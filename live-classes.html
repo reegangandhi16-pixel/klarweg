@@ -5,10 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--
   LIVE CLASSES — PUBLIC (waitlist launch, owner-approved 2026-10-20, D8)
+  Redesigned 2026-11-17 ("Tafel + Studio"): one flagship course, one
+  featured teacher, an interactive lesson board.
   Published: the teacher profile reegan-gandhi and the course live-a1
   as a WAITLIST (enrolment "waitlist", nextBatch null: no start date
   is set). Every other teacher and course in live-classes-data.js
-  stays draft: true and is never rendered on a deployed host.
+  stays draft: true and is never rendered on a deployed host; the
+  name-only "listed" teachers stay in the data but are not shown
+  (display.listedTeachers, owner 2026-11-17), and teacher credentials
+  are hidden until re-confirmed (display.teacherCredentials).
   The page is in .github/pages-allowlist.txt, sitemap.xml, the site
   nav and footer, and has a canonical link.
   To publish more, or to open enrolment:
@@ -17,212 +22,448 @@
     2. Open enrolment only with a real nextBatch date AND complete
        payment arrangements (see docs/live-classes-owner-decisions.md,
        part B); then update the homepage FAQ and terms.html §4A.
-    3. If the consultation fee changes, update the two meta descriptions
-       below by hand; the visible page copy reads it from the data file.
-       Name a level range there only if published teachers and courses
-       cover it (the hero range is computed from the data).
-    `npm run live:readiness` checks all of the above; see
+    3. If the course fee changes, update the two meta descriptions
+       below by hand; the visible page copy reads fees from the data file.
+    4. The syllabus in the course section follows
+       docs/live-classes-a1-delivery-kit.md §5; keep the two in step.
+    `npm run live:readiness` checks the data; see
     docs/live-classes-launch-readiness.md.
 -->
-<title>Live Classes · Klarweg — Learn German live with a teacher</title>
-<meta name="description" content="Live, teacher-led German classes from Klarweg. Join the free waitlist for Beginner German (A1), taught in Hindi and English; the start date is still to be announced. Online booking for the ₹100 personal consultation is not open yet.">
+<title>Live German Classes Online · A1 in Hindi &amp; English | Klarweg</title>
+<meta name="description" content="Live, small-group German A1 classes online, explained in Hindi and English: 36 live classes over 12 weeks, homework with written feedback and Goethe A1 practice. ₹7,999. Join the free waitlist; the start date is still to be announced.">
 <link rel="canonical" href="https://klarweg.in/live-classes.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Klarweg">
-<meta property="og:title" content="Live Classes · Klarweg — Learn German live with a teacher">
-<meta property="og:description" content="Live, teacher-led German classes. Join the free waitlist for Beginner German (A1); the start date is still to be announced. Online booking for the ₹100 personal consultation is not open yet.">
+<meta property="og:title" content="Live German Classes Online · A1 in Hindi &amp; English | Klarweg">
+<meta property="og:description" content="Small-group German A1 classes online with a teacher: explained in Hindi and English, corrected as you speak. ₹7,999 for 12 weeks. Free waitlist; start date to be announced.">
 <meta property="og:url" content="https://klarweg.in/live-classes.html">
-<meta property="og:image" content="https://klarweg.in/site-icon-512.png">
+<meta property="og:image" content="https://klarweg.in/og-live-classes.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Klarweg live German classes, A1: a lesson board explaining Ich bin ins Kino gegangen, with a correction from habe to bin.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Live German Classes Online · A1 in Hindi &amp; English | Klarweg">
+<meta name="twitter:description" content="Small-group German A1 classes online with a teacher: explained in Hindi and English, corrected as you speak. Free waitlist; start date to be announced.">
+<meta name="twitter:image" content="https://klarweg.in/og-live-classes.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Noto+Sans+Devanagari:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <link rel="icon" href="favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#FAFAF7">
 <style>
-  /* Match the shared Klarweg shell: warm canvas, editorial type,
-     neutral learning surfaces and the homepage green conversion CTA. */
+  /* ============================================================
+     LIVE CLASSES — "Tafel + Studio"
+     Tafel: the hero is a teaching board you can step through.
+     Studio: editorial type, quiet frames, generous whitespace.
+     Tokens come from site.css. Colour carries grammar meaning only
+     (subject / verb / place on the board); the one accent is the
+     brand green CTA. Spacing stays on the 4…120 scale.
+     ============================================================ */
   :root {
-    --live-navy: #0E0E10;
-    --live-navy-2: #F4F3EE;
-    --live-navy-ink: #5A5A60;
-    --live-gold: #0E0E10;
-    --live-gold-tint: #F4F3EE;
-    --live-gold-deep: #5A5A60;
-    --live-line: rgba(14,14,16,0.09);
+    --line: rgba(14,14,16,0.09);
+    --line-strong: rgba(14,14,16,0.16);
+    --font-hindi: 'Noto Sans Devanagari', 'Inter', sans-serif;
+    --ease-out: cubic-bezier(0.16,1,0.3,1);
   }
-  :focus-visible { outline: 2px solid var(--live-navy); outline-offset: 2px; }
-  /* Alternate warm surfaces to keep long sections easy to scan. */
+  :focus-visible { outline: 2px solid var(--ink-primary); outline-offset: 2px; }
   body { background: var(--bg-canvas); }
-  .section-warm, .cta-band { background: var(--bg-elevated); border-top: 1px solid var(--live-line); border-bottom: 0; }
-  .section-elevated { background: var(--bg-canvas); border-top: 1px solid var(--live-line); }
-  .on-navy :focus-visible { outline-color: var(--live-gold); }
-  section[id], [id="book-form"] { scroll-margin-top: 80px; }
+  section[id], [id="book-form"] { scroll-margin-top: 72px; }
   .vh { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+  .mono { font-family: var(--font-mono); font-weight: 500; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  [lang="hi"] { font-family: var(--font-hindi); }
 
-  .btn-live { background: var(--cta-green); color: #fff; border-radius: var(--r-lg); box-shadow: 0 8px 24px -8px rgba(31,168,75,0.3); }
-  .btn-live:hover { background: #1a9342; transform: translateY(-1px); box-shadow: 0 12px 32px -8px rgba(31,168,75,0.4); }
+  .btn-live { background: var(--cta-green); color: #fff; border-radius: var(--r-md); box-shadow: 0 8px 24px -8px rgba(31,168,75,0.35); }
+  .btn-live:hover { background: #1a9342; transform: translateY(-1px); box-shadow: 0 12px 32px -8px rgba(31,168,75,0.45); }
   .btn-gold { background: var(--cta-green); color: #fff; font-weight: 600; }
-  .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(31,168,75,0.22); }
-  .nav-cta.nav-cta-live { background: var(--cta-green); }
+  .nav-cta.nav-cta-live { background: var(--cta-green); border-color: var(--cta-green); }
+  .nav-cta.nav-cta-live:hover { background: #1a9342; border-color: #1a9342; }
   .nav-login, .nav-cta { white-space: nowrap; }
-  /* Small phones: the sticky bar + drawer carry the booking CTA. */
   @media (max-width: 480px) { .nav-actions .nav-cta { display: none; } }
-  .rule-gold { display: block; width: 36px; height: 3px; border-radius: 2px; background: var(--live-gold); margin-bottom: 16px; }
-  .pill-live { background: var(--bg-elevated); border-color: var(--hairline); color: var(--ink-secondary); }
-  .pill-live .pill-dot { background: var(--live-gold); }
-  .draft-flag {
-    display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: var(--r-xs);
-    font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-    background: repeating-linear-gradient(-45deg, var(--live-gold-tint), var(--live-gold-tint) 6px, #FFF 6px, #FFF 12px);
-    color: var(--live-gold-deep); border: 1px dashed rgba(138,90,0,0.4);
-  }
-  .draft-banner {
-    background: var(--live-gold-tint); border-bottom: 1px solid rgba(138,90,0,0.18);
-    font-size: 13px; color: var(--live-gold-deep); padding: 8px 0; text-align: center;
-  }
-  .draft-banner strong { font-weight: 600; }
+  .btn, .chip { min-height: 44px; }
+  .draft-flag { display: inline-flex; align-items: center; padding: 4px 8px; border-radius: var(--r-xs); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; background: var(--bg-elevated); color: var(--ink-secondary); border: 1px dashed var(--line-strong); }
+  .draft-banner { background: var(--bg-elevated); border-bottom: 1px solid var(--line); font-size: 13px; color: var(--ink-secondary); padding: 8px 0; text-align: center; }
 
-  /* ---------- hero ---------- */
-  .live-hero { padding: 80px 0 96px; }
-  .live-hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 64px; align-items: center; }
-  .live-hero h1 { margin: 0 0 24px; }
-  .live-hero .lede { max-width: 560px; }
-  .hero-points { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 24px 0 0; padding: 0; list-style: none; font-size: 15px; color: var(--ink-secondary); }
-  .hero-points li { display: flex; align-items: center; gap: 8px; }
-  .hero-points li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--live-gold); box-shadow: 0 0 0 3px var(--live-gold-tint); }
-  @media (max-width: 980px) { .live-hero-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; } }
-  @media (max-width: 768px) { .live-hero { padding: 48px 0 64px; } }
+  /* Section rhythm: one head style for the whole page. */
+  .s-head { max-width: 680px; margin: 0 0 48px; }
+  .s-head .mono, .s-eye { display: flex; align-items: center; gap: 12px; color: var(--ink-tertiary); margin-bottom: 16px; }
+  .sn { font-weight: 500; color: var(--ink-primary); display: inline-flex; align-items: center; gap: 12px; }
+  .sn::after { content: ''; width: 24px; height: 1px; background: var(--line-strong); }
+  .s-head h2 { margin: 0 0 16px; }
+  .s-head p { margin: 0; font-size: 19px; line-height: 1.55; color: var(--ink-secondary); }
+  .band { background: var(--bg-surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .band-elev { background: var(--bg-elevated); }
+  .reveal { opacity: 0; transform: translateY(12px); transition: opacity var(--dur-xl) var(--ease-out), transform var(--dur-xl) var(--ease-out); }
+  .reveal.in { opacity: 1; transform: none; }
 
-  .session-card {
-    background: var(--bg-surface); color: var(--ink-primary); border: 1px solid var(--hairline); border-radius: 24px; padding: 36px;
-    box-shadow: var(--shadow-card); position: relative; overflow: hidden;
+  /* ================= HERO ================= */
+  .live-hero { padding: 64px 0 0; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); gap: 64px; align-items: center; }
+  .hero-eyebrow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 0 0 24px; }
+  .hero-eyebrow .eyebrow { font-family: var(--font-mono); font-weight: 500; }
+  .pill-live { background: var(--bg-surface); border-color: var(--line-strong); color: var(--ink-primary); }
+  .pill-live .pill-dot { background: var(--cta-green); }
+  .live-hero h1 { font-size: clamp(44px, 5.4vw, 76px); line-height: 1.02; margin: 0 0 24px; }
+  .live-hero h1 .accent { display: block; color: var(--ink-primary); }
+  .live-hero .lede { max-width: 540px; font-size: 20px; }
+  .hero-ctas { margin-top: 36px; }
+  .hero-reassure { margin: 16px 0 0; font-size: 14px; color: var(--ink-tertiary); display: flex; flex-wrap: wrap; gap: 4px 16px; padding: 0; list-style: none; }
+  .hero-reassure li { display: flex; align-items: center; gap: 8px; }
+  .hero-reassure li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--ink-quaternary); }
+  .hero-reassure li:first-child::before { display: none; }
+
+  /* Fact rail: the course in one line, from the data file. */
+  .fact-rail { margin: 64px 0 0; padding: 24px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; }
+  .fact-rail div { min-width: 0; }
+  .fact-rail dt { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-tertiary); margin-bottom: 8px; }
+  .fact-rail dd { margin: 0; font-size: 15px; line-height: 1.45; color: var(--ink-primary); }
+  .fact-rail .fee dd { font-family: var(--font-display); font-size: 26px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+  .fact-rail .fee small { display: block; font-family: var(--font-ui); font-size: 13px; color: var(--ink-tertiary); letter-spacing: 0; margin-top: 4px; }
+  @media (max-width: 1080px) { .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; } .live-hero .lede { max-width: 640px; } }
+  @media (max-width: 900px) { .fact-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); } .fact-rail .fee { grid-column: 1 / -1; order: -1; } }
+  @media (max-width: 600px) { .fact-rail .fr-level, .fact-rail .fr-group { display: none; } }
+  @media (max-width: 768px) { section { padding: 64px 0; } .s-head { margin-bottom: 36px; } .s-head p { font-size: 17px; } .live-hero { padding: 36px 0 0; } .live-hero h1 { font-size: clamp(38px, 10.4vw, 52px); } .live-hero .lede { font-size: 18px; } .fact-rail { margin-top: 48px; gap: 16px; } }
+
+  /* ================= LESSON BOARD ("Tafel") ================= */
+  .board { background: var(--bg-surface); border: 1px solid var(--line); border-radius: 24px; box-shadow: 0 2px 8px rgba(64,40,10,0.05), 0 32px 64px -24px rgba(64,40,10,0.18); overflow: hidden; }
+  .board-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px 12px 24px; border-bottom: 1px solid var(--line); }
+  .board-title { margin: 0; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .board-title .mono { color: var(--ink-tertiary); font-size: 11px; }
+  .board-title strong { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: 17px; letter-spacing: -0.01em; }
+  .lang-toggle { display: inline-flex; padding: 4px; border-radius: var(--r-full); background: var(--bg-elevated); flex: 0 0 auto; }
+  .lang-toggle button { min-height: 36px; min-width: 44px; padding: 4px 12px; border-radius: var(--r-full); font-size: 13px; font-weight: 500; color: var(--ink-secondary); transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+  .lang-toggle button[aria-pressed="true"] { background: var(--bg-surface); color: var(--ink-primary); box-shadow: 0 1px 2px rgba(14,14,16,0.08); }
+  .lang-toggle button[lang="hi"] { font-size: 14px; }
+  .board-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--line); }
+  .board-tabs [role="tab"] { position: relative; min-height: 56px; padding: 12px 8px; text-align: left; display: flex; flex-direction: column; gap: 2px; padding-left: 24px; color: var(--ink-tertiary); transition: color var(--dur-fast) var(--ease); }
+  .board-tabs [role="tab"] + [role="tab"] { border-left: 1px solid var(--line); padding-left: 16px; }
+  .board-tabs [role="tab"]::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--ink-primary); transform: scaleX(0); transform-origin: left; transition: transform var(--dur-base) var(--ease-out); }
+  .board-tabs [role="tab"][aria-selected="true"] { color: var(--ink-primary); }
+  .board-tabs [role="tab"][aria-selected="true"]::after { transform: scaleX(1); }
+  .board-tabs .n { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; }
+  .board-tabs .de { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: 16px; line-height: 1.2; }
+  .board-tabs .en { font-size: 12px; }
+  .board-surface {
+    position: relative; padding: 36px 36px 24px; min-height: 380px;
+    background-color: var(--bg-surface);
+    background-image: radial-gradient(rgba(14,14,16,0.07) 1px, transparent 1.2px);
+    background-size: 16px 16px; background-position: -8px -8px;
   }
-  .session-card::after {
-    content: ''; position: absolute; right: -80px; top: -80px; width: 240px; height: 240px; border-radius: 50%;
-    border: 1px solid var(--hairline); pointer-events: none;
+  .board:not(.is-enhanced) .board-panel + .board-panel { margin-top: 36px; padding-top: 36px; border-top: 1px dashed var(--line-strong); }
+  .board-panel:focus-visible { outline-offset: 8px; }
+  .panel-kicker { margin: 0 0 16px; color: var(--ink-tertiary); }
+  .board[data-lang="en"] [data-l="hi"], .board[data-lang="hi"] [data-l="en"] { display: none; }
+
+  /* parsed sentence: role colour on the word, role name beneath */
+  .parse { display: flex; flex-wrap: wrap; gap: 12px 12px; margin: 0 0 24px; padding: 0; list-style: none; }
+  .parse li { display: flex; flex-direction: column; gap: 4px; }
+  .parse .w { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: clamp(26px, 2.5vw, 34px); line-height: 1.1; letter-spacing: -0.01em; }
+  .parse .r { font-family: var(--font-mono); font-size: 10.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding-top: 4px; border-top: 2px solid currentColor; }
+  .role-s { color: var(--g-subject); } .role-v { color: var(--g-verb); } .role-p { color: var(--g-place); }
+  .explain { margin: 0; padding: 16px 24px; border-left: 2px solid var(--ink-primary); background: var(--bg-canvas); border-radius: 0 var(--r-md) var(--r-md) 0; font-size: 16px; line-height: 1.6; color: var(--ink-secondary); }
+  .explain p { margin: 0; }
+  .explain p + p { margin-top: 8px; }
+  .explain strong { color: var(--ink-primary); font-weight: 600; }
+  .explain em, .compare em, .sheet em { font-family: var(--font-german); font-style: italic; font-weight: 500; color: var(--ink-primary); }
+  .explain [lang="hi"] { font-size: 16.5px; line-height: 1.75; }
+
+  .bubble { display: inline-block; max-width: 100%; padding: 12px 16px; border-radius: 16px 16px 16px 4px; background: var(--bg-elevated); margin: 0 0 24px; }
+  .bubble .who { display: block; color: var(--ink-tertiary); margin-bottom: 4px; }
+  .bubble .de-italic { font-size: 20px; line-height: 1.35; }
+  .build { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: clamp(26px, 3vw, 34px); line-height: 1.3; margin: 0 0 24px; }
+  .slot { display: inline-flex; align-items: center; justify-content: center; min-width: 88px; padding: 0 12px; margin: 0 4px; border-bottom: 2px dashed var(--line-strong); color: var(--ink-tertiary); font-style: normal; font-family: var(--font-mono); font-size: 0.6em; vertical-align: middle; height: 1.4em; }
+  .slot.is-right, .slot.is-wrong { font-family: var(--font-german); font-style: italic; font-size: 1em; border-bottom-style: solid; }
+  .slot.is-right { color: var(--g-verb); border-color: var(--g-verb); }
+  .slot.is-wrong { color: var(--ink-secondary); border-color: var(--ink-quaternary); text-decoration: line-through; text-decoration-thickness: 2px; }
+  .choices { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 0 0 16px; }
+  .choices .mono { color: var(--ink-tertiary); margin-right: 4px; }
+  .choice { min-width: 96px; min-height: 48px; padding: 8px 24px; border-radius: var(--r-md); border: 1px solid var(--line-strong); background: var(--bg-surface); font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: 20px; transition: transform var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease); }
+  .choice:hover { transform: translateY(-1px); border-color: var(--ink-primary); box-shadow: var(--shadow-soft); }
+  .choice[aria-pressed="true"] { border-color: var(--ink-primary); box-shadow: inset 0 0 0 1px var(--ink-primary); }
+  .feedback { margin: 0; padding: 16px; border-radius: var(--r-md); border: 1px solid var(--line); background: var(--bg-canvas); font-size: 15px; line-height: 1.55; color: var(--ink-secondary); }
+  .feedback p { margin: 0; }
+  .feedback strong { color: var(--ink-primary); }
+  .feedback .link-btn { color: var(--ink-primary); }
+  .compare { margin: 24px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .compare li { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 12px; padding: 12px 16px; border-radius: var(--r-md); background: var(--bg-canvas); border: 1px solid var(--line); font-size: 15px; }
+  .compare em { font-size: 18px; }
+  .compare .tag { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-tertiary); white-space: nowrap; }
+  .said { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: clamp(24px, 2.8vw, 32px); line-height: 1.35; margin: 0 0 16px; }
+  .said del { color: var(--ink-tertiary); text-decoration-thickness: 2px; }
+  .said ins { text-decoration: none; color: var(--g-verb); border-bottom: 2px solid var(--g-verb); }
+  .note { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; margin: 0; padding: 16px; border-radius: var(--r-md); background: var(--bg-warm); border: 1px solid var(--line); font-size: 15px; line-height: 1.55; color: var(--ink-secondary); }
+  .note svg { margin-top: 3px; color: var(--ink-primary); }
+  .note strong { color: var(--ink-primary); }
+
+  /* marked homework sheet */
+  .sheet { position: relative; margin: 0; padding: 16px 16px 16px 48px; border-radius: var(--r-md); background: var(--bg-surface); border: 1px solid var(--line-strong); box-shadow: var(--shadow-soft); }
+  .sheet::before { content: ''; position: absolute; top: 0; bottom: 0; left: 36px; width: 1px; background: var(--line-strong); }
+  .sheet ol { margin: 0; padding: 0; list-style: none; counter-reset: l; }
+  .sheet li { counter-increment: l; position: relative; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .sheet li:last-child { border-bottom: 0; }
+  .sheet li::before { content: counter(l); position: absolute; left: -36px; width: 24px; text-align: center; top: 14px; font-family: var(--font-mono); font-size: 11px; color: var(--ink-tertiary); }
+  .sheet .line { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: 18px; line-height: 1.4; color: var(--ink-primary); display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .sheet .line del { color: var(--ink-tertiary); }
+  .sheet .mark { font-family: var(--font-ui); font-style: normal; font-size: 13px; font-weight: 600; color: var(--ink-primary); }
+  .sheet .margin { display: block; margin-top: 4px; font-size: 13.5px; line-height: 1.5; color: var(--ink-secondary); }
+  .sheet-foot { margin: 16px 0 0; padding: 12px 16px; border-radius: var(--r-md); background: var(--bg-elevated); font-size: 14px; color: var(--ink-secondary); }
+  .sheet-foot strong { color: var(--ink-primary); }
+
+  .board-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px 12px 24px; border-top: 1px solid var(--line); background: var(--bg-surface); }
+  .board-count { display: flex; align-items: center; gap: 12px; color: var(--ink-tertiary); }
+  .board-prog { display: inline-flex; gap: 4px; }
+  .board-prog i { width: 20px; height: 3px; border-radius: 2px; background: var(--line-strong); transition: background var(--dur-base) var(--ease); }
+  .board[data-step="1"] .board-prog i:nth-child(-n+1), .board[data-step="2"] .board-prog i:nth-child(-n+2),
+  .board[data-step="3"] .board-prog i:nth-child(-n+3), .board[data-step="4"] .board-prog i { background: var(--ink-primary); }
+  @media (max-width: 380px) { .board-count .mono { display: none; } }
+  .board-next { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border-radius: var(--r-md); background: var(--ink-primary); color: #fff; font-size: 14px; font-weight: 500; transition: transform var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease); }
+  .board-next:hover { background: #26262B; transform: translateY(-1px); }
+  .board-caption { margin: 16px 4px 0; font-size: 13px; color: var(--ink-tertiary); line-height: 1.5; }
+  @media (max-width: 600px) {
+    .board { border-radius: 16px; }
+    .board-bar { padding: 12px 12px 12px 16px; }
+    .board-tabs [role="tab"], .board-tabs [role="tab"] + [role="tab"] { padding: 12px 4px 12px 12px; }
+    .board-tabs .en, .bt-wk { display: none; }
+    .board-tabs .de { font-size: 13px; }
+    .board-surface { padding: 24px 16px 16px; min-height: 0; }
+    .compare li { grid-template-columns: 1fr; gap: 4px; }
+    .sheet { padding-left: 40px; }
+    .sheet::before { left: 28px; }
+    .sheet li::before { left: -32px; }
+    .board-foot { padding: 12px 12px 12px 16px; }
   }
-  .session-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 24px; }
-  .session-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--live-gold); display: flex; align-items: center; gap: 8px; }
-  .session-label::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--live-gold); }
-  .session-meta { font-size: 12px; color: var(--live-navy-ink); }
-  .bubble { border-radius: 16px; padding: 16px 16px; margin-bottom: 12px; max-width: 92%; }
-  .bubble-who { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
-  .bubble-t { background: var(--bg-elevated); color: var(--ink-primary); border-bottom-left-radius: 4px; }
-  .bubble-t .bubble-who { color: var(--live-gold); }
-  .bubble-s { background: var(--bg-canvas); color: var(--ink-primary); margin-left: auto; border-bottom-right-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
-  .bubble-s .bubble-who { color: var(--live-navy-ink); }
-  .bubble .de-italic { font-size: 19px; line-height: 1.4; }
-  .bubble del { text-decoration-color: var(--live-gold); text-decoration-thickness: 2px; opacity: 0.75; }
-  .correction { background: var(--bg-warm); color: var(--ink-primary); border: 1px solid var(--hairline); border-radius: 16px; padding: 16px 24px 16px; margin-top: 16px; }
-  .correction-head { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--live-gold-deep); margin-bottom: 8px; }
-  .correction .correction-sentence { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: 24px; line-height: 1.35; margin: 0 0 8px; }
-  .correction p { margin: 0; font-size: 14px; color: var(--ink-secondary); line-height: 1.5; }
-  .session-steps { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; padding: 0; list-style: none; counter-reset: s; }
-  .session-steps li { counter-increment: s; font-size: 12px; color: var(--live-navy-ink); border: 1px solid var(--hairline); border-radius: var(--r-full); padding: 4px 12px; }
-  .session-steps li::before { content: counter(s) '  '; color: var(--live-gold); font-family: var(--font-mono); white-space: pre; }
-  .session-caption { font-size: 12px; color: var(--ink-tertiary); margin: 12px 0 0; text-align: center; }
-  @media (max-width: 480px) { .session-card { padding: 24px 16px; border-radius: 16px; } .correction { padding: 16px; } .correction .correction-sentence { font-size: 21px; } }
 
-  /* ---------- two ways ---------- */
-  .ways { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-  .way { padding: 36px; display: flex; flex-direction: column; }
-  .way h3 { font-family: var(--font-display); font-weight: 600; font-size: 26px; letter-spacing: -0.02em; margin: 12px 0 8px; }
-  .way > p { margin: 0 0 24px; color: var(--ink-secondary); font-size: 16px; }
-  .way dl { margin: 0 0 24px; display: grid; grid-template-columns: 112px 1fr; gap: 12px 16px; font-size: 15px; }
-  .way dt { color: var(--ink-tertiary); font-size: 13px; padding-top: 2px; }
-  .way dd { margin: 0; color: var(--ink-primary); }
-  .way .btn { margin-top: auto; align-self: flex-start; }
-  .way-live { border-color: var(--hairline-strong); box-shadow: var(--shadow-soft); }
-  @media (max-width: 860px) { .ways { grid-template-columns: minmax(0, 1fr); } }
-  @media (max-width: 480px) { .way { padding: 24px; } .way dl { grid-template-columns: 1fr; gap: 4px; } .way dd { margin-bottom: 8px; } }
+  /* ================= A CLASS, A WEEK ================= */
+  .class-wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .class-bar { display: none; }
+  .has-class-bar .class-bar { display: block; }
+  .has-class-bar #class-steps { display: none; }
+  .class-scale { position: relative; height: 24px; margin: 0 0 8px; }
+  .class-scale span { position: absolute; transform: translateX(-50%); font-family: var(--font-mono); font-size: 11px; color: var(--ink-tertiary); }
+  .class-scale span:first-child { transform: none; }
+  .class-scale span:last-child { transform: translateX(-100%); }
+  .class-segs { display: flex; gap: 4px; }
+  .class-segs button { position: relative; min-height: 88px; padding: 12px; border-radius: var(--r-md); border: 1px solid var(--line); background: var(--bg-surface); text-align: left; display: flex; flex-direction: column; justify-content: space-between; gap: 8px; min-width: 0; transition: background var(--dur-base) var(--ease), color var(--dur-base) var(--ease), transform var(--dur-fast) var(--ease), border-color var(--dur-base) var(--ease); }
+  .class-segs button:hover { transform: translateY(-1px); border-color: var(--line-strong); }
+  .class-segs button[aria-pressed="true"] { background: var(--ink-primary); border-color: var(--ink-primary); color: #fff; }
+  .class-segs .t { font-size: 13px; font-weight: 600; line-height: 1.25; overflow-wrap: anywhere; }
+  .class-segs .m { font-family: var(--font-mono); font-size: 11px; opacity: 0.7; }
+  .class-detail { margin-top: 16px; padding: 24px; border-radius: var(--r-lg); background: var(--bg-surface); border: 1px solid var(--line); min-height: 132px; }
+  .class-detail li, #class-steps li { list-style: none; }
+  .step-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; margin: 0 0 8px; }
+  .step-h h3 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 24px; letter-spacing: -0.02em; }
+  .step-h .mono { color: var(--ink-tertiary); }
+  .step-p { margin: 0; color: var(--ink-secondary); font-size: 16px; line-height: 1.6; max-width: 760px; }
+  .step-who { margin: 12px 0 0; font-size: 14px; color: var(--ink-tertiary); }
+  .step-who strong { color: var(--ink-primary); font-weight: 500; }
+  #class-steps { margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  #class-steps > li { padding: 24px 0; border-bottom: 1px solid var(--line); }
+  #class-steps .step-h h3 { font-size: 21px; }
+  @media (max-width: 600px) { #class-steps > li { padding: 16px 0; } #class-steps .step-p { font-size: 15px; } #class-steps .step-who { display: none; } .week { margin-top: 36px; padding-top: 36px; } }
 
-  /* ---------- filters ---------- */
+  .week { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 48px; align-items: start; padding-top: 48px; margin-top: 48px; border-top: 1px solid var(--line); }
+  .week h3 { font-family: var(--font-display); font-weight: 500; font-size: 28px; letter-spacing: -0.02em; margin: 0 0 12px; }
+  .week > div > p { margin: 0; color: var(--ink-secondary); font-size: 16px; line-height: 1.6; }
+  .days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; margin: 24px 0 0; padding: 0; list-style: none; }
+  .days li { aspect-ratio: 1 / 1.15; border-radius: var(--r-md); border: 1px solid var(--line); background: var(--bg-surface); display: flex; flex-direction: column; justify-content: space-between; padding: 8px; min-width: 0; }
+  .days .d { font-family: var(--font-mono); font-size: 11px; color: var(--ink-tertiary); }
+  .days .on { background: var(--ink-primary); border-color: var(--ink-primary); color: #fff; }
+  .days .on .d { color: rgba(255,255,255,0.7); }
+  .days .x { font-size: 12px; font-weight: 600; line-height: 1.2; }
+  .mid-cta { margin-top: 48px; padding: 24px; border-radius: 16px; background: var(--bg-surface); border: 1px solid var(--line); box-shadow: var(--shadow-soft); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; }
+  .mid-cta p { margin: 0; font-size: 16px; color: var(--ink-secondary); }
+  .mid-cta strong { color: var(--ink-primary); font-weight: 600; margin-right: 8px; }
+  .mid-cta-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  @media (max-width: 600px) { .mid-cta { margin-top: 36px; padding: 16px; } .mid-cta-actions, .mid-cta-actions .btn { width: 100%; justify-content: center; } .mid-cta-actions .btn-secondary { display: none; } }
+  .rhythm { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+  .rhythm li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.55; color: var(--ink-secondary); }
+  .rhythm .k { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-primary); padding-top: 4px; }
+  @media (max-width: 860px) {
+    .week { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+    .class-scale { display: none; }
+    .class-segs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; }
+    .class-segs button { min-height: 64px; padding: 8px 6px; flex: none !important; }
+    .class-segs .t { font-size: 11.5px; overflow-wrap: normal; hyphens: manual; }
+    .class-detail { padding: 16px; min-height: 0; }
+    .class-detail .step-h h3 { font-size: 20px; }
+    .class-detail .step-p { font-size: 15px; }
+  }
+  @media (max-width: 480px) { .rhythm li { grid-template-columns: 1fr; gap: 4px; } .days .x { font-size: 10.5px; } .days li { padding: 4px 4px 8px; } }
+
+  /* ================= COURSE ================= */
+  .course-layout { display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 1fr); gap: 48px; align-items: start; }
+  .course-grid { display: block; }
+  .course-grid.single { display: block; }
+  .c-card { background: var(--bg-surface); border: 1px solid var(--line); border-radius: 24px; padding: 36px; display: flex; flex-direction: column; box-shadow: var(--shadow-card); }
+  @media (min-width: 1081px) { .course-layout .c-card { position: sticky; top: 80px; } }
+  .c-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .c-status { margin-left: auto; }
+  .lvl { font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; padding: 4px 8px; border-radius: var(--r-xs); background: #fff; color: var(--ink-quaternary); border: 1px solid var(--line); }
+  .lvl.on { background: var(--ink-primary); border-color: var(--ink-primary); color: #fff; }
+  .lvl-row { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
+  .c-card h3 { font-family: var(--font-display); font-weight: 500; font-size: 32px; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 16px; }
+  .c-obj { margin: 0 0 24px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .c-obj li { display: flex; gap: 12px; font-size: 15px; color: var(--ink-secondary); line-height: 1.5; }
+  .c-obj li::before { content: ''; flex: 0 0 auto; width: 12px; height: 1px; margin-top: 12px; background: var(--ink-primary); }
+  .c-facts { display: grid; grid-template-columns: 1fr; gap: 0; margin: 0 0 24px; padding: 0; border-top: 1px solid var(--line); }
+  .c-facts > div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .c-facts dt { font-family: var(--font-mono); font-size: 11px; font-weight: 500; color: var(--ink-tertiary); letter-spacing: 0.08em; text-transform: uppercase; padding-top: 3px; }
+  .c-facts dd { margin: 0; font-size: 15px; color: var(--ink-primary); line-height: 1.5; }
+  .c-facts .tba { color: var(--ink-tertiary); font-style: italic; }
+  .c-facts .t-link { font: inherit; color: var(--ink-primary); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: var(--line-strong); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+  .c-price { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; margin-bottom: 16px; }
+  .c-price-label { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-tertiary); }
+  .c-price-val { font-family: var(--font-display); font-size: 40px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; }
+  .c-price-val.tba { font-family: var(--font-ui); font-size: 15px; font-weight: 500; color: var(--ink-secondary); }
+  .c-price-terms { flex-basis: 100%; font-size: 13.5px; color: var(--ink-tertiary); line-height: 1.5; }
+  .c-note { margin: 0 0 24px; padding: 12px 16px; border-radius: var(--r-md); background: var(--bg-elevated); font-size: 14px; line-height: 1.5; color: var(--ink-secondary); }
+  .c-card .btn { align-self: stretch; justify-content: center; }
+  .status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: var(--r-full); border: 1px solid var(--line); color: var(--ink-secondary); background: var(--bg-surface); }
+  .status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-quaternary); }
+  .status-open::before, .status-waitlist::before { background: var(--cta-green); }
+  .pill { white-space: nowrap; }
+
+  .syllabus-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; margin-bottom: 24px; }
+  .syllabus-head h3 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 28px; letter-spacing: -0.02em; }
+  .syllabus-head p { margin: 4px 0 0; font-size: 14px; color: var(--ink-tertiary); max-width: 460px; }
+  .syl-legend { display: flex; gap: 16px; font-size: 13px; color: var(--ink-tertiary); margin: 0; padding: 0; list-style: none; }
+  .syl-legend li { display: flex; align-items: center; gap: 8px; }
+  .syl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cta-green); flex: 0 0 auto; }
+  .syl-ring { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid var(--ink-primary); flex: 0 0 auto; }
+  .syl-tabs { display: none; }
+  .syllabus.is-enhanced .syl-tabs { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 4px; margin: 0 0 16px; }
+  .syl-tabs [role="tab"] { position: relative; min-height: 56px; border-radius: var(--r-md); border: 1px solid var(--line); background: var(--bg-surface); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease); }
+  .syl-tabs [role="tab"]:hover { border-color: var(--line-strong); }
+  .syl-tabs [role="tab"][aria-selected="true"] { background: var(--ink-primary); border-color: var(--ink-primary); color: #fff; }
+  .syl-tabs .wk { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; opacity: 0.6; }
+  .syl-tabs .num { font-family: var(--font-display); font-size: 20px; font-weight: 500; line-height: 1; }
+  .syl-tabs .mk { position: absolute; top: 6px; right: 6px; }
+  .syl-tabs [aria-selected="true"] .syl-ring { border-color: #fff; }
+  .syl-weeks { margin: 0; padding: 0; list-style: none; }
+  .syl-week { border-radius: var(--r-lg); background: var(--bg-surface); border: 1px solid var(--line); padding: 24px; }
+  .syllabus:not(.is-enhanced) .syl-week + .syl-week { margin-top: 12px; }
+  .syl-week h4 { margin: 0 0 16px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px; font-family: var(--font-display); font-weight: 500; font-size: 22px; letter-spacing: -0.02em; }
+  .syl-week h4 .mono { color: var(--ink-tertiary); font-family: var(--font-mono); font-size: 11px; }
+  .sessions { margin: 0; padding: 0; list-style: none; }
+  .sessions li { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 16px; align-items: baseline; padding: 16px 0; border-top: 1px solid var(--line); }
+  .sessions .day { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-tertiary); }
+  .sessions .ttl { display: block; font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: 19px; line-height: 1.3; color: var(--ink-primary); }
+  .sessions .ttl.en { font-family: var(--font-display); font-style: normal; }
+  .sessions .gl { display: block; font-size: 14px; color: var(--ink-tertiary); margin-top: 2px; }
+  .sessions .s { font-family: var(--font-mono); font-size: 11px; color: var(--ink-quaternary); }
+  .sessions .tag { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 12.5px; font-weight: 500; color: var(--ink-secondary); }
+  .included { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 36px; }
+  .included h4 { margin: 0 0 12px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-tertiary); }
+  .included ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .included li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 8px; font-size: 15px; line-height: 1.5; color: var(--ink-secondary); }
+  .included svg { margin-top: 4px; color: var(--ink-primary); }
+  .included .no svg { color: var(--ink-quaternary); }
+  @media (max-width: 1080px) { .course-layout { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 640px) {
+    .c-card { padding: 24px; border-radius: 16px; }
+    .c-card h3 { font-size: 28px; }
+    .c-facts { grid-template-columns: 1fr 1fr; column-gap: 16px; }
+    .c-facts > div { grid-template-columns: 1fr; gap: 4px; align-content: start; }
+    .c-facts > div:nth-last-child(-n+2) { grid-column: 1 / -1; }
+    .c-obj li { font-size: 14.5px; }
+    .syllabus.is-enhanced .syl-tabs { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .syl-week { padding: 16px; }
+    .sessions li { grid-template-columns: 44px minmax(0, 1fr); gap: 12px; }
+    .sessions .s { display: none; }
+    .included { display: none; } /* on phones: the same facts are in the card, the comparison and the FAQ */
+  }
+
+  /* ================= TEACHER ("Studio") ================= */
+  .teacher-grid.featured { display: block; }
+  .t-feature { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 64px; align-items: start; }
+  .tf-portrait { margin: 0; }
+  .tf-portrait img, .tf-mono { width: 100%; aspect-ratio: 4 / 5; border-radius: 24px; object-fit: cover; object-position: center 30%; display: block; }
+  .tf-mono { position: relative; display: flex; align-items: center; justify-content: center; background: var(--bg-elevated); border: 1px solid var(--line); overflow: hidden; }
+  .tf-mono::before { content: ''; position: absolute; inset: 16px; border: 1px solid var(--line); border-radius: 16px; }
+  .tf-mono span { font-family: var(--font-display); font-weight: 400; font-size: clamp(96px, 12vw, 168px); letter-spacing: -0.05em; color: var(--ink-primary); line-height: 1; }
+  .tf-portrait figcaption { margin-top: 12px; font-size: 13px; color: var(--ink-tertiary); }
+  .tf-body .eyebrow { display: block; font-family: var(--font-mono); margin: 0 0 16px; }
+  .tf-name { font-family: var(--font-display); font-weight: 500; font-size: clamp(40px, 4.6vw, 60px); letter-spacing: -0.03em; line-height: 1.02; margin: 0 0 16px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .tf-headline { margin: 0 0 36px; font-size: 19px; line-height: 1.5; color: var(--ink-secondary); max-width: 560px; }
+  .tf-quote { margin: 0 0 36px; padding: 0 0 0 24px; border-left: 2px solid var(--ink-primary); }
+  .tf-quote p { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: clamp(21px, 2vw, 25px); line-height: 1.45; letter-spacing: -0.01em; color: var(--ink-primary); }
+  .tf-quote .tf-cite { margin-top: 12px; font-family: var(--font-ui); font-size: 13px; color: var(--ink-tertiary); }
+  .tf-facts { margin: 0; display: grid; grid-template-columns: 160px minmax(0, 1fr); border-top: 1px solid var(--line); }
+  .tf-facts dt, .tf-facts dd { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .tf-facts dt { font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-tertiary); padding-top: 16px; }
+  .tf-facts dd { margin: 0; font-size: 15.5px; color: var(--ink-primary); }
+  .tf-facts ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+  .tf-video { display: flex; align-items: center; gap: 8px; margin: 24px 0 0; font-size: 13px; color: var(--ink-tertiary); }
+  .more-teachers { margin: 48px 0 0; font-size: 14px; color: var(--ink-tertiary); max-width: 680px; }
+  @media (max-width: 900px) { .t-feature { grid-template-columns: minmax(0, 1fr); gap: 36px; } .tf-portrait { max-width: 360px; } }
+  @media (max-width: 480px) { .tf-facts { grid-template-columns: 1fr; } .tf-facts dt { border-bottom: 0; padding-bottom: 0; } .tf-facts dd { padding-top: 4px; } .tf-portrait { max-width: none; display: flex; align-items: center; gap: 16px; } .tf-mono { width: 88px; flex: 0 0 88px; border-radius: 16px; aspect-ratio: 1; } .tf-mono span { font-size: 36px; } .tf-mono::before { inset: 6px; border-radius: 12px; } .tf-portrait figcaption { margin: 0; } .tf-name { font-size: 36px; } .tf-headline, .tf-quote { margin-bottom: 24px; } }
+
+  /* Directory (only when two or more full profiles exist) */
   .filters { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; margin-bottom: 36px; }
   .filters[hidden], .quotes[hidden] { display: none; }
   .filter-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-width: 0; }
   .filter-label { font-size: 13px; font-weight: 600; color: var(--ink-tertiary); margin-right: 4px; }
-  .chip {
-    min-height: 44px; padding: 8px 16px; border-radius: var(--r-full); border: 1px solid var(--hairline-strong);
-    background: var(--bg-surface); font-size: 14px; font-weight: 500; color: var(--ink-secondary);
-    transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
-  }
-  .chip:hover { border-color: var(--live-navy); color: var(--ink-primary); }
-  .chip[aria-pressed="true"] { background: var(--live-navy); border-color: var(--live-navy); color: #fff; }
-  .select-sm { min-height: 44px; font: inherit; font-size: 14px; padding: 8px 36px 8px 16px; border-radius: var(--r-full); border: 1px solid var(--hairline-strong); background: var(--bg-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%236F6F73' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center; appearance: none; -webkit-appearance: none; color: var(--ink-primary); }
+  .chip { padding: 8px 16px; border-radius: var(--r-full); border: 1px solid var(--line-strong); background: var(--bg-surface); font-size: 14px; font-weight: 500; color: var(--ink-secondary); }
+  .chip:hover { border-color: var(--ink-primary); color: var(--ink-primary); }
+  .chip[aria-pressed="true"] { background: var(--ink-primary); border-color: var(--ink-primary); color: #fff; }
+  .select-sm { min-height: 44px; font: inherit; font-size: 14px; padding: 8px 36px 8px 16px; border-radius: var(--r-full); border: 1px solid var(--line-strong); background: var(--bg-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%236F6F73' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center; appearance: none; -webkit-appearance: none; color: var(--ink-primary); }
   .results-note { font-size: 14px; color: var(--ink-tertiary); margin: -16px 0 24px; }
+  .results-note:empty { display: none; }
   @media (max-width: 680px) {
-    .filters { flex-direction: column; align-items: stretch; gap: 16px; min-width: 0; }
-    .filters > .filter-group { max-width: none; }
+    .filters { flex-direction: column; align-items: stretch; gap: 16px; }
     .filter-scroll { flex-wrap: nowrap; overflow-x: auto; width: calc(100% + 40px); margin: 0 -20px; padding: 0 20px 4px; scrollbar-width: none; }
     .filter-scroll::-webkit-scrollbar { display: none; }
     .chip { flex: 0 0 auto; }
   }
-
-  /* ---------- teacher directory: one row per teacher, hairline rules ---------- */
-  .teacher-grid { display: block; border-top: 1px solid var(--live-line); }
-  .t-card { display: grid; grid-template-columns: 72px minmax(0, 1fr) minmax(200px, auto); gap: 8px 28px; align-items: start; padding: 28px 0; border-bottom: 1px solid var(--live-line); }
-  .t-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--bg-elevated); color: var(--ink-primary); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 0 0 1px var(--live-line), 0 0 0 4px #fff, 0 0 0 5px rgba(251,191,36,0.45); }
-  .t-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
-  .t-avatar span { font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.01em; line-height: 1; }
+  .teacher-grid { display: block; border-top: 1px solid var(--line); }
+  .teacher-grid.featured { border-top: 0; }
+  .t-card { display: grid; grid-template-columns: 72px minmax(0, 1fr) minmax(200px, auto); gap: 8px 24px; align-items: start; padding: 24px 0; border-bottom: 1px solid var(--line); }
+  .t-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--bg-elevated); color: var(--ink-primary); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .t-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .t-avatar span { font-family: var(--font-display); font-size: 24px; font-weight: 500; }
   .t-body { min-width: 0; }
-  .t-name { font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -0.02em; margin: 2px 0 2px; color: var(--live-navy); overflow-wrap: anywhere; display: flex; align-items: center; gap: 10px; }
+  .t-card .t-name { font-family: var(--font-display); font-weight: 500; font-size: 22px; letter-spacing: -0.02em; margin: 0 0 4px; display: flex; align-items: center; gap: 8px; overflow-wrap: anywhere; }
   .t-headline { margin: 0 0 8px; font-size: 15px; color: var(--ink-secondary); line-height: 1.5; }
   .t-reviews { margin: 0 0 12px; font-size: 13px; color: var(--ink-tertiary); }
-  .t-sample .t-star { color: var(--live-gold); }
-  .sample-flag { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; border: 1px dashed var(--live-gold-deep); color: var(--live-gold-deep); font-size: 11px; font-weight: 600; letter-spacing: 0.02em; }
-  .t-avail { display: inline-flex; align-items: center; gap: 6px; margin: 0 0 10px; padding: 3px 10px; border-radius: 999px; font-size: 12.5px; font-weight: 600; color: var(--ink-secondary); border: 1px solid rgba(14,14,16,0.14); }
-  .t-avail.on { color: var(--g-object); border-color: rgba(46,125,50,0.25); background: rgba(46,125,50,0.06); }
+  .sample-flag { display: inline-block; margin-left: 4px; padding: 0 8px; border-radius: 999px; border: 1px dashed var(--line-strong); font-size: 11px; font-weight: 600; }
+  .t-avail { display: inline-flex; align-items: center; gap: 4px; margin: 0 0 8px; padding: 4px 8px; border-radius: 999px; font-size: 12.5px; font-weight: 600; color: var(--ink-secondary); border: 1px solid var(--line-strong); }
   .t-avail-what { font-weight: 400; }
-  .t-facts { margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; color: var(--ink-secondary); }
+  .t-facts { margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; color: var(--ink-secondary); }
   .t-facts li { display: flex; gap: 8px; align-items: flex-start; }
-  .t-facts svg { flex: 0 0 auto; margin-top: 3px; color: var(--live-gold-deep); }
-  .lvl-row { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
-  .lvl { font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; padding: 3px 7px; border-radius: var(--r-xs); background: #fff; color: var(--ink-quaternary); border: 1px solid var(--live-line); }
-  .lvl.on { background: var(--live-navy); border-color: var(--live-navy); color: #fff; }
-  .t-side { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; text-align: right; }
+  .t-facts svg { flex: 0 0 auto; margin-top: 4px; }
+  .t-side { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; text-align: right; }
   .t-price { margin: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
-  .t-price-label { font-size: 11.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--live-gold-deep); }
-  .t-price-value { font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.02em; color: var(--live-navy); font-variant-numeric: tabular-nums; }
+  .t-price-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-tertiary); }
+  .t-price-value { font-family: var(--font-display); font-size: 24px; font-weight: 500; }
   .t-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-  .t-actions .btn { padding: 10px 16px; font-size: 14px; justify-content: center; }
+  .t-actions .btn { padding: 8px 16px; font-size: 14px; }
   @media (max-width: 760px) {
-    .t-card { grid-template-columns: 56px minmax(0, 1fr); gap: 4px 16px; padding: 24px 0; }
+    .t-card { grid-template-columns: 56px minmax(0, 1fr); gap: 4px 16px; }
     .t-avatar { width: 56px; height: 56px; }
-    .t-avatar span { font-size: 19px; }
-    .t-name { font-size: 20px; }
     .t-side { grid-column: 2; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; text-align: left; margin-top: 8px; }
     .t-price { align-items: flex-start; }
-    .t-actions { justify-content: flex-start; }
   }
-  @media (max-width: 420px) { .t-actions { width: 100%; } .t-actions .btn { flex: 1 1 auto; } }
-  /* the profile dialog keeps its portrait */
   .portrait { position: relative; aspect-ratio: 4 / 3; background: var(--bg-elevated); overflow: hidden; }
-  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
-  .portrait-mono { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--live-gold); }
-  .portrait-mono span { font-family: var(--font-display); font-size: 48px; font-weight: 500; letter-spacing: -0.02em; line-height: 1; }
-  .portrait-mono small { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--live-navy-ink); }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; }
+  .portrait-mono { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+  .portrait-mono span { font-family: var(--font-display); font-size: 48px; font-weight: 500; }
+  .portrait-mono small { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-tertiary); }
   .portrait .draft-flag { position: absolute; top: 12px; left: 12px; }
-
-  .empty-state { border: 1px dashed var(--hairline-strong); border-radius: var(--r-lg); padding: 48px 24px; text-align: center; background: var(--bg-surface); }
-  .empty-state h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; margin: 0 0 8px; }
+  .empty-state { border: 1px dashed var(--line-strong); border-radius: var(--r-lg); padding: 48px 24px; text-align: center; background: var(--bg-surface); }
+  .empty-state h3 { font-family: var(--font-display); font-weight: 500; font-size: 22px; margin: 0 0 8px; }
   .empty-state p { margin: 0 auto 24px; max-width: 520px; color: var(--ink-secondary); font-size: 16px; }
-
-  /* ---------- profile dialog ---------- */
   .t-dialog { width: min(880px, calc(100% - 32px)); max-height: calc(100vh - 48px); padding: 0; border: 0; border-radius: 24px; background: var(--bg-surface); color: var(--ink-primary); box-shadow: var(--shadow-modal); overflow: hidden; }
   #t-dialog-content { max-height: calc(100vh - 48px); overflow-y: auto; overscroll-behavior: contain; }
-  .t-dialog::backdrop { background: rgba(15,23,42,0.55); }
+  .t-dialog::backdrop { background: rgba(14,14,16,0.5); }
   .t-dialog-grid { display: grid; grid-template-columns: 300px 1fr; }
   .t-dialog .portrait { aspect-ratio: auto; min-height: 100%; }
   .t-dialog-body { padding: 36px 64px 36px 36px; }
   .t-dialog-close { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; background: var(--bg-elevated); font-size: 16px; color: var(--ink-secondary); z-index: 2; }
-  .t-dialog-close:hover { color: var(--ink-primary); }
-  .t-dialog h2 { font-family: var(--font-display); font-weight: 600; font-size: 32px; letter-spacing: -0.02em; margin: 0 0 8px; overflow-wrap: anywhere; }
-  .t-dialog .t-headline { font-size: 17px; }
-  .profile-dl { margin: 24px 0; display: grid; grid-template-columns: 160px 1fr; gap: 12px 24px; font-size: 15px; border-top: 1px solid var(--hairline-light); padding-top: 24px; }
-  .profile-dl dt { color: var(--ink-tertiary); font-size: 13px; padding-top: 2px; }
+  .t-dialog h2 { font-family: var(--font-display); font-weight: 500; font-size: 32px; letter-spacing: -0.02em; margin: 0 0 8px; }
+  .profile-dl { margin: 24px 0; display: grid; grid-template-columns: 160px 1fr; gap: 12px 24px; font-size: 15px; border-top: 1px solid var(--line); padding-top: 24px; }
+  .profile-dl dt { color: var(--ink-tertiary); font-size: 13px; }
   .profile-dl dd { margin: 0; }
   .profile-dl ul { margin: 0; padding-left: 16px; }
   .approach { background: var(--bg-warm); border-radius: var(--r-md); padding: 16px 24px; font-size: 16px; color: var(--ink-secondary); margin: 0 0 24px; }
@@ -230,176 +471,169 @@
   @media (max-width: 760px) {
     .t-dialog { width: 100%; max-width: 100%; max-height: 92vh; margin: auto 0 0; border-radius: 24px 24px 0 0; }
     #t-dialog-content { max-height: 92vh; }
-    .t-dialog-close { background: rgba(255,255,255,0.92); }
     .t-dialog-grid { grid-template-columns: 1fr; }
     .t-dialog .portrait { aspect-ratio: 16 / 9; min-height: 0; }
     .t-dialog-body { padding: 24px 20px 36px; }
-    .t-dialog h2 { font-size: 26px; }
     .profile-dl { grid-template-columns: 1fr; gap: 4px; }
-    .profile-dl dd { margin-bottom: 12px; }
   }
 
-  /* ---------- courses ---------- */
-  .course-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-  .filters [hidden] { display: none !important; }
-  .course-grid.single { grid-template-columns: minmax(0, 760px); }
-  @media (max-width: 860px) { .course-grid { grid-template-columns: minmax(0, 1fr); } }
-  .c-card { background: var(--bg-surface); border: 1px solid var(--hairline); border-radius: var(--r-lg); padding: 36px; display: flex; flex-direction: column; }
-  .c-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 16px; }
-  .c-status { margin-left: auto; }
-  .c-card h3 { font-family: var(--font-display); font-weight: 600; font-size: 24px; letter-spacing: -0.02em; margin: 0 0 16px; }
-  .c-obj { margin: 0 0 24px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .c-obj li { display: flex; gap: 12px; font-size: 15px; color: var(--ink-secondary); line-height: 1.5; }
-  .c-obj li::before { content: ''; flex: 0 0 auto; width: 12px; height: 2px; margin-top: 11px; background: var(--live-gold); }
-  .c-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 24px; margin: 0 0 24px; padding: 24px 0 0; border-top: 1px solid var(--hairline-light); }
-  .c-facts dt { font-size: 12px; color: var(--ink-tertiary); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
-  .c-facts dd { margin: 0; font-size: 15px; color: var(--ink-primary); }
-  .c-facts .tba { color: var(--ink-tertiary); font-style: italic; }
-  .c-facts .c-tba { grid-column: 1 / -1; }
-  .c-facts .t-link { font: inherit; color: var(--ink-primary); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: var(--live-gold); text-decoration-thickness: 2px; text-underline-offset: 4px; }
-  .c-facts .t-link:hover { color: var(--live-gold-deep); }
-  .c-price { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; padding: 16px 24px; border-radius: var(--r-md); background: var(--bg-elevated); margin-bottom: 24px; }
-  .c-price-label { font-size: 13px; color: var(--ink-tertiary); }
-  .c-price-val { font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.02em; }
-  .c-price-val.tba { font-family: var(--font-ui); font-size: 15px; font-weight: 500; color: var(--ink-secondary); }
-  .c-price-terms { flex-basis: 100%; font-size: 13px; color: var(--ink-tertiary); }
-  .c-note { margin: 0 0 24px; padding: 10px 12px; border-left: 3px solid var(--live-gold); background: var(--live-gold-tint); border-radius: 0 8px 8px 0; font-size: 13.5px; line-height: 1.5; color: var(--ink-secondary); }
-  .c-card .btn { margin-top: auto; align-self: flex-start; }
-  .status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: var(--r-full); border: 1px solid var(--hairline); color: var(--ink-secondary); background: var(--bg-surface); }
-  .status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-quaternary); }
-  .status-open { color: var(--g-object); border-color: rgba(46,125,50,0.25); background: rgba(46,125,50,0.06); }
-  .status-open::before { background: var(--g-object); }
-  .status-waitlist { color: var(--live-gold-deep); border-color: rgba(138,90,0,0.25); background: var(--live-gold-tint); }
-  .status-waitlist::before { background: var(--live-gold); }
-  @media (max-width: 480px) { .c-card { padding: 24px; } .c-facts { grid-template-columns: 1fr; } .c-status { margin-left: 0; } .c-card .btn { align-self: stretch; justify-content: center; } }
+  /* ================= PATH: finder + roadmap ================= */
+  .path { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; align-items: start; }
+  .finder { background: var(--bg-surface); border: 1px solid var(--line); border-radius: 24px; padding: 36px; box-shadow: var(--shadow-card); }
+  .finder h3 { margin: 0 0 8px; font-family: var(--font-display); font-weight: 500; font-size: 26px; letter-spacing: -0.02em; }
+  .finder > p { margin: 0 0 24px; font-size: 15px; color: var(--ink-secondary); }
+  .finder fieldset { border: 0; padding: 0; margin: 0 0 24px; min-width: 0; }
+  .finder legend { padding: 0; margin: 0 0 12px; font-size: 14px; font-weight: 600; color: var(--ink-primary); }
+  .opts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .opt { position: relative; }
+  .opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .opt span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border-radius: var(--r-full); border: 1px solid var(--line-strong); font-size: 14px; color: var(--ink-secondary); cursor: pointer; background: var(--bg-surface); transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease); }
+  .opt span:hover { border-color: var(--ink-primary); color: var(--ink-primary); }
+  .opt input:checked + span { background: var(--ink-primary); border-color: var(--ink-primary); color: #fff; }
+  .opt input:focus-visible + span { outline: 2px solid var(--ink-primary); outline-offset: 2px; }
+  .finder-result { margin-top: 8px; padding: 24px; border-radius: var(--r-lg); background: var(--bg-warm); border: 1px solid var(--line); }
+  .finder-kicker { margin: 0 0 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-tertiary); }
+  .finder-h { margin: 0 0 8px; font-family: var(--font-display); font-weight: 500; font-size: 22px; letter-spacing: -0.02em; line-height: 1.25; }
+  .finder-result p { margin: 0 0 8px; font-size: 15px; line-height: 1.55; color: var(--ink-secondary); }
+  .finder-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .finder-actions .btn { font-size: 14px; padding: 8px 16px; }
 
-  /* ---------- journey ---------- */
-  .journey { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin: 0; padding: 0; list-style: none; counter-reset: j; }
-  .journey li { counter-increment: j; position: relative; padding-top: 48px; }
-  .journey li::before { content: counter(j, decimal-leading-zero); position: absolute; top: 0; left: 0; font-family: var(--font-mono); font-size: 13px; color: var(--live-navy); background: var(--bg-elevated); border-radius: var(--r-xs); padding: 4px 8px; }
-  .journey li::after { content: ''; position: absolute; top: 14px; left: 48px; right: -12px; height: 1px; background: var(--hairline-strong); }
-  .journey li:last-child::after { display: none; }
-  .journey h3 { font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: -0.01em; margin: 0 0 8px; }
-  .journey p { margin: 0; font-size: 15px; color: var(--ink-secondary); line-height: 1.55; }
-  @media (max-width: 980px) {
-    .journey { grid-template-columns: 1fr; gap: 0; }
-    .journey li { padding: 0 0 36px 64px; }
-    .journey li::after { top: 36px; left: 18px; right: auto; bottom: 8px; width: 1px; height: auto; }
+  .road { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .road > li { position: relative; padding: 24px 16px 24px; border-radius: var(--r-lg); border: 1px solid var(--line); background: transparent; display: flex; flex-direction: column; min-width: 0; transition: border-color var(--dur-base) var(--ease), background var(--dur-base) var(--ease), box-shadow var(--dur-base) var(--ease); }
+  .road > li.now { background: var(--bg-surface); border-color: var(--line-strong); box-shadow: var(--shadow-soft); }
+  .road > li.is-match { border-color: var(--ink-primary); box-shadow: inset 0 0 0 1px var(--ink-primary); }
+  .road .lv { font-family: var(--font-display); font-size: 44px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; margin: 0 0 4px; }
+  .road > li:not(.now) .lv { color: var(--ink-quaternary); }
+  .road .nm { margin: 0 0 16px; font-size: 13px; color: var(--ink-tertiary); }
+  .road ul { margin: 0 0 16px; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .road ul li { font-size: 14px; line-height: 1.45; color: var(--ink-secondary); padding-left: 12px; position: relative; }
+  .road ul li::before { content: ''; position: absolute; left: 0; top: 9px; width: 4px; height: 4px; border-radius: 50%; background: var(--ink-quaternary); }
+  .road .st { margin-top: auto; display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 500; color: var(--ink-tertiary); }
+  .road .st::before { content: ''; width: 6px; height: 6px; border-radius: 50%; border: 1.5px solid var(--ink-quaternary); }
+  .road .now .st { color: var(--ink-primary); }
+  .road .now .st::before { background: var(--cta-green); border-color: var(--cta-green); }
+  .road-track { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 0 0 12px; }
+  .road-track span { height: 2px; border-radius: 2px; background: var(--line); }
+  .road-track span:first-child { background: var(--ink-primary); }
+  .road-note { margin: 24px 0 0; font-size: 14px; color: var(--ink-tertiary); line-height: 1.55; max-width: 640px; }
+  @media (max-width: 1080px) { .path { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 760px) { .road, .road-track { grid-template-columns: repeat(2, minmax(0, 1fr)); } .road-track { display: none; } }
+  @media (max-width: 480px) { .finder { padding: 24px 16px; border-radius: 16px; } .road { gap: 8px; } .road > li { padding: 16px 12px; } .road .lv { font-size: 32px; } .road ul li:nth-child(n+2) { display: none; } .road ul { margin-bottom: 12px; } }
+
+  /* ================= COMPARE ================= */
+  .cmp { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 15px; }
+  .cmp th, .cmp td { text-align: left; vertical-align: top; padding: 16px 24px; border-bottom: 1px solid var(--line); line-height: 1.5; }
+  .cmp thead th { padding-top: 0; border-bottom: 1px solid var(--line-strong); font-family: var(--font-display); font-weight: 500; font-size: 22px; letter-spacing: -0.02em; }
+  .cmp thead th small { display: block; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-tertiary); margin-bottom: 8px; }
+  .cmp tbody th { width: 22%; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-tertiary); padding-top: 20px; }
+  .cmp td { width: 39%; color: var(--ink-secondary); }
+  .cmp .live { background: var(--bg-surface); }
+  .cmp thead .live { border-radius: 16px 16px 0 0; padding-top: 24px; }
+  .cmp tbody tr:last-child .live { border-radius: 0 0 16px 16px; }
+  .cmp td strong { color: var(--ink-primary); font-weight: 600; }
+  .cmp-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-top: 24px; font-size: 14px; color: var(--ink-tertiary); }
+  @media (max-width: 720px) {
+    .cmp, .cmp tbody { display: block; width: auto; }
+    .cmp thead { display: block; }
+    .cmp thead tr { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; border-bottom: 1px solid var(--line-strong); padding-bottom: 12px; }
+    .cmp thead td { display: none; }
+    .cmp thead th { display: block; width: auto; padding: 0; border: 0; font-size: 17px; background: none !important; border-radius: 0 !important; }
+    .cmp tbody tr { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .cmp tbody th { grid-column: 1 / -1; width: auto; padding: 0 0 4px; border: 0; }
+    .cmp td { width: auto; padding: 0; border: 0; font-size: 14px; background: none !important; border-radius: 0 !important; }
   }
 
-  /* ---------- method ---------- */
-  .method-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .method-grid .card { padding: 24px; }
-  .method-grid .card h3 { font-size: 19px; margin: 12px 0 8px; }
-  .method-grid .card p { font-size: 15px; }
-  .method-de { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: 15px; color: var(--ink-primary); margin-top: 16px !important; padding-top: 12px; border-top: 1px solid var(--hairline-light); }
-  .method-feature { grid-column: span 2; background: var(--bg-elevated); color: var(--ink-primary); border-color: var(--hairline); }
-  .method-feature h3 { color: var(--ink-primary); }
-  .method-feature p { color: var(--live-navy-ink) !important; }
-  .method-feature .card-num { color: var(--live-gold); }
-  .cefr-line { display: flex; gap: 4px; margin-top: 24px; }
-  .cefr-line span { flex: 1; text-align: center; font-family: var(--font-mono); font-size: 12px; padding: 8px 0; border-radius: var(--r-xs); background: var(--bg-surface); color: var(--ink-secondary); }
-  .cefr-line span:nth-child(-n+2) { background: var(--bg-warm); }
-  @media (max-width: 1080px) { .method-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .method-grid { grid-template-columns: 1fr; } .method-feature { grid-column: auto; } }
-
-  /* ---------- consultation ---------- */
-  .book { background: var(--bg-elevated); color: var(--ink-primary); border-top: 1px solid var(--hairline); }
-  .book-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: start; }
-  .book .eyebrow { color: var(--live-gold); }
-  .book h2 { color: var(--ink-primary); margin: 0 0 16px; }
-  .book .lede { color: var(--live-navy-ink); }
-  .fee { display: flex; align-items: baseline; gap: 16px; margin: 36px 0 8px; }
-  .fee-amt { font-family: var(--font-display); font-size: 64px; font-weight: 500; letter-spacing: -0.03em; color: var(--live-gold); line-height: 1; }
-  .fee-unit { font-size: 15px; color: var(--live-navy-ink); }
-  .fee-note { font-size: 16px; color: var(--ink-secondary); margin: 0 0 36px; max-width: 460px; }
-  .fee-note strong { color: var(--live-gold); font-weight: 600; }
-  .book-steps { margin: 0 0 36px; padding: 0; list-style: none; counter-reset: b; display: flex; flex-direction: column; gap: 16px; }
-  .book-steps li { counter-increment: b; display: flex; gap: 16px; font-size: 15px; color: var(--live-navy-ink); line-height: 1.5; }
-  .book-steps li::before { content: counter(b); flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--hairline-strong); color: var(--live-gold); font-family: var(--font-mono); font-size: 13px; display: flex; align-items: center; justify-content: center; }
-  .conditions { border-top: 1px solid var(--hairline); padding-top: 24px; font-size: 14px; color: var(--live-navy-ink); }
-  .conditions h3 { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-primary); margin: 0 0 12px; font-weight: 600; }
-  .conditions ul { margin: 0; padding-left: 16px; display: flex; flex-direction: column; gap: 8px; }
-  .conditions a { color: var(--live-gold); text-decoration: underline; text-underline-offset: 3px; }
-
-  .book-card { background: var(--bg-surface); color: var(--ink-primary); border-radius: 24px; padding: 36px; border: 1px solid var(--hairline); box-shadow: var(--shadow-card); }
-  .book-card h3 { font-family: var(--font-display); font-weight: 600; font-size: 24px; letter-spacing: -0.02em; margin: 0 0 4px; }
+  /* ================= WAITLIST ================= */
+  .book-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: start; }
+  .book-intro h2 { margin: 0 0 16px; }
+  .book-intro .lede { font-size: 19px; }
+  .free-line { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 36px; padding: 0; list-style: none; }
+  .free-line li { padding: 4px 12px; border-radius: var(--r-full); border: 1px solid var(--line-strong); font-size: 13px; font-weight: 500; color: var(--ink-primary); background: var(--bg-surface); }
+  .how-steps { margin: 0 0 36px; padding: 0; list-style: none; counter-reset: h; border-top: 1px solid var(--line); }
+  .how-steps li { counter-increment: h; display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.55; color: var(--ink-secondary); }
+  .how-steps li::before { content: counter(h, decimal-leading-zero); font-family: var(--font-mono); font-size: 12px; color: var(--ink-tertiary); padding-top: 2px; }
+  .how-steps strong { display: block; color: var(--ink-primary); font-weight: 600; margin-bottom: 2px; }
+  .book-closed { padding: 16px; border-radius: var(--r-md); background: var(--bg-surface); border: 1px dashed var(--line-strong); }
+  .book-closed h3 { margin: 0 0 4px; font-size: 15px; font-weight: 600; }
+  .book-closed p { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink-secondary); }
+  .book-closed .link-btn, .book-closed a { color: var(--ink-primary); font-weight: 500; }
+  .book-card { background: var(--bg-surface); color: var(--ink-primary); border-radius: 24px; padding: 36px; border: 1px solid var(--line); box-shadow: var(--shadow-card); }
+  .book-card h3 { font-family: var(--font-display); font-weight: 500; font-size: 28px; letter-spacing: -0.02em; margin: 0 0 4px; }
   .book-card .sub { margin: 0 0 24px; font-size: 14px; color: var(--ink-tertiary); }
   .form-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
   .book-card .form-row { margin-bottom: 16px; }
-  .book-card .form-row input, .book-card .form-row select, .book-card .form-row textarea { width: 100%; min-height: 48px; }
-  .book-card .form-row textarea { min-height: 96px; }
-  .book-card .form-row input:focus, .book-card .form-row select:focus, .book-card .form-row textarea:focus { border-color: var(--live-navy); box-shadow: 0 0 0 3px rgba(15,23,42,0.12); }
-  .req { color: var(--live-gold-deep); }
-  .opt { font-weight: 400; color: var(--ink-tertiary); }
-  .field-err { font-size: 13px; color: #B42318; margin: 0; }
-  .form-row [aria-invalid="true"] { border-color: #B42318; }
+  .book-card .form-row label, .book-card fieldset.form-row legend { display: block; font-size: 13px; font-weight: 600; color: var(--ink-secondary); margin-bottom: 8px; padding: 0; }
+  .book-card .form-row input, .book-card .form-row select, .book-card .form-row textarea { width: 100%; min-height: 48px; font: inherit; font-size: 16px; padding: 12px 16px; border-radius: var(--r-md); border: 1px solid var(--line-strong); background: var(--bg-surface); color: var(--ink-primary); }
+  .book-card .form-row select { appearance: none; -webkit-appearance: none; background: var(--bg-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%236F6F73' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 16px center; padding-right: 36px; }
+  .book-card .form-row textarea { min-height: 96px; resize: vertical; }
+  .book-card .form-row input:focus, .book-card .form-row select:focus, .book-card .form-row textarea:focus { outline: none; border-color: var(--ink-primary); box-shadow: 0 0 0 3px rgba(14,14,16,0.08); }
+  .req { color: var(--ink-tertiary); }
+  .opt-l { font-weight: 400; color: var(--ink-tertiary); }
+  .field-err { font-size: 13px; color: #B42318; margin: 4px 0 0; }
+  .form-row [aria-invalid="true"] { border-color: #B42318 !important; }
   fieldset.form-row { border: 0; padding: 0; margin: 0 0 16px; min-width: 0; }
-  fieldset.form-row legend { font-size: 13px; font-weight: 600; color: var(--ink-secondary); padding: 0; margin-bottom: 8px; }
   .times { display: flex; flex-wrap: wrap; gap: 8px; }
   .time-opt { position: relative; }
   .time-opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-  .time-opt > span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border-radius: var(--r-full); border: 1px solid var(--hairline-strong); font-size: 14px; color: var(--ink-secondary); cursor: pointer; transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
-  .time-opt input:checked + span { background: var(--live-navy); border-color: var(--live-navy); color: #fff; }
-  .time-opt input:focus-visible + span { outline: 2px solid var(--live-navy); outline-offset: 2px; }
+  .time-opt > span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border-radius: var(--r-full); border: 1px solid var(--line-strong); font-size: 14px; color: var(--ink-secondary); cursor: pointer; transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+  .time-opt input:checked + span { background: var(--ink-primary); border-color: var(--ink-primary); color: #fff; }
+  .time-opt input:focus-visible + span { outline: 2px solid var(--ink-primary); outline-offset: 2px; }
+  .more-fields { margin: 0 0 16px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .more-fields > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; font-size: 14px; font-weight: 600; color: var(--ink-primary); }
+  .more-fields > summary::-webkit-details-marker { display: none; }
+  .more-fields > summary::after { content: '+'; font-family: var(--font-mono); font-size: 16px; color: var(--ink-tertiary); }
+  .more-fields[open] > summary::after { content: '−'; }
+  .more-fields[open] { padding-bottom: 4px; }
   .consent { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--ink-secondary); margin: 8px 0 24px; }
-  .consent input { width: 20px; height: 20px; margin: 2px 0 0; flex: 0 0 auto; accent-color: var(--live-navy); }
+  .consent input { width: 20px; height: 20px; margin: 2px 0 0; flex: 0 0 auto; accent-color: var(--ink-primary); }
   .consent a { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
   .book-card .btn { width: 100%; justify-content: center; }
-  .form-foot { font-size: 13px; color: var(--ink-tertiary); margin: 16px 0 0; text-align: center; }
+  .form-foot { font-size: 13px; color: var(--ink-tertiary); margin: 16px 0 0; text-align: center; line-height: 1.5; }
   .err-summary { background: #FEF3F2; border: 1px solid rgba(180,35,24,0.25); color: #B42318; border-radius: var(--r-md); padding: 12px 16px; font-size: 14px; margin-bottom: 16px; }
-  .err-summary:focus { outline: 2px solid #B42318; outline-offset: 2px; }
   .done h3 { margin-bottom: 8px; }
   .done p { margin: 0 0 16px; font-size: 15px; color: var(--ink-secondary); }
-  .book-closed { background: var(--live-gold-tint); border-radius: var(--r-md); padding: 16px; margin-bottom: 24px; color: var(--ink-primary); }
-  .book-closed h3 { margin: 0 0 6px; font-size: 17px; }
-  .book-closed p { margin: 0; font-size: 14px; line-height: 1.5; }
-  .done-notice { background: var(--live-gold-tint); border-radius: var(--r-md); padding: 16px; font-size: 14px; color: var(--ink-primary); margin-bottom: 24px; }
+  .done-notice { background: var(--bg-elevated); border-radius: var(--r-md); padding: 16px; font-size: 14px; color: var(--ink-primary); margin-bottom: 24px; line-height: 1.55; }
   .done pre { white-space: pre-wrap; word-break: break-word; font-family: var(--font-mono); font-size: 12px; background: var(--bg-elevated); border-radius: var(--r-md); padding: 16px; margin: 0 0 16px; max-height: 220px; overflow: auto; }
   .done-actions { display: flex; flex-wrap: wrap; gap: 8px; }
   .done-actions .btn { width: auto; flex: 1 1 auto; }
   .done a.inline, .nojs-request a.inline { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
   .nojs-request p { margin: 8px 0 0; font-size: 15px; color: var(--ink-secondary); line-height: 1.55; }
-  @media (max-width: 980px) { .book-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; } }
-  @media (max-width: 520px) { .book-card { padding: 24px 16px; border-radius: 16px; } .form-2 { grid-template-columns: 1fr; } .fee-amt { font-size: 52px; } }
+  @media (max-width: 980px) { .book-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; } }
+  @media (max-width: 520px) { .book-card { padding: 24px 16px; border-radius: 16px; } .form-2 { grid-template-columns: 1fr; } .form-2.keep-2 { grid-template-columns: 1fr 1fr; gap: 0 12px; } .book-intro .lede { font-size: 17px; } .free-line { display: none; } .how-steps { margin-top: 24px; } .how-steps { margin-bottom: 24px; } .how-steps li { padding: 12px 0; font-size: 14px; } }
 
-  /* ---------- trust ---------- */
-  .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .trust-grid .card a { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
-  .quotes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 24px; }
-  .quote { margin: 0; }
-  .quote blockquote { margin: 0 0 16px; font-family: var(--font-display); font-size: 20px; line-height: 1.45; }
-  .quote figcaption { font-size: 14px; color: var(--ink-tertiary); }
-  .quote figcaption strong { color: var(--ink-primary); font-weight: 600; }
-  @media (max-width: 860px) { .trust-grid, .quotes { grid-template-columns: 1fr; } }
-
-  .faq-a-inner a { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
-  .faq-a-inner .link-btn { color: var(--ink-primary); }
+  /* ================= FAQ + close ================= */
+  .faq-groups { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 64px; align-items: start; }
+  .faq-side h2 { margin: 0 0 16px; }
+  .faq-side p { margin: 0; color: var(--ink-secondary); font-size: 16px; line-height: 1.6; }
+  .faq-side a { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
+  .faq-group + .faq-group { margin-top: 48px; }
+  .faq-group h3 { margin: 0 0 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-tertiary); }
+  .faq-q { font-size: 17px; min-height: 44px; }
+  .faq-a-inner a, .faq-a-inner .link-btn { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
+  .faq-a-inner ul { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 4px; }
   .faq-q:focus-visible { outline-offset: -2px; }
-  .cta-band .lede a { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
+  @media (min-width: 981px) { .faq-side { position: sticky; top: 96px; } }
+  @media (max-width: 980px) { .faq-groups { grid-template-columns: minmax(0, 1fr); gap: 36px; } }
 
-  /* ---------- mobile sticky CTA ---------- */
-  .sticky-book { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 40; display: none; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 16px; border-radius: var(--r-lg); background: var(--bg-surface); color: var(--ink-primary); border: 1px solid var(--hairline); box-shadow: var(--shadow-card); transform: translateY(calc(100% + 24px)); transition: transform var(--dur-slow) var(--ease); }
+  .close { text-align: center; }
+  .close h2 { margin: 0 auto 16px; max-width: 760px; }
+  .close .lede { max-width: 600px; margin: 0 auto; font-size: 19px; }
+  .close .hero-ctas { justify-content: center; }
+
+  /* ================= mobile sticky CTA ================= */
+  .sticky-book { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 40; display: none; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 16px; border-radius: var(--r-lg); background: rgba(255,255,255,0.96); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: var(--ink-primary); border: 1px solid var(--line); box-shadow: var(--shadow-modal); transform: translateY(calc(100% + 24px)); transition: transform var(--dur-slow) var(--ease-out); }
   .sticky-book.show { transform: none; }
-  .sticky-book p { margin: 0; font-size: 13px; line-height: 1.35; color: var(--live-navy-ink); }
-  .sticky-book p strong { color: var(--ink-primary); display: block; font-size: 14px; }
+  .sticky-book p { margin: 0; font-size: 12.5px; line-height: 1.35; color: var(--ink-tertiary); min-width: 0; }
+  .sticky-book p strong { color: var(--ink-primary); display: block; font-size: 14px; font-weight: 600; }
   .sticky-book .btn { padding: 12px 16px; font-size: 14px; flex: 0 0 auto; }
   @media (max-width: 760px) { .sticky-book { display: flex; } }
   @media (max-width: 340px) { .sticky-book p > span { display: none; } }
-  .payment-guide { display: grid; grid-template-columns: 1.2fr 1fr; gap: 36px; margin-top: 36px; padding: 36px; border: 1px solid var(--hairline); border-radius: var(--r-lg); background: var(--bg-surface); }
-  .payment-guide h3 { font-family: var(--font-display); font-size: 26px; font-weight: 500; margin: 12px 0; }
-  .payment-guide p { font-size: 14px; color: var(--ink-secondary); margin: 0 0 12px; }
-  .payment-guide-details { border-left: 1px solid var(--hairline); padding-left: 36px; align-self: center; }
-  .payment-guide a { font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
-  .btn, .chip, .t-actions .btn { min-height: 44px; }
-  .on-navy :focus-visible { outline-color: var(--ink-primary); }
-  @media (max-width: 680px) {
-    .payment-guide { grid-template-columns: 1fr; padding: 24px; gap: 24px; }
-    .payment-guide-details { border-left: 0; border-top: 1px solid var(--hairline); padding: 24px 0 0; }
-  }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .sticky-book, .board-tabs [role="tab"]::after { transition: none; } }
 </style>
-<!-- Without JavaScript: FAQ answers open, and controls that need kw-live.js
-     (filters, the request form) are hidden; a plain email link replaces the form. -->
+<!-- Without JavaScript: every panel is plain HTML (the lesson board shows
+     all four steps one after another), FAQ answers open, and controls
+     that need a script (tabs, the finder, the waitlist form) are hidden;
+     a plain email link replaces the form. -->
 <noscript><style>
   .js-only { display: none !important; }
   .faq-a { max-height: none !important; }
@@ -455,107 +689,326 @@
 
 <main id="main" tabindex="-1">
 
-<!-- ========== HERO ========== -->
-<section class="live-hero">
-  <div class="container live-hero-grid">
-    <div>
-      <div class="eyebrow-row" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:24px">
-        <span class="pill pill-live"><span class="pill-dot"></span> Live Classes</span>
-        <span class="eyebrow">Teacher-led · Online<span data-live-levels></span></span>
+<!-- ========== 1. HERO + LESSON BOARD ========== -->
+<section class="live-hero" aria-labelledby="hero-h">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="hero-eyebrow">
+          <span class="pill pill-live"><span class="pill-dot"></span> Live classes</span>
+          <span class="eyebrow">Teacher-led · Online<span data-live-levels></span></span>
+        </p>
+        <h1 class="display-xl" id="hero-h">Learn German live, <span class="accent">with every mistake explained.</span></h1>
+        <p class="lede">A small-group beginner course with Reegan Gandhi: live classes three evenings a week, homework with written feedback, and practice in the Goethe A1 format. Explanations in Hindi and English.</p>
+        <div class="hero-ctas">
+          <a href="#book" class="btn btn-live" data-hero-cta data-book-course="live-a1">Join the free A1 waitlist
+            <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#how" class="btn btn-secondary" data-hero-cta>See how a class works</a>
+        </div>
+        <ul class="hero-reassure">
+          <li>Free to join</li>
+          <li>Not a booking</li>
+          <li>Nothing is charged</li>
+        </ul>
       </div>
-      <h1 class="display-xl">A clear path to German. <span class="accent">With a teacher beside you.</span></h1>
-      <p class="lede">Small-group classes. Clear explanations in Hindi and English. A real teacher to help you speak, understand your mistakes and make steady progress.</p>
-      <div class="hero-ctas">
-        <a href="#teachers" class="btn btn-live" data-none="teachers" data-none-href="#book" data-none-text="Join the waitlist" data-one-text="Meet your teacher">Explore our teachers
-          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="#courses" class="btn btn-secondary" data-none="courses" data-none-href="#how" data-none-text="How live classes work">Explore live courses</a>
+
+      <!-- The Tafel: four steps of one teaching moment. An example written
+           for this page; nothing here is a recording of a real learner. -->
+      <div class="board-wrap">
+        <div class="board" id="lesson-board" data-lang="en" role="region" aria-labelledby="board-h">
+          <div class="board-bar">
+            <h2 class="board-title" id="board-h"><span class="mono">Example lesson<span class="bt-wk"> · A1 week 9</span></span><strong lang="de">Perfekt mit sein</strong></h2>
+            <div class="lang-toggle js-only" role="group" aria-label="Explanation language">
+              <button type="button" data-board-lang="en" aria-pressed="true">English</button>
+              <button type="button" data-board-lang="hi" aria-pressed="false" lang="hi">हिन्दी</button>
+            </div>
+          </div>
+          <div class="board-tabs js-only" role="tablist" aria-label="Lesson steps">
+            <button type="button" role="tab" id="bt-1" aria-controls="bp-1" aria-selected="true"><span class="n">01</span><span class="de" lang="de">Erklären</span><span class="en">Explain</span></button>
+            <button type="button" role="tab" id="bt-2" aria-controls="bp-2" aria-selected="false" tabindex="-1"><span class="n">02</span><span class="de" lang="de">Üben</span><span class="en">You try</span></button>
+            <button type="button" role="tab" id="bt-3" aria-controls="bp-3" aria-selected="false" tabindex="-1"><span class="n">03</span><span class="de" lang="de">Korrigieren</span><span class="en">Corrected</span></button>
+            <button type="button" role="tab" id="bt-4" aria-controls="bp-4" aria-selected="false" tabindex="-1"><span class="n">04</span><span class="de" lang="de">Festigen</span><span class="en">Homework</span></button>
+          </div>
+          <div class="board-surface">
+            <!-- 01 Explain -->
+            <div class="board-panel" id="bp-1" role="tabpanel" aria-labelledby="bt-1" tabindex="0">
+              <p class="panel-kicker mono">01 · The teacher explains</p>
+              <ul class="parse" lang="de" aria-label="Ich bin ins Kino gegangen: Ich is the subject, bin is the verb in position 2, ins Kino is the place, gegangen is the verb at the end">
+                <li class="role-s" aria-hidden="true"><span class="w">Ich</span><span class="r">Subject</span></li>
+                <li class="role-v" aria-hidden="true"><span class="w">bin</span><span class="r">Verb · pos. 2</span></li>
+                <li class="role-p" aria-hidden="true"><span class="w">ins Kino</span><span class="r">Place</span></li>
+                <li class="role-v" aria-hidden="true"><span class="w">gegangen.</span><span class="r">Verb · end</span></li>
+              </ul>
+              <div class="explain">
+                <p data-l="en"><em lang="de">gehen</em> means moving from one place to another. Verbs of movement form the Perfekt with <strong>sein</strong>, not <em lang="de">haben</em>.</p>
+                <p data-l="en">The helper verb <em lang="de">bin</em> sits in position 2; the participle <em lang="de">gegangen</em> goes to the end.</p>
+                <p data-l="hi" lang="hi"><em lang="de">gehen</em> का मतलब है एक जगह से दूसरी जगह जाना। ऐसी गति वाली क्रियाओं का Perfekt <em lang="de">haben</em> से नहीं, <strong lang="de">sein</strong> से बनता है।</p>
+                <p data-l="hi" lang="hi">सहायक क्रिया <em lang="de">bin</em> दूसरे स्थान पर आती है और <em lang="de">gegangen</em> वाक्य के अंत में।</p>
+              </div>
+            </div>
+
+            <!-- 02 Practise -->
+            <div class="board-panel" id="bp-2" role="tabpanel" aria-labelledby="bt-2" tabindex="0">
+              <p class="panel-kicker mono">02 · Your turn</p>
+              <p class="bubble"><span class="who mono">Teacher</span><span class="de-italic" lang="de">Und du? Was hast du am Wochenende gemacht?</span></p>
+              <p class="build" lang="de">Ich <span class="slot" id="practice-slot" aria-hidden="true">?</span> nach Agra gefahren.</p>
+              <div class="choices js-only" role="group" aria-label="Choose the helper verb">
+                <span class="mono">Choose</span>
+                <button type="button" class="choice" data-aux="habe" aria-pressed="false" lang="de">habe</button>
+                <button type="button" class="choice" data-aux="bin" aria-pressed="false" lang="de">bin</button>
+              </div>
+              <div class="feedback" id="practice-feedback" aria-live="polite" hidden>
+                <p data-when="right" hidden><strong>Richtig.</strong> <span data-l="en"><em lang="de">fahren</em> is movement to Agra, so the Perfekt takes <em lang="de">sein</em>: <em lang="de">Ich bin nach Agra gefahren.</em></span><span data-l="hi" lang="hi"><em lang="de">fahren</em> में Agra तक जाना है, इसलिए Perfekt <em lang="de">sein</em> से: <em lang="de">Ich bin nach Agra gefahren.</em></span> <button type="button" class="link-btn" data-board-goto="2">See how a mistake is corrected</button></p>
+                <p data-when="wrong" hidden><strong>Almost — this is the mistake most beginners make.</strong> <span data-l="en">In class, this is exactly the moment the teacher stops and explains.</span><span data-l="hi" lang="hi">क्लास में ठीक इसी पल शिक्षक रुककर समझाते हैं।</span> <button type="button" class="link-btn" data-board-goto="2">See the correction</button></p>
+              </div>
+              <noscript><p class="feedback">The answer is <em lang="de">bin</em>: <em lang="de">fahren</em> is movement, so its Perfekt takes <em lang="de">sein</em>.</p></noscript>
+            </div>
+
+            <!-- 03 Correct -->
+            <div class="board-panel" id="bp-3" role="tabpanel" aria-labelledby="bt-3" tabindex="0">
+              <p class="panel-kicker mono">03 · Corrected in the moment</p>
+              <p class="said" lang="de">Ich <del aria-label="habe, crossed out">habe</del> <ins aria-label="corrected to bin">bin</ins> nach Agra gefahren.</p>
+              <p class="note"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8.5 6.5 12 13 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span><span data-l="en"><strong>Why:</strong> moving from A to B → <em lang="de">sein</em>. Everything else → usually <em lang="de">haben</em>. Now say the whole sentence again.</span><span data-l="hi" lang="hi"><strong>क्यों:</strong> A से B तक जाना → <em lang="de">sein</em>। बाकी ज़्यादातर क्रियाएँ → <em lang="de">haben</em>। अब पूरा वाक्य फिर से बोलिए।</span></span></p>
+              <ul class="compare" lang="de">
+                <li><span><em>Ich habe Tee getrunken.</em></span><span class="tag" lang="en">No movement · haben</span></li>
+                <li><span><em>Ich bin nach Agra gefahren.</em></span><span class="tag" lang="en">Movement · sein</span></li>
+              </ul>
+            </div>
+
+            <!-- 04 Homework, marked -->
+            <div class="board-panel" id="bp-4" role="tabpanel" aria-labelledby="bt-4" tabindex="0">
+              <p class="panel-kicker mono">04 · Homework, with written feedback</p>
+              <div class="sheet">
+                <ol>
+                  <li><span class="line" lang="de">Am Samstag habe ich Cricket gespielt. <span class="mark" lang="en">✓</span></span><span class="margin"><span data-l="en">Good: the verb comes second after <em lang="de">Am Samstag</em>.</span><span data-l="hi" lang="hi">बहुत अच्छा: <em lang="de">Am Samstag</em> के बाद क्रिया दूसरे स्थान पर है।</span></span></li>
+                  <li><span class="line" lang="de"><del>Dann ich bin</del> Dann bin ich nach Hause gegangen.</span><span class="margin"><span data-l="en">After <em lang="de">Dann</em>, the verb still comes second.</span><span data-l="hi" lang="hi"><em lang="de">Dann</em> के बाद भी क्रिया दूसरे स्थान पर ही आती है।</span></span></li>
+                  <li><span class="line" lang="de">Am Sonntag habe ich lange geschlafen. <span class="mark" lang="en">✓</span></span><span class="margin"><span data-l="en"><em lang="de">schlafen</em> is not movement, so <em lang="de">haben</em> is right.</span><span data-l="hi" lang="hi"><em lang="de">schlafen</em> में कहीं जाना नहीं है, इसलिए <em lang="de">haben</em> सही है।</span></span></li>
+                </ol>
+              </div>
+              <p class="sheet-foot"><span data-l="en"><strong>Teacher’s note:</strong> sein and haben all correct. Next: word order after time words.</span><span data-l="hi" lang="hi"><strong>शिक्षक की टिप्पणी:</strong> sein और haben सब सही। अगला कदम: समय वाले शब्दों के बाद शब्द-क्रम।</span></p>
+            </div>
+          </div>
+          <div class="board-foot js-only">
+            <span class="board-count"><span class="board-prog" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="mono">Step <span id="board-step-now">1</span> of 4</span></span>
+            <button type="button" class="board-next" id="board-next"><span>Next step</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+        <p class="board-caption">An example written for this page, to show how teaching works. In class, the sentences come from your own answers.</p>
       </div>
-      <ul class="hero-points">
-        <li><span><span data-consult-fee>₹100</span> consultation once online booking opens</span></li>
-        <li><span>Adjusted against your course fee within <span data-consult-days>7 days</span></span></li>
-      </ul>
     </div>
 
-    <figure style="margin:0">
-      <div class="session-card on-navy" aria-label="Example of feedback in a live class">
-        <div class="session-top">
-          <span class="session-label">In a live class</span>
-          <span class="session-meta">Example</span>
+    <dl class="fact-rail" aria-label="The A1 live course at a glance">
+      <div class="fee"><dt>Course fee</dt><dd><span data-course-field="priceLabel">See the course below</span><small>Paid in full, once enrolment opens</small></dd></div>
+      <div class="fr-level"><dt>Level</dt><dd data-course-field="title">Beginner German · A1</dd></div>
+      <div><dt>Classes</dt><dd data-course-field="frequency">3 classes a week · Mon, Wed, Fri, 7:30–9:00 pm IST</dd></div>
+      <div class="fr-group"><dt>Group</dt><dd data-course-field="batchSize">Up to 8 learners; runs with at least 4</dd></div>
+      <div><dt>Next batch</dt><dd>Start date to be announced</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ========== 2. HOW A CLASS WORKS ========== -->
+<section id="how" aria-labelledby="how-h">
+  <div class="container">
+    <div class="s-head" data-reveal>
+      <span class="mono"><b class="sn">01</b>Inside a class</span>
+      <h2 class="display-md" id="how-h">Ninety minutes, the same clear shape every time.</h2>
+      <p>You always know what comes next: a quick warm-up, one point explained properly, then most of the time spent speaking, writing and being corrected.</p>
+    </div>
+    <div class="class-wrap" data-reveal>
+      <div class="class-bar" id="class-bar" aria-hidden="false">
+        <div class="class-scale" aria-hidden="true"><span style="left:0">0 min</span><span style="left:11.1%">10</span><span style="left:27.8%">25</span><span style="left:38.9%">35</span><span style="left:61.1%">55</span><span style="left:77.8%">70</span><span style="left:91.1%">82</span><span style="left:100%">90</span></div>
+        <div class="class-segs" role="group" aria-label="Parts of a 90-minute class">
+          <button type="button" data-seg style="flex:10" aria-pressed="true"><span class="t">Warm-up</span><span class="m">10 min</span></button>
+          <button type="button" data-seg style="flex:15" aria-pressed="false"><span class="t">Explanation</span><span class="m">15 min</span></button>
+          <button type="button" data-seg style="flex:10" aria-pressed="false"><span class="t">Model</span><span class="m">10 min</span></button>
+          <button type="button" data-seg style="flex:20" aria-pressed="false"><span class="t">Guided practice</span><span class="m">20 min</span></button>
+          <button type="button" data-seg style="flex:15" aria-pressed="false"><span class="t">Your turn</span><span class="m">15 min</span></button>
+          <button type="button" data-seg style="flex:12" aria-pressed="false"><span class="t">Correction</span><span class="m">12 min</span></button>
+          <button type="button" data-seg style="flex:8" aria-pressed="false"><span class="t">Wrap-up</span><span class="m">8 min</span></button>
         </div>
-        <div class="bubble bubble-t">
-          <span class="bubble-who">Teacher</span>
-          <span class="de-italic" lang="de">Was hast du am Wochenende gemacht?</span>
-        </div>
-        <div class="bubble bubble-s">
-          <span class="bubble-who">You</span>
-          <span class="de-italic" lang="de">Ich <del>habe</del> ins Kino gegangen.</span>
-        </div>
-        <div class="correction">
-          <div class="correction-head">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7.5 5.5 10.5 11.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Corrected in the moment
-          </div>
-          <p class="correction-sentence" lang="de"><span style="color:var(--g-subject)">Ich</span> <span style="color:var(--g-verb)">bin</span> <span style="color:var(--g-place)">ins Kino</span> <span style="color:var(--g-verb)">gegangen</span>.</p>
-          <p><em>gehen</em> is movement from one place to another, so its Perfekt takes <strong>sein</strong>, not <em>haben</em>. Now say it again.</p>
-        </div>
-        <ol class="session-steps" aria-label="Feedback loop">
-          <li>Speak</li><li>Get corrected</li><li>Understand why</li><li>Say it again</li>
+        <div class="class-detail" id="class-detail" aria-live="polite"></div>
+      </div>
+      <ol id="class-steps">
+        <li><div class="step-h"><h3>Warm-up</h3><span class="mono">0–10 min</span></div><p class="step-p">Five or six quick questions on what you learned last class, last week and last month, so nothing is forgotten.</p><p class="step-who"><strong>Who talks:</strong> every learner answers at least once.</p></li>
+        <li><div class="step-h"><h3>Explanation</h3><span class="mono">10–25 min</span></div><p class="step-p">One grammar or speaking point, explained in English with Hindi comparisons where they help: the pattern, three examples and the one trap to avoid.</p><p class="step-who"><strong>Who talks:</strong> the teacher, checking you have understood.</p></li>
+        <li><div class="step-h"><h3>Model</h3><span class="mono">25–35 min</span></div><p class="step-p">The teacher uses the new German in a short dialogue or builds a sentence out loud; you notice the pattern and say it back.</p><p class="step-who"><strong>Who talks:</strong> the teacher, then the whole group together.</p></li>
+        <li><div class="step-h"><h3>Guided practice</h3><span class="mono">35–55 min</span></div><p class="step-p">Gap-fills out loud, question chains, pair practice and a listening task, from controlled to more open.</p><p class="step-who"><strong>Who talks:</strong> you, in pairs or in turn.</p></li>
+        <li><div class="step-h"><h3>Your turn</h3><span class="mono">55–70 min</span></div><p class="step-p">You create your own German: a role play, a short talk or a few written sentences.</p><p class="step-who"><strong>Who talks:</strong> you.</p></li>
+        <li><div class="step-h"><h3>Correction</h3><span class="mono">70–82 min</span></div><p class="step-p">A few anonymised mistakes from the class go on screen. The group corrects them, then the teacher names the rule.</p><p class="step-who"><strong>Who talks:</strong> the group, then the teacher.</p></li>
+        <li><div class="step-h"><h3>Wrap-up</h3><span class="mono">82–90 min</span></div><p class="step-p">A short check that the point has landed, the homework, and a look at the next class.</p><p class="step-who"><strong>Who talks:</strong> everyone.</p></li>
+      </ol>
+    </div>
+
+    <div class="week" data-reveal>
+      <div>
+        <h3>And across the week</h3>
+        <p>Three live classes in the evening, Indian Standard Time, on Google Meet. Between them, short homework that comes back with written feedback.</p>
+        <ol class="days" aria-label="Class days">
+          <li class="on"><span class="d">Mon</span><span class="x">Class</span></li>
+          <li><span class="d">Tue</span></li>
+          <li class="on"><span class="d">Wed</span><span class="x">Class</span></li>
+          <li><span class="d">Thu</span></li>
+          <li class="on"><span class="d">Fri</span><span class="x">Class</span></li>
+          <li><span class="d">Sat</span></li>
+          <li><span class="d">Sun</span></li>
         </ol>
       </div>
-      <figcaption class="session-caption">An illustration of how feedback works in a live class.</figcaption>
-    </figure>
+      <ul class="rhythm">
+        <li><span class="k">Each class</span><span>90 minutes, live. Group size: <span data-course-field="batchSize">up to 8 learners; runs with at least 4</span>.</span></li>
+        <li><span class="k">After class</span><span>Homework, returned with written feedback.</span></li>
+        <li><span class="k">Each week</span><span>A short quiz on what you covered.</span></li>
+        <li><span class="k">Weeks 2, 5, 8, 10</span><span>A checkpoint with tasks in the Goethe A1 format.</span></li>
+        <li><span class="k">Week 12</span><span>A written and a speaking mock exam.</span></li>
+      </ul>
+    </div>
+    <div class="mid-cta" data-reveal>
+      <p><strong>Beginner German · A1</strong> <span data-course-field="priceLabel">See the course fee</span> for 12 weeks · start date to be announced</p>
+      <div class="mid-cta-actions">
+        <a href="#book" class="btn btn-live" data-book-course="live-a1">Join the free A1 waitlist</a>
+        <a href="#courses" class="btn btn-secondary">See the 12-week plan</a>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ========== TWO WAYS TO LEARN ========== -->
-<section class="section-warm" id="compare" aria-labelledby="compare-h">
+<!-- ========== 3. THE A1 COURSE ========== -->
+<section class="band" id="courses" aria-labelledby="courses-h">
   <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Two ways to learn with Klarweg</span>
-      <h2 class="display-md" id="compare-h">Self-paced or live. Different tools for different needs.</h2>
-      <p class="lede">Both are organised by CEFR level. Self-paced courses cover A1 to C2; each live course lists its own level. Choose the one that fits how you learn and how much time you have. You can also use both.</p>
+    <div class="s-head" data-reveal>
+      <span class="mono"><b class="sn">02</b>The course</span>
+      <h2 class="display-md" id="courses-h">Beginner German, A1. Twelve weeks, fully planned.</h2>
+      <p>Every fact below is confirmed. What isn’t confirmed yet, such as the start date, says so.</p>
     </div>
-    <div class="ways">
-      <article class="card way">
-        <span class="eyebrow">Self-paced courses</span>
-        <h3>Learn on your own schedule</h3>
-        <p>Klarweg's existing chapter-based courses: colour-coded grammar, Hindi-first explanations, audio and exercises, available any time.</p>
-        <dl>
-          <dt>Best for</dt><dd>Flexible study at your own speed</dd>
-          <dt>Guidance</dt><dd>Built-in explanations, exercises and feedback</dd>
-          <dt>Pricing</dt><dd><span data-selfpaced-price>Per level, or Lifetime for all six</span></dd>
-          <dt>Try it</dt><dd>Chapter 1 free at every level</dd>
-        </dl>
-        <a href="courses.html" class="btn btn-secondary">See self-paced courses</a>
-      </article>
-      <article class="card way way-live">
-        <span class="eyebrow" style="color:var(--live-gold-deep)">Live teacher courses</span>
-        <h3>Learn with a teacher, on a timetable</h3>
-        <p>Scheduled online classes led by a teacher, with speaking time, direct correction and a fixed course structure.</p>
-        <dl>
-          <dt>Best for</dt><dd>Accountability, speaking practice and personal feedback</dd>
-          <dt>Guidance</dt><dd>A teacher who explains, corrects and tracks your progress</dd>
-          <dt>Pricing</dt><dd>Per course, shown in full before you pay, in one payment</dd>
-          <dt>Try it</dt><dd><span data-consult-fee>₹100</span> personal consultation with a teacher</dd>
-        </dl>
-        <a href="#book" class="btn btn-live" data-request="interest" data-book-open="Book a consultation">Join the waitlist</a>
-      </article>
+    <div class="course-layout">
+      <div>
+        <div class="filters js-only" hidden>
+          <div class="filter-group filter-scroll" role="group" aria-label="Filter courses">
+            <button type="button" class="chip" data-cgroup="" aria-pressed="true">All courses</button>
+            <button type="button" class="chip" data-cgroup="beginner" aria-pressed="false">Beginner · A1–A2</button>
+            <button type="button" class="chip" data-cgroup="intermediate" aria-pressed="false">Intermediate · B1–B2</button>
+            <button type="button" class="chip" data-cgroup="advanced" aria-pressed="false">Advanced · C1–C2</button>
+            <button type="button" class="chip" data-cgroup="exam" aria-pressed="false">Goethe prep</button>
+            <button type="button" class="chip" data-cgroup="speaking" aria-pressed="false">Speaking</button>
+          </div>
+        </div>
+        <p class="results-note" id="c-count" aria-live="polite"></p>
+        <div class="course-grid" id="course-grid">
+          <noscript><p data-nojs-course><strong>Beginner German · A1</strong> with Reegan Gandhi: waitlist only. The start date is still to be announced and enrolment is not open. Joining the waitlist is free and is not a booking. The full course details need JavaScript; you can also <a href="contact.html">contact us</a> about live courses.</p></noscript>
+        </div>
+      </div>
+
+      <div class="syllabus" id="syllabus" data-reveal>
+        <div class="syllabus-head">
+          <div>
+            <h3>The 12-week plan</h3>
+            <p>Planned syllabus: three classes a week. The teacher may adjust the order for a batch.</p>
+          </div>
+          <ul class="syl-legend" aria-label="Legend">
+            <li><span class="syl-dot" aria-hidden="true"></span>Checkpoint in the Goethe format</li>
+            <li><span class="syl-ring" aria-hidden="true"></span>Mock exams</li>
+          </ul>
+        </div>
+        <div class="syl-tabs js-only" id="syl-tabs" role="tablist" aria-label="Weeks">
+          <button type="button" role="tab" id="wt-1" aria-controls="wk-1" aria-selected="true"><span class="wk">WK</span><span class="num">1</span></button>
+          <button type="button" role="tab" id="wt-2" aria-controls="wk-2" aria-selected="false" tabindex="-1"><span class="wk">WK</span><span class="num">2</span><span class="mk syl-dot" aria-hidden="true"></span><span class="vh">, checkpoint</span></button>
+          <button type="button" role="tab" id="wt-3" aria-controls="wk-3" aria-selected="false" tabindex="-1"><span class="wk">WK</span><span class="num">3</span></button>
+          <button type="button" role="tab" id="wt-4" aria-controls="wk-4" aria-selected="false" tabindex="-1"><span class="wk">WK</span><span class="num">4</span></button>
+          <button type="button" role="tab" id="wt-5" aria-controls="wk-5" aria-selected="false" tabindex="-1"><span class="wk">WK</span><span class="num">5</span><span class="mk syl-dot" aria-hidden="true"></span><span class="vh">, checkpoint</span></button>
+          <button type="button" role="tab" id="wt-6" aria-controls="wk-6" aria-selected="false" tabindex="-1"><span class="wk">WK</span><span class="num">6</span></button>
+          <button type="button" role="tab" id="wt-7" aria-controls="wk-7" aria-selected="false" tabindex="-1"><span class="wk">WK</span><span class="num">7</span></button>
+          <button type="button" role="tab" id="wt-8" aria-controls="wk-8" aria-selected="false" tabindex="-1"><span class="wk">WK</span><span class="num">8</span><span class="mk syl-dot" aria-hidden="true"></span><span class="vh">, checkpoint</span></button>
+          <button type="button" role="tab" id="wt-9" aria-controls="wk-9" aria-selected="false" tabindex="-1"><span class="wk">WK</span><span class="num">9</span></button>
+          <button type="button" role="tab" id="wt-10" aria-controls="wk-10" aria-selected="false" tabindex="-1"><span class="wk">WK</span><span class="num">10</span><span class="mk syl-dot" aria-hidden="true"></span><span class="vh">, checkpoint</span></button>
+          <button type="button" role="tab" id="wt-11" aria-controls="wk-11" aria-selected="false" tabindex="-1"><span class="wk">WK</span><span class="num">11</span></button>
+          <button type="button" role="tab" id="wt-12" aria-controls="wk-12" aria-selected="false" tabindex="-1"><span class="wk">WK</span><span class="num">12</span><span class="mk syl-ring" aria-hidden="true"></span><span class="vh">, mock exams</span></button>
+        </div>
+        <ol class="syl-weeks">
+          <li class="syl-week" id="wk-1" role="tabpanel" aria-labelledby="wt-1"><h4>Week 1 <span class="mono">Sounds, numbers, first words</span></h4><ol class="sessions">
+            <li><span class="day">Mon</span><span><span class="ttl" lang="de">Das Alphabet &amp; Laute</span><span class="gl">The alphabet and German sounds</span></span><span class="s">S1</span></li>
+            <li><span class="day">Wed</span><span><span class="ttl" lang="de">Zahlen 0–100</span><span class="gl">Numbers 0–100</span></span><span class="s">S2</span></li>
+            <li><span class="day">Fri</span><span><span class="ttl" lang="de">Hallo! Wer bist du?</span><span class="gl">Hello! Introducing yourself</span></span><span class="s">S3</span></li></ol></li>
+          <li class="syl-week" id="wk-2" role="tabpanel" aria-labelledby="wt-2"><h4>Week 2 <span class="mono">Asking questions</span></h4><ol class="sessions">
+            <li><span class="day">Mon</span><span><span class="ttl" lang="de">W-Fragen</span><span class="gl">Questions with wer, was, wo …</span></span><span class="s">S4</span></li>
+            <li><span class="day">Wed</span><span><span class="ttl" lang="de">Ja oder Nein?</span><span class="gl">Yes-or-no questions</span></span><span class="s">S5</span></li>
+            <li><span class="day">Fri</span><span><span class="ttl">Checkpoint 1</span><span class="gl">Review of weeks 1–2</span><span class="tag"><span class="syl-dot" aria-hidden="true"></span>Goethe-format practice</span></span><span class="s">S6</span></li></ol></li>
+          <li class="syl-week" id="wk-3" role="tabpanel" aria-labelledby="wt-3"><h4>Week 3 <span class="mono">Verbs and articles</span></h4><ol class="sessions">
+            <li><span class="day">Mon</span><span><span class="ttl" lang="de">Verben im Alltag</span><span class="gl">Everyday verbs in the present tense</span></span><span class="s">S7</span></li>
+            <li><span class="day">Wed</span><span><span class="ttl" lang="de">Der, die, das</span><span class="gl">Articles and gender</span></span><span class="s">S8</span></li>
+            <li><span class="day">Fri</span><span><span class="ttl" lang="de">Kein &amp; nicht</span><span class="gl">Saying no: kein and nicht</span></span><span class="s">S9</span></li></ol></li>
+          <li class="syl-week" id="wk-4" role="tabpanel" aria-labelledby="wt-4"><h4>Week 4 <span class="mono">Food, drink and the accusative</span></h4><ol class="sessions">
+            <li><span class="day">Mon</span><span><span class="ttl" lang="de">Akkusativ</span><span class="gl">The accusative case</span></span><span class="s">S10</span></li>
+            <li><span class="day">Wed</span><span><span class="ttl" lang="de">Beschreiben, Essen &amp; Trinken</span><span class="gl">Describing things; food and drink</span></span><span class="s">S11</span></li>
+            <li><span class="day">Fri</span><span><span class="ttl" lang="de">Im Café</span><span class="gl">Ordering at a café</span></span><span class="s">S12</span></li></ol></li>
+          <li class="syl-week" id="wk-5" role="tabpanel" aria-labelledby="wt-5"><h4>Week 5 <span class="mono">Free time and forms</span></h4><ol class="sessions">
+            <li><span class="day">Mon</span><span><span class="ttl" lang="de">Hobbys &amp; Freizeit</span><span class="gl">Hobbies and free time</span></span><span class="s">S13</span></li>
+            <li><span class="day">Wed</span><span><span class="ttl" lang="de">Checkpoint 2: Formulare</span><span class="gl">Filling in forms</span><span class="tag"><span class="syl-dot" aria-hidden="true"></span>Goethe-format practice</span></span><span class="s">S14</span></li>
+            <li><span class="day">Fri</span><span><span class="ttl" lang="de">Unregelmäßige Verben</span><span class="gl">Irregular verbs</span></span><span class="s">S15</span></li></ol></li>
+          <li class="syl-week" id="wk-6" role="tabpanel" aria-labelledby="wt-6"><h4>Week 6 <span class="mono">Word order, plans and time</span></h4><ol class="sessions">
+            <li><span class="day">Mon</span><span><span class="ttl" lang="de">Satzposition</span><span class="gl">Word order in a sentence</span></span><span class="s">S16</span></li>
+            <li><span class="day">Wed</span><span><span class="ttl" lang="de">Modalverben 1</span><span class="gl">Modal verbs: können, müssen, wollen …</span></span><span class="s">S17</span></li>
+            <li><span class="day">Fri</span><span><span class="ttl" lang="de">Uhrzeit &amp; Wochentage</span><span class="gl">Telling the time; days of the week</span></span><span class="s">S18</span></li></ol></li>
+          <li class="syl-week" id="wk-7" role="tabpanel" aria-labelledby="wt-7"><h4>Week 7 <span class="mono">Work, family and dates</span></h4><ol class="sessions">
+            <li><span class="day">Mon</span><span><span class="ttl" lang="de">Berufe &amp; Arbeit</span><span class="gl">Jobs and work</span></span><span class="s">S19</span></li>
+            <li><span class="day">Wed</span><span><span class="ttl" lang="de">Familie &amp; Possessivartikel</span><span class="gl">Family; my, your, his …</span></span><span class="s">S20</span></li>
+            <li><span class="day">Fri</span><span><span class="ttl" lang="de">Datum &amp; Ordinalzahlen</span><span class="gl">Dates and ordinal numbers</span></span><span class="s">S21</span></li></ol></li>
+          <li class="syl-week" id="wk-8" role="tabpanel" aria-labelledby="wt-8"><h4>Week 8 <span class="mono">Appointments and the past</span></h4><ol class="sessions">
+            <li><span class="day">Mon</span><span><span class="ttl" lang="de">Trennbare Verben</span><span class="gl">Separable verbs</span></span><span class="s">S22</span></li>
+            <li><span class="day">Wed</span><span><span class="ttl" lang="de">Checkpoint 3: Termine &amp; Pünktlichkeit</span><span class="gl">Appointments and punctuality</span><span class="tag"><span class="syl-dot" aria-hidden="true"></span>Goethe-format practice</span></span><span class="s">S23</span></li>
+            <li><span class="day">Fri</span><span><span class="ttl" lang="de">Präteritum: war &amp; hatte</span><span class="gl">Talking about the past with war and hatte</span></span><span class="s">S24</span></li></ol></li>
+          <li class="syl-week" id="wk-9" role="tabpanel" aria-labelledby="wt-9"><h4>Week 9 <span class="mono">The Perfekt</span></h4><ol class="sessions">
+            <li><span class="day">Mon</span><span><span class="ttl" lang="de">Perfekt mit haben</span><span class="gl">The perfect tense with haben</span></span><span class="s">S25</span></li>
+            <li><span class="day">Wed</span><span><span class="ttl" lang="de">Perfekt mit sein &amp; Partizip mit Präfix</span><span class="gl">The perfect tense with sein, as on the board above</span></span><span class="s">S26</span></li>
+            <li><span class="day">Fri</span><span><span class="ttl" lang="de">Akkusativpronomen &amp; Sätze verbinden</span><span class="gl">Pronouns; joining sentences</span></span><span class="s">S27</span></li></ol></li>
+          <li class="syl-week" id="wk-10" role="tabpanel" aria-labelledby="wt-10"><h4>Week 10 <span class="mono">Writing and the dative</span></h4><ol class="sessions">
+            <li><span class="day">Mon</span><span><span class="ttl" lang="de">Schreiben: Nachrichten &amp; Einladungen</span><span class="gl">Writing messages and invitations</span></span><span class="s">S28</span></li>
+            <li><span class="day">Wed</span><span><span class="ttl" lang="de">Checkpoint 4: Erlebnisse</span><span class="gl">Talking about experiences</span><span class="tag"><span class="syl-dot" aria-hidden="true"></span>Goethe-format practice</span></span><span class="s">S29</span></li>
+            <li><span class="day">Fri</span><span><span class="ttl" lang="de">Dativ &amp; Präpositionen mit Dativ</span><span class="gl">The dative and its prepositions</span></span><span class="s">S30</span></li></ol></li>
+          <li class="syl-week" id="wk-11" role="tabpanel" aria-labelledby="wt-11"><h4>Week 11 <span class="mono">Places, people, everyday talk</span></h4><ol class="sessions">
+            <li><span class="day">Mon</span><span><span class="ttl" lang="de">Wechselpräpositionen &amp; Wege</span><span class="gl">Two-way prepositions; giving directions</span></span><span class="s">S31</span></li>
+            <li><span class="day">Wed</span><span><span class="ttl" lang="de">Verben &amp; Pronomen mit Dativ, welcher &amp; dieser</span><span class="gl">Dative verbs and pronouns; which and this</span></span><span class="s">S32</span></li>
+            <li><span class="day">Fri</span><span><span class="ttl" lang="de">Small Talk, man, Imperativ, dürfen &amp; sollen</span><span class="gl">Small talk, instructions and permission</span></span><span class="s">S33</span></li></ol></li>
+          <li class="syl-week" id="wk-12" role="tabpanel" aria-labelledby="wt-12"><h4>Week 12 <span class="mono">Exam readiness</span></h4><ol class="sessions">
+            <li><span class="day">Mon</span><span><span class="ttl" lang="de">Telefonieren, Zeitangaben &amp; Prüfungsstrategien</span><span class="gl">Phone calls, time expressions and exam strategy</span></span><span class="s">S34</span></li>
+            <li><span class="day">Wed</span><span><span class="ttl en">Written mock exam</span><span class="gl">Listening, reading and writing, timed</span><span class="tag"><span class="syl-ring" aria-hidden="true"></span>Mock exam</span></span><span class="s">S35</span></li>
+            <li><span class="day">Fri</span><span><span class="ttl en">Speaking mock and review</span><span class="gl">Speaking practice in the exam format, and a readiness review</span><span class="tag"><span class="syl-ring" aria-hidden="true"></span>Mock exam</span></span><span class="s">S36</span></li></ol></li>
+        </ol>
+
+        <div class="included">
+          <div>
+            <h4>Included in the fee</h4>
+            <ul>
+              <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7.5 5.5 10.5 11.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Every live class in the course</span></li>
+              <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7.5 5.5 10.5 11.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>The teacher’s class notes and PDF worksheets</span></li>
+              <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7.5 5.5 10.5 11.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Written feedback on your homework</span></li>
+            </ul>
+          </div>
+          <div class="no">
+            <h4>Not included</h4>
+            <ul>
+              <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3.5 3.5l7 7M10.5 3.5l-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Class recordings: group classes are not recorded</span></li>
+              <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3.5 3.5l7 7M10.5 3.5l-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>The Goethe exam fee</span></li>
+              <li><svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3.5 3.5l7 7M10.5 3.5l-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>The self-paced courses, which are sold separately</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ========== TEACHERS ========== -->
+<!-- ========== 4. TEACHER ========== -->
 <section id="teachers" aria-labelledby="teachers-h">
   <div class="container">
-    <div class="section-head">
-      <span class="rule-gold" aria-hidden="true"></span>
-      <span class="eyebrow" data-one-text="Your teacher">The teachers</span>
-      <h2 class="display-md" id="teachers-h" data-one-text="Meet your teacher.">Find the teacher who fits your goal.</h2>
-      <p class="lede" data-none="teachers" data-none-text="Each profile will show the levels, teaching languages and exam experience a teacher actually has. Profiles are published only once those details are confirmed." data-one-text="Levels taught, teaching languages, certificates and exam experience, exactly as the teacher has confirmed them. Open the profile for the full picture.">Compare levels, teaching languages and exam experience, then open a profile for the full picture.</p>
+    <div class="s-head" data-reveal>
+      <span class="mono"><b class="sn">03</b>The teacher</span>
+      <h2 class="display-md" id="teachers-h" data-none="teachers" data-none-text="Teachers are published once their details are confirmed.">One teacher, one method.</h2>
     </div>
-
-    <div class="filters js-only" role="group" aria-label="Filter teachers">
+    <div class="filters js-only" role="group" aria-label="Filter teachers" hidden>
       <div class="filter-group filter-scroll" role="group" aria-label="Level taught">
         <span class="filter-label">Level</span>
         <button type="button" class="chip" data-tlevel="" aria-pressed="true">All</button>
@@ -575,9 +1028,11 @@
       </div>
     </div>
     <p class="results-note" id="t-count" aria-live="polite"></p>
-    <div class="teacher-grid" id="teacher-grid">
-      <noscript><p>Teacher profiles need JavaScript. You can still <a href="contact.html">contact us</a> to be matched with a teacher.</p></noscript>
+    <div class="teacher-grid" id="teacher-grid" data-reveal>
+      <noscript><p>The live A1 course is taught by Reegan Gandhi, with explanations in Hindi and English. The full profile needs JavaScript; you can also <a href="contact.html">contact us</a>.</p></noscript>
     </div>
+    <div class="quotes" id="quotes" hidden></div>
+    <p class="more-teachers">Only teachers whose details have been confirmed appear here. More profiles will be added as they are verified.</p>
   </div>
 </section>
 
@@ -586,120 +1041,142 @@
   <div id="t-dialog-content"></div>
 </dialog>
 
-<!-- ========== COURSES ========== -->
-<section class="section-elevated" id="courses" aria-labelledby="courses-h">
+<!-- ========== 5. YOUR PATH: finder + roadmap ========== -->
+<section class="band band-elev" id="path" aria-labelledby="path-h">
   <div class="container">
-    <div class="section-head">
-      <span class="rule-gold" aria-hidden="true"></span>
-      <span class="eyebrow">Live course catalogue</span>
-      <h2 class="display-md" id="courses-h">Courses with a clear structure.</h2>
-      <p class="lede">Each course lists its level, format, schedule and fee. Anything not yet confirmed is marked “to be announced”, never guessed.</p>
+    <div class="s-head" data-reveal>
+      <span class="mono"><b class="sn">04</b>Your path</span>
+      <h2 class="display-md" id="path-h">Find where you start.</h2>
+      <p>A1 is the only live course today. Answer three questions to see whether it fits, and where it leads.</p>
     </div>
-    <div class="filters js-only">
-      <div class="filter-group filter-scroll" role="group" aria-label="Filter courses">
-        <button type="button" class="chip" data-cgroup="" aria-pressed="true">All courses</button>
-        <button type="button" class="chip" data-cgroup="beginner" aria-pressed="false">Beginner · A1–A2</button>
-        <button type="button" class="chip" data-cgroup="intermediate" aria-pressed="false">Intermediate · B1–B2</button>
-        <button type="button" class="chip" data-cgroup="advanced" aria-pressed="false">Advanced · C1–C2</button>
-        <button type="button" class="chip" data-cgroup="exam" aria-pressed="false">Goethe prep</button>
-        <button type="button" class="chip" data-cgroup="speaking" aria-pressed="false">Speaking</button>
+    <div class="path">
+      <form class="finder js-only" id="finder" aria-labelledby="finder-h" data-reveal>
+        <h3 id="finder-h">Three quick questions</h3>
+        <p>Nothing is saved or sent. Your answers only change what this page shows.</p>
+        <fieldset>
+          <legend>Your German today</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="f-level" value="beginner"><span>Complete beginner</span></label>
+            <label class="opt"><input type="radio" name="f-level" value="some"><span>A1 basics</span></label>
+            <label class="opt"><input type="radio" name="f-level" value="a2"><span>A2</span></label>
+            <label class="opt"><input type="radio" name="f-level" value="b1"><span>B1</span></label>
+            <label class="opt"><input type="radio" name="f-level" value="b2"><span>B2</span></label>
+            <label class="opt"><input type="radio" name="f-level" value="c1"><span>C1 or above</span></label>
+            <label class="opt"><input type="radio" name="f-level" value="unsure"><span>Not sure</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Your main goal</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="f-goal" value="goethe"><span>Goethe exam</span></label>
+            <label class="opt"><input type="radio" name="f-goal" value="ausbildung"><span>Ausbildung</span></label>
+            <label class="opt"><input type="radio" name="f-goal" value="nursing"><span>Nursing</span></label>
+            <label class="opt"><input type="radio" name="f-goal" value="study"><span>Study</span></label>
+            <label class="opt"><input type="radio" name="f-goal" value="work"><span>Work</span></label>
+            <label class="opt"><input type="radio" name="f-goal" value="family"><span>Family visa</span></label>
+            <label class="opt"><input type="radio" name="f-goal" value="speaking"><span>Speaking</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Do Monday, Wednesday and Friday, 7:30–9:00 pm IST suit you?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="f-time" value="yes"><span>Yes</span></label>
+            <label class="opt"><input type="radio" name="f-time" value="no"><span>No</span></label>
+            <label class="opt"><input type="radio" name="f-time" value="maybe"><span>Not sure</span></label>
+          </div>
+        </fieldset>
+        <div class="finder-result" id="finder-result" aria-live="polite" hidden></div>
+      </form>
+
+      <div class="roadmap" data-reveal>
+        <div class="road-track" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <ol class="road" aria-label="CEFR levels A1 to B2 and their live-class status">
+          <li class="now" data-road="A1">
+            <p class="lv">A1</p><p class="nm">Beginner</p>
+            <ul><li>Introduce yourself and others</li><li>Ask and answer simple questions about daily life</li><li>Fill in a simple form</li></ul>
+            <span class="st">Live course · waitlist</span>
+          </li>
+          <li data-road="A2">
+            <p class="lv">A2</p><p class="nm">Elementary</p>
+            <ul><li>Talk about your past, family and work</li><li>Handle routine tasks: shopping, appointments, directions</li></ul>
+            <span class="st">Planned · not scheduled</span>
+          </li>
+          <li data-road="B1">
+            <p class="lv">B1</p><p class="nm">Intermediate</p>
+            <ul><li>Describe experiences and give reasons for your views</li><li>Manage most situations at work or while travelling</li></ul>
+            <span class="st">Planned · not scheduled</span>
+          </li>
+          <li data-road="B2">
+            <p class="lv">B2</p><p class="nm">Upper intermediate</p>
+            <ul><li>Discuss less familiar topics with some fluency</li><li>Write clear, detailed texts</li></ul>
+            <span class="st">Planned · not scheduled</span>
+          </li>
+        </ol>
+        <p class="road-note">Summarised from the CEFR. Planned levels have no teacher, timetable or fee yet. Many Ausbildung and nursing routes ask for B1 or B2; check your programme. Self-paced courses cover A1 to C2 today.</p>
       </div>
     </div>
-    <p class="results-note" id="c-count" aria-live="polite"></p>
-    <div class="course-grid" id="course-grid">
-      <noscript><p data-nojs-course><strong>Beginner German · A1</strong> with Reegan Gandhi: waitlist only. The start date is still to be announced and enrolment is not open. Joining the waitlist is free and is not a booking. The full course details need JavaScript; you can also <a href="contact.html">contact us</a> about live courses.</p></noscript>
-    </div>
-    <aside class="payment-guide" aria-labelledby="payment-guide-h">
-      <div>
-        <span class="eyebrow">Payments through Cashfree</span>
-        <h3 id="payment-guide-h">Your course. One clear payment.</h3>
-        <p>When enrolment opens, review your course and the full fee, then pay securely through Cashfree using UPI, cards or net banking. Your place is confirmed after payment verification.</p>
-      </div>
-      <div class="payment-guide-details">
-        <p>No payment is collected for the waitlist.</p>
-        <p>Eligible <span data-consult-fee>₹100</span> consultation fees are adjusted against your live course fee within <span data-consult-days>7 days</span>.</p>
-        <a href="terms.html#live-classes">Read live-class payment and cancellation terms →</a>
-      </div>
-    </aside>
   </div>
 </section>
 
-<!-- ========== HOW IT WORKS ========== -->
-<section id="how" aria-labelledby="how-h">
+<!-- ========== 6. LIVE vs SELF-PACED ========== -->
+<section id="compare" aria-labelledby="compare-h">
   <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">How live classes work</span>
-      <h2 class="display-md" id="how-h">From first conversation to fluent progress.</h2>
+    <div class="s-head" data-reveal>
+      <span class="mono"><b class="sn">05</b>Two ways to learn</span>
+      <h2 class="display-md" id="compare-h">Live or self-paced: an honest comparison.</h2>
     </div>
-    <ol class="journey">
-      <li><h3>Choose a teacher and course</h3><p>Compare profiles and courses, or book a consultation and let a teacher assess your level.</p></li>
-      <li><h3>Understand the plan</h3><p>See the level, schedule, materials and fee before you commit to anything.</p></li>
-      <li><h3>Enrol</h3><p>Pay the course fee online, in full and in one payment. Your place is confirmed only once the payment is verified.</p></li>
-      <li><h3>Attend live online</h3><p>Join your scheduled classes with your teacher, from wherever you are.</p></li>
-      <li><h3>Practise and progress</h3><p>Speak, get corrected and practise again, moving through the course one level at a time.</p></li>
-    </ol>
-  </div>
-</section>
-
-<!-- ========== METHOD ========== -->
-<section class="section-warm" aria-labelledby="method-h">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Method</span>
-      <h2 class="display-md" id="method-h">What happens in a live class.</h2>
-      <p class="lede">Self-paced study is ideal for steady input on your own time. A live teacher adds what is hard to do alone: real conversation, immediate correction and someone who notices what you keep getting wrong.</p>
-    </div>
-    <div class="method-grid">
-      <div class="card"><div class="card-num">01</div><h3>Grammar, systematically</h3><p>Each structure explained step by step, with the reasons behind it.</p><p class="method-de" lang="de">weil ich Deutsch lerne</p></div>
-      <div class="card"><div class="card-num">02</div><h3>Guided speaking</h3><p>Build sentences out loud with prompts, then on your own.</p><p class="method-de" lang="de">Ich möchte einen Termin vereinbaren.</p></div>
-      <div class="card"><div class="card-num">03</div><h3>Vocabulary</h3><p>Words learned in context, with gender and plural, and used again in later sessions.</p><p class="method-de" lang="de">der Termin, die Termine</p></div>
-      <div class="card"><div class="card-num">04</div><h3>Listening &amp; pronunciation</h3><p>Hear it, say it, adjust: umlauts, word stress and sentence melody.</p><p class="method-de" lang="de">schön · Müller · Straße</p></div>
-      <div class="card"><div class="card-num">05</div><h3>Feedback &amp; correction</h3><p>Mistakes caught and explained while the sentence is still fresh.</p><p class="method-de" lang="de">Ich bin gegangen – nicht: Ich habe gegangen.</p></div>
-      <div class="card"><div class="card-num">06</div><h3>Goethe preparation</h3><p>Where relevant: exam format, timing and task types, practised module by module.</p><p class="method-de" lang="de">Lesen · Hören · Schreiben · Sprechen</p></div>
-      <div class="card method-feature on-navy"><div class="card-num">07</div><h3>Structured progress through CEFR levels</h3><p>Each course has a defined level and objectives, so you always know what you are working towards and what comes next.</p>
-        <div class="cefr-line" aria-label="CEFR levels A1 to C2"><span>A1</span><span>A2</span><span>B1</span><span>B2</span><span>C1</span><span>C2</span></div>
+    <div data-reveal>
+      <table class="cmp">
+        <caption class="vh">Live A1 course compared with Klarweg self-paced courses</caption>
+        <thead><tr><td></td><th scope="col" class="live"><small>Live</small>Beginner German · A1</th><th scope="col"><small>Self-paced</small>Klarweg courses</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">How you learn</th><td class="live" data-col="Live A1">Scheduled classes with a teacher, in a small group. <span data-course-field="batchSize">Up to 8 learners; runs with at least 4</span>.</td><td data-col="Self-paced">Chapter-based lessons with colour-coded grammar, audio and exercises</td></tr>
+          <tr><th scope="row">When</th><td class="live" data-col="Live A1"><span data-course-field="frequency">Mon, Wed, Fri, 7:30–9:00 pm IST</span></td><td data-col="Self-paced">Any time, at your own speed</td></tr>
+          <tr><th scope="row">Feedback</th><td class="live" data-col="Live A1">Corrected as you speak; written feedback on homework</td><td data-col="Self-paced">Built-in explanations and exercise feedback</td></tr>
+          <tr><th scope="row">Levels</th><td class="live" data-col="Live A1">A1 only, for now</td><td data-col="Self-paced">A1 to C2</td></tr>
+          <tr><th scope="row">Price</th><td class="live" data-col="Live A1"><strong data-course-field="priceLabel">Shown on the course</strong> for the course, in one payment</td><td data-col="Self-paced"><span data-selfpaced-price>Per level, or Lifetime for all six</span></td></tr>
+          <tr><th scope="row">Try first</th><td class="live" data-col="Live A1">The lesson board above; the waitlist is free</td><td data-col="Self-paced">Chapter 1 free at every level</td></tr>
+          <tr><th scope="row">Available</th><td class="live" data-col="Live A1"><strong>Waitlist only.</strong> Enrolment is not open yet</td><td data-col="Self-paced"><strong>Now</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="cmp-foot">
+        <span>They are sold separately: buying one doesn’t give you access to the other. You can use both.</span>
+        <a href="courses.html" class="btn btn-secondary">See self-paced courses</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ========== CONSULTATION ========== -->
-<section class="book on-navy" id="book" aria-labelledby="book-h">
+<!-- ========== 7. WAITLIST ========== -->
+<section class="band band-elev" id="book" aria-labelledby="book-h">
   <div class="container book-grid">
-    <div>
-      <span class="eyebrow">Personal consultation</span>
-      <h2 class="display-md" id="book-h">Talk to a teacher before you decide.</h2>
-      <p class="lede">A one-to-one conversation to assess your level, understand your goal and recommend the right course and teacher.</p>
-      <div class="fee"><span class="fee-amt" data-consult-fee>₹100</span><span class="fee-unit" data-consult-unit>20-minute session on Google Meet</span></div>
-      <p class="fee-note">Enrol in a live course within <strong data-consult-days>7 days</strong> and the <span data-consult-fee>₹100</span> is adjusted against your course fee.</p>
-      <ol class="book-steps" id="book-steps"></ol>
-      <div class="conditions">
-        <h3>Good to know</h3>
-        <ul>
-          <li>Consultations are booked and paid online on this page, never by email. A booking is confirmed only once the payment is verified.</li>
-          <li>Your joining link is shown on this page, when you are signed in, only once your booking is confirmed.</li>
-          <li data-consult-cancel>If we have to cancel, you choose a full refund or a new time. You can move your consultation once, free of charge, with at least 12 hours’ notice; a consultation missed without notice is not refunded.</li>
-          <li>The <span data-consult-dayadj>7-day</span> adjustment applies to live course fees, counted from the date of your consultation.</li>
-          <li>The current <a href="refund-policy.html">Refund Policy</a> covers self-paced purchases. Live-class terms are confirmed with you before you pay.</li>
-        </ul>
+    <div class="book-intro">
+      <span class="mono s-eye"><b class="sn">06</b>Waitlist</span>
+      <h2 class="display-md" id="book-h">Join the A1 waitlist.</h2>
+      <p class="lede">Tell us your level, your goal and the times that suit you. When a start date is set, the dates and the course terms are confirmed in writing before you pay anything.</p>
+      <ul class="free-line"><li>Free</li><li>Not a booking</li><li>Nothing is charged</li></ul>
+      <ol class="how-steps" aria-label="How the waitlist works today">
+        <li><span><strong>Fill in the form</strong>It takes about a minute.</span></li>
+        <li><span><strong>Your email app opens</strong>with your details already written, addressed to <span data-contact-email>klarwegofficial@gmail.com</span>.</span></li>
+        <li><span><strong>Press Send</strong>Your request reaches us only when you send that email. This page doesn’t store or send anything itself.</span></li>
+      </ol>
+      <!-- Honest closed state: hidden by kw-live.js only when online booking is enabled (the booking script then shows its panel in #book-form). -->
+      <div class="book-closed" id="consult-closed" role="note">
+        <h3>Online consultation booking is not open yet</h3>
+        <p>A personal consultation with a teacher (<span data-consult-fee>₹100</span>) is planned. Nothing about it can be booked or paid on this page yet, and consultations are not booked by email. <a href="#faq-consult">How it will work</a></p>
       </div>
     </div>
 
     <div class="book-card" id="book-form">
       <noscript>
         <div class="nojs-request">
-          <h3>Online demo booking is not open yet</h3>
-          <p>Nothing can be booked or paid on this page yet, and consultations are not booked by email. To join the free waitlist for a live course, email <a class="inline" href="mailto:klarwegofficial@gmail.com">klarwegofficial@gmail.com</a> with your name, current level, goal and preferred times (IST). Joining the waitlist is free and is not a booking. We reply within two working days, Monday to Friday.</p>
+          <h3>Join the waitlist by email</h3>
+          <p>To join the free waitlist for the A1 live course, email <a class="inline" href="mailto:klarwegofficial@gmail.com">klarwegofficial@gmail.com</a> with your name, current level, goal and preferred times (IST). Joining the waitlist is free and is not a booking; nothing is charged.</p>
         </div>
       </noscript>
-      <!-- Honest closed state: hidden by kw-live.js only when online booking is enabled (the booking script then shows its panel here). -->
-      <div class="book-closed" id="consult-closed" role="note">
-        <h3>Online demo booking is not open yet</h3>
-        <p>When it opens, you will choose a time and pay the <span data-consult-fee>₹100</span> fee online here. Until then, nothing can be booked or paid on this page, and consultations are not booked by email. You can still join the free waitlist below.</p>
-      </div>
       <form id="consult-form" class="js-only" novalidate>
         <h3 id="form-title">Join the course waitlist</h3>
-        <p class="sub">Free, and not a booking: we tell you when a suitable course opens. Nothing is charged. Fields marked <span class="req">*</span> are required. We reply <span data-reply-time>within two working days</span>.</p>
+        <p class="sub">Free, and not a booking. Nothing is charged. Fields marked <span class="req">*</span> are required.</p>
         <div class="err-summary" id="err-summary" role="alert" tabindex="-1" hidden></div>
         <div class="form-2">
           <div class="form-row">
@@ -712,10 +1189,6 @@
             <input id="bf-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required aria-describedby="bf-email-err">
             <p class="field-err" id="bf-email-err" hidden></p>
           </div>
-        </div>
-        <div class="form-row">
-          <label for="bf-phone">WhatsApp / phone <span class="opt">(optional)</span></label>
-          <input id="bf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30">
         </div>
         <div class="form-2">
           <div class="form-row">
@@ -734,6 +1207,7 @@
               <option value="">Select…</option>
               <option>Goethe exam</option>
               <option>Ausbildung</option>
+              <option>Nursing</option>
               <option>Study in Germany</option>
               <option>Work / career</option>
               <option>Family / visa</option>
@@ -743,7 +1217,22 @@
             <p class="field-err" id="bf-goal-err" hidden></p>
           </div>
         </div>
-        <div class="form-2">
+        <fieldset class="form-row">
+          <legend>Preferred times (IST) <span class="opt-l">(choose any)</span></legend>
+          <div class="times">
+            <label class="time-opt"><input type="checkbox" name="times" value="Weekday mornings"><span>Weekday mornings</span></label>
+            <label class="time-opt"><input type="checkbox" name="times" value="Weekday afternoons"><span>Weekday afternoons</span></label>
+            <label class="time-opt"><input type="checkbox" name="times" value="Weekday evenings"><span>Weekday evenings</span></label>
+            <label class="time-opt"><input type="checkbox" name="times" value="Weekends"><span>Weekends</span></label>
+          </div>
+        </fieldset>
+        <details class="more-fields">
+          <summary><span>Optional: phone, teacher or a note</span></summary>
+        <div class="form-row">
+          <label for="bf-phone">WhatsApp / phone <span class="opt-l">(optional)</span></label>
+          <input id="bf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30">
+        </div>
+        <div class="form-2 keep-2">
           <div class="form-row">
             <label for="bf-teacher">Preferred teacher</label>
             <select id="bf-teacher" name="teacher"><option value="">Help me choose</option></select>
@@ -753,30 +1242,22 @@
             <select id="bf-course" name="course"><option value="">Not sure yet</option></select>
           </div>
         </div>
-        <fieldset class="form-row">
-          <legend>Preferred times (IST) <span class="opt">(choose any)</span></legend>
-          <div class="times">
-            <label class="time-opt"><input type="checkbox" name="times" value="Weekday mornings"><span>Weekday mornings</span></label>
-            <label class="time-opt"><input type="checkbox" name="times" value="Weekday afternoons"><span>Weekday afternoons</span></label>
-            <label class="time-opt"><input type="checkbox" name="times" value="Weekday evenings"><span>Weekday evenings</span></label>
-            <label class="time-opt"><input type="checkbox" name="times" value="Weekends"><span>Weekends</span></label>
-          </div>
-        </fieldset>
         <div class="form-row">
-          <label for="bf-msg">Anything else? <span class="opt">(optional)</span></label>
+          <label for="bf-msg">Anything else? <span class="opt-l">(optional)</span></label>
           <textarea id="bf-msg" name="message" maxlength="1000" placeholder="Exam date, deadlines, what you find hardest…"></textarea>
         </div>
+        </details>
         <label class="consent"><input type="checkbox" id="bf-consent" required aria-describedby="bf-consent-err"><span>I agree that Klarweg may use these details to respond to my request, as described in the <a href="privacy.html">Privacy Policy</a>. <span class="req">*</span></span></label>
         <p class="field-err" id="bf-consent-err" hidden style="margin:-16px 0 16px"></p>
-        <button type="submit" class="btn btn-live">Prepare my request
+        <button type="submit" class="btn btn-live">Prepare my waitlist email
           <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <p class="form-foot">Opens your email app with your request filled in, addressed to <span data-contact-email>klarwegofficial@gmail.com</span>.</p>
+        <p class="form-foot">Opens your email app with your request filled in. Nothing is sent until you press Send there.</p>
       </form>
 
       <div class="done" id="consult-done" hidden tabindex="-1">
-        <h3>Your request is ready to send</h3>
-        <div class="done-notice" id="done-notice"><strong>Nothing booked or charged.</strong> Your email app should have opened with the request. It is only sent when you press Send there. We reply to confirm we have noted your interest, and write again if a suitable course opens.</div>
+        <h3>Your waitlist email is ready to send</h3>
+        <div class="done-notice" id="done-notice"><strong>Nothing booked or charged.</strong> Your email app should have opened with the request. It is only sent when you press Send there; until then, you are not on the waitlist.</div>
         <p>If your email app didn’t open, copy the request below and email it to <a class="inline" data-contact-mailto href="mailto:klarwegofficial@gmail.com">klarwegofficial@gmail.com</a>.</p>
         <pre id="consult-preview"></pre>
         <div class="done-actions">
@@ -789,82 +1270,96 @@
   </div>
 </section>
 
-<!-- ========== TRUST ========== -->
-<section aria-labelledby="trust-h">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Trust</span>
-      <h2 class="display-md" id="trust-h">Clear information before you commit.</h2>
+<!-- ========== 8. FAQ ========== -->
+<section aria-labelledby="faq-h">
+  <div class="container faq-groups">
+    <div class="faq-side">
+      <span class="mono s-eye"><b class="sn">07</b>Questions</span>
+      <h2 class="display-md" id="faq-h">Everything to know before you join.</h2>
+      <p>Policies here are the approved live-class terms, also set out in our <a href="terms.html#live-classes">Terms</a>. Something missing? <a href="contact.html">Contact us</a>.</p>
     </div>
-    <div class="trust-grid">
-      <div class="card"><div class="card-num">Credentials</div><h3>Only what a teacher holds</h3><p>Profiles list only qualifications and certificates the teacher actually holds. If something isn’t confirmed, it isn’t shown.</p></div>
-      <div class="card"><div class="card-num">Terms</div><h3>Written down, in advance</h3><p>Course fees, schedules and live-class terms are confirmed in writing before you pay. See our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p></div>
-      <div class="card"><div class="card-num">People</div><h3>A real person replies</h3><p>Every request is read and answered by a member of the Klarweg team, usually within two working days. <a href="contact.html">Contact us</a> with any question.</p></div>
+    <div>
+      <div class="faq-group">
+        <h3>The course</h3>
+        <div class="faq">
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="fa1">Which level should I start with?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="faq-a" id="fa1"><div class="faq-a-inner">If you've never studied German, start at A1: the live course begins from zero. If you've studied some German, <button type="button" class="link-btn" data-kw-placement>take the 90-second level check</button>.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="fa2">How big are the groups, and when are classes?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="faq-a" id="fa2"><div class="faq-a-inner"><span data-course-field="batchSize">Up to 8 learners; runs with at least 4</span>. Classes: <span data-course-field="frequency">3 classes a week · Mon, Wed, Fri, 7:30–9:00 pm IST</span>, 90 minutes each, on Google Meet. The start date is still to be announced.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="fa3">Which language is the class taught in?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="faq-a" id="fa3"><div class="faq-a-inner">Explanations are in English, with Hindi wherever it helps; you practise in German. As the course goes on, the teacher uses more German, and the exam practice in the last weeks is in German only.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="fa4">Is there homework?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="faq-a" id="fa4"><div class="faq-a-inner">Yes, short homework after classes, returned with written feedback, plus a short weekly quiz. The teacher's class notes and PDF worksheets are part of the course.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="fa5">Does the course prepare me for the Goethe A1 exam?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="faq-a" id="fa5"><div class="faq-a-inner">It prepares for Goethe-Zertifikat A1: Start Deutsch 1, with checkpoints in the exam format during the course and written and speaking mock exams in the last week. You book and pay for the exam separately with an exam centre; the exam fee is not included. No course can guarantee an exam result.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="fa6">How do live courses differ from self-paced courses?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="faq-a" id="fa6"><div class="faq-a-inner">They are separate products. <a href="courses.html">Self-paced courses</a> are Klarweg's chapter-based lessons you work through on your own, any time. Live courses are scheduled online classes with a teacher, focused on speaking, correction and a fixed structure. Each is priced separately, and what a live course includes is confirmed with you in writing before you pay.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="faq-group">
+        <h3>Fees, policies and booking</h3>
+        <div class="faq">
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="fa7">What does the course fee include?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="faq-a" id="fa7"><div class="faq-a-inner" data-policy="feeIncludes">The course fee covers every live class in the course, the teacher’s class notes and worksheets, and written feedback on your homework. Goethe exam fees are not included.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="fa8">How are classes scheduled?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="faq-a" id="fa8"><div class="faq-a-inner" data-policy="scheduling">Group batches run on a fixed timetable in Indian Standard Time, shown on the course before you enrol. If a class has to move, we tell you at least 24 hours in advance and schedule a replacement class. One-to-one lessons are scheduled directly with your teacher.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="fa9">What happens if I miss a class? Are classes recorded?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="faq-a" id="fa9"><div class="faq-a-inner" data-policy="missedClass">Group classes are not recorded, and a missed group class is not refunded or repeated individually. Your teacher shares the class notes and homework so you can catch up, and you can bring questions to the next class. One-to-one lessons can be moved free of charge with at least 24 hours’ notice.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="fa10">What are the cancellation and refund terms?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="faq-a" id="fa10"><div class="faq-a-inner" data-policy="cancellationRefund">If you cancel at least 48 hours before the first class, your course fee is refunded in full. If you cancel during the first two weeks of the course, we refund the classes still to come; after that, course fees are not refunded. If Klarweg cancels or postpones a course and the new dates don’t suit you, we refund everything not yet delivered. The 7-day guarantee in our Refund Policy covers self-paced purchases only, not live classes.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="fa11">How will I pay when enrolment opens?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="faq-a" id="fa11"><div class="faq-a-inner">Online on this page, in full and in one payment, through our payment processor Cashfree (UPI, cards or net banking). Your place is confirmed only once the payment is verified. Enrolment is not open yet, so no payment is taken today, and nothing is ever collected for the waitlist.</div></div>
+          </div>
+          <div class="faq-item" id="faq-consult">
+            <button class="faq-q" aria-expanded="false" aria-controls="fa12">Can I talk to a teacher before I decide?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="faq-a" id="fa12"><div class="faq-a-inner">A personal consultation is planned: a <span data-consult-unit>20-minute session on Google Meet</span> for <span data-consult-fee>₹100</span>, to assess your level and talk through your goal. Online booking is not open yet, so none can be booked today. When it opens:
+              <ul>
+                <li>Consultations are booked and paid online on this page, never by email.</li>
+                <li>If you enrol in a live course within <span data-consult-days>7 days</span> of your consultation, the fee is adjusted against your course fee.</li>
+                <li data-consult-cancel>If we have to cancel, you choose a full refund or a new time. You can move your consultation once, free of charge, with at least 12 hours’ notice; a consultation missed without notice is not refunded.</li>
+              </ul></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false" aria-controls="fa13">What happens after I join the waitlist?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="faq-a" id="fa13"><div class="faq-a-inner">Today the waitlist works by email: the form prepares an email with your details, and you are on the waitlist once you send it. Joining is free, is not a booking and commits you to nothing. When a start date is set, the dates and the course terms are confirmed in writing before you pay.</div></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="quotes" id="quotes"></div>
   </div>
 </section>
 
-<!-- ========== FAQ ========== -->
-<section class="section-elevated" aria-labelledby="faq-h">
-  <div class="container-narrow">
-    <div class="section-head">
-      <span class="eyebrow">Questions</span>
-      <h2 class="display-md" id="faq-h">Before you book.</h2>
-    </div>
-    <div class="faq">
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa1">How do live courses differ from self-paced courses?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa1"><div class="faq-a-inner">They are separate products. <a href="courses.html">Self-paced courses</a> are Klarweg's chapter-based lessons you work through on your own, any time. Live courses are scheduled online classes with a teacher, focused on speaking, correction and a fixed structure. Each is priced separately, and what a live course includes is confirmed with you in writing before you pay.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa2">Which German level should I start with?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa2"><div class="faq-a-inner">If you've never studied German, start at A1. Otherwise, <button type="button" class="link-btn" data-kw-placement>take the 90-second level check</button>, or book a consultation and the teacher will assess your level with you.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa3">How do I choose a teacher?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa3"><div class="faq-a-inner" data-none="teachers" data-none-text="Teacher profiles appear on this page once each teacher’s qualifications are confirmed. Until then, book a consultation and tell us your goal, level and preferred times, and we’ll suggest a suitable teacher." data-one-text="Live classes are currently taught by one teacher, whose profile is above: the levels taught, teaching languages and exam experience are all listed there. If you’re unsure whether the classes fit your goal, request a consultation and talk it through first.">Filter the <a href="#teachers">teacher profiles</a> by the level you need, the language you'd like explanations in, and exam experience. If you're unsure, choose “Help me choose” in the consultation form and we'll suggest a teacher based on your goal.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa4">What happens during the consultation?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa4"><div class="faq-a-inner">You meet a teacher one-to-one online. They talk with you in German to gauge your level, ask about your goal and timeline, and recommend a course and format. You're under no obligation to enrol afterwards.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa5"><span>How does the <span data-consult-fee>₹100</span> consultation adjustment work?</span><svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa5"><div class="faq-a-inner">The consultation costs <span data-consult-fee>₹100</span>. If you enrol in a live course within <span data-consult-days>7 days</span> of your consultation, that <span data-consult-fee>₹100</span> is deducted from your course fee. After <span data-consult-days>7 days</span> the fee is not adjusted.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa6">What does the course fee include?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa6"><div class="faq-a-inner" data-policy="feeIncludes">The course fee covers every live class in the course, the teacher’s class notes and worksheets, and written feedback on your homework. Goethe exam fees are not included.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa7">How are classes scheduled?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa7"><div class="faq-a-inner" data-policy="scheduling">Group batches run on a fixed timetable in Indian Standard Time, shown on the course before you enrol. If a class has to move, we tell you at least 24 hours in advance and schedule a replacement class. One-to-one lessons are scheduled directly with your teacher.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa8">What happens if I miss a class?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa8"><div class="faq-a-inner" data-policy="missedClass">Group classes are not recorded, and a missed group class is not refunded or repeated individually. Your teacher shares the class notes and homework so you can catch up, and you can bring questions to the next class. One-to-one lessons can be moved free of charge with at least 24 hours’ notice.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa9">What are the cancellation and refund terms?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa9"><div class="faq-a-inner" data-policy="cancellationRefund">If you cancel at least 48 hours before the first class, your course fee is refunded in full. If you cancel during the first two weeks of the course, we refund the classes still to come; after that, course fees are not refunded. If Klarweg cancels or postpones a course and the new dates don’t suit you, we refund everything not yet delivered. The 7-day guarantee in our Refund Policy covers self-paced purchases only, not live classes.</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== CTA ========== -->
-<section class="cta-band">
+<!-- ========== 9. CLOSE ========== -->
+<section class="cta-band close">
   <div class="container">
-    <div class="inner">
-      <h2 class="display-md">Start with a conversation.</h2>
-      <p class="lede">Meet a teacher for <span data-consult-fee>₹100</span>, get an honest assessment of your level, and leave with a clear plan. <span data-book-closed>Online booking is not open yet; join the free waitlist to hear when a course opens.</span> Questions first? <a href="contact.html">Contact us</a>.</p>
-      <div class="hero-ctas">
-        <a href="#book" class="btn btn-live" data-request="interest" data-book-open="Book a consultation">Join the waitlist
-          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="courses.html" class="btn btn-secondary">Prefer self-paced? See courses</a>
-      </div>
+    <h2 class="display-md">Start German with a teacher who explains why.</h2>
+    <p class="lede">Join the free waitlist for Beginner German · A1. Prefer to begin today? The first self-paced chapter at every level is free.</p>
+    <div class="hero-ctas">
+      <a href="#book" class="btn btn-live" data-request="interest" data-book-open="Book a consultation">Join the free A1 waitlist
+        <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="courses.html" class="btn btn-secondary">Try a free self-paced chapter</a>
     </div>
   </div>
 </section>
@@ -872,8 +1367,8 @@
 </main>
 
 <div class="sticky-book" id="sticky-book" aria-hidden="true">
-  <p><strong><span data-consult-fee>₹100</span> consultation</strong><span data-book-closed>Online booking is not open yet</span><span data-book-only hidden>Adjusted against your fee within <span data-consult-days>7 days</span></span></p>
-  <a href="#book" class="btn btn-gold" tabindex="-1" data-request="interest" data-book-open="Book">Waitlist</a>
+  <p><strong data-course-field="title">Beginner German · A1</strong><span>Free waitlist · start date to be announced</span></p>
+  <a href="#book" class="btn btn-gold" tabindex="-1" data-request="interest" data-book-open="Book">Join</a>
 </div>
 
 <!-- ========== FOOTER (canonical) ========== -->
@@ -926,6 +1421,7 @@
 <script src="live-classes-data.js"></script>
 <script src="kw-products.js"></script>
 <script src="kw-live.js"></script>
+<script src="kw-live-experience.js"></script>
 <script src="site.js"></script>
 <script src="kw-placement.js"></script>
 <script src="kw-config.js"></script>

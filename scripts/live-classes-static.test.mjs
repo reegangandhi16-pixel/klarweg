@@ -158,7 +158,7 @@ test('LIVE D3: the first course is the approved A1 group batch, published as a w
   const t = D.teachers.find((x) => x.id === 'reegan-gandhi');
   assert.ok(t && t.draft === undefined, 'the teacher profile is published');
   assert.deepEqual({ experience: t.experience, proficiency: t.proficiency, qualifications: [...t.qualifications], goethe: [...t.goethe], levels: [...t.levels], teachesIn: [...t.teachesIn], specialisms: [...t.specialisms], examPrep: t.examPrep, formats: [...t.formats], photo: t.photo, availability: t.availability }, {
-    experience: '5 years of teaching German', proficiency: 'C1', qualifications: ['Goethe-Zertifikat C1'], goethe: ['Goethe-Zertifikat C1'], levels: ['A1', 'A2', 'B1', 'B2'], teachesIn: ['Hindi', 'English'],
+    experience: null, proficiency: null, qualifications: [], goethe: [], levels: ['A1', 'A2', 'B1', 'B2'], teachesIn: ['Hindi', 'English'],
     specialisms: ['German grammar', 'Structured learning for Hindi-speaking learners', 'Goethe exam preparation'], examPrep: 'Goethe exam preparation at A1–B1', formats: ['Group batch', 'One-to-one'], photo: null, availability: null
   }, 'only the confirmed facts: no photo, availability or other claims');
   assert.ok(t.levels.includes('A1') && t.formats.includes('Group batch'), 'the teacher teaches this course');
@@ -252,7 +252,9 @@ test('LIVE LEGAL: Terms, Privacy and Refund Policy disclose the live service as 
 test('LIVE: the request form is the free course waitlist only; a consultation is never requested by email', () => {
   assert.equal(/name="rtype"/.test(html), false, 'no consultation-or-interest choice');
   assert.match(html, /<h3 id="form-title">Join the course waitlist<\/h3>/);
-  assert.match(html, /Free, and not a booking: we tell you when a suitable course opens\. Nothing is charged\./);
+  assert.match(html, /Free, and not a booking\. Nothing is charged\./);
+  // no reply-time or notification promise while the waitlist is a plain email (owner, 2026-11-17)
+  assert.equal(/we tell you when|we reply within|within two working days/i.test(html.slice(html.indexOf('<body'))), false, 'the page promises no reply or notification it has no backend for');
   assert.equal(/arrange my consultation|Request a consultation by email|We then reply with a time slot and payment details/.test(html), false, 'no email booking or emailed payment details');
   const js = read('kw-live.js');
   assert.match(js, /'Live course interest \(no consultation requested, nothing to pay\)',/);
@@ -301,8 +303,19 @@ test('LIVE DATA: a named draft profile cannot reach the public site by deleting 
   }
 });
 
+test('LIVE DATA: unconfirmed credentials are not in the shipped data while display.teacherCredentials is false (owner, 2026-11-17)', () => {
+  const D = loadData();
+  assert.equal(D.display.teacherCredentials, false);
+  for (const t of D.teachers.filter((x) => !x.draft)) for (const f of ['experience', 'proficiency', 'qualifications', 'goethe']) assert.ok(t[f] == null || (Array.isArray(t[f]) && !t[f].length), `${t.id}.${f} must be empty`);
+  assert.equal(/Goethe-Zertifikat C1|5 years of teaching/.test(read('live-classes-data.js').replace(/\/\*[\s\S]*?\*\//g, '')), false, 'no unconfirmed credential text anywhere in the shipped data file');
+  const bad = clone(D); bad.teachers.find((t) => t.id === 'reegan-gandhi').proficiency = 'C1';
+  assert.ok(checkData(bad).some((e) => /proficiency is in the shipped data/.test(e)), 'a hidden credential is still a data error');
+});
+
 test('LIVE DATA: published entries must be complete and consistent; drafts may stay incomplete', () => {
-  const base = loadData();
+  // with credentials switched on (test-only values for the owner, so the fixture checks run in that mode)
+  const base = loadData(); base.display = { ...base.display, teacherCredentials: true };
+  Object.assign(base.teachers.find((t) => t.id === 'reegan-gandhi'), { experience: 'Test experience', proficiency: 'C2', qualifications: ['Test qualification'] });
   const expectError = (mutate, rx, why) => {
     const D = clone(base); mutate(D);
     const errors = checkData(D);
@@ -339,7 +352,7 @@ test('LIVE DATA: published entries must be complete and consistent; drafts may s
 });
 
 test('LIVE DATA: a teacher template cannot be published by filling its [brackets] alone', () => {
-  const D = loadData();
+  const D = loadData(); D.display = { ...D.display, teacherCredentials: true };
   const templates = D.teachers.filter((t) => t.draft && /^\[/.test(t.name));
   assert.deepEqual([...templates.map((t) => t.id)], ['teacher-1', 'teacher-2', 'teacher-3'], 'the three templates are still drafts');
   const fill = (x) => (typeof x === 'string' ? x.replace(/\[[^\]]+\]/g, 'Filled') : Array.isArray(x) ? x.map(fill) : x);
@@ -436,7 +449,10 @@ test('LIVE GATE: the gate clears once every blocker is resolved (so it can actua
     D.courses[0].enrolment = 'open';
     assert.ok(launchBlockers(D, dir).some((b) => /terms\.html says live-course enrolment is not open/.test(b)), 'the Terms must not contradict an open course');
     D.courses[0].enrolment = 'not-open';
-    D.consultation.feeLabel = '₹150';
-    assert.ok(launchBlockers(D, dir).some((b) => /meta description/.test(b)), 'a changed fee with stale meta descriptions is a blocker');
+    D.courses[0].priceLabel = '₹8,499';
+    assert.ok(launchBlockers(D, dir).some((b) => /meta description/.test(b)), 'a changed course fee with stale meta descriptions is a blocker');
+    D.courses[0].priceLabel = loadData().courses[0].priceLabel;
+    fs.writeFileSync(path.join(dir, 'live-classes.html'), meta('A consultation costs ₹150.'));
+    assert.ok(launchBlockers(D, dir).some((b) => /meta description names ₹150/.test(b)), 'an amount that is neither the consultation nor a published course fee is a blocker');
   } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });

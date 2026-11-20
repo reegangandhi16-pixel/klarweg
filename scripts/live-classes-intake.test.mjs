@@ -67,7 +67,9 @@ test('INTAKE: a complete, evidenced, owner-confirmed, consented sheet becomes an
   assert.deepEqual(JSON.parse(JSON.stringify(back)), JSON.parse(JSON.stringify(t)));
   for (const row of Object.values(FULL)) if (row[1] !== 'n/a') assert.equal(src.includes(row[1]), false, `evidence "${row[1]}" leaked`);
   const D = loadData();
-  assert.deepEqual(checkData({ ...D, teachers: D.teachers.concat(t) }), []);
+  assert.deepEqual(checkData({ ...D, display: { ...D.display, teacherCredentials: true }, teachers: D.teachers.concat(t) }).filter((e) => e.includes(t.id)), []);
+  // while credentials are switched off, the entry's credentials may not ship at all
+  assert.ok(checkData({ ...D, teachers: D.teachers.concat(t) }).some((e) => /in the shipped data while display\.teacherCredentials is false/.test(e)));
 });
 
 test('INTAKE: missing consent, evidence or owner confirmation blocks publication', () => {

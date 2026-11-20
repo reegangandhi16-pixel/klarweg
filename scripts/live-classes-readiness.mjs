@@ -122,7 +122,13 @@ export function checkData(D, root = ROOT) {
     if (t.tier === 'listed') { checkListed(t, w, err, root); continue; }
     if (has(t.unconfirmed)) err(w, `published teacher still has unconfirmed fields: ${t.unconfirmed.join(', ')}`);
     for (const p of placeholders(t)) err(w, `published teacher still has placeholder text "${p}"`);
-    for (const f of ['name', 'headline', 'experience', 'proficiency', 'qualifications', 'levels', 'teachesIn', 'formats']) if (!has(t[f])) err(w, `published teacher needs ${f}`);
+    // Credentials ship only once the owner has confirmed them for display
+    // (display.teacherCredentials). Until then they must not be in the
+    // shipped data at all, not merely hidden (owner, 2026-11-17).
+    const CRED = ['experience', 'proficiency', 'qualifications', 'goethe'];
+    const credsOn = D.display?.teacherCredentials !== false;
+    for (const f of ['name', 'headline', 'levels', 'teachesIn', 'formats', ...(credsOn ? ['experience', 'proficiency', 'qualifications'] : [])]) if (!has(t[f])) err(w, `published teacher needs ${f}`);
+    if (!credsOn) for (const f of CRED) if (has(t[f])) err(w, `${f} is in the shipped data while display.teacherCredentials is false: remove unconfirmed credentials from the file, not just from the page`);
     // a public profile needs the teacher's own approval on record (how and when; never shown)
     if (!has(t.consent)) err(w, 'published teacher needs consent (how and when the teacher approved publishing this profile)');
     // credentials in a recognisable, checkable form only
@@ -284,8 +290,12 @@ export function launchBlockers(D, root = ROOT) {
   if (!published(D.teachers).length) b.push('No published teacher profile.');
   if (!published(D.courses).length) b.push('No published live course.');
   const page = read(root, 'live-classes.html');
+  // every fee a meta description names must be a current one: the
+  // consultation fee or the fee of a published course (never a stale or
+  // invented amount)
+  const fees = [D.consultation?.feeLabel, ...published(D.courses).map((k) => k.priceLabel)].filter(Boolean);
   for (const m of page.matchAll(/<meta (?:name="description"|property="og:description") content="([^"]*)"/g)) {
-    if (/₹\s?\d/.test(m[1]) && !m[1].includes(D.consultation?.feeLabel)) b.push(`A meta description still names a different fee than consultation.feeLabel: "${m[1].slice(0, 60)}…".`);
+    for (const f of m[1].match(/₹\s?\d+(?:,\d{3})*/g) || []) if (!fees.includes(f)) b.push(`A meta description names ${f}, which is neither consultation.feeLabel nor a published course fee: "${m[1].slice(0, 60)}…".`);
   }
   const index = read(root, 'index.html');
   // a level range in the meta descriptions must be covered by what is published

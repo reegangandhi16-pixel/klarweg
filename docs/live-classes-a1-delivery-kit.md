@@ -33,7 +33,7 @@ Nothing here opens enrolment or promises an exam result.
 | Timetable | Monday, Wednesday and Friday, 7:30–9:00 pm IST, on Google Meet |
 | Session length | 90 minutes |
 | Length | 12 weeks × 3 sessions = **36 sessions**; 36 × 1.5 h = **54 live hours** |
-| Fee | ₹7,999 in full, or ₹4,000 before the start and ₹3,999 before week 7 |
+| Fee | ₹7,999 in full, in one payment, before the first class (instalments withdrawn, D10) |
 | Materials | the teacher's class notes, PDF worksheets, homework with written feedback |
 | Exam | prepares for Goethe-Zertifikat A1: Start Deutsch 1; the exam fee is not included |
 | Recording | classes are not recorded (D6) |

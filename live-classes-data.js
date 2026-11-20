@@ -35,6 +35,19 @@
        sample file is not published (not in the Pages allowlist). */
     previewSampleRatings: false,
 
+    /* What the public page shows of the data below (owner, 2026-11-17).
+       Nothing in the data is deleted by these switches.
+       - listedTeachers: false keeps the name-only teachers (tier
+         'listed') off the page; their entries stay here unchanged.
+       - teacherCredentials: false hides experience, German proficiency,
+         qualifications and Goethe certificates on every profile until
+         the owner re-confirms them for display. Levels taught, teaching
+         languages, approach, specialisms and formats still show. */
+    display: {
+      listedTeachers: false,
+      teacherCredentials: false
+    },
+
     /* The site's documented address, as on contact.html, privacy.html
        and terms.html (the old klarweg-domain inbox is retired). */
     contact: {
@@ -178,10 +191,14 @@
         photo: null,
         photoAlt: '',
         headline: 'German grammar and Goethe exam preparation, explained in Hindi and English',
-        experience: '5 years of teaching German',
-        proficiency: 'C1',
-        qualifications: ['Goethe-Zertifikat C1'],
-        goethe: ['Goethe-Zertifikat C1'],
+        /* Credentials removed from the shipped data on the owner's
+           instruction (2026-11-17): not yet verified against reliable
+           records. Re-add only after the owner confirms them in writing;
+           display.teacherCredentials must then be switched on too. */
+        experience: null,
+        proficiency: null,
+        qualifications: [],
+        goethe: [],
         levels: ['A1', 'A2', 'B1', 'B2'],
         teachesIn: ['Hindi', 'English'],
         specialisms: ['German grammar', 'Structured learning for Hindi-speaking learners', 'Goethe exam preparation'],

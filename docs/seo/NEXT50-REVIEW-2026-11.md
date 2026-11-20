@@ -2011,3 +2011,9 @@ Publication authorised by the user on 9 November 2026, including self-merging af
 - Headless Chrome: 100 page/viewport combinations across all 50 pages at 360×780 and 1280×800. No horizontal overflow before or after expanding answers; TOC anchors and language fonts passed.
 - Resources hub checked at both sizes; four category examples inspected visually in hero/content views.
 - Publication is user-authorised. Native German and fluent Hindi human review are still pending; automated checks do not establish that review.
+
+## Additional self-introduction examples
+
+- [ ] du
+- [ ] Ich wohne in Jaipur. Ich lese gern. Wo wohnst du?
+- [ ] Wo wohnen Sie?

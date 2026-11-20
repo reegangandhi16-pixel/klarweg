@@ -4,6 +4,8 @@ import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
 import { consultAvailability, createConsultBooking, getConsultBooking, getConsultJoin, listConsultBookings, reconcileRecentConsultBookings } from "./consultations.js";
 import { enrolCatalog, enrolQuote, createEnrolCheckout, getEnrolment, listEnrolments, reconcileRecentPayments } from "./enrolments.js";
+import { demoAvailability, createDemoBooking, rescheduleDemo } from "./live-demos.js";
+import { liveAdminOverview, liveAdminSlots, liveAdminBatch, liveAdminTeacher, liveAdminCoupon, liveAdminDemo, liveAdminEnrolment } from "./live-admin.js";
 import { aiStatus, aiRequest } from "./ai.js";
 import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
@@ -137,6 +139,36 @@ async function route(request, env, ctx) {
     const enrolMatch = url.pathname.match(/^\/enrol\/enrolments\/(KWE-[2-9A-HJ-NP-Z]{8})$/);
     if (request.method === "GET" && enrolMatch) {
       return withCors(await getEnrolment(request, env, enrolMatch[1]), request);
+    }
+
+    /* ₹100 Friday/Sunday demo classes (live-demos.js). Off unless
+       DEMO_BOOKING matches CASHFREE_ENV; status and join links use the
+       /consult/bookings/:ref routes above (same table, kind = 'demo'). */
+    if (request.method === "GET" && url.pathname === "/demo/availability") {
+      return withCors(await demoAvailability(request, env), request);
+    }
+    if (request.method === "POST" && url.pathname === "/demo/bookings") {
+      return withCors(await createDemoBooking(request, env), request);
+    }
+    const demoMoveMatch = url.pathname.match(/^\/demo\/bookings\/(KWC-[2-9A-HJ-NP-Z]{8})\/reschedule$/);
+    if (request.method === "POST" && demoMoveMatch) {
+      return withCors(await rescheduleDemo(request, env, demoMoveMatch[1]), request);
+    }
+
+    /* Live marketplace administration (live-admin.js): LIVE_ADMIN_EMAILS
+       + a fresh second factor; everything else is refused. */
+    if (url.pathname.startsWith("/live-admin/")) {
+      const p = url.pathname;
+      if (request.method === "GET" && p === "/live-admin/overview") return withCors(await liveAdminOverview(request, env), request);
+      if (request.method === "POST" && p === "/live-admin/slots") return withCors(await liveAdminSlots(request, env), request);
+      if (request.method === "POST" && p === "/live-admin/batches") return withCors(await liveAdminBatch(request, env), request);
+      if (request.method === "POST" && p === "/live-admin/teachers") return withCors(await liveAdminTeacher(request, env), request);
+      if (request.method === "POST" && p === "/live-admin/coupons") return withCors(await liveAdminCoupon(request, env), request);
+      const dm = p.match(/^\/live-admin\/demos\/(KWC-[2-9A-HJ-NP-Z]{8})$/);
+      if (request.method === "POST" && dm) return withCors(await liveAdminDemo(request, env, dm[1]), request);
+      const em = p.match(/^\/live-admin\/enrolments\/(KWE-[2-9A-HJ-NP-Z]{8})$/);
+      if (request.method === "POST" && em) return withCors(await liveAdminEnrolment(request, env, em[1]), request);
+      return withCors(json({ ok: false, error: "Not found." }, 404), request);
     }
 
     if (request.method === "POST" && url.pathname === "/auth/signup") {

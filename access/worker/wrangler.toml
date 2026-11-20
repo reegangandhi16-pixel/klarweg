@@ -57,6 +57,11 @@ CONSULT_TEACHERS = ""
 # D11 (2026-10-21): "course-fee", as approved in D4. It changes nothing
 # while ENROL_PAYMENTS is "off".
 ENROL_PAYMENTS = "off"
+# ₹100 Friday/Sunday demo classes (src/live-demos.js). "off" | "sandbox" | "live";
+# predeploy refuses anything but "off" without --allow-demo-booking=<mode>.
+DEMO_BOOKING = "off"
+# Accounts allowed to use /live-admin/* (plus a fresh second factor). Empty = nobody.
+LIVE_ADMIN_EMAILS = ""
 ENROL_COURSES = ""
 ENROL_CONSULT_CREDIT = "course-fee"
 

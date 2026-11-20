@@ -9,7 +9,7 @@
       agree with the page; and
    3. draft data is off by default and placeholder text only ever lives
       in entries marked draft.
-   The interactive behaviour is covered by scripts/live-classes-browser.mjs. */
+   The interactive behaviour is covered by scripts/live-marketplace-demo.mjs --e2e. */
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -101,9 +101,10 @@ test('LIVE: consultation requests go to the site\'s documented address (the one 
 
 test('LIVE: the page states no level range or live-course term that is not confirmed', () => {
   const body = html.slice(html.indexOf('<body'));
-  assert.equal(/A1 (?:→|to) C2/.test(html.match(/<meta name="description" content="([^"]*)"/)[1]), false, 'the meta description names no blanket level range');
-  assert.match(body, /<span data-live-levels><\/span>/, 'the hero level range is computed from the data');
+  assert.equal(/A1 (?:→|to|–) C2/.test(html.match(/<meta name="description" content="([^"]*)"/)[1]), false, 'the meta description names no blanket A1–C2 live range');
+  assert.match(html.match(/<meta name="description" content="([^"]*)"/)[1], /A1–B2/, 'the marketplace sells A1–B2 (owner brief 2026-11-20)');
   assert.equal(/doesn.t include the other|includes? self-paced access/i.test(body), false, 'D6 (no self-paced access) is stated in the Terms §4A, not claimed otherwise on this page');
+  assert.equal(/\b\d+(?:\.\d)?\s*(?:★|stars?)\b|\b\d+\+? (?:students|learners) (?:enrolled|taught)\b|only \d+ (?:seats|places) left|hurry|limited time/i.test(body), false, 'no rating, learner count or urgency is typed into the page');
 });
 
 test('LIVE: every amount on the page and in its data is an owner-approved amount (decision sheet, part A)', () => {
@@ -111,28 +112,27 @@ test('LIVE: every amount on the page and in its data is an owner-approved amount
   const settled = sheet.slice(sheet.indexOf('## A. Settled'), sheet.indexOf('## B. Still pending'));
   assert.ok(settled.length > 0, 'the sheet separates settled decisions from pending ones');
   const approved = new Set(settled.match(/₹\d+(?:,\d{3})*/g) || []);
-  for (const x of ['₹100', '₹7,999']) assert.ok(approved.has(x), `${x} is recorded as approved`);
+  for (const x of ['₹100', '₹16,000', '₹13,000', '₹22,000', '₹15,000', '₹21,000', '₹18,000', '₹27,000', '₹20,000', '₹3,000', '₹7,000']) assert.ok(approved.has(x), `${x} is recorded as approved (D12)`);
+  // live-classes-data.js still carries the superseded live-a1 / coursePricing (D9) records for the
+  // readiness validator; the marketplace page never reads them (asserted below).
+  const files = [PAGE, 'kw-marketplace.js', 'live-marketplace-pricing.js'];
+  assert.equal(/coursePricing|priceLabel|paymentTerms/.test(read('kw-marketplace.js')), false, 'the page never shows the superseded D9/D10 amounts');
   // D10: full payment only; the withdrawn instalment amounts appear nowhere on the page
-  for (const f of FILES) for (const x of ['₹4,000', '₹3,999']) assert.equal(read(f).includes(x), false, `${f} names the withdrawn instalment amount ${x}`);
-  for (const f of FILES) for (const x of new Set(read(f).match(/₹\d+(?:,\d{3})*/g) || [])) assert.ok(approved.has(x), `${f} names ${x}, which is not an approved amount in the decision sheet`);
+  for (const f of files) for (const x of ['₹4,000', '₹3,999', '₹7,999']) assert.equal(read(f).includes(x), false, `${f} names the withdrawn amount ${x}`);
+  for (const f of files) for (const x of new Set(read(f).match(/₹\d+(?:,\d{3})*/g) || [])) assert.ok(approved.has(x), `${f} names ${x}, which is not an approved amount in the decision sheet`);
 });
 
 /* ---------- owner-approved decisions (2026-10-20, docs/live-classes-owner-decisions.md) ---------- */
-test('LIVE D8: only the owner\'s full profile and the A1 waitlist course are published', () => {
+test('LIVE D8/D12: only verified teachers sell; the others are listed by name and title only, and nothing is open without a schedule', () => {
   const D = loadData();
   assert.deepEqual([...D.teachers.filter((x) => !x.draft && x.tier !== 'listed').map((x) => x.id)], ['reegan-gandhi'], 'no other teacher has a full profile');
   assert.ok(D.teachers.filter((x) => !x.draft && x.tier === 'listed').every((x) => x.title === 'German Language Teacher' && !('experience' in x)), 'other teachers are listed by name and title only');
-  assert.deepEqual([...D.courses.filter((x) => !x.draft).map((x) => x.id)], ['live-a1'], 'no other course is published');
+  assert.deepEqual(Object.keys(D.marketplace.verified), ['reegan-gandhi'], 'only the verified teacher sells courses and demos');
   assert.deepEqual([...D.testimonials.filter((x) => !x.draft)], [], 'no testimonial is published');
-  for (const k of D.courses.filter((x) => !x.draft)) assert.notEqual(k.enrolment, 'open', `${k.id}: enrolment cannot open without a start date and payment arrangements`);
-  // the card and the no-JS fallback say the start date is to be announced and the waitlist is free and not a booking
-  const js = read('kw-live.js');
-  assert.match(js, /c\.enrolment === 'waitlist' \? '<p class="c-note">' \+ \(has\(c\.nextBatch\) \? '' : 'The start date is still to be announced\. '\)/);
-  assert.match(js, /Enrolment is not open yet\. Joining the waitlist is free and is not a booking: nothing is charged\./);
-  const nojs = html.match(/<p data-nojs-course>([\s\S]*?)<\/p>/);
-  assert.ok(nojs, 'the no-JS course summary exists');
-  const a1 = D.courses.find((c) => c.id === 'live-a1');
-  assert.ok(nojs[1].includes(`<strong>${a1.title}</strong> with Reegan Gandhi: waitlist only. The start date is still to be announced and enrolment is not open. Joining the waitlist is free and is not a booking.`));
+  assert.equal(D.marketplace.scheduleTBA, 'To be announced');
+  assert.equal(D.marketplace.demoBookingEnabled, false, 'demo payments stay off in the committed page data');
+  assert.equal(D.marketplace.courseCheckoutEnabled, false, 'course payments stay off in the committed page data');
+  assert.equal(D.marketplace.showCredentials, false, 'credentials stay hidden until the owner re-confirms them (PR #344)');
 });
 
 test('LIVE D3: the first course is the approved A1 group batch, published as a waitlist with no invented start date', () => {
@@ -164,18 +164,16 @@ test('LIVE D3: the first course is the approved A1 group batch, published as a w
   assert.ok(t.levels.includes('A1') && t.formats.includes('Group batch'), 'the teacher teaches this course');
 });
 
-test('LIVE D4: the consultation terms are the approved ones', () => {
-  const c = loadData().consultation;
+test('LIVE D4: the demo terms are the approved ones', () => {
+  const c = loadData().consultation, m = loadData().marketplace.demo;
   assert.equal(c.termsConfirmed, true);
   assert.equal(c.feeLabel, '₹100');
-  assert.equal(c.durationMinutes, 20);
-  assert.equal(c.platform, 'Google Meet');
-  assert.equal(c.adjustmentDays, 7);
-  assert.match(c.cancellation, /full refund or a new time/);
-  assert.match(c.cancellation, /once, free of charge, with at least 12 hours’ notice/);
-  assert.match(c.cancellation, /missed without notice is not refunded/);
-  assert.ok(c.steps.some((x) => /online through Cashfree/.test(x) && /confirmed only once the payment is verified/.test(x)), 'booked and paid online (D11)');
-  assert.match(html, /Consultations are booked and paid online on this page, never by email\./);
+  assert.equal(m.durationMinutes, 20);
+  assert.equal(m.platform, 'Google Meet');
+  assert.match(m.refundRule, /full refund or a new time/);
+  assert.match(m.rescheduleRule, /once, free of charge, up to 12 hours before/);
+  assert.match(html, /pay ₹100 through Cashfree/, 'booked and paid online (D11)');
+  assert.match(html, /Friday or Sunday/);
 });
 
 test('LIVE D5: the four live-class policies hold the approved texts; the self-paced guarantee is not extended', () => {
@@ -249,14 +247,11 @@ test('LIVE LEGAL: Terms, Privacy and Refund Policy disclose the live service as 
   assert.match(refund, /7-day money-back guarantee on any paid level or the Lifetime bundle/);
 });
 
-test('LIVE: the request form is the free course waitlist only; a consultation is never requested by email', () => {
+test('LIVE: a demo or course is never requested or paid by email', () => {
   assert.equal(/name="rtype"/.test(html), false, 'no consultation-or-interest choice');
-  assert.match(html, /<h3 id="form-title">Join the course waitlist<\/h3>/);
-  assert.match(html, /Free, and not a booking: we tell you when a suitable course opens\. Nothing is charged\./);
-  assert.equal(/arrange my consultation|Request a consultation by email|We then reply with a time slot and payment details/.test(html), false, 'no email booking or emailed payment details');
-  const js = read('kw-live.js');
-  assert.match(js, /'Live course interest \(no consultation requested, nothing to pay\)',/);
-  assert.equal(/Live class consultation request/.test(js), false);
+  assert.equal(/arrange my consultation|Request a consultation by email|We then reply with a time slot and payment details|bank transfer|\bUPI\b/i.test(html), false, 'no email booking or emailed payment details');
+  const js = read('kw-marketplace.js');
+  assert.equal(/bank transfer|\bUPI\b|book(?:ing)? by email/i.test(js), false, 'email stays a support channel only (D11)');
 });
 
 test('LIVE: the consultation fee and adjustment period are read from the data file, not typed into the page', () => {
@@ -271,16 +266,14 @@ test('LIVE: the consultation fee and adjustment period are read from the data fi
   }
 });
 
-test('LIVE: the no-JavaScript fallbacks for the policies and consultation terms match the data file', () => {
+test('LIVE: the no-JavaScript fallbacks for the policies match the data file', () => {
   const D = loadData();
   const text = (s) => s.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&');
   for (const k of POLICIES) {
-    const m = html.match(new RegExp(`data-policy="${k}">([\\s\\S]*?)</div>`));
+    const m = html.match(new RegExp(`data-policy="${k}">([\\s\\S]*?)</(?:p|span)>`));
     assert.ok(m, `the FAQ shows policy ${k}`);
     assert.equal(text(m[1]), D.policies[k], `no-JS text for policy ${k}`);
   }
-  assert.equal(text(html.match(/data-consult-unit>([^<]*)</)[1]), `${D.consultation.durationMinutes}-minute session on ${D.consultation.platform}`);
-  assert.equal(text(html.match(/<li data-consult-cancel>([^<]*)<\/li>/)[1]), D.consultation.cancellation);
 });
 
 /* ---------- data validation and the launch gate (scripts/live-classes-readiness.mjs) ---------- */

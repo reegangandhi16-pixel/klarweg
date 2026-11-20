@@ -44,6 +44,10 @@
   .msg { padding: 12px 16px; border-radius: 12px; background: var(--mint); color: var(--mint-ink); margin: 0 0 12px; }
   .msg.err { background: #FBEFEF; color: var(--err); }
   .note { font-size: 13px; color: var(--ink2); margin: 0 0 16px; }
+  .qr { width: 216px; height: 216px; padding: 8px; background: #fff; border: 1px solid var(--line); border-radius: 12px; }
+  .qr svg { width: 100%; height: 100%; display: block; }
+  .codes { display: grid; grid-template-columns: repeat(2, max-content); gap: 8px 24px; font: 500 15px 'JetBrains Mono', monospace; margin: 0 0 16px; }
+  ol.steps { padding-left: 20px; margin: 0 0 16px; } ol.steps li { margin: 0 0 8px; }
   .slots-day { margin: 0 0 8px; }
   .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
   @media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } main, header { padding-left: 16px; padding-right: 16px; } }
@@ -56,6 +60,7 @@
 </header>
 <main id="app"><div class="card">Loading…</div></main>
 
+<script src="kw-qrcode.js"></script>
 <script src="kw-config.js"></script>
 <script src="kw-auth.js"></script>
 <script>
@@ -80,19 +85,53 @@
       return true;
     }
     if (r.code === 'not-admin') { app.innerHTML = '<div class="card"><h2>Not authorised</h2><p>This account is not a live-classes administrator.</p></div>'; return true; }
-    if (r.code === 'mfa-required') {
-      app.innerHTML = '<div class="card"><h2>Two-factor confirmation</h2><p class="note">Enter the 6-digit code from your authenticator app. Set up two-factor authentication first if you have not (Account → security).</p>'
-        + '<form id="mfa" class="row"><label class="f">Code<input id="mfa-code" inputmode="numeric" autocomplete="one-time-code" maxlength="8" required></label><button>Confirm</button></form><div id="mfa-msg"></div></div>';
-      document.getElementById('mfa').onsubmit = function (e) {
-        e.preventDefault();
-        api('/auth/mfa/verify', { code: document.getElementById('mfa-code').value.trim() }).then(function (v) {
-          if (v.ok) load(); else document.getElementById('mfa-msg').innerHTML = '<p class="msg err">' + esc(v.error || 'Code not accepted.') + '</p>';
-        });
-      };
-      return true;
-    }
+    if (r.code === 'mfa-required') { mfaFlow(); return true; }
     if (!r.ok) { app.innerHTML = '<div class="card"><p class="msg err">' + esc(r.error || 'Could not load.') + '</p></div>'; return true; }
     return false;
+  }
+
+  var MFA_ERR = { mfa_invalid_code: 'That code is not right. Check the time on your phone and try the newest code.', mfa_locked: 'Too many wrong codes. Two-factor is locked for 30 minutes.',
+    mfa_rate_limited: 'Too many attempts. Wait a few minutes and try again.', mfa_unavailable: 'Two-factor authentication is not available on the server right now.', auth_required: 'Your session ended. Sign in again.' };
+  function mfaMsg(v) { return MFA_ERR[v && v.error] || (v && v.error) || 'Something went wrong. Try again.'; }
+  function codeForm(id, label) {
+    return '<form id="' + id + '" class="row"><label class="f">' + label + '<input id="' + id + '-code" inputmode="numeric" autocomplete="one-time-code" maxlength="20" required></label><button>Confirm</button></form><div id="' + id + '-msg" role="alert"></div>';
+  }
+  function mfaFlow() {
+    api('/auth/mfa/status').then(function (st) {
+      if (!st.ok) { app.innerHTML = '<div class="card"><p class="msg err">' + esc(mfaMsg(st)) + '</p></div>'; return; }
+      if (st.enrolled) {
+        app.innerHTML = '<div class="card"><h2>Two-factor confirmation</h2><p class="note">Enter the 6-digit code from your authenticator app. You stay confirmed on this device for 12 hours. Lost your phone? Enter one of your recovery codes instead.</p>' + codeForm('mfa', 'Code') + '</div>';
+        document.getElementById('mfa').onsubmit = function (e) {
+          e.preventDefault();
+          var c = document.getElementById('mfa-code').value.replace(/\s+/g, '');
+          api('/auth/mfa/verify', /^\d{6}$/.test(c) ? { code: c } : { recovery_code: c }).then(function (v) {
+            if (v.ok) load(); else document.getElementById('mfa-msg').innerHTML = '<p class="msg err">' + esc(mfaMsg(v)) + '</p>';
+          });
+        };
+        return;
+      }
+      app.innerHTML = '<div class="card"><h2>Set up two-factor authentication</h2><p class="note">The admin area needs a second factor. You do this once, with an authenticator app on your phone (Google Authenticator, Microsoft Authenticator, 1Password, Authy).</p><button id="mfa-start">Start setup</button><div id="mfa-start-msg" role="alert"></div></div>';
+      document.getElementById('mfa-start').onclick = function () {
+        api('/auth/mfa/enroll', {}).then(function (en) {
+          if (!en.ok) { document.getElementById('mfa-start-msg').innerHTML = '<p class="msg err">' + esc(mfaMsg(en)) + '</p>'; return; }
+          var qr = '';
+          try { var q = window.qrcode(0, 'M'); q.addData(en.otpauth_uri); q.make(); qr = q.createSvgTag({ cellSize: 4, margin: 2, scalable: true }); } catch (x) { qr = ''; }
+          app.innerHTML = '<div class="card"><h2>Connect your authenticator app</h2><ol class="steps"><li>In the app, add an account and scan this code.' + (qr ? '<div class="qr" style="margin-top:12px" aria-label="QR code for your authenticator app">' + qr + '</div>' : '') + '</li>'
+            + '<li>Can\'t scan? Choose “enter a setup key” and type: <code id="mfa-secret">' + esc(en.secret) + '</code> (time-based).</li><li>Enter the 6-digit code the app now shows.</li></ol>' + codeForm('mfa-new', 'Code') + '</div>';
+          document.getElementById('mfa-new').onsubmit = function (e) {
+            e.preventDefault();
+            api('/auth/mfa/enroll/confirm', { code: document.getElementById('mfa-new-code').value.replace(/\s+/g, '') }).then(function (c) {
+              if (!c.ok) { document.getElementById('mfa-new-msg').innerHTML = '<p class="msg err">' + esc(mfaMsg(c)) + '</p>'; return; }
+              app.innerHTML = '<div class="card"><h2>Two-factor is on</h2><p>Save these recovery codes somewhere safe (a password manager or on paper). Each works once if you lose your phone. They are shown only now.</p><div class="codes">'
+                + (c.recovery_codes || []).map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</div><label><input type="checkbox" id="mfa-saved"> I have saved my recovery codes</label><div class="row" style="margin-top:12px"><button id="mfa-done" disabled>Continue to admin</button></div></div>';
+              var cb = document.getElementById('mfa-saved'), go = document.getElementById('mfa-done');
+              cb.onchange = function () { go.disabled = !cb.checked; };
+              go.onclick = function () { load(); };
+            });
+          };
+        });
+      };
+    });
   }
 
   function load() {

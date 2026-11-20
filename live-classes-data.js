@@ -157,7 +157,7 @@
       /* Owner switches for the page. The Worker's DEMO_BOOKING and
          ENROL_PAYMENTS decide whether money can actually be taken; with
          these false the page never calls the payment routes. */
-      demoBookingEnabled: false,
+      demoBookingEnabled: true,   // owner go-live 2026-11-20 (Worker DEMO_BOOKING=live, version 5852e9de)
       courseCheckoutEnabled: false
     },
 

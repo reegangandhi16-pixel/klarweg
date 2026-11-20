@@ -130,7 +130,7 @@ test('LIVE D8/D12: only verified teachers sell; the others are listed by name an
   assert.deepEqual(Object.keys(D.marketplace.verified), ['reegan-gandhi'], 'only the verified teacher sells courses and demos');
   assert.deepEqual([...D.testimonials.filter((x) => !x.draft)], [], 'no testimonial is published');
   assert.equal(D.marketplace.scheduleTBA, 'To be announced');
-  assert.equal(D.marketplace.demoBookingEnabled, false, 'demo payments stay off in the committed page data');
+  assert.equal(D.marketplace.demoBookingEnabled, true, 'the ₹100 demo is live (owner go-live 2026-11-20); the Worker\'s DEMO_BOOKING decides whether money can be taken');
   assert.equal(D.marketplace.courseCheckoutEnabled, false, 'course payments stay off in the committed page data');
   assert.equal(D.marketplace.showCredentials, false, 'credentials stay hidden until the owner re-confirms them (PR #344)');
 });

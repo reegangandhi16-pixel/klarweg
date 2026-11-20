@@ -184,9 +184,9 @@ test('REVIEWS: the validator refuses an unsubstantiated or malformed published r
 });
 
 /* ================= online booking switch ================= */
-test('BOOKING: online booking is off — no payment script runs while the page switches are off, and nothing is ever booked by email', () => {
+test('BOOKING: only the ₹100 demo is switched on; course payments and same-day consultations stay off, and nothing is ever booked by email', () => {
   const D = loadData();
-  assert.equal(D.marketplace.demoBookingEnabled, false);
+  assert.equal(D.marketplace.demoBookingEnabled, true, 'owner go-live 2026-11-20 for the ₹100 demo only');
   assert.equal(D.marketplace.courseCheckoutEnabled, false);
   assert.equal(D.consultation.onlineBooking.enabled, false);
   assert.equal(D.consultation.onlineBooking.joinLinksConfigured, false, 'no joining link is configured in page data');

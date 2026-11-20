@@ -199,7 +199,9 @@ const CHAPTER = {
       note: 'Expresses a concessive contrast — something remains true despite a preceding statement.',
       ex1: { de: 'Die Ergebnisse waren positiv; dennoch bleiben Fragen offen.', en: 'The results were positive; nevertheless, questions remain open.', hi: 'Parinaam sakaaraatmak thay; phir bhi, sawaal khule hain.' },
       ex2: { de: 'Er war müde, dennoch arbeitete er weiter.', en: 'He was tired, nevertheless he kept working.', hi: 'Woh thaka hua tha, phir bhi usne kaam jaari rakha.' },
-      collocations: ['dennoch bleiben', 'dennoch zeigt sich'] },
+      collocations: ['dennoch bleiben', 'dennoch zeigt sich'],
+      img: { src: '/api/media/vocab-img/5def7ca9f08fd5b78877', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person smiling and walking cheerfully under an umbrella in rain.' }
+    },
     { de: 'folglich', ipa: '[ˈfɔlklɪç]', en: 'consequently', hi: 'parinaamsvaroop', pos: 'Adverb (Konnektor)', register: 'C1 · academic/formal', logicalFunction: 'Result',
       note: 'Marks a logical result or conclusion, common in academic writing.',
       ex1: { de: 'Die Daten waren eindeutig; folglich wurde die Hypothese bestätigt.', en: 'The data were clear; consequently, the hypothesis was confirmed.', hi: 'Data spasht thay; parinaamsvaroop, parikalpanaa ki pushti hui.' },

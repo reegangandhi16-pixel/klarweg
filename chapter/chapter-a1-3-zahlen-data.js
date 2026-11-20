@@ -250,7 +250,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/d012a78c90a98819d2c1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Six books standing neatly on a shelf' }
     },
     { de: 'sieben', pos: 'number', en: 'seven', hi: 'सात',
-      ex: 'Eine Woche hat sieben Tage.', exEn: 'A week has seven days.' },
+      ex: 'Eine Woche hat sieben Tage.', exEn: 'A week has seven days.',
+      img: { src: '/api/media/vocab-img/c3080a23711ce84a0ee2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Seven red apples arranged in a row on a wooden table.' }
+    },
     { de: 'acht', pos: 'number', en: 'eight', hi: 'आठ',
       ex: 'Die Schule beginnt um acht.', exEn: 'School begins at eight.',
       img: { src: '/api/media/vocab-img/013283f32ecac02adff4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Eight red apples arranged in two neat rows.' }
@@ -338,7 +340,9 @@ const CHAPTER = {
       vis: { kind: 'number', n: 29 }
     },
     { de: 'Zahl', art: 'die', gender: 'f', plural: 'Zahlen', pos: 'noun', en: 'number, figure', hi: 'संख्या',
-      ex: 'Welche Zahl hörst du?', exEn: 'Which number do you hear?' },
+      ex: 'Welche Zahl hörst du?', exEn: 'Which number do you hear?',
+      img: { src: '/api/media/vocab-img/b732e4b66bd992ac5371', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A wooden abacus with colourful sliding beads arranged in counted groups.' }
+    },
     { de: 'Handynummer', art: 'die', gender: 'f', plural: 'Handynummern', pos: 'noun', en: 'mobile number', hi: 'मोबाइल नंबर',
       ex: 'Wie ist deine Handynummer?', exEn: 'What is your mobile number?' },
     { de: 'Telefonnummer', art: 'die', gender: 'f', plural: 'Telefonnummern', pos: 'noun', en: 'phone number', hi: 'टेलीफ़ोन नंबर',
@@ -352,9 +356,13 @@ const CHAPTER = {
       vis: { kind: 'grammar', de: 'anna_berlin', hl: '_', role: 'focus', cap: 'The underscore character' }
     },
     { de: 'dann', pos: 'adverb', en: 'then, next', hi: 'फिर',
-      ex: 'Erst zehn, dann elf, dann zwölf.', exEn: 'First ten, then eleven, then twelve.' },
+      ex: 'Erst zehn, dann elf, dann zwölf.', exEn: 'First ten, then eleven, then twelve.',
+      img: { src: '/api/media/vocab-img/915a61b137dce8de77da', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Three plant pots displaying consecutive growth stages from sprout to bloom.' }
+    },
     { de: 'plus', pos: 'operator', en: 'plus', hi: 'जोड़ (धन)',
-      ex: 'Vier plus drei ist sieben.', exEn: 'Four plus three is seven.' },
+      ex: 'Vier plus drei ist sieben.', exEn: 'Four plus three is seven.',
+      img: { src: '/api/media/vocab-img/765a823395e085c32c29', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A three-dimensional plus sign between four spheres and three spheres.' }
+    },
     { de: 'minus', pos: 'operator', en: 'minus', hi: 'घटा (ऋण)',
       ex: 'Zehn minus zwei ist acht.', exEn: 'Ten minus two is eight.',
       img: { src: '/api/media/vocab-img/f87753542ffa938c2f53', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Ten apples on a table with two being taken away.' }

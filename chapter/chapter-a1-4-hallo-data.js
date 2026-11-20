@@ -266,7 +266,9 @@ const CHAPTER = {
     { de: 'bis dann', pos: 'phrase', en: 'until then', hi: 'तब तक',
       ex: 'Okay, bis dann!', exEn: 'Okay, until then!' },
     { de: 'bis später', pos: 'phrase', en: 'see you later', hi: 'बाद में मिलेंगे',
-      ex: 'Ich gehe jetzt. Bis später!', exEn: 'I am going now. See you later!' },
+      ex: 'Ich gehe jetzt. Bis später!', exEn: 'I am going now. See you later!',
+      img: { src: '/api/media/vocab-img/05ded80ee9a292a12346', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person wearing a backpack waving goodbye at an open doorway' }
+    },
     { de: 'willkommen', pos: 'adjective', en: 'welcome', hi: 'स्वागत है',
       ex: 'Herzlich willkommen in der Schule!', exEn: 'A warm welcome to the school!',
       img: { src: '/api/media/vocab-img/8a435029457e16a457e3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Host greeting a visitor at the door.' }
@@ -276,11 +278,17 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/3a9f18cf8055793192bb', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person smiling gratefully with a hand over their heart.' }
     },
     { de: 'danke schön', pos: 'phrase', en: 'thank you (kindly)', hi: 'बहुत धन्यवाद',
-      ex: 'Danke schön, Herr Wolan!', exEn: 'Thank you kindly, Mr Wolan!' },
+      ex: 'Danke schön, Herr Wolan!', exEn: 'Thank you kindly, Mr Wolan!',
+      img: { src: '/api/media/vocab-img/e2f9e9d489757808836d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A customer offering a polite grateful bow to a market vendor.' }
+    },
     { de: 'bitte', pos: 'interjection', en: 'please; you\'re welcome', hi: 'कृपया / स्वागत है',
-      ex: 'Ein Buch, bitte. — Bitte schön!', exEn: 'One book, please. — Here you go!' },
+      ex: 'Ein Buch, bitte. — Bitte schön!', exEn: 'One book, please. — Here you go!',
+      img: { src: '/api/media/vocab-img/edac0738b62f36856d5c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A shopkeeper handing a wrapped book to a customer across a counter' }
+    },
     { de: 'ja', pos: 'particle', en: 'yes', hi: 'हाँ',
-      ex: 'Bist du Anna? — Ja!', exEn: 'Are you Anna? — Yes!' },
+      ex: 'Bist du Anna? — Ja!', exEn: 'Are you Anna? — Yes!',
+      img: { src: '/api/media/vocab-img/30e6d6aae2e2c6a8c474', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person nodding enthusiastically with a warm smile and thumbs-up.' }
+    },
     { de: 'nein', pos: 'particle', en: 'no', hi: 'नहीं',
       ex: 'Kommst du aus Berlin? — Nein.', exEn: 'Do you come from Berlin? — No.' },
     { de: 'auch', pos: 'adverb', en: 'also, too', hi: 'भी',
@@ -288,9 +296,13 @@ const CHAPTER = {
       vis: { kind: 'grammar', de: 'Ich komme auch aus Indien.', hl: 'auch', role: 'focus', cap: 'auch = also, too' }
     },
     { de: 'da', pos: 'adverb', en: 'there', hi: 'वहाँ',
-      ex: 'Ist der Lehrer da? — Ja, er ist da.', exEn: 'Is the teacher there? — Yes, he is there.' },
+      ex: 'Ist der Lehrer da? — Ja, er ist da.', exEn: 'Is the teacher there? — Yes, he is there.',
+      img: { src: '/api/media/vocab-img/6c6892dd0e78651f9ae1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A teacher standing inside an open classroom doorway, waving a friendly welcome.' }
+    },
     { de: 'hier', pos: 'adverb', en: 'here', hi: 'यहाँ',
-      ex: 'Anna ist hier.', exEn: 'Anna is here.' },
+      ex: 'Anna ist hier.', exEn: 'Anna is here.',
+      img: { src: '/api/media/vocab-img/ab120d8bf2c9ea833f3c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person pointing down at the spot where they are standing.' }
+    },
     { de: 'ganz', pos: 'adverb', en: 'quite, completely', hi: 'काफ़ी / पूरी तरह',
       ex: 'Das ist ganz einfach.', exEn: 'That is quite easy.',
       vis: { kind: 'grammar', de: 'Das ist ganz einfach.', hl: 'ganz', role: 'focus', cap: 'ganz = quite, completely' }
@@ -300,13 +312,17 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/feb01321b26de4565a43', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smiling person giving a thumbs-up' }
     },
     { de: 'okay', pos: 'adverb', en: 'okay', hi: 'ठीक है',
-      ex: 'Okay, bis dann!', exEn: 'Okay, until then!' },
+      ex: 'Okay, bis dann!', exEn: 'Okay, until then!',
+      img: { src: '/api/media/vocab-img/e29dc0e1d9a7bf50f0bf', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smiling person giving a thumbs-up gesture.' }
+    },
     { de: 'sehr', pos: 'adverb', en: 'very', hi: 'बहुत',
       ex: 'Sehr gut! Danke.', exEn: 'Very good! Thank you.',
       vis: { kind: 'grammar', de: 'Sehr gut! Danke.', hl: 'Sehr', role: 'focus', cap: 'sehr = very' }
     },
     { de: 'so', pos: 'adverb', en: 'so; so-so', hi: 'ऐसे / ठीक-ठाक',
-      ex: 'So, Herr Wolan, fangen wir an.', exEn: 'So, Mr Wolan, let us begin.' },
+      ex: 'So, Herr Wolan, fangen wir an.', exEn: 'So, Mr Wolan, let us begin.',
+      img: { src: '/api/media/vocab-img/d317973665edfcbf9ee9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A meeting leader clapping hands together to signal the start.' }
+    },
     { de: 'gehen', pos: 'verb', en: 'to go', hi: 'जाना',
       ex: 'Ich gehe jetzt. Tschüs!', exEn: 'I am going now. Bye!',
       conj: { praesens: 'geht', praeteritum: 'ging', perfekt: 'ist gegangen' },
@@ -319,7 +335,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/92d92a0de54aeeacc634', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Woman smiling warmly' }
     },
     { de: 'Herr', art: 'der', gender: 'm', plural: 'Herren', pos: 'noun', en: 'Mr; gentleman', hi: 'श्रीमान',
-      ex: 'Das ist Herr Wolan.', exEn: 'This is Mr Wolan.' },
+      ex: 'Das ist Herr Wolan.', exEn: 'This is Mr Wolan.',
+      img: { src: '/api/media/vocab-img/6645d062d16ee90dee15', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A politely dressed gentleman in a blazer offering a friendly greeting.' }
+    },
     { de: 'Höflichkeit', art: 'die', gender: 'f', plural: 'Höflichkeiten', pos: 'noun', en: 'politeness', hi: 'शिष्टाचार',
       ex: 'Höflichkeit ist wichtig.', exEn: 'Politeness is important.' },
     { de: 'formell', pos: 'adjective', en: 'formal', hi: 'औपचारिक',
@@ -335,13 +353,17 @@ const CHAPTER = {
     { de: 'grüß Gott', pos: 'greeting', en: 'hello (Austria/S. Germany)', hi: 'नमस्ते (दक्षिणी)',
       ex: 'Grüß Gott! — im Süden sehr normal.', exEn: 'Hello! — very normal in the south.' },
     { de: 'moin', pos: 'interjection', en: 'hi (North Germany)', hi: 'नमस्ते (उत्तरी)',
-      ex: 'Moin! — so sagt man im Norden.', exEn: 'Hi! — that is what they say in the north.' },
+      ex: 'Moin! — so sagt man im Norden.', exEn: 'Hi! — that is what they say in the north.',
+      img: { src: '/api/media/vocab-img/09f8c1deb79fc27eb153', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A coastal person in a raincoat waving a friendly greeting.' }
+    },
     { de: 'hey', pos: 'interjection', en: 'hey', hi: 'अरे / हे',
       ex: 'Hey, wie geht\'s?', exEn: 'Hey, how\'s it going?',
       img: { src: '/api/media/vocab-img/72b79b0311efbf9b135c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smiling person raising a hand in a casual friendly greeting.' }
     },
     { de: 'hi', pos: 'interjection', en: 'hi', hi: 'हाय',
-      ex: 'Hi Anna, alles gut?', exEn: 'Hi Anna, all good?' },
+      ex: 'Hi Anna, alles gut?', exEn: 'Hi Anna, all good?',
+      img: { src: '/api/media/vocab-img/c5cdc242db14096f35cf', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two friends greeting each other with a cheerful wave.' }
+    },
     { de: 'hurra', pos: 'interjection', en: 'hooray', hi: 'वाह / हुर्रे',
       ex: 'Hurra, die Schule ist aus!', exEn: 'Hooray, school is out!',
       img: { src: '/api/media/vocab-img/354c605ebda2588de7e3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A joyful person jumping with arms raised in celebration' }

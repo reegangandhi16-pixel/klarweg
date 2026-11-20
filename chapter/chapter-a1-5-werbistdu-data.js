@@ -226,11 +226,17 @@ const CHAPTER = {
   // ---------- Vocabulary (38 words) ----------
   vocab: [
     { de: 'ich', pos: 'pronoun', en: 'I', hi: 'मैं',
-      ex: 'Ich bin Anna.', exEn: 'I am Anna.' },
+      ex: 'Ich bin Anna.', exEn: 'I am Anna.',
+      img: { src: '/api/media/vocab-img/17dfe6bc5746c525e571', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smiling person placing a hand on their chest introducing themselves.' }
+    },
     { de: 'du', pos: 'pronoun', en: 'you (informal)', hi: 'तुम',
-      ex: 'Wer bist du?', exEn: 'Who are you?' },
+      ex: 'Wer bist du?', exEn: 'Who are you?',
+      img: { src: '/api/media/vocab-img/c42b1aef48f3170d568f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smiling person pointing directly forward toward the viewer.' }
+    },
     { de: 'er', pos: 'pronoun', en: 'he', hi: 'वह (पुरुष)',
-      ex: 'Er kommt aus Berlin.', exEn: 'He comes from Berlin.' },
+      ex: 'Er kommt aus Berlin.', exEn: 'He comes from Berlin.',
+      img: { src: '/api/media/vocab-img/ed6ac35d00dbe967a485', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person gesturing toward a man standing nearby' }
+    },
     { de: 'sie', pos: 'pronoun', en: 'she; they', hi: 'वह (स्त्री) / वे',
       ex: 'Sie heißt Lena.', exEn: 'She is called Lena.',
       vis: { kind: 'grammar', de: 'Sie heißt Lena.', hl: 'Sie', role: 'focus', cap: 'sie = she; they' }
@@ -242,7 +248,9 @@ const CHAPTER = {
     { de: 'wir', pos: 'pronoun', en: 'we', hi: 'हम',
       ex: 'Wir sind Studenten.', exEn: 'We are students.' },
     { de: 'ihr', pos: 'pronoun', en: 'you (plural)', hi: 'तुम सब',
-      ex: 'Woher kommt ihr?', exEn: 'Where do you all come from?' },
+      ex: 'Woher kommt ihr?', exEn: 'Where do you all come from?',
+      img: { src: '/api/media/vocab-img/50dcbfbc27fa5bb75401', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person addressing a group of three friends with open hands.' }
+    },
     { de: 'Sie', pos: 'pronoun', en: 'you (formal)', hi: 'आप',
       ex: 'Wer sind Sie?', exEn: 'Who are you? (formal)',
       vis: { kind: 'grammar', de: 'Wer sind Sie?', hl: 'Sie', role: 'subject', cap: 'Formal \'you\' in German is always capitalized' }

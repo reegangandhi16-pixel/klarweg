@@ -263,7 +263,9 @@ const CHAPTER = {
       conj: { praesens: 'spricht nach', praeteritum: 'sprach nach', perfekt: 'hat nachgesprochen' } },
     { de: 'mitsprechen', pos: 'verb', en: 'to speak along', hi: 'साथ बोलना',
       ex: 'Sprich mit mir mit.', exEn: 'Speak along with me.',
-      conj: { praesens: 'spricht mit', praeteritum: 'sprach mit', perfekt: 'hat mitgesprochen' } },
+      conj: { praesens: 'spricht mit', praeteritum: 'sprach mit', perfekt: 'hat mitgesprochen' },
+      img: { src: '/api/media/vocab-img/f3fc26f7c57b04a28303', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A student speaking aloud along with their teacher.' }
+    },
     { de: 'klopfen', pos: 'verb', en: 'to knock, to tap', hi: 'थपथपाना',
       ex: 'Wir klopfen den Rhythmus.', exEn: 'We tap the rhythm.',
       conj: { praesens: 'klopft', praeteritum: 'klopfte', perfekt: 'hat geklopft' },
@@ -291,9 +293,13 @@ const CHAPTER = {
     },
     { de: 'betont', pos: 'adjective', en: 'stressed (syllable)', hi: 'बलाघात वाला',
       ex: 'Die erste Silbe ist betont.', exEn: 'The first syllable is stressed.',
-      compare: { comparative: 'stärker betont', superlative: 'am stärksten betont' } },
+      compare: { comparative: 'stärker betont', superlative: 'am stärksten betont' },
+      img: { src: '/api/media/vocab-img/9a4e5d4d79cb25597be0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Three bells in a line, with the first prominently striking and ringing.' }
+    },
     { de: 'noch einmal', pos: 'phrase', en: 'once more, again', hi: 'एक बार और',
-      ex: 'Sag das bitte noch einmal.', exEn: 'Please say that once more.' }
+      ex: 'Sag das bitte noch einmal.', exEn: 'Please say that once more.',
+      img: { src: '/api/media/vocab-img/f8d63446ab8288f5c2fb', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A music teacher signalling to repeat a piece once more.' }
+    }
   ],
 
   // ---------- Sound System (rule cards → accordion) ----------

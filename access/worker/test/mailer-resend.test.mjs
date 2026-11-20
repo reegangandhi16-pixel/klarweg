@@ -35,6 +35,23 @@ test('Resend sends through HTTPS with auth header and verified-domain sender', a
   }
 });
 
+test('Resend respects a verified sender subdomain and does not trust malformed from values', async () => {
+  const original = globalThis.fetch;
+  const sent = [];
+  try {
+    globalThis.fetch = async (_url, options) => {
+      sent.push(JSON.parse(options.body));
+      return new Response('{}', { status: 200 });
+    };
+    await sendMail({ ...base, MAIL_FROM: 'no-reply@send.klarweg.in' }, message);
+    await sendMail({ ...base, MAIL_FROM: 'invalid sender <injection>' }, message);
+    assert.equal(sent[0].from, 'Klarweg <no-reply@send.klarweg.in>');
+    assert.equal(sent[1].from, 'Klarweg <no-reply@klarweg.in>');
+  } finally {
+    globalThis.fetch = original;
+  }
+});
+
 test('Resend HTTP rejection is a send failure and does not log private response data', async () => {
   const originalFetch = globalThis.fetch, originalLog = console.log;
   const logs = [];

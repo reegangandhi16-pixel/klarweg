@@ -419,3 +419,24 @@ The popup dictionary (chapter/global-lexicon.js) was corrected to match: Kunstst
 | C2·11 **die Methode, mittels derer ...** | Die Methode, mittels derer die Proben analysiert wurden, ist hoch präzise. | Feminine singular genitive relative pronoun is 'deren', not 'derer'; 'hochpräzise' is one word. |
 | C2·23 **telefonieren** | Die Kollegen telefonieren täglich über den Projektstand. | "telefonieren" does not take a prepositional object with "über". |
 | C2·28 **im Rahmen von** | Im Rahmen von diesem Projekt entstanden mehrere Publikationen. | "Im Rahmen von diesem" is colloquial; written German uses the genitive or an articleless plural. |
+
+## Further corrections — 2026-11-20 (owner follow-up)
+
+Unnatural or incorrect examples found during the manual image review; each fix keeps the chapter's grammar point.
+
+| Card(s) | Before | After | Why |
+|---|---|---|---|
+| B1·34 heimlich, herankommen, Dieb | Ein heimlich herankommender Dieb sei vorbeigekommen. | Die Kamera filmte einen heimlich herankommenden Dieb. | An "approaching" thief cannot have "passed by"; unmotivated Konjunktiv I. Partizip I as adjective kept (einen … herankommenden Dieb, Akk. mask.). |
+| B2·24 Rat, respektieren | Regelmäßig sollte man den Rat der Experten respektieren. | Einerseits sollte man den Rat der Experten respektieren, andererseits sollte man selbst nachdenken. | „regelmäßig respektieren“ is meaningless; new sentence also practises the chapter's einerseits … andererseits. |
+| B2·24 regelmäßig | (same) | Man sollte regelmäßig zum Arzt gehen. | regelmäßig in a natural collocation. |
+| B2·24 schutzlos | Andererseits bleiben viele gefährdete Kids schutzlos. | Einerseits gibt es neue Gesetze, andererseits bleiben viele Kinder schutzlos. | „endangered kids“ mistranslation, register clash; Hindi निराश्रित (destitute) → असुरक्षित, बेसहारा. |
+| B2·23 Epidemie | Die Epidemie betrifft nicht nur gefährdete Kids, sondern auch gesundheitlich stabile Familien. | Die Epidemie betrifft nicht nur ältere Menschen, sondern auch junge Familien. | Register clash (Kids in formal sentence), odd „gesundheitlich stabile Familien“, „endangered kids“; nicht nur … sondern auch kept. |
+| B2·23 gefährdet | (same) | Bei einer Epidemie sind nicht nur ältere Menschen, sondern auch Kinder gefährdet. | gefährdet = at risk, used naturally. |
+| B2·23 gesundheitlich | (same) | Die Epidemie hat nicht nur gesundheitliche, sondern auch wirtschaftliche Folgen. | Natural collocation. |
+| B2·23 Kids | (same) | Das Festival ist nicht nur für Kids, sondern auch für Eltern. | Kids in an informal context. |
+| A2·34 gestehen | Das ist das Geheimnis, das ich gestehen möchte. | Das ist der Fehler, den ich gestehen möchte. | One reveals (verrät) a secret; one confesses a mistake (Duden: einen Fehler gestehen). Relative clause in Akkusativ kept. |
+| B1·19 trotz | Trotz des schweren Weges bin ich sicher. | Trotz des schlechten Wetters sind wir pünktlich angekommen. | Original is not meaningful. |
+| B1·12 jedoch | Jedoch brauchst du auch ein überzeugendes Dokument. | Dein Lebenslauf ist gut. Jedoch brauchst du auch ein überzeugendes Anschreiben. | jedoch needs a preceding statement to contrast; adjective ending kept. |
+| B1·17 allerdings | Allerdings müssen wir genug Kapital haben. | Wir wollen ein Café eröffnen. Allerdings brauchen wir genug Kapital, um es zu finanzieren. | Contrast made explicit; practises the chapter's um … zu. |
+
+Checked and deliberately kept: A1·11 „Tee oder Kaffee? — Keinen Kaffee, danke.“ (negation chapter: teaches *kein*), B2·28 „Ausgerechnet heute regnete es.“ (tense-shift chapter: Präteritum intended).

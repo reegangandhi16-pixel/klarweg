@@ -38342,5 +38342,21 @@
   "im Rahmen": {
     "male": "audio/male/im_Rahmen.mp3",
     "female": "audio/female/im_Rahmen.mp3"
+  },
+  "das Roadmovie": {
+    "male": "audio/male/das_Roadmovie.mp3",
+    "female": "audio/female/das_Roadmovie.mp3"
+  },
+  "um sich herum": {
+    "male": "audio/male/um_sich_herum.mp3",
+    "female": "audio/female/um_sich_herum.mp3"
+  },
+  "erröten": {
+    "male": "audio/male/erroeten.mp3",
+    "female": "audio/female/erroeten.mp3"
+  },
+  "die Beherrschung": {
+    "male": "audio/male/die_Beherrschung.mp3",
+    "female": "audio/female/die_Beherrschung.mp3"
   }
 }

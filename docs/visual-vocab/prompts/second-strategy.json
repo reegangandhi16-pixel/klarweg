@@ -8198,7 +8198,7 @@
  },
  "allerdings--though-however": {
   "type": "grammar",
-  "de": "Allerdings müssen wir genug Kapital haben.",
+  "de": "Wir wollen ein Café eröffnen. Allerdings brauchen wir genug Kapital, um es zu finanzieren.",
   "hl": "Allerdings",
   "role": "focus",
   "cap": "allerdings = though, however"
@@ -8226,7 +8226,7 @@
  },
  "jedoch--however": {
   "type": "grammar",
-  "de": "Jedoch brauchst du auch ein überzeugendes Dokument.",
+  "de": "Dein Lebenslauf ist gut. Jedoch brauchst du auch ein überzeugendes Anschreiben.",
   "hl": "Jedoch",
   "role": "focus",
   "cap": "jedoch = however"

@@ -133,6 +133,7 @@ const BANNER = '<div style="position:relative;z-index:200;background:#3D2F73;col
 function previewData() {
   let s = fs.readFileSync(path.join(ROOT, 'live-classes-data.js'), 'utf8');
   for (const k of ['demoBookingEnabled', 'courseCheckoutEnabled']) {
+    if (new RegExp(`${k}: true`).test(s)) continue;
     const re = new RegExp(`(${k}: )false`);
     if (!re.test(s)) throw new Error('preview: data edit did not apply: ' + k);
     s = s.replace(re, '$1true');
@@ -259,13 +260,13 @@ async function runE2E() {
   /* ============ production default (payments off) ============ */
   await size(1440, 900);
   await go(SITE + '/prod/live-classes.html');
-  ok('prod default: teachers render; the demo panel says booking opens soon; no payment route called',
-    await waitFor('document.querySelector(".mk-tcard") && /opens soon/.test(document.getElementById("demo-panel").innerText)'));
-  await snap('desktop-prod-default-demo-closed', '#demo');
+  ok('prod default: teachers render; the ₹100 demo stepper is open (owner go-live 2026-11-20)',
+    await waitFor('document.querySelector(".mk-tcard") && document.querySelector("[data-d-date]")'));
+  await snap('desktop-prod-default-demo-open', '#demo');
   await click('[data-choose="live-reegan-gandhi-a1-group"]');
   ok('prod default: checkout shows "To be announced" and the pay button is disabled', await waitFor('document.getElementById("checkout").open && /Enrolment opens soon/.test(document.getElementById("checkout-body").innerText) && document.getElementById("co-pay").disabled'));
   await snap('desktop-prod-default-checkout-tba');
-  ok('prod default: no demo or checkout order was created', cf.creates.length === 0);
+  ok('prod default: no checkout order was created', cf.creates.length === 0);
 
   /* ============ marketplace, desktop ============ */
   await go(PAGE);

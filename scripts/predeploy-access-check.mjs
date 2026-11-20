@@ -62,6 +62,7 @@ const allowAi = args.includes('--allow-ai-enabled');
 const allowSpeech = (args.find((a) => a.startsWith('--allow-speech=')) || '').split('=')[1] || null;
 const allowConsult = (args.find((a) => a.startsWith('--allow-consult-booking=')) || '').split('=')[1] || null;
 const allowEnrol = (args.find((a) => a.startsWith('--allow-enrol-payments=')) || '').split('=')[1] || null;
+const allowDemo = (args.find((a) => a.startsWith('--allow-demo-booking=')) || '').split('=')[1] || null;
 const allowPasswordReset = args.includes('--allow-password-reset');
 const allowScope = (args.find((a) => a.startsWith('--allow-speech-scope=')) || '').split('=')[1] || null;
 
@@ -142,6 +143,14 @@ if (enrolCoursesRaw) {
     if (!v || !/^\d{4}-\d{2}-\d{2}$/.test(v.batch || '')) fail(`ENROL_COURSES "${id}" needs a batch start date, e.g. {"batch":"2026-11-02"}.`);
   }
 }
+/* 10. DEMO_BOOKING (₹100 Friday/Sunday demo classes, live-demos.js) is
+   "off" unless --allow-demo-booking=<sandbox|live> names the mode, with the
+   same CASHFREE_ENV pairing. LIVE_ADMIN_EMAILS is fine as a var (no secret). */
+const demo = (varOf(toml, 'DEMO_BOOKING') || 'off').toLowerCase();
+if (!['off', 'sandbox', 'live'].includes(demo)) fail(`DEMO_BOOKING in wrangler.toml is "${demo}" — must be "off", "sandbox" or "live".`);
+if (demo !== 'off' && allowDemo !== demo) fail(`DEMO_BOOKING="${demo}" in wrangler.toml. Enable demo booking deliberately with --allow-demo-booking=${demo}.`);
+if (demo === 'sandbox' && env !== 'sandbox') fail('DEMO_BOOKING="sandbox" needs CASHFREE_ENV="sandbox".');
+if (demo === 'live' && env !== 'production') fail('DEMO_BOOKING="live" needs CASHFREE_ENV="production" — never take live bookings through sandbox.');
 /* Non-production settings stay in wrangler.nonprod.toml (docs/exam/NONPROD-SETUP.md).
    An [env.*] section here would put a second set of vars in this file, which the
    first-match reads above could pick up; CORS_EXTRA_ORIGINS widens CORS/CSRF. */

@@ -55,6 +55,7 @@ import {
   notifyUrl,
   readJson
 } from "./cashfree-config.js";
+import { demoEligible } from "./live-catalog.js";
 
 const CASHFREE_API_VERSION = "2023-08-01";
 
@@ -122,7 +123,7 @@ export function joinLinkFor(env, teacherId) {
   try { map = JSON.parse(env.CONSULT_JOIN_LINKS); } catch { console.error("consult: CONSULT_JOIN_LINKS is not valid JSON"); return null; }
   const link = map && typeof map === "object" ? map[teacherId] : null;
   if (link == null) return null;
-  if (!ELIGIBLE_TEACHERS.includes(teacherId) || typeof link !== "string" || !MEET_LINK_RE.test(link)) {
+  if (!(ELIGIBLE_TEACHERS.includes(teacherId) || demoEligible(teacherId)) || typeof link !== "string" || !MEET_LINK_RE.test(link)) {
     console.error("consult: CONSULT_JOIN_LINKS entry refused for", teacherId);
     return null;
   }
@@ -236,8 +237,18 @@ export function publicBooking(row, mode) {
     amountPaise: row.amount_paise,
     currency: row.currency,
     holdExpiresAt: row.status === "pending" ? row.hold_expires_at : null,
+    kind: row.kind || "same-day",
+    rescheduleCount: Number(row.reschedule_count || 0),
+    refundStatus: row.refund_status || null,
     testMode: mode === "sandbox"
   };
+}
+
+/* Test-payment flag for a stored booking: a demo row (live-demos.js) is
+   paid through the same Cashfree configuration, whose environment decides. */
+function bookingMode(env, row) {
+  if (row && row.kind === "demo") return cashfreeConfigProblem(env) ? "off" : (cashfreeMode(env) === "sandbox" ? "sandbox" : "live");
+  return consultMode(env).mode;
 }
 
 /* ---------------- availability ---------------- */
@@ -588,7 +599,7 @@ export async function getConsultBooking(request, env, ref) {
     await sweepExpiredHolds(env.DB, nowSeconds());
     row = await env.DB.prepare("SELECT * FROM consult_bookings WHERE id = ?1").bind(row.id).first();
   }
-  return json({ ok: true, booking: publicBooking(row, consultMode(env).mode), verification });
+  return json({ ok: true, booking: publicBooking(row, bookingMode(env, row)), verification });
 }
 
 export async function listConsultBookings(request, env) {
@@ -597,8 +608,7 @@ export async function listConsultBookings(request, env) {
   const { results } = await env.DB.prepare(
     "SELECT * FROM consult_bookings WHERE user_id = ?1 AND status IN ('pending', 'confirmed', 'review') ORDER BY created_at DESC LIMIT 20"
   ).bind(user.id).all();
-  const mode = consultMode(env).mode;
-  return json({ ok: true, bookings: results.map((r) => publicBooking(r, mode)) });
+  return json({ ok: true, bookings: results.map((r) => publicBooking(r, bookingMode(env, r))) });
 }
 
 /* ---------------- webhook ---------------- */

@@ -51,6 +51,16 @@
      ENROL_CONSULT_CREDIT = "off" (default) | "course-fee": whether a
        confirmed ₹100 consultation from the last 7 days reduces the course
        fee (an owner decision; see docs/live-classes-online-payments.md).
+
+   MARKETPLACE COURSES (owner brief 2026-11-20): course ids
+   "live-<teacher>-<level>-<format>" (live-catalog.js) are sold per BATCH:
+   the browser sends course_id + batch_id (+ optional coupon). They are
+   chargeable only when ENROL_PAYMENTS is on, the course is verified in
+   live-catalog.js, the teacher's courses are not paused, and the batch
+   row (live_batches, admin-managed) is 'open' with dates, schedule,
+   capacity and an approval, and has not started. Price = owner list price
+   − at most one coupon (GROUP3000 group / PERSONAL7000 one-to-one). A
+   coupon and the ₹100 consultation adjustment never combine.
    ============================================================ */
 import { isValidPhone } from "./auth.js";
 import { getSessionToken, findSessionUser } from "./sessions.js";
@@ -63,6 +73,10 @@ import {
   readJson
 } from "./cashfree-config.js";
 import { cashfreeExpiryTime, parseGatewayTime, istClock, FEE_PAISE as CONSULT_FEE_PAISE } from "./consultations.js";
+import {
+  parseCourseId, isMarketplaceCourse, courseStatus, quoteCourse, listPrice, normaliseCoupon,
+  LEVELS, FORMATS, TEACHERS, COUPONS, courseId as marketplaceCourseId
+} from "./live-catalog.js";
 
 const CASHFREE_API_VERSION = "2023-08-01";
 
@@ -138,6 +152,44 @@ function openCourse(env, courseId, clock = istClock()) {
   return { id: courseId, batch: cfg.batch, ...LIVE_COURSES[courseId] };
 }
 
+/* A marketplace batch that may be charged today, or null. */
+async function openMarketplaceCourse(env, courseId, batchId, clock = istClock()) {
+  const c = parseCourseId(courseId);
+  if (!c || courseStatus(c.teacherId, c.level, c.format) !== "verified") return null;
+  if (typeof batchId !== "string" || !/^bat_[0-9a-f-]{36}$/.test(batchId)) return null;
+  const paused = await env.DB.prepare("SELECT courses_paused FROM live_teacher_settings WHERE teacher_id = ?1").bind(c.teacherId).first();
+  if (paused && paused.courses_paused) return null;
+  const b = await env.DB.prepare("SELECT * FROM live_batches WHERE id = ?1 AND course_id = ?2").bind(batchId, courseId).first();
+  if (!b || b.status !== "open" || !b.start_date || !b.end_date || !b.schedule || !(b.capacity > 0) || !b.approved_by) return null;
+  if (b.start_date <= clock.date) return null;
+  const lp = listPrice(c.teacherId, c.level, c.format);
+  return {
+    id: courseId, batch: batchId, title: `${lp.teacherName} · German ${c.level} · ${lp.formatLabel}`,
+    capacity: b.capacity, feePaise: lp.originalPaise,
+    marketplace: { ...c, teacherName: lp.teacherName, formatLabel: lp.formatLabel, batchId, startDate: b.start_date, endDate: b.end_date, schedule: b.schedule, fulfilmentNote: b.fulfilment_note || null }
+  };
+}
+
+async function resolveOpenCourse(env, courseId, batchId, clock) {
+  return isMarketplaceCourse(courseId) ? openMarketplaceCourse(env, courseId, batchId, clock) : openCourse(env, courseId, clock);
+}
+
+async function activeCoupons(db) {
+  const { results } = await db.prepare("SELECT code FROM live_coupons WHERE active = 1").all();
+  return new Set(results.map((r) => r.code));
+}
+
+/* Capacity and start date behind an existing enrolment row (for late-
+   payment recovery), whichever kind of course it is. */
+async function seatTermsOf(env, enrolment) {
+  if (isMarketplaceCourse(enrolment.course_id)) {
+    const b = await env.DB.prepare("SELECT capacity, start_date FROM live_batches WHERE id = ?1").bind(enrolment.batch).first();
+    return b && b.start_date ? { capacity: b.capacity, startDate: b.start_date } : null;
+  }
+  const course = LIVE_COURSES[enrolment.course_id];
+  return course ? { capacity: course.capacity, startDate: enrolment.batch } : null;
+}
+
 function addDays(date, days) {
   const [y, m, d] = date.split("-").map(Number);
   return new Date(Date.UTC(y, m - 1, d + days)).toISOString().slice(0, 10);
@@ -170,15 +222,27 @@ async function paymentsOf(db, enrolmentId) {
   return results;
 }
 
-export function publicEnrolment(row, payments, mode) {
+export function publicEnrolment(row, payments, mode, batchRow = null) {
   const course = LIVE_COURSES[row.course_id];
+  const mk = parseCourseId(row.course_id);
+  const mkTitle = mk ? `${TEACHERS[mk.teacherId].name} · German ${mk.level} · ${mk.format === "group" ? "Group classes" : "One-to-One classes"}` : null;
   const paid = payments.some((p) => p.status === "paid");
   const open = payments.some((p) => p.status === "pending");
   return {
     ref: row.ref,
     courseId: row.course_id,
-    courseTitle: course ? course.title : row.course_id,
+    courseTitle: course ? course.title : (mkTitle || row.course_id),
     batch: row.batch,
+    teacherId: mk ? mk.teacherId : null,
+    level: mk ? mk.level : null,
+    format: mk ? mk.format : null,
+    originalPaise: row.original_paise != null ? row.original_paise : row.total_paise,
+    couponCode: row.coupon_code || null,
+    discountPaise: Number(row.discount_paise || 0),
+    startDate: batchRow ? batchRow.start_date : (mk ? null : row.batch),
+    endDate: batchRow ? batchRow.end_date : null,
+    schedule: batchRow ? batchRow.schedule : null,
+    refundStatus: row.refund_status || null,
     status: row.status,
     totalPaise: row.total_paise,
     creditPaise: row.credit_paise,
@@ -211,18 +275,33 @@ async function consultCredit(env, userId, clock) {
 
 /* The amount due: the full course fee, less the consultation adjustment
    when that is switched on and applies. */
-async function quoteFor(env, user, course, clock) {
-  const credit = user ? await consultCredit(env, user.id, clock) : null;
-  const creditPaise = credit ? Math.min(credit.amountPaise, course.feePaise - 100) : 0;
+async function quoteFor(env, user, course, clock, coupon = "") {
+  let originalPaise = course.feePaise, discountPaise = 0, couponCode = null;
+  if (course.marketplace) {
+    const q = quoteCourse({ ...course.marketplace, coupon, activeCoupons: await activeCoupons(env.DB) });
+    if (!q.ok) return { ok: false, code: q.code, error: q.error };
+    originalPaise = q.originalPaise; discountPaise = q.discountPaise; couponCode = q.couponCode;
+  } else if (normaliseCoupon(coupon)) {
+    return { ok: false, code: "coupon-invalid", error: "Coupons apply only to marketplace courses." };
+  }
+  const totalPaise = originalPaise - discountPaise;
+  /* No stacking: a coupon excludes the ₹100 consultation adjustment. */
+  const credit = user && !couponCode ? await consultCredit(env, user.id, clock) : null;
+  const creditPaise = credit ? Math.min(credit.amountPaise, totalPaise - 100) : 0;
   return {
+    ok: true,
     courseId: course.id,
     courseTitle: course.title,
     batch: course.batch,
-    totalPaise: course.feePaise,
+    originalPaise,
+    couponCode,
+    discountPaise,
+    totalPaise,
     creditPaise,
     creditConsultRef: credit ? credit.ref : null,
-    dueNowPaise: course.feePaise - creditPaise,
-    currency: "INR"
+    dueNowPaise: totalPaise - creditPaise,
+    currency: "INR",
+    marketplace: course.marketplace || null
   };
 }
 
@@ -366,14 +445,14 @@ export async function settlePayment(env, payment, remote, paymentId) {
   /* Recovery: paid after the seat hold lapsed. The seat is re-taken only
      if the batch has not started and a seat is still free (one
      conditional UPDATE); otherwise a person reviews and refunds. */
-  const course = LIVE_COURSES[enrolment.course_id];
-  if (!course || enrolment.batch <= istClock().date) return enrolmentToReview("late-payment-batch-started");
+  const terms = await seatTermsOf(env, enrolment);
+  if (!terms || terms.startDate <= istClock().date) return enrolmentToReview("late-payment-batch-started");
   try {
     const r = await db.prepare(
       `UPDATE live_enrolments SET status = 'enrolled', updated_at = ?1
         WHERE id = ?2 AND status IN ('expired', 'released', 'failed')
           AND (SELECT COUNT(*) FROM live_enrolments WHERE course_id = ?3 AND batch = ?4 AND status IN ('pending', 'enrolled')) < ?5`
-    ).bind(now, enrolment.id, enrolment.course_id, enrolment.batch, course.capacity).run();
+    ).bind(now, enrolment.id, enrolment.course_id, enrolment.batch, terms.capacity).run();
     if (r.meta && r.meta.changes === 1) return { result: "paid", enrolled: true, recovered: true };
   } catch (e) {
     if (!isUniqueViolation(e)) throw e;
@@ -381,6 +460,11 @@ export async function settlePayment(env, payment, remote, paymentId) {
   }
   const fresh = await db.prepare("SELECT * FROM live_enrolments WHERE id = ?1").bind(enrolment.id).first();
   return fresh.status === "enrolled" ? { result: "paid" } : enrolmentToReview("late-payment-no-seat");
+}
+
+async function batchRowOf(env, row) {
+  if (!row.batch_id) return null;
+  return env.DB.prepare("SELECT start_date, end_date, schedule FROM live_batches WHERE id = ?1").bind(row.batch_id).first();
 }
 
 /* ---------------- routes ---------------- */
@@ -392,7 +476,8 @@ export async function enrolCatalog(request, env) {
   const cfg = enrolMode(env);
   const clock = istClock();
   const base = { ok: true, enabled: cfg.enabled, testMode: cfg.mode === "sandbox", currency: "INR", consultCredit: creditMode(env) };
-  if (!cfg.enabled) return json({ ...base, courses: [] });
+  const marketplace = await marketplaceCatalog(env, cfg, clock);
+  if (!cfg.enabled) return json({ ...base, courses: [], marketplace });
   await sweep(env.DB, clock.nowSec);
   const courses = [];
   for (const id of Object.keys(configuredCourses(env))) {
@@ -405,15 +490,60 @@ export async function enrolCatalog(request, env) {
       feePaise: course.feePaise
     });
   }
-  return json({ ...base, courses });
+  return json({ ...base, courses, marketplace });
+}
+
+/* Public marketplace state: every verified teacher × level × format with
+   its announced batches. Dates are null ("To be announced") until set. A
+   batch is purchasable only when everything openMarketplaceCourse checks
+   holds AND online enrolment is switched on. Draft batches and draft
+   (unverified) courses are never listed. */
+export async function marketplaceCatalog(env, cfg, clock) {
+  const { results: batches } = await env.DB.prepare(
+    "SELECT * FROM live_batches WHERE status IN ('announced', 'open', 'closed') ORDER BY start_date IS NULL, start_date, created_at"
+  ).all();
+  const { results: settings } = await env.DB.prepare("SELECT * FROM live_teacher_settings").all();
+  const paused = new Set(settings.filter((r) => r.courses_paused).map((r) => r.teacher_id));
+  const coupons = await activeCoupons(env.DB);
+  const courses = [];
+  for (const teacherId of Object.keys(TEACHERS)) {
+    for (const level of LEVELS) {
+      for (const format of FORMATS) {
+        if (courseStatus(teacherId, level, format) !== "verified") continue;
+        const id = marketplaceCourseId(teacherId, level, format);
+        const lp = listPrice(teacherId, level, format);
+        const list = [];
+        for (const b of batches.filter((x) => x.course_id === id)) {
+          const open = await openMarketplaceCourse(env, id, b.id, clock);
+          const held = open ? await seatsHeld(env.DB, id, b.id) : 0;
+          const seatsLeft = open ? Math.max(0, b.capacity - held) : null;
+          list.push({
+            id: b.id, status: b.status, startDate: b.start_date, endDate: b.end_date, schedule: b.schedule,
+            capacity: b.capacity || null, seatsLeft, fulfilmentNote: b.fulfilment_note || null,
+            purchasable: !!(cfg.enabled && open && seatsLeft > 0),
+            state: !open ? (b.status === "closed" ? "closed" : "awaiting-schedule") : seatsLeft > 0 ? (cfg.enabled ? "open" : "payments-off") : "full"
+          });
+        }
+        courses.push({
+          courseId: id, teacherId, level, format, formatLabel: lp.formatLabel,
+          originalPaise: lp.originalPaise, couponCode: lp.couponCode, couponActive: coupons.has(lp.couponCode),
+          couponDiscountPaise: lp.couponDiscountPaise, priceWithCouponPaise: lp.priceWithCouponPaise,
+          paused: paused.has(teacherId), batches: list
+        });
+      }
+    }
+  }
+  return { courses, coupons: Object.values(COUPONS).map((c) => ({ code: c.code, format: c.format, discountPaise: c.discountPaise, active: coupons.has(c.code) })) };
 }
 
 /* course_id, and the plan if one is named: only "full" is accepted
    (an old page asking for instalments is refused, never charged). */
 function readCourse(source) {
   const courseId = typeof source.course_id === "string" ? source.course_id.trim() : "";
+  const batchId = typeof source.batch_id === "string" ? source.batch_id.trim() : "";
+  const coupon = typeof source.coupon === "string" ? source.coupon : "";
   const planOk = source.plan == null || source.plan === "" || source.plan === PLAN;
-  return { courseId, planOk };
+  return { courseId, batchId, coupon, planOk };
 }
 const badPlan = () => json({ ok: false, error: "Only full payment of the course fee is available.", code: "bad-plan" }, 400);
 
@@ -423,12 +553,14 @@ export async function enrolQuote(request, env) {
   const cfg = enrolMode(env);
   if (!cfg.enabled) return json({ ok: false, error: "Online enrolment is not available." }, 503);
   const url = new URL(request.url);
-  const { courseId, planOk } = readCourse(Object.fromEntries(url.searchParams));
+  const { courseId, batchId, coupon, planOk } = readCourse(Object.fromEntries(url.searchParams));
   if (!planOk) return badPlan();
   const clock = istClock();
-  const course = openCourse(env, courseId, clock);
+  const course = await resolveOpenCourse(env, courseId, batchId, clock);
   if (!course) return json({ ok: false, error: "This course is not open for online enrolment.", code: "course-closed" }, 409);
-  return json({ ok: true, quote: await quoteFor(env, user, course, clock), testMode: cfg.mode === "sandbox" });
+  const quote = await quoteFor(env, user, course, clock, coupon);
+  if (!quote.ok) return json({ ok: false, code: quote.code, error: quote.error }, 400);
+  return json({ ok: true, quote, testMode: cfg.mode === "sandbox" });
 }
 
 export async function createEnrolCheckout(request, env) {
@@ -441,10 +573,10 @@ export async function createEnrolCheckout(request, env) {
   }
   let body;
   try { body = await request.json(); } catch { return json({ ok: false, error: "Invalid JSON body." }, 400); }
-  const { courseId, planOk } = readCourse(body || {});
+  const { courseId, batchId, coupon, planOk } = readCourse(body || {});
   if (!planOk) return badPlan();
   const clock = istClock();
-  const course = openCourse(env, courseId, clock);
+  const course = await resolveOpenCourse(env, courseId, batchId, clock);
   if (!course) return json({ ok: false, error: "This course is not open for online enrolment.", code: "course-closed" }, 409);
   if (!isValidPhone(user.phone)) {
     return json({ ok: false, error: "A valid phone number is required before payment. Please add one to your account.", code: "phone-required" }, 400);
@@ -458,18 +590,30 @@ export async function createEnrolCheckout(request, env) {
   if (active && active.status === "enrolled") {
     return json({ ok: false, code: "already-enrolled", error: "You are already enrolled in this batch.", enrolment: publicEnrolment(active, await paymentsOf(env.DB, active.id), cfg.mode) }, 409);
   }
-  /* Refresh / retry / back button: a held enrolment resumes its open order. */
+  const quote = await quoteFor(env, user, course, clock, coupon);
+  if (!quote.ok) return json({ ok: false, code: quote.code, error: quote.error }, 400);
+
+  /* Refresh / retry / back button: a held enrolment resumes its open order
+     when it is for the same amount. A different amount (e.g. a coupon was
+     added) replaces the hold: its open order is closed here, and a payment
+     that still lands on it is settled to review for a refund. */
+  let supersede = null;
   if (active) {
     const open = await env.DB.prepare(
       "SELECT * FROM live_payments WHERE enrolment_id = ?1 AND status = 'pending'"
     ).bind(active.id).first();
     if (open && open.payment_session_id) {
-      return json({ ok: true, resumed: true, enrolment: publicEnrolment(active, await paymentsOf(env.DB, active.id), cfg.mode), paymentSessionId: open.payment_session_id, checkout: { mode: cashfreeMode(env) } });
+      if (open.amount_paise === quote.dueNowPaise) {
+        return json({ ok: true, resumed: true, enrolment: publicEnrolment(active, await paymentsOf(env.DB, active.id), cfg.mode), paymentSessionId: open.payment_session_id, checkout: { mode: cashfreeMode(env) } });
+      }
+      supersede = open;
     }
   }
-
-  const quote = await quoteFor(env, user, course, clock);
-  /* The learner must have seen this exact amount. */
+  /* The learner must have seen this exact amount (always required for a
+     marketplace course, whose price depends on the coupon). */
+  if (course.marketplace && body.expected_amount_paise == null) {
+    return json({ ok: false, code: "amount-required", error: "Please review the amount before paying.", quote }, 400);
+  }
   if (body.expected_amount_paise != null && Number(body.expected_amount_paise) !== quote.dueNowPaise) {
     return json({ ok: false, code: "amount-changed", error: "The amount due has changed. Please review it before paying.", quote }, 409);
   }
@@ -501,12 +645,19 @@ export async function createEnrolCheckout(request, env) {
   if (active) {
     stmts.push(env.DB.prepare("UPDATE live_enrolments SET status = 'released', updated_at = ?1 WHERE id = ?2 AND status = 'pending'").bind(clock.nowSec, active.id));
   }
+  if (supersede) {
+    stmts.push(env.DB.prepare("UPDATE live_payments SET status = 'expired', review_reason = 'superseded', updated_at = ?1 WHERE id = ?2 AND status = 'pending'").bind(clock.nowSec, supersede.id));
+  }
   stmts.push(env.DB.prepare(
     `INSERT INTO live_enrolments
-       (id, ref, user_id, course_id, batch, status, total_paise, credit_paise, credit_consult_ref, hold_expires_at, created_at, updated_at)
-     SELECT ?1, ?2, ?3, ?4, ?5, 'pending', ?6, ?7, ?8, ?9, ?10, ?10
+       (id, ref, user_id, course_id, batch, status, total_paise, credit_paise, credit_consult_ref, hold_expires_at, created_at, updated_at,
+        batch_id, teacher_id, level, format, original_paise, coupon_code, discount_paise)
+     SELECT ?1, ?2, ?3, ?4, ?5, 'pending', ?6, ?7, ?8, ?9, ?10, ?10, ?12, ?13, ?14, ?15, ?16, ?17, ?18
       WHERE (SELECT COUNT(*) FROM live_enrolments WHERE course_id = ?4 AND batch = ?5 AND status IN ('pending', 'enrolled')) < ?11`
-  ).bind(enrolmentId, ref, user.id, courseId, course.batch, quote.totalPaise, quote.creditPaise, quote.creditConsultRef, holdUntil, clock.nowSec, course.capacity));
+  ).bind(enrolmentId, ref, user.id, courseId, course.batch, quote.totalPaise, quote.creditPaise, quote.creditConsultRef, holdUntil, clock.nowSec, course.capacity,
+    course.marketplace ? course.batch : null, course.marketplace ? course.marketplace.teacherId : null,
+    course.marketplace ? course.marketplace.level : null, course.marketplace ? course.marketplace.format : null,
+    quote.originalPaise, quote.couponCode, quote.discountPaise));
   stmts.push(env.DB.prepare(
     `INSERT INTO live_payments (id, enrolment_id, amount_paise, currency, status, payment_session_id, expires_at, created_at, updated_at)
      SELECT ?1, ?2, ?3, 'INR', 'pending', ?4, ?5, ?6, ?6
@@ -569,7 +720,7 @@ export async function getEnrolment(request, env, ref) {
   const verification = await reconcileEnrolment(env, row.id);
   await sweep(env.DB, nowSeconds());
   row = await env.DB.prepare("SELECT * FROM live_enrolments WHERE id = ?1").bind(row.id).first();
-  return json({ ok: true, enrolment: publicEnrolment(row, await paymentsOf(env.DB, row.id), enrolMode(env).mode), verification });
+  return json({ ok: true, enrolment: publicEnrolment(row, await paymentsOf(env.DB, row.id), enrolMode(env).mode, await batchRowOf(env, row)), verification });
 }
 
 export async function listEnrolments(request, env) {
@@ -580,7 +731,7 @@ export async function listEnrolments(request, env) {
   ).bind(user.id).all();
   const mode = enrolMode(env).mode;
   const out = [];
-  for (const r of results) out.push(publicEnrolment(r, await paymentsOf(env.DB, r.id), mode));
+  for (const r of results) out.push(publicEnrolment(r, await paymentsOf(env.DB, r.id), mode, await batchRowOf(env, r)));
   return json({ ok: true, enrolments: out });
 }
 

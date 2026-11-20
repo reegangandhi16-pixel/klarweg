@@ -19,7 +19,7 @@ export function mailConfigured(env) {
 
 function fromAddress(env) {
   const v = env && typeof env.MAIL_FROM === "string" ? env.MAIL_FROM.trim() : "";
-  return /^[^\\s@<>"]+@[^\\s@<>"]+\\.[a-z]{2,}$/i.test(v) ? v : DEFAULT_FROM;
+  return /^[^\s@<>"]+@[^\s@<>"]+\.[a-z]{2,}$/i.test(v) ? v : DEFAULT_FROM;
 }
 
 function logFailure(code) {

@@ -152,12 +152,14 @@ if (/CORS_EXTRA_ORIGINS["']?\s*=/.test(tomlCode)) fail('wrangler.toml sets CORS_
 if (/CORS_PUBLIC_SITE_ORIGINS["']?\s*=/.test(tomlCode)) fail('wrangler.toml sets CORS_PUBLIC_SITE_ORIGINS. Production always trusts the public site origins; the setting is for an isolated non-production Worker only.');
 
 /* Password reset by email (src/password-reset.js, docs/PASSWORD-RESET.md). "on" needs the
-   owner's go (--allow-password-reset) and an active [[send_email]] binding named EMAIL; the
-   sending domain must be onboarded in Cloudflare Email Service before that. */
+   owner's go (--allow-password-reset) and configured mail provider.
+   Resend requires a Worker secret; Cloudflare requires an active binding. */
 const pwReset = (varOf(toml, 'PASSWORD_RESET') || 'off').toLowerCase();
+const mailProvider = (varOf(toml, 'MAIL_PROVIDER') || 'cloudflare').toLowerCase();
+if (!['resend', 'cloudflare'].includes(mailProvider)) fail('MAIL_PROVIDER must be "resend" or "cloudflare".');
 if (!['off', 'on'].includes(pwReset)) fail(`PASSWORD_RESET in wrangler.toml is "${pwReset}" — must be "off" or "on".`);
-if (pwReset === 'on' && !allowPasswordReset) fail('PASSWORD_RESET="on" in wrangler.toml. Enable password reset emails deliberately with --allow-password-reset once klarweg.in is onboarded in Cloudflare Email Service (docs/PASSWORD-RESET.md).');
-if (pwReset === 'on' && !/^\s*\[\[\s*send_email\s*\]\][^\[]*?name\s*=\s*"EMAIL"/m.test(tomlCode)) fail('PASSWORD_RESET="on" but wrangler.toml has no active [[send_email]] binding named "EMAIL" — no reset email could be sent.');
+if (pwReset === 'on' && !allowPasswordReset) fail('PASSWORD_RESET="on" in wrangler.toml. Enable password reset emails deliberately with --allow-password-reset after the selected mail provider, domain and secret/binding are configured (docs/PASSWORD-RESET.md).');
+if (pwReset === 'on' && mailProvider === 'cloudflare' && !/^\s*\[\[\s*send_email\s*\]\][^\[]*?name\s*=\s*"EMAIL"/m.test(tomlCode)) fail('PASSWORD_RESET="on" but wrangler.toml has no active [[send_email]] binding named "EMAIL" — no reset email could be sent.');
 
 let live;
 try {

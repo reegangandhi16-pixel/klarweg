@@ -10,109 +10,236 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg-canvas:#FAFAF7;--bg-surface:#FFFFFF;--bg-elevated:#F4F3EE;--bg-warm:#FFF8EC;--ink-primary:#0E0E10;--ink-secondary:#5A5A60;--ink-tertiary:#6F6F73;--ink-quaternary:#C7C7C2;--coral:#E55A3F;--coral-tint:#FAECE7;--coral-deep:#993C1D;--accent:#1F4E4A;--accent-tint:#E7F0EE;--accent-deep:#143331;--hairline:rgba(14,14,16,0.08);--hairline-strong:rgba(14,14,16,0.14);--r-sm:8px;--r-md:12px;--r-lg:16px;--r-full:999px;--shadow-soft:0 8px 24px -12px rgba(14,14,16,0.10);--shadow-card:0 1px 0 rgba(14,14,16,0.02),0 12px 32px -16px rgba(14,14,16,0.12);--ease:cubic-bezier(0.16,1,0.3,1);--dur-fast:150ms;--dur-base:240ms;--font-display:'Fraunces','Times New Roman',serif;--font-ui:'Inter',system-ui,sans-serif;--font-german:'Fraunces','Times New Roman',serif;--font-mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
+/* Account surface: teal accent (--accent) for in-app actions, the brand CTA
+   green (--cta-green, = site.css / "Start with A1") for the one purchase
+   CTA. No coral on this page: errors use --danger. */
+:root{--bg-canvas:#FAFAF7;--bg-surface:#FFFFFF;--bg-elevated:#F4F3EE;--bg-warm:#FFF8EC;--ink-primary:#0E0E10;--ink-secondary:#5A5A60;--ink-tertiary:#6F6F73;--ink-quaternary:#C7C7C2;--accent:#1F4E4A;--accent-bright:#2E6F69;--accent-tint:#E7F0EE;--accent-soft:rgba(31,78,74,0.12);--accent-deep:#143331;--cta-green:#1FA84B;--cta-green-hover:#1a9342;--danger:#A12C2C;--danger-tint:#FBEEEE;--danger-line:rgba(161,44,44,.22);--hairline:rgba(14,14,16,0.08);--hairline-strong:rgba(14,14,16,0.14);--r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-full:999px;--shadow-soft:0 8px 24px -12px rgba(14,14,16,0.10);--shadow-card:0 1px 0 rgba(14,14,16,0.02),0 12px 32px -16px rgba(14,14,16,0.12);--ease:cubic-bezier(0.16,1,0.3,1);--dur-fast:150ms;--dur-base:240ms;--font-display:'Fraunces','Times New Roman',serif;--font-ui:'Inter',system-ui,sans-serif;--font-german:'Fraunces','Times New Roman',serif;--font-mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
 *,*::before,*::after{box-sizing:border-box}*{margin:0;padding:0}
 html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 body{font-family:var(--font-ui);background:var(--bg-canvas);color:var(--ink-primary);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
-button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+button,input,select{font:inherit;color:inherit}
+button{background:none;border:none;cursor:pointer}
 a{color:var(--accent);text-decoration:none}
 a:hover{color:var(--accent-deep)}
-:focus-visible{outline:2px solid var(--ink-primary);outline-offset:3px;border-radius:4px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
-.container{width:100%;max-width:1040px;margin:0 auto;padding:0 24px}
-@media(max-width:600px){.container{padding:0 18px}}
-.topbar{position:sticky;top:0;z-index:50;background:var(--bg-canvas);border-bottom:1px solid var(--hairline)}
+.container{width:100%;max-width:1080px;margin:0 auto;padding:0 24px}
+@media(max-width:600px){.container{padding:0 16px}}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(250,250,247,.92);backdrop-filter:saturate(1.4) blur(8px);-webkit-backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--hairline)}
 .topbar-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px}
-.brand{font-family:var(--font-display);font-weight:600;font-size:20px;letter-spacing:-.02em;display:flex;align-items:center;gap:9px;color:var(--ink-primary)}
+.brand{font-family:var(--font-display);font-weight:600;font-size:20px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;color:var(--ink-primary)}
 .brand:hover{color:var(--ink-primary)}
-.brand .dot{display:none} /* canonical Klarweg logo has no mark (coral is for conversion CTAs) */
-main{flex:1;padding:56px 0 96px}
-@media(max-width:600px){main{padding:36px 0 64px}}
+.brand .dot{display:none}
+.topnav{display:flex;align-items:center;gap:4px}
+.topnav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:var(--r-sm);font-size:14px;font-weight:500;color:var(--ink-secondary)}
+.topnav a:hover{color:var(--ink-primary);background:rgba(14,14,16,.04)}
+@media(max-width:480px){.topnav a.hide-sm{display:none}}
+main{flex:1;padding:48px 0 96px}
+@media(max-width:600px){main{padding:24px 0 64px}}
 .eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-tertiary)}
-h1{font-family:var(--font-display);font-size:clamp(28px,5vw,42px);font-weight:600;letter-spacing:-.03em;line-height:1.08;margin:14px 0 0}
+h1{font-family:var(--font-display);font-size:clamp(28px,5vw,40px);font-weight:600;letter-spacing:-.03em;line-height:1.08;margin:12px 0 0}
 .lede{font-size:16px;color:var(--ink-secondary);margin-top:12px;max-width:560px;text-wrap:pretty}
-/* ---- auth card ---- */
+/* ---- auth card (sign in / sign up) ---- */
 .auth-wrap{max-width:440px;margin:0 auto}
-.auth-card{background:var(--bg-surface);border:1px solid var(--hairline);border-radius:var(--r-lg);box-shadow:var(--shadow-card);padding:32px;margin-top:28px}
-@media(max-width:480px){.auth-card{padding:24px 20px}}
+.auth-card{background:var(--bg-surface);border:1px solid var(--hairline);border-radius:var(--r-lg);box-shadow:var(--shadow-card);padding:36px;margin-top:24px}
+@media(max-width:480px){.auth-card{padding:24px 16px}}
 #google-signin-button{max-width:100%;overflow:hidden}
-.field{display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
-.field label{font-size:13.5px;font-weight:600;color:var(--ink-secondary)}
-.field input{font-family:var(--font-ui);font-size:16px;color:var(--ink-primary);background:var(--bg-canvas);border:1px solid var(--hairline-strong);border-radius:var(--r-sm);padding:13px 14px;min-height:48px;width:100%;transition:border-color var(--dur-fast) var(--ease),background var(--dur-fast) var(--ease)}
+.google-auth{display:flex;justify-content:center;margin-top:24px}
+.field{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.field label,.field .label{font-size:13.5px;font-weight:600;color:var(--ink-secondary)}
+.field input,.field select{font-size:16px;color:var(--ink-primary);background:var(--bg-canvas);border:1px solid var(--hairline-strong);border-radius:var(--r-sm);padding:12px 16px;min-height:48px;width:100%;transition:border-color var(--dur-fast) var(--ease),background var(--dur-fast) var(--ease),box-shadow var(--dur-fast) var(--ease)}
 .field input:hover{border-color:rgba(14,14,16,.24)}
-.field input:focus{outline:none;border-color:var(--accent);background:var(--bg-surface);box-shadow:0 0 0 3px var(--accent-tint)}
-.field input[aria-invalid="true"]{border-color:var(--coral);box-shadow:0 0 0 3px var(--coral-tint)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--accent);background:var(--bg-surface);box-shadow:0 0 0 3px var(--accent-soft)}
+.field input[aria-invalid="true"]{border-color:var(--danger);box-shadow:0 0 0 3px var(--danger-tint)}
+.field input[readonly]{background:var(--bg-elevated);color:var(--ink-secondary);cursor:default}
 .field .hint{font-size:12.5px;color:var(--ink-tertiary)}
-.field .err{font-size:13px;color:var(--coral-deep);display:none}
+.field .err{font-size:13px;color:var(--danger);display:none}
 .field.invalid .err{display:block}
-.form-err{font-size:14px;line-height:1.5;color:var(--coral-deep);background:var(--coral-tint);border:1px solid rgba(229,90,63,.22);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:18px;display:none}
+.form-err{font-size:14px;line-height:1.5;color:var(--danger);background:var(--danger-tint);border:1px solid var(--danger-line);border-radius:var(--r-sm);padding:12px 16px;margin-bottom:16px;display:none}
 .form-err.on{display:block}
 .form-ok{font-size:14px;line-height:1.5;color:var(--accent-deep);background:var(--accent-tint);border:1px solid rgba(31,78,74,.18);border-radius:var(--r-sm);padding:12px 16px;margin-bottom:16px;display:none}
 .form-ok.on{display:block}
 .label-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .forgot{display:inline-flex;align-items:center;min-height:44px;margin:-12px 0;font-size:13.5px;font-weight:600;color:var(--accent);text-decoration:underline;text-decoration-color:rgba(31,78,74,.35);text-underline-offset:3px}
 .forgot:hover{color:var(--accent-deep);text-decoration-color:currentColor}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 24px;border-radius:var(--r-sm);border:1px solid transparent;font-size:15px;font-weight:600;cursor:pointer;transition:transform var(--dur-base) var(--ease),box-shadow var(--dur-base) var(--ease),border-color var(--dur-base) var(--ease)}
+/* ---- buttons ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 20px;border-radius:var(--r-sm);border:1px solid transparent;font-size:15px;font-weight:600;line-height:1.2;cursor:pointer;text-align:center;transition:transform var(--dur-base) var(--ease),box-shadow var(--dur-base) var(--ease),border-color var(--dur-base) var(--ease),background var(--dur-fast) var(--ease)}
 .btn:hover{transform:translateY(-1px)}
-.btn[disabled]{opacity:.55;cursor:default;transform:none}
+.btn:active{transform:translateY(0)}
+.btn[disabled]{opacity:.55;cursor:default;transform:none;box-shadow:none}
 .btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{box-shadow:0 8px 24px -10px rgba(31,78,74,.5)}
-.btn-coral{background:var(--coral);color:#fff}
-.btn-coral:hover{box-shadow:0 8px 24px -10px rgba(229,90,63,.55)}
-.btn-quiet{background:transparent;color:var(--ink-primary);border-color:var(--hairline-strong)}
-.btn-quiet:hover{border-color:rgba(14,14,16,.3)}
+.btn-primary:hover{background:var(--accent-bright);color:#fff;box-shadow:0 8px 24px -10px rgba(31,78,74,.5)}
+.btn-cta{background:var(--cta-green);color:#fff}
+.btn-cta:hover{background:var(--cta-green-hover);color:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08),0 12px 28px rgba(31,168,75,.22)}
+.btn-cta:focus-visible{outline-color:var(--cta-green)}
+.btn-quiet{background:var(--bg-surface);color:var(--ink-primary);border-color:var(--hairline-strong)}
+.btn-quiet:hover{border-color:rgba(14,14,16,.3);color:var(--ink-primary);box-shadow:var(--shadow-soft)}
+.btn-danger{background:var(--danger);color:#fff}
+.btn-danger:hover{box-shadow:0 8px 24px -10px rgba(161,44,44,.5)}
+.btn-text{min-height:44px;padding:0 8px;font-size:14px;font-weight:600;color:var(--accent);border-radius:var(--r-sm)}
+.btn-text:hover{color:var(--accent-deep);background:var(--accent-tint)}
+.btn-text.danger{color:var(--danger)}
+.btn-text.danger:hover{background:var(--danger-tint);color:var(--danger)}
 .btn-block{width:100%}
-.spin{width:17px;height:17px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:sp .8s linear infinite}
+.btn svg{flex:none}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:sp .8s linear infinite}
+.btn-quiet .spin,.btn-text .spin{border-color:rgba(14,14,16,.14);border-top-color:var(--accent)}
 @keyframes sp{to{transform:rotate(360deg)}}
-.swap{font-size:14px;color:var(--ink-secondary);text-align:center;margin-top:20px}
-.swap button{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.swap{font-size:14px;color:var(--ink-secondary);text-align:center;margin-top:24px}
+.swap button{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:3px;min-height:44px}
 .legal{font-size:12.5px;color:var(--ink-tertiary);text-align:center;margin-top:24px;line-height:1.55}
-/* ---- account view ---- */
-.acct-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.who{display:flex;align-items:center;gap:16px;margin-top:28px}
-.avatar{width:54px;height:54px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:600;font-size:20px;flex:none}
-.who .nm{font-family:var(--font-display);font-size:20px;font-weight:600;letter-spacing:-.01em}
-.who .em{font-size:14px;color:var(--ink-tertiary);word-break:break-all}
-.panel{background:var(--bg-surface);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:28px;margin-top:20px}
-@media(max-width:480px){.panel{padding:20px}}
-.panel-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
-.panel-head h2{font-family:var(--font-display);font-size:19px;font-weight:600;letter-spacing:-.01em}
-.panel-head .note{font-size:13px;color:var(--ink-tertiary)}
-.state-row{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ink-secondary)}
-.dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--ink-quaternary)}
-.dot.on{background:var(--accent)}
-.lifetime{display:flex;align-items:center;gap:14px;background:var(--bg-warm);border:1px solid rgba(229,90,63,.16);border-radius:var(--r-md);padding:16px 18px;margin-bottom:20px}
-.lifetime .t{font-weight:600;font-size:15px}
-.lifetime .s{font-size:13.5px;color:var(--ink-secondary)}
-.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-@media(max-width:700px){.levels{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:380px){.levels{grid-template-columns:1fr}}
-.lv{border:1px solid var(--hairline);border-radius:var(--r-md);padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--bg-canvas)}
-.lv.owned{background:var(--accent-tint);border-color:rgba(31,78,74,.18)}
+.loading{display:flex;align-items:center;gap:12px;color:var(--ink-secondary);font-size:15px;margin-top:36px}
+.spin-dark{width:18px;height:18px;border-radius:50%;border:2px solid rgba(14,14,16,.14);border-top-color:var(--accent);animation:sp .8s linear infinite;flex:none}
+.offline{font-size:14px;line-height:1.55;color:var(--danger);background:var(--danger-tint);border:1px solid var(--danger-line);border-radius:var(--r-sm);padding:12px 16px;margin-top:24px}
+/* ---- account: cards ---- */
+.card{background:var(--bg-surface);border:1px solid var(--hairline);border-radius:var(--r-xl);box-shadow:var(--shadow-card);padding:36px}
+@media(max-width:600px){.card{padding:24px 16px;border-radius:var(--r-lg)}}
+.card + .card,.stack > * + *{margin-top:24px}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.card-title{display:flex;align-items:center;gap:12px}
+.card-title h2{font-family:var(--font-display);font-size:21px;font-weight:600;letter-spacing:-.015em;line-height:1.2}
+.ico{width:36px;height:36px;border-radius:var(--r-md);background:var(--accent-tint);color:var(--accent);display:grid;place-items:center;flex:none}
+.ico svg{width:18px;height:18px}
+.card-note{font-size:13px;color:var(--ink-tertiary)}
+.grid-2{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:24px;margin-top:24px;align-items:start}
+.grid-2 > .card + .card{margin-top:0}
+@media(max-width:880px){.grid-2{grid-template-columns:1fr}}
+/* profile header */
+.profile{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:linear-gradient(180deg,var(--bg-surface) 0%,var(--bg-surface) 60%,#F7FAF8 100%)}
+.profile-main{display:flex;align-items:center;gap:24px;min-width:0;flex:1 1 420px}
+@media(max-width:600px){.profile-main{gap:16px;flex-basis:100%}}
+.avatar{position:relative;width:96px;height:96px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--font-display);font-weight:600;font-size:36px;letter-spacing:-.02em;flex:none;overflow:hidden;box-shadow:0 0 0 4px var(--bg-surface),0 0 0 5px var(--hairline-strong)}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+@media(max-width:600px){.avatar{width:72px;height:72px;font-size:28px}}
+.profile-id{min-width:0}
+.profile-id h1{font-size:clamp(26px,4.4vw,36px);margin-top:8px;overflow-wrap:anywhere}
+.profile-email{font-size:15px;color:var(--ink-secondary);margin-top:4px;overflow-wrap:anywhere}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:28px;padding:4px 12px;border-radius:var(--r-full);font-size:13px;font-weight:500;color:var(--ink-secondary);background:var(--bg-elevated);border:1px solid var(--hairline)}
+.chip .cdot{width:7px;height:7px;border-radius:50%;background:var(--ink-quaternary)}
+.chip.member{color:var(--accent-deep);background:var(--accent-tint);border-color:rgba(31,78,74,.16)}
+.chip.member .cdot{background:var(--accent)}
+.chip.level b{font-family:var(--font-display);font-weight:600;color:var(--ink-primary)}
+.profile-actions{display:flex;gap:12px;flex-wrap:wrap}
+@media(max-width:600px){.profile-actions{width:100%}.profile-actions .btn{flex:1}}
+/* edit profile */
+.edit-grid{display:grid;grid-template-columns:200px minmax(0,1fr);gap:36px}
+@media(max-width:700px){.edit-grid{grid-template-columns:1fr;gap:24px}}
+.photo-col{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.photo-col .avatar{width:120px;height:120px;font-size:44px}
+.photo-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:4px}
+.photo-col .hint{font-size:12.5px;color:var(--ink-tertiary);max-width:200px}
+.photo-col .err{font-size:13px;color:var(--danger)}
+.seg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+@media(max-width:420px){.seg{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.seg label{position:relative;display:flex;align-items:center;justify-content:center;min-height:48px;border:1px solid var(--hairline-strong);border-radius:var(--r-sm);background:var(--bg-canvas);font-size:15px;font-weight:600;color:var(--ink-secondary);cursor:pointer;transition:border-color var(--dur-fast) var(--ease),background var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease)}
+.seg label.wide{font-weight:500;font-size:14px}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:hover{border-color:rgba(14,14,16,.3);color:var(--ink-primary)}
+.seg input:checked + span{color:#fff}
+.seg label:has(input:checked){background:var(--accent);border-color:var(--accent);color:#fff}
+.seg label:has(input:focus-visible){outline:2px solid var(--accent);outline-offset:2px}
+.form-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;padding-top:24px;border-top:1px solid var(--hairline)}
+@media(max-width:600px){.form-actions .btn{flex:1}}
+.status{font-size:14px;line-height:1.5;border-radius:var(--r-sm);padding:12px 16px;display:flex;align-items:flex-start;gap:8px}
+.status.ok{color:var(--accent-deep);background:var(--accent-tint);border:1px solid rgba(31,78,74,.18)}
+.status.bad{color:var(--danger);background:var(--danger-tint);border:1px solid var(--danger-line)}
+.status svg{flex:none;margin-top:2px}
+.saved-note{margin-top:16px}
+/* learning */
+.resume{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:24px;border-radius:var(--r-lg);background:var(--accent-tint);border:1px solid rgba(31,78,74,.14)}
+.resume .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.resume .t{font-family:var(--font-display);font-size:20px;font-weight:600;letter-spacing:-.01em;margin-top:4px;line-height:1.25}
+.resume .s{font-size:14px;color:var(--ink-secondary);margin-top:4px}
+.resume-body{min-width:0;flex:1 1 240px}
+.bar{height:6px;border-radius:var(--r-full);background:rgba(14,14,16,.07);overflow:hidden;margin-top:12px}
+.bar > i{display:block;height:100%;border-radius:inherit;background:var(--accent)}
+.resume .bar{background:rgba(31,78,74,.14);max-width:320px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:24px}
+@media(max-width:420px){.stats{grid-template-columns:1fr 1fr}.stats > :last-child{grid-column:1/-1}}
+.stat{border:1px solid var(--hairline);border-radius:var(--r-md);padding:16px;background:var(--bg-canvas)}
+.stat .v{font-family:var(--font-display);font-size:28px;font-weight:600;letter-spacing:-.02em;line-height:1.1}
+.stat .l{font-size:13px;color:var(--ink-secondary);margin-top:4px}
+.empty{text-align:center;padding:24px 16px;border:1px dashed var(--hairline-strong);border-radius:var(--r-lg);background:var(--bg-canvas)}
+.empty .t{font-family:var(--font-display);font-size:18px;font-weight:600}
+.empty .s{font-size:14px;color:var(--ink-secondary);margin:8px auto 16px;max-width:380px}
+.muted-load{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--ink-secondary);padding:16px 0}
+/* membership */
+.plan{padding:24px;border-radius:var(--r-lg);border:1px solid var(--hairline);background:var(--bg-canvas)}
+.plan.lifetime{background:var(--accent-tint);border-color:rgba(31,78,74,.16)}
+.plan .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-tertiary)}
+.plan.lifetime .k{color:var(--accent)}
+.plan .t{font-family:var(--font-display);font-size:22px;font-weight:600;letter-spacing:-.015em;margin-top:4px}
+.plan .s{font-size:14px;color:var(--ink-secondary);margin-top:4px}
+.upsell{margin-top:16px;padding:24px;border-radius:var(--r-lg);border:1px solid rgba(31,168,75,.22);background:#F3FBF5}
+.upsell .t{font-weight:600;font-size:15px}
+.upsell .s{font-size:13.5px;color:var(--ink-secondary);margin:4px 0 16px}
+.list{list-style:none;margin-top:24px}
+.list-h{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-tertiary);margin-bottom:8px}
+.list li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--hairline);font-size:14px}
+.list li:first-child{border-top:0}
+.list .n{font-weight:600}
+.list .m{color:var(--ink-secondary);text-align:right;font-size:13.5px}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--accent-deep)}
+.tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.tag.off{color:var(--ink-tertiary)}
+.tag.off::before{background:var(--ink-quaternary)}
+/* levels */
+.levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media(max-width:820px){.levels{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:460px){.levels{grid-template-columns:1fr}}
+.lv{border:1px solid var(--hairline);border-radius:var(--r-lg);padding:24px;display:flex;flex-direction:column;gap:12px;background:var(--bg-canvas);transition:border-color var(--dur-base) var(--ease),box-shadow var(--dur-base) var(--ease)}
+.lv.owned{background:var(--bg-surface);border-color:rgba(31,78,74,.22)}
+.lv.owned:hover{box-shadow:var(--shadow-soft)}
 .lv-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.lv-code{font-family:var(--font-display);font-size:17px;font-weight:600}
-.lv-state{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-tertiary);display:flex;align-items:center;gap:6px}
-.lv.owned .lv-state{color:var(--accent-deep)}
-.lv-price{font-size:14px;color:var(--ink-secondary)}
+.lv-code{font-family:var(--font-display);font-size:24px;font-weight:600;letter-spacing:-.02em}
+.lv-state{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-tertiary);display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:var(--r-full);background:rgba(14,14,16,.04)}
+.lv.owned .lv-state{color:var(--accent-deep);background:var(--accent-tint)}
+.lv-prog{font-size:13.5px;color:var(--ink-secondary)}
+.lv .bar{margin-top:4px}
+.lv-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.lv-price{font-size:13.5px;color:var(--ink-secondary)}
+.lv-link{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:14px;font-weight:600}
 .lv .btn{min-height:44px;font-size:14px;padding:0 16px}
-.acct-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
-.acct-links a{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1px solid var(--hairline-strong);border-radius:var(--r-sm);font-size:14px;font-weight:500;color:var(--ink-primary)}
-.acct-links a:hover{border-color:rgba(14,14,16,.3);color:var(--ink-primary)}
-.loading{display:flex;align-items:center;gap:12px;color:var(--ink-secondary);font-size:15px;margin-top:32px}
-.spin-dark{width:18px;height:18px;border-radius:50%;border:2px solid rgba(14,14,16,.14);border-top-color:var(--accent);animation:sp .8s linear infinite}
-.offline{font-size:14px;line-height:1.55;color:var(--coral-deep);background:var(--coral-tint);border:1px solid rgba(229,90,63,.22);border-radius:var(--r-sm);padding:12px 14px;margin-top:20px}
+/* security */
+.rows{display:grid}
+.row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 0;border-top:1px solid var(--hairline)}
+.row:first-child{border-top:0;padding-top:0}
+.row .n{font-size:15px;font-weight:600}
+.row .d{font-size:14px;color:var(--ink-secondary);margin-top:2px;overflow-wrap:anywhere}
+.row-body{min-width:0;flex:1 1 260px}
+.verified{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--accent-deep)}
+.subform{margin-top:16px;padding:24px;border-radius:var(--r-lg);background:var(--bg-canvas);border:1px solid var(--hairline);width:100%}
+.subform .grid-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media(max-width:760px){.subform .grid-fields{grid-template-columns:1fr}}
+.subform .grid-fields.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:760px){.subform .grid-fields.two{grid-template-columns:1fr}}
+.subform .field{margin-bottom:0}
+.danger-zone{border-color:var(--danger-line)}
+.danger-zone .subform{background:var(--danger-tint);border-color:var(--danger-line)}
+.links{display:flex;flex-wrap:wrap;gap:12px}
 footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:var(--ink-tertiary)}
 [hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* Checkout dialog (kw-checkout.js) on this page: same flow, account colours. */
+body .kwco-btn-primary{background:var(--cta-green)}
+body .kwco-btn-primary:hover{box-shadow:0 1px 3px rgba(0,0,0,.08),0 12px 28px rgba(31,168,75,.22)}
+body .kwco-mark.warn{background:var(--danger-tint);color:var(--danger)}
+body .kwco-err{color:var(--danger);background:var(--danger-tint);border-color:var(--danger-line)}
 </style>
 <link rel="icon" href="../favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
 <link rel="manifest" href="../manifest.json">
-<meta name="theme-color" content="#E55A3F">
+<meta name="theme-color" content="#FAFAF7">
 </head>
 <body>
 <header class="topbar">
   <div class="container topbar-inner">
     <a class="brand" href="../index.html"><span class="dot"></span>Klarweg</a>
+    <nav class="topnav" aria-label="Main">
+      <a href="../courses.html">Courses</a>
+      <a href="saved-words.html" class="hide-sm">Saved words</a>
+    </nav>
   </div>
 </header>
 
@@ -190,54 +317,266 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
 
     <!-- signed in -->
     <div id="view-account" hidden>
-      <div class="acct-head">
-        <div>
-          <p class="eyebrow">Your account</p>
-          <h1 id="acct-greeting">Your Klarweg access</h1>
-        </div>
-      </div>
 
-      <div class="who">
-        <div class="avatar" id="acct-initial" aria-hidden="true">K</div>
-        <div>
-          <div class="nm" id="acct-name">—</div>
-          <div class="em" id="acct-email">—</div>
-        </div>
-      </div>
-
-      <section class="panel" aria-labelledby="panel-access-title">
-        <div class="panel-head">
-          <h2 id="panel-access-title">Access</h2>
-          <span class="note" id="acct-state-note"></span>
-        </div>
-        <div id="acct-lifetime" class="lifetime" hidden>
-          <div>
-            <div class="t">Lifetime access is active</div>
-            <div class="s">Every chapter of A1 through C2, including chapters added later.</div>
-          </div>
-        </div>
-        <div class="levels" id="acct-levels"></div>
-        <div id="acct-lifetime-offer" hidden style="margin-top:20px">
-          <div class="lifetime" style="justify-content:space-between;flex-wrap:wrap">
-            <div>
-              <div class="t">Klarweg Lifetime — <span id="lifetime-price">₹4,999</span></div>
-              <div class="s">All six levels, A1 → C2. Individually they come to <span id="levels-total">₹30,994</span>.</div>
+      <!-- A. Profile overview -->
+      <section class="card profile" aria-labelledby="acct-name">
+        <div class="profile-main">
+          <div class="avatar" id="acct-avatar" aria-hidden="true"><img id="acct-avatar-img" alt="" hidden><span id="acct-initial">K</span></div>
+          <div class="profile-id">
+            <p class="eyebrow">Your account</p>
+            <h1 id="acct-name">—</h1>
+            <p class="profile-email" id="acct-email"></p>
+            <div class="chips">
+              <span class="chip member" id="chip-member"><span class="cdot" aria-hidden="true"></span><span id="chip-member-text">Free access</span></span>
+              <span class="chip level" id="chip-level" hidden></span>
+              <span class="chip" id="chip-since" hidden></span>
             </div>
-            <button class="btn btn-coral" type="button" data-kw-buy="LIFETIME">Unlock everything</button>
           </div>
+        </div>
+        <div class="profile-actions">
+          <button class="btn btn-primary" type="button" id="btn-edit" hidden aria-controls="edit-panel" aria-expanded="false">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 3.5l3 3L7 16H4v-3z"/></svg>
+            Edit profile
+          </button>
         </div>
       </section>
+      <div class="status ok saved-note" id="profile-saved" role="status" hidden></div>
 
-      <section class="panel" aria-labelledby="panel-profile-title">
-        <div class="panel-head"><h2 id="panel-profile-title">Profile</h2></div>
-        <div class="state-row"><span class="dot on"></span> Signed in — session active on this device</div>
-        <div class="acct-links">
-          <a href="saved-words.html">Saved words</a>
-          <a href="review.html">Review</a>
-          <a href="../index.html#pricing">Pricing</a>
+      <!-- B. Edit profile -->
+      <section class="card" id="edit-panel" hidden aria-labelledby="edit-title" style="margin-top:24px">
+        <div class="card-head">
+          <div class="card-title">
+            <span class="ico" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="3.2"/><path d="M3.8 16.5c1.2-3 3.6-4.5 6.2-4.5s5 1.5 6.2 4.5"/></svg></span>
+            <h2 id="edit-title">Edit profile</h2>
+          </div>
+          <span class="card-note">Saved to your account — the same on every device.</span>
         </div>
-        <div style="margin-top:20px">
-          <button class="btn btn-quiet" type="button" id="btn-logout">Sign out</button>
+        <form id="form-profile" novalidate>
+          <p class="form-err" id="profile-error" role="alert"></p>
+          <div class="edit-grid">
+            <div class="photo-col">
+              <div class="avatar" id="edit-avatar" aria-hidden="true"><img id="edit-avatar-img" alt="" hidden><span id="edit-initial">K</span></div>
+              <div class="photo-actions">
+                <button class="btn-text" type="button" id="btn-photo-pick">Upload photo</button>
+                <button class="btn-text danger" type="button" id="btn-photo-remove" hidden>Remove</button>
+              </div>
+              <input type="file" id="photo-input" accept="image/jpeg,image/png,image/webp" class="sr" tabindex="-1" aria-hidden="true">
+              <p class="err" id="photo-err" role="alert" hidden></p>
+              <p class="hint">JPEG, PNG or WebP. Cropped to a square; visible only to you.</p>
+            </div>
+            <div>
+              <div class="field" id="f-profile-name">
+                <label for="profile-name">Display name</label>
+                <input id="profile-name" name="name" type="text" autocomplete="name" maxlength="80" required aria-describedby="profile-name-hint profile-name-err">
+                <span class="hint" id="profile-name-hint">2–80 characters. Shown on your account and in the header.</span>
+                <span class="err" id="profile-name-err"></span>
+              </div>
+              <div class="field">
+                <label for="profile-email">Email</label>
+                <input id="profile-email" type="email" readonly aria-describedby="profile-email-hint">
+                <span class="hint" id="profile-email-hint">Your sign-in email cannot be changed here.</span>
+              </div>
+              <fieldset class="field" id="f-profile-level" style="border:0">
+                <legend class="label" style="margin-bottom:8px">Learning level you are focusing on</legend>
+                <div class="seg" role="radiogroup" aria-describedby="profile-level-hint">
+                  <label><input type="radio" name="level" value="A1"><span>A1</span></label>
+                  <label><input type="radio" name="level" value="A2"><span>A2</span></label>
+                  <label><input type="radio" name="level" value="B1"><span>B1</span></label>
+                  <label><input type="radio" name="level" value="B2"><span>B2</span></label>
+                  <label class="wide"><input type="radio" name="level" value=""><span>Not set</span></label>
+                </div>
+                <span class="hint" id="profile-level-hint">Used to point you to the right level. It does not change what you can access.</span>
+                <span class="err" id="profile-level-err"></span>
+              </fieldset>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" type="submit" id="profile-save">Save changes</button>
+            <button class="btn btn-quiet" type="button" id="profile-cancel">Cancel</button>
+          </div>
+        </form>
+      </section>
+
+      <div class="grid-2">
+        <!-- C. Learning overview -->
+        <section class="card" aria-labelledby="learn-title">
+          <div class="card-head">
+            <div class="card-title">
+              <span class="ico" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5h5a2 2 0 0 1 2 2V16a1.6 1.6 0 0 0-1.6-1.6H3z"/><path d="M17 4.5h-5a2 2 0 0 0-2 2V16a1.6 1.6 0 0 1 1.6-1.6H17z"/></svg></span>
+              <h2 id="learn-title">Learning overview</h2>
+            </div>
+            <span class="card-note" id="learn-note"></span>
+          </div>
+          <div id="learn-loading" class="muted-load" role="status"><span class="spin-dark" aria-hidden="true"></span> Loading your progress…</div>
+          <div id="learn-error" class="status bad" role="alert" hidden>
+            <span>We could not load your progress just now. Your progress is safe. <button class="btn-text" type="button" id="learn-retry" style="min-height:0;padding:0;text-decoration:underline">Try again</button></span>
+          </div>
+          <div id="learn-body" hidden>
+            <div class="resume" id="resume" hidden>
+              <div class="resume-body">
+                <div class="k" id="resume-k">Continue where you left off</div>
+                <div class="t" id="resume-t"></div>
+                <div class="s" id="resume-s"></div>
+                <div class="bar" id="resume-bar" aria-hidden="true"><i style="width:0"></i></div>
+              </div>
+              <a class="btn btn-primary" id="resume-link" href="#">Continue learning</a>
+            </div>
+            <div class="empty" id="learn-empty" hidden>
+              <div class="t">No chapter progress yet</div>
+              <p class="s" id="learn-empty-s">Your progress appears here as soon as you work through a chapter while signed in.</p>
+              <a class="btn btn-primary" id="learn-empty-link" href="../a1.html">Start learning</a>
+            </div>
+            <div class="stats">
+              <div class="stat"><div class="v" id="stat-done">0</div><div class="l">Chapters completed</div></div>
+              <div class="stat"><div class="v" id="stat-prog">0</div><div class="l">In progress</div></div>
+              <div class="stat"><div class="v" id="stat-level">—</div><div class="l">Focus level</div></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- E. Membership & purchases -->
+        <section class="card" aria-labelledby="member-title">
+          <div class="card-head">
+            <div class="card-title">
+              <span class="ico" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="10.5" rx="2"/><path d="M3 8.5h14"/></svg></span>
+              <h2 id="member-title">Membership</h2>
+            </div>
+          </div>
+          <div class="plan" id="plan">
+            <div class="k" id="plan-k">Your plan</div>
+            <div class="t" id="plan-t">Free access</div>
+            <div class="s" id="plan-s">Chapter 1 of every level is open.</div>
+          </div>
+          <div class="upsell" id="acct-lifetime-offer" hidden>
+            <div class="t">Klarweg Lifetime — <span id="lifetime-price">₹4,999</span></div>
+            <p class="s">All six levels, A1 → C2, including chapters added later. Individually they come to <span id="levels-total">₹30,994</span>.</p>
+            <button class="btn btn-cta btn-block" type="button" data-kw-buy="LIFETIME">Unlock everything</button>
+          </div>
+          <div id="access-wrap" hidden>
+            <p class="list-h" style="margin-top:24px">Access</p>
+            <ul class="list" id="access-list" style="margin-top:0"></ul>
+          </div>
+          <div id="purchases-wrap" hidden>
+            <p class="list-h" style="margin-top:24px">Purchases</p>
+            <ul class="list" id="purchase-list" style="margin-top:0"></ul>
+          </div>
+        </section>
+      </div>
+
+      <!-- Courses / levels -->
+      <section class="card" aria-labelledby="panel-access-title" style="margin-top:24px">
+        <div class="card-head">
+          <div class="card-title">
+            <span class="ico" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15.5l4-4 3 3 7-7"/><path d="M13 7.5h4v4"/></svg></span>
+            <h2 id="panel-access-title">Your courses</h2>
+          </div>
+          <span class="card-note" id="acct-state-note"></span>
+        </div>
+        <div class="levels" id="acct-levels"></div>
+      </section>
+
+      <!-- D. Account & security -->
+      <section class="card" aria-labelledby="sec-title" style="margin-top:24px">
+        <div class="card-head">
+          <div class="card-title">
+            <span class="ico" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.8l6 2.4v4.5c0 3.7-2.6 6.4-6 7.5-3.4-1.1-6-3.8-6-7.5V5.2z"/><path d="M7.5 10l1.8 1.8 3.4-3.6"/></svg></span>
+            <h2 id="sec-title">Account &amp; security</h2>
+          </div>
+        </div>
+        <div class="rows">
+          <div class="row">
+            <div class="row-body">
+              <div class="n">Email</div>
+              <div class="d"><span id="sec-email"></span> <span class="verified" id="sec-verified" hidden><svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 8 14.5 16 6"/></svg>Verified by Google</span></div>
+            </div>
+          </div>
+          <div class="row" id="row-method" hidden>
+            <div class="row-body">
+              <div class="n">Sign-in method</div>
+              <div class="d" id="sec-method"></div>
+            </div>
+          </div>
+          <div class="row" id="row-password" hidden>
+            <div class="row-body">
+              <div class="n">Password</div>
+              <div class="d" id="sec-password-d">Change the password you use to sign in.</div>
+            </div>
+            <div class="links">
+              <a class="btn btn-quiet" id="link-reset" href="forgot-password.html" hidden>Reset by email</a>
+              <button class="btn btn-quiet" type="button" id="btn-pw" aria-controls="form-password" aria-expanded="false" hidden>Change password</button>
+            </div>
+            <form class="subform" id="form-password" novalidate hidden>
+              <p class="form-err" id="password-error" role="alert"></p>
+              <div class="grid-fields">
+                <div class="field" id="f-password-current">
+                  <label for="password-current">Current password</label>
+                  <input id="password-current" type="password" autocomplete="current-password" aria-describedby="password-current-err">
+                  <span class="err" id="password-current-err"></span>
+                </div>
+                <div class="field" id="f-password-new">
+                  <label for="password-new">New password</label>
+                  <input id="password-new" type="password" autocomplete="new-password" aria-describedby="password-new-hint password-new-err">
+                  <span class="hint" id="password-new-hint">At least 8 characters.</span>
+                  <span class="err" id="password-new-err"></span>
+                </div>
+                <div class="field" id="f-password-confirm">
+                  <label for="password-confirm">Confirm new password</label>
+                  <input id="password-confirm" type="password" autocomplete="new-password" aria-describedby="password-confirm-err">
+                  <span class="err" id="password-confirm-err"></span>
+                </div>
+              </div>
+              <p class="hint" style="font-size:13px;color:var(--ink-tertiary);margin-top:12px">Other devices will be signed out. This one stays signed in.</p>
+              <div class="form-actions" style="border:0;padding-top:0;margin-top:16px">
+                <button class="btn btn-primary" type="submit" id="password-save">Update password</button>
+                <button class="btn btn-quiet" type="button" id="password-cancel">Cancel</button>
+              </div>
+            </form>
+          </div>
+          <div class="status ok" id="password-ok" role="status" hidden style="margin-bottom:16px"></div>
+          <div class="row">
+            <div class="row-body">
+              <div class="n">Your study tools</div>
+              <div class="d">Words you saved from chapters, and spaced review.</div>
+            </div>
+            <div class="links">
+              <a class="btn btn-quiet" href="saved-words.html">Saved words</a>
+              <a class="btn btn-quiet" href="review.html">Review</a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row-body">
+              <div class="n">Sign out</div>
+              <div class="d">Session active on this device.</div>
+            </div>
+            <button class="btn btn-quiet" type="button" id="btn-logout">Sign out</button>
+          </div>
+          <div class="row danger-zone" id="row-delete">
+            <div class="row-body">
+              <div class="n">Delete account</div>
+              <div class="d" id="delete-d">Want your account and its data deleted? <a href="../contact.html">Contact us</a> and we will do it for you.</div>
+            </div>
+            <button class="btn btn-quiet" type="button" id="btn-delete" aria-controls="form-delete" aria-expanded="false" hidden>Delete account…</button>
+            <form class="subform" id="form-delete" novalidate hidden>
+              <p class="form-err" id="delete-error" role="alert"></p>
+              <p style="font-size:14px;line-height:1.55;color:var(--ink-primary);margin-bottom:16px"><strong>This cannot be undone.</strong> Your profile, saved words and chapter progress are deleted, and you are signed out everywhere. Accounts with purchases cannot be deleted online — contact us instead.</p>
+              <div class="grid-fields two">
+                <div class="field" id="f-delete-email">
+                  <label for="delete-email">Type your email to confirm</label>
+                  <input id="delete-email" type="email" autocomplete="off" aria-describedby="delete-email-err">
+                  <span class="err" id="delete-email-err"></span>
+                </div>
+                <div class="field" id="f-delete-password">
+                  <label for="delete-password">Password</label>
+                  <input id="delete-password" type="password" autocomplete="current-password" aria-describedby="delete-password-err">
+                  <span class="err" id="delete-password-err"></span>
+                </div>
+              </div>
+              <div class="form-actions" style="border:0;padding-top:0;margin-top:16px">
+                <button class="btn btn-danger" type="submit" id="delete-submit">Delete my account</button>
+                <button class="btn btn-quiet" type="button" id="delete-cancel">Cancel</button>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
     </div>
@@ -441,44 +780,559 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
     });
   });
 
-  /* ---- account view ---- */
-  function renderAccount(state) {
-    var u = state.user || {};
-    var name = u.name || 'Learner';
-    $('acct-name').textContent = name;
-    $('acct-email').textContent = u.email || '';
-    $('acct-initial').textContent = (name.trim()[0] || 'K').toUpperCase();
-    $('acct-greeting').textContent = 'Your Klarweg access';
+  /* ---- account view ----
+     Two server sources, both scoped to the session cookie:
+       /auth/me   (KWAuth)   name, email, entitlements — always available
+       /account   (account.js) profile photo, focus level, sign-in methods,
+                  access expiry, paid purchases, feature switches
+       /progress  (progress.js) chapter records, read-only here
+     If the Worker does not have /account yet (404), the page shows what
+     /auth/me knows and hides the controls that need /account — it never
+     shows a button that cannot work. */
+  var CHAPTER_TOTALS = { A1: 47, A2: 35, B1: 35, B2: 69, C1: 43, C2: 29 };   // = chapter cards on a1.html … c2.html (scripts/account-page.test.mjs)
+  var LEVEL_NAMES = { A1: 'Beginner', A2: 'Elementary', B1: 'Intermediate', B2: 'Upper intermediate', C1: 'Advanced', C2: 'Mastery' };
+  var CHAPTER_ID = /^(a1|a2|b1|b2|c1|c2)-([0-9]{1,2})(?:-[a-z0-9]+){0,12}$/;
+  var acct = { state: null, overview: null, available: null, entKey: '', progress: null, progressStatus: 'idle' };
 
-    var owned = LEVELS.filter(function (l) { return state.entitlements[l]; });
-    $('acct-state-note').textContent = state.hasFullAccess
-      ? 'Lifetime — all six levels'
-      : (owned.length ? owned.length + ' of 6 levels unlocked' : 'Chapter 1 of every level is open');
-    $('acct-lifetime').hidden = !state.hasFullAccess;
-    $('acct-lifetime-offer').hidden = state.hasFullAccess;
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function fmtDate(sec) {
+    if (!sec) return '';
+    try { return new Date(sec * 1000).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }); }
+    catch (e) { return ''; }
+  }
+  function fmtMoney(paise, currency) {
+    var v = (Number(paise) || 0) / 100;
+    try {
+      return new Intl.NumberFormat('en-IN', { style: 'currency', currency: currency || 'INR', maximumFractionDigits: v % 1 ? 2 : 0 }).format(v);
+    } catch (e) { return '₹' + v; }
+  }
+  function initials(name) {
+    var parts = String(name || '').trim().split(/\s+/).filter(Boolean);
+    if (!parts.length) return 'K';
+    var a = Array.from(parts[0])[0] || '';
+    var b = parts.length > 1 ? (Array.from(parts[parts.length - 1])[0] || '') : '';
+    return (a + b).toUpperCase() || 'K';
+  }
+  function productName(p) {
+    return p === 'LIFETIME' ? 'Lifetime · all levels A1–C2' : p + ' · ' + (LEVEL_NAMES[p] || 'Level');
+  }
 
+  /* Chapter status from one progress record — the same rule as
+     kw-roadmap-progress.js read() (parity is tested), applied to the
+     account's server copy instead of this browser's localStorage. */
+  function chapterStatus(rec) {
+    if (!rec || typeof rec !== 'object') return { status: 'not-started', pct: 0 };
+    var earned = rec.xpEarned, max = rec.xpMax;
+    if (isFinite(earned) && isFinite(max) && typeof earned === 'number' && typeof max === 'number' &&
+        max > 0 && earned >= 0 && earned <= max) {
+      if (earned >= max) return { status: 'completed', pct: 100 };
+      if (earned > 0) return { status: 'in-progress', pct: Math.min(99, Math.floor(earned / max * 100)) };
+      return { status: 'not-started', pct: 0 };
+    }
+    var done = rec.done && typeof rec.done === 'object' && !Array.isArray(rec.done) ? rec.done : {};
+    var hasXp = Object.keys(done).some(function (k) { return k !== 'quiz' && done[k] === true; }) ||
+      (Number.isInteger(rec.quizScore) && rec.quizScore > 0);
+    return hasXp ? { status: 'in-progress', pct: null } : { status: 'not-started', pct: 0 };
+  }
+
+  /* chapters: { <id>: { record, updatedAt(ms) } } (GET /progress) */
+  function summarize(chapters) {
+    var levels = {};
+    Object.keys(CHAPTER_TOTALS).forEach(function (l) { levels[l] = { completed: 0, inProgress: 0, total: CHAPTER_TOTALS[l] }; });
+    var out = { completed: 0, inProgress: 0, levels: levels, resume: null, latest: null };
+    Object.keys(chapters || {}).forEach(function (id) {
+      var m = CHAPTER_ID.exec(id);
+      if (!m) return;
+      var lvl = m[1].toUpperCase();
+      var row = chapters[id] || {};
+      var st = chapterStatus(row.record);
+      var at = Number(row.updatedAt) || 0;
+      var item = { id: id, level: lvl, n: Number(m[2]), status: st.status, pct: st.pct, updatedAt: at };
+      if (st.status === 'completed') { out.completed++; levels[lvl].completed++; }
+      else if (st.status === 'in-progress') {
+        out.inProgress++; levels[lvl].inProgress++;
+        if (!out.resume || at > out.resume.updatedAt) out.resume = item;
+      }
+      if (st.status !== 'not-started' && (!out.latest || at > out.latest.updatedAt)) out.latest = item;
+    });
+    return out;
+  }
+  window.KWAccountView = { chapterStatus: chapterStatus, summarize: summarize, CHAPTER_TOTALS: CHAPTER_TOTALS };
+
+  function setAvatar(imgEl, initialEl, src, name) {
+    initialEl.textContent = initials(name);
+    if (src) { imgEl.src = src; imgEl.hidden = false; initialEl.hidden = true; }
+    else { imgEl.removeAttribute('src'); imgEl.hidden = true; initialEl.hidden = false; }
+  }
+
+  function profileView() {
+    var u = (acct.state && acct.state.user) || {};
+    var p = acct.overview ? acct.overview.profile : null;
+    return {
+      name: (p && p.name) || u.name || 'Learner',
+      email: (p && p.email) || u.email || '',
+      avatar: p ? p.avatar : null,
+      level: p ? p.preferredLevel : null,
+      since: p ? p.memberSince : null
+    };
+  }
+
+  function renderProfile() {
+    var v = profileView();
+    var st = acct.state || {};
+    $('acct-name').textContent = v.name;
+    $('acct-email').textContent = v.email;
+    setAvatar($('acct-avatar-img'), $('acct-initial'), v.avatar, v.name);
+    var owned = LEVELS.filter(function (l) { return st.entitlements && st.entitlements[l]; });
+    $('chip-member-text').textContent = st.hasFullAccess ? 'Lifetime member'
+      : (owned.length ? owned.join(' · ') + ' access' : 'Free access');
+    $('chip-member').classList.toggle('member', !!(st.hasFullAccess || owned.length));
+    $('chip-level').hidden = !v.level;
+    if (v.level) $('chip-level').innerHTML = 'Focus level <b>' + esc(v.level) + '</b>';
+    $('chip-since').hidden = !v.since;
+    if (v.since) $('chip-since').textContent = 'Member since ' + fmtDate(v.since);
+    $('btn-edit').hidden = acct.available !== true;
+    $('stat-level').textContent = v.level || '—';
+  }
+
+  function renderMembership() {
+    var st = acct.state || {};
     var P = window.KWProducts;
+    var owned = LEVELS.filter(function (l) { return st.entitlements && st.entitlements[l]; });
+    var plan = $('plan');
+    plan.classList.toggle('lifetime', !!st.hasFullAccess);
+    if (st.hasFullAccess) {
+      $('plan-k').textContent = 'Lifetime member';
+      $('plan-t').textContent = 'Klarweg Lifetime';
+      $('plan-s').textContent = 'Every chapter of A1 through C2, including chapters added later.';
+    } else if (owned.length) {
+      $('plan-k').textContent = 'Your access';
+      $('plan-t').textContent = owned.length === 1 ? owned[0] + ' level' : owned.length + ' levels · ' + owned.join(', ');
+      $('plan-s').textContent = 'Chapter 1 of every other level stays free.';
+    } else {
+      $('plan-k').textContent = 'Your plan';
+      $('plan-t').textContent = 'Free access';
+      $('plan-s').textContent = 'Chapter 1 of every level is open — no purchase needed.';
+    }
+    // Upgrade CTA only for learners who do not already own everything.
+    $('acct-lifetime-offer').hidden = !!st.hasFullAccess;
     if (P) {
       $('lifetime-price').textContent = P.priceLabel('LIFETIME');
       $('levels-total').textContent = P.LEVEL_TOTAL_LABEL;
     }
 
-    $('acct-levels').innerHTML = LEVELS.map(function (code) {
-      var has = state.entitlements[code] === true;
-      var price = P ? P.priceLabel(code) : '';
-      // An owned level opens its roadmap (the level's entry point, where
-      // chapter progress and "continue" live), never Chapter 1 directly.
-      var roadmapHref = '../' + code.toLowerCase() + '.html';
-      return '<div class="lv' + (has ? ' owned' : '') + '">' +
-        '<div class="lv-top"><span class="lv-code">' + code + '</span>' +
-        '<span class="lv-state">' + (has ? 'Unlocked' : 'Locked') + '</span></div>' +
-        (has
-          ? '<a class="lv-price" href="' + roadmapHref + '">Open ' + code + ' roadmap →</a>'
-          : '<span class="lv-price">' + price + ' one-time</span>' +
-            '<button class="btn btn-quiet" type="button" data-kw-buy="' + code + '">Unlock ' + code + '</button>') +
-        '</div>';
+    var o = acct.overview;
+    var access = o ? o.access.slice() : [];
+    var hasLifetimeRow = access.some(function (a) { return a.product === 'LIFETIME' && a.active; });
+    if (hasLifetimeRow) access = access.filter(function (a) { return a.product === 'LIFETIME'; });
+    var order = ['LIFETIME'].concat(LEVELS);
+    access.sort(function (a, b) { return order.indexOf(a.product) - order.indexOf(b.product); });
+    $('access-wrap').hidden = !access.length;
+    $('access-list').innerHTML = access.map(function (a) {
+      var when = a.active
+        ? (a.expiresAt ? 'Active until ' + fmtDate(a.expiresAt) : 'Active · no expiry')
+        : 'Expired ' + fmtDate(a.expiresAt);
+      return '<li><span class="n">' + esc(productName(a.product)) + '</span>' +
+        '<span class="tag' + (a.active ? '' : ' off') + '">' + esc(when) + '</span></li>';
+    }).join('');
+
+    var purchases = o ? o.purchases : [];
+    $('purchases-wrap').hidden = !purchases.length;
+    $('purchase-list').innerHTML = purchases.map(function (p) {
+      return '<li><span class="n">' + esc(productName(p.product)) + '</span>' +
+        '<span class="m">' + esc(fmtMoney(p.amountPaise, p.currency)) + (p.paidAt ? ' · ' + esc(fmtDate(p.paidAt)) : '') + '</span></li>';
     }).join('');
   }
+
+  function renderLevels() {
+    var st = acct.state || {};
+    var P = window.KWProducts;
+    var sum = acct.progress;
+    var owned = LEVELS.filter(function (l) { return st.entitlements && st.entitlements[l]; });
+    $('acct-state-note').textContent = st.hasFullAccess
+      ? 'Lifetime — all six levels'
+      : (owned.length ? owned.length + ' of 6 levels unlocked' : 'Chapter 1 of every level is open');
+    $('acct-levels').innerHTML = LEVELS.map(function (code) {
+      var has = st.entitlements && st.entitlements[code] === true;
+      var lv = sum ? sum.levels[code] : null;
+      var showProg = lv && (has || lv.completed || lv.inProgress);
+      var pct = lv ? Math.round(lv.completed / lv.total * 100) : 0;
+      var roadmapHref = '../' + code.toLowerCase() + '.html';
+      var prog = showProg
+        ? '<div class="lv-prog">' + lv.completed + ' of ' + lv.total + ' chapters completed' +
+          (lv.inProgress ? ' · ' + lv.inProgress + ' in progress' : '') + '</div>' +
+          '<div class="bar" role="img" aria-label="' + pct + '% of ' + code + ' completed"><i style="width:' + pct + '%"></i></div>'
+        : '<div class="lv-prog">' + (LEVEL_NAMES[code] || '') + ' · ' + CHAPTER_TOTALS[code] + ' chapters</div>';
+      return '<div class="lv' + (has ? ' owned' : '') + '">' +
+        '<div class="lv-top"><span class="lv-code">' + code + '</span>' +
+        '<span class="lv-state">' + (has ? 'Unlocked' : 'Chapter 1 free') + '</span></div>' +
+        prog +
+        '<div class="lv-foot">' +
+        (has
+          ? '<a class="lv-link" href="' + roadmapHref + '">Open ' + code + ' roadmap <span aria-hidden="true">→</span></a>'
+          : '<a class="lv-link" href="' + roadmapHref + '">View ' + code + '</a>' +
+            '<button class="btn btn-quiet" type="button" data-kw-buy="' + code + '">Unlock ' + code +
+            (P ? ' · ' + esc(P.priceLabel(code)) : '') + '</button>') +
+        '</div></div>';
+    }).join('');
+  }
+
+  function renderLearning() {
+    var s = acct.progressStatus;
+    $('learn-loading').hidden = s !== 'loading';
+    $('learn-error').hidden = s !== 'error';
+    $('learn-body').hidden = s !== 'ready';
+    if (s !== 'ready') return;
+    var sum = acct.progress;
+    var v = profileView();
+    $('stat-done').textContent = sum.completed;
+    $('stat-prog').textContent = sum.inProgress;
+    $('learn-note').textContent = sum.completed + sum.inProgress ? 'Synced to your account' : '';
+    var r = sum.resume, latest = sum.latest;
+    $('resume').hidden = !(r || latest);
+    $('learn-empty').hidden = !!(r || latest);
+    if (r) {
+      $('resume-k').textContent = 'Continue where you left off';
+      $('resume-t').textContent = r.level + ' · Chapter ' + r.n;
+      $('resume-s').textContent = (r.pct != null ? r.pct + '% complete' : 'In progress') +
+        (r.updatedAt ? ' · last studied ' + fmtDate(Math.floor(r.updatedAt / 1000)) : '');
+      $('resume-bar').hidden = r.pct == null;
+      $('resume-bar').firstElementChild.style.width = (r.pct || 0) + '%';
+      $('resume-link').href = '../chapter/chapter-' + r.id + '.html';
+      $('resume-link').textContent = 'Continue learning';
+    } else if (latest) {
+      var lv = sum.levels[latest.level];
+      $('resume-k').textContent = 'Keep going';
+      $('resume-t').textContent = latest.level + ' roadmap';
+      $('resume-s').textContent = lv.completed + ' of ' + lv.total + ' chapters completed — pick your next chapter.';
+      $('resume-bar').hidden = false;
+      $('resume-bar').firstElementChild.style.width = Math.round(lv.completed / lv.total * 100) + '%';
+      $('resume-link').href = '../' + latest.level.toLowerCase() + '.html';
+      $('resume-link').textContent = 'Continue learning';
+    } else {
+      var start = v.level || 'A1';
+      $('learn-empty-s').textContent = 'Your progress appears here as soon as you work through a chapter while signed in. ' +
+        (v.level ? 'Your focus level is ' + v.level + '.' : 'Chapter 1 of every level is free.');
+      $('learn-empty-link').href = '../' + start.toLowerCase() + '.html';
+      $('learn-empty-link').textContent = 'Start ' + start;
+    }
+  }
+
+  function renderSecurity() {
+    var v = profileView();
+    var o = acct.overview;
+    $('sec-email').textContent = v.email;
+    $('sec-verified').hidden = !(o && o.signIn.emailVerified === true);
+    $('row-method').hidden = !o;
+    if (o) {
+      var m = [];
+      if (o.signIn.password) m.push('Email and password');
+      if (o.signIn.google) m.push('Google');
+      $('sec-method').textContent = m.join(' · ') || '—';
+    }
+    var canChange = !!(o && o.features.changePassword);
+    var canReset = !!(o && o.features.passwordReset && o.signIn.password);
+    $('row-password').hidden = !(canChange || (o && o.signIn.google && !o.signIn.password));
+    $('btn-pw').hidden = !canChange;
+    $('link-reset').hidden = !canReset;
+    $('sec-password-d').textContent = canChange
+      ? 'Change the password you use to sign in.'
+      : 'You sign in with Google, so your password is managed by your Google account.';
+    var canDelete = !!(o && o.features.deletion);
+    $('btn-delete').hidden = !canDelete;
+    $('delete-d').innerHTML = canDelete
+      ? 'Permanently delete your account and its learning data.'
+      : 'Want your account and its data deleted? <a href="../contact.html">Contact us</a> and we will do it for you.';
+    $('f-delete-password').hidden = !(o && o.signIn.password);
+  }
+
+  function renderAll() { renderProfile(); renderMembership(); renderLevels(); renderLearning(); renderSecurity(); }
+
+  function loadOverview() {
+    return KWAuth.request('/account').then(function (data) {
+      acct.overview = data; acct.available = true;
+    }, function (e) {
+      // 404 = this Worker has no /account yet; anything else = temporary.
+      acct.available = false;
+      if (e.status !== 404 && e.code !== 'unauthorized') acct.overviewError = true;
+    }).then(renderAll);
+  }
+  function loadProgress() {
+    acct.progressStatus = 'loading'; renderLearning();
+    return KWAuth.request('/progress').then(function (data) {
+      acct.progress = summarize(data.chapters || {});
+      acct.progressStatus = 'ready';
+    }, function () {
+      acct.progressStatus = 'error';
+    }).then(function () { renderLearning(); renderLevels(); });
+  }
+  $('learn-retry').addEventListener('click', loadProgress);
+
+  function renderAccount(state) {
+    acct.state = state;
+    var key = JSON.stringify([state.user && state.user.id, state.entitlements]);
+    var first = acct.entKey === '';
+    var changed = key !== acct.entKey;
+    acct.entKey = key;
+    renderAll();
+    if (changed) {
+      if (first || !acct.overview || acct.available !== false) loadOverview();
+      if (first || acct.progressStatus === 'error') loadProgress();
+    }
+  }
+
+  /* ---- shared form helpers for the account forms ---- */
+  function setBusy(btn, on, label) {
+    if (!btn.getAttribute('data-label')) btn.setAttribute('data-label', btn.innerHTML);
+    btn.disabled = on;
+    btn.innerHTML = on ? '<span class="spin" aria-hidden="true"></span>' + esc(label) : btn.getAttribute('data-label');
+  }
+  function clearForm(form) {
+    form.querySelectorAll('.field').forEach(function (f) { f.classList.remove('invalid'); });
+    form.querySelectorAll('input').forEach(function (i) { i.removeAttribute('aria-invalid'); });
+    form.querySelectorAll('.form-err').forEach(function (p) { p.classList.remove('on'); p.textContent = ''; });
+  }
+  function showStatus(el, text) {
+    el.innerHTML = '<svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 8 14.5 16 6"/></svg><span></span>';
+    el.lastChild.textContent = text;
+    el.hidden = false;
+  }
+  function toggle(btn, panel, open) {
+    panel.hidden = !open;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  /* ---- B. edit profile ---- */
+  var edit = { avatar: undefined };   // undefined = unchanged, null = remove, string = new data: URL
+  function openEdit() {
+    var v = profileView();
+    clearForm($('form-profile'));
+    $('profile-saved').hidden = true;
+    $('profile-name').value = v.name === 'Learner' && !(acct.overview && acct.overview.profile.name) ? '' : v.name;
+    $('profile-email').value = v.email;
+    document.querySelectorAll('input[name="level"]').forEach(function (r) { r.checked = r.value === (v.level || ''); });
+    edit.avatar = undefined;
+    $('photo-err').hidden = true;
+    setAvatar($('edit-avatar-img'), $('edit-initial'), v.avatar, v.name);
+    $('btn-photo-remove').hidden = !v.avatar;
+    $('btn-photo-pick').textContent = v.avatar ? 'Change photo' : 'Upload photo';
+    toggle($('btn-edit'), $('edit-panel'), true);
+    $('edit-panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    try { $('profile-name').focus({ preventScroll: true }); } catch (e) {}
+  }
+  function closeEdit() {
+    toggle($('btn-edit'), $('edit-panel'), false);
+    edit.avatar = undefined;
+    $('photo-input').value = '';
+    try { $('btn-edit').focus({ preventScroll: true }); } catch (e) {}
+  }
+  $('btn-edit').addEventListener('click', function () {
+    if ($('edit-panel').hidden) openEdit(); else closeEdit();
+  });
+  $('profile-cancel').addEventListener('click', closeEdit);
+  $('profile-name').addEventListener('input', function () {
+    if (edit.avatar === undefined && !(profileView().avatar)) $('edit-initial').textContent = initials($('profile-name').value);
+  });
+
+  $('btn-photo-pick').addEventListener('click', function () { $('photo-input').click(); });
+  $('btn-photo-remove').addEventListener('click', function () {
+    edit.avatar = null;
+    setAvatar($('edit-avatar-img'), $('edit-initial'), null, $('profile-name').value || profileView().name);
+    $('btn-photo-remove').hidden = true;
+    $('btn-photo-pick').textContent = 'Upload photo';
+  });
+  /* Re-encode in the browser: square centre crop, 256×256, JPEG ≤ 90 KB.
+     The Worker re-checks type and size; this only keeps uploads small. */
+  function encodePhoto(file) {
+    return new Promise(function (resolve, reject) {
+      if (!/^image\/(jpeg|png|webp)$/.test(file.type)) return reject(new Error('Use a JPEG, PNG or WebP image.'));
+      if (file.size > 15 * 1024 * 1024) return reject(new Error('That image is too large (15 MB at most).'));
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        URL.revokeObjectURL(url);
+        var side = Math.min(img.naturalWidth, img.naturalHeight);
+        if (!side) return reject(new Error('That image could not be read.'));
+        var c = document.createElement('canvas');
+        c.width = c.height = 256;
+        var g = c.getContext('2d');
+        g.fillStyle = '#FFFFFF'; g.fillRect(0, 0, 256, 256);
+        g.drawImage(img, (img.naturalWidth - side) / 2, (img.naturalHeight - side) / 2, side, side, 0, 0, 256, 256);
+        var q = 0.88, out;
+        do { out = c.toDataURL('image/jpeg', q); q -= 0.1; } while (out.length * 0.75 > 90 * 1024 && q > 0.3);
+        if (out.length * 0.75 > 90 * 1024) return reject(new Error('That image could not be made small enough. Try another photo.'));
+        resolve(out);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('That image could not be read.')); };
+      img.src = url;
+    });
+  }
+  $('photo-input').addEventListener('change', function () {
+    var f = this.files && this.files[0];
+    if (!f) return;
+    $('photo-err').hidden = true;
+    encodePhoto(f).then(function (dataUrl) {
+      edit.avatar = dataUrl;
+      setAvatar($('edit-avatar-img'), $('edit-initial'), dataUrl, $('profile-name').value);
+      $('btn-photo-remove').hidden = false;
+      $('btn-photo-pick').textContent = 'Change photo';
+    }, function (e) {
+      $('photo-err').textContent = e.message;
+      $('photo-err').hidden = false;
+    });
+    this.value = '';
+  });
+
+  function profileFieldError(field, message) {
+    var map = { name: 'f-profile-name', preferredLevel: 'f-profile-level' };
+    var wrap = $(map[field]);
+    if (!wrap) { $('profile-error').textContent = message; $('profile-error').classList.add('on'); return; }
+    wrap.classList.add('invalid');
+    wrap.querySelector('.err').textContent = message;
+    var input = wrap.querySelector('input');
+    if (input && field === 'name') { input.setAttribute('aria-invalid', 'true'); try { input.focus(); } catch (e) {} }
+  }
+
+  $('form-profile').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form = $('form-profile');
+    clearForm(form);
+    var current = profileView();
+    var name = $('profile-name').value.replace(/\s+/g, ' ').trim();
+    var picked = document.querySelector('input[name="level"]:checked');
+    var level = picked ? (picked.value || null) : (current.level || null);
+    var nameLen = Array.from(name).length;
+    if (nameLen < 2) return profileFieldError('name', 'Please enter your name (at least 2 characters).');
+    if (nameLen > 80) return profileFieldError('name', 'That name is too long (80 characters at most).');
+
+    var body = {};
+    if (name !== (acct.overview ? acct.overview.profile.name : current.name)) body.name = name;
+    if (level !== (current.level || null)) body.preferredLevel = level;
+    var photo = edit.avatar;
+    if (!Object.keys(body).length && photo === undefined) { closeEdit(); return; }
+
+    var btn = $('profile-save');
+    setBusy(btn, true, 'Saving…');
+    $('profile-cancel').disabled = true;
+    var step = Object.keys(body).length
+      ? KWAuth.request('/account/profile', { method: 'POST', body: body })
+      : Promise.resolve(null);
+    step.then(function () {
+      if (photo === undefined) return null;
+      return photo === null
+        ? KWAuth.request('/account/avatar', { method: 'DELETE' })
+        : KWAuth.request('/account/avatar', { method: 'POST', body: { image: photo } }).catch(function (err) {
+            err.field = err.field || 'avatar'; err.partial = Object.keys(body).length > 0; throw err;
+          });
+    }).then(function () {
+      return Promise.all([loadOverview(), KWAuth.refresh({ force: true })]);
+    }).then(function () {
+      setBusy(btn, false); $('profile-cancel').disabled = false;
+      closeEdit();
+      showStatus($('profile-saved'), 'Your profile has been saved.');
+    }).catch(function (err) {
+      setBusy(btn, false); $('profile-cancel').disabled = false;
+      if (err.code === 'unauthorized') { location.reload(); return; }
+      if (err.field === 'avatar') {
+        $('photo-err').textContent = (err.partial ? 'Your name and level were saved, but the photo was not: ' : '') + err.message;
+        $('photo-err').hidden = false;
+        if (err.partial) loadOverview();
+        return;
+      }
+      profileFieldError(err.field, err.message || 'Your changes could not be saved. Please try again.');
+    });
+  });
+
+  /* ---- D. change password ---- */
+  function pwField(field, message) {
+    var wrap = $('f-password-' + field);
+    if (!wrap) { $('password-error').textContent = message; $('password-error').classList.add('on'); return; }
+    wrap.classList.add('invalid');
+    wrap.querySelector('.err').textContent = message;
+    var i = wrap.querySelector('input'); i.setAttribute('aria-invalid', 'true'); try { i.focus(); } catch (e) {}
+  }
+  function closePw() {
+    toggle($('btn-pw'), $('form-password'), false);
+    ['password-current', 'password-new', 'password-confirm'].forEach(function (id) { $(id).value = ''; });
+  }
+  $('btn-pw').addEventListener('click', function () {
+    var open = $('form-password').hidden;
+    $('password-ok').hidden = true;
+    clearForm($('form-password'));
+    toggle($('btn-pw'), $('form-password'), open);
+    if (open) try { $('password-current').focus(); } catch (e) {}
+  });
+  $('password-cancel').addEventListener('click', function () { closePw(); try { $('btn-pw').focus(); } catch (e) {} });
+  $('form-password').addEventListener('submit', function (e) {
+    e.preventDefault();
+    clearForm($('form-password'));
+    var cur = $('password-current').value, next = $('password-new').value, conf = $('password-confirm').value;
+    if (!cur) return pwField('current', 'Enter your current password.');
+    if (next.length < 8) return pwField('new', 'Use at least 8 characters.');
+    if (next.length > 200) return pwField('new', 'That password is too long.');
+    if (next !== conf) return pwField('confirm', 'The two passwords do not match.');
+    var btn = $('password-save');
+    setBusy(btn, true, 'Updating…');
+    KWAuth.request('/account/password', { method: 'POST', body: { currentPassword: cur, newPassword: next } })
+      .then(function () {
+        setBusy(btn, false);
+        closePw();
+        showStatus($('password-ok'), 'Your password has been changed. Other devices have been signed out.');
+      }, function (err) {
+        setBusy(btn, false);
+        var f = { currentPassword: 'current', newPassword: 'new' }[err.field];
+        pwField(f || 'x', err.message);
+      });
+  });
+
+  /* ---- D. delete account (only when the Worker reports it as enabled) ---- */
+  $('btn-delete').addEventListener('click', function () {
+    var open = $('form-delete').hidden;
+    clearForm($('form-delete'));
+    toggle($('btn-delete'), $('form-delete'), open);
+    if (open) try { $('delete-email').focus(); } catch (e) {}
+  });
+  $('delete-cancel').addEventListener('click', function () {
+    toggle($('btn-delete'), $('form-delete'), false);
+    $('delete-email').value = ''; $('delete-password').value = '';
+  });
+  $('form-delete').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var form = $('form-delete');
+    clearForm(form);
+    function fieldErr(f, msg) {
+      var wrap = $('f-delete-' + f);
+      if (!wrap) { $('delete-error').textContent = msg; $('delete-error').classList.add('on'); return; }
+      wrap.classList.add('invalid'); wrap.querySelector('.err').textContent = msg;
+      wrap.querySelector('input').setAttribute('aria-invalid', 'true');
+    }
+    var email = $('delete-email').value.trim();
+    if (email.toLowerCase() !== profileView().email.toLowerCase()) return fieldErr('email', 'Type your account email exactly as shown above.');
+    var needPw = !$('f-delete-password').hidden;
+    if (needPw && !$('delete-password').value) return fieldErr('password', 'Enter your password.');
+    var btn = $('delete-submit');
+    setBusy(btn, true, 'Deleting…');
+    KWAuth.request('/account/delete', { method: 'POST', body: { confirmEmail: email, password: needPw ? $('delete-password').value : undefined } })
+      .then(function () {
+        setBusy(btn, false);
+        return KWAuth.refresh({ force: true }).then(function () {
+          acct.entKey = ''; acct.overview = null; acct.progress = null;
+          toggle($('btn-delete'), $('form-delete'), false);
+          show('auth'); setMode('login');
+          $('login-ok').textContent = 'Your Klarweg account has been deleted.';
+          $('login-ok').classList.add('on');
+          window.scrollTo(0, 0);
+        });
+      }, function (err) {
+        setBusy(btn, false);
+        var f = { confirmEmail: 'email', currentPassword: 'password' }[err.field];
+        fieldErr(f || 'x', err.message);
+      });
+  });
 /* Due to Safari's ITP, Google's own guidance requires redirect UX (not
    popup) on iOS — every iOS browser is WebKit-based regardless of brand,
    so this detects the platform, not "Safari" specifically. iPadOS 13+

@@ -65,7 +65,7 @@
       steps: [
         'You sign in, then choose a teacher and a time on this page.',
         'You pay the {fee} fee online through Cashfree. The booking is confirmed only once the payment is verified.',
-        'Your joining link appears on this page once your booking is confirmed.',
+        'Your teacher sends you the Google Meet link one day before your demo.',
         'You meet the teacher, who assesses your level and recommends a course.'
       ],
       /* Same-day online booking with a ₹100 Cashfree payment
@@ -146,7 +146,13 @@
         platform: 'Google Meet',
         what: 'A 20-minute live session with the teacher: a short level check, a sample of how they teach, and a recommendation for your course and format.',
         rescheduleRule: 'You can move a confirmed demo once, free of charge, up to 12 hours before it starts.',
-        refundRule: 'If the teacher has to cancel, you choose a full refund or a new time.'
+        refundRule: 'If the teacher has to cancel, you choose a full refund or a new time.',
+        /* Owner decision 2026-11-20: the teacher sends the Google Meet link
+           personally, one day before the demo, to the learner's account email
+           (the booking also records name and mobile). joinLinkOnPage: true
+           only once CONSULT_JOIN_LINKS is set as a Worker secret. */
+        linkDelivery: 'Your teacher emails you the Google Meet link one day before your demo.',
+        joinLinkOnPage: false
       },
       /* Owner switches for the page. The Worker's DEMO_BOOKING and
          ENROL_PAYMENTS decide whether money can actually be taken; with

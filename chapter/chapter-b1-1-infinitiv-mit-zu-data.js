@@ -270,7 +270,7 @@ const CHAPTER = {
     },
     { de: 'wieso', pos: 'adverb', en: 'why', hi: 'क्यों',
       ex: 'Wieso hast du aufgehört, Deutsch zu lernen?', exEn: 'Why did you stop learning German?',
-      img: { src: '../public/vocab-img/d3f8a5cb1fb1b7e6cab6', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Puzzled person asking why with open palms' }
+      vis: { kind: 'grammar', de: 'Wieso hast du aufgehört, Deutsch zu lernen?', hl: 'Wieso', role: 'focus', cap: 'wieso = why (= warum)' }
     },
     { de: 'zelten', pos: 'verb', en: 'to camp', hi: 'कैंपिंग करना',
       ex: 'Wir haben vor, an der Küste zu zelten.', exEn: 'We\'re planning to camp on the coast.',

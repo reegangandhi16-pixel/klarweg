@@ -298,7 +298,7 @@ const CHAPTER = {
     },
     { de: 'noch einmal', pos: 'phrase', en: 'once more, again', hi: 'एक बार और',
       ex: 'Sag das bitte noch einmal.', exEn: 'Please say that once more.',
-      img: { src: '/api/media/vocab-img/f8d63446ab8288f5c2fb', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A music teacher signalling to repeat a piece once more.' }
+      vis: { kind: 'grammar', de: 'Sag das bitte noch einmal.', hl: 'noch einmal', role: 'focus', cap: 'noch einmal = once more, again' }
     }
   ],
 

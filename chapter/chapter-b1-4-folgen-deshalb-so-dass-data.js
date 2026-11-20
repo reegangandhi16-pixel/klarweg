@@ -251,7 +251,7 @@ const CHAPTER = {
     { de: 'ausgezeichnet', pos: 'adjective', level: 'B1', en: 'excellent', hi: 'शानदार',
       ex: 'Manche Werbeanzeigen sind ausgezeichnet gemacht.', exEn: 'Some advertisements are excellently made.', exHi: 'Kuch vigyapan bahut shandaar tareeke se bane hote hain.',
       advanced: { synonyms: ['hervorragend'], opposites: ['mangelhaft'], collocations: ['ausgezeichnet gemacht', 'ausgezeichnete Qualität'] },
-      img: { src: '/api/media/vocab-img/4daf7747252646d42438', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A woodturner admiring a flawlessly crafted wooden bowl.' }
+      vis: { kind: 'grammar', de: 'Manche Werbeanzeigen sind ausgezeichnet gemacht.', hl: 'ausgezeichnet', role: 'focus', cap: 'ausgezeichnet = excellent(ly)' }
     },
     { de: 'automatisch', pos: 'adjective', level: 'B1', en: 'automatic', hi: 'स्वचालित',
       ex: 'Das Gerät schaltet sich automatisch aus.', exEn: 'The device switches off automatically.', exHi: 'Device apne aap band ho jaata hai.',

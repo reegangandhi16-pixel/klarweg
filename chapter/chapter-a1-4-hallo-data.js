@@ -321,7 +321,7 @@ const CHAPTER = {
     },
     { de: 'so', pos: 'adverb', en: 'so; so-so', hi: 'ऐसे / ठीक-ठाक',
       ex: 'So, Herr Wolan, fangen wir an.', exEn: 'So, Mr Wolan, let us begin.',
-      img: { src: '/api/media/vocab-img/d317973665edfcbf9ee9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A meeting leader clapping hands together to signal the start.' }
+      vis: { kind: 'grammar', de: 'So, Herr Wolan, fangen wir an.', hl: 'So', role: 'focus', cap: 'so = so, well (to start); so lala = so-so' }
     },
     { de: 'gehen', pos: 'verb', en: 'to go', hi: 'जाना',
       ex: 'Ich gehe jetzt. Tschüs!', exEn: 'I am going now. Bye!',

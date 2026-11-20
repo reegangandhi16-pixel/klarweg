@@ -224,7 +224,7 @@ const CHAPTER = {
       conj: { praesens: 'versucht', praeteritum: 'versuchte', perfekt: 'hat versucht' } },
     { de: 'vorhaben', pos: 'verb', en: 'to plan, intend', hi: 'योजना बनाना', ex: 'Ich habe vor, morgen zu üben.', exEn: 'I\'m planning to practise tomorrow.',
       conj: { praesens: 'hat vor', praeteritum: 'hatte vor', perfekt: 'hat vorgehabt' },
-      img: { src: '/api/media/vocab-img/e69e9c6a037c10f67b52', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Man intending to start a morning run' }
+      vis: { kind: 'grammar', de: 'Ich habe vor, morgen zu üben.', hl: 'habe vor', role: 'focus', cap: 'vorhaben = to plan (ich habe vor, … zu …)' }
     },
     { de: 'versprechen', pos: 'verb', en: 'to promise', hi: 'वादा करना', ex: 'Ich verspreche, pünktlich zu sein.', exEn: 'I promise to be on time.',
       conj: { praesens: 'verspricht', praeteritum: 'versprach', perfekt: 'hat versprochen' } },
@@ -232,9 +232,9 @@ const CHAPTER = {
     { de: 'da', pos: 'grammar', en: 'as, since (formal reason)', hi: 'चूंकि', ex: 'Da ich vorbereitet bin, bin ich ruhig.', exEn: 'Since I\'m prepared, I\'m calm.', vis: { kind: 'grammar', de: 'Da ich vorbereitet bin, bin ich ruhig.', hl: 'Da', role: 'focus', cap: 'da = as, since: gives the reason (verb at the end)' } },
     { de: 'obwohl', pos: 'grammar', en: 'although (contrast)', hi: 'हालांकि', ex: 'Obwohl ich nervös bin, schaffe ich es.', exEn: 'Although I\'m nervous, I\'ll manage it.' },
     { de: 'könnte', pos: 'verb', en: 'could (polite request)', hi: 'क्या आप कर सकते हैं', ex: 'Könnten Sie mir helfen?', exEn: 'Could you help me?' },
-    { de: 'würde', pos: 'verb', en: 'would (polite request)', hi: 'क्या आप करेंगे', ex: 'Würden Sie bitte langsamer sprechen?', exEn: 'Would you please speak more slowly?', img: { src: '/api/media/vocab-img/5949d3231fa4547bb984', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person daydreaming about travel with a suitcase and palm tree.' } },
+    { de: 'würde', pos: 'verb', en: 'would (polite request)', hi: 'क्या आप करेंगे', ex: 'Würden Sie bitte langsamer sprechen?', exEn: 'Would you please speak more slowly?', vis: { kind: 'grammar', de: 'Ich würde gern mehr reisen.', hl: 'würde', role: 'focus', cap: 'würde + infinitive = would (wishes, polite requests)' } },
     { de: 'hätte gern', pos: 'verb', en: 'would like (to have)', hi: 'मुझे चाहिए', ex: 'Ich hätte gern einen Kaffee.', exEn: 'I\'d like a coffee.' },
-    { de: 'wäre', pos: 'verb', en: 'would be', hi: 'होगा', ex: 'Wären Sie so freundlich, mir zu helfen?', exEn: 'Would you be so kind as to help me?', img: { src: '/api/media/vocab-img/52587d68aaa825e17d0d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person gazing wistfully, imagining being in Germany.' } },
+    { de: 'wäre', pos: 'verb', en: 'would be', hi: 'होगा', ex: 'Wären Sie so freundlich, mir zu helfen?', exEn: 'Would you be so kind as to help me?', vis: { kind: 'grammar', de: 'Ich wäre gern in Deutschland.', hl: 'wäre', role: 'focus', cap: 'wäre = would be (Konjunktiv II of sein)' } },
     { de: 'deshalb', pos: 'grammar', en: 'that\'s why, therefore (result)', hi: 'इसलिए', ex: 'Es regnet. Deshalb bleiben wir zu Hause.', exEn: 'It\'s raining. That\'s why we\'re staying home.', vis: { kind: 'grammar', de: 'Es regnet. Deshalb bleiben wir zu Hause.', hl: 'Deshalb', role: 'focus', cap: 'deshalb = that\'s why: the result follows, verb comes next' } },
     { de: 'so … dass', pos: 'grammar', en: 'so … that (strong consequence)', hi: 'इतना … कि', ex: 'Ich war so müde, dass ich sofort eingeschlafen bin.', exEn: 'I was so tired that I fell asleep immediately.' },
     { de: 'wegen', pos: 'grammar', en: 'because of (+ Genitiv)', hi: 'की वजह से', ex: 'Wegen des Regens bleiben wir zu Hause.', exEn: 'Because of the rain, we\'re staying home.' },
@@ -257,7 +257,7 @@ const CHAPTER = {
     { de: 'ruhig', pos: 'adjective', en: 'calm', hi: 'शांत', ex: 'Bleib ruhig, du bist gut vorbereitet.', exEn: 'Stay calm, you\'re well prepared.', img: { src: '/api/media/vocab-img/6e1e76606af0465e0974', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person meditating calmly on a mat' } },
     { de: 'sicher', pos: 'adjective', en: 'confident, certain', hi: 'आश्वस्त', ex: 'Ich bin mir ziemlich sicher.', exEn: 'I\'m fairly confident.' },
     { de: 'Übung', art: 'die', gender: 'f', plural: 'Übungen', pos: 'noun', en: 'exercise', hi: 'अभ्यास', ex: 'Diese Übung hilft mir sehr.', exEn: 'This exercise helps me a lot.' },
-    { de: 'Thema', art: 'das', gender: 'n', plural: 'Themen', pos: 'noun', en: 'topic', hi: 'विषय', ex: 'Welches Thema fällt dir am schwersten?', exEn: 'Which topic seems hardest to you?', img: { src: '/api/media/vocab-img/9f40eaa7d030acbbc887', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Discussion cards with pictograms placed in the center of a meeting table.' } },
+    { de: 'Thema', art: 'das', gender: 'n', plural: 'Themen', pos: 'noun', en: 'topic', hi: 'विषय', ex: 'Welches Thema fällt dir am schwersten?', exEn: 'Which topic seems hardest to you?', vis: { kind: 'grammar', de: 'Welches Thema interessiert dich?', hl: 'Thema', role: 'focus', cap: 'das Thema = topic' } },
     { de: 'feiern', pos: 'verb', en: 'to celebrate', hi: 'जश्न मनाना', ex: 'Wir feiern den Erfolg zusammen.', exEn: 'We\'re celebrating the success together.',
       conj: { praesens: 'feiert', praeteritum: 'feierte', perfekt: 'hat gefeiert' },
       img: { src: '/api/media/vocab-img/122b18c419e9958e2bc0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Friends toasting together at a party' }

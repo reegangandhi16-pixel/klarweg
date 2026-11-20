@@ -281,7 +281,7 @@ const CHAPTER = {
       ex: 'Ich habe ihn mehrfach angerufen.', exEn: 'I called him repeatedly.', exHi: 'Maine use baar-baar phone kiya.',
       ex2: 'Der Fehler ist mehrfach aufgetreten.', ex2En: 'The error occurred multiple times.', ex2Hi: 'Galti kai baar hui.',
       advanced: { synonyms: ['wiederholt', 'mehrmals'], opposites: ['einmal'], collocations: ['mehrfach versuchen', 'mehrfach anrufen'] },
-      img: { src: '/api/media/vocab-img/b47e724e28f1e87b8abc', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smartphone on a table with multiple missed-call bell symbols.' }
+      vis: { kind: 'grammar', de: 'Ich habe ihn mehrfach angerufen.', hl: 'mehrfach', role: 'focus', cap: 'mehrfach = repeatedly, several times' }
     },
     { de: 'obwohl', pos: 'grammar', level: 'B1', en: 'although, even though', hi: 'हालांकि, बावजूद',
       ex: 'Obwohl es regnet, gehen wir spazieren.', exEn: 'Although it\'s raining, we\'re going for a walk.', exHi: 'Halanki barish ho rahi hai, hum tehalne jaate hain.',

@@ -45,5 +45,89 @@
   "alt": "A tablecloth far too small for a large table",
   "strategy": "direct",
   "note": "retry prompt after manual QA fail 2026-11-20"
+ },
+ "ansehen--look-at": {
+  "subject": "Show a young couple standing in an empty, sunny apartment they want to rent, both turning their heads to look carefully at the large windows and walls, one pointing at the window.",
+  "alt": "A couple looking carefully at an empty apartment",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "die-lieblingsfarbe--favourite-colour": {
+  "subject": "Show a smiling girl holding up a blue paint swatch card in front of a table of many colour swatches; she wears a blue sweater, has a blue backpack and a blue cup beside her, clearly loving the colour blue.",
+  "alt": "A girl holding up her favourite colour, blue",
+  "strategy": "emotion",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "ausschalten--switch-off": {
+  "subject": "Show a close-up of a hand pressing a wall light switch down while the ceiling lamp above goes dark; the left half of the room is still lit, the right half already dark.",
+  "alt": "A hand switching off the light",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "kaempfen--fight": {
+  "subject": "Show a determined woman marching in a peaceful street demonstration, holding a blank sign high with one fist raised, other demonstrators behind her.",
+  "alt": "A woman demonstrating for her rights",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "die-erpressung--blackmail-extortion": {
+  "subject": "Show a worried man at a police station counter handing a threatening anonymous letter with cut-out magazine letters to a police officer, who reads it seriously.",
+  "alt": "A man reporting a threatening letter to the police",
+  "strategy": "scene",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "die-nation--nation": {
+  "subject": "Show many small sailing boats at a regatta, each sail clearly in different national flag colours (e.g. German, French, Italian, Japanese, Brazilian), sailing side by side.",
+  "alt": "Sailing boats from many nations at a regatta",
+  "strategy": "scene",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "besetzen--occupy-fill": {
+  "subject": "Show a manager welcoming a new employee to an empty desk with a nameplate holder and a new laptop, shaking hands; the empty office chair is about to be filled.",
+  "alt": "A manager welcoming a new employee to a vacant desk",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "ereignen--happen-occur": {
+  "subject": "Show a minor car accident at a quiet crossing in the early morning: two small cars with a dented bumper, the low morning sun rising behind, drivers getting out.",
+  "alt": "A minor car accident in the morning",
+  "strategy": "scene",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "gebraucht--used-second-hand": {
+  "subject": "Show a young woman buying an older, slightly scratched car with a small dent from a friendly seller on a used-car lot; she receives the keys and an old service booklet.",
+  "alt": "A woman buying a slightly worn second-hand car",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "publizieren--publish": {
+  "subject": "Show a proud researcher in a lab coat holding up a freshly printed scientific journal with charts on the open page, colleagues clapping behind him.",
+  "alt": "A researcher proudly holding his published journal article",
+  "strategy": "emotion",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "der-augenblick--moment": {
+  "subject": "Show a man at a kitchen table who has just lifted his coffee cup when his phone on the table suddenly lights up and rings; he freezes mid-movement, surprised.",
+  "alt": "A man surprised by a ringing phone at that very moment",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "der-defekt--defect": {
+  "subject": "Show a technician looking through a magnifying glass at a computer chip on a workbench; a clearly visible crack runs across the chip, with a small red warning light beside it.",
+  "alt": "A technician finding a crack in a chip",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "die-steuer--tax": {
+  "subject": "Show a person at a desk filling in a tax form (lines and boxes, no words) with receipts, a calculator and a pile of coins being moved towards a government building icon.",
+  "alt": "A person doing their taxes with receipts and calculator",
+  "strategy": "scene",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "grossbritannien--great-britain": {
+  "subject": "Show a simple relief map of the island of Great Britain floating on blue sea, with England, Scotland and Wales in slightly different shades of green and tiny landmarks: Big Ben, a Scottish castle, Welsh mountains.",
+  "alt": "A map of Great Britain with England, Scotland and Wales",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
  }
 }

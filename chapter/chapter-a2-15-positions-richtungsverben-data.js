@@ -250,7 +250,7 @@ const CHAPTER = {
     { de: 'hinten', pos: 'adverb', en: 'at the back, behind', hi: 'पीछे', ex: 'Das Kennzeichen ist hinten am Pkw.', exEn: 'The licence plate is at the back of the car.' },
     { de: 'gegen', pos: 'preposition', en: 'against (+ Akk.)', hi: 'के विरुद्ध', ex: 'Stell das Rad nicht gegen die Wand.', exEn: 'Don\u2019t put the bike against the wall.' },
     { de: 'in Zukunft', pos: 'phrase', en: 'in future', hi: 'भविष्य में', ex: 'In Zukunft fahren wir weniger Auto.', exEn: 'In future we\u2019ll drive less.' },
-    { de: 'd.h.', pos: 'phrase', en: 'i.e., meaning (das hei\u00dft)', hi: 'यानी', ex: 'Das Zentrum ist autofrei, d.h. ohne Pkw.', exEn: 'The city centre is car-free, i.e. without cars.', img: { src: '/api/media/vocab-img/92f621e15f16da186974', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'vibrant pedestrian street filled with people walking and cycling, with a round no-cars sign at the street entrance', cap: 'Car-free, meaning without cars', hl: 'd.h.' } }
+    { de: 'd.h.', pos: 'phrase', en: 'i.e., meaning (das hei\u00dft)', hi: 'यानी', ex: 'Das Zentrum ist autofrei, d.h. ohne Pkw.', exEn: 'The city centre is car-free, i.e. without cars.', vis: { kind: 'grammar', de: 'Das Zentrum ist autofrei, d.h. ohne Pkw.', hl: 'd.h.', role: 'focus', cap: 'd.h. = das heißt = i.e., that is' } }
   ],
 
   // ---------- Positions- & Richtungsverben (rule cards) ----------

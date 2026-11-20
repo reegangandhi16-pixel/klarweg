@@ -2476,5 +2476,397 @@
   "hl": "Außerhalb von",
   "role": "focus",
   "cap": "außerhalb von + Dativ = outside of"
+ },
+ "noch-einmal--once-more-again": {
+  "type": "grammar",
+  "de": "Sag das bitte noch einmal.",
+  "hl": "noch einmal",
+  "role": "focus",
+  "cap": "noch einmal = once more, again"
+ },
+ "so--so-so-so": {
+  "type": "grammar",
+  "de": "So, Herr Wolan, fangen wir an.",
+  "hl": "So",
+  "role": "focus",
+  "cap": "so = so, well (to start); so lala = so-so"
+ },
+ "laufen--run-to-go": {
+  "type": "grammar",
+  "de": "Die Reise ist gut gelaufen.",
+  "hl": "gut gelaufen",
+  "role": "focus",
+  "cap": "gut laufen = to go well (Perfekt: ist gut gelaufen)"
+ },
+ "das-thema--topic": {
+  "type": "grammar",
+  "de": "Welches Thema interessiert dich?",
+  "hl": "Thema",
+  "role": "focus",
+  "cap": "das Thema = topic"
+ },
+ "klar--of-course-sure": {
+  "type": "grammar",
+  "de": "Klar, machen wir das!",
+  "hl": "Klar",
+  "role": "focus",
+  "cap": "klar = sure, of course (spoken)"
+ },
+ "alles-klar--all-good-okay": {
+  "type": "grammar",
+  "de": "Alles klar bei dir?",
+  "hl": "Alles klar",
+  "role": "focus",
+  "cap": "Alles klar? = All good? / Okay"
+ },
+ "so--so-such": {
+  "type": "grammar",
+  "de": "So ein Pech!",
+  "hl": "So ein",
+  "role": "focus",
+  "cap": "so ein … = such a …"
+ },
+ "duerfen--may-to-be-allowed": {
+  "type": "grammar",
+  "de": "Darf ich hereinkommen?",
+  "hl": "Darf",
+  "role": "focus",
+  "cap": "dürfen = may, to be allowed (ich darf)"
+ },
+ "ausdruecken--express": {
+  "type": "grammar",
+  "de": "Ich kann das gut ausdrücken.",
+  "hl": "ausdrücken",
+  "role": "focus",
+  "cap": "ausdrücken = to express (in words)"
+ },
+ "glauben--believe-to-think": {
+  "type": "grammar",
+  "de": "Ich glaube, dass Filme gute Lehrer sind.",
+  "hl": "glaube",
+  "role": "focus",
+  "cap": "glauben = to believe, to think (an opinion)"
+ },
+ "das-stichwort--keyword-cue": {
+  "type": "grammar",
+  "de": "Das Stichwort ist „Präteritum“.",
+  "hl": "Stichwort",
+  "role": "focus",
+  "cap": "das Stichwort = keyword, cue"
+ },
+ "sollen--be-meant-to-to-be-the-point": {
+  "type": "grammar",
+  "de": "Was soll dieser Vergleich?",
+  "hl": "soll",
+  "role": "focus",
+  "cap": "Was soll …? = What's the point of …?"
+ },
+ "die-verzeihung--pardon-excuse-me": {
+  "type": "grammar",
+  "de": "Verzeihung, ist der Platz noch frei?",
+  "hl": "Verzeihung",
+  "role": "focus",
+  "cap": "Verzeihung = excuse me, pardon (polite)"
+ },
+ "wollte--wanted-to": {
+  "type": "grammar",
+  "de": "Ich wollte das Zertifikat bekommen.",
+  "hl": "wollte",
+  "role": "focus",
+  "cap": "wollte = wanted to (Präteritum of wollen)"
+ },
+ "das-bedauern--regret": {
+  "type": "grammar",
+  "de": "Zu meinem Bedauern kann ich nicht zur Feier kommen.",
+  "hl": "Zu meinem Bedauern",
+  "role": "focus",
+  "cap": "zu meinem Bedauern = to my regret (formal)"
+ },
+ "sich-entschuldigen--apologise": {
+  "type": "grammar",
+  "de": "Ich möchte mich für die Verspätung entschuldigen.",
+  "hl": "entschuldigen",
+  "role": "focus",
+  "cap": "sich entschuldigen (für) = to apologise (for)"
+ },
+ "d-h--i-e-meaning": {
+  "type": "grammar",
+  "de": "Das Zentrum ist autofrei, d.h. ohne Pkw.",
+  "hl": "d.h.",
+  "role": "focus",
+  "cap": "d.h. = das heißt = i.e., that is"
+ },
+ "effektiv--effective": {
+  "type": "grammar",
+  "de": "Wenn man effektiv lernt, spart man Zeit.",
+  "hl": "effektiv",
+  "role": "focus",
+  "cap": "effektiv = effective(ly), with a real result"
+ },
+ "gestehen--confess": {
+  "type": "grammar",
+  "de": "Er gesteht, dass er das Fenster kaputt gemacht hat.",
+  "hl": "gesteht",
+  "role": "focus",
+  "cap": "gestehen = to confess, to admit"
+ },
+ "waere--would-be": {
+  "type": "grammar",
+  "de": "Ich wäre gern in Deutschland.",
+  "hl": "wäre",
+  "role": "focus",
+  "cap": "wäre = would be (Konjunktiv II of sein)"
+ },
+ "wuerde--would": {
+  "type": "grammar",
+  "de": "Ich würde gern mehr reisen.",
+  "hl": "würde",
+  "role": "focus",
+  "cap": "würde + infinitive = would (wishes, polite requests)"
+ },
+ "wieso--why": {
+  "type": "grammar",
+  "de": "Wieso hast du aufgehört, Deutsch zu lernen?",
+  "hl": "Wieso",
+  "role": "focus",
+  "cap": "wieso = why (= warum)"
+ },
+ "mehrfach--repeatedly-multiple-times": {
+  "type": "grammar",
+  "de": "Ich habe ihn mehrfach angerufen.",
+  "hl": "mehrfach",
+  "role": "focus",
+  "cap": "mehrfach = repeatedly, several times"
+ },
+ "ausgezeichnet--excellent": {
+  "type": "grammar",
+  "de": "Manche Werbeanzeigen sind ausgezeichnet gemacht.",
+  "hl": "ausgezeichnet",
+  "role": "focus",
+  "cap": "ausgezeichnet = excellent(ly)"
+ },
+ "vorhaben--plan-intend": {
+  "type": "grammar",
+  "de": "Ich habe vor, morgen zu üben.",
+  "hl": "habe vor",
+  "role": "focus",
+  "cap": "vorhaben = to plan (ich habe vor, … zu …)"
+ },
+ "aufgeben--forsake-give-up": {
+  "type": "grammar",
+  "de": "Er will seinen alten Beruf aufgeben.",
+  "hl": "aufgeben",
+  "role": "focus",
+  "cap": "aufgeben = to give up (separable: er gibt … auf)"
+ },
+ "relevant--relevant": {
+  "type": "grammar",
+  "de": "Diese Information ist für die Prüfung relevant.",
+  "hl": "relevant",
+  "role": "focus",
+  "cap": "relevant (für) = relevant (to)"
+ },
+ "angehen--concern": {
+  "type": "grammar",
+  "de": "Das geht mich nichts an.",
+  "hl": "geht mich nichts an",
+  "role": "focus",
+  "cap": "Das geht mich nichts an. = That doesn't concern me."
+ },
+ "die-wahrheit--truth": {
+  "type": "grammar",
+  "de": "Er wird die Wahrheit sagen.",
+  "hl": "Wahrheit",
+  "role": "focus",
+  "cap": "die Wahrheit sagen = to tell the truth"
+ },
+ "die-ausrede--excuse": {
+  "type": "grammar",
+  "de": "Er wird sicher eine Ausrede finden.",
+  "hl": "Ausrede",
+  "role": "focus",
+  "cap": "die Ausrede = excuse (a made-up reason)"
+ },
+ "grad--at-the-moment": {
+  "type": "grammar",
+  "de": "Ich bin grad beschäftigt.",
+  "hl": "grad",
+  "role": "focus",
+  "cap": "grad (spoken) = gerade = at the moment"
+ },
+ "schaetzen--value": {
+  "type": "grammar",
+  "de": "Ich schätze deine Ehrlichkeit sehr.",
+  "hl": "schätze",
+  "role": "focus",
+  "cap": "schätzen = to value, to appreciate"
+ },
+ "die-ich-aussage--i-statement": {
+  "type": "grammar",
+  "de": "Eine Ich-Aussage erleichtert das Gespräch.",
+  "hl": "Ich-Aussage",
+  "role": "focus",
+  "cap": "die Ich-Aussage = I-statement („Ich fühle mich …“)"
+ },
+ "ergreifen--seize-take": {
+  "type": "grammar",
+  "de": "Neue Maßnahmen sind ergriffen worden.",
+  "hl": "ergriffen",
+  "role": "focus",
+  "cap": "Maßnahmen ergreifen = to take measures"
+ },
+ "die-patenschaft--sponsorship-godparenthood": {
+  "type": "grammar",
+  "de": "Sie übernimmt eine Patenschaft für das Projekt.",
+  "hl": "Patenschaft",
+  "role": "focus",
+  "cap": "die Patenschaft = sponsorship; godparenthood"
+ },
+ "problematisch--problematic": {
+  "type": "grammar",
+  "de": "Der Wohlstand ist problematisch, wenn er Umweltprobleme verursacht.",
+  "hl": "problematisch",
+  "role": "focus",
+  "cap": "problematisch = problematic"
+ },
+ "herankommen--approach": {
+  "type": "grammar",
+  "de": "Die Katze versucht, an den Vogel heranzukommen.",
+  "hl": "heranzukommen",
+  "role": "focus",
+  "cap": "herankommen (an + Akk.) = to approach, to get close to"
+ },
+ "geteilt--divided-shared": {
+  "type": "grammar",
+  "de": "Die Meinungen sind geteilt.",
+  "hl": "geteilt",
+  "role": "focus",
+  "cap": "geteilt = divided (opinions); shared"
+ },
+ "die-lebenslage--life-situation": {
+  "type": "grammar",
+  "de": "Er ist in einer schwierigen Lebenslage.",
+  "hl": "Lebenslage",
+  "role": "focus",
+  "cap": "die Lebenslage = life situation, circumstances"
+ },
+ "die-leistungsbereitschaft--willingness-to-perform": {
+  "type": "grammar",
+  "de": "Der Chef lobt ihre hohe Leistungsbereitschaft.",
+  "hl": "Leistungsbereitschaft",
+  "role": "focus",
+  "cap": "die Leistungsbereitschaft = willingness to perform"
+ },
+ "bemerkenswert--remarkable": {
+  "type": "grammar",
+  "de": "Das Programm ist bemerkenswert.",
+  "hl": "bemerkenswert",
+  "role": "focus",
+  "cap": "bemerkenswert = remarkable"
+ },
+ "die-epidemie--epidemic": {
+  "type": "grammar",
+  "de": "Die Epidemie breitete sich schnell aus.",
+  "hl": "Epidemie",
+  "role": "focus",
+  "cap": "die Epidemie = epidemic"
+ },
+ "die-macke--quirk-flaw": {
+  "type": "grammar",
+  "de": "Jeder hat seine kleinen Macken.",
+  "hl": "Macken",
+  "role": "focus",
+  "cap": "die Macke = quirk, little flaw (spoken)"
+ },
+ "respektieren--respect": {
+  "type": "grammar",
+  "de": "Man sollte die Meinung anderer respektieren.",
+  "hl": "respektieren",
+  "role": "focus",
+  "cap": "respektieren = to respect"
+ },
+ "treffen--meet-hit-make": {
+  "type": "grammar",
+  "de": "Die Koalition traf eine schwierige Entscheidung.",
+  "hl": "traf eine schwierige Entscheidung",
+  "role": "focus",
+  "cap": "eine Entscheidung treffen = to make a decision"
+ },
+ "wach-halten--keep-awake-keep-alive": {
+  "type": "grammar",
+  "de": "Kaffee kann dich wach halten.",
+  "hl": "wach halten",
+  "role": "focus",
+  "cap": "wach halten = keep awake; die Erinnerung wach halten = keep alive"
+ },
+ "die-eifersucht--jealousy": {
+  "type": "grammar",
+  "de": "Eifersucht zerstörte ihre Freundschaft.",
+  "hl": "Eifersucht",
+  "role": "focus",
+  "cap": "die Eifersucht = jealousy"
+ },
+ "elementar--elementary-fundamental": {
+  "type": "grammar",
+  "de": "Das war ein elementarer Fehler.",
+  "hl": "elementarer",
+  "role": "focus",
+  "cap": "elementar = fundamental, basic"
+ },
+ "die-liberalitaet--liberality-tolerance": {
+  "type": "grammar",
+  "de": "Ihre Liberalität war bekannt.",
+  "hl": "Liberalität",
+  "role": "focus",
+  "cap": "die Liberalität = liberality, open-minded tolerance"
+ },
+ "gemein--mean-common": {
+  "type": "grammar",
+  "de": "Das war eine gemeine Bemerkung.",
+  "hl": "gemeine",
+  "role": "focus",
+  "cap": "gemein = mean, nasty (also: common)"
+ },
+ "die-kritikfaehigkeit--ability-to-take-criticism": {
+  "type": "grammar",
+  "de": "Meine Kritikfähigkeit wächst.",
+  "hl": "Kritikfähigkeit",
+  "role": "focus",
+  "cap": "die Kritikfähigkeit = ability to take criticism"
+ },
+ "die-bereitschaft--readiness": {
+  "type": "grammar",
+  "de": "Ihre Bereitschaft, sich auf die Prüfung vorzubereiten, ist hoch.",
+  "hl": "Bereitschaft",
+  "role": "focus",
+  "cap": "die Bereitschaft = readiness, willingness"
+ },
+ "die-evidenz--evidence": {
+  "type": "grammar",
+  "de": "Die Evidenz spricht für diese Theorie.",
+  "hl": "Evidenz",
+  "role": "focus",
+  "cap": "die Evidenz = evidence (academic)"
+ },
+ "andeuten--hint-at-indicate": {
+  "type": "grammar",
+  "de": "Der Autor deutet nur an, was er meint.",
+  "hl": "deutet nur an",
+  "role": "focus",
+  "cap": "andeuten = to hint at (separable: deutet … an)"
+ },
+ "evident--evident": {
+  "type": "grammar",
+  "de": "Der Zusammenhang ist evident.",
+  "hl": "evident",
+  "role": "focus",
+  "cap": "evident = evident, obvious (formal)"
+ },
+ "diskurspraegend--discourse-shaping": {
+  "type": "grammar",
+  "de": "Ihr Werk gilt als diskursprägend für die Debatte.",
+  "hl": "diskursprägend",
+  "role": "focus",
+  "cap": "diskursprägend = shaping the public debate"
  }
 }

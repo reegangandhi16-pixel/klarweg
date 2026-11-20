@@ -40,15 +40,19 @@ activate a Workers Paid subscription.** Cloudflare's own Email Sending cannot
 send to arbitrary learner addresses from Workers Free. Resend's free tier
 supports ordinary recipients after domain verification.
 
-1. **Create a Resend Free account** at https://resend.com and remain on the
-   $0 plan. The free allowance is 100 emails per day, 3,000 per month.
-   Do not enable paid overages, subscriptions or upgrades.
-2. **Verify the sender domain:** Resend dashboard → Domains → Add Domain →
-   `klarweg.in` (or a dedicated `send.klarweg.in` subdomain). Copy the
-   **exact** DNS records displayed by Resend into the Cloudflare DNS zone.
+1. **Use the existing Resend Free account** at https://resend.com and
+   remain on the $0 plan (100 emails/day, 3,000/month). As checked in
+   the dashboard on 2026-11-20, the existing domain `send.klarweg.in`
+   has status **not started** and Resend Forge **Pending**.
+   Do not create a duplicate domain or enable paid subscriptions.
+2. **Verify the existing sender domain:** Resend dashboard → Domains →
+   `send.klarweg.in`. Copy the **exact** DKIM and CNAME records displayed
+   by Resend into **Cloudflare DNS**, not Amazon Route 53 (which is
+   currently shown as the provider in the Resend dashboard).
    Do not replace the website's A, AAAA, CNAME records or existing inbound
    MX/SPF records. If using a sending subdomain, change `MAIL_FROM` to
-   `no-reply@send.klarweg.in` once that subdomain is verified. Avoid
+   `no-reply@send.klarweg.in` (already selected in wrangler.toml) once
+   that subdomain is verified. Avoid
    duplicate conflicting SPF TXT records; follow Resend's verification UI.
    Confirm the domain status is **Verified** before attempting delivery.
 3. **Create a Resend send-only API key**. Keep it private. In the correct

@@ -1165,3 +1165,8 @@ book-answers/netzwerk-neu-a2-kursbuch-answers.html
 book-answers/netzwerk-neu-a2-uebungsbuch-answers.html
 book-answers/netzwerk-neu-b1-kursbuch-answers.html
 book-answers/netzwerk-neu-b1-uebungsbuch-answers.html
+
+# German PDF library
+downloads/library/index.html
+GLOB:downloads/library/*/index.html
+GLOB:downloads/library/files/*.pdf

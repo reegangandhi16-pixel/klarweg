@@ -291,7 +291,9 @@ const CHAPTER = {
       ex: 'Merke dir den Artikel!', exEn: 'Remember the article!',
       conj: { praesens: 'merkt', praeteritum: 'merkte', perfekt: 'hat gemerkt' } },
     { de: 'noch', pos: 'adverb', en: 'yet, still, any', hi: 'अभी / और',
-      ex: 'Hast du noch eine Karte?', exEn: 'Do you have another card?' },
+      ex: 'Hast du noch eine Karte?', exEn: 'Do you have another card?',
+      vis: { kind: 'grammar', de: 'Hast du noch eine Karte?', hl: 'noch', role: 'focus', cap: 'noch = yet, still, any' }
+    },
     // — Passive (mostly neuter & masculine compound nouns) —
     { de: 'Artikelbild', art: 'das', gender: 'n', plural: 'Artikelbilder', pos: 'noun', en: 'article picture', hi: 'लेख-चित्र',
       ex: 'Das Artikelbild zeigt ein Auto.', exEn: 'The article picture shows a car.' },

@@ -150,10 +150,18 @@ function final() {
   // Hand-checked corrections (German reviewed by Claude, 2026-11-19) win over the model.
   const manual = J(path.join(ROOT, "docs/visual-vocab/prompts/second-strategy-manual.json")) || {};
   for (const [k, x] of Object.entries(manual)) { if (all.has(k) && valid(x, all.get(k))) { out[k] = x; stat.manual = (stat.manual || 0) + 1; } else console.error("manual entry invalid or unknown:", k); }
+  // Evaluation 2026-11-20 (docs/visual-vocab/second-strategy-evaluation.md): AI pictures did not teach
+  // connectors and function words, so their pairs/scenes become the sentence-focus visual (no image).
+  const focus = J(path.join(ROOT, "docs/visual-vocab/prompts/second-strategy-focus.json")) || {};
+  for (const [k, x] of Object.entries(focus)) { if (all.has(k) && valid(x, all.get(k))) { out[k] = x; stat.focus = (stat.focus || 0) + 1; } else console.error("focus entry invalid or unknown:", k); }
   return { out, stat };
 }
 function merge() {
   const { out, stat } = final();
+  // a concept whose scene image was accepted and applied leaves the candidate set; keep its record
+  const prev = J(OUT) || {}; const withImg = new Set();
+  for (const ch of loadChapters()) for (const v of ch.C.vocab || []) if (v.img) withImg.add(conceptKey(v));
+  for (const [k, x] of Object.entries(prev)) if (!out[k] && withImg.has(k) && (x.type === "scene" || x.type === "pair")) { out[k] = x; stat.keptWithImage = (stat.keptWithImage || 0) + 1; }
   fs.writeFileSync(OUT, JSON.stringify(out, null, 1) + "\n");
   const by = {}; for (const x of Object.values(out)) by[x.type] = (by[x.type] || 0) + 1;
   console.log(JSON.stringify({ written: Object.keys(out).length, byType: by, ...stat, out: path.relative(ROOT, OUT) }));

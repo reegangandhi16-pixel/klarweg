@@ -232,7 +232,9 @@ const CHAPTER = {
     { de: 'er', pos: 'pronoun', en: 'he', hi: 'वह (पुरुष)',
       ex: 'Er kommt aus Berlin.', exEn: 'He comes from Berlin.' },
     { de: 'sie', pos: 'pronoun', en: 'she; they', hi: 'वह (स्त्री) / वे',
-      ex: 'Sie heißt Lena.', exEn: 'She is called Lena.' },
+      ex: 'Sie heißt Lena.', exEn: 'She is called Lena.',
+      vis: { kind: 'grammar', de: 'Sie heißt Lena.', hl: 'Sie', role: 'focus', cap: 'sie = she; they' }
+    },
     { de: 'es', pos: 'pronoun', en: 'it', hi: 'यह',
       ex: 'Es ist gut.', exEn: 'It is good.',
       vis: { kind: 'grammar', de: 'Das Essen schmeckt. Es ist gut.', hl: 'Es', role: 'subject', cap: 'Neuter personal pronoun referring back to \'das Essen\'' }

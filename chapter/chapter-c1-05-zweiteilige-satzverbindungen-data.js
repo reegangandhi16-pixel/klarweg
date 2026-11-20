@@ -204,7 +204,9 @@ const CHAPTER = {
       note: 'Negates both alternatives simultaneously — never pair "weder" with "oder".',
       ex1: { de: 'Weder die Kritiker noch die Befürworter konnten überzeugen.', en: 'Neither the critics nor the supporters could convince.', hi: 'Na toh aalochak, na hi samarthak convince kar sake.' },
       ex2: { de: 'Sie hatte weder Zeit noch Geduld für die Diskussion.', en: 'She had neither time nor patience for the discussion.', hi: 'Uske paas charcha ke liye na toh samay tha, na hi dhairya.' },
-      collocations: ['weder ... noch bestätigen', 'weder ... noch möglich'] },
+      collocations: ['weder ... noch bestätigen', 'weder ... noch möglich'],
+      img: { src: '/api/media/vocab-img/3e1475078c9d7884b404', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person politely pushing away both a coffee mug and a teacup.' }
+    },
     { de: 'zwar ... aber', ipa: '[tsvaːɐ̯ ˈaːbɐ]', en: 'admittedly ... but', hi: 'sach hai ki ... lekin', pos: 'Korrelativkonnektor', register: 'C1 · academic/formal', connectorCategory: 'Contrast',
       note: 'Concedes a point before contrasting it — a classic academic rhetorical structure.',
       ex1: { de: 'Zwar war die Stichprobe klein, aber die Ergebnisse waren signifikant.', en: 'Admittedly the sample was small, but the results were significant.', hi: 'Sach hai ki namoona chhota tha, lekin parinaam mahatvapurn thay.' },

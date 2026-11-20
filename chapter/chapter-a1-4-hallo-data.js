@@ -272,7 +272,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/8a435029457e16a457e3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Host greeting a visitor at the door.' }
     },
     { de: 'danke', pos: 'interjection', en: 'thank you', hi: 'धन्यवाद',
-      ex: 'Danke, das ist sehr nett.', exEn: 'Thank you, that is very kind.' },
+      ex: 'Danke, das ist sehr nett.', exEn: 'Thank you, that is very kind.',
+      img: { src: '/api/media/vocab-img/3a9f18cf8055793192bb', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person smiling gratefully with a hand over their heart.' }
+    },
     { de: 'danke schön', pos: 'phrase', en: 'thank you (kindly)', hi: 'बहुत धन्यवाद',
       ex: 'Danke schön, Herr Wolan!', exEn: 'Thank you kindly, Mr Wolan!' },
     { de: 'bitte', pos: 'interjection', en: 'please; you\'re welcome', hi: 'कृपया / स्वागत है',
@@ -282,13 +284,17 @@ const CHAPTER = {
     { de: 'nein', pos: 'particle', en: 'no', hi: 'नहीं',
       ex: 'Kommst du aus Berlin? — Nein.', exEn: 'Do you come from Berlin? — No.' },
     { de: 'auch', pos: 'adverb', en: 'also, too', hi: 'भी',
-      ex: 'Ich komme auch aus Indien.', exEn: 'I come from India too.' },
+      ex: 'Ich komme auch aus Indien.', exEn: 'I come from India too.',
+      vis: { kind: 'grammar', de: 'Ich komme auch aus Indien.', hl: 'auch', role: 'focus', cap: 'auch = also, too' }
+    },
     { de: 'da', pos: 'adverb', en: 'there', hi: 'वहाँ',
       ex: 'Ist der Lehrer da? — Ja, er ist da.', exEn: 'Is the teacher there? — Yes, he is there.' },
     { de: 'hier', pos: 'adverb', en: 'here', hi: 'यहाँ',
       ex: 'Anna ist hier.', exEn: 'Anna is here.' },
     { de: 'ganz', pos: 'adverb', en: 'quite, completely', hi: 'काफ़ी / पूरी तरह',
-      ex: 'Das ist ganz einfach.', exEn: 'That is quite easy.' },
+      ex: 'Das ist ganz einfach.', exEn: 'That is quite easy.',
+      vis: { kind: 'grammar', de: 'Das ist ganz einfach.', hl: 'ganz', role: 'focus', cap: 'ganz = quite, completely' }
+    },
     { de: 'gut', pos: 'adjective', en: 'good, well', hi: 'अच्छा',
       ex: 'Mir geht es gut, danke.', exEn: 'I am well, thank you.',
       img: { src: '/api/media/vocab-img/feb01321b26de4565a43', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smiling person giving a thumbs-up' }
@@ -296,7 +302,9 @@ const CHAPTER = {
     { de: 'okay', pos: 'adverb', en: 'okay', hi: 'ठीक है',
       ex: 'Okay, bis dann!', exEn: 'Okay, until then!' },
     { de: 'sehr', pos: 'adverb', en: 'very', hi: 'बहुत',
-      ex: 'Sehr gut! Danke.', exEn: 'Very good! Thank you.' },
+      ex: 'Sehr gut! Danke.', exEn: 'Very good! Thank you.',
+      vis: { kind: 'grammar', de: 'Sehr gut! Danke.', hl: 'Sehr', role: 'focus', cap: 'sehr = very' }
+    },
     { de: 'so', pos: 'adverb', en: 'so; so-so', hi: 'ऐसे / ठीक-ठाक',
       ex: 'So, Herr Wolan, fangen wir an.', exEn: 'So, Mr Wolan, let us begin.' },
     { de: 'gehen', pos: 'verb', en: 'to go', hi: 'जाना',
@@ -329,7 +337,9 @@ const CHAPTER = {
     { de: 'moin', pos: 'interjection', en: 'hi (North Germany)', hi: 'नमस्ते (उत्तरी)',
       ex: 'Moin! — so sagt man im Norden.', exEn: 'Hi! — that is what they say in the north.' },
     { de: 'hey', pos: 'interjection', en: 'hey', hi: 'अरे / हे',
-      ex: 'Hey, wie geht\'s?', exEn: 'Hey, how\'s it going?' },
+      ex: 'Hey, wie geht\'s?', exEn: 'Hey, how\'s it going?',
+      img: { src: '/api/media/vocab-img/72b79b0311efbf9b135c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smiling person raising a hand in a casual friendly greeting.' }
+    },
     { de: 'hi', pos: 'interjection', en: 'hi', hi: 'हाय',
       ex: 'Hi Anna, alles gut?', exEn: 'Hi Anna, all good?' },
     { de: 'hurra', pos: 'interjection', en: 'hooray', hi: 'वाह / हुर्रे',

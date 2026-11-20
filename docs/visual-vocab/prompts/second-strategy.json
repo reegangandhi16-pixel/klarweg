@@ -23,11 +23,11 @@
   "hl": ""
  },
  "absolut--absolutely": {
-  "key": "absolut--absolutely",
-  "type": "scene",
-  "scene": "Show two colleagues in a modern office warmly shaking hands with broad smiles and firm nods, clearly completely united and confident about an agreed plan.",
+  "type": "grammar",
+  "de": "Das war absolut die richtige Entscheidung.",
   "hl": "absolut",
-  "cap": "Feeling completely confident in the right decision"
+  "role": "focus",
+  "cap": "absolut = absolutely"
  },
  "achtundzwanzig--twenty-eight": {
   "key": "achtundzwanzig--twenty-eight",
@@ -45,18 +45,18 @@
   "n": 80
  },
  "aeusserst--extremely-utmost": {
-  "key": "aeusserst--extremely-utmost",
-  "type": "scene",
-  "scene": "Show a master woodworker in an apron leaning in close, carefully guiding a fine chisel along a delicate wood carving with intense focus and precision.",
+  "type": "grammar",
+  "de": "Es ist äußerst wichtig, ein Handwerk zu beherrschen.",
   "hl": "äußerst",
-  "cap": "Utmost care and precision needed to master a craft"
+  "role": "focus",
+  "cap": "äußerst = extremely, utmost"
  },
  "akademischer-deutschsprecher--academic-german-speaker": {
-  "key": "akademischer-deutschsprecher--academic-german-speaker",
-  "type": "scene",
-  "scene": "Show two university graduates in academic robes holding their degree certificates, talking enthusiastically on a campus walkway.",
-  "cap": "Graduates conversing as academic German speakers",
-  "hl": "akademische Deutschsprecher"
+  "type": "grammar",
+  "de": "Wir sind jetzt akademische Deutschsprecher.",
+  "hl": "akademische Deutschsprecher",
+  "role": "focus",
+  "cap": "akademischer Deutschsprecher = academic German speaker"
  },
  "aktuell--current-topical": {
   "key": "aktuell--current-topical",
@@ -81,11 +81,11 @@
   "cap": "An alcohol-free refreshing drink served with lime"
  },
  "alles-in-allem--all-in-all": {
-  "key": "alles-in-allem--all-in-all",
-  "type": "scene",
-  "scene": "Show an auditorium stage after an event where the audience stands applauding while presenters smile warmly and bow together.",
+  "type": "grammar",
+  "de": "Alles in allem war die Konferenz ein Erfolg.",
   "hl": "Alles in allem",
-  "cap": "All in all, the event was a complete success"
+  "role": "focus",
+  "cap": "alles in allem = all in all"
  },
  "allgemein--general": {
   "key": "allgemein--general",
@@ -102,46 +102,32 @@
   "cap": "A familiar, ordinary everyday scene in the city"
  },
  "allzu--all-too": {
-  "key": "allzu--all-too",
-  "type": "scene",
-  "scene": "Show a person sitting in an audience resting their chin on their palm, politely nodding with a blank expression while drifting off.",
+  "type": "grammar",
+  "de": "Manche geben allzu oft vor, interessiert zu sein.",
   "hl": "allzu",
-  "cap": "Feigning interest all too often in a boring lecture"
+  "role": "focus",
+  "cap": "allzu = all too"
  },
  "als--as": {
-  "key": "als--as",
-  "type": "scene",
-  "scene": "Show a smiling man standing at the front of a classroom next to a chalkboard, holding a notebook.",
-  "cap": "Working as a teacher",
-  "hl": "als"
+  "type": "grammar",
+  "de": "Ich arbeite als Lehrer.",
+  "hl": "als",
+  "role": "focus",
+  "cap": "als = as"
  },
  "als--than": {
-  "key": "als--than",
-  "type": "pair",
-  "a": {
-   "scene": "Show a sprawling skyline of a large metropolis with numerous high-rise buildings stretching far into the distance.",
-   "label": "Berlin: bigger"
-  },
-  "b": {
-   "scene": "Show a smaller town skyline with historic low-rise buildings and a quiet church steeple along a riverbank.",
-   "label": "Bonn: smaller"
-  },
+  "type": "grammar",
+  "de": "Berlin ist größer als Bonn.",
   "hl": "als",
-  "cap": "Comparison of unequal sizes using 'größer als'"
+  "role": "focus",
+  "cap": "als = than"
  },
  "als--when": {
-  "key": "als--when",
-  "type": "pair",
-  "a": {
-   "scene": "Show a small young boy happily kicking a soccer ball across a sunny green grass pitch in retro clothing.",
-   "label": "in childhood"
-  },
-  "b": {
-   "scene": "Show an adult looking through an old photo album, smiling at past memories.",
-   "label": "looking back now"
-  },
+  "type": "grammar",
+  "de": "Als ich klein war, spielte ich jeden Tag Fußball.",
   "hl": "Als",
-  "cap": "Referring to a single, extended period in the past"
+  "role": "focus",
+  "cap": "als = when (one past event)"
  },
  "also--so-well-then": {
   "key": "also--so-well-then",
@@ -160,11 +146,11 @@
   "cap": "Conversational particle 'also' opening a question or topic"
  },
  "also-gut--very-well": {
-  "key": "also-gut--very-well",
-  "type": "scene",
-  "scene": "Show two friends standing near an apartment doorway, putting on their winter jackets and reaching for the door handle to head out.",
+  "type": "grammar",
+  "de": "Also gut, wir sollten jetzt los.",
   "hl": "Also gut",
-  "cap": "Agreeing it is time to pack up and get going"
+  "role": "focus",
+  "cap": "also gut = very well"
  },
  "alzheimer--alzheimer-s-disease": {
   "key": "alzheimer--alzheimer-s-disease",
@@ -190,25 +176,25 @@
   "cap": "Preposition 'am' used for days of the week"
  },
  "an--x": {
-  "key": "an--x",
-  "type": "scene",
-  "scene": "Show a person sitting at a wooden desk with a pen, writing a letter and placing it inside an envelope addressed to a friend.",
-  "cap": "Writing a letter addressed to someone",
-  "hl": "an"
+  "type": "grammar",
+  "de": "Ich schreibe an Max.",
+  "hl": "an",
+  "role": "focus",
+  "cap": "an = to (write to)"
  },
  "an-d--over": {
-  "key": "an-d--over",
-  "type": "scene",
-  "scene": "Show a relaxed person sitting in an armchair with a cup of tea, looking peacefully out of a window during weekend daylight.",
-  "cap": "Resting over the course of the weekends",
-  "hl": "An"
+  "type": "grammar",
+  "de": "An den Wochenenden ruhe ich mich aus.",
+  "hl": "An",
+  "role": "focus",
+  "cap": "an (+D) = over (a period)"
  },
  "an-sich--in-itself": {
-  "key": "an-sich--in-itself",
-  "type": "scene",
-  "scene": "Show a mechanic calmly inspecting a small scratch on a bicycle frame, giving an easy gesture showing it is harmless.",
-  "cap": "A detail that in itself poses no real problem",
-  "hl": "an sich"
+  "type": "grammar",
+  "de": "Das ist an sich kein Problem.",
+  "hl": "an sich",
+  "role": "focus",
+  "cap": "an sich = in itself"
  },
  "analytisch--analytical": {
   "key": "analytisch--analytical",
@@ -218,32 +204,18 @@
   "hl": "analytischen"
  },
  "andererseits--on-the-other-hand": {
-  "key": "andererseits--on-the-other-hand",
-  "type": "pair",
-  "a": {
-   "scene": "Show a customer looking hesitantly at a slightly plain, unadorned second-hand bicycle.",
-   "label": "simple model"
-  },
-  "b": {
-   "scene": "Show the same customer smiling while holding a modest price tag, finding it very reasonable.",
-   "label": "fair price"
-  },
-  "cap": "Weighing downsides, but on the other hand the price is fair",
-  "hl": "Andererseits"
+  "type": "grammar",
+  "de": "Andererseits ist der Preis fair.",
+  "hl": "Andererseits",
+  "role": "focus",
+  "cap": "andererseits = on the other hand"
  },
  "andernfalls--otherwise": {
-  "key": "andernfalls--otherwise",
-  "type": "pair",
-  "a": {
-   "scene": "Show an office worker hurrying to finish project tasks according to a strict timeline on a planner.",
-   "label": "sticking to plan"
-  },
-  "b": {
-   "scene": "Show a wall calendar with delayed deadlines crossed out in red and a stressed team.",
-   "label": "otherwise: delay"
-  },
-  "cap": "Action required, otherwise deadlines will slip",
-  "hl": "Andernfalls"
+  "type": "grammar",
+  "de": "Andernfalls lässt sich der Zeitplan nicht einhalten.",
+  "hl": "Andernfalls",
+  "role": "focus",
+  "cap": "andernfalls = otherwise"
  },
  "anerkennen--acknowledge-recognize": {
   "key": "anerkennen--acknowledge-recognize",
@@ -274,18 +246,18 @@
   "hl": "angemessen"
  },
  "angesichts--in-view-of-given": {
-  "key": "angesichts--in-view-of-given",
-  "type": "scene",
-  "scene": "Show a technician looking at a cracked machine component, shaking their head thoughtfully before ordering a replacement.",
-  "cap": "Given the defect, taking the necessary steps",
-  "hl": "Angesichts"
+  "type": "grammar",
+  "de": "Angesichts des Defekts lässt sich das nicht vermeiden.",
+  "hl": "Angesichts",
+  "role": "focus",
+  "cap": "angesichts = in view of, given"
  },
  "anhand--on-the-basis-of-using": {
-  "key": "anhand--on-the-basis-of-using",
-  "type": "scene",
-  "scene": "Show a researcher presenting findings by displaying several distinct binder folders of real-world case studies side by side on a table.",
-  "cap": "Demonstrating arguments on the basis of case studies",
-  "hl": "Anhand"
+  "type": "grammar",
+  "de": "Anhand mehrerer Fallstudien belegt die Autorin ihre These.",
+  "hl": "Anhand",
+  "role": "focus",
+  "cap": "anhand = on the basis of, using"
  },
  "anknuepfen--link-up-connect": {
   "key": "anknuepfen--link-up-connect",
@@ -309,11 +281,11 @@
   "hl": "kommt"
  },
  "anlaesslich--on-the-occasion-of": {
-  "key": "anlaesslich--on-the-occasion-of",
-  "type": "scene",
-  "scene": "Show people gathering in a warm festive room, raising glasses to celebrate the arrival of newly welcomed guests.",
-  "cap": "A celebration held on the occasion of arrival",
-  "hl": "Anlässlich"
+  "type": "grammar",
+  "de": "Anlässlich des Ankunftsabends gab es ein Fest.",
+  "hl": "Anlässlich",
+  "role": "focus",
+  "cap": "anlässlich = on the occasion of"
  },
  "annehmen--assume-suppose-to-accept-adopt": {
   "key": "annehmen--assume-suppose-to-accept-adopt",
@@ -330,25 +302,25 @@
   "hl": "nehmen an"
  },
  "anscheinend--apparently": {
-  "key": "anscheinend--apparently",
-  "type": "scene",
-  "scene": "Show a modern town square filled with green trees, clean bike paths, and relaxed pedestrians enjoying a sunny afternoon.",
-  "cap": "Apparent signs of thriving quality of life",
-  "hl": "Anscheinend"
+  "type": "grammar",
+  "de": "Anscheinend steigt die Lebensqualität hier.",
+  "hl": "Anscheinend",
+  "role": "focus",
+  "cap": "anscheinend = apparently"
  },
  "arg--badly-very": {
-  "key": "arg--badly-very",
-  "type": "scene",
-  "scene": "Show a person sitting with hunched shoulders, holding an unread rejection notice, looking deeply crestfallen and upset.",
-  "cap": "Looking very disappointed and downcast",
-  "hl": "arg"
+  "type": "grammar",
+  "de": "Sie war arg enttäuscht.",
+  "hl": "arg",
+  "role": "focus",
+  "cap": "arg = badly, very"
  },
  "auch--also-too": {
-  "key": "auch--also-too",
-  "type": "scene",
-  "scene": "Show two friendly travelers in a German language classroom smiling and shaking hands upon discovering they share the same home country.",
-  "cap": "Coming from the same country too",
-  "hl": "auch"
+  "type": "grammar",
+  "de": "Ich komme auch aus Indien.",
+  "hl": "auch",
+  "role": "focus",
+  "cap": "auch = also, too"
  },
  "auf--in-on": {
   "key": "auf--in-on",
@@ -359,25 +331,25 @@
   "cap": "Using \"auf\" to specify the language"
  },
  "auf-evidenz-basieren--be-based-on-evidence": {
-  "key": "auf-evidenz-basieren--be-based-on-evidence",
-  "type": "scene",
-  "scene": "Show a team of medical researchers at a table reviewing clinical trial reports and test data before making a recommendation.",
-  "cap": "Basing recommendations on scientific evidence",
-  "hl": ""
+  "type": "grammar",
+  "de": "Die Empfehlung basiert auf solider wissenschaftlicher Evidenz.",
+  "hl": "basiert auf solider wissenschaftlicher Evidenz",
+  "role": "focus",
+  "cap": "auf Evidenz basieren = be based on evidence"
  },
  "aufgrund--due-to-because-of": {
-  "key": "aufgrund--due-to-because-of",
-  "type": "scene",
-  "scene": "Show an analyst crossing out an old diagram after receiving a fresh printout of newly gathered lab test figures.",
-  "cap": "Revising assumptions due to newly arrived data",
-  "hl": "Aufgrund"
+  "type": "grammar",
+  "de": "Aufgrund der neuen Datenlage musste die Hypothese revidiert werden.",
+  "hl": "Aufgrund",
+  "role": "focus",
+  "cap": "aufgrund = due to, because of"
  },
  "aufgrund--on-the-basis-of-because-of": {
-  "key": "aufgrund--on-the-basis-of-because-of",
-  "type": "scene",
-  "scene": "Show hospital staff reviewing a newly framed flow chart on the wall, replacing an outdated checklist based on study recommendations.",
-  "cap": "Changing procedures on the basis of a study",
-  "hl": "Aufgrund"
+  "type": "grammar",
+  "de": "Aufgrund der Studie wurde das Verfahren geändert.",
+  "hl": "Aufgrund",
+  "role": "focus",
+  "cap": "aufgrund = on the basis of, because of"
  },
  "aufwerfen--raise": {
   "key": "aufwerfen--raise",
@@ -395,25 +367,18 @@
   "cap": "Preposition indicating origin or provenance"
  },
  "aus-den-augen-verlieren--lose-touch": {
-  "key": "aus-den-augen-verlieren--lose-touch",
-  "type": "pair",
-  "a": {
-   "scene": "Show two young friends laughing and walking together in a sunny park.",
-   "label": "past: close friends"
-  },
-  "b": {
-   "scene": "Show one person sitting alone at home, looking thoughtfully at an old printed photo of the two.",
-   "label": "now: lost touch"
-  },
-  "cap": "Almost losing touch after many years",
-  "hl": "aus den Augen verloren"
+  "type": "grammar",
+  "de": "Wir hatten uns fast aus den Augen verloren.",
+  "hl": "aus den Augen verloren",
+  "role": "focus",
+  "cap": "aus den Augen verlieren = to lose touch"
  },
  "aus-wissenschaftlicher-sicht--from-a-scientific-point-of-view": {
-  "key": "aus-wissenschaftlicher-sicht--from-a-scientific-point-of-view",
-  "type": "scene",
-  "scene": "Show a female scientist in a white lab coat carefully examining a glass petri dish near a microscope in a bright laboratory.",
-  "cap": "Examining an issue from a scientific perspective",
-  "hl": "Aus wissenschaftlicher Sicht"
+  "type": "grammar",
+  "de": "Aus wissenschaftlicher Sicht ist die Fragestellung noch nicht ausreichend geklärt.",
+  "hl": "Aus wissenschaftlicher Sicht",
+  "role": "focus",
+  "cap": "aus wissenschaftlicher Sicht = from a scientific point of view"
  },
  "ausgesprochen--pronounced-spoken-decidedly": {
   "key": "ausgesprochen--pronounced-spoken-decidedly",
@@ -445,18 +410,18 @@
   "cap": "besagen: what a rule or text says"
  },
  "bestimmt--certainly-surely": {
-  "key": "bestimmt--certainly-surely",
-  "type": "scene",
-  "scene": "Show a host looking cheerfully at a wristwatch while setting an extra plate and cutlery at a welcoming dinner table.",
-  "cap": "Confident and sure that a guest will arrive",
-  "hl": "bestimmt"
+  "type": "grammar",
+  "de": "Er kommt bestimmt.",
+  "hl": "bestimmt",
+  "role": "focus",
+  "cap": "bestimmt = certainly, surely"
  },
  "bestimmt--definitely": {
-  "key": "bestimmt--definitely",
-  "type": "scene",
-  "scene": "Show a clear blue sky over a sunlit meadow with blooming wildflowers and bright sunshine spreading warmth.",
-  "cap": "Expecting with certainty a beautiful summer day",
-  "hl": "bestimmt"
+  "type": "grammar",
+  "de": "Der lange Sommertag wird bestimmt schön.",
+  "hl": "bestimmt",
+  "role": "focus",
+  "cap": "bestimmt = definitely"
  },
  "betreffend--concerning-regarding": {
   "key": "betreffend--concerning-regarding",
@@ -467,18 +432,11 @@
   "cap": "Formal preposition governing the accusative case"
  },
  "bevor--before": {
-  "key": "bevor--before",
-  "type": "pair",
-  "a": {
-   "scene": "Show a person leaning forward attentively, cupping a hand to their ear to listen carefully.",
-   "label": "first: listen"
-  },
-  "b": {
-   "scene": "Show the person gesturing and speaking openly with their partner.",
-   "label": "then: speak"
-  },
-  "cap": "Listening first before speaking further",
-  "hl": "Bevor"
+  "type": "grammar",
+  "de": "Bevor wir weiterreden, sollten wir zuhören.",
+  "hl": "Bevor",
+  "role": "focus",
+  "cap": "bevor = before"
  },
  "bewusst-dass--aware-that": {
   "key": "bewusst-dass--aware-that",
@@ -495,11 +453,11 @@
   "cap": "A word stands for a thing"
  },
  "beziehungsweise--or-rather-respectively": {
-  "key": "beziehungsweise--or-rather-respectively",
-  "type": "scene",
-  "scene": "Show a host arranging place cards at a dinner table while checking arrival updates on a smartphone.",
-  "cap": "Clarifying or correcting who arrives later",
-  "hl": "beziehungsweise"
+  "type": "grammar",
+  "de": "Anna, beziehungsweise Rohan, kommt später.",
+  "hl": "beziehungsweise",
+  "role": "focus",
+  "cap": "beziehungsweise = or rather, respectively"
  },
  "bezueglich--regarding-concerning": {
   "key": "bezueglich--regarding-concerning",
@@ -532,11 +490,11 @@
   "cap": "Formal preposition meaning 'within a time period'"
  },
  "bis--until-till": {
-  "key": "bis--until-till",
-  "type": "scene",
-  "scene": "Show an office worker typing focused at a desk, with an analog wall clock behind them showing exactly five o'clock.",
-  "cap": "Working continuously until five o'clock",
-  "hl": "bis"
+  "type": "grammar",
+  "de": "Ich arbeite bis fünf Uhr.",
+  "hl": "bis",
+  "role": "focus",
+  "cap": "bis = until, till"
  },
  "bisher--so-far": {
   "key": "bisher--so-far",
@@ -554,11 +512,11 @@
   "hl": "bisherigen"
  },
  "bloss--only-just": {
-  "key": "bloss--only-just",
-  "type": "scene",
-  "scene": "Show a person raising an index finger slightly and smiling politely while stepping up to an information desk.",
-  "cap": "Asking just a quick, single question",
-  "hl": "bloß"
+  "type": "grammar",
+  "de": "Ich hätte bloß eine kleine Frage.",
+  "hl": "bloß",
+  "role": "focus",
+  "cap": "bloß = only, just"
  },
  "bluten--bleed": {
   "key": "bluten--bleed",
@@ -605,25 +563,18 @@
   "cap": "Known nationwide across all of Germany."
  },
  "ca--approx": {
-  "key": "ca--approx",
-  "type": "scene",
-  "scene": "Show a car dashboard display showing a winding navigation route while the driver glances ahead at the highway.",
-  "cap": "The drive takes approximately three hours.",
-  "hl": "ca."
+  "type": "grammar",
+  "de": "Die Fahrt dauert ca. drei Stunden.",
+  "hl": "ca.",
+  "role": "focus",
+  "cap": "ca. = approx."
  },
  "co--and-company": {
-  "key": "co--and-company",
-  "type": "scene",
-  "scene": "Show three friendly business partners standing side by side outside the entrance of their cozy neighborhood bakery.",
-  "cap": "The founder alongside their business partners and associates.",
-  "hl": "& Co"
- },
- "d-h--i-e-meaning": {
-  "key": "d-h--i-e-meaning",
-  "type": "scene",
-  "scene": "Show a vibrant pedestrian street filled with people walking and cycling, with a round no-cars sign at the street entrance.",
-  "cap": "Car-free, meaning without cars",
-  "hl": "d.h."
+  "type": "grammar",
+  "de": "Café Schmidt & Co",
+  "hl": "& Co",
+  "role": "focus",
+  "cap": "& Co = and company"
  },
  "damalig--bygone-of-that-time": {
   "key": "damalig--bygone-of-that-time",
@@ -633,32 +584,25 @@
   "hl": "damaligen"
  },
  "dann--then": {
-  "key": "dann--then",
-  "type": "pair",
-  "a": {
-   "scene": "Show heavy raindrops splashing against a windowpane.",
-   "label": "condition: if it rains"
-  },
-  "b": {
-   "scene": "Show two people relaxing with warm mugs on a sofa indoors.",
-   "label": "consequence: then stay"
-  },
-  "cap": "If it rains, then we stay home.",
-  "hl": "dann"
+  "type": "grammar",
+  "de": "Wenn es regnet, dann bleiben wir zu Hause.",
+  "hl": "dann",
+  "role": "focus",
+  "cap": "dann = then"
  },
  "daran--about-that": {
-  "key": "daran--about-that",
-  "type": "scene",
-  "scene": "Show a person leaning on an open windowsill, looking out pensively and reminiscing about a past event.",
-  "cap": "Remembering and thinking about that often.",
-  "hl": "daran"
+  "type": "grammar",
+  "de": "Ich denke oft daran.",
+  "hl": "daran",
+  "role": "focus",
+  "cap": "daran = about that"
  },
  "darauf--that": {
-  "key": "darauf--that",
-  "type": "scene",
-  "scene": "Show a smiling traveler packing a suitcase with sunglasses, a sun hat, and walking shoes in eager anticipation.",
-  "cap": "Looking forward eagerly to that upcoming event.",
-  "hl": "Darauf"
+  "type": "grammar",
+  "de": "Darauf freue ich mich schon.",
+  "hl": "Darauf",
+  "role": "focus",
+  "cap": "darauf = to that"
  },
  "darueber-hinaus--furthermore-beyond-that": {
   "key": "darueber-hinaus--furthermore-beyond-that",
@@ -769,11 +713,11 @@
   "cap": "Official language in Germany, Austria, and Switzerland"
  },
  "das-duerfte-stimmen--that-is-likely-to-be-true": {
-  "key": "das-duerfte-stimmen--that-is-likely-to-be-true",
-  "type": "scene",
-  "scene": "Show a researcher in an office leaning thoughtfully over charts and notes, nodding with cautious agreement while holding a pen.",
-  "cap": "Expressing careful agreement: that is probably right",
-  "hl": "Das dürfte stimmen"
+  "type": "grammar",
+  "de": "Schreib nicht \"Das stimmt\", schreib lieber \"Das dürfte stimmen\".",
+  "hl": "Das dürfte stimmen",
+  "role": "focus",
+  "cap": "Das dürfte stimmen. = That is likely to be true."
  },
  "das-dur--major": {
   "key": "das-dur--major",
@@ -1267,18 +1211,11 @@
   "cap": "A reflexive pronoun referring back to the subject"
  },
  "das-register--register": {
-  "key": "das-register--register",
-  "type": "pair",
-  "a": {
-   "scene": "Show a person in a dark tailored suit speaking formally before a judge in a stately courtroom",
-   "label": "formal register"
-  },
-  "b": {
-   "scene": "Show two friends in casual hoodies laughing over paper coffee cups on a park bench",
-   "label": "casual register"
-  },
-  "cap": "Linguistic register shifts between formal and casual settings",
-  "hl": "Register"
+  "type": "grammar",
+  "de": "Das Register bestimmt, welche Adjektive und Konstruktionen passend sind.",
+  "hl": "Register",
+  "role": "focus",
+  "cap": "das Register = register (linguistic)"
  },
  "das-relativpronomen--relative-pronoun": {
   "key": "das-relativpronomen--relative-pronoun",
@@ -1420,39 +1357,39 @@
   "hl": "Wortspiel"
  },
  "dass--that": {
-  "key": "dass--that",
-  "type": "scene",
-  "scene": "Show a young woman sitting at a study desk, writing in a notebook and smiling with determination about her future.",
-  "cap": "Expressing the belief that learning German is valuable",
-  "hl": "dass"
+  "type": "grammar",
+  "de": "Ich glaube, dass Deutsch wichtig ist.",
+  "hl": "dass",
+  "role": "focus",
+  "cap": "dass = that (sends verb to the end)"
  },
  "davon--of-it-from-it": {
-  "key": "davon--of-it-from-it",
-  "type": "scene",
-  "scene": "Show a person standing with open palms and a bewildered, innocent shrug, reacting to surprising news with confusion.",
-  "cap": "Knowing nothing about what occurred",
-  "hl": "davon"
+  "type": "grammar",
+  "de": "Ich habe nichts davon gewusst.",
+  "hl": "davon",
+  "role": "focus",
+  "cap": "davon = of it, from it"
  },
  "davor--before-that-in-front-of-it": {
-  "key": "davor--before-that-in-front-of-it",
-  "type": "scene",
-  "scene": "Show a doctor in a white coat speaking earnestly to a seated patient, gesturing caution toward a bowl of sugar cubes.",
-  "cap": "A doctor warning against eating too much sugar",
-  "hl": "davor"
+  "type": "grammar",
+  "de": "Ärzte warnen davor, zu viel Zucker zu essen.",
+  "hl": "davor",
+  "role": "focus",
+  "cap": "davor = before that, in front of it"
  },
  "dazu--in-addition-to-that": {
-  "key": "dazu--in-addition-to-that",
-  "type": "scene",
-  "scene": "Show an applicant organizing an official application folder on a table, holding a small passport photograph to include.",
-  "cap": "Adding a required photograph to the documents",
-  "hl": "Dazu"
+  "type": "grammar",
+  "de": "Dazu brauche ich noch ein Foto.",
+  "hl": "Dazu",
+  "role": "focus",
+  "cap": "dazu = in addition, to that"
  },
  "dazu--that-about-it": {
-  "key": "dazu--that-about-it",
-  "type": "scene",
-  "scene": "Show an architect presenting a building sketch to a coworker, gesturing with an open hand to ask for feedback.",
-  "cap": "Asking a coworker for their opinion on an idea",
-  "hl": "dazu"
+  "type": "grammar",
+  "de": "Was meinst du dazu?",
+  "hl": "dazu",
+  "role": "focus",
+  "cap": "dazu = to that, about it"
  },
  "definieren--define": {
   "key": "definieren--define",
@@ -1567,11 +1504,11 @@
   "cap": "A statement: the verb is in second position"
  },
  "der-autor-beschreibt--author-describes": {
-  "key": "der-autor-beschreibt--author-describes",
-  "type": "scene",
-  "scene": "Show a woman reading an academic book at a desk and taking notes with a pen, summarizing the chapter about climate change",
-  "cap": "Analyzing how the author describes the topic",
-  "hl": "Der Autor beschreibt"
+  "type": "grammar",
+  "de": "Der Autor beschreibt die Auswirkungen des Klimawandels.",
+  "hl": "Der Autor beschreibt",
+  "role": "focus",
+  "cap": "der Autor beschreibt = the author describes"
  },
  "der-bedarf--need": {
   "key": "der-bedarf--need",
@@ -1616,11 +1553,11 @@
   "cap": "An example sentence shows a word in use"
  },
  "der-bericht-dem-zufolge--report-according-to-which": {
-  "key": "der-bericht-dem-zufolge--report-according-to-which",
-  "type": "scene",
-  "scene": "Show a journalist looking intently at an open published document with statistical charts during a lively editorial newsroom meeting",
-  "cap": "A formal report according to which facts are presented",
-  "hl": "Der Bericht, dem zufolge"
+  "type": "grammar",
+  "de": "Der Bericht, dem zufolge die Zahlen gestiegen sind, sorgte für Aufsehen.",
+  "hl": "Der Bericht, dem zufolge",
+  "role": "focus",
+  "cap": "der Bericht, dem zufolge ... = the report, according to which ..."
  },
  "der-betracht--consideration": {
   "key": "der-betracht--consideration",
@@ -1779,11 +1716,11 @@
   "hl": "Asylberechtigte"
  },
  "der-die-berechtigte--entitled-authorized-person": {
-  "key": "der-die-berechtigte--entitled-authorized-person",
-  "type": "scene",
-  "scene": "Show a bank teller behind a glass service counter carefully checking an identity card before sliding an envelope across to the customer.",
-  "cap": "Verifying authorization before releasing a payment",
-  "hl": "Berechtigte"
+  "type": "grammar",
+  "de": "Nur der Berechtigte darf die Zahlung entgegennehmen.",
+  "hl": "Berechtigte",
+  "role": "focus",
+  "cap": "der/die der/die Berechtigte = the entitled/authorized person"
  },
  "der-die-betroffene-r--affected-person": {
   "key": "der-die-betroffene-r--affected-person",
@@ -2175,13 +2112,6 @@
   "cap": "Welcoming the new year in January",
   "hl": "Januar"
  },
- "der-juli--july": {
-  "key": "der-juli--july",
-  "type": "scene",
-  "scene": "Show a sunny summer beach scene with colourful parasols, people swimming in the bright blue sea, and a family relaxing under the warm July sun.",
-  "cap": "Enjoying summer holidays in July",
-  "hl": "Juli"
- },
  "der-juni--june": {
   "key": "der-juni--june",
   "type": "scene",
@@ -2340,18 +2270,11 @@
   "cap": "The twists and turns of a life's journey"
  },
  "der-lerneffekt--learning-effect": {
-  "key": "der-lerneffekt--learning-effect",
-  "type": "pair",
-  "a": {
-   "scene": "Show a student frowning while looking at an unsolved puzzle or equation.",
-   "label": "before: struggling"
-  },
-  "b": {
-   "scene": "Show the same student smiling confidently, having solved the puzzle easily.",
-   "label": "after: clear progress"
-  },
+  "type": "grammar",
+  "de": "Der Lerneffekt war deutlich sichtbar.",
   "hl": "Lerneffekt",
-  "cap": "Noticeable improvement through learning"
+  "role": "focus",
+  "cap": "der der Lerneffekt = learning effect"
  },
  "der-lerninhalt--learning-content": {
   "key": "der-lerninhalt--learning-content",
@@ -2834,18 +2757,11 @@
   "cap": "The underscore character"
  },
  "der-urlaubstyp--holiday-type": {
-  "key": "der-urlaubstyp--holiday-type",
-  "type": "pair",
-  "a": {
-   "scene": "Show a hiker with a backpack and trekking poles climbing a steep mountain trail under clear skies.",
-   "label": "active holidaymaker"
-  },
-  "b": {
-   "scene": "Show a person relaxing in a hammock between two palm trees reading a book quietly.",
-   "label": "calm holidaymaker"
-  },
-  "cap": "Different travel preferences and vacation styles",
-  "hl": "Urlaubstyp"
+  "type": "grammar",
+  "de": "Sie ist eher der ruhige Urlaubstyp.",
+  "hl": "Urlaubstyp",
+  "role": "focus",
+  "cap": "der der Urlaubstyp = holiday type"
  },
  "der-verbteil--part-of-the-verb": {
   "type": "grammar",
@@ -2905,18 +2821,11 @@
   "hl": "Wert"
  },
  "der-wertewandel--change-of-values": {
-  "key": "der-wertewandel--change-of-values",
-  "type": "pair",
-  "a": {
-   "scene": "Show an elder person in a formal suit sitting behind a rigid oak desk with stacked paper folders.",
-   "label": "traditional workplace"
-  },
-  "b": {
-   "scene": "Show young colleagues in casual clothes collaborating comfortably on sofas around a shared laptop.",
-   "label": "modern priorities"
-  },
-  "cap": "Shifting societal priorities across generations",
-  "hl": "Wertewandel"
+  "type": "grammar",
+  "de": "Der Wertewandel prägt die junge Generation.",
+  "hl": "Wertewandel",
+  "role": "focus",
+  "cap": "der der Wertewandel = change of values"
  },
  "der-wirtschaftsprozess--economic-process": {
   "key": "der-wirtschaftsprozess--economic-process",
@@ -2999,11 +2908,11 @@
   "hl": "Zeitraum"
  },
  "derzeit--currently-at-present": {
-  "key": "derzeit--currently-at-present",
-  "type": "scene",
-  "scene": "Show laboratory technicians in white coats actively conducting tests with beakers and a microscope in real time.",
-  "cap": "Happening right now, at the present time",
-  "hl": "Derzeit"
+  "type": "grammar",
+  "de": "Derzeit läuft die Untersuchung.",
+  "hl": "Derzeit",
+  "role": "focus",
+  "cap": "derzeit = currently, at present"
  },
  "des-weiteren--furthermore-in-addition": {
   "key": "des-weiteren--furthermore-in-addition",
@@ -3185,18 +3094,18 @@
   "hl": "Arbeitsmarktpolitik"
  },
  "die-arbeitsmarktpolitikreform--labor-market-policy-reform": {
-  "key": "die-arbeitsmarktpolitikreform--labor-market-policy-reform",
-  "type": "scene",
-  "scene": "Show lawmakers in a legislative hall leaning toward microphones and debating, with printed proposal folders on their desks.",
-  "cap": "Controversial debate on reforming labor market policy",
-  "hl": "Arbeitsmarktpolitikreform"
+  "type": "grammar",
+  "de": "Die Arbeitsmarktpolitikreform wird kontrovers diskutiert.",
+  "hl": "Arbeitsmarktpolitikreform",
+  "role": "focus",
+  "cap": "die Arbeitsmarktpolitikreform = labor-market policy reform"
  },
  "die-argumentation-macht-deutlich-dass--argumentation-makes-clear-that": {
-  "key": "die-argumentation-macht-deutlich-dass--argumentation-makes-clear-that",
-  "type": "scene",
-  "scene": "Show an academic presenter standing next to a slide with two interlocking gear wheels, explaining how two factors connect seamlessly.",
-  "cap": "The argument clarifies how two factors work together",
-  "hl": "Die Argumentation macht deutlich, dass"
+  "type": "grammar",
+  "de": "Die Argumentation macht deutlich, dass beide Faktoren zusammenwirken.",
+  "hl": "Die Argumentation macht deutlich, dass",
+  "role": "focus",
+  "cap": "die Argumentation macht deutlich, dass = the argumentation makes clear that"
  },
  "die-argumentationsstruktur--structure-of-argumentation": {
   "key": "die-argumentationsstruktur--structure-of-argumentation",
@@ -3248,11 +3157,11 @@
   "hl": "Bedeutungsnuance"
  },
  "die-begruendung--justification-reasoning": {
-  "key": "die-begruendung--justification-reasoning",
-  "type": "scene",
-  "scene": "Show a judge in robes reading through a thick, multi-page legal document placed on the bench beside a wooden gavel.",
-  "cap": "Detailed legal reasoning behind a court ruling",
-  "hl": "Begründung"
+  "type": "grammar",
+  "de": "Die Begründung des Urteils umfasst mehrere Seiten.",
+  "hl": "Begründung",
+  "role": "focus",
+  "cap": "die Begründung = justification, reasoning"
  },
  "die-besatzungszone--occupation-zone": {
   "type": "map",
@@ -3290,18 +3199,11 @@
   "hl": "Bildungschancen"
  },
  "die-bildungserwartung--educational-expectation": {
-  "key": "die-bildungserwartung--educational-expectation",
-  "type": "pair",
-  "a": {
-   "scene": "Show a graduate in academic gown holding a diploma folder, standing tall.",
-   "label": "high expectation"
-  },
-  "b": {
-   "scene": "Show a young apprentice happily assembling wooden furniture in a workshop.",
-   "label": "practical choice"
-  },
-  "cap": "Choosing a vocational craft despite academic expectations",
-  "hl": "Bildungserwartung"
+  "type": "grammar",
+  "de": "Obgleich die Bildungserwartung hoch ist, wählen viele einen praktischen Weg.",
+  "hl": "Bildungserwartung",
+  "role": "focus",
+  "cap": "die die Bildungserwartung = educational expectation"
  },
  "die-bildungspolitik--education-policy": {
   "key": "die-bildungspolitik--education-policy",
@@ -3339,25 +3241,25 @@
   "hl": "Cousine"
  },
  "die-daten-anhand-derer--data-on-the-basis-of-which": {
-  "key": "die-daten-anhand-derer--data-on-the-basis-of-which",
-  "type": "scene",
-  "scene": "Show a scientist pointing at glowing complex statistical charts and data graphs displayed on a large research monitor.",
-  "cap": "Data serving as the basis for an analysis",
-  "hl": "Daten, anhand derer"
+  "type": "grammar",
+  "de": "Die Daten, anhand derer die Analyse durchgeführt wurde, stammen aus einer großen Stichprobe.",
+  "hl": "Daten, anhand derer",
+  "role": "focus",
+  "cap": "die Daten, anhand derer ... = the data, on the basis of which ..."
  },
  "die-daten-belegen-dass--data-show-prove-that": {
-  "key": "die-daten-belegen-dass--data-show-prove-that",
-  "type": "scene",
-  "scene": "Show two researchers in a laboratory examining a printed line chart where upward trends confirm their test results.",
-  "cap": "Data proving the success of a method",
-  "hl": "Daten belegen, dass"
+  "type": "grammar",
+  "de": "Die Daten belegen, dass die Methode zuverlässig funktioniert.",
+  "hl": "Daten belegen, dass",
+  "role": "focus",
+  "cap": "die Daten belegen, dass = the data show/prove that"
  },
  "die-daten-wurden-erhoben--data-were-collected": {
-  "key": "die-daten-wurden-erhoben--data-were-collected",
-  "type": "scene",
-  "scene": "Show two researchers in waterproof jackets by a tranquil lake, carefully collecting water samples in test tubes and recording measurements in a binder.",
-  "cap": "Collecting scientific research data systematically.",
-  "hl": ""
+  "type": "grammar",
+  "de": "Die Daten wurden über einen Zeitraum von zwei Jahren erhoben.",
+  "hl": "Die Daten wurden über einen Zeitraum von zwei Jahren erhoben",
+  "role": "focus",
+  "cap": "die Daten wurden erhoben = the data were collected"
  },
  "die-eigenschaft--characteristic": {
   "key": "die-eigenschaft--characteristic",
@@ -3425,18 +3327,18 @@
   "hl": "Englischlehrerin"
  },
  "die-entscheidung-die--decision-which": {
-  "key": "die-entscheidung-die--decision-which",
-  "type": "scene",
-  "scene": "Show an auditorium of seated employees listening attentively as company representatives announce important news from a podium.",
-  "cap": "An important decision affecting staff",
-  "hl": "Entscheidung, die"
+  "type": "grammar",
+  "de": "Die Entscheidung, die gestern getroffen wurde, betrifft Tausende Mitarbeiter.",
+  "hl": "Entscheidung, die",
+  "role": "focus",
+  "cap": "die Entscheidung, die ... = the decision, which ..."
  },
  "die-ergebnisse-auf-denen--results-on-which": {
-  "key": "die-ergebnisse-auf-denen--results-on-which",
-  "type": "scene",
-  "scene": "Show international researchers collaborating around a large conference table covered with scientific diagrams and maps.",
-  "cap": "The results supporting a broader theory",
-  "hl": "Ergebnisse, auf denen"
+  "type": "grammar",
+  "de": "Die Ergebnisse, auf denen diese Theorie beruht, stammen aus mehreren Ländern.",
+  "hl": "Ergebnisse, auf denen",
+  "role": "focus",
+  "cap": "die Ergebnisse, auf denen ... = the results, on which ..."
  },
  "die-ewigkeit--ages-eternity": {
   "key": "die-ewigkeit--ages-eternity",
@@ -3644,11 +3546,11 @@
   "cap": "Much information packed into one noun phrase"
  },
  "die-international-anerkannte-wissenschaftlich-entwickelte-me--internationally-recognized-scientifically-developed-method": {
-  "key": "die-international-anerkannte-wissenschaftlich-entwickelte-me--internationally-recognized-scientifically-developed-method",
-  "type": "scene",
-  "scene": "Show an international panel of scientists in white lab coats nodding in agreement around a modern testing device in a state-of-the-art laboratory.",
-  "cap": "An internationally recognized, scientifically developed method",
-  "hl": "international anerkannte wissenschaftlich entwickelte Methode"
+  "type": "grammar",
+  "de": "Die international anerkannte wissenschaftlich entwickelte Methode wird nun weltweit eingesetzt.",
+  "hl": "anerkannte wissenschaftlich entwickelte Methode",
+  "role": "focus",
+  "cap": "an internationally recognised, scientifically developed method"
  },
  "die-jahresmiete--yearly-rent": {
   "key": "die-jahresmiete--yearly-rent",
@@ -4148,11 +4050,11 @@
   "hl": "Seele"
  },
  "die-selbstbestimmung--self-determination": {
-  "key": "die-selbstbestimmung--self-determination",
-  "type": "scene",
-  "scene": "Show a voter standing inside a voting booth with a ballot paper in hand, pensively making their own independent choice before dropping it into a ballot box.",
-  "cap": "Exercising personal self-determination in a democratic vote",
-  "hl": "Selbstbestimmung"
+  "type": "grammar",
+  "de": "Das Recht auf Selbstbestimmung ist grundgesetzlich verankert.",
+  "hl": "Selbstbestimmung",
+  "role": "focus",
+  "cap": "die Selbstbestimmung = self-determination"
  },
  "die-selbsthilfe--self-help": {
   "key": "die-selbsthilfe--self-help",
@@ -4315,18 +4217,11 @@
   "hl": "Tonart"
  },
  "die-umschreibung--paraphrase": {
-  "key": "die-umschreibung--paraphrase",
-  "type": "pair",
-  "a": {
-   "scene": "Show a person looking puzzled and scratching their head while looking at a complex medical prescription paper.",
-   "label": "difficult technical term"
-  },
-  "b": {
-   "scene": "Show a doctor explaining warmly with open hands, and the patient smiling with clear understanding.",
-   "label": "clear paraphrase"
-  },
-  "cap": "Explaining complex wording through a simple paraphrase",
-  "hl": "Umschreibung"
+  "type": "grammar",
+  "de": "Die Umschreibung wird verständlicher sein.",
+  "hl": "Umschreibung",
+  "role": "focus",
+  "cap": "die die Umschreibung = paraphrase"
  },
  "die-unterrichtsform--form-of-instruction": {
   "key": "die-unterrichtsform--form-of-instruction",
@@ -4499,39 +4394,32 @@
   "hl": "Zwischensumme"
  },
  "dienstags--on-tuesdays": {
-  "key": "dienstags--on-tuesdays",
-  "type": "scene",
-  "scene": "Show a person packing a sports bag with a tennis racket in their entryway, dressed in athletic clothes, ready for their weekly sports session.",
-  "cap": "A recurring weekly sports routine",
-  "hl": "Dienstags"
+  "type": "grammar",
+  "de": "Dienstags spiele ich Tennis.",
+  "hl": "Dienstags",
+  "role": "focus",
+  "cap": "dienstags = on Tuesdays"
  },
  "dies-legt-nahe-dass--this-suggests-that": {
-  "key": "dies-legt-nahe-dass--this-suggests-that",
-  "type": "scene",
-  "scene": "Show two scientists in lab coats examining a series of lab test results and pointing at a surprising trend on a clipboard with keen interest.",
-  "cap": "Findings pointing toward a clear conclusion",
-  "hl": "Dies legt nahe, dass"
+  "type": "grammar",
+  "de": "Dies legt nahe, dass weitere Untersuchungen notwendig sind.",
+  "hl": "Dies legt nahe, dass",
+  "role": "focus",
+  "cap": "dies legt nahe, dass = this suggests that"
  },
  "dies-waere-problematisch--this-would-be-problematic": {
-  "key": "dies-waere-problematisch--this-would-be-problematic",
-  "type": "scene",
-  "scene": "Show an IT specialist staring with a worried expression at a glowing warning prompt on a server room laptop.",
-  "cap": "A hypothetical situation that poses serious risks",
-  "hl": "Dies wäre problematisch"
+  "type": "grammar",
+  "de": "Dies wäre problematisch, wenn die Daten öffentlich würden.",
+  "hl": "Dies wäre problematisch",
+  "role": "focus",
+  "cap": "Dies wäre problematisch. = This would be problematic."
  },
  "diesmal--this-time": {
-  "key": "diesmal--this-time",
-  "type": "pair",
-  "a": {
-   "scene": "Show a student skimming through a paper quickly with a distracted look.",
-   "label": "last time: careless"
-  },
-  "b": {
-   "scene": "Show the student sitting upright, carefully reading every line with full focus.",
-   "label": "this time: thorough"
-  },
-  "cap": "A contrast between previous behavior and this time",
-  "hl": "Diesmal"
+  "type": "grammar",
+  "de": "Diesmal habe ich es genau gelesen.",
+  "hl": "Diesmal",
+  "role": "focus",
+  "cap": "diesmal = this time"
  },
  "dreissig--thirty": {
   "key": "dreissig--thirty",
@@ -4554,18 +4442,18 @@
   "n": 13
  },
  "drin-sein--be-in-be-possible": {
-  "key": "drin-sein--be-in-be-possible",
-  "type": "scene",
-  "scene": "Show a coach firmly shaking their head and holding out an open hand in refusal to an athlete arriving late to practice.",
-  "cap": "Making clear that no excuse is accepted",
-  "hl": "drin"
+  "type": "grammar",
+  "de": "Eine Ausrede ist nicht drin.",
+  "hl": "drin",
+  "role": "focus",
+  "cap": "drin sein = to be in, be possible"
  },
  "durchaus--thoroughly-definitely": {
-  "key": "durchaus--thoroughly-definitely",
-  "type": "scene",
-  "scene": "Show an architect confidently nodding while pointing at an ambitious building model during a meeting with an approving smile.",
-  "cap": "Acknowledging that an option is definitely viable",
-  "hl": "durchaus"
+  "type": "grammar",
+  "de": "Das ist durchaus möglich.",
+  "hl": "durchaus",
+  "role": "focus",
+  "cap": "durchaus = thoroughly, definitely"
  },
  "durfte--was-allowed-to": {
   "key": "durfte--was-allowed-to",
@@ -4576,46 +4464,46 @@
   "cap": "Past tense of dürfen expressing past permission"
  },
  "ebenfalls--also-likewise": {
-  "key": "ebenfalls--also-likewise",
-  "type": "scene",
-  "scene": "Show a customer at an electronics checkout holding both a new smartphone and a bundled charging cable with matching discount stickers.",
-  "cap": "The accessory is also included in the offer",
-  "hl": "ebenfalls"
+  "type": "grammar",
+  "de": "Das Ladekabel war ebenfalls im Angebot.",
+  "hl": "ebenfalls",
+  "role": "focus",
+  "cap": "ebenfalls = also, likewise"
  },
  "ebenfalls--likewise-also": {
-  "key": "ebenfalls--likewise-also",
-  "type": "scene",
-  "scene": "Show a smiling woman arriving at an apartment door with a gift, joining guests who are already celebrating inside.",
-  "cap": "She is joining the party too.",
-  "hl": "ebenfalls"
+  "type": "grammar",
+  "de": "Sie kommt ebenfalls zur Party.",
+  "hl": "ebenfalls",
+  "role": "focus",
+  "cap": "ebenfalls = likewise, also"
  },
  "ebenso--likewise-also": {
-  "key": "ebenso--likewise-also",
-  "type": "scene",
-  "scene": "Show two friends arriving together at a café entrance, waving warmly to people waiting at a table.",
-  "cap": "Anna comes, and Rohan comes too.",
-  "hl": "ebenso"
+  "type": "grammar",
+  "de": "Anna kommt, Rohan ebenso.",
+  "hl": "ebenso",
+  "role": "focus",
+  "cap": "ebenso = likewise, also"
  },
  "ebenso--likewise-equally": {
-  "key": "ebenso--likewise-equally",
-  "type": "scene",
-  "scene": "Show a presenter pointing to two balanced pillars on a whiteboard during a meeting, showing equal weight.",
-  "cap": "Both factors carry equal importance.",
-  "hl": "Ebenso"
+  "type": "grammar",
+  "de": "Ebenso wichtig ist die Berücksichtigung sozialer Faktoren.",
+  "hl": "Ebenso",
+  "role": "focus",
+  "cap": "ebenso = likewise, equally"
  },
  "echt-wirklich--really-genuinely": {
-  "key": "echt-wirklich--really-genuinely",
-  "type": "scene",
-  "scene": "Show a person standing on a hill at sunset, looking out at a stunning valley view with a look of pure delight.",
-  "cap": "Admiring a truly beautiful sunset view.",
-  "hl": "echt"
+  "type": "grammar",
+  "de": "Das ist echt schön.",
+  "hl": "echt",
+  "role": "focus",
+  "cap": "echt (wirklich) = really, genuinely"
  },
  "eher--rather": {
-  "key": "eher--rather",
-  "type": "scene",
-  "scene": "Show a young boy hesitating near a group of children playing, holding back slightly instead of jumping in boldly.",
-  "cap": "Leaning toward shyness rather than boldness.",
-  "hl": "eher"
+  "type": "grammar",
+  "de": "Er war eher schüchtern als mutig.",
+  "hl": "eher",
+  "role": "focus",
+  "cap": "eher = rather"
  },
  "ein-eine--a-an": {
   "key": "ein-eine--a-an",
@@ -4633,32 +4521,32 @@
   "hl": "löst eine kulturelle Debatte aus"
  },
  "eine-moegliche-erklaerung-waere--possible-explanation-would-be": {
-  "key": "eine-moegliche-erklaerung-waere--possible-explanation-would-be",
-  "type": "scene",
-  "scene": "Show a researcher at a lecture podium tapping their chin thoughtfully while presenting a chart to colleagues.",
-  "cap": "Offering a careful hypothesis during a presentation.",
-  "hl": "Eine mögliche Erklärung wäre"
+  "type": "grammar",
+  "de": "Eine mögliche Erklärung wäre, dass Universitäten KI-Tools aktiv fördern.",
+  "hl": "Eine mögliche Erklärung wäre",
+  "role": "focus",
+  "cap": "eine mögliche Erklärung wäre = a possible explanation would be"
  },
  "eines-tages--one-day": {
-  "key": "eines-tages--one-day",
-  "type": "scene",
-  "scene": "Show a person leaning on a balcony railing, daydreaming as they look at an empty plot of land with lush greenery.",
-  "cap": "Dreaming of owning a garden in the future.",
-  "hl": "Eines Tages"
+  "type": "grammar",
+  "de": "Eines Tages möchte ich einen eigenen Garten haben.",
+  "hl": "Eines Tages",
+  "role": "focus",
+  "cap": "eines Tages = one day (Genitiv time expression)"
  },
  "einfach--simply": {
-  "key": "einfach--simply",
-  "type": "scene",
-  "scene": "Show a friend talking calmly across a kitchen table, gesturing openly with relaxed hands to reassure the other person.",
-  "cap": "Speaking plainly and without overthinking.",
-  "hl": "einfach"
+  "type": "grammar",
+  "de": "Sag es einfach so wie immer.",
+  "hl": "einfach",
+  "role": "focus",
+  "cap": "einfach = simply"
  },
  "einfach-so--just-like-that": {
-  "key": "einfach-so--just-like-that",
-  "type": "scene",
-  "scene": "Show a woman rolling up her sleeves and studying a detailed project plan at her desk, knowing hard work is required.",
-  "cap": "Success requires effort and will not happen on its own.",
-  "hl": "einfach so"
+  "type": "grammar",
+  "de": "Das wird nicht einfach so passieren.",
+  "hl": "einfach so",
+  "role": "focus",
+  "cap": "einfach so = just like that"
  },
  "eingerechnet--included-factored-in": {
   "key": "eingerechnet--included-factored-in",
@@ -4685,18 +4573,18 @@
   "n": 100000
  },
  "einige--some-several": {
-  "key": "einige--some-several",
-  "type": "scene",
-  "scene": "Show three or four people chatting in a bright seminar room while most of the chairs are still empty.",
-  "cap": "A few attendees have already arrived.",
-  "hl": "einige"
+  "type": "grammar",
+  "de": "Ich frage mich, ob einige Leute schon da sind.",
+  "hl": "einige",
+  "role": "focus",
+  "cap": "einige = some, several"
  },
  "einschliesslich--including": {
-  "key": "einschliesslich--including",
-  "type": "scene",
-  "scene": "Show a hotel front desk where a receptionist points to an all-inclusive keycard package that covers breakfast and spa.",
-  "cap": "Everything is covered in the overall price.",
-  "hl": "einschließlich"
+  "type": "grammar",
+  "de": "Der Preis, einschließlich Steuer, ist fair.",
+  "hl": "einschließlich",
+  "role": "focus",
+  "cap": "einschließlich = including"
  },
  "einschneidend--drastic-incisive": {
   "key": "einschneidend--drastic-incisive",
@@ -4741,18 +4629,11 @@
   "cap": "to take someone away by force"
  },
  "entgegen--contrary-to": {
-  "key": "entgegen--contrary-to",
-  "type": "pair",
-  "a": {
-   "scene": "Show a chart with a projected downward arrow on a screen.",
-   "label": "forecast: falling"
-  },
-  "b": {
-   "scene": "Show eager customers lining up outside a bustling store.",
-   "label": "reality: rising demand"
-  },
-  "cap": "Demand kept rising contrary to what was expected.",
-  "hl": "Entgegen"
+  "type": "grammar",
+  "de": "Entgegen den Erwartungen stieg die Nachfrage weiter.",
+  "hl": "Entgegen",
+  "role": "focus",
+  "cap": "entgegen = contrary to"
  },
  "entgegenbringen--show-extend": {
   "key": "entgegenbringen--show-extend",
@@ -4862,25 +4743,18 @@
   "cap": "to kill with a gun"
  },
  "erst--only-not-until": {
-  "key": "erst--only-not-until",
-  "type": "pair",
-  "a": {
-   "scene": "Show students sitting silently in an exam hall writing intensely on test sheets while a wall clock ticks.",
-   "label": "during exam: quiet"
-  },
-  "b": {
-   "scene": "Show the same students outside in the sunshine raising glasses and laughing together after the exam.",
-   "label": "after: celebration"
-  },
-  "cap": "Celebrating only after the exam is finished",
-  "hl": "erst"
+  "type": "grammar",
+  "de": "Wir feiern erst nach der Prüfung.",
+  "hl": "erst",
+  "role": "focus",
+  "cap": "erst = only, not until"
  },
  "erst-mal--first": {
-  "key": "erst-mal--first",
-  "type": "scene",
-  "scene": "Show a young woman opening her laptop in the morning with a cup of tea nearby, immediately reading through feedback and comments on screen.",
-  "cap": "Checking comments first thing before continuing",
-  "hl": "Erst mal"
+  "type": "grammar",
+  "de": "Erst mal checke ich die Kommentare.",
+  "hl": "Erst mal",
+  "role": "focus",
+  "cap": "erst mal = first (of all)"
  },
  "erstaunt-dass--astonished-that": {
   "key": "erstaunt-dass--astonished-that",
@@ -4933,11 +4807,11 @@
   "cap": "Neuter personal pronoun referring back to 'das Essen'"
  },
  "es-besteht-ein-zusammenhang-zwischen--there-is-a-connection-between": {
-  "key": "es-besteht-ein-zusammenhang-zwischen--there-is-a-connection-between",
-  "type": "scene",
-  "scene": "Show a presenter pointing at a graph on a display board showing two parallel rising lines linking educational degrees and income levels.",
-  "cap": "Showing a clear connection between two factors",
-  "hl": "Es besteht ein Zusammenhang zwischen"
+  "type": "grammar",
+  "de": "Es besteht ein Zusammenhang zwischen Bildung und Einkommen.",
+  "hl": "Es besteht ein Zusammenhang zwischen",
+  "role": "focus",
+  "cap": "es besteht ein Zusammenhang zwischen = there is a connection between"
  },
  "es-ist-zu-beachten--it-is-to-be-noted-observed": {
   "key": "es-ist-zu-beachten--it-is-to-be-noted-observed",
@@ -5042,11 +4916,11 @@
   "hl": "etablieren"
  },
  "etwa--approximately-about": {
-  "key": "etwa--approximately-about",
-  "type": "scene",
-  "scene": "Show a passenger seated on a train, glancing down calmly at a wrist watch while looking out the window at passing countryside.",
-  "cap": "The train ride takes approximately twenty minutes",
-  "hl": "etwa"
+  "type": "grammar",
+  "de": "Die Fahrt dauert etwa zwanzig Minuten.",
+  "hl": "etwa",
+  "role": "focus",
+  "cap": "etwa = approximately, about"
  },
  "etwa--for-instance-roughly": {
   "key": "etwa--for-instance-roughly",
@@ -5057,18 +4931,18 @@
   "cap": "Adverb introducing an illustrative example"
  },
  "etwas--something": {
-  "key": "etwas--something",
-  "type": "scene",
-  "scene": "Show an adult relaxing on a comfortable sofa with closed eyes and a gentle smile, noise-canceling headphones resting on their ears in a quiet room.",
-  "cap": "Seeking some peace and quiet after a busy day",
-  "hl": "etwas"
+  "type": "grammar",
+  "de": "Ich hätte gern etwas Ruhe.",
+  "hl": "etwas",
+  "role": "focus",
+  "cap": "etwas = something"
  },
  "etwas--something-anything": {
-  "key": "etwas--something-anything",
-  "type": "scene",
-  "scene": "Show a friendly waiter standing beside an outdoor cafe table, politely offering a fresh glass of water with lemon to a smiling guest.",
-  "cap": "Offering something refreshing to drink",
-  "hl": "etwas"
+  "type": "grammar",
+  "de": "Möchten Sie etwas trinken?",
+  "hl": "etwas",
+  "role": "focus",
+  "cap": "etwas = something, anything"
  },
  "eu--eu": {
   "type": "map",
@@ -5104,18 +4978,18 @@
   "cap": "The 27 member states of the European Union"
  },
  "euch--you-all": {
-  "key": "euch--you-all",
-  "type": "scene",
-  "scene": "Show a smiling person waving goodbye from a train window to a group of friends standing together on the station platform waving back warmly.",
-  "cap": "Waving goodbye to all of you on the platform",
-  "hl": "euch"
+  "type": "grammar",
+  "de": "Ich vergesse euch nicht.",
+  "hl": "euch",
+  "role": "focus",
+  "cap": "euch = you all (accusative)"
  },
  "euer-eure--your": {
-  "key": "euer-eure--your",
-  "type": "scene",
-  "scene": "Show a person pointing inquiringly towards a charming family house with a garden, addressing a smiling couple standing beside them.",
-  "cap": "Asking a couple where their house is located",
-  "hl": "euer"
+  "type": "grammar",
+  "de": "Wo ist euer Haus?",
+  "hl": "euer",
+  "role": "focus",
+  "cap": "euer/eure = your (plural)"
  },
  "europa--europe": {
   "type": "map",
@@ -5270,11 +5144,11 @@
   "example": "Ich habe festgestellt, dass du sehr fleißig arbeitest."
  },
  "fliessend--fluently": {
-  "key": "fliessend--fluently",
-  "type": "scene",
-  "scene": "Show two people sitting at an outdoor café table, deep in lively, effortless conversation with expressive hand gestures and warm smiles.",
-  "cap": "Speaking effortlessly and fluently in conversation",
-  "hl": "fließend"
+  "type": "grammar",
+  "de": "Ich will fließend Deutsch sprechen.",
+  "hl": "fließend",
+  "role": "focus",
+  "cap": "fließend = fluently"
  },
  "fluessig--fluent-liquid": {
   "key": "fluessig--fluent-liquid",
@@ -5309,11 +5183,11 @@
   "hl": "frei"
  },
  "freitags--on-fridays": {
-  "key": "freitags--on-fridays",
-  "type": "scene",
-  "scene": "Show a person happily shutting their office laptop, picking up their jacket, and heading out the door into a bustling evening street.",
-  "cap": "Heading out for the evening at the end of the week",
-  "hl": "Freitags"
+  "type": "grammar",
+  "de": "Freitags gehe ich aus.",
+  "hl": "Freitags",
+  "role": "focus",
+  "cap": "freitags = on Fridays"
  },
  "fristgerecht--on-time": {
   "key": "fristgerecht--on-time",
@@ -5352,25 +5226,25 @@
   "n": 50
  },
  "ganz--completely-all-the-way-quite": {
-  "key": "ganz--completely-all-the-way-quite",
-  "type": "scene",
-  "scene": "Show a person carefully taking a crisp, pristine diploma with an embossed golden seal out of a sturdy mailing tube.",
-  "cap": "A brand new, completely fresh certificate",
-  "hl": "ganz"
+  "type": "grammar",
+  "de": "Mein Zertifikat ist ganz neu.",
+  "hl": "ganz",
+  "role": "focus",
+  "cap": "ganz = completely, all the way, quite"
  },
  "ganz--quite-completely": {
-  "key": "ganz--quite-completely",
-  "type": "scene",
-  "scene": "Show a child effortlessly assembling a simple three-piece wooden puzzle with a proud and easy smile.",
-  "cap": "Something quite simple and easy to do",
-  "hl": "ganz"
+  "type": "grammar",
+  "de": "Das ist ganz einfach.",
+  "hl": "ganz",
+  "role": "focus",
+  "cap": "ganz = quite, completely"
  },
  "gar--at-all": {
-  "key": "gar--at-all",
-  "type": "scene",
-  "scene": "Show a person tasting a spoonful of homemade soup, raising their eyebrows in pleasant surprise, and nodding approvingly.",
-  "cap": "Surprised that the food is not bad at all",
-  "hl": "gar"
+  "type": "grammar",
+  "de": "Das ist gar nicht schlecht.",
+  "hl": "gar",
+  "role": "focus",
+  "cap": "gar = at all"
  },
  "gebuertig--native-born-in": {
   "key": "gebuertig--native-born-in",
@@ -5387,11 +5261,11 @@
   "hl": "geehrte"
  },
  "gegen--around": {
-  "key": "gegen--around",
-  "type": "scene",
-  "scene": "Show a person stepping off a train onto a station platform, glancing up at the large station clock which shows five minutes to eight.",
-  "cap": "Arriving around eight o'clock",
-  "hl": "gegen"
+  "type": "grammar",
+  "de": "Er kam gegen acht Uhr an.",
+  "hl": "gegen",
+  "role": "focus",
+  "cap": "gegen = around (time)"
  },
  "gegenwartsbezogen--contemporary-present-focused": {
   "key": "gegenwartsbezogen--contemporary-present-focused",
@@ -5401,11 +5275,11 @@
   "hl": "gegenwartsbezogene"
  },
  "gehen-um--be-about": {
-  "key": "gehen-um--be-about",
-  "type": "scene",
-  "scene": "Show a lecture hall where a presenter stands beside a screen displaying icons of newspapers, podcasts, and digital tablets.",
-  "cap": "The lecture is all about modern media",
-  "hl": "geht es um"
+  "type": "grammar",
+  "de": "Heute geht es um Medien.",
+  "hl": "geht es um",
+  "role": "focus",
+  "cap": "gehen um = to be about"
  },
  "gelegentlich--occasional-occasionally": {
   "key": "gelegentlich--occasional-occasionally",
@@ -5415,11 +5289,11 @@
   "hl": "Gelegentlich"
  },
  "gell--right": {
-  "key": "gell--right",
-  "type": "scene",
-  "scene": "Show two friends sitting on a park bench. One person smiles warmly, nudging the other gently and gesturing toward a beautiful sunset, seeking agreement.",
-  "cap": "Seeking casual agreement: 'Right?'",
-  "hl": "gell"
+  "type": "grammar",
+  "de": "Das ist toll, gell?",
+  "hl": "gell",
+  "role": "focus",
+  "cap": "gell = right (tag question, regional)"
  },
  "gelten--apply-to-be-valid": {
   "key": "gelten--apply-to-be-valid",
@@ -5429,11 +5303,11 @@
   "hl": "gilt"
  },
  "gemaess--in-accordance-with-pursuant-to": {
-  "key": "gemaess--in-accordance-with-pursuant-to",
-  "type": "scene",
-  "scene": "Show a judge in formal attire sitting in a courtroom, holding an open thick legal book and gesturing calmly toward a podium.",
-  "cap": "In accordance with legal provisions.",
-  "hl": "Gemäß"
+  "type": "grammar",
+  "de": "Gemäß Artikel 5 der Verfassung ist die Meinungsfreiheit geschützt.",
+  "hl": "Gemäß",
+  "role": "focus",
+  "cap": "gemäß = in accordance with, pursuant to"
  },
  "genehmigungspflichtig--permit-requiring-subject-to-approval": {
   "key": "genehmigungspflichtig--permit-requiring-subject-to-approval",
@@ -5450,11 +5324,11 @@
   "hl": "Generell"
  },
  "gerade--at-the-moment-just-now": {
-  "key": "gerade--at-the-moment-just-now",
-  "type": "scene",
-  "scene": "Show a student sitting at a desk with an open textbook, notebook, and headphones on, actively writing down notes with concentrated focus.",
-  "cap": "In the middle of the action right now.",
-  "hl": "gerade"
+  "type": "grammar",
+  "de": "Ich lerne gerade Deutsch.",
+  "hl": "gerade",
+  "role": "focus",
+  "cap": "gerade = at the moment, just now"
  },
  "geraten--fall-into-end-up-in": {
   "key": "geraten--fall-into-end-up-in",
@@ -5513,18 +5387,11 @@
   "hl": "gesetzlich"
  },
  "gestern--yesterday": {
-  "key": "gestern--yesterday",
-  "type": "pair",
-  "a": {
-   "scene": "Show a person resting comfortably on a couch at home reading a book.",
-   "label": "yesterday: at home"
-  },
-  "b": {
-   "scene": "Show the same person walking down a busy city street in outdoor clothes.",
-   "label": "today: out in town"
-  },
-  "cap": "Contrasting yesterday at home with today out in town.",
-  "hl": "Gestern"
+  "type": "grammar",
+  "de": "Gestern war ich zu Hause.",
+  "hl": "Gestern",
+  "role": "focus",
+  "cap": "gestern = yesterday"
  },
  "gesundheitlich--health-related": {
   "key": "gesundheitlich--health-related",
@@ -5608,25 +5475,25 @@
   "example": "Mein Herzenswunsch erfüllt sich dadurch, dass ich hauptberuflich als Näherin arbeite."
  },
  "heute--today": {
-  "key": "heute--today",
-  "type": "scene",
-  "scene": "Show a person looking at a busy day planner with a hand holding a pen, tapping their wrist, declining an invitation on the phone.",
-  "cap": "Today with no free time",
-  "hl": "Heute"
+  "type": "grammar",
+  "de": "Heute habe ich keine Zeit.",
+  "hl": "Heute",
+  "role": "focus",
+  "cap": "heute = today"
  },
  "hinsichtlich--regarding-with-respect-to": {
-  "key": "hinsichtlich--regarding-with-respect-to",
-  "type": "scene",
-  "scene": "Show two colleagues in an office leaning over a sheet of paper with cost charts, one pointing at an unclear section with a puzzled expression.",
-  "cap": "Questions regarding the costs",
-  "hl": "Hinsichtlich"
+  "type": "grammar",
+  "de": "Hinsichtlich der Kosten gibt es noch Fragen.",
+  "hl": "Hinsichtlich",
+  "role": "focus",
+  "cap": "hinsichtlich = regarding, with respect to"
  },
  "hinsichtlich--with-regard-to-in-terms-of": {
-  "key": "hinsichtlich--with-regard-to-in-terms-of",
-  "type": "scene",
-  "scene": "Show a researcher at a desk comparing two opened scientific binders side by side, taking notes on the contrasting methods used.",
-  "cap": "Clear differences regarding methodology",
-  "hl": "Hinsichtlich"
+  "type": "grammar",
+  "de": "Hinsichtlich der Methodik gibt es deutliche Unterschiede zwischen den Studien.",
+  "hl": "Hinsichtlich",
+  "role": "focus",
+  "cap": "hinsichtlich = with regard to, in terms of"
  },
  "hundert--hundred": {
   "key": "hundert--hundred",
@@ -5641,18 +5508,18 @@
   "hl": "identitätsstiftend"
  },
  "im-folgenden--in-the-following-below": {
-  "key": "im-folgenden--in-the-following-below",
-  "type": "scene",
-  "scene": "Show a speaker standing near a presentation easel with diagrams, gesturing toward the next section while summarizing key results.",
-  "cap": "Summarizing what follows next",
-  "hl": "Im Folgenden"
+  "type": "grammar",
+  "de": "Im Folgenden sollten wir die Ergebnisse zusammenfassen.",
+  "hl": "Im Folgenden",
+  "role": "focus",
+  "cap": "im Folgenden = in the following, below"
  },
  "im-hinblick-auf--with-a-view-to-regarding": {
-  "key": "im-hinblick-auf--with-a-view-to-regarding",
-  "type": "scene",
-  "scene": "Show a team of planners reviewing building materials on a table, carefully selecting essential supplies to manage tight limits.",
-  "cap": "Setting priorities with a view to limited resources",
-  "hl": "Im Hinblick auf"
+  "type": "grammar",
+  "de": "Im Hinblick auf die begrenzten Ressourcen muss priorisiert werden.",
+  "hl": "Im Hinblick auf",
+  "role": "focus",
+  "cap": "im Hinblick auf = with a view to, regarding"
  },
  "im-laufe--in-the-course-of": {
   "key": "im-laufe--in-the-course-of",
@@ -5671,46 +5538,39 @@
   "cap": "Fixed expression meaning 'within the framework of'"
  },
  "im-rahmen-von--within-the-framework-of-as-part-of": {
-  "key": "im-rahmen-von--within-the-framework-of-as-part-of",
-  "type": "scene",
-  "scene": "Show several published booklets and brochures arranged neatly on a conference table alongside a collaborative project binder.",
-  "cap": "Publications created as part of the project",
-  "hl": "Im Rahmen von"
+  "type": "grammar",
+  "de": "Im Rahmen von diesem Projekt entstanden mehrere Publikationen.",
+  "hl": "Im Rahmen von",
+  "role": "focus",
+  "cap": "im Rahmen von = within the framework of, as part of"
  },
  "immer--always": {
-  "key": "immer--always",
-  "type": "scene",
-  "scene": "Show a person sitting at a bright kitchen table every morning, peacefully spreading jam on bread beside a cup of tea.",
-  "cap": "Always eating breakfast",
-  "hl": "immer"
+  "type": "grammar",
+  "de": "Ich frühstücke immer.",
+  "hl": "immer",
+  "role": "focus",
+  "cap": "immer = always"
  },
  "immer-wenn--whenever": {
-  "key": "immer-wenn--whenever",
-  "type": "pair",
-  "a": {
-   "scene": "Show a visitor reaching a garden gate and opening the latch.",
-   "label": "every time visitor comes"
-  },
-  "b": {
-   "scene": "Show a dog near the front door barking energetically.",
-   "label": "the dog barks"
-  },
-  "cap": "Whenever one happens, the other follows",
-  "hl": "Immer wenn"
+  "type": "grammar",
+  "de": "Immer wenn ich komme, bellt ihr Hund.",
+  "hl": "Immer wenn",
+  "role": "focus",
+  "cap": "immer wenn = whenever"
  },
  "in-bezug-auf--with-regard-to": {
-  "key": "in-bezug-auf--with-regard-to",
-  "type": "scene",
-  "scene": "Show a team around a conference table discussing a budget document spread open, debating the exact figures before making a choice.",
-  "cap": "Deciding with regard to the costs",
-  "hl": "In Bezug auf"
+  "type": "grammar",
+  "de": "In Bezug auf die Kosten müssen wir noch entscheiden.",
+  "hl": "In Bezug auf",
+  "role": "focus",
+  "cap": "in Bezug auf = with regard to"
  },
  "in-diesem-zusammenhang--in-this-context-in-this-connection": {
-  "key": "in-diesem-zusammenhang--in-this-context-in-this-connection",
-  "type": "scene",
-  "scene": "Show a conference speaker at a lectern addressing a room full of journalists holding notebooks and cameras.",
-  "cap": "Discussing a related topic in this formal context.",
-  "hl": "In diesem Zusammenhang"
+  "type": "grammar",
+  "de": "In diesem Zusammenhang ist auch die Rolle der Medien zu betrachten.",
+  "hl": "In diesem Zusammenhang",
+  "role": "focus",
+  "cap": "in diesem Zusammenhang = in this context, in this connection"
  },
  "indonesisch--indonesian": {
   "key": "indonesisch--indonesian",
@@ -5721,25 +5581,25 @@
   "cap": "Official language of Indonesia"
  },
  "infolge--as-a-result-of-due-to": {
-  "key": "infolge--as-a-result-of-due-to",
-  "type": "scene",
-  "scene": "Show paramedics rushing to an ambulance with gear immediately after a call alert sounds in the dispatch station.",
-  "cap": "Immediate reaction as a result of the emergency call",
-  "hl": "Infolge"
+  "type": "grammar",
+  "de": "Infolge des Notrufs wird sofort reagiert.",
+  "hl": "Infolge",
+  "role": "focus",
+  "cap": "infolge = as a result of, due to"
  },
  "infolge--as-a-result-of-owing-to": {
-  "key": "infolge--as-a-result-of-owing-to",
-  "type": "scene",
-  "scene": "Show a dry, cracked riverbed under harsh sunlight alongside heavy rain flooding an adjacent field, contrasting extreme weather.",
-  "cap": "Extreme events increasing as a result of climate change",
-  "hl": "Infolge"
+  "type": "grammar",
+  "de": "Infolge des Klimawandels häufen sich Extremwetterereignisse.",
+  "hl": "Infolge",
+  "role": "focus",
+  "cap": "infolge = as a result of, owing to"
  },
  "infrage-kommen--be-an-option-be-considered": {
-  "key": "infrage-kommen--be-an-option-be-considered",
-  "type": "scene",
-  "scene": "Show two business partners thoughtfully pondering a negotiation agenda on a desk, weighing whether it is still a viable option.",
-  "cap": "Weighing whether an option is still on the table",
-  "hl": "infrage"
+  "type": "grammar",
+  "de": "Kommt eine Geschäftsverhandlung noch infrage?",
+  "hl": "infrage",
+  "role": "focus",
+  "cap": "infrage kommen = to be an option, be considered"
  },
  "inhaltlich--in-terms-of-content": {
   "key": "inhaltlich--in-terms-of-content",
@@ -5756,11 +5616,11 @@
   "hl": "inhaltlich"
  },
  "innerhalb-von--within": {
-  "key": "innerhalb-von--within",
-  "type": "scene",
-  "scene": "Show a person walking briskly down a short street toward a nearby cafe entrance that is already visible just ahead.",
-  "cap": "Arriving within just two minutes",
-  "hl": "Innerhalb von"
+  "type": "grammar",
+  "de": "Innerhalb von zwei Minuten sind Sie da.",
+  "hl": "Innerhalb von",
+  "role": "focus",
+  "cap": "innerhalb von = within"
  },
  "inoffiziell--informal": {
   "type": "grammar",
@@ -5770,53 +5630,53 @@
   "cap": "Everyday (informal) way to tell the time"
  },
  "insgesamt--in-total-altogether": {
-  "key": "insgesamt--in-total-altogether",
-  "type": "scene",
-  "scene": "Show a large dining table outdoors filled with a lively gathering of people seated together celebrating a meal.",
-  "cap": "Altogether twenty guests arriving",
-  "hl": "Insgesamt"
+  "type": "grammar",
+  "de": "Insgesamt kommen zwanzig Gäste.",
+  "hl": "Insgesamt",
+  "role": "focus",
+  "cap": "insgesamt = in total, altogether"
  },
  "insgesamt--overall-altogether": {
-  "key": "insgesamt--overall-altogether",
-  "type": "scene",
-  "scene": "Show a scientist reviewing data sheets and smiling in satisfaction as the full pattern matches the expected outcome.",
-  "cap": "Overall confirming the initial hypothesis",
-  "hl": "Insgesamt"
+  "type": "grammar",
+  "de": "Insgesamt bestätigen die Ergebnisse die ursprüngliche Hypothese.",
+  "hl": "Insgesamt",
+  "role": "focus",
+  "cap": "insgesamt = overall, altogether"
  },
  "insgesamt--overall-in-total": {
-  "key": "insgesamt--overall-in-total",
-  "type": "scene",
-  "scene": "Show a classic brass balance scale. On the left pan are three green cubes labeled conceptually as benefits, heavily weighing it down, while on the right pan is one small red cube representing drawbacks.",
-  "cap": "Weighing everything together: overall, the advantages outweigh.",
-  "hl": "Insgesamt"
+  "type": "grammar",
+  "de": "Insgesamt überwiegen die Vorteile.",
+  "hl": "Insgesamt",
+  "role": "focus",
+  "cap": "insgesamt = overall, in total"
  },
  "inzwischen--meanwhile-by-now": {
-  "key": "inzwischen--meanwhile-by-now",
-  "type": "scene",
-  "scene": "Show a smiling adult sitting in a language classroom, happily chatting and laughing with fellow classmates on both sides, looking fully integrated and comfortable among them.",
-  "cap": "By now, getting along with everyone in the course.",
-  "hl": "Inzwischen"
+  "type": "grammar",
+  "de": "Inzwischen kenne ich alle im Kurs.",
+  "hl": "Inzwischen",
+  "role": "focus",
+  "cap": "inzwischen = meanwhile, by now"
  },
  "irgendetwas--something-anything": {
-  "key": "irgendetwas--something-anything",
-  "type": "scene",
-  "scene": "Show a customer at a restaurant table holding an open menu, politely speaking to a waiter while pointing inquisitively toward the vegetarian vegetable section.",
-  "cap": "Politely asking the waiter for any vegetarian dish.",
-  "hl": "irgendetwas"
+  "type": "grammar",
+  "de": "Könnten Sie mir irgendetwas Vegetarisches empfehlen?",
+  "hl": "irgendetwas",
+  "role": "focus",
+  "cap": "irgendetwas = something, anything"
  },
  "irgendwann--sometime": {
-  "key": "irgendwann--sometime",
-  "type": "scene",
-  "scene": "Show a person standing outdoors on a suburban street, looking up with curiosity at several small delivery drones flying smoothly across a futuristic sky.",
-  "cap": "Imagining that sometime in the future, drones will be everywhere.",
-  "hl": "Irgendwann"
+  "type": "grammar",
+  "de": "Irgendwann werden wir alle Drohnen nutzen.",
+  "hl": "Irgendwann",
+  "role": "focus",
+  "cap": "irgendwann = sometime"
  },
  "irgendwo--somewhere": {
-  "key": "irgendwo--somewhere",
-  "type": "scene",
-  "scene": "Show a scientist in a white coat looking at a beaker in a bright lab, while in the background a solar-powered water purification pump provides clean water to a garden.",
-  "cap": "Believing research must be useful somewhere in the world.",
-  "hl": "Irgendwo"
+  "type": "grammar",
+  "de": "Irgendwo muss die Forschung ja nützen.",
+  "hl": "Irgendwo",
+  "role": "focus",
+  "cap": "irgendwo = somewhere"
  },
  "italienisch--italian": {
   "key": "italienisch--italian",
@@ -5830,25 +5690,25 @@
   "cap": "Italian: official in Italy, Switzerland, San Marino, and Vatican City."
  },
  "ja--x": {
-  "key": "ja--x",
-  "type": "scene",
-  "scene": "Show a person opening an unexpected gift box with a wide smile and pleasantly surprised expression, hands raised in delight.",
-  "cap": "Reacting with pleasant surprise: That's great!",
-  "hl": "ja"
+  "type": "grammar",
+  "de": "Das ist ja toll!",
+  "hl": "ja",
+  "role": "focus",
+  "cap": "ja = (modal particle)"
  },
  "jaehrig--year-old": {
-  "key": "jaehrig--year-old",
-  "type": "scene",
-  "scene": "Show a smiling grandfather standing back-to-back with a boy, measuring how tall the grandson has grown.",
-  "cap": "Comparing height with a ten-year-old boy.",
-  "hl": "zehnjährige"
+  "type": "grammar",
+  "de": "Der zehnjährige Enkel ist so groß wie ich.",
+  "hl": "zehnjährige",
+  "role": "focus",
+  "cap": "-jährig = -year-old (as in zehnjährig)"
  },
  "jahrelang--for-years": {
-  "key": "jahrelang--for-years",
-  "type": "scene",
-  "scene": "Show an elderly man sitting outside a weathered wooden alpine cabin on a high mountain meadow, surrounded by grazing cows and sweeping peaks, looking settled and at home.",
-  "cap": "Living peacefully on the alpine pasture for years.",
-  "hl": "jahrelang"
+  "type": "grammar",
+  "de": "Er lebte jahrelang auf der Alm.",
+  "hl": "jahrelang",
+  "role": "focus",
+  "cap": "jahrelang = for years"
  },
  "japanisch--japanese": {
   "key": "japanisch--japanese",
@@ -5859,18 +5719,18 @@
   "cap": "Japanese: spoken primarily in Japan."
  },
  "jedenfalls--in-any-case-anyway": {
-  "key": "jedenfalls--in-any-case-anyway",
-  "type": "scene",
-  "scene": "Show a person rushing out of a subway exit onto the street while checking a wristwatch anxiously, determined to arrive without further delay.",
-  "cap": "Trying hard to be on time anyway.",
-  "hl": "jedenfalls"
+  "type": "grammar",
+  "de": "Ich habe jedenfalls versucht, pünktlich zu sein.",
+  "hl": "jedenfalls",
+  "role": "focus",
+  "cap": "jedenfalls = in any case, anyway"
  },
  "jederzeit--at-any-time": {
-  "key": "jederzeit--at-any-time",
-  "type": "scene",
-  "scene": "Show a customer inserting an empty glass bottle into an automatic bottle-return machine at a supermarket entrance, illuminated and accessible around the clock.",
-  "cap": "Returning empty bottles at any time.",
-  "hl": "jederzeit"
+  "type": "grammar",
+  "de": "Du kannst die Flasche jederzeit zurückbringen.",
+  "hl": "jederzeit",
+  "role": "focus",
+  "cap": "jederzeit = at any time"
  },
  "jetzig--current": {
   "key": "jetzig--current",
@@ -5887,11 +5747,11 @@
   "hl": "jetzige"
  },
  "jetzt--now": {
-  "key": "jetzt--now",
-  "type": "scene",
-  "scene": "Show a busy person sitting in front of a laptop raising an open palm politely toward someone approaching, signaling to wait a moment.",
-  "cap": "Signaling: Not right now, please.",
-  "hl": "Jetzt"
+  "type": "grammar",
+  "de": "Jetzt nicht, bitte.",
+  "hl": "Jetzt",
+  "role": "focus",
+  "cap": "jetzt = now"
  },
  "katholisch--catholic": {
   "key": "katholisch--catholic",
@@ -5901,11 +5761,11 @@
   "hl": "katholischen"
  },
  "kaum--barely-hardly": {
-  "key": "kaum--barely-hardly",
-  "type": "scene",
-  "scene": "Show a person rushing with a coat half-on, holding a packed bag, glancing with a stressed expression at a large wall clock with just minutes left.",
-  "cap": "Stressed and having hardly any time.",
-  "hl": "kaum"
+  "type": "grammar",
+  "de": "Ich habe kaum Zeit.",
+  "hl": "kaum",
+  "role": "focus",
+  "cap": "kaum = barely, hardly"
  },
  "koennte--could": {
   "key": "koennte--could",
@@ -5930,18 +5790,18 @@
   "hl": "konnte"
  },
  "kraft--by-virtue-of": {
-  "key": "kraft--by-virtue-of",
-  "type": "scene",
-  "scene": "Show an official at a formal wooden desk signing an important parchment treaty with a fountain pen, with an official seal lying nearby.",
-  "cap": "Signing the official contract by virtue of his office.",
-  "hl": "Kraft"
+  "type": "grammar",
+  "de": "Kraft seines Amtes unterzeichnete er den Vertrag.",
+  "hl": "Kraft",
+  "role": "focus",
+  "cap": "kraft = by virtue of"
  },
  "kraft--by-virtue-of-on-the-strength-of": {
-  "key": "kraft--by-virtue-of-on-the-strength-of",
-  "type": "scene",
-  "scene": "Show a government minister standing formally at a rostrum, affixing a signature to a legal decree in a state hall.",
-  "cap": "By virtue of his office, the minister signs the decree.",
-  "hl": "Kraft"
+  "type": "grammar",
+  "de": "Kraft seines Amtes unterzeichnete der Minister das Dekret.",
+  "hl": "Kraft",
+  "role": "focus",
+  "cap": "kraft = by virtue of, on the strength of"
  },
  "krisenbedingt--crisis-related-crisis-induced": {
   "key": "krisenbedingt--crisis-related-crisis-induced",
@@ -5951,11 +5811,11 @@
   "hl": "Krisenbedingte"
  },
  "kuerzlich--shortly-recently": {
-  "key": "kuerzlich--shortly-recently",
-  "type": "scene",
-  "scene": "Show an art restorer in an atelier carefully putting down a fine brush next to a freshly cleaned, vibrant oil painting resting on an easel.",
-  "cap": "The painting was recently restored.",
-  "hl": "kürzlich"
+  "type": "grammar",
+  "de": "Das Gemälde wurde kürzlich restauriert.",
+  "hl": "kürzlich",
+  "role": "focus",
+  "cap": "kürzlich = shortly, recently"
  },
  "kursiv--italic": {
   "key": "kursiv--italic",
@@ -5965,25 +5825,18 @@
   "hl": "kursiv"
  },
  "kurz--just": {
-  "key": "kurz--just",
-  "type": "scene",
-  "scene": "Show a round wall clock with its hands pointing exactly to two minutes past eight.",
-  "cap": "Just after eight o'clock",
-  "hl": "kurz"
+  "type": "grammar",
+  "de": "Es ist kurz nach acht.",
+  "hl": "kurz",
+  "role": "focus",
+  "cap": "kurz = just (after/before)"
  },
  "laengst--for-a-long-time": {
-  "key": "laengst--for-a-long-time",
-  "type": "pair",
-  "a": {
-   "scene": "Show a person looking at a broken leaky pipe with water pooling on the floor.",
-   "label": "past: already known"
-  },
-  "b": {
-   "scene": "Show an old faded calendar with many crossed-off weeks beside the same pipe.",
-   "label": "längst: known for ages"
-  },
-  "cap": "A problem recognized long ago",
-  "hl": "längst"
+  "type": "grammar",
+  "de": "Das Problem ist längst bekannt.",
+  "hl": "längst",
+  "role": "focus",
+  "cap": "längst = for a long time (already)"
  },
  "lauten--be-to-read": {
   "key": "lauten--be-to-read",
@@ -5994,25 +5847,18 @@
   "cap": "Verb used to quote or state official wording"
  },
  "lauter--all": {
-  "key": "lauter--all",
-  "type": "scene",
-  "scene": "Show a speaker standing behind a microphone on a stage, trembling and holding a glass of water with wide eyes, overwhelmed by excitement.",
-  "cap": "Paralyzed from sheer excitement",
-  "hl": "lauter"
+  "type": "grammar",
+  "de": "Vor lauter Aufregung konnte er nicht sprechen.",
+  "hl": "lauter",
+  "role": "focus",
+  "cap": "lauter = all (vor lauter Aufregung: from all the excitement)"
  },
  "lebenslang--lifelong": {
-  "key": "lebenslang--lifelong",
-  "type": "pair",
-  "a": {
-   "scene": "Show a young student reading a large book at a sunny library desk.",
-   "label": "youth: studying"
-  },
-  "b": {
-   "scene": "Show an elderly person in glasses happily taking an evening lecture class.",
-   "label": "old age: still learning"
-  },
-  "cap": "Continuing to learn throughout one's entire life",
-  "hl": "lebenslanges"
+  "type": "grammar",
+  "de": "Er spricht über sein lebenslanges Lernen.",
+  "hl": "lebenslanges",
+  "role": "focus",
+  "cap": "lebenslang = lifelong"
  },
  "ledig--single-unmarried": {
   "key": "ledig--single-unmarried",
@@ -6057,18 +5903,11 @@
   "hl": "machen"
  },
  "mal--sometime-just": {
-  "key": "mal--sometime-just",
-  "type": "scene",
-  "scene": "Show a friendly friend waving casually with one hand, gesturing for someone nearby to come over for a second.",
-  "cap": "Friendly prompt: come here a moment",
-  "hl": "mal"
- },
- "man--one-you": {
-  "key": "man--one-you",
-  "type": "scene",
-  "scene": "Show several diverse people in a lively café, each happily holding a warm ceramic cup of coffee.",
-  "cap": "People in general drink coffee",
-  "hl": "man"
+  "type": "grammar",
+  "de": "Komm mal her!",
+  "hl": "mal",
+  "role": "focus",
+  "cap": "mal = sometime; just"
  },
  "man-koennte-vermuten-dass--one-might-suspect-that": {
   "type": "grammar",
@@ -6078,25 +5917,18 @@
   "cap": "A cautious way to suggest something"
  },
  "manchmal--sometimes": {
-  "key": "manchmal--sometimes",
-  "type": "pair",
-  "a": {
-   "scene": "Show a person in an apron stirring vegetables in a steaming pan over a stove.",
-   "label": "some days: cooking"
-  },
-  "b": {
-   "scene": "Show the same person eating a sandwich from a bakery on a park bench.",
-   "label": "other days: takeaway"
-  },
-  "cap": "Cooking occasionally, not every day",
-  "hl": "Manchmal"
+  "type": "grammar",
+  "de": "Manchmal koche ich.",
+  "hl": "Manchmal",
+  "role": "focus",
+  "cap": "manchmal = sometimes"
  },
  "mangels--for-lack-of": {
-  "key": "mangels--for-lack-of",
-  "type": "scene",
-  "scene": "Show a judge in a courtroom closing a folder with empty document pockets and spreading hands calmly.",
-  "cap": "Case closed due to lack of evidence",
-  "hl": "Mangels"
+  "type": "grammar",
+  "de": "Mangels Beweisen wurde der Fall eingestellt.",
+  "hl": "Mangels",
+  "role": "focus",
+  "cap": "mangels = for lack of"
  },
  "mangels--for-lack-of-in-the-absence-of": {
   "key": "mangels--for-lack-of-in-the-absence-of",
@@ -6107,32 +5939,32 @@
   "cap": "Formal genitive preposition expressing absence or lack"
  },
  "maximal--maximum-at-most": {
-  "key": "maximal--maximum-at-most",
-  "type": "scene",
-  "scene": "Show a wallet containing banknotes alongside a strict price limit note marked with an upward stop bar.",
-  "cap": "Upper limit of rent payment",
-  "hl": "Maximal"
+  "type": "grammar",
+  "de": "Maximal 500 Euro Miete.",
+  "hl": "Maximal",
+  "role": "focus",
+  "cap": "maximal = maximum, at most"
  },
  "mega--really": {
-  "key": "mega--really",
-  "type": "scene",
-  "scene": "Show two hikers standing on a sunny mountain peak, arms raised in awe looking over majestic alpine valleys.",
-  "cap": "An exceptionally beautiful mountain view",
-  "hl": "mega"
+  "type": "grammar",
+  "de": "Eine Wanderung zur Bergstation wäre mega schön.",
+  "hl": "mega",
+  "role": "focus",
+  "cap": "mega = really"
  },
  "mehr--more-anymore": {
-  "key": "mehr--more-anymore",
-  "type": "scene",
-  "scene": "Show a person rushing out the front door with a coat half on, checking a watch with an empty schedule slot.",
-  "cap": "Running out of time completely",
-  "hl": "mehr"
+  "type": "grammar",
+  "de": "Ich habe keine Zeit mehr.",
+  "hl": "mehr",
+  "role": "focus",
+  "cap": "mehr = more, anymore"
  },
  "mehrmals--repeatedly-several-times": {
-  "key": "mehrmals--repeatedly-several-times",
-  "type": "scene",
-  "scene": "Show a person sitting on a sofa watching a laptop screen, with a visible replay loop icon on the desk notebook.",
-  "cap": "Watching the same video multiple times",
-  "hl": "mehrmals"
+  "type": "grammar",
+  "de": "Ich habe den Trailer mehrmals gesehen.",
+  "hl": "mehrmals",
+  "role": "focus",
+  "cap": "mehrmals = repeatedly, several times"
  },
  "meinen--mean-to-be-of-the-opinion": {
   "key": "meinen--mean-to-be-of-the-opinion",
@@ -6149,18 +5981,18 @@
   "hl": "meine"
  },
  "meinetwegen--fine-with-me-for-my-sake": {
-  "key": "meinetwegen--fine-with-me-for-my-sake",
-  "type": "scene",
-  "scene": "Show a person sleeping peacefully under a warm duvet in a bedroom while sunlight streams gently through the window.",
-  "cap": "As far as I'm concerned, sleep in",
-  "hl": "Meinetwegen"
+  "type": "grammar",
+  "de": "Meinetwegen brauchst du nicht früh aufzustehen.",
+  "hl": "Meinetwegen",
+  "role": "focus",
+  "cap": "meinetwegen = fine with me, for my sake"
  },
  "meistens--mostly-usually": {
-  "key": "meistens--mostly-usually",
-  "type": "scene",
-  "scene": "Show two cheerful colleagues eating lunch together at a cafeteria table, a familiar daily routine.",
-  "cap": "Usually having meals together",
-  "hl": "Meistens"
+  "type": "grammar",
+  "de": "Meistens esse ich mit Max.",
+  "hl": "Meistens",
+  "role": "focus",
+  "cap": "meistens = mostly, usually"
  },
  "mit-dem--with-whom": {
   "key": "mit-dem--with-whom",
@@ -6179,32 +6011,18 @@
   "cap": "Formal connective adverb expressing logical consequence ('thus')."
  },
  "mittlerweile--meanwhile": {
-  "key": "mittlerweile--meanwhile",
-  "type": "pair",
-  "a": {
-   "scene": "Show a quiet village road with small stone houses and empty dirt paths.",
-   "label": "years ago"
-  },
-  "b": {
-   "scene": "Show the same street now modernized with paved roads, cafes, and cyclists.",
-   "label": "meanwhile"
-  },
-  "cap": "Shows how things have transformed in the meantime.",
-  "hl": "Mittlerweile"
+  "type": "grammar",
+  "de": "Mittlerweile hatte sich vieles verändert.",
+  "hl": "Mittlerweile",
+  "role": "focus",
+  "cap": "mittlerweile = meanwhile"
  },
  "mittlerweile--meanwhile-by-now": {
-  "key": "mittlerweile--meanwhile-by-now",
-  "type": "pair",
-  "a": {
-   "scene": "Show an office conference table occupied solely by senior male managers.",
-   "label": "in the past"
-  },
-  "b": {
-   "scene": "Show the same meeting room with a balanced, diverse team collaborating.",
-   "label": "by now"
-  },
-  "cap": "Questioning whether inequalities have decreased over time.",
-  "hl": "mittlerweile"
+  "type": "grammar",
+  "de": "Ist die Diskriminierung mittlerweile zurückgegangen?",
+  "hl": "mittlerweile",
+  "role": "focus",
+  "cap": "mittlerweile = meanwhile, by now"
  },
  "mittwochs--on-wednesdays": {
   "key": "mittwochs--on-wednesdays",
@@ -6231,11 +6049,11 @@
   "cap": "Adverbial modifier meaning 'as ... as possible'."
  },
  "momentan--at-the-moment": {
-  "key": "momentan--at-the-moment",
-  "type": "scene",
-  "scene": "Show a woman at an office desk surrounded by tall stacks of paperwork, holding a phone receiver with one hand while typing on her keyboard.",
-  "cap": "She is extremely busy at the moment.",
-  "hl": "Momentan"
+  "type": "grammar",
+  "de": "Momentan war sie sehr beschäftigt.",
+  "hl": "Momentan",
+  "role": "focus",
+  "cap": "momentan = at the moment"
  },
  "monolingual--monolingual": {
   "key": "monolingual--monolingual",
@@ -6269,11 +6087,11 @@
   "cap": "Preposition used to indicate minutes past the hour."
  },
  "nach-angaben--according-to-statements-reports-of": {
-  "key": "nach-angaben--according-to-statements-reports-of",
-  "type": "scene",
-  "scene": "Show an official spokesperson speaking into a cluster of press microphones at a podium while journalists in front take notes.",
-  "cap": "Official statements reported by an authority to the public.",
-  "hl": "Nach Angaben"
+  "type": "grammar",
+  "de": "Nach Angaben der Behörde wurden alle Auflagen erfüllt.",
+  "hl": "Nach Angaben",
+  "role": "focus",
+  "cap": "nach Angaben ... = according to statements/reports of ..."
  },
  "naemlich--you-see-namely": {
   "type": "grammar",
@@ -6299,11 +6117,18 @@
   "cap": "Imperative of 'nennen', instructing someone to state or list names."
  },
  "neulich--recently": {
-  "key": "neulich--recently",
-  "type": "scene",
-  "scene": "Show a viewer relaxing on a living room sofa with a hot drink, watching an athletic competition broadcast on a television.",
-  "cap": "Watching a television broadcast the other day.",
-  "hl": "Neulich"
+  "type": "grammar",
+  "de": "Neulich habe ich eine Sendung über den Wettbewerb gesehen.",
+  "hl": "Neulich",
+  "role": "focus",
+  "cap": "neulich = recently"
+ },
+ "neulich--recently-the-other-day": {
+  "type": "grammar",
+  "de": "Neulich haben wir uns getroffen.",
+  "hl": "Neulich",
+  "role": "focus",
+  "cap": "neulich = recently, the other day"
  },
  "neunundzwanzig--twenty-nine": {
   "key": "neunundzwanzig--twenty-nine",
@@ -6344,18 +6169,11 @@
   "cap": "Negation particle positioned directly before an adjective."
  },
  "nicht-nur--not-only": {
-  "key": "nicht-nur--not-only",
-  "type": "pair",
-  "a": {
-   "scene": "Show a single steaming mug of herbal tea on a saucer.",
-   "label": "not only tea"
-  },
-  "b": {
-   "scene": "Show both the mug of tea and a cup of freshly brewed coffee side by side.",
-   "label": "also coffee"
-  },
-  "cap": "Expresses that both items are included, not just the first.",
-  "hl": "Nicht nur"
+  "type": "grammar",
+  "de": "Nicht nur Tee, auch Kaffee.",
+  "hl": "Nicht nur",
+  "role": "focus",
+  "cap": "nicht nur = not only"
  },
  "nicht-nur-sondern-auch--not-only-but-also": {
   "type": "grammar",
@@ -6379,67 +6197,67 @@
   "cap": "Not this one, but that one"
  },
  "nicht-zuletzt--not-least": {
-  "key": "nicht-zuletzt--not-least",
-  "type": "scene",
-  "scene": "Show a diverse group of engineers and researchers shaking hands around a large renewable energy turbine model, celebrating success.",
-  "cap": "Not least thanks to teamwork, the problem was solved.",
-  "hl": "Nicht zuletzt"
+  "type": "grammar",
+  "de": "Nicht zuletzt dank internationaler Zusammenarbeit konnte das Problem gelöst werden.",
+  "hl": "Nicht zuletzt",
+  "role": "focus",
+  "cap": "nicht zuletzt = not least"
  },
  "nie--never": {
-  "key": "nie--never",
-  "type": "scene",
-  "scene": "Show an empty dining table in bright morning sunlight, as a person grabs keys by the door and leaves without eating.",
-  "cap": "Never eating breakfast in the morning.",
-  "hl": "nie"
+  "type": "grammar",
+  "de": "Ich frühstücke nie.",
+  "hl": "nie",
+  "role": "focus",
+  "cap": "nie = never"
  },
  "nie-mehr--never-again": {
-  "key": "nie-mehr--never-again",
-  "type": "scene",
-  "scene": "Show an exhausted person collapsed on the floor among taped moving boxes, wiping sweat from their forehead in relief.",
-  "cap": "Vowing never to move apartments again.",
-  "hl": "nie mehr"
+  "type": "grammar",
+  "de": "Als das passierte, wollte ich nie mehr umziehen.",
+  "hl": "nie mehr",
+  "role": "focus",
+  "cap": "nie mehr = never again"
  },
  "niemals--never": {
-  "key": "niemals--never",
-  "type": "scene",
-  "scene": "Show a small alpine hut surrounded by deep snow in winter, with smoke rising warmly from the chimney while someone looks outside.",
-  "cap": "Never leaving the alpine cabin during winter.",
-  "hl": "niemals"
+  "type": "grammar",
+  "de": "Er verließ die Alm niemals im Winter.",
+  "hl": "niemals",
+  "role": "focus",
+  "cap": "niemals = never"
  },
  "niemand--nobody": {
-  "key": "niemand--nobody",
-  "type": "scene",
-  "scene": "Show a decorated living room with party streamers and a cake on the table, while the host sits alone looking at the doorway.",
-  "cap": "Nobody arriving at the planned celebration.",
-  "hl": "niemand"
+  "type": "grammar",
+  "de": "Wenn niemand kommt, ist die Feier traurig.",
+  "hl": "niemand",
+  "role": "focus",
+  "cap": "niemand = nobody"
  },
  "nirgends--nowhere": {
-  "key": "nirgends--nowhere",
-  "type": "scene",
-  "scene": "Show a hiker sitting on a scenic mountain ridge overlooking a stunning sunlit lake valley, arms spread wide with delight.",
-  "cap": "Nowhere is more beautiful than right here.",
-  "hl": "Nirgends"
+  "type": "grammar",
+  "de": "Nirgends ist es schöner als hier.",
+  "hl": "Nirgends",
+  "role": "focus",
+  "cap": "nirgends = nowhere"
  },
  "nirgendwo--nowhere": {
-  "key": "nirgendwo--nowhere",
-  "type": "scene",
-  "scene": "Show a traveler holding a printed train ticket at a station kiosk, smiling at the exceptionally low fare.",
-  "cap": "Unable to find a cheaper ticket anywhere.",
-  "hl": "nirgendwo"
+  "type": "grammar",
+  "de": "Diesen Fahrschein bekommt man nirgendwo billiger.",
+  "hl": "nirgendwo",
+  "role": "focus",
+  "cap": "nirgendwo = nowhere"
  },
  "noch--yet-still-any": {
-  "key": "noch--yet-still-any",
-  "type": "scene",
-  "scene": "Show a person holding a small fan of playing cards, offering one additional card to a friend across the table.",
-  "cap": "Asking if someone still has another card.",
-  "hl": "noch"
+  "type": "grammar",
+  "de": "Hast du noch eine Karte?",
+  "hl": "noch",
+  "role": "focus",
+  "cap": "noch = yet, still, any"
  },
  "noch-mal--again-once-more": {
-  "key": "noch-mal--again-once-more",
-  "type": "scene",
-  "scene": "Show a person leaning forward slightly with one hand cupped behind their ear, politely asking the other speaker to repeat.",
-  "cap": "Asking someone to say that once more.",
-  "hl": "noch mal"
+  "type": "grammar",
+  "de": "Sag das noch mal, bitte.",
+  "hl": "noch mal",
+  "role": "focus",
+  "cap": "noch mal = again, once more"
  },
  "nominal--nominal": {
   "type": "grammar",
@@ -6456,11 +6274,11 @@
   "hl": "normal"
  },
  "normalerweise--normally-usually": {
-  "key": "normalerweise--normally-usually",
-  "type": "scene",
-  "scene": "Show a student sitting comfortably at their desk at home with an open notebook, a warm lamp, and a hot beverage.",
-  "cap": "Normally studying in the comfort of home.",
-  "hl": "Normalerweise"
+  "type": "grammar",
+  "de": "Normalerweise lerne ich zu Hause.",
+  "hl": "Normalerweise",
+  "role": "focus",
+  "cap": "normalerweise = normally, usually"
  },
  "null--zero": {
   "key": "null--zero",
@@ -6468,32 +6286,25 @@
   "n": 0
  },
  "nun--now": {
-  "key": "nun--now",
-  "type": "scene",
-  "scene": "Show a commuter standing on a train platform looking up with sudden recognition as the arrival display lights up.",
-  "cap": "Finally knowing now what one is waiting for.",
-  "hl": "Nun"
+  "type": "grammar",
+  "de": "Nun weiß ich, worauf ich warte.",
+  "hl": "Nun",
+  "role": "focus",
+  "cap": "nun = now"
  },
  "ob--whether-if": {
-  "key": "ob--whether-if",
-  "type": "pair",
-  "a": {
-   "scene": "Show a person looking warmly toward an open front door, anticipating an arrival.",
-   "label": "he might come"
-  },
-  "b": {
-   "scene": "Show an empty hallway with a closed door from the exact same viewpoint.",
-   "label": "or he might not"
-  },
-  "cap": "Uncertain whether someone will come or not.",
-  "hl": "ob"
+  "type": "grammar",
+  "de": "Ich weiß nicht, ob er kommt.",
+  "hl": "ob",
+  "role": "focus",
+  "cap": "ob = whether, if"
  },
  "offenbar--apparently-obviously": {
-  "key": "offenbar--apparently-obviously",
-  "type": "scene",
-  "scene": "Show a person looking puzzled at an unread text indicator on a phone while the recipient walks past obliviously.",
-  "cap": "Apparently, he did not read the message.",
-  "hl": "Offenbar"
+  "type": "grammar",
+  "de": "Offenbar hat er die Nachricht nicht gelesen.",
+  "hl": "Offenbar",
+  "role": "focus",
+  "cap": "offenbar = apparently, obviously"
  },
  "offline--offline": {
   "key": "offline--offline",
@@ -6503,18 +6314,18 @@
   "hl": "offline"
  },
  "oftmals--often-frequently": {
-  "key": "oftmals--often-frequently",
-  "type": "scene",
-  "scene": "Show a researcher in a lab coat comfortably unlocking a modern laboratory door, deeply familiar with the daily routine.",
-  "cap": "Frequently visiting the laboratory for research.",
-  "hl": "oftmals"
+  "type": "grammar",
+  "de": "Sie besuchte oftmals das Labor.",
+  "hl": "oftmals",
+  "role": "focus",
+  "cap": "oftmals = often, frequently"
  },
  "ohnehin--anyway-in-any-case": {
-  "key": "ohnehin--anyway-in-any-case",
-  "type": "scene",
-  "scene": "Show a woman resting her head against a sofa cushion with heavy eyelids, yawning softly in the early evening.",
-  "cap": "Tired anyway, regardless of what happened next.",
-  "hl": "ohnehin"
+  "type": "grammar",
+  "de": "Sie war ohnehin müde.",
+  "hl": "ohnehin",
+  "role": "focus",
+  "cap": "ohnehin = anyway, in any case"
  },
  "operationalisieren--operationalize": {
   "type": "grammar",
@@ -6538,11 +6349,11 @@
   "hl": "paraphrasieren"
  },
  "per--via": {
-  "key": "per--via",
-  "type": "scene",
-  "scene": "Show a person sitting at a desk typing a message on a laptop to send a question.",
-  "cap": "Contacting someone via email",
-  "hl": "per"
+  "type": "grammar",
+  "de": "Wenn ich Fragen habe, schreibe ich per E-Mail.",
+  "hl": "per",
+  "role": "focus",
+  "cap": "per = via"
  },
  "phrasieren--phrase": {
   "type": "scene",
@@ -6605,18 +6416,18 @@
   "hl": "rechnete"
  },
  "recht--quite-rather": {
-  "key": "recht--quite-rather",
-  "type": "scene",
-  "scene": "Show a hiker wiping sweat from their forehead while looking back down a steep, rocky trail.",
-  "cap": "Looking back at a quite difficult climb",
-  "hl": "recht"
+  "type": "grammar",
+  "de": "Das war recht schwierig.",
+  "hl": "recht",
+  "role": "focus",
+  "cap": "recht = quite, rather"
  },
  "recht-haben--be-right": {
-  "key": "recht-haben--be-right",
-  "type": "scene",
-  "scene": "Show two travelers smiling at each other as they ride comfortably inside an aerial cable car above a mountain slope.",
-  "cap": "Admitting someone was right about the cable car",
-  "hl": "hast recht"
+  "type": "grammar",
+  "de": "Du hast recht — die Seilbahn ist besser.",
+  "hl": "hast recht",
+  "role": "focus",
+  "cap": "recht haben = to be right"
  },
  "rechtskraeftig--legally-binding-final": {
   "key": "rechtskraeftig--legally-binding-final",
@@ -6626,11 +6437,11 @@
   "hl": "rechtskräftig"
  },
  "rechtskraeftig-werden--become-legally-binding-final": {
-  "key": "rechtskraeftig-werden--become-legally-binding-final",
-  "type": "scene",
-  "scene": "Show a formal courtroom setting with a wooden gavel resting beside official documents bearing a seal.",
-  "cap": "A verdict becoming legally binding after the deadline",
-  "hl": "rechtskräftig"
+  "type": "grammar",
+  "de": "Das Urteil wird erst nach Ablauf der Frist rechtskräftig.",
+  "hl": "rechtskräftig",
+  "role": "focus",
+  "cap": "rechtskräftig werden = to become legally binding/final"
  },
  "rechtsverbindlich--legally-binding": {
   "key": "rechtsverbindlich--legally-binding",
@@ -6682,11 +6493,11 @@
   "hl": "revolutionieren"
  },
  "rund--around-about": {
-  "key": "rund--around-about",
-  "type": "scene",
-  "scene": "Show a host setting plates and glasses around a long dining table prepared for about twenty people.",
-  "cap": "Preparing for around twenty guests",
-  "hl": "Rund"
+  "type": "grammar",
+  "de": "Rund zwanzig Gäste kommen.",
+  "hl": "Rund",
+  "role": "focus",
+  "cap": "rund = around, about"
  },
  "russisch--russian": {
   "key": "russisch--russian",
@@ -6697,11 +6508,11 @@
   "cap": "Official language spoken in Russia"
  },
  "samstags--on-saturdays": {
-  "key": "samstags--on-saturdays",
-  "type": "scene",
-  "scene": "Show friends enjoying food and drinks together at a lively evening patio dinner.",
-  "cap": "Celebrating together on Saturdays",
-  "hl": "Samstags"
+  "type": "grammar",
+  "de": "Samstags feiern wir.",
+  "hl": "Samstags",
+  "role": "focus",
+  "cap": "samstags = on Saturdays"
  },
  "samt--including-together-with": {
   "key": "samt--including-together-with",
@@ -6711,25 +6522,25 @@
   "hl": "samt"
  },
  "schlimmstenfalls--in-the-worst-case": {
-  "key": "schlimmstenfalls--in-the-worst-case",
-  "type": "scene",
-  "scene": "Show a traveler sitting comfortably inside a cabin looking out at bad weather, taking advantage of a planned spare day.",
-  "cap": "Planning a buffer day in the worst case",
-  "hl": "Schlimmstenfalls"
+  "type": "grammar",
+  "de": "Schlimmstenfalls sollten wir einen Puffertag einplanen.",
+  "hl": "Schlimmstenfalls",
+  "role": "focus",
+  "cap": "schlimmstenfalls = in the worst case"
  },
  "schon-mal--before-already-once": {
-  "key": "schon-mal--before-already-once",
-  "type": "scene",
-  "scene": "Show two people at an ice skating rink; one person looks hesitant by the barrier, while the other cheerfully asks them a question, gesturing toward the ice.",
-  "cap": "Asking if someone has ever done something before",
-  "hl": "schon mal"
+  "type": "grammar",
+  "de": "Weißt du, ob er das schon mal gemacht hat?",
+  "hl": "schon mal",
+  "role": "focus",
+  "cap": "schon mal = before, already once"
  },
  "schon-wieder--yet-again": {
-  "key": "schon-wieder--yet-again",
-  "type": "scene",
-  "scene": "Show a person looking out of a window with an exasperated expression, holding a wet umbrella as heavy rain pours down outside.",
-  "cap": "Frustrated that it is raining yet again",
-  "hl": "schon wieder"
+  "type": "grammar",
+  "de": "Es regnet schon wieder!",
+  "hl": "schon wieder",
+  "role": "focus",
+  "cap": "schon wieder = yet again"
  },
  "schweizerdeutsch--swiss-german": {
   "key": "schweizerdeutsch--swiss-german",
@@ -6755,18 +6566,18 @@
   "n": 60
  },
  "sehr--very": {
-  "key": "sehr--very",
-  "type": "scene",
-  "scene": "Show a teacher smiling broadly and giving a warm double thumbs-up to a pleased adult student in a classroom.",
-  "cap": "A very positive reaction of praise",
-  "hl": "Sehr"
+  "type": "grammar",
+  "de": "Sehr gut! Danke.",
+  "hl": "Sehr",
+  "role": "focus",
+  "cap": "sehr = very"
  },
  "sehr-geehrte-r--dear": {
-  "key": "sehr-geehrte-r--dear",
-  "type": "scene",
-  "scene": "Show an open formal printed business letter on a desk beside a fountain pen, neatly formatted with professional header spacing.",
-  "cap": "Formal written greeting in professional correspondence",
-  "hl": "Sehr geehrte"
+  "type": "grammar",
+  "de": "Sehr geehrte Damen und Herren, ...",
+  "hl": "Sehr geehrte",
+  "role": "focus",
+  "cap": "sehr geehrte(r) = dear (formal letter/email opener)"
  },
  "sein--be": {
   "key": "sein--be",
@@ -6777,88 +6588,74 @@
   "cap": "Form of 'sein' (to be) linking subject to state"
  },
  "sein-seine--his-its": {
-  "key": "sein-seine--his-its",
-  "type": "scene",
-  "scene": "Show a boy smiling proudly with his arm around a friendly dog sitting beside him.",
-  "cap": "Referring to his pet dog",
-  "hl": "Sein"
+  "type": "grammar",
+  "de": "Sein Name ist Bello.",
+  "hl": "Sein",
+  "role": "focus",
+  "cap": "sein/seine = his, its"
  },
  "seit--since": {
-  "key": "seit--since",
-  "type": "pair",
-  "a": {
-   "scene": "Show two colleagues arguing heatedly in an office hallway.",
-   "label": "past: argument"
-  },
-  "b": {
-   "scene": "Show the same two colleagues smiling and collaborating calmly over a project.",
-   "label": "since then: cooperating"
-  },
-  "cap": "Learning and changing since an event",
-  "hl": "Seit"
+  "type": "grammar",
+  "de": "Seit unserem Streit haben wir viel gelernt.",
+  "hl": "Seit",
+  "role": "focus",
+  "cap": "seit = since"
  },
  "seit--since-for": {
-  "key": "seit--since-for",
-  "type": "scene",
-  "scene": "Show an adult learner sitting at a study desk with open notebooks, pointing with a smile to a wall calendar spanning an entire past year.",
-  "cap": "Studying continuously for a year",
-  "hl": "seit"
+  "type": "grammar",
+  "de": "Ich lerne seit einem Jahr Deutsch.",
+  "hl": "seit",
+  "role": "focus",
+  "cap": "seit = since, for"
  },
  "seitdem--since": {
-  "key": "seitdem--since",
-  "type": "pair",
-  "a": {
-   "scene": "Show two people sitting in tense silence looking away from each other.",
-   "label": "before: tension"
-  },
-  "b": {
-   "scene": "Show the same two people sitting over coffee, chatting openly and laughing.",
-   "label": "since then: open talk"
-  },
-  "cap": "Speaking openly ever since that turning point",
-  "hl": "Seitdem"
+  "type": "grammar",
+  "de": "Seitdem sprechen wir offener miteinander.",
+  "hl": "Seitdem",
+  "role": "focus",
+  "cap": "seitdem = since"
  },
  "seitdem--since-then": {
-  "key": "seitdem--since-then",
-  "type": "scene",
-  "scene": "Show a woman standing happily in a sunny garden in front of a cozy countryside cottage, tending blooming flowers.",
-  "cap": "Living happily in the country since that time",
-  "hl": "Seitdem"
+  "type": "grammar",
+  "de": "Seitdem lebte sie glücklich auf dem Land.",
+  "hl": "Seitdem",
+  "role": "focus",
+  "cap": "seitdem = since then"
  },
  "seitens--on-the-part-of": {
-  "key": "seitens--on-the-part-of",
-  "type": "scene",
-  "scene": "Show an empty press conference podium with several microphones, while journalists with notepads wait quietly in the audience.",
-  "cap": "No statement issued on the part of the authorities",
-  "hl": "Seitens"
+  "type": "grammar",
+  "de": "Seitens der Regierung gab es bislang keine Stellungnahme.",
+  "hl": "Seitens",
+  "role": "focus",
+  "cap": "seitens = on the part of"
  },
  "selber--self-oneself": {
-  "key": "selber--self-oneself",
-  "type": "scene",
-  "scene": "Show a person happily assembling a wooden chair at home with a screwdriver, declining help with a friendly wave.",
-  "cap": "Doing a task all by oneself",
-  "hl": "selber"
+  "type": "grammar",
+  "de": "Ich werde das selber machen.",
+  "hl": "selber",
+  "role": "focus",
+  "cap": "selber = self, oneself"
  },
  "selbst--oneself-even": {
-  "key": "selbst--oneself-even",
-  "type": "scene",
-  "scene": "Show a young person kneeling on the floor, independently tightening bolts on their bicycle using a wrench.",
-  "cap": "Fixing the bicycle oneself",
-  "hl": "selbst"
+  "type": "grammar",
+  "de": "Ich mache das selbst.",
+  "hl": "selbst",
+  "role": "focus",
+  "cap": "selbst = oneself, even"
  },
  "selbstverstaendlich--of-course": {
-  "key": "selbstverstaendlich--of-course",
-  "type": "scene",
-  "scene": "Show a friendly person smiling warmly and nodding in agreement while leaning over a desk to review a friend's resume folder.",
-  "cap": "Agreeing naturally and gladly to help",
-  "hl": "Selbstverständlich"
+  "type": "grammar",
+  "de": "Selbstverständlich helfe ich dir bei der Bewerbung.",
+  "hl": "Selbstverständlich",
+  "role": "focus",
+  "cap": "selbstverständlich = of course"
  },
  "selten--rarely-seldom": {
-  "key": "selten--rarely-seldom",
-  "type": "scene",
-  "scene": "Show a clean, spotless kitchen stove with only a takeout container resting on the counter beside it.",
-  "cap": "A spotless kitchen because someone rarely cooks",
-  "hl": "selten"
+  "type": "grammar",
+  "de": "Ich koche selten.",
+  "hl": "selten",
+  "role": "focus",
+  "cap": "selten = rarely, seldom"
  },
  "serbisch--serbian": {
   "key": "serbisch--serbian",
@@ -6915,11 +6712,11 @@
   "hl": "sicher"
  },
  "sicherlich--certainly-surely": {
-  "key": "sicherlich--certainly-surely",
-  "type": "scene",
-  "scene": "Show a meeting room where several colleagues around a table are leaning forward and gesturing animatedly while discussing an open folder in the center.",
-  "cap": "Her assessment certainly sparks a debate",
-  "hl": "sicherlich"
+  "type": "grammar",
+  "de": "Ihre Beurteilung löst sicherlich eine Diskussion aus.",
+  "hl": "sicherlich",
+  "role": "focus",
+  "cap": "sicherlich = certainly, surely"
  },
  "sie--her-them-it": {
   "key": "sie--her-them-it",
@@ -6930,11 +6727,11 @@
   "cap": "Feminine accusative pronoun: her"
  },
  "sie--she-they": {
-  "key": "sie--she-they",
-  "type": "scene",
-  "scene": "Show a smiling young woman waving warmly toward the viewer in a bright casual indoor setting.",
-  "cap": "She is called Lena",
-  "hl": "Sie"
+  "type": "grammar",
+  "de": "Sie heißt Lena.",
+  "hl": "Sie",
+  "role": "focus",
+  "cap": "sie = she; they"
  },
  "sie--you": {
   "key": "sie--you",
@@ -6945,11 +6742,11 @@
   "cap": "Formal 'you' in German is always capitalized"
  },
  "sie-pl--they": {
-  "key": "sie-pl--they",
-  "type": "scene",
-  "scene": "Show two travellers with backpacks walking together along a station platform, chatting happily.",
-  "cap": "They come from India",
-  "hl": "Sie"
+  "type": "grammar",
+  "de": "Sie kommen aus Indien.",
+  "hl": "Sie",
+  "role": "focus",
+  "cap": "sie (Pl.) = they"
  },
  "siebenundzwanzig--twenty-seven": {
   "key": "siebenundzwanzig--twenty-seven",
@@ -6967,60 +6764,53 @@
   "n": 70
  },
  "so-ein--such-a": {
-  "key": "so-ein--such-a",
-  "type": "scene",
-  "scene": "Show a person sitting in a comfortable armchair holding an open novel in one hand while looking at an engrossing film playing on a screen nearby.",
-  "cap": "Such a film is just as good as a book",
-  "hl": "So ein"
+  "type": "grammar",
+  "de": "So ein Film ist genauso gut wie ein Buch.",
+  "hl": "So ein",
+  "role": "focus",
+  "cap": "so ein = such a"
  },
  "sobald--as-soon-as": {
-  "key": "sobald--as-soon-as",
-  "type": "pair",
-  "a": {
-   "scene": "Show two colleagues looking at an unopened envelope in their hands with anticipation.",
-   "label": "first: letter arrives"
-  },
-  "b": {
-   "scene": "Show the same two colleagues smiling and raising glasses to celebrate together.",
-   "label": "then: celebrate"
-  },
-  "cap": "As soon as the decision arrives, celebrating begins",
-  "hl": "Sobald"
+  "type": "grammar",
+  "de": "Sobald wir die Entscheidung bekommen, werden wir feiern gehen.",
+  "hl": "Sobald",
+  "role": "focus",
+  "cap": "sobald = as soon as"
  },
  "solche--such-of-that-kind": {
-  "key": "solche--such-of-that-kind",
-  "type": "scene",
-  "scene": "Show an inventor or designer surrounded by several wildly creative, imaginative sketches and miniature prototypes spread across a wide table.",
-  "cap": "Never had such unusual ideas before",
-  "hl": "Solche"
+  "type": "grammar",
+  "de": "Solche Ideen hatte ich noch nie.",
+  "hl": "Solche",
+  "role": "focus",
+  "cap": "solche = such, of that kind"
  },
  "sonntags--on-sundays": {
-  "key": "sonntags--on-sundays",
-  "type": "scene",
-  "scene": "Show a person comfortably relaxing on a sofa with a soft blanket and a warm mug, looking peaceful through a sunny window.",
-  "cap": "Resting on Sundays",
-  "hl": "Sonntags"
+  "type": "grammar",
+  "de": "Sonntags ruhe ich mich aus.",
+  "hl": "Sonntags",
+  "role": "focus",
+  "cap": "sonntags = on Sundays"
  },
  "sowie--as-well-as": {
-  "key": "sowie--as-well-as",
-  "type": "scene",
-  "scene": "Show a city view featuring a lush green public park in the foreground and a grand museum building with columns right beside it.",
-  "cap": "The city features parks as well as museums",
-  "hl": "sowie"
+  "type": "grammar",
+  "de": "Die Stadt hat Parks sowie Museen.",
+  "hl": "sowie",
+  "role": "focus",
+  "cap": "sowie = as well as"
  },
  "sowieso--anyway": {
-  "key": "sowieso--anyway",
-  "type": "scene",
-  "scene": "Show a professional runner tying their shoes calmly in a locker room, fully focused and prepared regardless of the rainy weather outside.",
-  "cap": "He will start next week anyway",
-  "hl": "sowieso"
+  "type": "grammar",
+  "de": "Er startet nächste Woche sowieso.",
+  "hl": "sowieso",
+  "role": "focus",
+  "cap": "sowieso = anyway"
  },
  "sowieso--anyway-in-any-case": {
-  "key": "sowieso--anyway-in-any-case",
-  "type": "scene",
-  "scene": "Show a security officer at an entrance checkpoint thoroughly inspecting luggage and bags as visitors pass through.",
-  "cap": "It gets strictly checked anyway",
-  "hl": "sowieso"
+  "type": "grammar",
+  "de": "Es wird sowieso streng kontrolliert.",
+  "hl": "sowieso",
+  "role": "focus",
+  "cap": "sowieso = anyway, in any case"
  },
  "sozialistisch--socialist": {
   "key": "sozialistisch--socialist",
@@ -7030,18 +6820,18 @@
   "hl": "sozialistische"
  },
  "spaeter--later": {
-  "key": "spaeter--later",
-  "type": "scene",
-  "scene": "Show two friends waving goodbye to each other on a street corner, smiling as they walk off in opposite directions.",
-  "cap": "See you later!",
-  "hl": "später"
+  "type": "grammar",
+  "de": "Bis später!",
+  "hl": "später",
+  "role": "focus",
+  "cap": "später = later"
  },
  "spaetestens--at-the-latest": {
-  "key": "spaetestens--at-the-latest",
-  "type": "scene",
-  "scene": "Show a person looking at an analogue clock on a wall with the hands showing five o'clock, waiting beside an entrance for a friend.",
-  "cap": "Meeting at five at the latest",
-  "hl": "spätestens"
+  "type": "grammar",
+  "de": "Wir treffen uns spätestens um fünf.",
+  "hl": "spätestens",
+  "role": "focus",
+  "cap": "spätestens = at the latest"
  },
  "spanisch--spanish": {
   "key": "spanisch--spanish",
@@ -7097,18 +6887,18 @@
   "cap": "stehen zu: your opinion on something"
  },
  "stets--always-constantly": {
-  "key": "stets--always-constantly",
-  "type": "scene",
-  "scene": "Show a student's tidy desk with color-coded notebooks, organized pens, and a neatly packed backpack ready by the door.",
-  "cap": "Always thoroughly prepared for any situation",
-  "hl": "stets"
+  "type": "grammar",
+  "de": "Sie ist stets vorbereitet.",
+  "hl": "stets",
+  "role": "focus",
+  "cap": "stets = always, constantly"
  },
  "stundenweise--hourly": {
-  "key": "stundenweise--hourly",
-  "type": "scene",
-  "scene": "Show an office worker packing their laptop bag mid-afternoon, consulting their wristwatch after a short shift.",
-  "cap": "Working flexibly by the hour",
-  "hl": "stundenweise"
+  "type": "grammar",
+  "de": "Man könnte auch stundenweise arbeiten.",
+  "hl": "stundenweise",
+  "role": "focus",
+  "cap": "stundenweise = hourly"
  },
  "syrien--syria": {
   "key": "syrien--syria",
@@ -7119,39 +6909,32 @@
   "cap": "Syria in the Middle East"
  },
  "taeglich--daily": {
-  "key": "taeglich--daily",
-  "type": "scene",
-  "scene": "Show a person sitting at a desk with an open language workbook, practicing vocabulary with headphones every morning.",
-  "cap": "Studying German daily as a habit",
-  "hl": "täglich"
+  "type": "grammar",
+  "de": "Ich lerne täglich Deutsch.",
+  "hl": "täglich",
+  "role": "focus",
+  "cap": "täglich = daily"
  },
  "tagsueber--during-the-day": {
-  "key": "tagsueber--during-the-day",
-  "type": "pair",
-  "a": {
-   "scene": "Show a person working behind a retail counter in a brightly sunlit shop.",
-   "label": "tagsüber: working"
-  },
-  "b": {
-   "scene": "Show the same person sitting at home writing on a laptop late in the evening.",
-   "label": "abends: blogging"
-  },
-  "cap": "Contrasting daytime work with evening blogging",
-  "hl": "Tagsüber"
+  "type": "grammar",
+  "de": "Tagsüber jobbe ich, abends blogge ich.",
+  "hl": "Tagsüber",
+  "role": "focus",
+  "cap": "tagsüber = during the day"
  },
  "tatsaechlich--actually-in-fact": {
-  "key": "tatsaechlich--actually-in-fact",
-  "type": "scene",
-  "scene": "Show two scientists in lab coats examining research data on a screen with surprised expressions.",
-  "cap": "The scientists actually contradict the conclusion",
-  "hl": "Tatsächlich"
+  "type": "grammar",
+  "de": "Tatsächlich widersprechen manche Wissenschaftler ihrem Resümee.",
+  "hl": "Tatsächlich",
+  "role": "focus",
+  "cap": "tatsächlich = actually, in fact"
  },
  "tatsaechlich--actually-really": {
-  "key": "tatsaechlich--actually-really",
-  "type": "scene",
-  "scene": "Show a traveler standing atop a scenic mountain ridge with arms wide open, admiring the stunning view.",
-  "cap": "The journey really was wonderful",
-  "hl": "tatsächlich"
+  "type": "grammar",
+  "de": "Die Reise war tatsächlich toll.",
+  "hl": "tatsächlich",
+  "role": "focus",
+  "cap": "tatsächlich = actually, really"
  },
  "tausend--thousand": {
   "key": "tausend--thousand",
@@ -7159,11 +6942,11 @@
   "n": 1000
  },
  "teilweise--partly-partially": {
-  "key": "teilweise--partly-partially",
-  "type": "scene",
-  "scene": "Show a scientist reviewing a printed test report where some sections show positive marks and others neutral ones.",
-  "cap": "The hypothesis was only partially confirmed",
-  "hl": "teilweise"
+  "type": "grammar",
+  "de": "Die Hypothese wurde teilweise bestätigt.",
+  "hl": "teilweise",
+  "role": "focus",
+  "cap": "teilweise = partly, partially"
  },
  "thai--thai": {
   "key": "thai--thai",
@@ -7174,11 +6957,11 @@
   "cap": "Spoken primarily in Thailand"
  },
  "thematisieren--address-as-a-topic-thematize": {
-  "key": "thematisieren--address-as-a-topic-thematize",
-  "type": "scene",
-  "scene": "Show a journalist discussing a feature article layout at a newsroom table, pointing to a central section on inequality.",
-  "cap": "Addressing a major issue as the central theme",
-  "hl": "thematisiert"
+  "type": "grammar",
+  "de": "Der Artikel thematisiert die wachsende Ungleichheit.",
+  "hl": "thematisiert",
+  "role": "focus",
+  "cap": "thematisieren = to address as a topic, thematize"
  },
  "theoriegeleitet--theory-guided": {
   "key": "theoriegeleitet--theory-guided",
@@ -7240,18 +7023,11 @@
   "cap": "Adverb strengthening the negation (not at all)"
  },
  "uebermorgen--day-after-tomorrow": {
-  "key": "uebermorgen--day-after-tomorrow",
-  "type": "pair",
-  "a": {
-   "scene": "Show a traveler packing hiking gear into a backpack at home.",
-   "label": "today: packing"
-  },
-  "b": {
-   "scene": "Show the same traveler hiking up a sunny mountain path.",
-   "label": "übermorgen: mountains"
-  },
-  "cap": "Heading to the mountains the day after tomorrow",
-  "hl": "Übermorgen"
+  "type": "grammar",
+  "de": "Übermorgen fahren wir in die Berge.",
+  "hl": "Übermorgen",
+  "role": "focus",
+  "cap": "übermorgen = day after tomorrow"
  },
  "uebersetzbar--translatable": {
   "key": "uebersetzbar--translatable",
@@ -7261,11 +7037,11 @@
   "hl": "übersetzbar"
  },
  "ueberzeugt-sein--be-convinced": {
-  "key": "ueberzeugt-sein--be-convinced",
-  "type": "scene",
-  "scene": "Show a speaker at a podium with a hand over their heart, speaking with absolute confidence.",
-  "cap": "Completely convinced and certain of their position",
-  "hl": "überzeugt"
+  "type": "grammar",
+  "de": "Ich bin völlig überzeugt davon.",
+  "hl": "überzeugt",
+  "role": "focus",
+  "cap": "überzeugt sein = to be convinced (von + D.)"
  },
  "ueberzeugt-von--convinced-of": {
   "key": "ueberzeugt-von--convinced-of",
@@ -7282,11 +7058,18 @@
   "hl": "übliche"
  },
  "uebrigens--by-the-way": {
-  "key": "uebrigens--by-the-way",
-  "type": "scene",
-  "scene": "Show a person speaking casually with a friend while holding up a colourful folded travel brochure they just remembered and pulled out of their bag.",
-  "cap": "Mentioning an extra thought casually",
-  "hl": "Übrigens"
+  "type": "grammar",
+  "de": "Übrigens, ich habe einen Prospekt gefunden.",
+  "hl": "Übrigens",
+  "role": "focus",
+  "cap": "übrigens = by the way"
+ },
+ "uebrigens--by-the-way-incidentally": {
+  "type": "grammar",
+  "de": "Der Tennisprofi behauptet übrigens, er trainiere täglich.",
+  "hl": "übrigens",
+  "role": "focus",
+  "cap": "übrigens = by the way, incidentally"
  },
  "um-zu--in-order-to": {
   "type": "grammar",
@@ -7310,18 +7093,11 @@
   "hl": "umformulieren"
  },
  "umgangssprachlich--colloquial": {
-  "key": "umgangssprachlich--colloquial",
-  "type": "pair",
-  "a": {
-   "scene": "Show two friends laughing and chatting relaxed on a park bench with coffee cups.",
-   "label": "informal talk"
-  },
-  "b": {
-   "scene": "Show two people in business attire bowing slightly and shaking hands formally.",
-   "label": "formal speech"
-  },
-  "cap": "Casual, everyday spoken language",
-  "hl": "umgangssprachlicher"
+  "type": "grammar",
+  "de": "Das ist ein umgangssprachlicher Ausdruck.",
+  "hl": "umgangssprachlicher",
+  "role": "focus",
+  "cap": "umgangssprachlich = colloquial"
  },
  "umgehend--immediate": {
   "key": "umgehend--immediate",
@@ -7338,18 +7114,18 @@
   "hl": "umschreibt"
  },
  "unbedingt--absolutely-definitely": {
-  "key": "unbedingt--absolutely-definitely",
-  "type": "scene",
-  "scene": "Show a coach enthusiastically pointing to a training plan while encouraging a group of young athletes in sportswear.",
-  "cap": "Highly recommended and definitely necessary",
-  "hl": "unbedingt"
+  "type": "grammar",
+  "de": "Ihr solltet unbedingt üben.",
+  "hl": "unbedingt",
+  "role": "focus",
+  "cap": "unbedingt = absolutely, definitely"
  },
  "unbedingt--necessarily-absolutely": {
-  "key": "unbedingt--necessarily-absolutely",
-  "type": "scene",
-  "scene": "Show a job applicant thoughtfully looking at two different job offers on a desk with a relaxed, open posture.",
-  "cap": "Not strictly or absolutely required",
-  "hl": "unbedingt"
+  "type": "grammar",
+  "de": "Ich brauche nicht unbedingt diese Stelle.",
+  "hl": "unbedingt",
+  "role": "focus",
+  "cap": "unbedingt = necessarily, absolutely"
  },
  "unbestimmt--indefinite": {
   "key": "unbestimmt--indefinite",
@@ -7375,18 +7151,11 @@
   "hl": "unbezahlte"
  },
  "und--and": {
-  "key": "und--and",
-  "type": "pair",
-  "a": {
-   "scene": "Show a person sitting at a desk with an open textbook studying attentively.",
-   "label": "learning"
-  },
-  "b": {
-   "scene": "Show the same person typing productively on a laptop in an office.",
-   "label": "working"
-  },
-  "cap": "Connecting two actions together",
-  "hl": "und"
+  "type": "grammar",
+  "de": "Ich lerne und ich arbeite.",
+  "hl": "und",
+  "role": "focus",
+  "cap": "und = and"
  },
  "undenkbar--unthinkable": {
   "key": "undenkbar--unthinkable",
@@ -7411,32 +7180,32 @@
   "hl": "ungebrochen"
  },
  "unter-anderem--among-other-things": {
-  "key": "unter-anderem--among-other-things",
-  "type": "scene",
-  "scene": "Show a reviewer marking one specific item with a red pen on a checklist that has many different points listed.",
-  "cap": "Singling out one item among several points",
-  "hl": "Unter anderem"
+  "type": "grammar",
+  "de": "Unter anderem wurde auch die Methodik kritisiert.",
+  "hl": "Unter anderem",
+  "role": "focus",
+  "cap": "unter anderem = among other things"
  },
  "unter-anderem--amongst-other-things": {
-  "key": "unter-anderem--amongst-other-things",
-  "type": "scene",
-  "scene": "Show an open novel resting on a wooden table with several small symbolic bookmarks marking various themes.",
-  "cap": "One theme among several addressed in the book",
-  "hl": "unter anderem"
+  "type": "grammar",
+  "de": "Der Roman handelt unter anderem von Freiheit.",
+  "hl": "unter anderem",
+  "role": "focus",
+  "cap": "unter anderem = amongst other things"
  },
  "unter-beruecksichtigung--taking-into-account-in-consideration-of": {
-  "key": "unter-beruecksichtigung--taking-into-account-in-consideration-of",
-  "type": "scene",
-  "scene": "Show a committee seated around a conference table examining various reports, charts, and binders spread out before making a joint decision.",
-  "cap": "Carefully weighing all factors before deciding",
-  "hl": "Unter Berücksichtigung"
+  "type": "grammar",
+  "de": "Unter Berücksichtigung aller Aspekte empfiehlt der Ausschuss eine Reform.",
+  "hl": "Unter Berücksichtigung",
+  "role": "focus",
+  "cap": "unter Berücksichtigung = taking into account, in consideration of"
  },
  "unter-diesen-voraussetzungen--under-these-conditions": {
-  "key": "unter-diesen-voraussetzungen--under-these-conditions",
-  "type": "scene",
-  "scene": "Show an architect reviewing detailed blueprints alongside a solid foundation model, nodding with approval at the feasibility.",
-  "cap": "Success made possible under specific premises",
-  "hl": "Unter diesen Voraussetzungen"
+  "type": "grammar",
+  "de": "Unter diesen Voraussetzungen kann die Reform gelingen.",
+  "hl": "Unter diesen Voraussetzungen",
+  "role": "focus",
+  "cap": "unter diesen Voraussetzungen = under these conditions"
  },
  "unzulaessig-nach--inadmissible-according-to": {
   "key": "unzulaessig-nach--inadmissible-according-to",
@@ -7446,11 +7215,11 @@
   "hl": "unzulässig nach"
  },
  "usw--und-so-weiter": {
-  "key": "usw--und-so-weiter",
-  "type": "scene",
-  "scene": "Show sports equipment laid out on a gym bench—tennis rackets, climbing harness, rope, water bottle, and more gear continuing out of view.",
-  "cap": "Items listed, continuing with more of the same kind",
-  "hl": "usw."
+  "type": "grammar",
+  "de": "Wir brauchen Schläger, Klettergurte usw.",
+  "hl": "usw.",
+  "role": "focus",
+  "cap": "usw. = und so weiter (etc.)"
  },
  "verarbeiten--process": {
   "key": "verarbeiten--process",
@@ -7474,18 +7243,11 @@
   "hl": "verdrängte"
  },
  "vergleichsweise--comparatively": {
-  "key": "vergleichsweise--comparatively",
-  "type": "pair",
-  "a": {
-   "scene": "Show a large electronic microchip on a display stand with a very large stack of paper banknotes beside it.",
-   "label": "expensive chip"
-  },
-  "b": {
-   "scene": "Show an identical-looking electronic microchip on a display stand with just two paper banknotes beside it.",
-   "label": "comparatively cheap"
-  },
-  "cap": "Much cheaper in comparison",
-  "hl": "vergleichsweise"
+  "type": "grammar",
+  "de": "Der Chip war vergleichsweise günstig.",
+  "hl": "vergleichsweise",
+  "role": "focus",
+  "cap": "vergleichsweise = comparatively"
  },
  "verhandlungssicher--fluent-in-negotiation": {
   "key": "verhandlungssicher--fluent-in-negotiation",
@@ -7502,11 +7264,11 @@
   "hl": "verlief"
  },
  "vermutlich--presumably": {
-  "key": "vermutlich--presumably",
-  "type": "scene",
-  "scene": "Show a woman looking at her wristwatch and glancing down an empty hallway where someone is expected to arrive.",
-  "cap": "Presumably arriving later",
-  "hl": "Vermutlich"
+  "type": "grammar",
+  "de": "Vermutlich kommt er später.",
+  "hl": "Vermutlich",
+  "role": "focus",
+  "cap": "vermutlich = presumably"
  },
  "verpflichtet-zu--obligated-to": {
   "key": "verpflichtet-zu--obligated-to",
@@ -7545,25 +7307,25 @@
   "n": 40
  },
  "voellig--completely": {
-  "key": "voellig--completely",
-  "type": "scene",
-  "scene": "Show a man nodding vigorously with both hands spread open and an expression of total, unwavering agreement.",
-  "cap": "Completely convinced",
-  "hl": "völlig"
+  "type": "grammar",
+  "de": "Ich bin völlig überzeugt davon.",
+  "hl": "völlig",
+  "role": "focus",
+  "cap": "völlig = completely"
  },
  "voellig--completely-utterly": {
-  "key": "voellig--completely-utterly",
-  "type": "scene",
-  "scene": "Show a stage presenter looking out at an audience made up of people of diverse ages and backgrounds filling all the rows.",
-  "cap": "Utterly dependent on the audience",
-  "hl": "völlig"
+  "type": "grammar",
+  "de": "Es hängt völlig von der Vielfalt des Publikums ab.",
+  "hl": "völlig",
+  "role": "focus",
+  "cap": "völlig = completely, utterly"
  },
  "vor--x": {
-  "key": "vor--x",
-  "type": "scene",
-  "scene": "Show a round analog wall clock with the minute hand pointing directly at nine and the hour hand just before five.",
-  "cap": "Quarter to five (4:45)",
-  "hl": "vor"
+  "type": "grammar",
+  "de": "Es ist Viertel vor fünf. (4:45)",
+  "hl": "vor",
+  "role": "focus",
+  "cap": "vor = to (before the hour)"
  },
  "voraussetzen--presuppose-require": {
   "key": "voraussetzen--presuppose-require",
@@ -7594,11 +7356,11 @@
   "hl": "vorgekommen"
  },
  "vorgestern--day-before-yesterday": {
-  "key": "vorgestern--day-before-yesterday",
-  "type": "scene",
-  "scene": "Show a wall calendar where the past two days are marked with diagonal slashes, and a family dinner table is visible through the door.",
-  "cap": "Guests visited two days ago",
-  "hl": "Vorgestern"
+  "type": "grammar",
+  "de": "Vorgestern hatten wir Besuch.",
+  "hl": "Vorgestern",
+  "role": "focus",
+  "cap": "vorgestern = the day before yesterday"
  },
  "vorkommen--happen-to-occur": {
   "key": "vorkommen--happen-to-occur",
@@ -7615,11 +7377,11 @@
   "hl": ""
  },
  "vormittags--in-the-late-morning": {
-  "key": "vormittags--in-the-late-morning",
-  "type": "scene",
-  "scene": "Show a sunlit classroom at mid-morning with sunlight streaming through large windows while adult students take notes attentively.",
-  "cap": "Attending class in the late mornings",
-  "hl": "Vormittags"
+  "type": "grammar",
+  "de": "Vormittags habe ich Kurs.",
+  "hl": "Vormittags",
+  "role": "focus",
+  "cap": "vormittags = in the late morning(s)"
  },
  "war--was": {
   "key": "war--was",
@@ -7654,46 +7416,32 @@
   "cap": "Past tense form of 'sein' (to be) for 'du'"
  },
  "was--something": {
-  "key": "was--something",
-  "type": "scene",
-  "scene": "Show a person in a small corner grocery store holding a brown paper bag, picking up a carton of milk from a shelf on the way to the counter.",
-  "cap": "Picking up something extra at the shop",
-  "hl": "was"
+  "type": "grammar",
+  "de": "Ich musste noch was besorgen.",
+  "hl": "was",
+  "role": "focus",
+  "cap": "was = something (colloquial for etwas)"
  },
  "weiterhin--still-furthermore": {
-  "key": "weiterhin--still-furthermore",
-  "type": "scene",
-  "scene": "Show an official document stamped with a green confirmation mark, lying on an office desk beside a fountain pen and a calendar showing ongoing months.",
-  "cap": "An agreement that remains valid into the future",
-  "hl": "weiterhin"
+  "type": "grammar",
+  "de": "Der Vertrag bleibt weiterhin gültig.",
+  "hl": "weiterhin",
+  "role": "focus",
+  "cap": "weiterhin = still, furthermore"
  },
  "wenn--when": {
-  "key": "wenn--when",
-  "type": "pair",
-  "a": {
-   "scene": "Show an open calendar showing a free afternoon marked with a cup of tea icon.",
-   "label": "condition: free time"
-  },
-  "b": {
-   "scene": "Show a person sitting in a comfortable armchair happily reading a book.",
-   "label": "result: reading"
-  },
-  "cap": "Whenever time is available, reading a book",
-  "hl": "Wenn"
+  "type": "grammar",
+  "de": "Wenn ich Zeit habe, lese ich ein Buch.",
+  "hl": "Wenn",
+  "role": "focus",
+  "cap": "wenn = when(ever) (repeated/future)"
  },
  "wenngleich--although-even-though": {
-  "key": "wenngleich--although-even-though",
-  "type": "pair",
-  "a": {
-   "scene": "Show a scientist smiling while looking at an upward-trending chart on a clipboard in a laboratory.",
-   "label": "promising results"
-  },
-  "b": {
-   "scene": "Show the same scientist continuing to examine test tubes and taking careful notes.",
-   "label": "more research needed"
-  },
-  "cap": "Promising findings, yet still requiring further study",
-  "hl": "Wenngleich"
+  "type": "grammar",
+  "de": "Wenngleich die Ergebnisse vielversprechend sind, braucht es weitere Forschung.",
+  "hl": "Wenngleich",
+  "role": "focus",
+  "cap": "wenngleich = although, even though"
  },
  "wer--who": {
   "key": "wer--who",
@@ -7743,32 +7491,18 @@
   "hl": "werden"
  },
  "wesentlich--considerable": {
-  "key": "wesentlich--considerable",
-  "type": "pair",
-  "a": {
-   "scene": "Show an old, flickering desktop monitor with a thick frame and tangled cables.",
-   "label": "before: old setup"
-  },
-  "b": {
-   "scene": "Show a modern, sleek ultrawide monitor with crystal-clear display on a neat desk.",
-   "label": "after: major upgrade"
-  },
-  "cap": "A noticeable, substantial improvement",
-  "hl": "wesentliche"
+  "type": "grammar",
+  "de": "Das war eine wesentliche Verbesserung.",
+  "hl": "wesentliche",
+  "role": "focus",
+  "cap": "wesentlich = considerable"
  },
  "wesentlich--essential-substantial": {
-  "key": "wesentlich--essential-substantial",
-  "type": "pair",
-  "a": {
-   "scene": "Show a notepad with just three brief bullet points and large empty spaces.",
-   "label": "brief overview"
-  },
-  "b": {
-   "scene": "Show a table covered with detailed blueprints, diagrams, and highlighted notes.",
-   "label": "in-depth discussion"
-  },
-  "cap": "Examining a topic substantially more thoroughly",
-  "hl": "wesentlich"
+  "type": "grammar",
+  "de": "Wir sollten das Teilthema wesentlich gründlicher besprechen.",
+  "hl": "wesentlich",
+  "role": "focus",
+  "cap": "wesentlich = essential, substantial"
  },
  "weshalb--why": {
   "key": "weshalb--why",
@@ -7817,11 +7551,11 @@
   "hl": "wirkt"
  },
  "wirklich--really": {
-  "key": "wirklich--really",
-  "type": "scene",
-  "scene": "Show a language student smiling broadly while holding up an open textbook with an illustrated German dialogue, showing genuine enthusiasm.",
-  "cap": "Expressing genuine, heartfelt appreciation",
-  "hl": "wirklich"
+  "type": "grammar",
+  "de": "Deutsch ist wirklich schön.",
+  "hl": "wirklich",
+  "role": "focus",
+  "cap": "wirklich = really"
  },
  "wirtschaftlich--economic": {
   "key": "wirtschaftlich--economic",
@@ -7862,60 +7596,60 @@
   "cap": "'wohl' expresses probability or cautious agreement ('probably / well')"
  },
  "womit--with-what": {
-  "key": "womit--with-what",
-  "type": "scene",
-  "scene": "Show a smiling young woman holding a small spoon near a cute kitten sitting on the kitchen floor, looking curiously at what she is feeding it.",
+  "type": "grammar",
+  "de": "Womit hast du das Kätzchen gefüttert?",
   "hl": "Womit",
-  "cap": "Asking what tool or food is used to feed the kitten"
+  "role": "focus",
+  "cap": "womit = with what"
  },
  "woran--about-what": {
-  "key": "woran--about-what",
-  "type": "scene",
-  "scene": "Show a person sitting by a window, chin resting thoughtfully on one hand, gazing outside with a dreamy, reflective expression.",
+  "type": "grammar",
+  "de": "Woran denkst du gerade?",
   "hl": "Woran",
-  "cap": "Wondering what thoughts are in someone's head right now"
+  "role": "focus",
+  "cap": "woran = about what"
  },
  "woran--what": {
-  "key": "woran--what",
-  "type": "scene",
-  "scene": "Show an older person looking at an open photo album with a gentle nostalgic smile, pointing at an old faded picture.",
+  "type": "grammar",
+  "de": "Woran erinnerst du dich?",
   "hl": "Woran",
-  "cap": "Asking what someone remembers"
+  "role": "focus",
+  "cap": "woran = what (question about a thing, an + D./A.)"
  },
  "worauf--what-for": {
-  "key": "worauf--what-for",
-  "type": "scene",
-  "scene": "Show a person standing under a bus shelter in the rain, checking their wristwatch while peering down the empty street.",
+  "type": "grammar",
+  "de": "Worauf wartest du?",
   "hl": "Worauf",
-  "cap": "Waiting for something (e.g. the bus)"
+  "role": "focus",
+  "cap": "worauf = what … for"
  },
  "worauf--what-on-for": {
-  "key": "worauf--what-on-for",
-  "type": "scene",
-  "scene": "Show a person sitting impatiently on a wooden bench at a train station platform, glancing down at their watch.",
+  "type": "grammar",
+  "de": "Worauf musstest du warten?",
   "hl": "Worauf",
-  "cap": "Asking what someone had to wait for"
+  "role": "focus",
+  "cap": "worauf = what … on/for (wo + preposition)"
  },
  "worueber--about-what": {
-  "key": "worueber--about-what",
-  "type": "scene",
-  "scene": "Show a young man sitting at a desk in front of an open laptop, typing thoughtfully with travel photos and notes spread around.",
+  "type": "grammar",
+  "de": "Worüber schreibst du den Blogbeitrag?",
   "hl": "Worüber",
-  "cap": "Asking about the topic of the blog post"
+  "role": "focus",
+  "cap": "worüber = about what"
  },
  "worum--about-what": {
-  "key": "worum--about-what",
-  "type": "scene",
-  "scene": "Show a person with a clipboard and pencil gently approaching a passerby on a lively pedestrian street to ask questions.",
+  "type": "grammar",
+  "de": "Worum geht es in der Umfrage?",
   "hl": "Worum",
-  "cap": "Asking what the survey is about"
+  "role": "focus",
+  "cap": "worum = about what (worum geht es?)"
  },
  "wovon--about-what": {
-  "key": "wovon--about-what",
-  "type": "scene",
-  "scene": "Show a group of colleagues sitting in a circle in a bright workshop room, looking at a whiteboard prepared for a session.",
+  "type": "grammar",
+  "de": "Wovon könnte der Workshop handeln?",
   "hl": "Wovon",
-  "cap": "Asking about the subject or theme of the workshop"
+  "role": "focus",
+  "cap": "wovon = about what"
  },
  "zehntausend--ten-thousand": {
   "key": "zehntausend--ten-thousand",
@@ -7923,11 +7657,11 @@
   "n": 10000
  },
  "ziemlich--quite-rather": {
-  "key": "ziemlich--quite-rather",
-  "type": "scene",
-  "scene": "Show two people on a couch watching a television in a dark living room, clutching a throw pillow with wide eyes and suspenseful expressions.",
+  "type": "grammar",
+  "de": "Der Film war ziemlich spannend.",
   "hl": "ziemlich",
-  "cap": "A movie that is quite exciting and thrilling"
+  "role": "focus",
+  "cap": "ziemlich = quite, rather"
  },
  "zu-infinitiv--x": {
   "key": "zu-infinitiv--x",
@@ -7938,18 +7672,18 @@
   "cap": "'zu' combines with the infinitive verb at the end of the clause"
  },
  "zufolge--according-to": {
-  "key": "zufolge--according-to",
-  "type": "scene",
-  "scene": "Show a researcher in a modern office pointing with a pen at a downward trend curve on a large printed statistical chart.",
+  "type": "grammar",
+  "de": "Der Studie zufolge sinkt die Zahl.",
   "hl": "zufolge",
-  "cap": "According to the study, the numbers are declining"
+  "role": "focus",
+  "cap": "zufolge = according to"
  },
  "zugunsten--in-favour-of": {
-  "key": "zugunsten--in-favour-of",
-  "type": "scene",
-  "scene": "Show a group of diverse office workers smiling, giving high-fives and celebrating together in a conference room after good news.",
+  "type": "grammar",
+  "de": "Die Entscheidung fiel zugunsten der Mitarbeiter aus.",
   "hl": "zugunsten",
-  "cap": "The decision was made in favour of the employees"
+  "role": "focus",
+  "cap": "zugunsten = in favour of"
  },
  "zum-beispiel--for-example": {
   "key": "zum-beispiel--for-example",
@@ -7960,18 +7694,18 @@
   "cap": "'zum Beispiel' introduces an example or illustration"
  },
  "zumindest--at-least": {
-  "key": "zumindest--at-least",
-  "type": "scene",
-  "scene": "Show a smiling young woman holding a single small train ticket and looking at a globe on a table, daydreaming about a budget getaway.",
+  "type": "grammar",
+  "de": "Wenn ich schon spare, will ich zumindest reisen.",
   "hl": "zumindest",
-  "cap": "Wanting at least to travel despite saving money"
+  "role": "focus",
+  "cap": "zumindest = at least"
  },
  "zusaetzlich--additionally-in-addition": {
-  "key": "zusaetzlich--additionally-in-addition",
-  "type": "scene",
-  "scene": "Show a journalist seated across from a scientist with a microphone and notepad, conducting an in-depth interview in an office.",
+  "type": "grammar",
+  "de": "Zusätzlich wurden Interviews mit Experten geführt.",
   "hl": "Zusätzlich",
-  "cap": "Additionally conducting expert interviews"
+  "role": "focus",
+  "cap": "zusätzlich = additionally, in addition"
  },
  "zusammenfassend--in-summary": {
   "key": "zusammenfassend--in-summary",
@@ -7982,11 +7716,11 @@
   "cap": "'zusammenfassend' introduces a summarizing conclusion"
  },
  "zusammenfassend-laesst-sich-feststellen--in-summary-it-can-be-stated": {
-  "key": "zusammenfassend-laesst-sich-feststellen--in-summary-it-can-be-stated",
-  "type": "scene",
-  "scene": "Show a scientist standing beside a presentation screen displaying Earth, gesturing to wrap up a conference talk.",
-  "cap": "Stating the main conclusion at the end of a report.",
-  "hl": "Zusammenfassend lässt sich feststellen"
+  "type": "grammar",
+  "de": "Zusammenfassend lässt sich feststellen, dass der Klimawandel weitreichende Folgen hat.",
+  "hl": "Zusammenfassend lässt sich feststellen",
+  "role": "focus",
+  "cap": "zusammenfassend lässt sich feststellen = in summary, it can be stated"
  },
  "zusammenschreiben--write-as-one-word": {
   "key": "zusammenschreiben--write-as-one-word",
@@ -8038,11 +7772,11 @@
   "n": 22
  },
  "zwischendurch--in-between-now-and-then": {
-  "key": "zwischendurch--in-between-now-and-then",
-  "type": "scene",
-  "scene": "Show a municipal worker taking a brief pause from their main roadwork tasks to inspect and tighten a nearby tilted traffic sign on the sidewalk.",
-  "cap": "Attending to a small task in between main duties",
-  "hl": "zwischendurch"
+  "type": "grammar",
+  "de": "Ich kümmere mich zwischendurch um das Verkehrsschild.",
+  "hl": "zwischendurch",
+  "role": "focus",
+  "cap": "zwischendurch = in between, now and then"
  },
  "zumal--especially-since-particularly-as": {
   "type": "grammar",
@@ -8052,29 +7786,38 @@
   "cap": "zumal adds an extra, especially strong reason"
  },
  "contra--con": {
-  "type": "pair",
-  "a": {
-   "scene": "Show a team member smiling and nodding approvingly during a conference room debate.",
-   "label": "pro: in favor"
-  },
-  "b": {
-   "scene": "Show another team member raising a skeptical hand to voice counterarguments.",
-   "label": "contra: against"
-  },
-  "cap": "Weighing the pros and cons in a discussion.",
-  "hl": "contra"
+  "type": "grammar",
+  "de": "Ein Argument contra die Globalisierung ist, dass kleine Firmen nicht profitieren.",
+  "hl": "contra",
+  "role": "focus",
+  "cap": "contra = con (against)"
  },
  "urspruenglich--originally": {
-  "type": "pair",
-  "a": {
-   "scene": "Show a young person soldering components on a circuit board at a workbench.",
-   "label": "earlier: electronics"
-  },
-  "b": {
-   "scene": "Show the same person leading a team meeting in a modern office.",
-   "label": "now: management"
-  },
-  "cap": "The original background or starting career",
-  "hl": "Ursprünglich"
+  "type": "grammar",
+  "de": "Ursprünglich war er Experte für Elektronik.",
+  "hl": "Ursprünglich",
+  "role": "focus",
+  "cap": "ursprünglich = originally"
+ },
+ "d-h--i-e-meaning": {
+  "key": "d-h--i-e-meaning",
+  "type": "scene",
+  "scene": "Show a vibrant pedestrian street filled with people walking and cycling, with a round no-cars sign at the street entrance.",
+  "cap": "Car-free, meaning without cars",
+  "hl": "d.h."
+ },
+ "der-juli--july": {
+  "key": "der-juli--july",
+  "type": "scene",
+  "scene": "Show a sunny summer beach scene with colourful parasols, people swimming in the bright blue sea, and a family relaxing under the warm July sun.",
+  "cap": "Enjoying summer holidays in July",
+  "hl": "Juli"
+ },
+ "man--one-you": {
+  "key": "man--one-you",
+  "type": "scene",
+  "scene": "Show several diverse people in a lively café, each happily holding a warm ceramic cup of coffee.",
+  "cap": "People in general drink coffee",
+  "hl": "man"
  }
 }

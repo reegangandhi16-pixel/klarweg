@@ -256,7 +256,9 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/ffaf72c9007ff0103dfa', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'picnic blanket with a basket on a green meadow under trees, open air' }
     },
     { de: 'meinetwegen', pos: 'adverb', en: 'fine with me, for my sake', hi: 'मेरी वजह से / ठीक है',
-      ex: 'Meinetwegen brauchst du nicht früh aufzustehen.', exEn: 'As far as I\'m concerned, you don\'t need to get up early.' },
+      ex: 'Meinetwegen brauchst du nicht früh aufzustehen.', exEn: 'As far as I\'m concerned, you don\'t need to get up early.',
+      vis: { kind: 'grammar', de: 'Meinetwegen brauchst du nicht früh aufzustehen.', hl: 'Meinetwegen', role: 'focus', cap: 'meinetwegen = fine with me, for my sake' }
+    },
     { de: 'sich erholen', pos: 'verb', en: 'to relax, recover', hi: 'आराम करना',
       ex: 'Es ist wichtig, sich im Urlaub zu erholen.', exEn: 'It\'s important to relax on holiday.',
       conj: { praesens: 'erholt sich', praeteritum: 'erholte sich', perfekt: 'hat sich erholt' },
@@ -267,7 +269,9 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/ace3906bf5f52fee5fd2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person with an apologetic expression, hand on chest, saying sorry to a friend' }
     },
     { de: 'wieso', pos: 'adverb', en: 'why', hi: 'क्यों',
-      ex: 'Wieso hast du aufgehört, Deutsch zu lernen?', exEn: 'Why did you stop learning German?' },
+      ex: 'Wieso hast du aufgehört, Deutsch zu lernen?', exEn: 'Why did you stop learning German?',
+      img: { src: '../public/vocab-img/d3f8a5cb1fb1b7e6cab6', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Puzzled person asking why with open palms' }
+    },
     { de: 'zelten', pos: 'verb', en: 'to camp', hi: 'कैंपिंग करना',
       ex: 'Wir haben vor, an der Küste zu zelten.', exEn: 'We\'re planning to camp on the coast.',
       conj: { praesens: 'zeltet', praeteritum: 'zeltete', perfekt: 'hat gezeltet' },

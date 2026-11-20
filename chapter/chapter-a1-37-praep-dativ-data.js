@@ -242,15 +242,15 @@ const CHAPTER = {
   // ---------- Vocabulary (23 words) ----------
   vocab: [
     // ===== Core Active =====
-    { de: 'bei', pos: 'preposition', en: 'at (someone\u2019s), near', hi: 'के यहाँ, पास', ex: 'Ich wohne bei meiner Tante.', exEn: 'I live at my aunt\u2019s.' },
+    { de: 'bei', pos: 'preposition', en: 'at (someone\u2019s), near', hi: 'के यहाँ, पास', ex: 'Ich wohne bei meiner Tante.', exEn: 'I live at my aunt\u2019s.', img: { src: '/api/media/vocab-img/65d95a36389726d8b7ef', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A young person sharing tea with their aunt in a cosy kitchen.' } },
     { de: 'Fahrrad', art: 'das', gender: 'n', plural: 'Fahrräder', pos: 'noun', en: 'bicycle', hi: 'साइकिल', ex: 'Ich fahre mit dem Fahrrad.', exEn: 'I go by bike.', img: { src: '/api/media/vocab-img/d002cbe20c17d4fbacd3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'city bicycle' } },
     { de: 'Bus', art: 'der', gender: 'm', plural: 'Busse', pos: 'noun', en: 'bus', hi: 'बस', ex: 'Ich fahre mit dem Bus.', exEn: 'I go by bus.', img: { src: '/api/media/vocab-img/5b27a373d88ccac116f4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A city transit bus' } },
     { de: 'Zug', art: 'der', gender: 'm', plural: 'Züge', pos: 'noun', en: 'train', hi: 'ट्रेन', ex: 'Der Zug ist schnell.', exEn: 'The train is fast.', img: { src: '/api/media/vocab-img/04be55f72ce627497e98', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'a passenger train on railway tracks' } },
-    { de: 'mit', pos: 'preposition', en: 'with, by', hi: 'के साथ, से', ex: 'Ich fahre mit dem Zug.', exEn: 'I travel by train.' },
+    { de: 'mit', pos: 'preposition', en: 'with, by', hi: 'के साथ, से', ex: 'Ich fahre mit dem Zug.', exEn: 'I travel by train.', img: { src: '/api/media/vocab-img/0d732e169c8fe10518aa', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person traveling inside a comfortable passenger train.' } },
     { de: 'nach', pos: 'preposition', en: 'to; after', hi: 'को; के बाद', ex: 'Wir fahren nach Berlin.', exEn: 'We travel to Berlin.' },
-    { de: 'seit', pos: 'preposition', en: 'since, for', hi: 'से', ex: 'Ich lerne seit einem Jahr Deutsch.', exEn: 'I\u2019ve studied German for a year.' },
+    { de: 'seit', pos: 'preposition', en: 'since, for', hi: 'से', ex: 'Ich lerne seit einem Jahr Deutsch.', exEn: 'I\u2019ve studied German for a year.', vis: { kind: 'grammar', de: 'Ich lerne seit einem Jahr Deutsch.', hl: 'seit', role: 'focus', cap: 'seit = since, for' } },
     { de: 'von', pos: 'preposition', en: 'from, of, by', hi: 'से, की ओर से', ex: 'Das Geschenk ist von Max.', exEn: 'The gift is from Max.' },
-    { de: 'zu', pos: 'preposition', en: 'to (a person/place)', hi: 'के यहाँ, को', ex: 'Ich gehe zu Anna.', exEn: 'I go to Anna\u2019s.' },
+    { de: 'zu', pos: 'preposition', en: 'to (a person/place)', hi: 'के यहाँ, को', ex: 'Ich gehe zu Anna.', exEn: 'I go to Anna\u2019s.', img: { src: '/api/media/vocab-img/943c1d5838597f6590d0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person walking along a stone path toward a welcoming friend.' } },
     // ===== Active Support =====
     { de: 'Flugzeug', art: 'das', gender: 'n', plural: 'Flugzeuge', pos: 'noun', en: 'airplane', hi: 'हवाई जहाज़', ex: 'Wir fliegen mit dem Flugzeug.', exEn: 'We fly by plane.' },
     { de: 'Schiff', art: 'das', gender: 'n', plural: 'Schiffe', pos: 'noun', en: 'ship', hi: 'जहाज़', ex: 'Das Schiff fährt langsam.', exEn: 'The ship goes slowly.' },
@@ -266,7 +266,7 @@ const CHAPTER = {
     // ===== Passive =====
     { de: 'Motorrad', art: 'das', gender: 'n', plural: 'Motorräder', pos: 'noun', en: 'motorcycle', hi: 'मोटरसाइकिल', ex: 'Er fährt mit dem Motorrad.', exEn: 'He goes by motorcycle.', img: { src: '/api/media/vocab-img/656fca46ab475dbf3998', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A red motorcycle parked on a road.' } },
     // ===== Reference / System =====
-    { de: 'Präposition', art: 'die', gender: 'f', plural: 'Präpositionen', pos: 'noun', en: 'preposition', hi: 'पूर्वसर्ग', ex: '"mit" ist eine Präposition.', exEn: '"mit" is a preposition.' }
+    { de: 'Präposition', art: 'die', gender: 'f', plural: 'Präpositionen', pos: 'noun', en: 'preposition', hi: 'पूर्वसर्ग', ex: '"mit" ist eine Präposition.', exEn: '"mit" is a preposition.', img: { src: '/api/media/vocab-img/515b65e12015a3a3f880', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Small balls positioned on top, inside, and beside a wooden cube.' } }
   ],
 
   // ---------- Dative prepositions (rule cards → accordion) ----------

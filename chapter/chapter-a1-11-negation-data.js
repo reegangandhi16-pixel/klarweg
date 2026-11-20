@@ -207,9 +207,13 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/a1-1/zeit', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A round wall clock beside an hourglass' }
     },
     { de: 'heute', pos: 'adverb', en: 'today', hi: 'आज',
-      ex: 'Heute habe ich keine Zeit.', exEn: 'Today I have no time.' },
+      ex: 'Heute habe ich keine Zeit.', exEn: 'Today I have no time.',
+      vis: { kind: 'grammar', de: 'Heute habe ich keine Zeit.', hl: 'Heute', role: 'focus', cap: 'heute = today' }
+    },
     { de: 'jetzt', pos: 'adverb', en: 'now', hi: 'अभी',
-      ex: 'Jetzt nicht, bitte.', exEn: 'Not now, please.' },
+      ex: 'Jetzt nicht, bitte.', exEn: 'Not now, please.',
+      vis: { kind: 'grammar', de: 'Jetzt nicht, bitte.', hl: 'Jetzt', role: 'focus', cap: 'jetzt = now' }
+    },
     { de: 'aber', pos: 'conjunction', en: 'but', hi: 'लेकिन',
       ex: 'Ich habe Zeit, aber kein Geld.', exEn: 'I have time, but no money.' },
     { de: 'oder', pos: 'conjunction', en: 'or', hi: 'या',
@@ -217,7 +221,9 @@ const CHAPTER = {
     { de: 'Problem', art: 'das', gender: 'n', plural: 'Probleme', pos: 'noun', en: 'problem', hi: 'समस्या',
       ex: 'Kein Problem!', exEn: 'No problem!' },
     { de: 'mehr', pos: 'adverb', en: 'more, anymore', hi: 'और / अब',
-      ex: 'Ich habe keine Zeit mehr.', exEn: 'I have no more time.' },
+      ex: 'Ich habe keine Zeit mehr.', exEn: 'I have no more time.',
+      vis: { kind: 'grammar', de: 'Ich habe keine Zeit mehr.', hl: 'mehr', role: 'focus', cap: 'mehr = more, anymore' }
+    },
     { de: 'nicht mehr', pos: 'phrase', en: 'not anymore', hi: 'अब नहीं',
       ex: 'Er wohnt nicht mehr hier.', exEn: 'He does not live here anymore.' },
     { de: 'schon', pos: 'adverb', en: 'already', hi: 'पहले से',

@@ -273,7 +273,9 @@ const CHAPTER = {
       compare: { comparative: 'mehr', superlative: 'am meisten' } },
     // — Active support —
     { de: 'als', pos: 'conjunction', en: 'than', hi: 'से (तुलना)',
-      ex: 'Berlin ist größer als Bonn.', exEn: 'Berlin is bigger than Bonn.' },
+      ex: 'Berlin ist größer als Bonn.', exEn: 'Berlin is bigger than Bonn.',
+      vis: { kind: 'grammar', de: 'Berlin ist größer als Bonn.', hl: 'als', role: 'focus', cap: 'als = than' }
+    },
     { de: 'alt', pos: 'adjective', en: 'old', hi: 'पुराना / बूढ़ा',
       ex: 'Das Auto ist alt.', exEn: 'The car is old.',
       compare: { comparative: 'älter', superlative: 'am ältesten' },

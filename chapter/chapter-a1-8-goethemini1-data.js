@@ -199,7 +199,9 @@ const CHAPTER = {
   vocab: [
     // — Core / Support —
     { de: 'sie (Pl.)', pos: 'pronoun', en: 'they', hi: 'वे',
-      ex: 'Sie kommen aus Indien.', exEn: 'They come from India.' },
+      ex: 'Sie kommen aus Indien.', exEn: 'They come from India.',
+      vis: { kind: 'grammar', de: 'Sie kommen aus Indien.', hl: 'Sie', role: 'focus', cap: 'sie (Pl.) = they' }
+    },
     { de: 'Land', art: 'das', gender: 'n', plural: 'Länder', pos: 'noun', en: 'country', hi: 'देश',
       ex: 'Aus welchem Land kommst du?', exEn: 'Which country do you come from?' },
     { de: 'Stadt', art: 'die', gender: 'f', plural: 'Städte', pos: 'noun', en: 'city', hi: 'शहर',
@@ -222,7 +224,9 @@ const CHAPTER = {
     { de: 'andere', pos: 'adjective', en: 'other', hi: 'अन्य',
       ex: 'Frag eine andere Person.', exEn: 'Ask another person.' },
     { de: 'gegenseitig', pos: 'adjective', en: 'mutual', hi: 'पारस्परिक',
-      ex: 'Stellt euch gegenseitig vor.', exEn: 'Introduce each other (mutually).' },
+      ex: 'Stellt euch gegenseitig vor.', exEn: 'Introduce each other (mutually).',
+      img: { src: '/api/media/vocab-img/f2e0f9c2e1442d47fade', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people politely gesturing toward each other.' }
+    },
     { de: 'international', pos: 'adjective', en: 'international', hi: 'अंतरराष्ट्रीय',
       ex: 'Der Kurs ist international.', exEn: 'The course is international.',
       img: { src: '/api/media/vocab-img/1920a06e1974484e9a49', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Diverse students gathered around a globe' }

@@ -204,7 +204,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/e2f353f4479fbe9f6804', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two children playing with building blocks' }
     },
     { de: 'und', pos: 'conjunction', en: 'and', hi: 'और',
-      ex: 'Ich lerne und ich arbeite.', exEn: 'I learn and I work.' },
+      ex: 'Ich lerne und ich arbeite.', exEn: 'I learn and I work.',
+      vis: { kind: 'grammar', de: 'Ich lerne und ich arbeite.', hl: 'und', role: 'focus', cap: 'und = and' }
+    },
     // — Active support —
     { de: 'Wochenende', art: 'das', gender: 'n', plural: 'Wochenenden', pos: 'noun', en: 'weekend', hi: 'सप्ताहांत',
       ex: 'Am Wochenende spiele ich.', exEn: 'On the weekend I play.' },
@@ -216,7 +218,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/b001b9e6b4523a2e19e4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person placing stamps into a collector album' }
     },
     { de: 'wirklich', pos: 'adverb', en: 'really', hi: 'सचमुच',
-      ex: 'Deutsch ist wirklich schön.', exEn: 'German is really beautiful.' },
+      ex: 'Deutsch ist wirklich schön.', exEn: 'German is really beautiful.',
+      vis: { kind: 'grammar', de: 'Deutsch ist wirklich schön.', hl: 'wirklich', role: 'focus', cap: 'wirklich = really' }
+    },
     // — Passive —
     { de: 'Deutschbuch', art: 'das', gender: 'n', plural: 'Deutschbücher', pos: 'noun', en: 'German book', hi: 'जर्मन किताब',
       ex: 'Das Deutschbuch ist neu.', exEn: 'The German book is new.' },

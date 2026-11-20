@@ -122,8 +122,8 @@ export function buildPlan(chapters = loadChapters()) {
   // --second-keys FILE: only these concepts get the second strategy (evaluation before the full run)
   const only2 = opt("second-keys") ? new Set(fs.readFileSync(String(opt("second-keys")), "utf8").split(/\s+/).filter(Boolean)) : null;
   if (only2) for (const k of Object.keys(second)) if (!only2.has(k)) delete second[k];
-  for (const it of [...items.values()]) {
-    const x = second[it.key]; if (!x || it.status !== "text-only") continue;
+  const applySecond = (it) => {
+    const x = second[it.key]; if (!x || it.status !== "text-only") return;
     it.second = true;
     const extra = { ...(x.cap ? { cap: x.cap } : {}), ...(x.hl ? { hl: x.hl } : {}) };
     if (x.type === "scene") Object.assign(it, { status: "todo", subject: x.scene, strategy: "sentence", ...extra, alt: x.scene.replace(/^Show (an?|the|two|one) /i, "").replace(/\.$/, "").slice(0, 120) }, { why: undefined });
@@ -138,14 +138,15 @@ export function buildPlan(chapters = loadChapters()) {
       if (type === "map") vis.src = mapSrc(x.iso);
       Object.assign(it, { status: "vis", vis, why: undefined });
     }
-  }
+  };
+  for (const it of [...items.values()]) applySecond(it);
   // resolve aliases to a root that has (or will have) an image
   for (const it of items.values()) {
     if (it.status !== "alias") continue;
     let r = items.get(it.sameAs), hops = 0;
     while (r && r.status === "alias" && hops++ < 5) r = items.get(r.sameAs);
     if (r && (r.status === "todo" || r.status === "have")) it.root = r.key;
-    else { it.status = "text-only"; it.why = "alias without image"; }
+    else { it.status = "text-only"; it.why = "alias without image"; applySecond(it); }   // its own second-strategy visual, if any
   }
   // every image's audience = its own uses + the uses of its aliases
   for (const it of items.values()) if (it.status === "todo") { it.id = imageId(it.key); it.prompt = promptFor(it, it.subject); it.audience = [...it.uses]; }

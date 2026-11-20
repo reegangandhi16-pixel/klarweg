@@ -259,12 +259,12 @@ const CHAPTER = {
     { de: 'denn', pos: 'conjunction', en: 'because (normal order)', hi: 'क्योंकि', ex: 'Ich gehe, denn ich habe Zeit.', exEn: 'I\u2019m going because I have time.' },
     { de: 'also', pos: 'conjunction', en: 'so, therefore', hi: 'तो, इसलिए', ex: 'Es regnet, also bleibe ich hier.', exEn: 'It\u2019s raining, so I stay here.' },
     { de: 'Grund', art: 'der', gender: 'm', plural: 'Gründe', pos: 'noun', en: 'reason', hi: 'कारण', ex: 'Das ist ein guter Grund.', exEn: 'That is a good reason.' },
-    { de: 'doch', pos: 'adverb', en: 'but, yet, on the contrary', hi: 'फिर भी', ex: 'Es ist spät, doch ich lerne weiter.', exEn: 'It\u2019s late, yet I keep studying.' },
-    { de: 'nicht nur', pos: 'phrase', en: 'not only', hi: 'सिर्फ़ नहीं', ex: 'Nicht nur Tee, auch Kaffee.', exEn: 'Not only tea, also coffee.' },
+    { de: 'doch', pos: 'adverb', en: 'but, yet, on the contrary', hi: 'फिर भी', ex: 'Es ist spät, doch ich lerne weiter.', exEn: 'It\u2019s late, yet I keep studying.', img: { src: '/api/media/vocab-img/a904fd61912a50589dac', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A student studying diligently under a desk lamp late at night.' } },
+    { de: 'nicht nur', pos: 'phrase', en: 'not only', hi: 'सिर्फ़ नहीं', ex: 'Nicht nur Tee, auch Kaffee.', exEn: 'Not only tea, also coffee.', vis: { kind: 'grammar', de: 'Nicht nur Tee, auch Kaffee.', hl: 'Nicht nur', role: 'focus', cap: 'nicht nur = not only' } },
     { de: 'durch', pos: 'preposition', en: 'through', hi: 'के द्वारा', ex: 'Wir gehen durch den Park.', exEn: 'We go through the park.' },
-    { de: 'durch (Portal)', pos: 'preposition', en: 'through (a portal/door)', hi: 'से होकर', ex: 'Geh durch die Tür.', exEn: 'Go through the door.' },
-    { de: 'ebenso', pos: 'adverb', en: 'likewise, also', hi: 'इसी तरह', ex: 'Anna kommt, Rohan ebenso.', exEn: 'Anna comes, Rohan likewise.' },
-    { de: 'Ereignis', art: 'das', gender: 'n', plural: 'Ereignisse', pos: 'noun', en: 'event, result', hi: 'घटना', ex: 'Das Fest war ein großes Ereignis.', exEn: 'The party was a big event.' },
+    { de: 'durch (Portal)', pos: 'preposition', en: 'through (a portal/door)', hi: 'से होकर', ex: 'Geh durch die Tür.', exEn: 'Go through the door.', img: { src: '/api/media/vocab-img/dc6ba14bbc611dbaf41a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person walking forward through an open doorway.' } },
+    { de: 'ebenso', pos: 'adverb', en: 'likewise, also', hi: 'इसी तरह', ex: 'Anna kommt, Rohan ebenso.', exEn: 'Anna comes, Rohan likewise.', vis: { kind: 'grammar', de: 'Anna kommt, Rohan ebenso.', hl: 'ebenso', role: 'focus', cap: 'ebenso = likewise, also' } },
+    { de: 'Ereignis', art: 'das', gender: 'n', plural: 'Ereignisse', pos: 'noun', en: 'event, result', hi: 'घटना', ex: 'Das Fest war ein großes Ereignis.', exEn: 'The party was a big event.', img: { src: '/api/media/vocab-img/36505619a85de5fb12a1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A festive outdoor gathering with lanterns, bunting, and confetti.' } },
     { de: 'Aussage', art: 'die', gender: 'f', plural: 'Aussagen', pos: 'noun', en: 'statement', hi: 'बयान', ex: 'Das ist eine klare Aussage.', exEn: 'That is a clear statement.' }
   ],
 

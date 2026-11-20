@@ -2,72 +2,72 @@
   {
     "slug": "a1-der-die-das-exercises",
     "cluster": "cases",
-    "prompt": "Label a masculine table and a neuter bed with their definite articles.",
-    "sample": "Das ist der Tisch. Das ist das Bett.",
-    "check": "Der marks masculine Tisch; das marks neuter Bett in these nominative phrases."
+    "prompt": "Label a chair, a lamp and a window. Then explain why you should learn a word such as Mädchen with its article.",
+    "sample": "der Stuhl, die Lampe, das Fenster, das Mädchen.",
+    "check": "Mädchen is neuter because the diminutive ending -chen takes das. Memorise familiar nouns together with their articles."
   },
   {
     "slug": "a1-ein-eine-exercises",
     "cluster": "cases",
-    "prompt": "Introduce a pen and a bag using indefinite articles.",
-    "sample": "Das ist ein Stift, und das ist eine Tasche.",
-    "check": "Masculine Stift takes ein; feminine Tasche takes eine in these nominative phrases."
+    "prompt": "Introduce a chair, a lamp and a shelf as new items. Begin each line with Das ist.",
+    "sample": "Das ist ein Stuhl. Das ist eine Lampe. Das ist ein Regal.",
+    "check": "In these nominative phrases, masculine Stuhl and neuter Regal take ein, and feminine Lampe takes eine."
   },
   {
     "slug": "a1-kein-keine-exercises",
     "cluster": "cases",
-    "prompt": "Say you have no car and no bicycle.",
-    "sample": "Ich habe kein Auto und kein Fahrrad.",
-    "check": "Both nouns are neuter; accusative keeps kein."
+    "prompt": "A shop has no juice, no bread and no tomatoes. Say what you cannot get using Es gibt.",
+    "sample": "Es gibt keinen Saft, kein Brot und keine Tomaten.",
+    "check": "Es gibt takes accusative. Masculine Saft takes keinen, neuter Brot takes kein, and plural Tomaten takes keine."
   },
   {
     "slug": "a1-sein-present-tense-exercises",
     "cluster": "verbs",
-    "prompt": "Tell a new classmate that you are tired but your friends are fit.",
-    "sample": "Ich bin müde, aber meine Freunde sind fit.",
-    "check": "Match bin to ich and sind to the plural subject."
+    "prompt": "Tell a partner that you are new, Mira is absent and you and your partner are in Room 2.",
+    "sample": "Ich bin neu. Mira ist nicht da. Wir sind in Raum zwei.",
+    "check": "Match bin with ich, ist with one named person, and sind with wir."
   },
   {
     "slug": "a1-haben-present-tense-exercises",
     "cluster": "verbs",
-    "prompt": "Say you have a question and your teacher has time.",
-    "sample": "Ich habe eine Frage, und meine Lehrerin hat Zeit.",
-    "check": "Haben changes to hat with the singular subject Lehrerin."
+    "prompt": "Say that you have a ticket, your companion has a map, and you both have water.",
+    "sample": "Ich habe eine Fahrkarte. Du hast eine Karte. Wir haben Wasser.",
+    "check": "Habe, hast and haben change with the subject, even if the object stays the same."
   },
   {
     "slug": "a1-regular-verbs-exercises",
     "cluster": "verbs",
-    "prompt": "Describe what you and a friend do in a language lesson.",
-    "sample": "Ich lerne Deutsch, und mein Freund spielt Klavier.",
-    "check": "The regular endings are -e for ich and -t for mein Freund."
+    "prompt": "Use lernen to say that you are studying today, your friend is studying tomorrow and you both study on Friday.",
+    "sample": "Ich lerne heute. Du lernst morgen. Wir lernen am Freitag.",
+    "check": "Check the endings -e, -st and -en against ich, du and wir."
   },
   {
     "slug": "a1-personal-pronouns-exercises",
     "cluster": "people",
-    "prompt": "Replace Anna und Tom with a pronoun when saying they live in Bonn.",
-    "sample": "Sie wohnen in Bonn.",
-    "check": "Plural sie takes wohnen; sentence-initial capitalisation does not make it formal Sie."
+    "prompt": "Rewrite the subjects in these messages: Lara kommt. Tom wartet. Lara und Tom gehen ins Kino.",
+    "sample": "Sie kommt. Er wartet. Sie gehen ins Kino.",
+    "check": "The singular and plural forms of sie are distinguished here by kommt and gehen."
   },
   {
     "slug": "a1-possessive-mein-dein-exercises",
     "cluster": "people",
-    "prompt": "Introduce your brother and your sister using possessives.",
-    "sample": "Das ist mein Bruder, und das ist meine Schwester.",
-    "check": "Mein agrees with masculine Bruder; meine agrees with feminine Schwester."
+    "prompt": "Ask if a notebook is your friend’s. Your friend confirms, then asks about a bottle next to it.",
+    "sample": "Ist das dein Heft? Ja, das ist mein Heft. Ist das deine Flasche?",
+    "check": "Heft is neuter and takes dein or mein here. Feminine Flasche takes deine."
   },
   {
     "slug": "a1-w-questions-exercises",
     "cluster": "questions",
-    "prompt": "Ask someone where they live and what their name is.",
-    "sample": "Wo wohnst du, und wie heißt du?",
-    "check": "The question word comes before the finite verb in each question."
+    "prompt": "Only the words Deutschkurs and Dienstag are visible. Ask where the class is, who teaches it, and when exactly it begins.",
+    "sample": "Wo ist der Deutschkurs? Wer unterrichtet den Kurs? Wann beginnt der Kurs?",
+    "check": "Choose the question word for the gap in your information. In these models the finite verb follows the question word."
   },
   {
     "slug": "a1-yes-no-questions-exercises",
     "cluster": "questions",
-    "prompt": "Ask a friend whether they are coming to the cinema today.",
-    "sample": "Kommst du heute mit ins Kino?",
-    "check": "The finite verb starts this yes/no question."
+    "prompt": "Turn these statements into questions: Sie haben einen Tisch frei. Sie öffnen um sechs. Sie akzeptieren Karten.",
+    "sample": "Haben Sie einen Tisch frei? Öffnen Sie um sechs? Akzeptieren Sie Karten?",
+    "check": "Move the finite verb to the front and keep formal Sie in each question."
   },
   {
     "slug": "a1-nicht-position-exercises",

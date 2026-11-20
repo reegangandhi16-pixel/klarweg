@@ -344,8 +344,8 @@ async function runE2E() {
   ok('demo: Complete payment resumes the SAME ₹100 order (no second order)', await waitFor('location.pathname === "/__mock_cashfree/pay"') && (await text('#mock-order')) === demoOrder && cf.creates.filter((x) => x.startsWith('cons_')).length === 1);
   await click('#mock-paid');
   ok('demo: confirmed with reference after verified payment', await waitFor('/Your demo is booked/.test(document.getElementById("demo-panel").innerText)', 30000));
-  await click('[data-join]');
-  ok('demo: joining link served by the Worker only for the confirmed booking', await waitFor('document.querySelector(\'#demo-panel a[href^="https://meet.google.com/"]\')'));
+  ok('demo: the confirmation says the teacher emails the Meet link a day before, to the account email', await waitFor('/emails you the Google Meet link one day before/.test(document.querySelector("[data-link-by-email]").innerText) && /asha@example\\.test/.test(document.querySelector("[data-link-by-email]").innerText)'));
+  ok('demo: no meeting link is shown on the page', !(await ev('!!document.querySelector(\'#demo-panel a[href*="meet.google.com"]\')')));
   await snap('desktop-demo-confirmed', '#demo-panel');
   const dref = (await text('#demo-panel [data-ref]')).trim();
   await click('[data-move]');

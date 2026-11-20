@@ -360,7 +360,7 @@
     } else {
       if (!demo.name) demo.name = (s.user && s.user.name) || '';
       if (!demo.phone) demo.phone = (s.user && s.user.phone) || '';
-      details = '<p class="mk-fine" style="margin:0 0 16px">Signed in as ' + esc(s.user.email) + '</p>'
+      details = '<p class="mk-fine" style="margin:0 0 16px">Signed in as ' + esc(s.user.email) + (D.marketplace.demo.joinLinkOnPage ? '' : '. Your teacher emails the Google Meet link to this address one day before your demo.') + '</p>'
         + '<div class="mk-field"><label for="d-name">Full name</label><input id="d-name" autocomplete="name" value="' + esc(demo.name) + '" required></div>'
         + '<div class="mk-field"><label for="d-phone">Mobile number</label><input id="d-phone" type="tel" inputmode="numeric" autocomplete="tel-national" value="' + esc(demo.phone) + '" required aria-describedby="d-phone-h"><span class="mk-hint" id="d-phone-h">10-digit Indian mobile number. Your teacher may use it if the call has trouble connecting.</span></div>'
         + '<label class="mk-check"><input type="checkbox" id="d-terms"' + (demo.terms ? ' checked' : '') + '> <span>I understand the ₹100 demo fee and that ' + esc(M.demo && M.demo.rescheduleRule ? M.demo.rescheduleRule.charAt(0).toLowerCase() + M.demo.rescheduleRule.slice(1) : 'a demo can be moved once.') + ' See the <a href="terms.html">Terms</a>.</span></label>';
@@ -448,14 +448,18 @@
     }
     function confirmed(b) {
       var t = byId[b.teacherId];
+      var linkOnPage = !!D.marketplace.demo.joinLinkOnPage;
+      var st = auth() ? auth().getState() : null, email = st && st.user ? st.user.email : '';
       show('<div class="mk-success"><p class="mk-eyebrow">Demo confirmed</p><h3>Your demo is booked.</h3>'
         + '<p class="mk-sub-sm">Payment verified with Cashfree. Keep your reference; it is also in My Account.</p>'
         + '<p class="mk-ref" data-ref>' + esc(b.ref) + '</p>'
         + '<dl class="mk-summary"><dt>Teacher</dt><dd>' + esc(t ? t.name : b.teacherId) + '</dd><dt>Date</dt><dd>' + esc(niceDate(b.date, { weekday: 'long' })) + '</dd><dt>Time</dt><dd>' + to12h(b.slotStart) + ' – ' + to12h(b.slotEnd) + ' IST</dd><dt>Paid</dt><dd>' + inrP(b.amountPaise) + (b.testMode ? ' (test)' : '') + '</dd></dl>'
-        + '<div class="mk-hero-ctas"><button type="button" class="mk-btn mk-btn-primary" data-join>Show joining link</button>'
+        + (linkOnPage ? '' : '<div class="mk-note" data-link-by-email><strong>Google Meet link</strong>' + esc(D.marketplace.demo.linkDelivery || '') + ' It goes to <span data-acct-email>' + (email ? esc(email) : 'your Klarweg account email') + '</span>.' + (b.contactPhone ? ' If anything changes we call or message ' + esc(b.contactPhone) + '.' : '') + '</div>')
+        + '<div class="mk-hero-ctas">' + (linkOnPage ? '<button type="button" class="mk-btn mk-btn-primary" data-join>Show joining link</button>' : '')
         + (b.rescheduleCount < 1 ? '<button type="button" class="mk-btn mk-btn-ghost" data-move>Move this demo</button>' : '') + '</div>'
         + '<div data-join-out style="margin-top:16px"></div></div>');
-      panel.querySelector('[data-join]').onclick = function () {
+      if (!email && auth()) auth().refresh().then(function (s2) { var el = panel.querySelector('[data-acct-email]'); if (el && s2 && s2.user && s2.user.email) el.textContent = s2.user.email; }, function () {});
+      if (linkOnPage) panel.querySelector('[data-join]').onclick = function () {
         var out = panel.querySelector('[data-join-out]');
         out.innerHTML = '<span class="mk-spinner"></span>';
         call('/consult/bookings/' + encodeURIComponent(b.ref) + '/join').then(function (j) {

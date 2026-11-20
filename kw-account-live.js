@@ -40,7 +40,7 @@
         + '<p class="live-title">' + esc(NAMES[d.teacherId] || 'Your teacher') + ' · ' + esc(date(d.date, true)) + ', ' + t12(d.slotStart) + ' IST</p>'
         + '<p class="live-meta">Reference <code>' + esc(d.ref) + '</code> · ' + inr(d.amountPaise) + (d.testMode ? ' (test)' : '') + '</p></div>'
         + '<div class="live-side">' + badge(d.status, d.refundStatus)
-        + '<a class="live-link" href="../live-classes.html?demo_ref=' + encodeURIComponent(d.ref) + '#demo">' + (d.status === 'confirmed' ? 'Joining link and details' : 'View status') + '</a></div></li>');
+        + '<a class="live-link" href="../live-classes.html?demo_ref=' + encodeURIComponent(d.ref) + '#demo">' + (d.status === 'confirmed' ? 'Booking details' : 'View status') + '</a></div></li>');
     });
     enrols.forEach(function (e) {
       var dates = e.startDate ? date(e.startDate) + ' – ' + date(e.endDate) : 'Dates to be announced';

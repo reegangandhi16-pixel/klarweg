@@ -53,7 +53,7 @@ ENROL_PAYMENTS = "off"
 ENROL_COURSES = ""
 ENROL_CONSULT_CREDIT = "course-fee"
 # ₹100 Friday/Sunday demo classes (src/live-demos.js). "off" | "sandbox" | "live".
-DEMO_BOOKING = "off"
+DEMO_BOOKING = "live"
 # LIVE_ADMIN_EMAILS and CONSULT_JOIN_LINKS are Worker SECRETS (never in this
 # public file): admin account emails, and {"teacher-id":"https://meet.google.com/…"}.
 

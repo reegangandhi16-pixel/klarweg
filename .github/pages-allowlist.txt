@@ -142,6 +142,8 @@ site-icon-512.png
 # internal implementation note, never fetched by any page)
 # ---------------------------------------------------------------
 account/index.html
+account/forgot-password.html
+account/reset-password.html
 account/saved-words.html
 account/review.html
 account/kw-account.js

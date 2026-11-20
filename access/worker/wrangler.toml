@@ -138,6 +138,20 @@ RESOURCE_RELEASE = "r5"
 # shows "unavailable", so never deploy the pages ahead of the upload.
 CHAPTER_RELEASE = "r3"
 
+# Password reset by email (src/password-reset.js; setup: docs/PASSWORD-RESET.md).
+#   "off"  the "Forgot password?" page explains that reset by email is not
+#          available yet and points to support (the default)
+#   "on"   reset links are emailed after verifying the domain and configuring
+#          the selected provider. Requires --allow-password-reset.
+# Workers Free remains unchanged. Resend Free uses RESEND_API_KEY as a
+# Worker SECRET (never commit it), plus verified sender DNS records.
+# Cap reset-request emails to leave headroom for password-change notices
+# within Resend Free's 100 emails/day and 3,000 emails/month limits.
+PASSWORD_RESET = "off"
+MAIL_PROVIDER = "resend"
+MAIL_FROM = "no-reply@send.klarweg.in"
+PASSWORD_RESET_DAILY_EMAILS = "45"
+
 [[r2_buckets]]
 binding = "RESOURCES"
 bucket_name = "klarweg-resources"
@@ -158,4 +172,11 @@ service = "klarweg-tutor"
 #   RATE_SALT
 #   CASHFREE_WEBHOOK_SECRET   (optional; defaults to CASHFREE_SECRET_KEY)
 #   RESOURCE_URL_SECRET       (signed chapter-resource links; 32+ random bytes)
+#   RESEND_API_KEY            (Resend Free mail API key, only if MAIL_PROVIDER="resend")
 #   SPEECH_ALLOWLIST          (only for SPEECH_MODE = "allowlist": comma-separated user ids)
+
+# Optional Cloudflare Email Service alternative (requires Workers Paid
+# for arbitrary learners). KEEP COMMENTED on Workers Free + Resend Free.
+# [[send_email]]
+# name = "EMAIL"
+# allowed_sender_addresses = ["no-reply@klarweg.in"]

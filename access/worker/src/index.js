@@ -9,6 +9,7 @@ import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
 import { chapterScript, CHAPTER_ROUTE } from "./chapters.js";
 import { examProxy } from "./exam-proxy.js";
+import { forgotPassword, checkResetToken, resetPassword } from "./password-reset.js";
 import { mfaStatus, mfaEnroll, mfaEnrollConfirm, mfaVerify, mfaRegenerateRecoveryCodes } from "./mfa-routes.js";
 import { cookieProbeSet, cookieProbeCheck } from "./cookie-probe.js";
 import {
@@ -158,6 +159,18 @@ async function route(request, env, ctx) {
        target, so CORS handling does not apply and must not be added. */
     if (request.method === "POST" && url.pathname === "/auth/google/redirect") {
       return googleLoginRedirect(request, env);
+    }
+
+    /* Forgot / reset password (password-reset.js). Off unless
+       PASSWORD_RESET = "on" and the selected mail transport is configured. */
+    if (request.method === "POST" && url.pathname === "/auth/password/forgot") {
+      return withCors(await forgotPassword(request, env, ctx), request);
+    }
+    if (request.method === "POST" && url.pathname === "/auth/password/reset/check") {
+      return withCors(await checkResetToken(request, env, ctx), request);
+    }
+    if (request.method === "POST" && url.pathname === "/auth/password/reset") {
+      return withCors(await resetPassword(request, env, ctx), request);
     }
 
     if (request.method === "POST" && url.pathname === "/auth/logout") {

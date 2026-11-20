@@ -47,6 +47,11 @@ h1{font-family:var(--font-display);font-size:clamp(28px,5vw,42px);font-weight:60
 .field.invalid .err{display:block}
 .form-err{font-size:14px;line-height:1.5;color:var(--coral-deep);background:var(--coral-tint);border:1px solid rgba(229,90,63,.22);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:18px;display:none}
 .form-err.on{display:block}
+.form-ok{font-size:14px;line-height:1.5;color:var(--accent-deep);background:var(--accent-tint);border:1px solid rgba(31,78,74,.18);border-radius:var(--r-sm);padding:12px 16px;margin-bottom:16px;display:none}
+.form-ok.on{display:block}
+.label-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.forgot{display:inline-flex;align-items:center;min-height:44px;margin:-12px 0;font-size:13.5px;font-weight:600;color:var(--accent);text-decoration:underline;text-decoration-color:rgba(31,78,74,.35);text-underline-offset:3px}
+.forgot:hover{color:var(--accent-deep);text-decoration-color:currentColor}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 24px;border-radius:var(--r-sm);border:1px solid transparent;font-size:15px;font-weight:600;cursor:pointer;transition:transform var(--dur-base) var(--ease),box-shadow var(--dur-base) var(--ease),border-color var(--dur-base) var(--ease)}
 .btn:hover{transform:translateY(-1px)}
 .btn[disabled]{opacity:.55;cursor:default;transform:none}
@@ -132,6 +137,7 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
 </div>
         <!-- LOGIN -->
         <form class="auth-card" id="form-login" novalidate>
+          <p class="form-ok" id="login-ok" role="status"></p>
           <p class="form-err" id="login-error" role="alert"></p>
           <div class="field" id="f-login-email">
             <label for="login-email">Email</label>
@@ -139,7 +145,10 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
             <span class="err" id="login-email-err"></span>
           </div>
           <div class="field" id="f-login-password">
-            <label for="login-password">Password</label>
+            <div class="label-row">
+              <label for="login-password">Password</label>
+              <a class="forgot" href="forgot-password.html" id="login-forgot">Forgot password?</a>
+            </div>
             <input id="login-password" name="password" type="password" autocomplete="current-password" required aria-describedby="login-password-err">
             <span class="err" id="login-password-err"></span>
           </div>
@@ -384,6 +393,18 @@ footer{border-top:1px solid var(--hairline);padding:24px 0;font-size:13px;color:
         else formError('login', err.message);
       });
   });
+
+  /* Back from account/reset-password.html: say so once, then drop the
+     flag from the address bar so a reload does not repeat it. */
+  if (params.get('reset') === 'done') {
+    $('login-ok').textContent = 'Your password has been changed and every device was signed out. Sign in with your new password.';
+    $('login-ok').classList.add('on');
+    try {
+      var _resetUrl = new URL(location.href);
+      _resetUrl.searchParams.delete('reset');
+      history.replaceState({}, '', _resetUrl.toString());
+    } catch (e) {}
+  }
 
   /* ---- signup ---- */
   $('form-signup').addEventListener('submit', function (e) {

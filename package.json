@@ -28,6 +28,7 @@
     "test:live": "node --test scripts/live-classes-static.test.mjs && node scripts/live-classes-browser.mjs",
     "test:live:browser": "node scripts/live-classes-browser.mjs",
     "test:popup:browser": "node scripts/word-popup-browser.mjs",
+    "test:password-reset:browser": "node scripts/password-reset-browser.mjs",
     "test:payments:browser": "node scripts/live-payments-demo.mjs --e2e",
     "demo:payments": "node scripts/live-payments-demo.mjs",
     "live:readiness": "node scripts/live-classes-readiness.mjs",

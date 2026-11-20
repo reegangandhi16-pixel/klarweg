@@ -62,6 +62,7 @@ const allowAi = args.includes('--allow-ai-enabled');
 const allowSpeech = (args.find((a) => a.startsWith('--allow-speech=')) || '').split('=')[1] || null;
 const allowConsult = (args.find((a) => a.startsWith('--allow-consult-booking=')) || '').split('=')[1] || null;
 const allowEnrol = (args.find((a) => a.startsWith('--allow-enrol-payments=')) || '').split('=')[1] || null;
+const allowPasswordReset = args.includes('--allow-password-reset');
 const allowScope = (args.find((a) => a.startsWith('--allow-speech-scope=')) || '').split('=')[1] || null;
 
 function varOf(toml, name) {
@@ -150,6 +151,16 @@ if (/^\s*\[\[?\s*["']?env["']?\s*\./m.test(tomlCode)) fail('wrangler.toml contai
 if (/CORS_EXTRA_ORIGINS["']?\s*=/.test(tomlCode)) fail('wrangler.toml sets CORS_EXTRA_ORIGINS. Extra CORS origins are for the isolated non-production Worker only (wrangler.nonprod.toml).');
 if (/CORS_PUBLIC_SITE_ORIGINS["']?\s*=/.test(tomlCode)) fail('wrangler.toml sets CORS_PUBLIC_SITE_ORIGINS. Production always trusts the public site origins; the setting is for an isolated non-production Worker only.');
 
+/* Password reset by email (src/password-reset.js, docs/PASSWORD-RESET.md). "on" needs the
+   owner's go (--allow-password-reset) and configured mail provider.
+   Resend requires a Worker secret; Cloudflare requires an active binding. */
+const pwReset = (varOf(toml, 'PASSWORD_RESET') || 'off').toLowerCase();
+const mailProvider = (varOf(toml, 'MAIL_PROVIDER') || 'cloudflare').toLowerCase();
+if (!['resend', 'cloudflare'].includes(mailProvider)) fail('MAIL_PROVIDER must be "resend" or "cloudflare".');
+if (!['off', 'on'].includes(pwReset)) fail(`PASSWORD_RESET in wrangler.toml is "${pwReset}" — must be "off" or "on".`);
+if (pwReset === 'on' && !allowPasswordReset) fail('PASSWORD_RESET="on" in wrangler.toml. Enable password reset emails deliberately with --allow-password-reset after the selected mail provider, domain and secret/binding are configured (docs/PASSWORD-RESET.md).');
+if (pwReset === 'on' && mailProvider === 'cloudflare' && !/^\s*\[\[\s*send_email\s*\]\][^\[]*?name\s*=\s*"EMAIL"/m.test(tomlCode)) fail('PASSWORD_RESET="on" but wrangler.toml has no active [[send_email]] binding named "EMAIL" — no reset email could be sent.');
+
 let live;
 try {
   const res = await fetch(LIVE_URL, { headers: { accept: 'application/json' } });
@@ -166,4 +177,4 @@ if (live !== env) {
   console.warn(`! Cashfree environment will change: ${live} → ${env} (explicitly allowed).`);
 }
 
-console.log(`✔ predeploy-access-check: Cashfree ${env} (live: ${live}), app id ${isTest ? 'TEST…' : 'live…'}, AI_ENABLED=${ai}, SPEECH_MODE=${speech}, CONSULT_BOOKING=${consult}, ENROL_PAYMENTS=${enrol}, scope "${speechScope.join(',')}" + ${speechChapters.length} listed − ${speechExclude.length} excluded.`);
+console.log(`✔ predeploy-access-check: Cashfree ${env} (live: ${live}), app id ${isTest ? 'TEST…' : 'live…'}, AI_ENABLED=${ai}, SPEECH_MODE=${speech}, CONSULT_BOOKING=${consult}, ENROL_PAYMENTS=${enrol}, PASSWORD_RESET=${pwReset}, scope "${speechScope.join(',')}" + ${speechChapters.length} listed − ${speechExclude.length} excluded.`);

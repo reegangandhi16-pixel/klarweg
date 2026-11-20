@@ -3383,14 +3383,22 @@ a.level-node:hover .level-view .arrow { transform: translateX(3px); }
 }
 .sp-play[data-state="playing"] .icon svg path { d: path('M2 1h2v8H2zM6 1h2v8H6z'); }
 .sp-play[data-state="error"] { background: rgba(216,90,48,0.18); color: var(--coral-deep); }
-/* Hero "Listen" (Der Mann liest ein Buch.) uses the same dark-green accent as
-   the chapter Story "Play conversation" button (chapter.css .kw-play-all:
-   var(--accent), hover var(--accent-bright)). Error state stays as above. */
-#hero-demo .sp-play:not([data-state="error"]) { background: var(--accent); box-shadow: 0 4px 12px -6px rgba(31,78,74,0.4); }
+/* Hero "Listen" (Der Mann liest ein Buch.) and the homepage Story
+   "Play conversation" use the same dark-green accent as the chapter Story
+   "Play conversation" button (chapter.css .kw-play-all: var(--accent),
+   hover var(--accent-bright)). Error state stays as above. */
+#hero-demo .sp-play:not([data-state="error"]),
+#story-dialogue-player .sp-play:not([data-state="error"]) { background: var(--accent); box-shadow: 0 4px 12px -6px rgba(31,78,74,0.4); }
 #hero-demo .sp-play:not([data-state="error"]):hover,
-#hero-demo .sp-play[data-state="loading"] { background: var(--accent-bright); }
-#hero-demo .sp-play[data-state="playing"] { animation-name: audio-pulse-accent; }
-#hero-demo .sp-play:focus-visible { box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--accent); }
+#hero-demo .sp-play[data-state="loading"],
+#story-dialogue-player .sp-play:not([data-state="error"]):hover,
+#story-dialogue-player .sp-play[data-state="loading"] { background: var(--accent-bright); }
+#hero-demo .sp-play:not([data-state="error"]):active,
+#story-dialogue-player .sp-play:not([data-state="error"]):active { background: var(--accent-deep); }
+#hero-demo .sp-play[data-state="playing"],
+#story-dialogue-player .sp-play[data-state="playing"] { animation-name: audio-pulse-accent; }
+#hero-demo .sp-play:focus-visible,
+#story-dialogue-player .sp-play:focus-visible { box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--accent); }
 @keyframes audio-pulse-accent {
   0%, 100% { box-shadow: 0 0 0 0 rgba(31,78,74,0.35); }
   50% { box-shadow: 0 0 0 8px rgba(31,78,74,0); }

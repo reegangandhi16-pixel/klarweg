@@ -20,6 +20,7 @@ import {
   reviewSavedWord
 } from "./saved-words.js";
 import { listProgress, saveProgress } from "./progress.js";
+import { accountOverview, updateProfile, setAvatar, removeAvatar, changePassword, deleteAccount } from "./account.js";
 function json(data, status = 200) {
   return Response.json(data, { status });
 }
@@ -192,6 +193,21 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
         "POST /auth/mfa/enroll/confirm": mfaEnrollConfirm,
         "POST /auth/mfa/verify": mfaVerify,
         "POST /auth/mfa/recovery-codes": mfaRegenerateRecoveryCodes
+      }[`${request.method} ${url.pathname}`];
+      if (handler) return withCors(await handler(request, env), request);
+    }
+
+    /* The signed-in learner's own account page (account.js): profile,
+       photo, preferred level, password change, guarded self-deletion.
+       Session-derived user only; never touches entitlements or orders. */
+    if (url.pathname === "/account" || url.pathname.startsWith("/account/")) {
+      const handler = {
+        "GET /account": accountOverview,
+        "POST /account/profile": updateProfile,
+        "POST /account/avatar": setAvatar,
+        "DELETE /account/avatar": removeAvatar,
+        "POST /account/password": changePassword,
+        "POST /account/delete": deleteAccount
       }[`${request.method} ${url.pathname}`];
       if (handler) return withCors(await handler(request, env), request);
     }

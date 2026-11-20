@@ -9,17 +9,17 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | Levels | 6 |
 | Chapters | 258 (253 with word cards; 4 checkpoint chapters use a review quiz) |
 | Vocabulary cards | 9230 |
-| Unique headwords | 7780 |
+| Unique headwords | 7779 |
 | Unique concepts (headword + meaning) | 8461 |
 | Text-only (function words / grammar constructions) | 568 |
 | Illustrable concepts | 7893 |
 | Chapters without word cards | b2-14-goethe-mini-test-1 (review quiz), b2-26-goethe-mini-test-2 (review quiz), b2-36-goethe-halbzeit-test (review quiz), b2-43-goethe-mini-3 (review quiz), b2-53-goethe-mini-4 (none) |
 | Already illustrated (A1·01 pilot) | 4129 |
-| **New images needed** | **3764** (2920 direct, 844 conceptual) |
+| **New images needed** | **3764** (2919 direct, 845 conceptual) |
 | …used on a free Chapter 1 page (public files) | 30 |
 | …used only in paid chapters (gated files) | 3734 |
 | Cards served by reusing another card's image | 663 |
-| Headwords with several meanings | 578 (308 look like the same meaning worded differently — review) |
+| Headwords with several meanings | 578 (309 look like the same meaning worded differently — review) |
 
 ## Cost and storage (estimate)
 - Expected generations incl. re-rolls: **4770** × $0.039 = **$186.03** (interactive) · **$93.02** if the 50 % batch mode is available for this model (to verify).
@@ -32,7 +32,7 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | A2 | 35 | 35 | 0 | 1607 | 1270 | 272 | 65 | 542 |
 | B1 | 35 | 35 | 0 | 2128 | 1712 | 296 | 120 | 832 |
 | B2 | 69 | 64 | 4 | 2569 | 2142 | 405 | 22 | 1355 |
-| C1 | 43 | 43 | 0 | 231 | 89 | 85 | 57 | 86 |
+| C1 | 43 | 43 | 0 | 231 | 88 | 86 | 57 | 86 |
 | C2 | 29 | 29 | 0 | 711 | 423 | 112 | 176 | 345 |
 
 ## Per chapter
@@ -266,7 +266,7 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | c1-40-forumsbeitrag-schreiben | paid | 5 | 2 | 3 | 0 | 3 |
 | c1-41-grafikbeschreibung-und-grafikauswertung | paid | 5 | 0 | 5 | 0 | 0 |
 | c1-42-goethe-zertifikat-c1-probepruefung | paid | 5 | 2 | 3 | 0 | 4 |
-| c1-43-goethe-zertifikat-c1-final | paid | 5 | 2 | 3 | 0 | 1 |
+| c1-43-goethe-zertifikat-c1-final | paid | 5 | 1 | 4 | 0 | 1 |
 | c2-01-zeitformen-der-verben | free | 4 | 2 | 2 | 0 | 3 |
 | c2-02-verben-mit-praefixen | paid | 84 | 81 | 3 | 0 | 25 |
 | c2-03-verben-und-ihre-ergaenzungen | paid | 11 | 0 | 0 | 11 | 0 |

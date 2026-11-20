@@ -10,17 +10,17 @@
  ],
  "cards": 9230,
  "uniqueConcepts": 8461,
- "uniqueHeadwords": 7780,
+ "uniqueHeadwords": 7779,
  "illustrableConcepts": 7893,
  "textOnlyConcepts": 568,
  "alreadyIllustrated": 4129,
  "imagesNeeded": 3764,
  "cardsServedByReuse": 663,
  "polysemousHeadwords": 578,
- "nearDuplicateHeadwords": 308,
+ "nearDuplicateHeadwords": 309,
  "byTier": {
-  "image": 2920,
-  "concept": 844
+  "image": 2919,
+  "concept": 845
  },
  "publicImages": 30,
  "gatedImages": 3734,
@@ -81,8 +81,8 @@
    "withCards": 43,
    "checkpoints": 0,
    "cards": 231,
-   "image": 89,
-   "concept": 85,
+   "image": 88,
+   "concept": 86,
    "textOnly": 57,
    "newConcepts": 86
   },

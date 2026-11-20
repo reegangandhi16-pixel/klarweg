@@ -2983,10 +2983,10 @@
  },
  "die-adjektivendung--adjective-ending": {
   "type": "grammar",
-  "de": "Ich trage einen roten Pullover.",
-  "hl": "roten",
+  "de": "Ich trinke gern heißen Tee.",
+  "hl": "heißen",
   "role": "adjective",
-  "cap": "The adjective ending changes with case and gender"
+  "cap": "No article: the ending -en on heißen shows masculine accusative"
  },
  "die-aeusserung--remark": {
   "key": "die-aeusserung--remark",
@@ -6355,12 +6355,6 @@
   "role": "focus",
   "cap": "per = via"
  },
- "phrasieren--phrase": {
-  "type": "scene",
-  "scene": "Show a manager speaking calmly to a colleague at a desk with an open, friendly hand gesture, the colleague nodding and listening.",
-  "cap": "Wording criticism politely and carefully",
-  "hl": "phrasiert"
- },
  "portugiesisch--portuguese": {
   "key": "portugiesisch--portuguese",
   "type": "map",
@@ -7798,6 +7792,24 @@
   "hl": "Ursprünglich",
   "role": "focus",
   "cap": "ursprünglich = originally"
+ },
+ "formulieren--phrase-to-formulate": {
+  "type": "scene",
+  "scene": "Show a manager speaking calmly to a colleague at a desk with an open, friendly hand gesture, the colleague nodding and listening.",
+  "cap": "Wording criticism politely and carefully",
+  "hl": "formuliert"
+ },
+ "um-sich-herum--around-oneself": {
+  "type": "scene",
+  "scene": "Show a man standing in the middle of a circle of smiling, laughing people at a garden party, turning his head to look at the friendly faces all around him.",
+  "cap": "um sich herum = all around oneself",
+  "hl": "Um sich herum"
+ },
+ "die-meisterschaft--mastery": {
+  "type": "scene",
+  "scene": "Show a concert pianist on a stage playing a grand piano with calm, effortless confidence, eyes half closed, hands moving lightly over the keys.",
+  "cap": "Meisterschaft = mastery: masterly, effortless skill",
+  "hl": "Meisterschaft"
  },
  "ein-vergleich-zeigt-dass--comparison-shows-that": {
   "type": "grammar",

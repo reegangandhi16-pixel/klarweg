@@ -226,7 +226,7 @@
 {"id":"c1-40-forumsbeitrag-schreiben","level":"c1","number":40,"title":"Forumsbeitrag schreiben","access":"paid","cards":5,"checkpoint":false,"withImage":3,"tiers":{"image":2,"concept":3,"text-only":0}},
 {"id":"c1-41-grafikbeschreibung-und-grafikauswertung","level":"c1","number":41,"title":"Grafikbeschreibung & Grafikauswertung","access":"paid","cards":5,"checkpoint":false,"withImage":0,"tiers":{"image":0,"concept":5,"text-only":0}},
 {"id":"c1-42-goethe-zertifikat-c1-probepruefung","level":"c1","number":42,"title":"Goethe-Zertifikat C1 Probeprüfung","access":"paid","cards":5,"checkpoint":false,"withImage":4,"tiers":{"image":2,"concept":3,"text-only":0}},
-{"id":"c1-43-goethe-zertifikat-c1-final","level":"c1","number":43,"title":"Goethe-Zertifikat C1 Final","access":"paid","cards":5,"checkpoint":false,"withImage":1,"tiers":{"image":2,"concept":3,"text-only":0}},
+{"id":"c1-43-goethe-zertifikat-c1-final","level":"c1","number":43,"title":"Goethe-Zertifikat C1 Final","access":"paid","cards":5,"checkpoint":false,"withImage":1,"tiers":{"image":1,"concept":4,"text-only":0}},
 {"id":"c2-01-zeitformen-der-verben","level":"c2","number":1,"title":"Zeitformen der Verben","access":"free","cards":4,"checkpoint":false,"withImage":3,"tiers":{"image":2,"concept":2,"text-only":0}},
 {"id":"c2-02-verben-mit-praefixen","level":"c2","number":2,"title":"Verben mit Präfixen","access":"paid","cards":84,"checkpoint":false,"withImage":25,"tiers":{"image":81,"concept":3,"text-only":0}},
 {"id":"c2-03-verben-und-ihre-ergaenzungen","level":"c2","number":3,"title":"Verben und ihre Ergänzungen","access":"paid","cards":11,"checkpoint":false,"withImage":0,"tiers":{"image":0,"concept":0,"text-only":11}},

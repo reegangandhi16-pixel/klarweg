@@ -310,8 +310,8 @@ const CHAPTER = {
       ex: 'Eine W-Frage beginnt mit einem W-Wort.', exEn: 'A W-question begins with a W-word.',
       vis: { kind: 'grammar', de: 'Wo wohnst du?', hl: 'Wo', role: 'question', cap: 'A W-question starts with a W-word' }
     },
-    { de: 'kreisen', pos: 'verb', en: 'to circle', hi: 'घेरना',
-      ex: 'Kreise das W-Wort ein.', exEn: 'Circle the W-word.',
+    { de: 'kreisen', pos: 'verb', en: 'to circle', hi: 'चक्कर लगाना',
+      ex: 'Ein Vogel kreist über dem Feld.', exEn: 'A bird is circling over the field.',
       conj: { praesens: 'kreist', praeteritum: 'kreiste', perfekt: 'hat gekreist' },
       img: { src: '/api/media/vocab-img/cc36ac725518f32b57a8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hawk circling in the sky' }
     },

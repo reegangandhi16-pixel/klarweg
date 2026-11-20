@@ -23,28 +23,37 @@ educational content without documenting it.” This file is that documentation.
    examples and was **not** changed. `global-lexicon-public.js` was regenerated only because
    the free chapters’ text changed (4 generic words added: klarheit, putzen, revolution, sorgen für).
 
-## Decisions for the owner (not changed)
-| Card | Example | Question / suggestion |
+## Owner decisions — resolved 2026-11-20 (19)
+Owner rule: keep each chapter's teaching goal; fix only verified errors; German must match English, Hindi and the card image.
+References: Duden online (phrasieren, Roadmovie, schamrot, Kunststück, Meisterschaft, kreisen/einkreisen), DWDS (no entry „rotschämen“).
+
+**B1·26 (Adjektivdeklination ohne Artikel).** The chapter's own story uses plurals and nothing in it frames examples as headlines, so singular count nouns without an article were genuine errors (learners would copy them). No article was added anywhere; every fix keeps a strong ending without an article. Singular was kept wherever German allows it: mass nouns, *als*, exclamation, *in* + dative.
+| Card | Before | After | Why |
+|---|---|---|---|
+| das Büfett | Am Büfett gibt es leckeren Snack. | Am Büfett gibt es frischen Kaffee und leckeren Kuchen. | mass nouns keep singular strong -en |
+| der Snack | (same) | Als Snack gibt es salziges Gebäck und Nüsse. | *als Snack* is article-free; matches image (pretzels, nuts) |
+| der Gedanke | Guter Gedanke braucht Zeit. | Guter Gedanke! Das machen wir so. | exclamation keeps singular -er |
+| der Jäger | Talentierter Jäger wird zum Theatermacher. | Erfahrene Jäger kennen den Wald genau. | unmarked headline style; matches image (hunter in forest) |
+| die Broschüre, brasilianisch | Interessante Broschüre zeigt brasilianische Traditionen. | Im Reisebüro gibt es kostenlose Broschüren über brasilianische Traditionen. | plural strong -e twice |
+| die Mauer | Hohe Mauer umgibt den Kerker. | Hohe Mauern umgeben den Kerker. | plural strong -e |
+| die Schranke | Künstlerische Schranke gibt es hier nicht. | Rot-weiße Schranken sperren die Straße. | also matched the literal sense to the image (barrier gate) |
+| die Uniform | Talentierte Schauspielerin trägt schwarze Uniform. | Die Schauspielerin steht in dunkelblauer Uniform auf der Bühne. | *in* + dative singular strong -er; colour matches image |
+| vergeblich | Vergeblich suchen wir freien Platz. | German kept (Platz = room, mass noun: correct) | Hindi fixed: „Hum vyarth hi khaali jagah dhoondhte hain.“ |
+| das Lernplakat | Neues Lernplakat hängt an der Wand. | Bunte Lernplakate hängen an der Wand. | plural strong -e |
+| die Adjektivendung | Starke Adjektivendung steht ohne Artikel. | Ohne Artikel bekommt das Adjektiv die starke Adjektivendung: guter Kaffee. | also wrong in content; card visual changed from „einen roten Pullover“ (mixed declension) to „Ich trinke gern heißen Tee.“ |
+
+**Other 7**
+| Card | Change | Reference / why |
 |---|---|---|
-| A1·6 **kreisen** (to circle) | Kreise das W-Wort ein. | The example uses 'einkreisen' rather than the headword 'kreisen'. Suggested: Die Vögel kreisen am Himmel. |
-| B1·26 **das Büfett** (buffet) | Am Büfett gibt es leckeren Snack. | Countable singular noun "Snack" requires an article; use plural for zero article. Suggested: Am Büfett gibt es leckere Snacks. |
-| B1·26 **der Gedanke** (thought) | Guter Gedanke braucht Zeit. | Countable singular noun "Gedanke" cannot stand without an article; use plural. Suggested: Gute Gedanken brauchen Zeit. |
-| B1·26 **der Jäger** (hunter (male)) | Talentierter Jäger wird zum Theatermacher. | Singular countable noun cannot stand without an article outside headlines. Suggested: Ein talentierter Jäger wird zum Theatermacher. |
-| B1·26 **der Snack** (snack) | Am Büfett gibt es leckeren Snack. | Countable singular noun "Snack" requires an article; use plural for zero article. Suggested: Am Büfett gibt es leckere Snacks. |
-| B1·26 **die Broschüre** (brochure) | Interessante Broschüre zeigt brasilianische Traditionen. | Singular count noun requires an article; use plural for zero article. Suggested: Interessante Broschüren zeigen brasilianische Traditionen. |
-| B1·26 **die Mauer** (wall) | Hohe Mauer umgibt den Kerker. | Singular count noun requires an article; use plural for zero article. Suggested: Hohe Mauern umgeben den Kerker. |
-| B1·26 **die Schranke** (barrier) | Künstlerische Schranke gibt es hier nicht. | Singular count noun requires an article; use plural here. Suggested: Künstlerische Schranken gibt es hier nicht. |
-| B1·26 **die Uniform** (uniform) | Talentierte Schauspielerin trägt schwarze Uniform. | Singular count nouns require an article; use plural for zero article. Suggested: Talentierte Schauspielerinnen tragen schwarze Uniformen. |
-| B1·26 **vergeblich** (in vain) | Vergeblich suchen wir freien Platz. | Singular count noun requires an article; use plural for zero article. Suggested: Vergeblich suchen wir freie Plätze. |
-| B1·26 **brasilianisch** (Brazilian) | Interessante Broschüre zeigt brasilianische Traditionen. | Singular count noun requires an article; use plural for zero article. Suggested: Interessante Broschüren zeigen brasilianische Traditionen. |
-| B1·26 **das Lernplakat** (revision poster) | Neues Lernplakat hängt an der Wand. | Singular count noun requires an article; use plural for zero article. Suggested: Neue Lernplakate hängen an der Wand. |
-| B1·26 **die Adjektivendung** (adjective ending) | Starke Adjektivendung steht ohne Artikel. | Singular count noun requires an article; use plural for zero article. Suggested: Starke Adjektivendungen stehen ohne Artikel. |
-| B1·32 **das Kunststück** (piece of art) | Das Kunststück, das wir gestern gesehen haben, entwickelt sich weiter. | 'Kunststück' means trick or feat, not piece of art. Suggested: Das Kunststück, das der Zauberer gezeigt hat, war beeindruckend. |
-| B2·09 **sich herum** (around (oneself)) | Er schaut sich herum, bevor er spricht. | Incorrect phrase; standard German requires 'um sich herum'. Suggested: Er schaut um sich herum, bevor er spricht. |
-| B2·12 **phrasieren** (to phrase) | Er phrasiert seine Kritik sehr höflich. | 'phrasieren' refers to musical phrasing in German, not formulating words. Suggested: Der Musiker phrasiert die Melodie nicht ungeschickt. |
-| B2·32 **rotschämen** (to blush with shame) | Sie schämte sich rot. | The verb 'rotschämen' does not exist in German; say 'vor Scham rot werden'. Suggested: Sie wurde vor Scham rot. |
-| B2·41 **der Road Movie** (road movie) | Der Road Movie zeigte die Landschaft. | In German, compounds are written together (Roadmovie) or hyphenated (Road-Movie), not spaced. Suggested: Das Roadmovie zeigte die Landschaft. |
-| C1·43 **die Mastery** (mastery) | Diese Prüfung zeigt echte sprachliche Mastery. | 'Mastery' ist kein deutsches Wort; 'Meisterschaft' verwenden Suggested: Diese Prüfung zeigt echte sprachliche Meisterschaft. |
+| A1·6 kreisen | Ein Vogel kreist über dem Feld. (Hindi meaning चक्कर लगाना) | Duden: kreisen = sich im Kreis bewegen; circling a word is *einkreisen*. Now matches the image (bird circling). |
+| B1·32 Kunststück | meaning „trick, feat“ (करतब); Das Kunststück, das der Zauberer gezeigt hat, war beeindruckend. | Duden: „besondere Geschicklichkeitsleistung“, not a work of art; relative clause kept for the chapter. New image prompt: magician. |
+| B2·09 sich herum → um sich herum | Um sich herum sieht er nur fröhliche Gesichter. | „sich herum“ is not a unit; „Er schaut sich herum“ is ungrammatical. |
+| B2·12 phrasieren → formulieren | Er formuliert seine Kritik sehr höflich. / Man sollte diese Bitte anders formulieren. | Duden: phrasieren is music only. |
+| B2·32 rotschämen → schamrot (adj.) | Sie wurde schamrot. / Mit schamrotem Gesicht verließ er den Raum. | No entry in DWDS (Duden search unavailable); Duden: schamrot, „mit schamrotem Gesicht“. Image (blushing) kept. |
+| B2·41 Road Movie → das Roadmovie | Das Roadmovie zeigte die weite Landschaft. / Sie haben ein Roadmovie gedreht. | Duden: „Roadmovie, das“, one word. |
+| C1·43 die Mastery → die Meisterschaft | Diese Prüfung zeigt echte sprachliche Meisterschaft. | Duden: Meisterschaft = meisterhaftes Können; „Mastery“ is not German. |
+
+The popup dictionary (chapter/global-lexicon.js) was corrected to match: Kunststück, phrasieren (music sense), schamrot, Roadmovie, um sich herum and Meisterschaft fixed or added; rotschämen and the non-German „Mastery“ removed.
 
 ## Applied corrections (316)
 | Card | Kind | Before | After | Reason |

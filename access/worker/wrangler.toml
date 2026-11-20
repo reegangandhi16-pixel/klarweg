@@ -19,6 +19,11 @@ PASSWORD_RESET = "on"
 MAIL_PROVIDER = "resend"
 MAIL_FROM = "no-reply@send.klarweg.in"
 PASSWORD_RESET_DAILY_EMAILS = "45"
+# Self-service account deletion on the account page (src/account.js).
+# "on" lets a learner without purchases/bookings/2FA delete their own
+# account after typing their email + password (or a fresh Google sign-in).
+# Owner decision; off until approved.
+ACCOUNT_DELETION = "off"
 # Exam proxy /exam/* (exam-proxy.js): on since 2026-11-09 (M0 launch, runbook §7.2). Kill switch: "off" + redeploy.
 EXAM_ROUTES = "on"
 CASHFREE_ENV = "production"

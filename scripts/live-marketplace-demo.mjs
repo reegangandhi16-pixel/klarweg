@@ -83,7 +83,8 @@ const env = {
   GOOGLE_CLIENT_ID: 'local-preview.apps.googleusercontent.com', RATE_SALT: 'local-preview',
   DEMO_BOOKING: 'sandbox', ENROL_PAYMENTS: 'sandbox', ENROL_CONSULT_CREDIT: 'course-fee',
   CONSULT_JOIN_LINKS: JSON.stringify({ 'reegan-gandhi': 'https://meet.google.com/abc-defg-hij' }),
-  LIVE_ADMIN_EMAILS: ADMIN_EMAIL, CORS_EXTRA_ORIGINS: SITE
+  LIVE_ADMIN_EMAILS: ADMIN_EMAIL, CORS_EXTRA_ORIGINS: SITE,
+  TOTP_ENC_KEY: Buffer.alloc(32, 7).toString('base64')   // local preview only
 };
 
 /* ---------- SAMPLE schedule (in memory only) ---------- */
@@ -183,11 +184,8 @@ if (!E2E) {
   Marketplace:          ${SITE}/live-classes.html
   Production default:   ${SITE}/prod/live-classes.html
   My Account:           ${SITE}/account/index.html
-  Admin:                ${SITE}/live-admin.html   (sign up as ${ADMIN_EMAIL}; 2FA is pre-confirmed for that account in this preview)
+  Admin:                ${SITE}/live-admin.html   (sign up as ${ADMIN_EMAIL}, then set up 2FA on the page)
 Ctrl+C to stop.`);
-  setInterval(async () => {   // preview only: treat the admin account as 2FA-verified
-    await env.DB.prepare("UPDATE sessions SET mfa_verified_at = ?1 WHERE user_id IN (SELECT id FROM users WHERE email = ?2)").bind(Math.floor(Date.now() / 1000), ADMIN_EMAIL).run().catch(() => {});
-  }, 2000);
 } else {
   await runE2E().catch((e) => { console.error(e); process.exitCode = 1; });
   servers.forEach((s) => s.close());
@@ -366,10 +364,26 @@ async function runE2E() {
   await ev(`fetch(${JSON.stringify(API)}+'/auth/logout',{method:'POST',credentials:'include'})`);
   ok('admin: admin account signs up (in-memory)', (await signUp(ADMIN_EMAIL)) === 201);
   await go(SITE + '/live-admin.html');
-  ok('admin: without a fresh second factor the page asks for the 2FA code', await waitFor('/Two-factor confirmation/.test(document.body.innerText)'));
-  await env.DB.prepare("UPDATE sessions SET mfa_verified_at = ?1 WHERE user_id IN (SELECT id FROM users WHERE email = ?2)").bind(Math.floor(Date.now() / 1000), ADMIN_EMAIL).run();
-  await go(SITE + '/live-admin.html');
+  ok('admin: an admin without two-factor is offered setup, not access', await waitFor('/Set up two-factor authentication/.test(document.body.innerText) && !/Demo bookings/.test(document.body.innerText)'));
+  await click('#mfa-start');
+  ok('admin: setup shows a QR code and the setup key', await waitFor('document.querySelector(".qr svg") && document.getElementById("mfa-secret")'));
+  await snap('desktop-admin-2fa-setup', '#app');
+  const { base32Decode, hotp, stepAt } = await import('../access/worker/src/totp.js');
+  const secret = base32Decode(await text('#mfa-secret'));
+  await setVal('#mfa-new-code', '000000');
+  await ev('document.getElementById("mfa-new").requestSubmit()');
+  ok('admin: a wrong code is refused with a clear message', await waitFor('/That code is not right/.test(document.getElementById("mfa-new-msg").innerText)'));
+  await setVal('#mfa-new-code', await hotp(secret, stepAt(Math.floor(Date.now() / 1000))));
+  await ev('document.getElementById("mfa-new").requestSubmit()');
+  ok('admin: the right code turns two-factor on and shows recovery codes once', await waitFor('/Two-factor is on/.test(document.body.innerText) && document.querySelectorAll(".codes span").length >= 8'));
+  await click('#mfa-saved'); await click('#mfa-done');
   ok('admin: overview shows teachers, coupons, slots, batches, the demo booking and the enrolment', await waitFor('/Demo bookings/.test(document.body.innerText) && document.body.innerText.includes(' + JSON.stringify(dref) + ') && document.body.innerText.includes(' + JSON.stringify(eref) + ')'));
+  await env.DB.prepare("UPDATE sessions SET mfa_verified_at = ?1 WHERE user_id IN (SELECT id FROM users WHERE email = ?2)").bind(Math.floor(Date.now() / 1000) - 13 * 3600, ADMIN_EMAIL).run();
+  await go(SITE + '/live-admin.html');
+  ok('admin: after 12 hours the page asks for a fresh code', await waitFor('/Two-factor confirmation/.test(document.body.innerText)'));
+  await setVal('#mfa-code', await hotp(secret, stepAt(Math.floor(Date.now() / 1000)) + 1));
+  await ev('document.getElementById("mfa").requestSubmit()');
+  ok('admin: a fresh code opens the admin again', await waitFor('/Demo bookings/.test(document.body.innerText)'));
   await snap('desktop-admin', null, { full: true });
 
   /* ============ mobile ============ */

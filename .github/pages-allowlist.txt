@@ -118,6 +118,7 @@ live-marketplace.css
 live-marketplace-pricing.js
 kw-account-live.js
 live-admin.html
+kw-qrcode.js
 site.css
 site.js
 

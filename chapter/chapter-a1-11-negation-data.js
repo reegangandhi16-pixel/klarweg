@@ -199,31 +199,53 @@ const CHAPTER = {
     { de: 'kein/keine', pos: 'negation article', en: 'no, not a', hi: 'कोई नहीं',
       ex: 'Ich habe kein Buch.', exEn: 'I have no book.' },
     { de: 'nicht', pos: 'adverb (negation)', en: 'not', hi: 'नहीं',
-      ex: 'Ich bin nicht müde.', exEn: 'I am not tired.' },
+      ex: 'Ich bin nicht müde.', exEn: 'I am not tired.',
+      vis: { kind: 'grammar', de: 'Ich verstehe das nicht.', hl: 'nicht', role: 'negation', cap: 'Negation particle negating the verb or statement.' }
+    },
     { de: 'Zeit', art: 'die', gender: 'f', plural: 'Zeiten', pos: 'noun', en: 'time', hi: 'समय',
-      ex: 'Ich habe keine Zeit.', exEn: 'I have no time.' },
+      ex: 'Ich habe keine Zeit.', exEn: 'I have no time.',
+      img: { src: '../public/vocab-img/a1-1/zeit', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A round wall clock beside an hourglass' }
+    },
     { de: 'heute', pos: 'adverb', en: 'today', hi: 'आज',
-      ex: 'Heute habe ich keine Zeit.', exEn: 'Today I have no time.' },
+      ex: 'Heute habe ich keine Zeit.', exEn: 'Today I have no time.',
+      vis: { kind: 'grammar', de: 'Heute habe ich keine Zeit.', hl: 'Heute', role: 'focus', cap: 'heute = today' }
+    },
     { de: 'jetzt', pos: 'adverb', en: 'now', hi: 'अभी',
-      ex: 'Jetzt nicht, bitte.', exEn: 'Not now, please.' },
+      ex: 'Jetzt nicht, bitte.', exEn: 'Not now, please.',
+      vis: { kind: 'grammar', de: 'Jetzt nicht, bitte.', hl: 'Jetzt', role: 'focus', cap: 'jetzt = now' }
+    },
     { de: 'aber', pos: 'conjunction', en: 'but', hi: 'लेकिन',
-      ex: 'Ich habe Zeit, aber kein Geld.', exEn: 'I have time, but no money.' },
+      ex: 'Ich habe Zeit, aber kein Geld.', exEn: 'I have time, but no money.',
+      vis: { kind: 'grammar', de: 'Ich habe Zeit, aber kein Geld.', hl: 'aber', role: 'focus', cap: 'aber = but' }
+    },
     { de: 'oder', pos: 'conjunction', en: 'or', hi: 'या',
-      ex: 'Tee oder Kaffee? — Kein Kaffee, danke.', exEn: 'Tea or coffee? — No coffee, thanks.' },
+      ex: 'Tee oder Kaffee? — Keinen Kaffee, danke.', exEn: 'Tea or coffee? — No coffee, thanks.',
+      vis: { kind: 'grammar', de: 'Tee oder Kaffee? — Keinen Kaffee, danke.', hl: 'oder', role: 'focus', cap: 'oder = or' }
+    },
     { de: 'Problem', art: 'das', gender: 'n', plural: 'Probleme', pos: 'noun', en: 'problem', hi: 'समस्या',
-      ex: 'Kein Problem!', exEn: 'No problem!' },
+      ex: 'Kein Problem!', exEn: 'No problem!',
+      img: { src: '/api/media/vocab-img/3daa089770a67df28ea9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A cyclist looking puzzled at a slipped bicycle chain.' }
+    },
     { de: 'mehr', pos: 'adverb', en: 'more, anymore', hi: 'और / अब',
-      ex: 'Ich habe keine Zeit mehr.', exEn: 'I have no more time.' },
+      ex: 'Ich habe keine Zeit mehr.', exEn: 'I have no more time.',
+      vis: { kind: 'grammar', de: 'Ich habe keine Zeit mehr.', hl: 'mehr', role: 'focus', cap: 'mehr = more, anymore' }
+    },
     { de: 'nicht mehr', pos: 'phrase', en: 'not anymore', hi: 'अब नहीं',
-      ex: 'Er wohnt nicht mehr hier.', exEn: 'He does not live here anymore.' },
+      ex: 'Er wohnt nicht mehr hier.', exEn: 'He does not live here anymore.',
+      img: { src: '/api/media/vocab-img/566ad0d156f49d4966f5', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An empty apartment room with keys left on the windowsill.' }
+    },
     { de: 'schon', pos: 'adverb', en: 'already', hi: 'पहले से',
-      ex: 'Ich bin schon hier, aber sie nicht.', exEn: 'I am already here, but she is not.' },
+      ex: 'Ich bin schon hier, aber sie nicht.', exEn: 'I am already here, but she is not.',
+      img: { src: '/api/media/vocab-img/c2e59984b5f9aadb777b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'already arrived waiting' }
+    },
     { de: 'Glück', art: 'das', gender: 'n', plural: '—', pos: 'noun', en: 'luck, happiness', hi: 'किस्मत / खुशी',
       ex: 'Kein Glück heute!', exEn: 'No luck today!',
       img: { src: '/api/media/vocab-img/de9e3197723ff4bd9f86', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A green four-leaf clover in soil.' }
     },
     { de: 'Negationsartikel', art: 'der', gender: 'm', plural: 'Negationsartikel', pos: 'noun', en: 'negation article', hi: 'निषेध-आर्टिकल',
-      ex: '"kein" ist ein Negationsartikel.', exEn: '"kein" is a negation article.' }
+      ex: '"kein" ist ein Negationsartikel.', exEn: '"kein" is a negation article.',
+      vis: { kind: 'grammar', de: 'Ich habe kein Auto.', hl: 'kein', role: 'negation', cap: 'Negation article before a noun' }
+    }
   ],
 
   // ---------- Negation (rule cards → accordion) ----------

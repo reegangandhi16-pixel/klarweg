@@ -197,17 +197,23 @@ const CHAPTER = {
     },
     { de: 'machen', pos: 'verb', en: 'to do, to make', hi: 'करना / बनाना',
       ex: 'Was machst du morgen?', exEn: 'What are you doing tomorrow?',
-      conj: { praesens: 'macht', praeteritum: 'machte', perfekt: 'hat gemacht' } },
+      conj: { praesens: 'macht', praeteritum: 'machte', perfekt: 'hat gemacht' },
+      img: { src: '/api/media/vocab-img/c9b43d7eb76138737e01', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person crafting a wooden birdhouse at a workbench' }
+    },
     { de: 'spielen', pos: 'verb', en: 'to play', hi: 'खेलना',
       ex: 'Wir spielen am Wochenende.', exEn: 'We play on the weekend.',
       conj: { praesens: 'spielt', praeteritum: 'spielte', perfekt: 'hat gespielt' },
       img: { src: '/api/media/vocab-img/e2f353f4479fbe9f6804', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two children playing with building blocks' }
     },
     { de: 'und', pos: 'conjunction', en: 'and', hi: 'और',
-      ex: 'Ich lerne und ich arbeite.', exEn: 'I learn and I work.' },
+      ex: 'Ich lerne und ich arbeite.', exEn: 'I learn and I work.',
+      vis: { kind: 'grammar', de: 'Ich lerne und ich arbeite.', hl: 'und', role: 'focus', cap: 'und = and' }
+    },
     // — Active support —
     { de: 'Wochenende', art: 'das', gender: 'n', plural: 'Wochenenden', pos: 'noun', en: 'weekend', hi: 'सप्ताहांत',
-      ex: 'Am Wochenende spiele ich.', exEn: 'On the weekend I play.' },
+      ex: 'Am Wochenende spiele ich.', exEn: 'On the weekend I play.',
+      img: { src: '/api/media/vocab-img/1a7101c7988d6cb879bd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person relaxing on a sofa on a weekend morning.' }
+    },
     { de: 'morgen', pos: 'adverb', en: 'tomorrow', hi: 'कल',
       ex: 'Morgen lerne ich Deutsch.', exEn: 'Tomorrow I learn German.' },
     { de: 'sammeln', pos: 'verb', en: 'to collect', hi: 'इकट्ठा करना',
@@ -216,7 +222,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/b001b9e6b4523a2e19e4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person placing stamps into a collector album' }
     },
     { de: 'wirklich', pos: 'adverb', en: 'really', hi: 'सचमुच',
-      ex: 'Deutsch ist wirklich schön.', exEn: 'German is really beautiful.' },
+      ex: 'Deutsch ist wirklich schön.', exEn: 'German is really beautiful.',
+      vis: { kind: 'grammar', de: 'Deutsch ist wirklich schön.', hl: 'wirklich', role: 'focus', cap: 'wirklich = really' }
+    },
     // — Passive —
     { de: 'Deutschbuch', art: 'das', gender: 'n', plural: 'Deutschbücher', pos: 'noun', en: 'German book', hi: 'जर्मन किताब',
       ex: 'Das Deutschbuch ist neu.', exEn: 'The German book is new.' },
@@ -227,25 +235,35 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/0f3850815ba69661afec', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open exercise workbook with a pencil.' }
     },
     { de: 'Form', art: 'die', gender: 'f', plural: 'Formen', pos: 'noun', en: 'form, shape', hi: 'रूप',
-      ex: 'Welche Form hat das Verb?', exEn: 'Which form does the verb have?' },
+      ex: 'Welche Form hat das Verb?', exEn: 'Which form does the verb have?',
+      vis: { kind: 'grammar', de: 'Welche Form hat das Verb?', hl: 'Form', role: 'focus', cap: 'die Form = form (of a word); shape' }
+    },
     { de: 'Lernkarte', art: 'die', gender: 'f', plural: 'Lernkarten', pos: 'noun', en: 'flashcard', hi: 'फ्लैशकार्ड',
-      ex: 'Ich mache eine Lernkarte.', exEn: 'I make a flashcard.' },
+      ex: 'Ich mache eine Lernkarte.', exEn: 'I make a flashcard.',
+      img: { src: '/api/media/vocab-img/af54e8328e5b04aaedbf', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person holding a blank flashcard above a desk tray.' }
+    },
     { de: 'Seite', art: 'die', gender: 'f', plural: 'Seiten', pos: 'noun', en: 'page', hi: 'पृष्ठ',
-      ex: 'Öffne Seite zwölf.', exEn: 'Open page twelve.',
+      ex: 'Öffne das Buch auf Seite zwölf.', exEn: 'Open the book to page twelve.',
       img: { src: '/api/media/vocab-img/9a8871b58f3a5a97d751', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open book showing a single page turning' }
     },
     { de: 'nennen', pos: 'verb', en: 'to name, to call', hi: 'नाम बताना',
       ex: 'Nenne drei Verben.', exEn: 'Name three verbs.',
-      conj: { praesens: 'nennt', praeteritum: 'nannte', perfekt: 'hat genannt' } },
+      conj: { praesens: 'nennt', praeteritum: 'nannte', perfekt: 'hat genannt' },
+      vis: { kind: 'grammar', de: 'Nenne drei Verben.', hl: 'Nenne', role: 'verb', cap: 'Imperative of \'nennen\', instructing someone to state or list names.' }
+    },
     // — Reference / System —
     { de: 'Infinitiv', art: 'der', gender: 'm', plural: 'Infinitive', pos: 'noun', en: 'infinitive', hi: 'क्रिया का मूल रूप',
-      ex: '"lernen" ist der Infinitiv.', exEn: '"lernen" is the infinitive.' },
+      ex: '"lernen" ist der Infinitiv.', exEn: '"lernen" is the infinitive.',
+      vis: { kind: 'grammar', de: 'Wir möchten heute Deutsch lernen.', hl: 'lernen', role: 'verb', cap: 'The basic, unconjugated verb form (infinitive)' }
+    },
     { de: 'Lernwortschatz', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'vocabulary list', hi: 'शब्द-सूची',
       ex: 'Der Lernwortschatz hat 22 Wörter.', exEn: 'The vocabulary list has 22 words.' },
     { de: 'Endung', art: 'die', gender: 'f', plural: 'Endungen', pos: 'noun', en: 'ending', hi: 'अंत-प्रत्यय',
       ex: 'Die Endung für "ich" ist -e.', exEn: 'The ending for "ich" is -e.' },
     { de: 'Regel', art: 'die', gender: 'f', plural: 'Regeln', pos: 'noun', en: 'rule', hi: 'नियम',
-      ex: 'Die Regel ist einfach.', exEn: 'The rule is simple.' }
+      ex: 'Die Regel ist einfach.', exEn: 'The rule is simple.',
+      img: { src: '/api/media/vocab-img/80a6e68bbe95d935b071', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A referee holding up a yellow card on a sports pitch.' }
+    }
   ],
 
   // ---------- Present Tense (rule cards → accordion) ----------

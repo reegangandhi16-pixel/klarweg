@@ -196,8 +196,8 @@ const CHAPTER = {
 
   // ---------- Vocabulary (2 words) ----------
   vocab: [
-    { de: 'dir', pos: 'pronoun', en: 'to you (dative)', hi: 'तुम्हें', ex: 'Ich danke dir.', exEn: 'I thank you.' },
-    { de: 'Ihnen', pos: 'pronoun', en: 'to you (formal dative)', hi: 'आपको', ex: 'Das Kleid steht Ihnen gut.', exEn: 'The dress suits you well.' }
+    { de: 'dir', pos: 'pronoun', en: 'to you (dative)', hi: 'तुम्हें', ex: 'Ich danke dir.', exEn: 'I thank you.', vis: { kind: 'grammar', de: 'Ich danke dir.', hl: 'dir', role: 'focus', cap: 'Dativ: du → dir (to you); danken takes the dative' } },
+    { de: 'Ihnen', pos: 'pronoun', en: 'to you (formal dative)', hi: 'आपको', ex: 'Das Kleid steht Ihnen gut.', exEn: 'The dress suits you well.', vis: { kind: 'grammar', de: 'Das Kleid steht Ihnen gut.', hl: 'Ihnen', role: 'focus', cap: 'Dativ, formal: Sie → Ihnen (to you)' } }
   ],
 
   // ---------- Dative pronouns (rule cards → accordion) ----------

@@ -254,7 +254,7 @@ const CHAPTER = {
     { de: 'entdecken', pos: 'verb', en: 'to discover', hi: 'खोजना', ex: 'Wir haben ein neues Café entdeckt.', exEn: 'We discovered a new café.', conj: { praesens: 'entdeckt', praeteritum: 'entdeckte', perfekt: 'hat entdeckt' }, img: { src: '/api/media/vocab-img/9a0e661daa8418208e0e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person discovering an old stone carving in nature.' } },
     { de: 'vermissen', pos: 'verb', en: 'to miss (someone)', hi: 'याद करना', ex: 'Wir haben dich vermisst.', exEn: 'We missed you.', conj: { praesens: 'vermisst', praeteritum: 'vermisste', perfekt: 'hat vermisst' }, img: { src: '/api/media/vocab-img/f8b4f69568bf25e9bdd0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person looking fondly at a framed photograph' } },
     // ===== Reference / System =====
-    { de: 'Präfix', art: 'das', gender: 'n', plural: 'Präfixe', pos: 'noun', en: 'prefix', hi: 'उपसर्ग', ex: 'Das Präfix bestimmt das ge-.', exEn: 'The prefix decides the ge-.' }
+    { de: 'Präfix', art: 'das', gender: 'n', plural: 'Präfixe', pos: 'noun', en: 'prefix', hi: 'उपसर्ग', ex: 'Das Präfix bestimmt das ge-.', exEn: 'The prefix decides the ge-.', vis: { kind: 'grammar', de: 'Ich verstehe die Frage.', hl: 'ver', role: 'verb', cap: 'ver- is a prefix: stehen → verstehen' } }
   ],
 
   // ---------- Prefix participles (rule cards → accordion) ----------

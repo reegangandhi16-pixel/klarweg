@@ -1,0 +1,193 @@
+{
+ "das-kunststueck--trick-feat": {
+  "subject": "Show a magician in a dark suit on a small stage pulling a white rabbit out of a black top hat, while two children in the front row clap in amazement.",
+  "alt": "A magician pulling a white rabbit out of a top hat",
+  "strategy": "direct"
+ },
+ "kritikfaehig--able-to-take-criticism": {
+  "subject": "Show a young woman at an office desk calmly writing notes while her manager points to a mistake marked with a red circle on a printed chart; she looks grateful and relaxed, not upset, and gives a small thumbs-up.",
+  "alt": "A woman gratefully noting feedback on her mistake",
+  "strategy": "emotion",
+  "note": "retry prompt after manual QA fail 2026-11-20"
+ },
+ "geeignet-fuer--suited-for": {
+  "subject": "Show a large jigsaw puzzle of a smiling office team lying on a table with one piece missing in the middle; a hand places the matching piece, which fits the gap perfectly.",
+  "alt": "A hand placing the one puzzle piece that fits perfectly",
+  "strategy": "context",
+  "note": "retry prompt after manual QA fail 2026-11-20"
+ },
+ "die-einladung-zu--invitation-to": {
+  "subject": "Show a woman at her front door opening an envelope and holding up a festive invitation card decorated with balloons and confetti, without any writing, smiling with delight.",
+  "alt": "A woman opening a festive invitation card",
+  "strategy": "context",
+  "note": "retry prompt after manual QA fail 2026-11-20"
+ },
+ "nachvollziehbar--understandable-comprehensible": {
+  "subject": "Show a teacher at a whiteboard pointing to a simple three-step diagram of boxes connected by arrows, without any writing; a student follows each step and raises an index finger with a clear look of understanding.",
+  "alt": "A student understanding a step-by-step diagram",
+  "strategy": "context",
+  "note": "retry prompt after manual QA fail 2026-11-20"
+ },
+ "einschaetzen--assess-estimate": {
+  "subject": "Show a woman at a market stall holding a big pumpkin in both hands, lifting it slightly to judge its weight by feel, with a thoughtful, estimating expression; there is no scale anywhere.",
+  "alt": "A woman judging the weight of a pumpkin by hand",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20"
+ },
+ "ausschliessen--exclude-rule-out": {
+  "subject": "Show a detective at a desk with three photographs of different people laid out in a row; he firmly pushes one photograph off to the side, away from the other two, ruling that person out.",
+  "alt": "A detective pushing one suspect photo aside",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20"
+ },
+ "unzureichend--insufficient": {
+  "subject": "Show a man trying to cover a large dining table with a tablecloth that is far too small, covering only one corner of the table; he holds it up with a puzzled face.",
+  "alt": "A tablecloth far too small for a large table",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-20"
+ },
+ "ansehen--look-at": {
+  "subject": "Show a young couple standing in an empty, sunny apartment they want to rent, both turning their heads to look carefully at the large windows and walls, one pointing at the window.",
+  "alt": "A couple looking carefully at an empty apartment",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "die-lieblingsfarbe--favourite-colour": {
+  "subject": "Show a smiling girl holding up a blue paint swatch card in front of a table of many colour swatches; she wears a blue sweater, has a blue backpack and a blue cup beside her, clearly loving the colour blue.",
+  "alt": "A girl holding up her favourite colour, blue",
+  "strategy": "emotion",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "ausschalten--switch-off": {
+  "subject": "Show a close-up of a hand pressing a wall light switch down while the ceiling lamp above goes dark; the left half of the room is still lit, the right half already dark.",
+  "alt": "A hand switching off the light",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "kaempfen--fight": {
+  "subject": "Show a determined woman marching in a peaceful street demonstration, holding a blank sign high with one fist raised, other demonstrators behind her.",
+  "alt": "A woman demonstrating for her rights",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "die-erpressung--blackmail-extortion": {
+  "subject": "Show a worried man at a police station counter handing a threatening anonymous letter with cut-out magazine letters to a police officer, who reads it seriously.",
+  "alt": "A man reporting a threatening letter to the police",
+  "strategy": "scene",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "die-nation--nation": {
+  "subject": "Show many small sailing boats at a regatta, each sail clearly in different national flag colours (e.g. German, French, Italian, Japanese, Brazilian), sailing side by side.",
+  "alt": "Sailing boats from many nations at a regatta",
+  "strategy": "scene",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "besetzen--occupy-fill": {
+  "subject": "Show a manager welcoming a new employee to an empty desk with a nameplate holder and a new laptop, shaking hands; the empty office chair is about to be filled.",
+  "alt": "A manager welcoming a new employee to a vacant desk",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "ereignen--happen-occur": {
+  "subject": "Show a minor car accident at a quiet crossing in the early morning: two small cars with a dented bumper, the low morning sun rising behind, drivers getting out.",
+  "alt": "A minor car accident in the morning",
+  "strategy": "scene",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "gebraucht--used-second-hand": {
+  "subject": "Show a young woman buying an older, slightly scratched car with a small dent from a friendly seller on a used-car lot; she receives the keys and an old service booklet.",
+  "alt": "A woman buying a slightly worn second-hand car",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "publizieren--publish": {
+  "subject": "Show a proud researcher in a lab coat holding up a freshly printed scientific journal with charts on the open page, colleagues clapping behind him.",
+  "alt": "A researcher proudly holding his published journal article",
+  "strategy": "emotion",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "der-augenblick--moment": {
+  "subject": "Show a man at a kitchen table who has just lifted his coffee cup when his phone on the table suddenly lights up and rings; he freezes mid-movement, surprised.",
+  "alt": "A man surprised by a ringing phone at that very moment",
+  "strategy": "action",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "der-defekt--defect": {
+  "subject": "Show a technician looking through a magnifying glass at a computer chip on a workbench; a clearly visible crack runs across the chip, with a small red warning light beside it.",
+  "alt": "A technician finding a crack in a chip",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "die-steuer--tax": {
+  "subject": "Show a person at a desk filling in a tax form (lines and boxes, no words) with receipts, a calculator and a pile of coins being moved towards a government building icon.",
+  "alt": "A person doing their taxes with receipts and calculator",
+  "strategy": "scene",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "grossbritannien--great-britain": {
+  "subject": "Show a simple relief map of the island of Great Britain floating on blue sea, with England, Scotland and Wales in slightly different shades of green and tiny landmarks: Big Ben, a Scottish castle, Welsh mountains.",
+  "alt": "A map of Great Britain with England, Scotland and Wales",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-20 (picture did not teach the card's meaning/example)"
+ },
+ "erklaeren--declare-explain": {
+  "subject": "Show a government minister standing at a press podium with microphones, formally announcing a statement to a room of journalists holding notepads and cameras.",
+  "alt": "A minister formally declaring a statement at a press podium",
+  "strategy": "direct",
+  "note": "own image 2026-11-20: card means 'to declare' (Die Ministerin erklärte, …); the shared whiteboard 'explain' image was misleading"
+ },
+ "hin-und-zurueck--there-and-back-round-trip": {
+  "subject": "Show a train ticket labelled with two stations, A and B, with one arrow going from A to B and a second arrow curving back from B to A, next to a small train.",
+  "alt": "A round-trip train ticket with arrows there and back",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "vorn--at-the-front": {
+  "subject": "Show a small cinema with rows of seats seen from the side; two friends sit together in the very first row right in front of the screen, all other rows are empty.",
+  "alt": "Two friends sitting in the front row of a cinema",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "verlaengern--extend": {
+  "subject": "Show an office clerk at a desk handing a contract to a smiling employee; on a wall calendar behind them, an end date is crossed out and a later date is circled with an arrow pointing forward.",
+  "alt": "A contract being extended to a later end date",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "die-tabelle--table-chart": {
+  "subject": "Show a worksheet with a simple table of two columns and several rows; a hand writes German words into the empty cells with a pencil.",
+  "alt": "A hand writing words into the cells of a table",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "halb--half": {
+  "subject": "Show a round wall clock showing exactly 7:30, the minute hand pointing straight down to the 6 and the hour hand halfway between 7 and 8.",
+  "alt": "A clock showing half past seven",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "unabhaengig--independent": {
+  "subject": "Show a young woman proudly holding the keys to her own small flat in one hand and her first pay slip in the other, standing in front of her own front door.",
+  "alt": "A young woman with her own flat keys and pay slip",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "angeklagte--defendant": {
+  "subject": "Show a courtroom: a judge at the high bench, and a man in a suit sitting silently alone at the defendant's table with his lawyer beside him.",
+  "alt": "A defendant sitting silently in court",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "unruhig--restless-turbulent": {
+  "subject": "Show a heated meeting around a table: several people talk at once, interrupting each other with raised hands and speech bubbles overlapping.",
+  "alt": "A turbulent discussion with people interrupting",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "beweisen--prove": {
+  "subject": "Show a female researcher in a lab coat pointing at a chart on a screen that clearly confirms her hypothesis with a big tick, while colleagues nod.",
+  "alt": "A researcher proving her thesis with data",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ }
+}

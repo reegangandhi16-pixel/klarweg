@@ -13,7 +13,7 @@ import { ROOT } from "./lib.mjs";
 
 export const STORE = process.env.VOCAB_IMG_STORE || path.resolve(ROOT, "../vocab-img-store");
 export const LEDGER = path.join(STORE, "ledger.jsonl");
-export const HARD_CAP_USD = 385;
+export const HARD_CAP_USD = 700;   // owner 2026-11-19: full coverage expansion approved (~$650 booked + margin)
 export const IMAGE_USD_WORST = 0.039;        // standard price, gemini-2.5-flash-image (checked 2026-11-11)
 export const IMAGE_USD_BATCH = 0.0195;       // batch list price
 export const TEXT_PRICES = {                  // per 1M tokens, standard (checked 2026-11-11)

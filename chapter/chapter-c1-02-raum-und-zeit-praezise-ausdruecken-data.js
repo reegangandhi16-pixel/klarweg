@@ -204,7 +204,9 @@ const CHAPTER = {
       note: 'Precisely expresses an extended duration during which something develops.',
       ex1: { de: 'Im Laufe der Jahre veränderte sich die Stadt stark.', en: 'In the course of the years, the city changed a lot.', hi: 'Saalon ke daur mein, shahar bahut badla.' },
       ex2: { de: 'Im Laufe des Projekts entstanden neue Ideen.', en: 'In the course of the project, new ideas emerged.', hi: 'Project ke daur mein naye vichaar aaye.' },
-      collocations: ['im Laufe der Zeit', 'im Laufe des Jahres'] },
+      collocations: ['im Laufe der Zeit', 'im Laufe des Jahres'],
+      vis: { kind: 'grammar', de: 'Im Laufe der Zeit lernt man viel.', hl: 'Im Laufe', role: 'preposition', cap: 'Fixed expression meaning \'in the course of\'' }
+    },
     { de: 'in unmittelbarer Nähe', ipa: '[ɪn ʊnˈmɪtl̩baːɐ̯ɐ ˈnɛːə]', en: 'in the immediate vicinity', hi: 'nazdeek mein', pos: 'Präpositionalphrase', register: 'C1 · formal/geographic', category: 'Spatial · position',
       note: 'A more precise alternative to "in der Nähe von", emphasizing close proximity.',
       ex1: { de: 'Das Museum liegt in unmittelbarer Nähe des Bahnhofs.', en: 'The museum is in the immediate vicinity of the station.', hi: 'Museum station ke nazdeek sthit hai.' },
@@ -214,7 +216,9 @@ const CHAPTER = {
       note: 'An abstract spatial metaphor common in academic and formal contexts, meaning "as part of" or "within the scope of".',
       ex1: { de: 'Im Rahmen der Studie wurden 500 Personen befragt.', en: 'Within the framework of the study, 500 people were surveyed.', hi: 'Adhyayan ke daayre mein, 500 logon se poocha gaya.' },
       ex2: { de: 'Im Rahmen des Projekts entstand eine neue Kooperation.', en: 'Within the framework of the project, a new cooperation emerged.', hi: 'Project ke daayre mein ek nayi saajhedaari bani.' },
-      collocations: ['im Rahmen der Studie', 'im Rahmen dieser Entwicklung'] }
+      collocations: ['im Rahmen der Studie', 'im Rahmen dieser Entwicklung'],
+      vis: { kind: 'grammar', de: 'Im Rahmen der Veranstaltung gibt es Musik.', hl: 'Im Rahmen', role: 'preposition', cap: 'Fixed expression meaning \'within the framework of\'' }
+    }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

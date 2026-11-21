@@ -192,22 +192,30 @@ const CHAPTER = {
       note: 'A more formal alternative to "zudem", useful for varying repeated addition connectors.',
       ex1: { de: 'Darüber hinaus zeigt die Studie neue Trends.', en: 'Furthermore, the study shows new trends.', hi: 'Iske alaawa, adhyayan naye trends dikhaata hai.' },
       ex2: { de: 'Das Projekt spart Kosten; darüber hinaus verbessert es die Effizienz.', en: 'The project saves costs; furthermore, it improves efficiency.', hi: 'Project lagat bachaata hai; iske alaawa, yeh kushaltaa bhi badhaata hai.' },
-      collocations: ['darüber hinaus zeigt sich', 'darüber hinaus lässt sich sagen'] },
+      collocations: ['darüber hinaus zeigt sich', 'darüber hinaus lässt sich sagen'],
+      vis: { kind: 'grammar', de: 'Darüber hinaus sollten wir die Kosten prüfen.', hl: 'Darüber hinaus', role: 'adverb', cap: '\'Darüber hinaus\' links sentences by introducing an additional point.' }
+    },
     { de: 'dennoch', ipa: '[ˈdɛnɔx]', en: 'nevertheless', hi: 'phir bhi', pos: 'Adverb (Konnektor)', register: 'C1 · academic/formal', logicalFunction: 'Contrast',
       note: 'Expresses a concessive contrast — something remains true despite a preceding statement.',
       ex1: { de: 'Die Ergebnisse waren positiv; dennoch bleiben Fragen offen.', en: 'The results were positive; nevertheless, questions remain open.', hi: 'Parinaam sakaaraatmak thay; phir bhi, sawaal khule hain.' },
       ex2: { de: 'Er war müde, dennoch arbeitete er weiter.', en: 'He was tired, nevertheless he kept working.', hi: 'Woh thaka hua tha, phir bhi usne kaam jaari rakha.' },
-      collocations: ['dennoch bleiben', 'dennoch zeigt sich'] },
+      collocations: ['dennoch bleiben', 'dennoch zeigt sich'],
+      vis: { kind: 'grammar', de: 'Die Kritik war scharf; dennoch hielt der Autor an seiner These fest.', hl: 'dennoch', role: 'focus', cap: 'dennoch = nevertheless' }
+    },
     { de: 'folglich', ipa: '[ˈfɔlklɪç]', en: 'consequently', hi: 'parinaamsvaroop', pos: 'Adverb (Konnektor)', register: 'C1 · academic/formal', logicalFunction: 'Result',
       note: 'Marks a logical result or conclusion, common in academic writing.',
       ex1: { de: 'Die Daten waren eindeutig; folglich wurde die Hypothese bestätigt.', en: 'The data were clear; consequently, the hypothesis was confirmed.', hi: 'Data spasht thay; parinaamsvaroop, parikalpanaa ki pushti hui.' },
       ex2: { de: 'Die Kosten stiegen, folglich musste das Budget angepasst werden.', en: 'Costs rose, consequently the budget had to be adjusted.', hi: 'Lagat badhi, parinaamsvaroop budget adjust karna pada.' },
-      collocations: ['folglich ergibt sich', 'folglich lässt sich schließen'] },
+      collocations: ['folglich ergibt sich', 'folglich lässt sich schließen'],
+      vis: { kind: 'grammar', de: 'Die Prämissen sind korrekt; folglich muss die Schlussfolgerung ebenfalls zutreffen.', hl: 'folglich', role: 'focus', cap: 'folglich = consequently' }
+    },
     { de: 'gleichzeitig', ipa: '[ˈɡlaɪçtsaɪtɪç]', en: 'simultaneously / at the same time', hi: 'ek hi samay mein', pos: 'Adverb (Konnektor)', register: 'C1 · academic/formal', logicalFunction: 'Parallel',
       note: 'As a sentence connector, introduces a parallel idea happening alongside the previous one, not a contrast.',
       ex1: { de: 'Die Kosten sanken; gleichzeitig stieg die Qualität.', en: 'Costs fell; simultaneously, quality rose.', hi: 'Lagat kam hui; isi samay, gunvatta badhi.' },
       ex2: { de: 'Gleichzeitig entsteht ein ausgewogener Textfluss.', en: 'Simultaneously, a balanced text flow emerges.', hi: 'Isi samay, ek santulit text pravaah banta hai.' },
-      collocations: ['gleichzeitig entsteht', 'gleichzeitig zeigt sich'] }
+      collocations: ['gleichzeitig entsteht', 'gleichzeitig zeigt sich'],
+      vis: { kind: 'grammar', de: 'Sie telefoniert und kocht gleichzeitig.', hl: 'gleichzeitig', role: 'focus', cap: 'gleichzeitig = simultaneously / at the same time' }
+    }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

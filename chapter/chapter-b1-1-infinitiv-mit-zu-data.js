@@ -218,7 +218,9 @@ const CHAPTER = {
   // ---------- Vocabulary (31 items — full chapter-01 upload list, plus the grammar marker) ----------
   vocab: [
     { de: 'Erlebnis', art: 'das', gender: 'n', plural: 'Erlebnisse', pos: 'noun', en: 'experience', hi: 'अनुभव',
-      ex: 'Es war ein tolles Erlebnis, in Deutschland zu leben.', exEn: 'It was a great experience to live in Germany.' },
+      ex: 'Es war ein tolles Erlebnis, in Deutschland zu leben.', exEn: 'It was a great experience to live in Germany.',
+      img: { src: '../public/vocab-img/7fc09e45b96f0000f712', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A joyful person on a mountain summit celebrating an unforgettable view.' }
+    },
     { de: 'erfahren', pos: 'verb', en: 'to learn, find out', hi: 'पता चलना',
       ex: 'Ich hoffe, mehr über die Kultur zu erfahren.', exEn: 'I hope to learn more about the culture.',
       conj: { praesens: 'erfährt', praeteritum: 'erfuhr', perfekt: 'hat erfahren' },
@@ -233,7 +235,7 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/3e31ee4a268dd1f4be9b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person happily joining a small group at an outdoor town festival with string lights' }
     },
     { de: 'Urlaubsplanung', art: 'die', gender: 'f', plural: 'Urlaubsplanungen', pos: 'noun', en: 'holiday planning', hi: 'छुट्टी की योजना',
-      ex: 'Wir beginnen, mit der Urlaubsplanung anzufangen.', exEn: 'We\'re starting to begin the holiday planning.',
+      ex: 'Es ist Zeit, mit der Urlaubsplanung anzufangen.', exEn: 'It is time to start the holiday planning.',
       img: { src: '../public/vocab-img/8f1a0d104671e5b07734', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'open map, a small suitcase, sunglasses and a blank calendar on a table, ready for holiday planning' }
     },
     { de: 'drüben', pos: 'adverb', en: 'over there', hi: 'उस पार',
@@ -256,7 +258,9 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/ffaf72c9007ff0103dfa', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'picnic blanket with a basket on a green meadow under trees, open air' }
     },
     { de: 'meinetwegen', pos: 'adverb', en: 'fine with me, for my sake', hi: 'मेरी वजह से / ठीक है',
-      ex: 'Meinetwegen brauchst du nicht früh aufzustehen.', exEn: 'As far as I\'m concerned, you don\'t need to get up early.' },
+      ex: 'Meinetwegen brauchst du nicht früh aufzustehen.', exEn: 'As far as I\'m concerned, you don\'t need to get up early.',
+      vis: { kind: 'grammar', de: 'Meinetwegen brauchst du nicht früh aufzustehen.', hl: 'Meinetwegen', role: 'focus', cap: 'meinetwegen = fine with me, for my sake' }
+    },
     { de: 'sich erholen', pos: 'verb', en: 'to relax, recover', hi: 'आराम करना',
       ex: 'Es ist wichtig, sich im Urlaub zu erholen.', exEn: 'It\'s important to relax on holiday.',
       conj: { praesens: 'erholt sich', praeteritum: 'erholte sich', perfekt: 'hat sich erholt' },
@@ -267,14 +271,18 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/ace3906bf5f52fee5fd2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person with an apologetic expression, hand on chest, saying sorry to a friend' }
     },
     { de: 'wieso', pos: 'adverb', en: 'why', hi: 'क्यों',
-      ex: 'Wieso hast du aufgehört, Deutsch zu lernen?', exEn: 'Why did you stop learning German?' },
+      ex: 'Wieso hast du aufgehört, Deutsch zu lernen?', exEn: 'Why did you stop learning German?',
+      vis: { kind: 'grammar', de: 'Wieso hast du aufgehört, Deutsch zu lernen?', hl: 'Wieso', role: 'focus', cap: 'wieso = why (= warum)' }
+    },
     { de: 'zelten', pos: 'verb', en: 'to camp', hi: 'कैंपिंग करना',
       ex: 'Wir haben vor, an der Küste zu zelten.', exEn: 'We\'re planning to camp on the coast.',
       conj: { praesens: 'zeltet', praeteritum: 'zeltete', perfekt: 'hat gezeltet' },
       img: { src: '../public/vocab-img/9dab6ac849fcfa9ff5b6', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person pitching a tent near the coast' }
     },
     { de: 'zu (+ Infinitiv)', pos: 'grammar', en: 'to (infinitive marker)', hi: 'को (इनफिनिटिव चिह्न)',
-      ex: 'Ich versuche, pünktlich zu kommen.', exEn: 'I try to arrive on time.' },
+      ex: 'Ich versuche, pünktlich zu kommen.', exEn: 'I try to arrive on time.',
+      vis: { kind: 'grammar', de: 'Ich versuche, pünktlich zu kommen.', hl: 'zu kommen', role: 'verb', cap: '\'zu\' combines with the infinitive verb at the end of the clause' }
+    },
     { de: 'Insekt', art: 'das', gender: 'n', plural: 'Insekten', pos: 'noun', en: 'insect', hi: 'कीड़ा',
       ex: 'Vergiss nicht, Insektenschutz mitzubringen.', exEn: 'Don\'t forget to bring insect repellent.',
       img: { src: '../public/vocab-img/9ba1614457e410cf3de6', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'friendly-looking beetle on a green leaf' }
@@ -330,7 +338,9 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/bbd5c92d836037f7aad7', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'red fly agaric mushroom with white spots and a small warning gesture: a hand stopping before picking it' }
     },
     { de: 'reif', pos: 'adjective', en: 'ripe', hi: 'पका हुआ',
-      ex: 'Es ist leicht, reife von unreifen Trauben zu unterscheiden.', exEn: 'It\'s easy to tell ripe grapes from unripe ones.' }
+      ex: 'Es ist leicht, reife von unreifen Trauben zu unterscheiden.', exEn: 'It\'s easy to tell ripe grapes from unripe ones.',
+      img: { src: '../public/vocab-img/16705c624becbb061941', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A bright yellow ripe banana beside an unripe green banana.' }
+    }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

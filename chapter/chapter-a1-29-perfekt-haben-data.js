@@ -245,7 +245,7 @@ const CHAPTER = {
 
   // ---------- Vocabulary (6 words) ----------
   vocab: [
-    { de: 'Projekt', art: 'das', gender: 'n', plural: 'Projekte', pos: 'noun', en: 'project', hi: 'परियोजना', ex: 'Ich habe das Projekt gemacht.', exEn: 'I did the project.' },
+    { de: 'Projekt', art: 'das', gender: 'n', plural: 'Projekte', pos: 'noun', en: 'project', hi: 'परियोजना', ex: 'Ich habe das Projekt gemacht.', exEn: 'I did the project.', img: { src: '/api/media/vocab-img/40d72a9bf2d5d2969162', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A desk with an architectural model, blueprints, and drawing tools.' } },
     { de: 'Semester', art: 'das', gender: 'n', plural: 'Semester', pos: 'noun', en: 'semester', hi: 'सेमेस्टर', ex: 'Das Semester war lang.', exEn: 'The semester was long.' },
     { de: 'Studium', art: 'das', gender: 'n', plural: 'Studien', pos: 'noun', en: 'studies, degree course', hi: 'अध्ययन', ex: 'Mein Studium ist interessant.', exEn: 'My studies are interesting.' },
     { de: 'Unterricht', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'lessons, class', hi: 'कक्षा, पाठ', ex: 'Der Unterricht hat geholfen.', exEn: 'The lessons helped.', img: { src: '/api/media/vocab-img/615bf25232c669d29639', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Teacher giving a lesson in a classroom' } },

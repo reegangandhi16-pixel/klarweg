@@ -4,9 +4,7 @@
 
    - no literal "undefined" in visible text
    - exactly one </body> and one </html>
-   - every relative link OUTSIDE <footer> resolves to a published file
-     (footers are being rebuilt site-wide separately; they are excluded on
-     purpose, not because they are fine)
+   - every relative link, footers included, resolves to a published file
    - every free guide (goethe/, grammar/, german-certificate-*, cost page)
      is linked from at least one other indexable page, and the Goethe hub
      links every published goethe/ guide */
@@ -58,10 +56,10 @@ test('every indexable page closes </body> and </html> exactly once', () => {
   }
 });
 
-test('relative links outside the footer resolve to published files', () => {
+test('relative links (footers included) resolve to published files', () => {
   const broken = [];
   for (const { f, html } of pages) {
-    for (const h of hrefs(withoutFooter(html))) {
+    for (const h of hrefs(html)) {
       const t = target(f, h);
       if (t && !published.has(t)) broken.push(`${f} → ${h}`);
     }

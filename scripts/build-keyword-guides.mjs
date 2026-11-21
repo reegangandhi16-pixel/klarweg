@@ -6,7 +6,7 @@ import { escapeHtml as esc } from './build-seo-practice.mjs';
 const root = new URL('../', import.meta.url);
 const read = file => fs.readFileSync(new URL(file, root), 'utf8');
 const guidesDirectory = 'docs/seo/keyword-guides/';
-const batches = ['pages.json', 'batch-2.json', 'batch-3.json', 'batch-4.json'].map(file => JSON.parse(read(guidesDirectory + file)));
+const batches = ['pages.json', 'batch-2.json', 'batch-3.json', 'batch-4.json', 'batch-5.json'].map(file => JSON.parse(read(guidesDirectory + file)));
 const answers = JSON.parse(read(guidesDirectory + 'direct-answers.json'));
 const check = process.argv.includes('--check');
 const sitemap = read('sitemap.xml');
@@ -28,7 +28,7 @@ for (const pages of batches) {
     assert.ok(allowlist.has(file) && sitemap.includes(`<loc>${url}</loc>`) && resources.includes(`href="${file}"`), file);
     assert.ok(fs.existsSync(new URL(target.split('#')[0],root)), target);
     const sections = [];
-    const language = slug === 'german-course-fees-in-hindi' ? 'hi' : 'en';
+    const language = ['german-course-fees-in-hindi','german-questions-for-beginners-hindi'].includes(slug) ? 'hi' : 'en';
     const content = read(guidesDirectory + file).trim()
       .replace(/<section class="panel"( lang="hi")?><h2>([^<]+)<\/h2>/g, (section, languageAttribute, heading) => {
         const id = 'guide-section-' + (sections.length + 1);
@@ -89,7 +89,7 @@ for (const pages of batches) {
 .guide-back{display:inline-flex;align-items:center;min-height:44px;font-weight:650}
 @media(max-width:760px){.guide-contents ul{display:grid;grid-template-columns:minmax(0,1fr)}.guide-contents a{padding-left:0}}
 @media(max-width:480px){.guide-hero .btn,.guide-next .btn{width:100%;text-align:center}.guide-table table{min-width:24rem}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}${slug === 'german-a1-listening-practice' ? '\n[data-speak][hidden]{display:none}' : ''}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}${content.includes('data-speak=') ? '\n[data-speak][hidden]{display:none}' : ''}
 </style>
 <script type="application/ld+json">${schema}</script>
 </head>

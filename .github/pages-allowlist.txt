@@ -1585,3 +1585,15 @@ german-a2-writing-practice-online.html
 german-b2-speaking-practice-online.html
 german-language-basics-for-beginners.html
 german-a2-course-fees.html
+
+# Keyword-led German learning guides, batch 5
+german-a2-listening-practice.html
+german-b2-listening-practice.html
+goethe-b1-speaking-partner-topics.html
+goethe-a1-reading-practice-notices.html
+telc-b2-writing-practice.html
+german-for-healthcare-reception.html
+german-for-university-seminars.html
+german-ausbildung-weekly-study-plan.html
+german-questions-for-beginners-hindi.html
+german-pronunciation-ch-ich-ach.html

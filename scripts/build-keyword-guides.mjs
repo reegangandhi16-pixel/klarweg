@@ -6,7 +6,7 @@ import { escapeHtml as esc } from './build-seo-practice.mjs';
 const root = new URL('../', import.meta.url);
 const read = file => fs.readFileSync(new URL(file, root), 'utf8');
 const guidesDirectory = 'docs/seo/keyword-guides/';
-const batches = ['pages.json', 'batch-2.json'].map(file => JSON.parse(read(guidesDirectory + file)));
+const batches = ['pages.json', 'batch-2.json', 'batch-3.json'].map(file => JSON.parse(read(guidesDirectory + file)));
 const answers = JSON.parse(read(guidesDirectory + 'direct-answers.json'));
 const check = process.argv.includes('--check');
 const sitemap = read('sitemap.xml');
@@ -28,21 +28,22 @@ for (const pages of batches) {
     assert.ok(allowlist.has(file) && sitemap.includes(`<loc>${url}</loc>`) && resources.includes(`href="${file}"`), file);
     assert.ok(fs.existsSync(new URL(target.split('#')[0],root)), target);
     const sections = [];
+    const language = slug === 'german-course-fees-in-hindi' ? 'hi' : 'en';
     const content = read(guidesDirectory + file).trim()
-      .replace(/<section class="panel"><h2>([^<]+)<\/h2>/g, (section, heading) => {
+      .replace(/<section class="panel"( lang="hi")?><h2>([^<]+)<\/h2>/g, (section, languageAttribute, heading) => {
         const id = 'guide-section-' + (sections.length + 1);
-        sections.push({ id, heading });
-        return section.replace('<section class="panel">', `<section class="panel" id="${id}">`);
+        sections.push({ id, heading, languageAttribute });
+        return section.replace('<section class="panel"', `<section class="panel" id="${id}"`);
       })
       .replace(/<table>[\s\S]*?<\/table>/g, table =>
         `<div class="guide-table" tabindex="0" role="region" aria-label="Comparison table">${table}</div>`);
     assert.ok(sections.length >= 2, file);
     const contents = sections.filter(({ heading }) => heading !== 'Official references')
-      .map(({ id, heading }) => `<li><a href="#${id}">${heading}</a></li>`).join('');
+      .map(({ id, heading, languageAttribute }) => `<li><a href="#${id}"${languageAttribute || ''}>${heading}</a></li>`).join('');
     const related = pages.filter(page => page[0] !== slug).slice(0, 4);
     const schema = JSON.stringify({
       '@context':'https://schema.org', '@type':'Article', headline:title, description,
-      url, mainEntityOfPage:url, inLanguage:'en',
+      url, mainEntityOfPage:url, inLanguage:language,
       publisher:{'@type':'Organization',name:'Klarweg',url:SITE_BASE+'/'}
     }).replaceAll('<','\\u003c');
     const page = `<!doctype html>
@@ -98,7 +99,7 @@ for (const pages of batches) {
 <main class="wrap" id="main" tabindex="-1">
 <nav class="crumb" aria-label="Breadcrumb">${link('resources.html#german-learning-guides','German learning guides')}</nav>
 <section class="hero guide-hero"><h1>${esc(title)}</h1>
-<div class="guide-answer"><strong>Quick answer</strong><p class="lede">${esc(answers[slug])}</p></div>
+<div class="guide-answer"><strong>Quick answer</strong><p class="lede"${language === 'hi' ? ' lang="hi"' : ''}>${esc(answers[slug])}</p></div>
 <div class="actions">${link(target,action,'btn')}</div></section>
 <nav class="panel guide-contents" id="on-this-page" aria-labelledby="contents-title"><h2 id="contents-title">On this page</h2><ul>${contents}</ul></nav>
 <div class="content guide-content"><div class="stack">

@@ -1547,3 +1547,15 @@ german-conversation-practice-online.html
 goethe-a1-mock-test.html
 german-learning-app-for-beginners.html
 free-german-course-online.html
+
+# Keyword-led German learning guides, batch 2
+oesd-a1-exam-preparation.html
+testdaf-preparation-course-checklist.html
+dsh-exam-preparation.html
+b2-german-for-nurses.html
+german-for-doctors.html
+german-for-engineering-students.html
+german-for-mba-students.html
+german-language-for-jobs-in-germany.html
+intensive-german-courses-india.html
+online-german-course-certificate-fees.html

@@ -1535,3 +1535,15 @@ german-situations/tentative-agreement-conditions.html
 german-situations/summarise-disagreement-fairly.html
 german-situations/clarify-nonbinding-commitment.html
 german-situations/rewrite-loaded-wording.html
+
+# Keyword-led German learning guides
+weekend-german-classes-online.html
+one-to-one-german-classes-online.html
+german-classes-for-working-professionals.html
+how-long-to-learn-german-a1.html
+a1-to-b2-german-course-duration.html
+german-sentences-for-beginners.html
+german-conversation-practice-online.html
+goethe-a1-mock-test.html
+german-learning-app-for-beginners.html
+free-german-course-online.html

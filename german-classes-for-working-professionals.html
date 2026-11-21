@@ -15,39 +15,63 @@
 <link rel="stylesheet" href="practice/practice.css">
 <link rel="icon" href="favicon.ico">
 <style>
-.panel table{width:100%;border-collapse:collapse;margin-block:1rem;table-layout:fixed}
-.panel th,.panel td{padding:.6rem .45rem;text-align:left;vertical-align:top;overflow-wrap:anywhere;border-bottom:1px solid var(--line)}
-.panel th{background:#f1f8f3;color:var(--forest)}
-.panel ol,.panel ul{padding-inline-start:1.3rem}
-.panel li+li{margin-top:.45rem}
-@media(max-width:420px){.panel th,.panel td{padding-inline:.25rem;font-size:.9rem}}
+.guide-hero h1{margin-top:0;text-wrap:balance}
+.guide-hero .lede{margin:.35rem 0 0;color:var(--navy)}
+.guide-answer{max-width:48rem;border-left:3px solid var(--green);padding:.3rem 0 .3rem 1rem}
+.guide-answer strong{color:var(--forest)}
+.guide-contents{margin-top:1.25rem;padding:1rem 1.25rem}
+.guide-contents h2{font-size:1.125rem;margin-bottom:.35rem}
+.guide-contents ul{display:flex;flex-wrap:wrap;gap:.25rem .75rem;margin:0;padding:0;list-style:none}
+.guide-contents a{display:flex;align-items:center;min-height:44px;padding:.3rem .45rem;line-height:1.35}
+.guide-content .panel{scroll-margin-top:1rem}
+.guide-content .panel p,.guide-content .panel li{max-width:66ch}
+.guide-table{overflow:auto;margin-block:1rem;border:1px solid var(--line);border-radius:.75rem}
+.guide-table:focus-visible{outline:3px solid var(--forest);outline-offset:3px}
+.guide-table table{width:100%;min-width:26rem;border-collapse:collapse}
+.guide-table th,.guide-table td{padding:.7rem .8rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.guide-table th{background:#edf5ef;color:var(--forest)}
+.guide-table tbody tr:nth-child(even){background:#f8faf9}
+.guide-table tbody tr:last-child td{border-bottom:0}
+.guide-content .panel ol,.guide-content .panel ul{padding-inline-start:1.3rem}
+.guide-content .panel li+li{margin-top:.45rem}
+.guide-content details{margin-top:1rem;padding:0 .8rem;border:1px solid var(--line);border-radius:.75rem;background:#f8faf9}
+.guide-content summary{padding:.7rem 0;line-height:1.4}
+.guide-content details .answer{margin-bottom:.8rem}
+.guide-next .actions{align-items:center}
+.guide-back{display:inline-flex;align-items:center;min-height:44px;font-weight:650}
+@media(max-width:760px){.guide-contents ul{display:grid;grid-template-columns:minmax(0,1fr)}.guide-contents a{padding-left:0}}
+@media(max-width:480px){.guide-hero .btn,.guide-next .btn{width:100%;text-align:center}.guide-table table{min-width:24rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"German Classes for Working Professionals","description":"Choose a German learning schedule for fixed workdays, rotating shifts or unpredictable overtime.","url":"https://klarweg.in/german-classes-for-working-professionals.html","mainEntityOfPage":"https://klarweg.in/german-classes-for-working-professionals.html","inLanguage":"en","publisher":{"@type":"Organization","name":"Klarweg","url":"https://klarweg.in/"}}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header><div class="top"><a class="brand" href="index.html">Klarweg</a><nav class="nav" aria-label="Main navigation"><a href="courses.html">Courses</a> <a href="resources.html">Resources</a> <a href="live-classes.html">Live classes</a></nav></div></header>
-<main class="wrap" id="main">
+<main class="wrap" id="main" tabindex="-1">
 <nav class="crumb" aria-label="Breadcrumb"><a href="resources.html#german-learning-guides">German learning guides</a></nav>
-<section class="hero"><h1>German Classes for Working Professionals</h1><p class="lede">If your work hours are predictable, reserve a fixed study block and compare available live options. If your roster changes, start with self-paced German and add a teacher session when you can commit to a time. Klarweg has self-paced A1–C2 and teacher-led options at A1–B2.</p><div class="actions"><a class="btn" href="courses.html">Compare Klarweg course levels</a></div></section>
-<div class="content"><div class="stack">
-<section class="panel"><h2>Choose a schedule that fits how you work</h2>
-<table><thead><tr><th scope="col">Work pattern</th><th scope="col">Study approach</th><th scope="col">What to check</th></tr></thead><tbody>
+<section class="hero guide-hero"><h1>German Classes for Working Professionals</h1>
+<div class="guide-answer"><strong>Quick answer</strong><p class="lede">If your work hours are predictable, reserve a fixed study block and compare available live options. If your roster changes, start with self-paced German and add a teacher session when you can commit to a time. Klarweg has self-paced A1–C2 and teacher-led options at A1–B2.</p></div>
+<div class="actions"><a class="btn" href="courses.html">Compare Klarweg course levels</a></div></section>
+<nav class="panel guide-contents" id="on-this-page" aria-labelledby="contents-title"><h2 id="contents-title">On this page</h2><ul><li><a href="#guide-section-1">Choose a schedule that fits how you work</a></li><li><a href="#guide-section-2">Try a 90-minute week around your job</a></li><li><a href="#guide-section-3">Choose work German you will actually use</a></li><li><a href="#guide-section-4">Give your work practice a measurable outcome</a></li></ul></nav>
+<div class="content guide-content"><div class="stack">
+<section class="panel" id="guide-section-1"><h2>Choose a schedule that fits how you work</h2>
+<div class="guide-table" tabindex="0" role="region" aria-label="Comparison table"><table><thead><tr><th scope="col">Work pattern</th><th scope="col">Study approach</th><th scope="col">What to check</th></tr></thead><tbody>
 <tr><td>Fixed hours</td><td>Book one recurring practice block and one shorter review block.</td><td>Confirm the class time stays in IST through the course.</td></tr>
 <tr><td>Rotating shifts</td><td>Use self-paced lessons on changing days and request a live slot once your roster is confirmed.</td><td>Ask the teacher what rescheduling is possible.</td></tr>
 <tr><td>Unpredictable overtime</td><td>Keep short weekday reviews and move the longer lesson to your next available day.</td><td>Set a minimum weekly practice target you can maintain.</td></tr>
-</tbody></table></section>
-<section class="panel"><h2>Try a 90-minute week around your job</h2>
+</tbody></table></div></section>
+<section class="panel" id="guide-section-2"><h2>Try a 90-minute week around your job</h2>
 <p>Monday, 15 minutes to listen and repeat. Wednesday, 15 minutes to retrieve the phrases from memory. Friday, 30 minutes to work through a lesson. Weekend, 30 minutes to rehearse one workplace situation. If you miss Friday, use the weekend block for the core lesson and do the speaking task the following day.</p></section>
-<section class="panel"><h2>Choose work German you will actually use</h2>
+<section class="panel" id="guide-section-3"><h2>Choose work German you will actually use</h2>
 <p>Start with one task this week, such as confirming a deadline. Say <span lang="de">Kannst du die Liste bis Donnerstag prüfen?</span> Then write a second line that says who will send the updated version. Next week, revise the same task with a different deadline and a formal <span lang="de">Sie</span> relationship.</p>
 <p><a href="live-classes.html#teachers">Check teacher availability for speaking feedback</a>.</p></section>
-<section class="panel"><h2>Give your work practice a measurable outcome</h2>
+<section class="panel" id="guide-section-4"><h2>Give your work practice a measurable outcome</h2>
 <p>In week one, record a 30-second update with the deadline and next action. In week two, repeat it with a changed deadline and answer one follow-up. Compare the two recordings for a clear owner, time and task. For meetings, try Ich schicke Ihnen die Liste bis Donnerstag. Können Sie sie bis Freitag prüfen?</p></section>
-<section class="panel"><h2>Put it into practice</h2><div class="actions"><a class="btn" href="courses.html">Compare Klarweg course levels</a></div></section>
+<section class="panel guide-next"><h2>Continue with Klarweg</h2><div class="actions"><a class="btn" href="courses.html">Compare Klarweg course levels</a> <a class="guide-back" href="#on-this-page">Back to contents</a></div></section>
 </div><aside class="side panel" aria-labelledby="more"><h2 id="more">More German learning guides</h2>
 <ul><li><a href="weekend-german-classes-online.html">Weekend German Classes Online</a></li><li><a href="one-to-one-german-classes-online.html">1-to-1 German Classes Online</a></li><li><a href="how-long-to-learn-german-a1.html">How Long Does It Take to Learn German A1?</a></li><li><a href="a1-to-b2-german-course-duration.html">A1 to B2 German Course Duration</a></li></ul>
-<p><a href="resources.html#german-learning-guides">See all ten guides</a></p></aside></div>
+<p><a href="resources.html#german-learning-guides">See all German learning guides</a></p></aside></div>
 </main>
 <footer class="footer">Klarweg · <a href="privacy.html">Privacy</a></footer>
 </body>

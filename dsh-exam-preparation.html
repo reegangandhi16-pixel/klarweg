@@ -15,32 +15,56 @@
 <link rel="stylesheet" href="practice/practice.css">
 <link rel="icon" href="favicon.ico">
 <style>
-.panel table{width:100%;border-collapse:collapse;margin-block:1rem;table-layout:fixed}
-.panel th,.panel td{padding:.6rem .45rem;text-align:left;vertical-align:top;overflow-wrap:anywhere;border-bottom:1px solid var(--line)}
-.panel th{background:#f1f8f3;color:var(--forest)}
-.panel ol,.panel ul{padding-inline-start:1.3rem}
-.panel li+li{margin-top:.45rem}
-@media(max-width:420px){.panel th,.panel td{padding-inline:.25rem;font-size:.9rem}}
+.guide-hero h1{margin-top:0;text-wrap:balance}
+.guide-hero .lede{margin:.35rem 0 0;color:var(--navy)}
+.guide-answer{max-width:48rem;border-left:3px solid var(--green);padding:.3rem 0 .3rem 1rem}
+.guide-answer strong{color:var(--forest)}
+.guide-contents{margin-top:1.25rem;padding:1rem 1.25rem}
+.guide-contents h2{font-size:1.125rem;margin-bottom:.35rem}
+.guide-contents ul{display:flex;flex-wrap:wrap;gap:.25rem .75rem;margin:0;padding:0;list-style:none}
+.guide-contents a{display:flex;align-items:center;min-height:44px;padding:.3rem .45rem;line-height:1.35}
+.guide-content .panel{scroll-margin-top:1rem}
+.guide-content .panel p,.guide-content .panel li{max-width:66ch}
+.guide-table{overflow:auto;margin-block:1rem;border:1px solid var(--line);border-radius:.75rem}
+.guide-table:focus-visible{outline:3px solid var(--forest);outline-offset:3px}
+.guide-table table{width:100%;min-width:26rem;border-collapse:collapse}
+.guide-table th,.guide-table td{padding:.7rem .8rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.guide-table th{background:#edf5ef;color:var(--forest)}
+.guide-table tbody tr:nth-child(even){background:#f8faf9}
+.guide-table tbody tr:last-child td{border-bottom:0}
+.guide-content .panel ol,.guide-content .panel ul{padding-inline-start:1.3rem}
+.guide-content .panel li+li{margin-top:.45rem}
+.guide-content details{margin-top:1rem;padding:0 .8rem;border:1px solid var(--line);border-radius:.75rem;background:#f8faf9}
+.guide-content summary{padding:.7rem 0;line-height:1.4}
+.guide-content details .answer{margin-bottom:.8rem}
+.guide-next .actions{align-items:center}
+.guide-back{display:inline-flex;align-items:center;min-height:44px;font-weight:650}
+@media(max-width:760px){.guide-contents ul{display:grid;grid-template-columns:minmax(0,1fr)}.guide-contents a{padding-left:0}}
+@media(max-width:480px){.guide-hero .btn,.guide-next .btn{width:100%;text-align:center}.guide-table table{min-width:24rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"DSH Exam Preparation: Plan and Writing Practice","description":"Plan your DSH preparation around your institution’s rules and try a short source-based writing exercise.","url":"https://klarweg.in/dsh-exam-preparation.html","mainEntityOfPage":"https://klarweg.in/dsh-exam-preparation.html","inLanguage":"en","publisher":{"@type":"Organization","name":"Klarweg","url":"https://klarweg.in/"}}</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header><div class="top"><a class="brand" href="index.html">Klarweg</a><nav class="nav" aria-label="Main navigation"><a href="courses.html">Courses</a> <a href="resources.html">Resources</a> <a href="live-classes.html">Live classes</a></nav></div></header>
-<main class="wrap" id="main">
+<main class="wrap" id="main" tabindex="-1">
 <nav class="crumb" aria-label="Breadcrumb"><a href="resources.html#german-learning-guides">German learning guides</a></nav>
-<section class="hero"><h1>DSH Exam Preparation: Plan and Writing Practice</h1><p class="lede">Prepare for the DSH with your target institution’s published rules and samples. Practise turning a source into a short summary and separating its findings from your interpretation. The exercise on this page gives you a starting point.</p><div class="actions"><a class="btn" href="c1.html">Explore advanced German study</a></div></section>
-<div class="content"><div class="stack">
-<section class="panel"><h2>Use the rules of your target institution</h2>
+<section class="hero guide-hero"><h1>DSH Exam Preparation: Plan and Writing Practice</h1>
+<div class="guide-answer"><strong>Quick answer</strong><p class="lede">Prepare for the DSH with your target institution’s published rules and samples. Practise turning a source into a short summary and separating its findings from your interpretation. The exercise on this page gives you a starting point.</p></div>
+<div class="actions"><a class="btn" href="c1.html">Explore advanced German study</a></div></section>
+<nav class="panel guide-contents" id="on-this-page" aria-labelledby="contents-title"><h2 id="contents-title">On this page</h2><ul><li><a href="#guide-section-1">Use the rules of your target institution</a></li><li><a href="#guide-section-2">Try one short source-based response</a></li><li><a href="#guide-section-3">Rehearse source-based writing in four steps</a></li></ul></nav>
+<div class="content guide-content"><div class="stack">
+<section class="panel" id="guide-section-1"><h2>Use the rules of your target institution</h2>
 <p>Find the language requirement for your specific programme. Then open the DSH instructions and sample material published by the institution where you plan to sit the exam. Write down the required result, booking deadline, task types and permitted materials. The DAAD overview of German language requirements is a useful starting point for understanding language evidence.</p>
 <p>If two programmes use different wording, keep two checklists and ask admissions about anything unclear before booking.</p></section>
-<section class="panel"><h2>Try one short source-based response</h2>
+<section class="panel" id="guide-section-2"><h2>Try one short source-based response</h2>
 <p>A fictional university reports that longer library opening hours increased evening visits. Its student council says commuters still leave early because of transport. Summarise the finding and the limitation, then propose one question for a follow-up survey.</p>
 <details><summary>Compare a possible academic response</summary><div class="answer"><p lang="de">Längere Öffnungszeiten gingen mit mehr Besuchen am Abend einher. Für Pendelnde kann der öffentliche Nahverkehr allerdings weiterhin eine Hürde darstellen. Eine Befragung könnte klären, welche Verbindungen nach neunzehn Uhr fehlen.</p><p>Separate observation, possible limitation and next question. Use your institution’s posted model for actual timing and scoring. This task practises academic language.</p></div></details></section>
-<section class="panel"><h2>Rehearse source-based writing in four steps</h2>
+<section class="panel" id="guide-section-3"><h2>Rehearse source-based writing in four steps</h2>
 <p>Underline the claim about evening visits. Mark the student council’s transport concern as a separate view. Write one sentence reporting the finding, a second explaining the limitation, and a final question that could test it. For a retry, replace the transport concern with work schedules and revise only the last two sentences.</p></section>
-<section class="panel"><h2>Official references</h2><ul><li><a href="https://www.daad.de/en/studying-in-germany/living-in-germany/german-language/">DAAD overview of German language requirements</a></li></ul></section>
-<section class="panel"><h2>Put it into practice</h2><div class="actions"><a class="btn" href="c1.html">Explore advanced German study</a></div></section>
+<section class="panel" id="guide-section-4"><h2>Official references</h2><ul><li><a href="https://www.daad.de/en/studying-in-germany/living-in-germany/german-language/">DAAD overview of German language requirements</a></li></ul></section>
+<section class="panel guide-next"><h2>Continue with Klarweg</h2><div class="actions"><a class="btn" href="c1.html">Explore advanced German study</a> <a class="guide-back" href="#on-this-page">Back to contents</a></div></section>
 </div><aside class="side panel" aria-labelledby="more"><h2 id="more">More German learning guides</h2>
 <ul><li><a href="oesd-a1-exam-preparation.html">ÖSD A1 Exam Preparation: Practice and Checklist</a></li><li><a href="testdaf-preparation-course-checklist.html">How to Choose a TestDaF Preparation Course</a></li><li><a href="b2-german-for-nurses.html">B2 German for Nurses: Handover Practice</a></li><li><a href="german-for-doctors.html">German for Doctors: Communication Practice</a></li></ul>
 <p><a href="resources.html#german-learning-guides">See all German learning guides</a></p></aside></div>

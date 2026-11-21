@@ -89,7 +89,7 @@ for (const pages of batches) {
 .guide-back{display:inline-flex;align-items:center;min-height:44px;font-weight:650}
 @media(max-width:760px){.guide-contents ul{display:grid;grid-template-columns:minmax(0,1fr)}.guide-contents a{padding-left:0}}
 @media(max-width:480px){.guide-hero .btn,.guide-next .btn{width:100%;text-align:center}.guide-table table{min-width:24rem}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}${slug === 'german-a1-listening-practice' ? '\n[data-speak][hidden]{display:none}' : ''}
 </style>
 <script type="application/ld+json">${schema}</script>
 </head>

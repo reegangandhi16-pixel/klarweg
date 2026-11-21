@@ -164,3 +164,31 @@ export async function sweepRateCounters(env, now = Date.now()) {
     await env.DB.prepare("DELETE FROM rate_counters WHERE window_end < ?1").bind(now).run();
   } catch { /* housekeeping only */ }
 }
+
+/* Second factor (OD-19 D3): at most 5 wrong codes per user and 20 per network (pseudonymous daily IP hash) per
+   15 minutes. Read before verifying; bumped only after a wrong code. The 30-minute lock after 10 consecutive failures
+   (D4) is kept on the user's row in user_totp, not here. */
+export const MFA_USER_LIMIT = { max: 5, win: 15 * 60 * 1000 };
+export const MFA_IP_LIMIT = { max: 20, win: 15 * 60 * 1000 };
+
+async function mfaBuckets(env, request, userId) {
+  return [[`mfa:u:${userId}`, MFA_USER_LIMIT], [await ipBucket(env, request, "mfa"), MFA_IP_LIMIT]];
+}
+
+export async function checkMfaLimit(env, request, userId, now = Date.now()) {
+  for (const [key, lim] of await mfaBuckets(env, request, userId)) {
+    const end = windowEnd(now, lim.win);
+    const row = await env.DB.prepare("SELECT hits FROM rate_counters WHERE bucket = ?1 AND window_end = ?2").bind(key, end).first();
+    if (row && row.hits >= lim.max) return { ok: false, retryAfter: Math.max(1, Math.ceil((end - now) / 1000)) };
+  }
+  return { ok: true };
+}
+
+export async function recordMfaFailure(env, request, userId, now = Date.now()) {
+  for (const [key, lim] of await mfaBuckets(env, request, userId)) {
+    await env.DB.prepare(
+      "INSERT INTO rate_counters (bucket, window_end, hits) VALUES (?1, ?2, 1) " +
+      "ON CONFLICT(bucket, window_end) DO UPDATE SET hits = hits + 1"
+    ).bind(key, windowEnd(now, lim.win)).run();
+  }
+}

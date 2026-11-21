@@ -17,6 +17,9 @@ import {
 } from "./saved-words.js";
 import { listProgress, saveProgress } from "./progress.js";
 import { savedWordsLexicon } from "./saved-lexicon.js";
+import { examProxy } from "./exam-proxy.js";
+import { mfaStatus, mfaEnroll, mfaEnrollConfirm, mfaVerify, mfaRegenerateRecoveryCodes } from "./mfa-routes.js";
+import { cookieProbeSet, cookieProbeCheck } from "./cookie-probe.js";
 function json(data, status = 200) {
   return Response.json(data, { status });
 }
@@ -120,6 +123,22 @@ async function route(request, env, ctx) {
 if (request.method === "GET" && url.pathname === "/auth/me") {
   return withCors(await me(request, env), request);
 }
+
+    if (url.pathname === "/auth/cookie-probe") {
+      if (request.method === "POST") return withCors(cookieProbeSet(), request);
+      if (request.method === "GET") return withCors(cookieProbeCheck(request), request);
+    }
+
+    if (url.pathname.startsWith("/auth/mfa/")) {
+      const handler = {
+        "GET /auth/mfa/status": mfaStatus,
+        "POST /auth/mfa/enroll": mfaEnroll,
+        "POST /auth/mfa/enroll/confirm": mfaEnrollConfirm,
+        "POST /auth/mfa/verify": mfaVerify,
+        "POST /auth/mfa/recovery-codes": mfaRegenerateRecoveryCodes
+      }[`${request.method} ${url.pathname}`];
+      if (handler) return withCors(await handler(request, env), request);
+    }
 
     if (request.method === "POST" && url.pathname === "/auth/phone") {
       return withCors(await updatePhone(request, env), request);
@@ -235,6 +254,11 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
     if (request.method === "POST" && url.pathname === "/webhooks/cashfree") {
       return cashfreeWebhook(request, env);
     }
+
+    /* Klarweg exam (exam-proxy.js) — OFF unless EXAM_ROUTES = "on" and the
+       EXAM service binding exists; otherwise /exam/* falls through to 404. */
+    const examResponse = await examProxy(request, env, url);
+    if (examResponse) return examResponse;
 
     return withCors(
       json(

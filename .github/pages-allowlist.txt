@@ -1559,3 +1559,17 @@ german-for-mba-students.html
 german-language-for-jobs-in-germany.html
 intensive-german-courses-india.html
 online-german-course-certificate-fees.html
+
+# Keyword-led German learning guides, batch 3
+online-german-a1-classes.html
+online-german-b1-classes.html
+german-course-fees-in-hindi.html
+german-a1-30-day-study-plan.html
+german-a1-syllabus-checklist.html
+german-a1-worksheet-hindi.html
+german-a1-listening-practice.html
+goethe-b1-exam-preparation-plan.html
+b1-german-ausbildung-interview.html
+a1-speaking-practice-family-reunion.html
+kw-a1-listening-voice.js
+downloads/klarweg-a1-worksheet-hindi.pdf

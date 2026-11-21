@@ -6,33 +6,34 @@ import { escapeHtml as esc } from './build-seo-practice.mjs';
 const root = new URL('../', import.meta.url);
 const read = file => fs.readFileSync(new URL(file, root), 'utf8');
 const guidesDirectory = 'docs/seo/keyword-guides/';
-const pages = JSON.parse(read(guidesDirectory + 'pages.json'));
+const batches = ['pages.json', 'batch-2.json'].map(file => JSON.parse(read(guidesDirectory + file)));
 const check = process.argv.includes('--check');
 const sitemap = read('sitemap.xml');
 const resources = read('resources.html');
 const allowlist = new Set(read('.github/pages-allowlist.txt').split(/\r?\n/));
 
-assert.equal(pages.length, 10);
-for (const index of [0,1,2,3]) {
-  assert.equal(new Set(pages.map(page => page[index])).size, pages.length);
-}
 const link = (url, text, classes = '') => `<a${classes ? ` class="${classes}"` : ''} href="${esc(url)}">${esc(text)}</a>`;
 
-for (const [slug, keyword, title, description, target, action] of pages) {
-  assert.match(slug, /^[a-z]+[a-z0-9]*(?:-[a-z0-9]+)*$/);
-  assert.ok(keyword && target && action);
-  const file = slug + '.html';
-  const url = SITE_BASE + '/' + file;
-  assert.ok(allowlist.has(file) && sitemap.includes(`<loc>${url}</loc>`) && resources.includes(`href="${file}"`), file);
-  assert.ok(fs.existsSync(new URL(target.split('#')[0],root)), target);
-  const content = read(guidesDirectory + file).trim();
-  const related = pages.filter(page => page[0] !== slug).slice(0, 4);
-  const schema = JSON.stringify({
-    '@context':'https://schema.org', '@type':'Article', headline:title, description,
-    url, mainEntityOfPage:url, inLanguage:'en',
-    publisher:{'@type':'Organization',name:'Klarweg',url:SITE_BASE+'/'}
-  }).replaceAll('<','\\u003c');
-  const page = `<!doctype html>
+for (const pages of batches) {
+  assert.equal(pages.length, 10);
+  for (const index of [0,1,2,3]) {
+    assert.equal(new Set(pages.map(page => page[index])).size, pages.length);
+  }
+  for (const [slug, keyword, title, description, target, action] of pages) {
+    assert.match(slug, /^[a-z]+[a-z0-9]*(?:-[a-z0-9]+)*$/);
+    assert.ok(keyword && target && action);
+    const file = slug + '.html';
+    const url = SITE_BASE + '/' + file;
+    assert.ok(allowlist.has(file) && sitemap.includes(`<loc>${url}</loc>`) && resources.includes(`href="${file}"`), file);
+    assert.ok(fs.existsSync(new URL(target.split('#')[0],root)), target);
+    const content = read(guidesDirectory + file).trim();
+    const related = pages.filter(page => page[0] !== slug).slice(0, 4);
+    const schema = JSON.stringify({
+      '@context':'https://schema.org', '@type':'Article', headline:title, description,
+      url, mainEntityOfPage:url, inLanguage:'en',
+      publisher:{'@type':'Organization',name:'Klarweg',url:SITE_BASE+'/'}
+    }).replaceAll('<','\\u003c');
+    const page = `<!doctype html>
 <!-- Generated from ${guidesDirectory + file} by scripts/build-keyword-guides.mjs. -->
 <html lang="en">
 <head>
@@ -69,13 +70,14 @@ ${content}
 <section class="panel"><h2>Put it into practice</h2><div class="actions">${link(target,action,'btn')}</div></section>
 </div><aside class="side panel" aria-labelledby="more"><h2 id="more">More German learning guides</h2>
 <ul>${related.map(([path,,label])=>`<li>${link(path + '.html',label)}</li>`).join('')}</ul>
-<p>${link('resources.html#german-learning-guides','See all ten guides')}</p></aside></div>
+<p>${link('resources.html#german-learning-guides',pages === batches[0] ? 'See all ten guides' : 'See all German learning guides')}</p></aside></div>
 </main>
 <footer class="footer">Klarweg · ${link('privacy.html','Privacy')}</footer>
 </body>
 </html>
 `;
-  if (check) assert.equal(read(file),page,'Stale keyword guide: ' + file);
-  else fs.writeFileSync(new URL(file,root),page);
+    if (check) assert.equal(read(file),page,'Stale keyword guide: ' + file);
+    else fs.writeFileSync(new URL(file,root),page);
+  }
 }
-console.log(`Keyword guides: ${pages.length} pages ${check ? 'checked' : 'generated'}`);
+console.log(`Keyword guides: ${batches.flat().length} pages ${check ? 'checked' : 'generated'}`);

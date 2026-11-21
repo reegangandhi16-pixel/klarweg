@@ -286,5 +286,21 @@
  "wuerde--would": {
   "tier": "text-only",
   "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "vor-allem--especially-above-all": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "moeglich--possible": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "tausend-dank--thanks-a-million": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "was-fuer-ein--what-kind-of-a": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
  }
 }

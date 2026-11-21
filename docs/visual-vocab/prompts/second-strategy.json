@@ -8924,6 +8924,34 @@
   "role": "focus",
   "cap": "diskursprägend = shaping the public debate"
  },
+ "vor-allem--especially-above-all": {
+  "type": "grammar",
+  "de": "Vor allem werde ich ruhiger.",
+  "hl": "Vor allem",
+  "role": "focus",
+  "cap": "vor allem = especially, above all"
+ },
+ "moeglich--possible": {
+  "type": "grammar",
+  "de": "Sie fragt, ob ein späterer Termin möglich ist.",
+  "hl": "möglich",
+  "role": "focus",
+  "cap": "möglich = possible"
+ },
+ "tausend-dank--thanks-a-million": {
+  "type": "grammar",
+  "de": "Tausend Dank für die Karte!",
+  "hl": "Tausend Dank",
+  "role": "focus",
+  "cap": "Tausend Dank! = Thanks a million!"
+ },
+ "was-fuer-ein--what-kind-of-a": {
+  "type": "grammar",
+  "de": "Was für ein Buch ist das?",
+  "hl": "Was für ein",
+  "role": "focus",
+  "cap": "Was für ein …? = What kind of …?"
+ },
  "der-juli--july": {
   "key": "der-juli--july",
   "type": "scene",

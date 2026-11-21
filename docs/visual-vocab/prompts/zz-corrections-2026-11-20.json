@@ -135,5 +135,23 @@
   "alt": "A minister formally declaring a statement at a press podium",
   "strategy": "direct",
   "note": "own image 2026-11-20: card means 'to declare' (Die Ministerin erklärte, …); the shared whiteboard 'explain' image was misleading"
+ },
+ "hin-und-zurueck--there-and-back-round-trip": {
+  "subject": "Show a train ticket labelled with two stations, A and B, with one arrow going from A to B and a second arrow curving back from B to A, next to a small train.",
+  "alt": "A round-trip train ticket with arrows there and back",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "vorn--at-the-front": {
+  "subject": "Show a small cinema with rows of seats seen from the side; two friends sit together in the very first row right in front of the screen, all other rows are empty.",
+  "alt": "Two friends sitting in the front row of a cinema",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "verlaengern--extend": {
+  "subject": "Show an office clerk at a desk handing a contract to a smiling employee; on a wall calendar behind them, an end date is crossed out and a later date is circled with an arrow pointing forward.",
+  "alt": "A contract being extended to a later end date",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
  }
 }

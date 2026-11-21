@@ -323,7 +323,9 @@ const CHAPTER = {
     { de: 'weg sein', pos: 'idiom', level: 'B1', en: 'to be gone', hi: 'गायब होना',
       ex: 'Mein Schlüssel ist plötzlich weg.', exEn: 'My key is suddenly gone.', exHi: 'Meri chaabi achanak gayab ho gayi.',
       ex2: 'Nach dem Sturm war das ganze Zelt weg.', ex2En: 'After the storm, the whole tent was gone.', ex2Hi: 'Toofan ke baad, poora tambu gayab tha.',
-      advanced: { synonyms: ['verschwunden sein', 'verloren sein'], opposites: ['da sein'], collocations: ['ganz weg sein', 'plötzlich weg sein'] } },
+      advanced: { synonyms: ['verschwunden sein', 'verloren sein'], opposites: ['da sein'], collocations: ['ganz weg sein', 'plötzlich weg sein'] },
+      img: { src: '/api/media/vocab-img/a53a540f37050f6466d1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person anxiously searching inside an empty coat pocket for their keys.' }
+    },
     { de: 'Abenteuer', art: 'das', gender: 'n', plural: 'Abenteuer', pos: 'noun', level: 'B1', en: 'adventure', hi: 'रोमांच',
       ex: 'Der Urlaub war ein echtes Abenteuer.', exEn: 'The holiday was a real adventure.', exHi: 'Chutti ek sacha romanch thi.',
       ex2: 'Sie sucht immer neue Abenteuer.', ex2En: 'She\'s always looking for new adventures.', ex2Hi: 'Woh hamesha naye romanch dhundhti hai.',

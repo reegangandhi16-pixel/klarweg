@@ -236,7 +236,7 @@ const CHAPTER = {
 
   // ---------- Vocabulary review (~36 items — no new words, from Ch.25–34) ----------
   vocab: [
-    { de: 'genauso', pos: 'adverb', en: 'just as', hi: 'बिल्कुल वैसे ही', ex: 'Das ist genauso schwer wie die letzte Prüfung.', exEn: 'That is just as hard as the last exam.' },
+    { de: 'genauso', pos: 'adverb', en: 'just as', hi: 'बिल्कुल वैसे ही', ex: 'Das ist genauso schwer wie die letzte Prüfung.', exEn: 'That is just as hard as the last exam.', img: { src: '/api/media/vocab-img/6c8c850aec925b1a7bc5', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people of identical height standing back to back.' } },
     { de: 'Grund', art: 'der', gender: 'm', plural: 'Gründe', pos: 'noun', en: 'reason', hi: 'कारण', ex: 'Was ist der Grund für deine Nervosität?', exEn: 'What is the reason for your nervousness?' },
     { de: 'gehören', pos: 'verb', en: 'to belong to', hi: 'का होना', ex: 'Dieses Buch gehört mir.', exEn: 'This book belongs to me.', conj: { praesens: 'gehört', praeteritum: 'gehörte', perfekt: 'hat gehört' }, img: { src: '/api/media/vocab-img/9ff2d59cb57b57344191', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'sister recognizing her book being held up' } },
     { de: 'teuer', pos: 'adjective', en: 'expensive', hi: 'महंगा', ex: 'Der teure Kurs hat sich gelohnt.', exEn: 'The expensive course was worth it.', img: { src: '/api/media/vocab-img/84cde82e3eb87dd05da9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Luxury sports car outside a modern villa' } },

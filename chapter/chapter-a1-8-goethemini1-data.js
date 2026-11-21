@@ -216,7 +216,9 @@ const CHAPTER = {
     },
     { de: 'kurz', pos: 'adjective', en: 'short', hi: 'छोटा / संक्षिप्त',
       ex: 'Schreib einen kurzen Text.', exEn: 'Write a short text.',
-      compare: { comparative: 'kürzer', superlative: 'am kürzesten' } },
+      compare: { comparative: 'kürzer', superlative: 'am kürzesten' },
+      img: { src: '/api/media/vocab-img/6bd546e3e62b0da583ca', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A full-length pencil lying parallel beside a very short pencil stub.' }
+    },
     { de: 'zu zweit', pos: 'phrase', en: 'in pairs', hi: 'जोड़ी में',
       ex: 'Arbeitet zu zweit.', exEn: 'Work in pairs.',
       img: { src: '/api/media/vocab-img/24961c27307f05e4c533', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people working together in pairs at a desk' }
@@ -236,9 +238,13 @@ const CHAPTER = {
       vis: { kind: 'map', iso: ['DE', 'AT', 'CH', 'LI'], cap: 'German-speaking countries in Central Europe', src: '../public/vocab-map/e3ac7eea0374.svg' }
     },
     { de: 'darauf', pos: 'adverb', en: 'upon it, to it', hi: 'उस पर',
-      ex: 'Reagiere darauf.', exEn: 'React to it.' },
+      ex: 'Reagiere darauf.', exEn: 'React to it.',
+      vis: { kind: 'grammar', de: 'Reagiere darauf.', hl: 'darauf', role: 'focus', cap: 'darauf = to it (reagieren auf → darauf)' }
+    },
     { de: 'über', pos: 'preposition (+A)', en: 'about', hi: 'के बारे में',
-      ex: 'Wir sprechen über Länder.', exEn: 'We talk about countries.' },
+      ex: 'Wir sprechen über Länder.', exEn: 'We talk about countries.',
+      img: { src: '/api/media/vocab-img/bd65f7a864f957a3baca', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two friends talking at a table while pointing at a globe.' }
+    },
     { de: 'reagieren', pos: 'verb', en: 'to react', hi: 'प्रतिक्रिया देना',
       ex: 'Wie reagierst du darauf?', exEn: 'How do you react to it?',
       conj: { praesens: 'reagiert', praeteritum: 'reagierte', perfekt: 'hat reagiert' } },
@@ -312,42 +318,70 @@ const CHAPTER = {
       vis: { kind: 'map', iso: ['TH'], cap: 'Spoken primarily in Thailand', src: '../public/vocab-map/a482167f2a1c.svg' }
     },
     { de: 'Maori', pos: 'language', en: 'Maori', hi: 'माओरी',
-      ex: 'Maori spricht man in Neuseeland.', exEn: 'Maori is spoken in New Zealand.' },
+      ex: 'Maori spricht man in Neuseeland.', exEn: 'Maori is spoken in New Zealand.',
+      img: { src: '/api/media/vocab-img/8bbb57c1feb81e9f1cef', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people sharing a traditional respectful Māori hongi greeting' }
+    },
     { de: 'Rätoromanisch', pos: 'language', en: 'Raeto-Romanic', hi: 'रेटो-रोमांस',
       ex: 'Rätoromanisch spricht man in der Schweiz.', exEn: 'Raeto-Romanic is spoken in Switzerland.',
       vis: { kind: 'map', iso: ['CH'], cap: 'Official language spoken in parts of Switzerland', src: '../public/vocab-map/b4061022cd61.svg' }
     },
     { de: 'Muttersprache', art: 'die', gender: 'f', plural: 'Muttersprachen', pos: 'noun', en: 'mother tongue', hi: 'मातृभाषा',
-      ex: 'Meine Muttersprache ist Hindi.', exEn: 'My mother tongue is Hindi.' },
+      ex: 'Meine Muttersprache ist Hindi.', exEn: 'My mother tongue is Hindi.',
+      img: { src: '/api/media/vocab-img/f6333e4683013bb302fd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A mother speaking warmly to her young child listening attentively.' }
+    },
     // — Countries (no article) —
     { de: 'Deutschland', pos: 'country', en: 'Germany', hi: 'जर्मनी',
-      ex: 'Ich komme aus Deutschland.', exEn: 'I come from Germany.' },
+      ex: 'Ich komme aus Deutschland.', exEn: 'I come from Germany.',
+      img: { src: '/api/media/vocab-img/50b61515be529ba6453e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A clay rendering of the Brandenburg Gate with linden trees.' }
+    },
     { de: 'Österreich', pos: 'country', en: 'Austria', hi: 'ऑस्ट्रिया',
-      ex: 'Wien ist in Österreich.', exEn: 'Vienna is in Austria.' },
+      ex: 'Wien ist in Österreich.', exEn: 'Vienna is in Austria.',
+      img: { src: '/api/media/vocab-img/d899501c9a52324e242e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Giant Ferris Wheel and horse-drawn carriage in Vienna, Austria' }
+    },
     { de: 'Frankreich', pos: 'country', en: 'France', hi: 'फ़्रांस',
-      ex: 'Paris ist in Frankreich.', exEn: 'Paris is in France.' },
+      ex: 'Paris ist in Frankreich.', exEn: 'Paris is in France.',
+      img: { src: '/api/media/vocab-img/1fc88148264d0a5477d2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A miniature Eiffel Tower beside a café table with a croissant.' }
+    },
     { de: 'Italien', pos: 'country', en: 'Italy', hi: 'इटली',
-      ex: 'Ich komme aus Italien.', exEn: 'I come from Italy.' },
+      ex: 'Ich komme aus Italien.', exEn: 'I come from Italy.',
+      img: { src: '/api/media/vocab-img/2d5880785ac2962c9445', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Miniature Colosseum ruins beside a plate of pasta and an espresso maker.' }
+    },
     { de: 'Spanien', pos: 'country', en: 'Spain', hi: 'स्पेन',
-      ex: 'Madrid ist in Spanien.', exEn: 'Madrid is in Spain.' },
+      ex: 'Madrid ist in Spanien.', exEn: 'Madrid is in Spain.',
+      img: { src: '/api/media/vocab-img/2ee5ada64a69b334dfef', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A sunlit terracotta patio with an orange tree and acoustic guitar.' }
+    },
     { de: 'Portugal', pos: 'country', en: 'Portugal', hi: 'पुर्तगाल',
       ex: 'Lissabon ist in Portugal.', exEn: 'Lisbon is in Portugal.' },
     { de: 'Polen', pos: 'country', en: 'Poland', hi: 'पोलैंड',
-      ex: 'Sie kommt aus Polen.', exEn: 'She comes from Poland.' },
+      ex: 'Sie kommt aus Polen.', exEn: 'She comes from Poland.',
+      img: { src: '/api/media/vocab-img/17f73b937d00d5239976', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'The historic brick towers of St. Mary\'s Basilica in Kraków.' }
+    },
     { de: 'Griechenland', pos: 'country', en: 'Greece', hi: 'यूनान',
-      ex: 'Athen ist in Griechenland.', exEn: 'Athens is in Greece.' },
+      ex: 'Athen ist in Griechenland.', exEn: 'Athens is in Greece.',
+      img: { src: '/api/media/vocab-img/7ae3862597bf9d91c1f0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'White buildings with blue domed roofs beside a bright sea.' }
+    },
     { de: 'Ungarn', pos: 'country', en: 'Hungary', hi: 'हंगरी',
       ex: 'Budapest ist in Ungarn.', exEn: 'Budapest is in Hungary.' },
     { de: 'Dänemark', pos: 'country', en: 'Denmark', hi: 'डेनमार्क',
-      ex: 'Dänemark liegt im Norden.', exEn: 'Denmark lies in the north.' },
+      ex: 'Dänemark liegt im Norden.', exEn: 'Denmark lies in the north.',
+      img: { src: '/api/media/vocab-img/9d4d7ca0ed0f6e4eb3a6', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Colorful canal rowhouses and small wooden boats along a waterfront in Denmark.' }
+    },
     { de: 'Russland', pos: 'country', en: 'Russia', hi: 'रूस',
-      ex: 'Russland ist sehr groß.', exEn: 'Russia is very big.' },
+      ex: 'Russland ist sehr groß.', exEn: 'Russia is very big.',
+      img: { src: '/api/media/vocab-img/d3d8a977b991056cd3dd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Traditional Russian nesting dolls arranged in a row by size.' }
+    },
     { de: 'China', pos: 'country', en: 'China', hi: 'चीन',
-      ex: 'China hat viele Städte.', exEn: 'China has many cities.' },
+      ex: 'China hat viele Städte.', exEn: 'China has many cities.',
+      img: { src: '/api/media/vocab-img/d5f3b13087364cc3a786', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A traditional pagoda tower standing peacefully beside a river and stone bridge.' }
+    },
     { de: 'Japan', pos: 'country', en: 'Japan', hi: 'जापान',
-      ex: 'Tokio ist in Japan.', exEn: 'Tokyo is in Japan.' },
+      ex: 'Tokio ist in Japan.', exEn: 'Tokyo is in Japan.',
+      img: { src: '/api/media/vocab-img/bf26757375ab290c2d9d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Snow-capped Mount Fuji framed by cherry blossoms and a wooden pagoda.' }
+    },
     { de: 'Thailand', pos: 'country', en: 'Thailand', hi: 'थाईलैंड',
-      ex: 'Ich komme aus Thailand.', exEn: 'I come from Thailand.' },
+      ex: 'Ich komme aus Thailand.', exEn: 'I come from Thailand.',
+      img: { src: '/api/media/vocab-img/773dccea132797d02cd7', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A traditional longtail boat on turquoise water near limestone cliffs.' }
+    },
     { de: 'Kanada', pos: 'country', en: 'Canada', hi: 'कनाडा',
       ex: 'Kanada ist im Norden.', exEn: 'Canada is in the north.' },
     { de: 'Mexiko', pos: 'country', en: 'Mexico', hi: 'मेक्सिको',
@@ -373,20 +407,30 @@ const CHAPTER = {
       vis: { kind: 'map', iso: ['SY'], cap: 'Syria in the Middle East', src: '../public/vocab-map/4152ec29594e.svg' }
     },
     { de: 'Südamerika', pos: 'region', en: 'South America', hi: 'दक्षिण अमेरिका',
-      ex: 'Brasilien ist in Südamerika.', exEn: 'Brazil is in South America.' },
+      ex: 'Brasilien ist in Südamerika.', exEn: 'Brazil is in South America.',
+      img: { src: '/api/media/vocab-img/affa4e6f86a782292b92', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Globe highlighting the continent of South America.' }
+    },
     // — Countries (with article) —
     { de: 'Schweiz', art: 'die', gender: 'f', plural: '—', pos: 'country', en: 'Switzerland', hi: 'स्विट्ज़रलैंड',
-      ex: 'Ich komme aus der Schweiz.', exEn: 'I come from Switzerland.' },
+      ex: 'Ich komme aus der Schweiz.', exEn: 'I come from Switzerland.',
+      img: { src: '/api/media/vocab-img/8ecdf7275917c67d3384', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A sharp alpine mountain peak behind a wooden Swiss chalet.' }
+    },
     { de: 'Türkei', art: 'die', gender: 'f', plural: '—', pos: 'country', en: 'Turkey', hi: 'तुर्की',
-      ex: 'Er kommt aus der Türkei.', exEn: 'He comes from Turkey.' },
+      ex: 'Er kommt aus der Türkei.', exEn: 'He comes from Turkey.',
+      img: { src: '/api/media/vocab-img/c5a4af41286f58dde4f4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Hot air balloons floating over Cappadocia rock formations.' }
+    },
     { de: 'Ukraine', art: 'die', gender: 'f', plural: '—', pos: 'country', en: 'Ukraine', hi: 'यूक्रेन',
       ex: 'Kiew ist in der Ukraine.', exEn: 'Kyiv is in Ukraine.' },
     { de: 'Slowakei', art: 'die', gender: 'f', plural: '—', pos: 'country', en: 'Slovakia', hi: 'स्लोवाकिया',
       ex: 'Die Slowakei liegt in Europa.', exEn: 'Slovakia is in Europe.' },
     { de: 'Niederlande', art: 'die', plural: 'Niederlande', pos: 'country', en: 'Netherlands', hi: 'नीदरलैंड',
-      ex: 'Amsterdam ist in den Niederlanden.', exEn: 'Amsterdam is in the Netherlands.' },
+      ex: 'Amsterdam ist in den Niederlanden.', exEn: 'Amsterdam is in the Netherlands.',
+      img: { src: '/api/media/vocab-img/c37450ac43378784da5a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A windmill beside a canal with tulips and a parked bicycle.' }
+    },
     { de: 'USA', art: 'die', plural: 'USA', pos: 'country', en: 'USA', hi: 'अमेरिका',
-      ex: 'New York ist in den USA.', exEn: 'New York is in the USA.' },
+      ex: 'New York ist in den USA.', exEn: 'New York is in the USA.',
+      img: { src: '/api/media/vocab-img/d251e96b164504a76133', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A miniature Statue of Liberty holding a torch on a pedestal.' }
+    },
     { de: 'Iran', art: 'der', gender: 'm', plural: '—', pos: 'country', en: 'Iran', hi: 'ईरान',
       ex: 'Teheran ist im Iran.', exEn: 'Tehran is in Iran.' },
     { de: 'Irak', art: 'der', gender: 'm', plural: '—', pos: 'country', en: 'Iraq', hi: 'इराक़',
@@ -394,10 +438,14 @@ const CHAPTER = {
     { de: 'Libanon', art: 'der', gender: 'm', plural: '—', pos: 'country', en: 'Lebanon', hi: 'लेबनान',
       ex: 'Beirut ist im Libanon.', exEn: 'Beirut is in Lebanon.' },
     { de: 'Jemen', art: 'der', gender: 'm', plural: '—', pos: 'country', en: 'Yemen', hi: 'यमन',
-      ex: 'Der Jemen liegt im Süden.', exEn: 'Yemen lies in the south.' },
+      ex: 'Der Jemen liegt im Süden.', exEn: 'Yemen lies in the south.',
+      img: { src: '/api/media/vocab-img/5ec5778210016caa60aa', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Traditional Yemeni clay tower houses with decorative white arched windows.' }
+    },
     // — Reference / System —
     { de: 'Befinden', art: 'das', gender: 'n', plural: '—', pos: 'noun', en: 'well-being, how one feels', hi: 'हाल-चाल',
-      ex: 'Man fragt nach dem Befinden: "Wie geht es dir?"', exEn: 'You ask after well-being: "How are you?"' },
+      ex: 'Man fragt nach dem Befinden: "Wie geht es dir?"', exEn: 'You ask after well-being: "How are you?"',
+      vis: { kind: 'grammar', de: 'Man fragt nach dem Befinden: "Wie geht es dir?"', hl: 'Befinden', role: 'focus', cap: 'das Befinden = how someone feels' }
+    },
     { de: 'Redemittel', art: 'das', gender: 'n', plural: 'Redemittel', pos: 'noun', en: 'useful phrase', hi: 'उपयोगी वाक्यांश',
       ex: '"Wie heißt du?" ist ein Redemittel.', exEn: '"What is your name?" is a useful phrase.',
       vis: { kind: 'grammar', de: 'Guten Tag, wie geht es Ihnen?', hl: 'wie geht es Ihnen?', role: 'question', cap: 'A standard conversational phrase for everyday use' }

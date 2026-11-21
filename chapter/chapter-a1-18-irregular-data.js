@@ -215,10 +215,10 @@ const CHAPTER = {
   // ---------- Vocabulary (14 words) ----------
   vocab: [
     // ===== Core Active (irregular verbs) =====
-    { de: 'fahren', pos: 'verb', en: 'to drive, go (by vehicle)', hi: 'गाड़ी से जाना', ex: 'Ich fahre mit dem Bus zur Uni.', exEn: 'I go to uni by bus.', conj: { praesens: 'fährt', praeteritum: 'fuhr', perfekt: 'ist gefahren' } },
-    { de: 'geben', pos: 'verb', en: 'to give; (es gibt) there is', hi: 'देना; (es gibt) होना', ex: 'Ich gebe dir ein Stück Kuchen. Es gibt Kaffee.', exEn: 'I give you a piece of cake. There is coffee.', conj: { praesens: 'gibt', praeteritum: 'gab', perfekt: 'hat gegeben' } },
+    { de: 'fahren', pos: 'verb', en: 'to drive, go (by vehicle)', hi: 'गाड़ी से जाना', ex: 'Ich fahre mit dem Bus zur Uni.', exEn: 'I go to uni by bus.', conj: { praesens: 'fährt', praeteritum: 'fuhr', perfekt: 'ist gefahren' }, img: { src: '/api/media/vocab-img/23efc4ac566908248338', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A driver steering a bus, seen from behind the wheel.' } },
+    { de: 'geben', pos: 'verb', en: 'to give; (es gibt) there is', hi: 'देना; (es gibt) होना', ex: 'Ich gebe dir ein Stück Kuchen. Es gibt Kaffee.', exEn: 'I give you a piece of cake. There is coffee.', conj: { praesens: 'gibt', praeteritum: 'gab', perfekt: 'hat gegeben' }, img: { src: '/api/media/vocab-img/a88ac7907459984bf089', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person handing a plate with a slice of cake across a table.' } },
     { de: 'schlafen', pos: 'verb', en: 'to sleep', hi: 'सोना', ex: 'Max schläft zu wenig.', exEn: 'Max sleeps too little.', conj: { praesens: 'schläft', praeteritum: 'schlief', perfekt: 'hat geschlafen' }, img: { src: '/api/media/vocab-img/651b11812a8f5f58c082', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person sleeping peacefully in bed' } },
-    { de: 'sehen', pos: 'verb', en: 'to see', hi: 'देखना', ex: 'Siehst du die Bibliothek?', exEn: 'Do you see the library?', conj: { praesens: 'sieht', praeteritum: 'sah', perfekt: 'hat gesehen' } },
+    { de: 'sehen', pos: 'verb', en: 'to see', hi: 'देखना', ex: 'Siehst du die Bibliothek?', exEn: 'Do you see the library?', conj: { praesens: 'sieht', praeteritum: 'sah', perfekt: 'hat gesehen' }, img: { src: '/api/media/vocab-img/0938252dd6924ffd9764', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person shading their eyes and looking at a distant library.' } },
     { de: 'treffen', pos: 'verb', en: 'to meet', hi: 'मिलना', ex: 'Ich treffe Max in der Mensa.', exEn: 'I meet Max in the canteen.', conj: { praesens: 'trifft', praeteritum: 'traf', perfekt: 'hat getroffen' }, img: { src: '/api/media/vocab-img/a45a5815a1161295c44d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two friends greeting each other outside a cafe' } },
     // ===== Active Support =====
     { de: 'besuchen', pos: 'verb', en: 'to visit', hi: 'मिलने जाना', ex: 'Ich besuche die Bibliothek.', exEn: 'I visit the library.', conj: { praesens: 'besucht', praeteritum: 'besuchte', perfekt: 'hat besucht' } },
@@ -230,7 +230,7 @@ const CHAPTER = {
     { de: 'Unicafé', art: 'das', gender: 'n', plural: 'Unicafés', pos: 'noun', en: 'uni café', hi: 'यूनि कैफ़े', ex: 'Ich lese im Unicafé.', exEn: 'I read in the uni café.', img: { src: '/api/media/vocab-img/86dc32e60eb99c26240d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Students sitting in a campus cafe with coffee.' } },
     { de: 'Zeitung', art: 'die', gender: 'f', plural: 'Zeitungen', pos: 'noun', en: 'newspaper', hi: 'अख़बार', ex: 'Anna liest die Zeitung.', exEn: 'Anna reads the newspaper.', img: { src: '/api/media/vocab-img/59f397d20ad30f0e3898', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A folded newspaper on a table' } },
     // ===== Reference / System =====
-    { de: 'unregelmäßig', pos: 'adjective', en: 'irregular', hi: 'अनियमित', ex: 'Fahren ist ein unregelmäßiges Verb.', exEn: 'Fahren is an irregular verb.' }
+    { de: 'unregelmäßig', pos: 'adjective', en: 'irregular', hi: 'अनियमित', ex: 'Fahren ist ein unregelmäßiges Verb.', exEn: 'Fahren is an irregular verb.', img: { src: '/api/media/vocab-img/81eaef4f401e2ffa8ed7', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A path of neat square stones transitioning into jagged, uneven rocks.' } }
   ],
 
   // ---------- Stem changes (rule cards → accordion) ----------

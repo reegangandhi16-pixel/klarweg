@@ -199,7 +199,9 @@ const CHAPTER = {
       note: 'Presents exactly two mutually exclusive options — never combine with "und".',
       ex1: { de: 'Entweder akzeptieren wir das Risiko, oder wir ändern den Plan.', en: 'Either we accept the risk, or we change the plan.', hi: 'Ya toh hum risk accept karte hain, ya hum plan badalte hain.' },
       ex2: { de: 'Entweder kommt er heute, oder er kommt gar nicht.', en: 'Either he comes today, or he doesn\'t come at all.', hi: 'Ya toh woh aaj aata hai, ya bilkul nahi aata.' },
-      collocations: ['entweder ... oder entscheiden', 'entweder ... oder wählen'] },
+      collocations: ['entweder ... oder entscheiden', 'entweder ... oder wählen'],
+      img: { src: '/api/media/vocab-img/4fded328532dfb4a6787', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A pathway splitting toward a study desk or a game console.' }
+    },
     { de: 'weder ... noch', ipa: '[ˈveːdɐ nɔx]', en: 'neither ... nor', hi: 'na toh ... na hi', pos: 'Korrelativkonnektor', register: 'C1 · neutral/formal', connectorCategory: 'Negation',
       note: 'Negates both alternatives simultaneously — never pair "weder" with "oder".',
       ex1: { de: 'Weder die Kritiker noch die Befürworter konnten überzeugen.', en: 'Neither the critics nor the supporters could convince.', hi: 'Na toh aalochak, na hi samarthak convince kar sake.' },

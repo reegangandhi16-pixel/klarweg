@@ -246,6 +246,10 @@ public/vocab-img/11fd251742f1bade99db-400.avif
 public/vocab-img/11fd251742f1bade99db-400.webp
 public/vocab-img/11fd251742f1bade99db-800.avif
 public/vocab-img/11fd251742f1bade99db-800.webp
+public/vocab-img/16705c624becbb061941-400.avif
+public/vocab-img/16705c624becbb061941-400.webp
+public/vocab-img/16705c624becbb061941-800.avif
+public/vocab-img/16705c624becbb061941-800.webp
 public/vocab-img/1c40b89166130ab09d6f-400.avif
 public/vocab-img/1c40b89166130ab09d6f-400.webp
 public/vocab-img/1c40b89166130ab09d6f-800.avif
@@ -342,6 +346,10 @@ public/vocab-img/7de3a371a13d231541df-400.avif
 public/vocab-img/7de3a371a13d231541df-400.webp
 public/vocab-img/7de3a371a13d231541df-800.avif
 public/vocab-img/7de3a371a13d231541df-800.webp
+public/vocab-img/7fc09e45b96f0000f712-400.avif
+public/vocab-img/7fc09e45b96f0000f712-400.webp
+public/vocab-img/7fc09e45b96f0000f712-800.avif
+public/vocab-img/7fc09e45b96f0000f712-800.webp
 public/vocab-img/84afb4b48ce53441b811-400.avif
 public/vocab-img/84afb4b48ce53441b811-400.webp
 public/vocab-img/84afb4b48ce53441b811-800.avif
@@ -390,6 +398,10 @@ public/vocab-img/bbd5c92d836037f7aad7-400.avif
 public/vocab-img/bbd5c92d836037f7aad7-400.webp
 public/vocab-img/bbd5c92d836037f7aad7-800.avif
 public/vocab-img/bbd5c92d836037f7aad7-800.webp
+public/vocab-img/be4630573016c064fca2-400.avif
+public/vocab-img/be4630573016c064fca2-400.webp
+public/vocab-img/be4630573016c064fca2-800.avif
+public/vocab-img/be4630573016c064fca2-800.webp
 public/vocab-img/be7a2e9ccdc8aef0b836-400.avif
 public/vocab-img/be7a2e9ccdc8aef0b836-400.webp
 public/vocab-img/be7a2e9ccdc8aef0b836-800.avif

@@ -197,7 +197,9 @@ const CHAPTER = {
     },
     { de: 'machen', pos: 'verb', en: 'to do, to make', hi: 'करना / बनाना',
       ex: 'Was machst du morgen?', exEn: 'What are you doing tomorrow?',
-      conj: { praesens: 'macht', praeteritum: 'machte', perfekt: 'hat gemacht' } },
+      conj: { praesens: 'macht', praeteritum: 'machte', perfekt: 'hat gemacht' },
+      img: { src: '/api/media/vocab-img/c9b43d7eb76138737e01', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person crafting a wooden birdhouse at a workbench' }
+    },
     { de: 'spielen', pos: 'verb', en: 'to play', hi: 'खेलना',
       ex: 'Wir spielen am Wochenende.', exEn: 'We play on the weekend.',
       conj: { praesens: 'spielt', praeteritum: 'spielte', perfekt: 'hat gespielt' },
@@ -209,7 +211,9 @@ const CHAPTER = {
     },
     // — Active support —
     { de: 'Wochenende', art: 'das', gender: 'n', plural: 'Wochenenden', pos: 'noun', en: 'weekend', hi: 'सप्ताहांत',
-      ex: 'Am Wochenende spiele ich.', exEn: 'On the weekend I play.' },
+      ex: 'Am Wochenende spiele ich.', exEn: 'On the weekend I play.',
+      img: { src: '/api/media/vocab-img/1a7101c7988d6cb879bd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person relaxing on a sofa on a weekend morning.' }
+    },
     { de: 'morgen', pos: 'adverb', en: 'tomorrow', hi: 'कल',
       ex: 'Morgen lerne ich Deutsch.', exEn: 'Tomorrow I learn German.' },
     { de: 'sammeln', pos: 'verb', en: 'to collect', hi: 'इकट्ठा करना',
@@ -231,9 +235,13 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/0f3850815ba69661afec', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open exercise workbook with a pencil.' }
     },
     { de: 'Form', art: 'die', gender: 'f', plural: 'Formen', pos: 'noun', en: 'form, shape', hi: 'रूप',
-      ex: 'Welche Form hat das Verb?', exEn: 'Which form does the verb have?' },
+      ex: 'Welche Form hat das Verb?', exEn: 'Which form does the verb have?',
+      vis: { kind: 'grammar', de: 'Welche Form hat das Verb?', hl: 'Form', role: 'focus', cap: 'die Form = form (of a word); shape' }
+    },
     { de: 'Lernkarte', art: 'die', gender: 'f', plural: 'Lernkarten', pos: 'noun', en: 'flashcard', hi: 'फ्लैशकार्ड',
-      ex: 'Ich mache eine Lernkarte.', exEn: 'I make a flashcard.' },
+      ex: 'Ich mache eine Lernkarte.', exEn: 'I make a flashcard.',
+      img: { src: '/api/media/vocab-img/af54e8328e5b04aaedbf', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person holding a blank flashcard above a desk tray.' }
+    },
     { de: 'Seite', art: 'die', gender: 'f', plural: 'Seiten', pos: 'noun', en: 'page', hi: 'पृष्ठ',
       ex: 'Öffne das Buch auf Seite zwölf.', exEn: 'Open the book to page twelve.',
       img: { src: '/api/media/vocab-img/9a8871b58f3a5a97d751', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open book showing a single page turning' }
@@ -253,7 +261,9 @@ const CHAPTER = {
     { de: 'Endung', art: 'die', gender: 'f', plural: 'Endungen', pos: 'noun', en: 'ending', hi: 'अंत-प्रत्यय',
       ex: 'Die Endung für "ich" ist -e.', exEn: 'The ending for "ich" is -e.' },
     { de: 'Regel', art: 'die', gender: 'f', plural: 'Regeln', pos: 'noun', en: 'rule', hi: 'नियम',
-      ex: 'Die Regel ist einfach.', exEn: 'The rule is simple.' }
+      ex: 'Die Regel ist einfach.', exEn: 'The rule is simple.',
+      img: { src: '/api/media/vocab-img/80a6e68bbe95d935b071', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A referee holding up a yellow card on a sports pitch.' }
+    }
   ],
 
   // ---------- Present Tense (rule cards → accordion) ----------

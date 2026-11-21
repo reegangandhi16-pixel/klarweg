@@ -299,7 +299,9 @@ const CHAPTER = {
       ex: 'Bei der Präsentation ist alles schiefgegangen.', exEn: 'Everything went wrong during the presentation.', exHi: 'Presentation ke dauran sab kuch galat ho gaya.',
       ex2: 'Hoffentlich geht heute nichts schief.', ex2En: 'Hopefully nothing goes wrong today.', ex2Hi: 'Ummeed hai aaj kuch bhi galat na ho.',
       conj: { praesens: 'geht schief', praeteritum: 'ging schief', perfekt: 'ist schiefgegangen' },
-      advanced: { synonyms: ['misslingen', 'scheitern'], opposites: ['gelingen', 'klappen'], collocations: ['etwas geht schief', 'alles ist schiefgegangen'] } },
+      advanced: { synonyms: ['misslingen', 'scheitern'], opposites: ['gelingen', 'klappen'], collocations: ['etwas geht schief', 'alles ist schiefgegangen'] },
+      img: { src: '/api/media/vocab-img/e9396e0ab342f75e5c73', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A flustered presenter as a display easel collapses on stage.' }
+    },
     { de: 'solche', pos: 'pronoun', level: 'B1', en: 'such, of that kind', hi: 'ऐसे, इस तरह के',
       ex: 'Solche Ideen hatte ich noch nie.', exEn: 'I\'ve never had such ideas.', exHi: 'Mujhe kabhi aise vichar nahi aaye the.',
       ex2: 'Mit solchen Problemen kenne ich mich aus.', ex2En: 'I know my way around such problems.', ex2Hi: 'Aise samasyaon ke saath mujhe anubhav hai.',
@@ -405,7 +407,9 @@ const CHAPTER = {
     { de: 'Zeug', art: 'das', gender: 'n', plural: '— (Sg.)', pos: 'noun', level: 'B1', en: 'stuff, things', hi: 'सामान',
       ex: 'Wessen Zeug liegt auf dem Tisch?', exEn: 'Whose stuff is on the table?', exHi: 'Table par kiska saaman rakha hai?',
       ex2: 'Ich muss mein ganzes Zeug einpacken.', ex2En: 'I have to pack all my stuff.', ex2Hi: 'Mujhe apna saara saaman pack karna hai.',
-      advanced: { synonyms: ['Sachen', 'Kram'], opposites: [], collocations: ['mein ganzes Zeug', 'Zeug liegen lassen'] } },
+      advanced: { synonyms: ['Sachen', 'Kram'], opposites: [], collocations: ['mein ganzes Zeug', 'Zeug liegen lassen'] },
+      img: { src: '/api/media/vocab-img/4cdd8ca3e78d628e9ef9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A table covered in a messy assortment of miscellaneous stuff.' }
+    },
     { de: 'Kausalsatz', art: 'der', gender: 'm', plural: 'Kausalsätze', pos: 'noun', level: 'B1', en: 'causal clause', hi: 'कारण-वाचक वाक्य',
       ex: 'Ein Kausalsatz mit "weil" nennt einen Grund.', exEn: 'A causal clause with "weil" states a reason.', exHi: '"weil" wala kaaran-vachak vaakya ek kaaran batata hai.',
       ex2: 'Auch "da" leitet einen Kausalsatz ein.', ex2En: '"da" also introduces a causal clause.', ex2Hi: '"da" bhi ek kaaran-vachak vaakya shuru karta hai.',

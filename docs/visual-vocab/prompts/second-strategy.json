@@ -8952,6 +8952,125 @@
   "role": "focus",
   "cap": "Was für ein …? = What kind of …?"
  },
+ "bilden--form": {
+  "type": "grammar",
+  "de": "Bilde eine Frage.",
+  "hl": "Bilde",
+  "role": "focus",
+  "cap": "bilden = to form (eine Frage bilden)"
+ },
+ "nummerieren--number": {
+  "type": "grammar",
+  "de": "Nummeriere die Sätze.",
+  "hl": "Nummeriere",
+  "role": "focus",
+  "cap": "nummerieren = to number"
+ },
+ "darauf--upon-it-to-it": {
+  "type": "grammar",
+  "de": "Reagiere darauf.",
+  "hl": "darauf",
+  "role": "focus",
+  "cap": "darauf = to it (reagieren auf → darauf)"
+ },
+ "das-befinden--well-being-how-one-feels": {
+  "type": "grammar",
+  "de": "Man fragt nach dem Befinden: \"Wie geht es dir?\"",
+  "hl": "Befinden",
+  "role": "focus",
+  "cap": "das Befinden = how someone feels"
+ },
+ "die-form--form-shape": {
+  "type": "grammar",
+  "de": "Welche Form hat das Verb?",
+  "hl": "Form",
+  "role": "focus",
+  "cap": "die Form = form (of a word); shape"
+ },
+ "die-methode--method": {
+  "type": "grammar",
+  "de": "Die Methode ist einfach.",
+  "hl": "Methode",
+  "role": "focus",
+  "cap": "die Methode = method"
+ },
+ "besser--better": {
+  "type": "grammar",
+  "de": "Heute ist es besser.",
+  "hl": "besser",
+  "role": "focus",
+  "cap": "besser = better (gut → besser)"
+ },
+ "der-nachteil--disadvantage": {
+  "type": "grammar",
+  "de": "Das ist ein Nachteil.",
+  "hl": "Nachteil",
+  "role": "focus",
+  "cap": "der Nachteil = disadvantage"
+ },
+ "preiswert--cheap-good-value": {
+  "type": "grammar",
+  "de": "Die Fahrkarte ist sehr preiswert.",
+  "hl": "preiswert",
+  "role": "focus",
+  "cap": "preiswert = good value"
+ },
+ "dahinter--behind-it": {
+  "type": "grammar",
+  "de": "Das ist der Grund, der dahinter steht.",
+  "hl": "dahinter",
+  "role": "focus",
+  "cap": "dahinter = behind it"
+ },
+ "genuegen--suffice-be-enough": {
+  "type": "grammar",
+  "de": "Ein kurzer Blick genügt, um den Trick zu erkennen.",
+  "hl": "genügt",
+  "role": "focus",
+  "cap": "genügen = to be enough"
+ },
+ "obwohl--although": {
+  "type": "grammar",
+  "de": "Obwohl ich nervös bin, schaffe ich es.",
+  "hl": "Obwohl",
+  "role": "focus",
+  "cap": "obwohl = although (verb at the end)"
+ },
+ "danach--after-that": {
+  "type": "grammar",
+  "de": "Du kümmerst dich am besten erst danach darum.",
+  "hl": "danach",
+  "role": "focus",
+  "cap": "danach = after that"
+ },
+ "sich-eignen--be-suitable-for": {
+  "type": "grammar",
+  "de": "Sie eignet sich sehr gut für diese Stelle.",
+  "hl": "eignet sich",
+  "role": "focus",
+  "cap": "sich eignen (für) = to be suitable (for)"
+ },
+ "eventuell--potential-possibly": {
+  "type": "grammar",
+  "de": "Wir werden eventuell später kommen.",
+  "hl": "eventuell",
+  "role": "focus",
+  "cap": "eventuell = possibly, maybe"
+ },
+ "fassen--make": {
+  "type": "grammar",
+  "de": "Ich werde einen guten Vorsatz fassen.",
+  "hl": "Vorsatz fassen",
+  "role": "focus",
+  "cap": "einen Vorsatz fassen = to make a resolution"
+ },
+ "beim-alten-bleiben--stay-the-same": {
+  "type": "grammar",
+  "de": "Zum Glück war alles beim Alten geblieben.",
+  "hl": "beim Alten geblieben",
+  "role": "focus",
+  "cap": "beim Alten bleiben = to stay the same"
+ },
  "der-juli--july": {
   "key": "der-juli--july",
   "type": "scene",

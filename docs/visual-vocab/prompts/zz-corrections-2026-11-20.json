@@ -153,5 +153,41 @@
   "alt": "A contract being extended to a later end date",
   "strategy": "direct",
   "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "die-tabelle--table-chart": {
+  "subject": "Show a worksheet with a simple table of two columns and several rows; a hand writes German words into the empty cells with a pencil.",
+  "alt": "A hand writing words into the cells of a table",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "halb--half": {
+  "subject": "Show a round wall clock showing exactly 7:30, the minute hand pointing straight down to the 6 and the hour hand halfway between 7 and 8.",
+  "alt": "A clock showing half past seven",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "unabhaengig--independent": {
+  "subject": "Show a young woman proudly holding the keys to her own small flat in one hand and her first pay slip in the other, standing in front of her own front door.",
+  "alt": "A young woman with her own flat keys and pay slip",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "angeklagte--defendant": {
+  "subject": "Show a courtroom: a judge at the high bench, and a man in a suit sitting silently alone at the defendant's table with his lawyer beside him.",
+  "alt": "A defendant sitting silently in court",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "unruhig--restless-turbulent": {
+  "subject": "Show a heated meeting around a table: several people talk at once, interrupting each other with raised hands and speech bubbles overlapping.",
+  "alt": "A turbulent discussion with people interrupting",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "beweisen--prove": {
+  "subject": "Show a female researcher in a lab coat pointing at a chart on a screen that clearly confirms her hypothesis with a big tick, while colleagues nod.",
+  "alt": "A researcher proving her thesis with data",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
  }
 }

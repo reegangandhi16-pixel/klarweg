@@ -262,10 +262,14 @@ const CHAPTER = {
     },
     { de: 'heißen', pos: 'verb', en: 'to be called', hi: 'कहलाना',
       ex: 'Ich heiße Anna. Wie heißt du?', exEn: 'My name is Anna. What is yours?',
-      conj: { praesens: 'heißt', praeteritum: 'hieß', perfekt: 'hat geheißen' } },
+      conj: { praesens: 'heißt', praeteritum: 'hieß', perfekt: 'hat geheißen' },
+      img: { src: '/api/media/vocab-img/73f581d02058a653adc8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person gesturing to themselves while introducing their name to another.' }
+    },
     { de: 'kommen', pos: 'verb', en: 'to come (from)', hi: 'आना',
       ex: 'Ich komme aus Indien.', exEn: 'I come from India.',
-      conj: { praesens: 'kommt', praeteritum: 'kam', perfekt: 'ist gekommen' } },
+      conj: { praesens: 'kommt', praeteritum: 'kam', perfekt: 'ist gekommen' },
+      img: { src: '/api/media/vocab-img/a40f363d33cb98c8f2ec', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A traveler rolling a suitcase through an arrival gate and waving.' }
+    },
     { de: 'wohnen', pos: 'verb', en: 'to live, reside', hi: 'रहना',
       ex: 'Ich wohne in Delhi.', exEn: 'I live in Delhi.',
       conj: { praesens: 'wohnt', praeteritum: 'wohnte', perfekt: 'hat gewohnt' },
@@ -283,7 +287,9 @@ const CHAPTER = {
     },
     { de: 'kennen', pos: 'verb', en: 'to know (a person)', hi: 'जानना (किसी को)',
       ex: 'Kennst du Anna?', exEn: 'Do you know Anna?',
-      conj: { praesens: 'kennt', praeteritum: 'kannte', perfekt: 'hat gekannt' } },
+      conj: { praesens: 'kennt', praeteritum: 'kannte', perfekt: 'hat gekannt' },
+      img: { src: '/api/media/vocab-img/a447a623d2e82d8725a6', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person smiling and waving in friendly recognition at an approaching acquaintance.' }
+    },
     { de: 'vorstellen', pos: 'verb', en: 'to introduce', hi: 'परिचय देना',
       ex: 'Ich stelle mich vor: Ich bin Rohan.', exEn: 'Let me introduce myself: I am Rohan.',
       conj: { praesens: 'stellt vor', praeteritum: 'stellte vor', perfekt: 'hat vorgestellt' },
@@ -300,7 +306,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/4f1405bec4a5e3feb0c9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Row of vases with varying shapes and heights' }
     },
     { de: 'mein/meine', pos: 'possessive', en: 'my', hi: 'मेरा / मेरी',
-      ex: 'Mein Name ist Anna.', exEn: 'My name is Anna.' },
+      ex: 'Mein Name ist Anna.', exEn: 'My name is Anna.',
+      img: { src: '/api/media/vocab-img/edeecc1309a09f6db5e9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person placing their hands on their chest pointing to themselves.' }
+    },
     { de: 'dein/deine', pos: 'possessive', en: 'your (informal)', hi: 'तुम्हारा / तुम्हारी',
       ex: 'Wie ist dein Name?', exEn: 'What is your name?',
       vis: { kind: 'grammar', de: 'Wie ist dein Name?', hl: 'dein', role: 'article', cap: 'Informal possessive determiner (your)' }
@@ -310,7 +318,9 @@ const CHAPTER = {
       vis: { kind: 'grammar', de: 'Ich komme aus Indien.', hl: 'aus', role: 'preposition', cap: 'Preposition indicating origin or provenance' }
     },
     { de: 'in', pos: 'preposition', en: 'in', hi: 'में',
-      ex: 'Ich wohne in Delhi.', exEn: 'I live in Delhi.' },
+      ex: 'Ich wohne in Delhi.', exEn: 'I live in Delhi.',
+      img: { src: '/api/media/vocab-img/4be93dd4920723ae7a47', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A cat sleeping comfortably inside a woven basket.' }
+    },
     { de: 'auf', pos: 'preposition', en: 'in (a language); on', hi: 'पर / में (भाषा)',
       ex: 'Auf Deutsch, bitte!', exEn: 'In German, please!',
       vis: { kind: 'grammar', de: 'Auf Deutsch, bitte!', hl: 'Auf', role: 'preposition', cap: 'Using "auf" to specify the language' }
@@ -332,11 +342,17 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/7f3ed19fc9dd3ac9c87a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A friendly person standing' }
     },
     { de: 'Partner', art: 'der', gender: 'm', plural: 'Partner', pos: 'noun', en: 'partner (m)', hi: 'साथी (पुरुष)',
-      ex: 'Frag deinen Partner!', exEn: 'Ask your partner!' },
+      ex: 'Frag deinen Partner!', exEn: 'Ask your partner!',
+      img: { src: '/api/media/vocab-img/89639603ebd5c50d21c3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A student turning to talk with their male study partner at a desk.' }
+    },
     { de: 'Partnerin', art: 'die', gender: 'f', plural: 'Partnerinnen', pos: 'noun', en: 'partner (f)', hi: 'साथी (स्त्री)',
-      ex: 'Meine Partnerin heißt Lena.', exEn: 'My partner is called Lena.' },
+      ex: 'Meine Partnerin heißt Lena.', exEn: 'My partner is called Lena.',
+      img: { src: '/api/media/vocab-img/933e7681aaecccab134c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two female partners walking happily together holding hands.' }
+    },
     { de: 'Antwort', art: 'die', gender: 'f', plural: 'Antworten', pos: 'noun', en: 'answer', hi: 'जवाब',
-      ex: 'Die Antwort ist richtig.', exEn: 'The answer is correct.' },
+      ex: 'Die Antwort ist richtig.', exEn: 'The answer is correct.',
+      img: { src: '/api/media/vocab-img/449fe07d58878e37eafe', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A smiling student raising their hand in class beside a checkmark.' }
+    },
     { de: 'Telefon', art: 'das', gender: 'n', plural: 'Telefone', pos: 'noun', en: 'telephone', hi: 'टेलीफ़ोन',
       ex: 'Das Telefon klingelt.', exEn: 'The telephone is ringing.',
       img: { src: '/api/media/vocab-img/6747d4556438e7cbd9e0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A landline desktop telephone with a handset.' }

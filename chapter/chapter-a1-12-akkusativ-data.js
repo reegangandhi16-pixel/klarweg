@@ -197,7 +197,9 @@ const CHAPTER = {
     },
     { de: 'haben', pos: 'verb', en: 'to have', hi: 'होना (पास)',
       ex: 'Ich habe einen Stift.', exEn: 'I have a pen.',
-      conj: { praesens: 'hat', praeteritum: 'hatte', perfekt: 'hat gehabt' } },
+      conj: { praesens: 'hat', praeteritum: 'hatte', perfekt: 'hat gehabt' },
+      img: { src: '/api/media/vocab-img/bd609c527f8050d37d8f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person holding a yellow pen in their hand.' }
+    },
     { de: 'finden', pos: 'verb', en: 'to find', hi: 'ढूँढ़ना (मिलना)',
       ex: 'Ich finde den Schlüssel nicht.', exEn: 'I can\'t find the key.',
       conj: { praesens: 'findet', praeteritum: 'fand', perfekt: 'hat gefunden' },
@@ -209,7 +211,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/d82473e5e49f8464430e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person searching for something under a sofa.' }
     },
     { de: 'alles', pos: 'pronoun', en: 'everything', hi: 'सब कुछ',
-      ex: 'Ich habe alles.', exEn: 'I have everything.' },
+      ex: 'Ich habe alles.', exEn: 'I have everything.',
+      img: { src: '/api/media/vocab-img/512ca6efbc75ac062844', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person standing beside a fully packed suitcase.' }
+    },
     { de: 'Geschäft', art: 'das', gender: 'n', plural: 'Geschäfte', pos: 'noun', en: 'shop', hi: 'दुकान',
       ex: 'Das Geschäft ist offen.', exEn: 'The shop is open.',
       img: { src: '/api/media/vocab-img/9093c5c67e95a2e35df4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A small street shop with an overhead awning.' }
@@ -221,11 +225,15 @@ const CHAPTER = {
     { de: 'Sache', art: 'die', gender: 'f', plural: 'Sachen', pos: 'noun', en: 'thing', hi: 'चीज़',
       ex: 'Ich brauche die Sache.', exEn: 'I need the thing.' },
     { de: 'ein paar', pos: 'phrase', en: 'a few', hi: 'कुछ',
-      ex: 'Ich kaufe ein paar Sachen.', exEn: 'I buy a few things.' },
+      ex: 'Ich kaufe ein paar Sachen.', exEn: 'I buy a few things.',
+      img: { src: '/api/media/vocab-img/5718db9371ffcbb62742', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A shopping tote holding a few groceries on a table.' }
+    },
     { de: 'genug', pos: 'adverb', en: 'enough', hi: 'काफ़ी',
       ex: 'Ich habe genug Zeit.', exEn: 'I have enough time.' },
     { de: 'so', pos: 'adverb', en: 'this way, like this', hi: 'इस तरह',
-      ex: 'So sagt man das auf Deutsch.', exEn: 'That is how you say it in German.' },
+      ex: 'So sagt man das auf Deutsch.', exEn: 'That is how you say it in German.',
+      img: { src: '/api/media/vocab-img/aa0bffd9a22776dcd063', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A potter demonstrating the exact hand position to an apprentice.' }
+    },
     { de: 'Ding', art: 'das', gender: 'n', plural: 'Dinge', pos: 'noun', en: 'thing', hi: 'वस्तु',
       ex: 'Was ist das für ein Ding?', exEn: 'What kind of thing is that?' },
     { de: 'Meer', art: 'das', gender: 'n', plural: 'Meere', pos: 'noun', en: 'sea', hi: 'समुद्र',

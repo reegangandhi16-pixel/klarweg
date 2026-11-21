@@ -232,11 +232,11 @@ const CHAPTER = {
 
   // ---------- Vocabulary (8 words) ----------
   vocab: [
-    { de: 'mich', pos: 'pronoun', en: 'me (accusative)', hi: 'मुझे', ex: 'Hörst du mich?', exEn: 'Do you hear me?' },
+    { de: 'mich', pos: 'pronoun', en: 'me (accusative)', hi: 'मुझे', ex: 'Hörst du mich?', exEn: 'Do you hear me?', img: { src: '/api/media/vocab-img/b101e11eabf411780ca9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person on a telephone pointing to their own chest.' } },
     { de: 'dich', pos: 'pronoun', en: 'you (accusative)', hi: 'तुम्हें', ex: 'Ich sehe dich.', exEn: 'I see you.', vis: { kind: 'grammar', de: 'Ich sehe dich.', hl: 'dich', role: 'focus', cap: 'Akkusativ: du → dich (you as the object)' } },
     { de: 'ihn', pos: 'pronoun', en: 'him; it (masc.)', hi: 'उसे, इसे', ex: 'Ich kenne ihn.', exEn: 'I know him.', vis: { kind: 'grammar', de: 'Ich kenne ihn.', hl: 'ihn', role: 'focus', cap: 'Akkusativ: er → ihn (him; it for masculine nouns)' } },
     { de: 'sie', pos: 'pronoun', en: 'her, them; it (fem.)', hi: 'उसे, उन्हें', ex: 'Ich rufe sie an.', exEn: 'I call her.', vis: { kind: 'grammar', de: 'Ich rufe sie an.', hl: 'sie', role: 'akkusativ', cap: 'Feminine accusative pronoun: her' } },
-    { de: 'uns', pos: 'pronoun', en: 'us (accusative)', hi: 'हमें', ex: 'Frau Weber hört uns.', exEn: 'Frau Weber hears us.' },
+    { de: 'uns', pos: 'pronoun', en: 'us (accusative)', hi: 'हमें', ex: 'Frau Weber hört uns.', exEn: 'Frau Weber hears us.', img: { src: '/api/media/vocab-img/56bd67672797e691c3f7', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An older woman listening with a smile as two friends sing together.' } },
     { de: 'euch', pos: 'pronoun', en: 'you all (accusative)', hi: 'तुम सबको', ex: 'Ich vergesse euch nicht.', exEn: 'I won\u2019t forget you.', vis: { kind: 'grammar', de: 'Ich vergesse euch nicht.', hl: 'euch', role: 'focus', cap: 'euch = you all (accusative)' } },
     { de: 'wen', pos: 'pronoun', en: 'whom', hi: 'किसे', ex: 'Wen lädst du ein?', exEn: 'Whom do you invite?', img: { src: '/api/media/vocab-img/60a72d62fcceaae1a183', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person holding an invitation, deciding which friend to invite.' } },
     { de: 'Pronomen', art: 'das', gender: 'n', plural: 'Pronomen', pos: 'noun', en: 'pronoun', hi: 'सर्वनाम', ex: '"Ihn" ist ein Pronomen.', exEn: '"Ihn" is a pronoun.', vis: { kind: 'grammar', de: 'Ich kenne ihn gut.', hl: 'ihn', role: 'object', cap: 'A pronoun replacing a noun in the accusative case' } }

@@ -262,9 +262,13 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/9668b4c26e43ea6ef9f8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person smiling and waving goodbye.' }
     },
     { de: 'bis bald', pos: 'phrase', en: 'see you soon', hi: 'जल्द मिलेंगे',
-      ex: 'Tschüs und bis bald!', exEn: 'Bye and see you soon!' },
+      ex: 'Tschüs und bis bald!', exEn: 'Bye and see you soon!',
+      img: { src: '/api/media/vocab-img/6be432ab656fc0824700', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two friends smiling and waving goodbye along a sunlit path' }
+    },
     { de: 'bis dann', pos: 'phrase', en: 'until then', hi: 'तब तक',
-      ex: 'Okay, bis dann!', exEn: 'Okay, until then!' },
+      ex: 'Okay, bis dann!', exEn: 'Okay, until then!',
+      img: { src: '/api/media/vocab-img/7a41f704d4adbdd87012', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A colleague turning to wave goodbye while leaving through a doorway' }
+    },
     { de: 'bis später', pos: 'phrase', en: 'see you later', hi: 'बाद में मिलेंगे',
       ex: 'Ich gehe jetzt. Bis später!', exEn: 'I am going now. See you later!',
       img: { src: '/api/media/vocab-img/05ded80ee9a292a12346', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person wearing a backpack waving goodbye at an open doorway' }
@@ -339,7 +343,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/6645d062d16ee90dee15', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A politely dressed gentleman in a blazer offering a friendly greeting.' }
     },
     { de: 'Höflichkeit', art: 'die', gender: 'f', plural: 'Höflichkeiten', pos: 'noun', en: 'politeness', hi: 'शिष्टाचार',
-      ex: 'Höflichkeit ist wichtig.', exEn: 'Politeness is important.' },
+      ex: 'Höflichkeit ist wichtig.', exEn: 'Politeness is important.',
+      img: { src: '/api/media/vocab-img/62bf2597c11db601115a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A courteous person holding a door open for someone carrying packages.' }
+    },
     { de: 'formell', pos: 'adjective', en: 'formal', hi: 'औपचारिक',
       ex: 'Mit dem Lehrer spricht man formell.', exEn: 'With the teacher you speak formally.',
       compare: { comparative: 'formeller', superlative: 'am formellsten' } },
@@ -351,7 +357,9 @@ const CHAPTER = {
     { de: 'grüezi', pos: 'greeting', en: 'hello (Switzerland)', hi: 'नमस्ते (स्विस)',
       ex: 'Grüezi! — so grüßt man in der Schweiz.', exEn: 'Hello! — that is how you greet in Switzerland.' },
     { de: 'grüß Gott', pos: 'greeting', en: 'hello (Austria/S. Germany)', hi: 'नमस्ते (दक्षिणी)',
-      ex: 'Grüß Gott! — im Süden sehr normal.', exEn: 'Hello! — very normal in the south.' },
+      ex: 'Grüß Gott! — im Süden sehr normal.', exEn: 'Hello! — very normal in the south.',
+      img: { src: '/api/media/vocab-img/7365b496797b7d288747', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A friendly person tipping their hat in greeting at a shop doorway.' }
+    },
     { de: 'moin', pos: 'interjection', en: 'hi (North Germany)', hi: 'नमस्ते (उत्तरी)',
       ex: 'Moin! — so sagt man im Norden.', exEn: 'Hi! — that is what they say in the north.',
       img: { src: '/api/media/vocab-img/09f8c1deb79fc27eb153', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A coastal person in a raincoat waving a friendly greeting.' }

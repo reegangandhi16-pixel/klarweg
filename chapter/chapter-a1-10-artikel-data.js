@@ -289,7 +289,9 @@ const CHAPTER = {
     },
     { de: 'merken', pos: 'verb', en: 'to remember, note', hi: 'याद रखना',
       ex: 'Merke dir den Artikel!', exEn: 'Remember the article!',
-      conj: { praesens: 'merkt', praeteritum: 'merkte', perfekt: 'hat gemerkt' } },
+      conj: { praesens: 'merkt', praeteritum: 'merkte', perfekt: 'hat gemerkt' },
+      img: { src: '/api/media/vocab-img/3ed6726b9f1d39c0838c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person tapping their temple with a string tied on their finger.' }
+    },
     { de: 'noch', pos: 'adverb', en: 'yet, still, any', hi: 'अभी / और',
       ex: 'Hast du noch eine Karte?', exEn: 'Do you have another card?',
       vis: { kind: 'grammar', de: 'Hast du noch eine Karte?', hl: 'noch', role: 'focus', cap: 'noch = yet, still, any' }
@@ -358,7 +360,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/13d5ef53eb61107b0b2d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A sick person resting in bed' }
     },
     { de: 'Anzeige', art: 'die', gender: 'f', plural: 'Anzeigen', pos: 'noun', en: 'advert', hi: 'विज्ञापन',
-      ex: 'Die Anzeige ist im Blog.', exEn: 'The advert is in the blog.' },
+      ex: 'Die Anzeige ist im Blog.', exEn: 'The advert is in the blog.',
+      img: { src: '/api/media/vocab-img/e6469dbe6f8ad4fa7be5', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A tablet screen displaying a side advertisement banner with a sneaker.' }
+    },
     { de: 'Assoziation', art: 'die', gender: 'f', plural: 'Assoziationen', pos: 'noun', en: 'association', hi: 'संबंध',
       ex: 'Die Assoziation hilft beim Merken.', exEn: 'The association helps you remember.' },
     { de: 'Autobahn', art: 'die', gender: 'f', plural: 'Autobahnen', pos: 'noun', en: 'highway', hi: 'राजमार्ग',
@@ -370,11 +374,17 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/416645d17628177effee', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A glass bottle with a cork stopper.' }
     },
     { de: 'Homepage', art: 'die', gender: 'f', plural: 'Homepages', pos: 'noun', en: 'homepage', hi: 'होमपेज',
-      ex: 'Die Homepage ist neu.', exEn: 'The homepage is new.' },
+      ex: 'Die Homepage ist neu.', exEn: 'The homepage is new.',
+      img: { src: '/api/media/vocab-img/d1927c1ef3af936375e4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A computer monitor showing a clean website homepage layout.' }
+    },
     { de: 'Methode', art: 'die', gender: 'f', plural: 'Methoden', pos: 'noun', en: 'method', hi: 'तरीका',
-      ex: 'Die Methode ist einfach.', exEn: 'The method is simple.' },
+      ex: 'Die Methode ist einfach.', exEn: 'The method is simple.',
+      vis: { kind: 'grammar', de: 'Die Methode ist einfach.', hl: 'Methode', role: 'focus', cap: 'die Methode = method' }
+    },
     { de: 'Mindmap', art: 'die', gender: 'f', plural: 'Mindmaps', pos: 'noun', en: 'mind map', hi: 'माइंड मैप',
-      ex: 'Die Mindmap zeigt die Artikel.', exEn: 'The mind map shows the articles.' },
+      ex: 'Die Mindmap zeigt die Artikel.', exEn: 'The mind map shows the articles.',
+      img: { src: '/api/media/vocab-img/4f3cb446d8edd734d2df', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A whiteboard with a branching diagram connecting a central circle to satellites.' }
+    },
     { de: 'Nudel', art: 'die', gender: 'f', plural: 'Nudeln', pos: 'noun', en: 'noodle', hi: 'नूडल',
       ex: 'Die Nudel ist lang.', exEn: 'The noodle is long.',
       img: { src: '/api/media/vocab-img/cd4c65629a07bce1485a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A long noodle strand lifted on a fork' }
@@ -396,12 +406,18 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/3ccb7b085a4da63ac60e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person researching with open books at desk' }
     },
     { de: 'thematisch', pos: 'adjective', en: 'thematic', hi: 'विषय-आधारित',
-      ex: 'Ordne die Wörter thematisch.', exEn: 'Sort the words thematically.' },
+      ex: 'Ordne die Wörter thematisch.', exEn: 'Sort the words thematically.',
+      img: { src: '/api/media/vocab-img/37e418d420d6b2ac1cd3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Winter clothes and beach gear sorted into separate piles.' }
+    },
     { de: 'verwenden', pos: 'verb', en: 'to use', hi: 'इस्तेमाल करना',
       ex: 'Verwende den richtigen Artikel.', exEn: 'Use the correct article.',
-      conj: { praesens: 'verwendet', praeteritum: 'verwendete', perfekt: 'hat verwendet' } },
+      conj: { praesens: 'verwendet', praeteritum: 'verwendete', perfekt: 'hat verwendet' },
+      img: { src: '/api/media/vocab-img/ba65febe1966d25a7491', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A craftsperson using a chisel to carve a block of timber.' }
+    },
     { de: 'weitere', pos: 'adjective', en: 'further, more', hi: 'और / अतिरिक्त',
-      ex: 'Nenne weitere Beispiele.', exEn: 'Name further examples.' },
+      ex: 'Nenne weitere Beispiele.', exEn: 'Name further examples.',
+      img: { src: '/api/media/vocab-img/b6d80b075b16e79e0a75', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand adding two more wooden cubes to an existing row.' }
+    },
     { de: 'ziehen', pos: 'verb', en: 'to draw (a card)', hi: 'खींचना / कार्ड निकालना',
       ex: 'Zieh eine Karte vom Stapel.', exEn: 'Draw a card from the pile.',
       conj: { praesens: 'zieht', praeteritum: 'zog', perfekt: 'hat gezogen' },
@@ -414,7 +430,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/5403784c533107914944', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A reporter speaking into a microphone' }
     },
     { de: 'bestimmt', pos: 'adjective', en: 'definite', hi: 'निश्चित',
-      ex: 'Der, die, das sind bestimmte Artikel.', exEn: 'Der, die, das are definite articles.' },
+      ex: 'Der, die, das sind bestimmte Artikel.', exEn: 'Der, die, das are definite articles.',
+      img: { src: '/api/media/vocab-img/203ff8156e6f92137371', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand pointing directly at one specific red apple among green ones.' }
+    },
     { de: 'Nomen', art: 'das', gender: 'n', plural: 'Nomen', pos: 'noun', en: 'noun', hi: 'संज्ञा',
       ex: 'Jedes Nomen hat einen Artikel.', exEn: 'Every noun has an article.',
       vis: { kind: 'grammar', de: 'Der Hund schläft im Garten.', hl: 'Hund', role: 'subject', cap: '"Hund" is a capitalized German noun with an article' }

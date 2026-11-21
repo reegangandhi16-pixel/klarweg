@@ -233,29 +233,41 @@ const CHAPTER = {
     // — Active support —
     { de: 'bedeuten', pos: 'verb', en: 'to mean', hi: 'मतलब होना',
       ex: 'Was bedeutet das Wort?', exEn: 'What does the word mean?',
-      conj: { praesens: 'bedeutet', praeteritum: 'bedeutete', perfekt: 'hat bedeutet' } },
+      conj: { praesens: 'bedeutet', praeteritum: 'bedeutete', perfekt: 'hat bedeutet' },
+      img: { src: '/api/media/vocab-img/0a390b7c964bf89f77bc', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An adult explaining the meaning of a red traffic light.' }
+    },
     { de: 'Gespräch', art: 'das', gender: 'n', plural: 'Gespräche', pos: 'noun', en: 'conversation', hi: 'बातचीत',
       ex: 'Das Gespräch ist auf Deutsch.', exEn: 'The conversation is in German.',
       img: { src: '/api/media/vocab-img/55dfbce3ff371de48f9f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people at a table having a conversation.' }
     },
     { de: 'Dank', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'thanks', hi: 'धन्यवाद',
-      ex: 'Vielen Dank für das Gespräch!', exEn: 'Many thanks for the conversation!' },
+      ex: 'Vielen Dank für das Gespräch!', exEn: 'Many thanks for the conversation!',
+      img: { src: '/api/media/vocab-img/f005551f242aba46f031', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person with hand over heart bowing in gratitude' }
+    },
     { de: 'Dialog', art: 'der', gender: 'm', plural: 'Dialoge', pos: 'noun', en: 'dialogue', hi: 'संवाद',
-      ex: 'Lest den Dialog zu zweit.', exEn: 'Read the dialogue in pairs.' },
+      ex: 'Lest den Dialog zu zweit.', exEn: 'Read the dialogue in pairs.',
+      img: { src: '/api/media/vocab-img/8041180bd28963ca4609', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people seated facing each other engaged in conversation.' }
+    },
     { de: 'Entschuldigung', art: 'die', gender: 'f', plural: 'Entschuldigungen', pos: 'noun', en: 'sorry; excuse me', hi: 'माफ़ कीजिए',
       ex: 'Entschuldigung, verstehst du das?', exEn: 'Excuse me, do you understand that?' },
     { de: 'ein bisschen', pos: 'phrase', en: 'a little', hi: 'थोड़ा',
-      ex: 'Ich spreche ein bisschen Deutsch.', exEn: 'I speak a little German.' },
+      ex: 'Ich spreche ein bisschen Deutsch.', exEn: 'I speak a little German.',
+      img: { src: '/api/media/vocab-img/86046fdaf128af62169d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand pinching thumb and forefinger close together indicating a little.' }
+    },
     // — Passive —
     { de: 'Wort', art: 'das', gender: 'n', plural: 'Wörter', pos: 'noun', en: 'word', hi: 'शब्द',
       ex: 'Was bedeutet dieses Wort?', exEn: 'What does this word mean?' },
     { de: 'Sprache', art: 'die', gender: 'f', plural: 'Sprachen', pos: 'noun', en: 'language', hi: 'भाषा',
-      ex: 'Deutsch ist eine schöne Sprache.', exEn: 'German is a beautiful language.' },
+      ex: 'Deutsch ist eine schöne Sprache.', exEn: 'German is a beautiful language.',
+      img: { src: '/api/media/vocab-img/4bfc2fd511d99f310136', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people conversing with intertwining colorful speech bubbles.' }
+    },
     // — Reference / System —
     { de: 'Satz', art: 'der', gender: 'm', plural: 'Sätze', pos: 'noun', en: 'sentence', hi: 'वाक्य',
       ex: 'Bilde einen Satz.', exEn: 'Form a sentence.' },
     { de: 'Art', art: 'die', gender: 'f', plural: 'Arten', pos: 'noun', en: 'type, kind', hi: 'प्रकार',
-      ex: 'Welche Art von Frage ist das?', exEn: 'What type of question is that?' },
+      ex: 'Welche Art von Frage ist das?', exEn: 'What type of question is that?',
+      img: { src: '/api/media/vocab-img/9aab200975784b2786ad', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Three different types of leaves arranged in a row.' }
+    },
     { de: 'Ja-/Nein-Frage', art: 'die', gender: 'f', plural: 'Ja-/Nein-Fragen', pos: 'noun', en: 'yes/no question', hi: 'हाँ/नहीं प्रश्न',
       ex: 'Eine Ja-/Nein-Frage beginnt mit dem Verb.', exEn: 'A yes/no question begins with the verb.',
       img: { src: '/api/media/vocab-img/cf7cb3b35d8412b223ad', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Hands offering a choice between a green checkmark and red cross token.' }
@@ -264,7 +276,9 @@ const CHAPTER = {
       ex: 'Auf diese Weise fragt man.', exEn: 'This is the way you ask.' },
     { de: 'führen', pos: 'verb', en: 'to lead; to have (a conversation)', hi: 'चलाना (बातचीत)',
       ex: 'Wir führen ein Gespräch.', exEn: 'We have a conversation.',
-      conj: { praesens: 'führt', praeteritum: 'führte', perfekt: 'hat geführt' } }
+      conj: { praesens: 'führt', praeteritum: 'führte', perfekt: 'hat geführt' },
+      img: { src: '/api/media/vocab-img/9817539b45138327bede', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people sitting at a table having an animated conversation.' }
+    }
   ],
 
   // ---------- Yes/No Questions (rule cards → accordion) ----------

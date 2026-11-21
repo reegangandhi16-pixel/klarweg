@@ -266,7 +266,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/1adb497f1a703ac970da', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two open hands showing ten fingers' }
     },
     { de: 'elf', pos: 'number', en: 'eleven', hi: 'ग्यारह',
-      ex: 'Elf Spieler sind ein Team.', exEn: 'Eleven players are a team.' },
+      ex: 'Elf Spieler sind ein Team.', exEn: 'Eleven players are a team.',
+      img: { src: '/api/media/vocab-img/b0278493b85857f43500', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Eleven soccer players in matching jerseys standing in team formation.' }
+    },
     { de: 'zwölf', pos: 'number', en: 'twelve', hi: 'बारह',
       ex: 'Ein Jahr hat zwölf Monate.', exEn: 'A year has twelve months.',
       img: { src: '/api/media/vocab-img/8143a84b650b3f090ade', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'open carton with twelve brown eggs' }
@@ -346,9 +348,13 @@ const CHAPTER = {
     { de: 'Handynummer', art: 'die', gender: 'f', plural: 'Handynummern', pos: 'noun', en: 'mobile number', hi: 'मोबाइल नंबर',
       ex: 'Wie ist deine Handynummer?', exEn: 'What is your mobile number?' },
     { de: 'Telefonnummer', art: 'die', gender: 'f', plural: 'Telefonnummern', pos: 'noun', en: 'phone number', hi: 'टेलीफ़ोन नंबर',
-      ex: 'Meine Telefonnummer ist neu.', exEn: 'My phone number is new.' },
+      ex: 'Meine Telefonnummer ist neu.', exEn: 'My phone number is new.',
+      img: { src: '/api/media/vocab-img/56ba9fa42c36e6a72d64', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Tapping digits on a smartphone keypad.' }
+    },
     { de: 'E-Mail-Adresse', art: 'die', gender: 'f', plural: 'E-Mail-Adressen', pos: 'noun', en: 'email address', hi: 'ईमेल पता',
-      ex: 'Meine E-Mail-Adresse hat einen Punkt.', exEn: 'My email address has a dot.' },
+      ex: 'Meine E-Mail-Adresse hat einen Punkt.', exEn: 'My email address has a dot.',
+      img: { src: '/api/media/vocab-img/e18c141fc08aa796d28f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A tablet showing a contact form field with an envelope icon.' }
+    },
     { de: 'Punkt', art: 'der', gender: 'm', plural: 'Punkte', pos: 'noun', en: 'dot, point', hi: 'बिंदु',
       ex: 'anna.berlin — hier ist ein Punkt.', exEn: 'anna.berlin — here is a dot.' },
     { de: 'Unterstrich', art: 'der', gender: 'm', plural: 'Unterstriche', pos: 'noun', en: 'underscore', hi: 'अंडरस्कोर',

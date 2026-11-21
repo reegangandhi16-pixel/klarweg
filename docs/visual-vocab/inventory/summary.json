@@ -13,27 +13,27 @@
  "uniqueHeadwords": 7779,
  "illustrableConcepts": 7893,
  "textOnlyConcepts": 568,
- "alreadyIllustrated": 4188,
- "imagesNeeded": 3705,
+ "alreadyIllustrated": 4617,
+ "imagesNeeded": 3276,
  "cardsServedByReuse": 663,
  "polysemousHeadwords": 578,
  "nearDuplicateHeadwords": 309,
  "byTier": {
-  "image": 2864,
-  "concept": 841
+  "image": 2517,
+  "concept": 759
  },
- "publicImages": 31,
- "gatedImages": 3674,
+ "publicImages": 28,
+ "gatedImages": 3248,
  "cost": {
   "pricePerImage": 0.039,
-  "expectedImages": 4698,
-  "expectedUsd": 183.22,
-  "batchApiUsd": 91.61
+  "expectedImages": 4159,
+  "expectedUsd": 162.2,
+  "batchApiUsd": 81.1
  },
  "storage": {
   "bytesPerWord": 19942,
-  "files": 14820,
-  "mb": 70.5
+  "files": 13104,
+  "mb": 62.3
  },
  "byLevel": {
   "a1": {
@@ -44,7 +44,7 @@
    "image": 1480,
    "concept": 269,
    "textOnly": 235,
-   "newConcepts": 615
+   "newConcepts": 403
   },
   "a2": {
    "chapters": 35,
@@ -54,7 +54,7 @@
    "image": 1270,
    "concept": 272,
    "textOnly": 65,
-   "newConcepts": 427
+   "newConcepts": 379
   },
   "b1": {
    "chapters": 35,
@@ -64,7 +64,7 @@
    "image": 1712,
    "concept": 296,
    "textOnly": 120,
-   "newConcepts": 851
+   "newConcepts": 685
   },
   "b2": {
    "chapters": 69,
@@ -74,7 +74,7 @@
    "image": 2142,
    "concept": 405,
    "textOnly": 22,
-   "newConcepts": 1376
+   "newConcepts": 1374
   },
   "c1": {
    "chapters": 43,
@@ -94,7 +94,7 @@
    "image": 423,
    "concept": 112,
    "textOnly": 176,
-   "newConcepts": 349
+   "newConcepts": 348
   }
  }
 }

@@ -306,7 +306,9 @@ const CHAPTER = {
       ex: 'Wann ist das neue Modell auf den Markt gekommen?', exEn: 'When did the new model come onto the market?', exHi: 'Naya model bazaar mein kab aaya?',
       ex2: 'Das Gerät kommt nächsten Monat auf den Markt.', ex2En: 'The device comes onto the market next month.', ex2Hi: 'Device agle mahine bazaar mein aayega.',
       conj: { praesens: 'kommt auf den Markt', praeteritum: 'kam auf den Markt', perfekt: 'ist auf den Markt gekommen' },
-      advanced: { synonyms: ['erscheinen', 'herauskommen'], opposites: [], collocations: ['ein neues Modell kommt auf den Markt'] } },
+      advanced: { synonyms: ['erscheinen', 'herauskommen'], opposites: [], collocations: ['ein neues Modell kommt auf den Markt'] },
+      img: { src: '/api/media/vocab-img/531d00d80ad1c207cd64', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'New product being placed onto the retail market' }
+    },
     { de: 'stumm schalten', pos: 'verb', level: 'B1', en: 'to switch to mute', hi: 'म्यूट करना',
       ex: 'Könnten Sie Ihr Handy bitte stumm schalten?', exEn: 'Could you please put your phone on mute?', exHi: 'Kya aap kripya apna phone mute kar sakte hain?',
       ex2: 'Ich würde das Mikrofon gern stumm schalten.', ex2En: 'I would like to mute the microphone.', ex2Hi: 'Main microphone mute karna chahoonga.',
@@ -345,7 +347,9 @@ const CHAPTER = {
     { de: 'Sonderangebot', art: 'das', gender: 'n', plural: 'Sonderangebote', pos: 'noun', level: 'B1', en: 'special offer', hi: 'विशेष ऑफ़र',
       ex: 'Hätten Sie auch ein Sonderangebot für Kuchen?', exEn: 'Would you also have a special offer on cake?', exHi: 'Kya aapke paas cake ka special offer bhi hoga?',
       ex2: 'Das Sonderangebot gilt nur bis Freitag.', ex2En: 'The special offer is valid only until Friday.', ex2Hi: 'Special offer sirf Friday tak valid hai.',
-      advanced: { synonyms: ['Angebot', 'Aktion'], opposites: ['Normalpreis'], collocations: ['ein Sonderangebot nutzen', 'im Sonderangebot'] } },
+      advanced: { synonyms: ['Angebot', 'Aktion'], opposites: ['Normalpreis'], collocations: ['ein Sonderangebot nutzen', 'im Sonderangebot'] },
+      img: { src: '/api/media/vocab-img/c11dc4b33b235b5cbdc7', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A bakery cake displayed next to a bright starburst card.' }
+    },
     { de: 'Handyladen', art: 'der', gender: 'm', plural: 'Handyläden', pos: 'noun', level: 'B1', en: 'mobile phone shop', hi: 'मोबाइल फ़ोन की दुकान',
       ex: 'Ich muss noch in den Handyladen.', exEn: 'I still need to go to the mobile phone shop.', exHi: 'Mujhe abhi mobile shop jaana hai.',
       ex2: 'Der Handyladen hat ein gutes Sonderangebot.', ex2En: 'The mobile phone shop has a good special offer.', ex2Hi: 'Mobile shop mein ek accha special offer hai.',

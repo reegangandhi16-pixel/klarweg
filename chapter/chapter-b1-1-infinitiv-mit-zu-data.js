@@ -218,7 +218,9 @@ const CHAPTER = {
   // ---------- Vocabulary (31 items — full chapter-01 upload list, plus the grammar marker) ----------
   vocab: [
     { de: 'Erlebnis', art: 'das', gender: 'n', plural: 'Erlebnisse', pos: 'noun', en: 'experience', hi: 'अनुभव',
-      ex: 'Es war ein tolles Erlebnis, in Deutschland zu leben.', exEn: 'It was a great experience to live in Germany.' },
+      ex: 'Es war ein tolles Erlebnis, in Deutschland zu leben.', exEn: 'It was a great experience to live in Germany.',
+      img: { src: '../public/vocab-img/7fc09e45b96f0000f712', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A joyful person on a mountain summit celebrating an unforgettable view.' }
+    },
     { de: 'erfahren', pos: 'verb', en: 'to learn, find out', hi: 'पता चलना',
       ex: 'Ich hoffe, mehr über die Kultur zu erfahren.', exEn: 'I hope to learn more about the culture.',
       conj: { praesens: 'erfährt', praeteritum: 'erfuhr', perfekt: 'hat erfahren' },
@@ -336,7 +338,9 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/bbd5c92d836037f7aad7', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'red fly agaric mushroom with white spots and a small warning gesture: a hand stopping before picking it' }
     },
     { de: 'reif', pos: 'adjective', en: 'ripe', hi: 'पका हुआ',
-      ex: 'Es ist leicht, reife von unreifen Trauben zu unterscheiden.', exEn: 'It\'s easy to tell ripe grapes from unripe ones.' }
+      ex: 'Es ist leicht, reife von unreifen Trauben zu unterscheiden.', exEn: 'It\'s easy to tell ripe grapes from unripe ones.',
+      img: { src: '../public/vocab-img/16705c624becbb061941', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A bright yellow ripe banana beside an unripe green banana.' }
+    }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

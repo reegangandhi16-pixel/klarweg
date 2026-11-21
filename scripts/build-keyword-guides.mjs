@@ -7,6 +7,7 @@ const root = new URL('../', import.meta.url);
 const read = file => fs.readFileSync(new URL(file, root), 'utf8');
 const guidesDirectory = 'docs/seo/keyword-guides/';
 const batches = ['pages.json', 'batch-2.json'].map(file => JSON.parse(read(guidesDirectory + file)));
+const answers = JSON.parse(read(guidesDirectory + 'direct-answers.json'));
 const check = process.argv.includes('--check');
 const sitemap = read('sitemap.xml');
 const resources = read('resources.html');
@@ -21,7 +22,7 @@ for (const pages of batches) {
   }
   for (const [slug, keyword, title, description, target, action] of pages) {
     assert.match(slug, /^[a-z]+[a-z0-9]*(?:-[a-z0-9]+)*$/);
-    assert.ok(keyword && target && action);
+    assert.ok(keyword && target && action && answers[slug]);
     const file = slug + '.html';
     const url = SITE_BASE + '/' + file;
     assert.ok(allowlist.has(file) && sitemap.includes(`<loc>${url}</loc>`) && resources.includes(`href="${file}"`), file);
@@ -64,7 +65,7 @@ for (const pages of batches) {
 <header><div class="top"><a class="brand" href="index.html">Klarweg</a><nav class="nav" aria-label="Main navigation">${link('courses.html','Courses')} ${link('resources.html','Resources')} ${link('live-classes.html','Live classes')}</nav></div></header>
 <main class="wrap" id="main">
 <nav class="crumb" aria-label="Breadcrumb">${link('resources.html#german-learning-guides','German learning guides')}</nav>
-<section class="hero"><h1>${esc(title)}</h1><p class="lede">${esc(description)}</p><div class="actions">${link(target,action,'btn')}</div></section>
+<section class="hero"><h1>${esc(title)}</h1><p class="lede">${esc(answers[slug])}</p><div class="actions">${link(target,action,'btn')}</div></section>
 <div class="content"><div class="stack">
 ${content}
 <section class="panel"><h2>Put it into practice</h2><div class="actions">${link(target,action,'btn')}</div></section>

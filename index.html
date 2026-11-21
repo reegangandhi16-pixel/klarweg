@@ -1902,6 +1902,27 @@ body.mobile-nav-open { overflow: hidden; }
 }
 .dialog-bubble.right .dialog-speaker { color: var(--blue-deep); }
 
+/* Show / Hide translation — mirrors the course Study story
+   (chapter/chapter.css .story-trans / .story-trans-toggle). Hidden until the
+   toggle adds .show-trans to the scene. */
+.story-scene .story-trans { margin-top: 10px; font-family: var(--font-ui); font-style: normal; font-weight: 400; font-size: 15px; color: var(--ink-tertiary); line-height: 1.5; display: none; }
+.story-scene .story-trans .st-hi { font-family: var(--font-hindi, inherit); color: var(--ink-secondary); display: block; margin-top: 3px; }
+.story-scene.show-trans .story-trans { display: block; }
+.story-scene-controls { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+.story-trans-toggle {
+  min-height: 44px; padding: 11px 18px; border-radius: var(--r-full);
+  border: 1px solid var(--hairline-strong); background: var(--bg-surface);
+  font-family: var(--font-ui); font-size: 14px; color: var(--ink-secondary); cursor: pointer;
+}
+.story-trans-toggle:hover { border-color: var(--ink-tertiary); }
+.story-trans-toggle[aria-pressed="true"] { border-color: var(--ink-tertiary); color: var(--ink-primary); }
+.story-trans-toggle .stt-short { display: none; }
+@media (max-width: 860px) {
+  .story-trans-toggle .stt-long { display: none; }
+  .story-trans-toggle .stt-short { display: inline; }
+  .story-trans-toggle { padding: 12px 12px; }
+}
+
 /* ============================================================
    GOETHE BAND
 ============================================================ */
@@ -5373,6 +5394,7 @@ body {
           <span class="de r-verb" data-word="möchten">möchten</span>
           <span class="de r-pronoun c-nom" data-word="sie">Sie</span>
           <span class="de r-verb" data-word="trinken">trinken</span>?
+          <div class="story-trans"><span class="st-en">What would you like to drink?</span><span class="st-hi" lang="hi">आप क्या पीना चाहेंगे?</span></div>
         </div>
         <div class="dialog-bubble right sentence" data-voice="male" data-playable data-sentence="Ich nehme einen Kaffee, bitte.">
           <div class="dialog-speaker">Rohan</div>
@@ -5381,22 +5403,25 @@ body {
           <span class="de r-article c-akk" data-word="einen-2">einen</span>
           <span class="de r-object c-akk" data-word="kaffee">Kaffee</span>,
           <span class="de r-conjunction" data-word="bitte">bitte.</span>
+          <div class="story-trans"><span class="st-en">I'll have a coffee, please.</span><span class="st-hi" lang="hi">मैं एक कॉफ़ी लूँगा, प्लीज़।</span></div>
         </div>
         <div class="dialog-bubble left sentence" data-voice="female" data-playable data-sentence="Klein oder groß?">
           <div class="dialog-speaker">Anna</div>
           <span class="de r-adjective" data-word="klein">Klein</span>
           <span class="de r-conjunction" data-word="oder">oder</span>
           <span class="de r-adjective" data-word="groß">groß</span>?
+          <div class="story-trans"><span class="st-en">Small or large?</span><span class="st-hi" lang="hi">छोटी या बड़ी?</span></div>
         </div>
         <div class="dialog-bubble right sentence" data-voice="male" data-playable data-sentence="Groß, mit Milch.">
           <div class="dialog-speaker">Rohan</div>
           <span class="de r-adjective" data-word="groß-2">Groß</span>,
           <span class="de r-preposition" data-word="mit">mit</span>
           <span class="de r-object c-dat" data-word="milch">Milch</span>.
+          <div class="story-trans"><span class="st-en">Large, with milk.</span><span class="st-hi" lang="hi">बड़ी, दूध के साथ।</span></div>
         </div>
 
         <!-- Single play-conversation button cycles every bubble -->
-        <div style="display: flex; justify-content: center; margin-top: 20px;">
+        <div class="story-scene-controls">
           <div class="sentence-player" id="story-dialogue-player">
             <button class="sp-btn sp-play" data-state="idle" type="button" id="story-play-btn">
               <span class="icon" aria-hidden="true">
@@ -5406,6 +5431,8 @@ body {
             </button>
             <button class="sp-btn sp-speed" id="story-speed-btn" type="button">1×</button>
           </div>
+          <!-- Same control as the course Study story (chapter-app.js): hidden by default. -->
+          <button class="story-trans-toggle" id="story-trans-toggle" type="button" aria-pressed="false" aria-controls="story-scene"><span class="stt-long">Show translation</span><span class="stt-short">Translation</span></button>
         </div>
       </div>
     </div>
@@ -7473,6 +7500,20 @@ document.querySelectorAll('.sentence-player').forEach(player => {
     }).observe(playBtn, { attributes: true, attributeFilter: ['data-state'] });
   }
 });
+
+/* Story "Show translation" — same behaviour as the course Study story
+   (chapter-app.js): toggles .show-trans on the scene, swaps the long label,
+   mirrors the state in aria-pressed. */
+(function () {
+  const btn = document.getElementById('story-trans-toggle');
+  const scene = document.getElementById('story-scene');
+  if (!btn || !scene) return;
+  btn.addEventListener('click', () => {
+    const on = scene.classList.toggle('show-trans');
+    btn.querySelector('.stt-long').textContent = on ? 'Hide translation' : 'Show translation';
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+})();
 
 /* ============================================================
    COLOR-SYSTEM "See more" toggle — reveals tiers 2–7 smoothly.

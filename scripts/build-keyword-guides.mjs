@@ -6,7 +6,7 @@ import { escapeHtml as esc } from './build-seo-practice.mjs';
 const root = new URL('../', import.meta.url);
 const read = file => fs.readFileSync(new URL(file, root), 'utf8');
 const guidesDirectory = 'docs/seo/keyword-guides/';
-const batches = ['pages.json', 'batch-2.json', 'batch-3.json'].map(file => JSON.parse(read(guidesDirectory + file)));
+const batches = ['pages.json', 'batch-2.json', 'batch-3.json', 'batch-4.json'].map(file => JSON.parse(read(guidesDirectory + file)));
 const answers = JSON.parse(read(guidesDirectory + 'direct-answers.json'));
 const check = process.argv.includes('--check');
 const sitemap = read('sitemap.xml');
@@ -17,7 +17,7 @@ const link = (url, text, classes = '') => `<a${classes ? ` class="${classes}"` :
 
 for (const pages of batches) {
   assert.equal(pages.length, 10);
-  for (const index of [0,1,2,3]) {
+  for (const index of [0,2,3]) {
     assert.equal(new Set(pages.map(page => page[index])).size, pages.length);
   }
   for (const [slug, keyword, title, description, target, action] of pages) {

@@ -1573,3 +1573,15 @@ b1-german-ausbildung-interview.html
 a1-speaking-practice-family-reunion.html
 kw-a1-listening-voice.js
 downloads/klarweg-a1-worksheet-hindi.pdf
+
+# Keyword-led German learning guides, batch 4
+online-german-a2-classes.html
+online-german-b2-classes.html
+german-tutor-online-india.html
+learn-german-online-india.html
+german-a2-mini-practice-test.html
+german-b2-mini-practice-test.html
+german-a2-writing-practice-online.html
+german-b2-speaking-practice-online.html
+german-language-basics-for-beginners.html
+german-a2-course-fees.html

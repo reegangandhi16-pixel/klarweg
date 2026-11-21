@@ -1,0 +1,12 @@
+{
+  "name": "klarweg-social-agent",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --test scripts/*.test.mjs",
+    "dry-run": "node scripts/agent.mjs --dry-run"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

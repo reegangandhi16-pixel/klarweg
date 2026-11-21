@@ -1571,5 +1571,5 @@ german-a1-listening-practice.html
 goethe-b1-exam-preparation-plan.html
 b1-german-ausbildung-interview.html
 a1-speaking-practice-family-reunion.html
-practice/a1-listening-voice.js
+kw-a1-listening-voice.js
 downloads/klarweg-a1-worksheet-hindi.pdf

@@ -1,18 +1,51 @@
-<section class="panel"><h2>Listen for one detail at a time</h2>
-<p>Press Play to hear each short clip at a steady beginner pace. Write your answer before opening the transcript. Play it again to check what you heard. These are original clips spoken by an on-device German voice, where available.</p>
-<ol>
-<li><strong>Appointment:</strong> What day and time does the course start?
-<button type="button" class="btn secondary" data-speak="listen-appointment" hidden>Play appointment</button></li>
-<li><strong>Station:</strong> Which platform does the train leave from today?
-<button type="button" class="btn secondary" data-speak="listen-station" hidden>Play station announcement</button></li>
-<li><strong>Shopping:</strong> What does the soup cost and what is unavailable?
-<button type="button" class="btn secondary" data-speak="listen-shop" hidden>Play shopping message</button></li>
-</ol>
+<section class="panel"><h2>Six A1 listening exercises with instant answers</h2>
+<p>Press Play, listen for the one detail in the question, then choose your answer. Each clip is short and spoken at a steady beginner pace. Play it a second time before checking, as you would in most parts of the A1 exam. All clips are original Klarweg practice. They are spoken by a German voice on your device.</p>
 <p id="listening-status" role="status">If your device has no German voice, ask a partner to read the transcripts aloud.</p>
-<noscript><p>On-device speech playback requires JavaScript. You can still open every transcript and answer below.</p></noscript></section>
+<noscript><p>Audio playback and instant checking need JavaScript. The transcripts and explained answers below still work.</p></noscript>
+<form class="guide-check" data-guide-check aria-label="A1 listening exercises">
+<fieldset data-answer="a"><legend>1. Appointment: When does the German course start?</legend>
+<p><button type="button" class="btn secondary" data-speak="listen-appointment" hidden>Play exercise 1</button></p>
+<label><input type="radio" name="a1l1" value="a"> Tuesday, 08:45</label><label><input type="radio" name="a1l1" value="b"> Tuesday, 09:15</label><label><input type="radio" name="a1l1" value="c"> Thursday, 08:45</label>
+<p class="check-why" hidden><span lang="de">Viertel vor neun</span> is a quarter to nine: 08:45. <span lang="de">Dienstag</span> is Tuesday; Thursday is <span lang="de">Donnerstag</span>.</p></fieldset>
+<fieldset data-answer="b"><legend>2. Station announcement: Which platform does the train to Bonn leave from today?</legend>
+<p><button type="button" class="btn secondary" data-speak="listen-station" hidden>Play exercise 2</button></p>
+<label><input type="radio" name="a1l2" value="a"> Platform 4</label><label><input type="radio" name="a1l2" value="b"> Platform 7</label><label><input type="radio" name="a1l2" value="c"> Platform 11</label>
+<p class="check-why" hidden>You hear two platforms. <span lang="de">statt</span> means “instead of”, so platform 4 is the one being replaced.</p></fieldset>
+<fieldset data-answer="b"><legend>3. At a market stall: What is not available today?</legend>
+<p><button type="button" class="btn secondary" data-speak="listen-shop" hidden>Play exercise 3</button></p>
+<label><input type="radio" name="a1l3" value="a"> Soup</label><label><input type="radio" name="a1l3" value="b"> Bread</label><label><input type="radio" name="a1l3" value="c"> Water</label>
+<p class="check-why" hidden><span lang="de">nicht mehr</span> means “no longer”: there is no bread left. The soup costs €5.</p></fieldset>
+<fieldset data-answer="a"><legend>4. Phone message: Which number should you call back?</legend>
+<p><button type="button" class="btn secondary" data-speak="listen-number" hidden>Play exercise 4</button></p>
+<label><input type="radio" name="a1l4" value="a"> 0152 43 68 12</label><label><input type="radio" name="a1l4" value="b"> 0152 34 86 12</label><label><input type="radio" name="a1l4" value="c"> 0152 43 86 21</label>
+<p class="check-why" hidden>German says the unit before the ten: <span lang="de">dreiundvierzig</span> is “three and forty”, 43. Write the second digit first as you listen, then add the first.</p></fieldset>
+<fieldset data-answer="a"><legend>5. Invitation: When is the party?</legend>
+<p><button type="button" class="btn secondary" data-speak="listen-date" hidden>Play exercise 5</button></p>
+<label><input type="radio" name="a1l5" value="a"> 3 May</label><label><input type="radio" name="a1l5" value="b"> 30 May</label><label><input type="radio" name="a1l5" value="c"> 3 March</label>
+<p class="check-why" hidden><span lang="de">am dritten Mai</span> is 3 May. 30 would be <span lang="de">dreißigsten</span>. March is <span lang="de">März</span>, which sounds different from <span lang="de">Mai</span>.</p></fieldset>
+<fieldset data-answer="b"><legend>6. Weather report: What will the weather be on Sunday?</legend>
+<p><button type="button" class="btn secondary" data-speak="listen-weather" hidden>Play exercise 6</button></p>
+<label><input type="radio" name="a1l6" value="a"> Warm, 25 degrees</label><label><input type="radio" name="a1l6" value="b"> Rain</label><label><input type="radio" name="a1l6" value="c"> Snow</label>
+<p class="check-why" hidden>25 degrees is Saturday. For Sunday you hear <span lang="de">am Sonntag regnet es</span>: it rains. Listen for the day before the detail.</p></fieldset>
+<div class="actions"><button type="button" class="btn" data-check-button hidden>Check my answers</button> <button type="button" class="btn secondary" data-reset-button hidden>Try again</button></div>
+<p class="check-score" role="status" tabindex="-1"></p>
+</form></section>
 <section class="panel"><h2>Transcripts and explained answers</h2>
-<details><summary>Check the appointment</summary><div class="answer"><p lang="de" id="listen-appointment">Der Deutschkurs beginnt am Dienstag um Viertel vor neun.</p><p>Tuesday at 08:45. <span lang="de">Viertel vor neun</span> is a quarter to nine.</p></div></details>
-<details><summary>Check the station announcement</summary><div class="answer"><p lang="de" id="listen-station">Der Zug nach Bonn fährt heute von Gleis sieben statt von Gleis vier.</p><p>Platform 7. The platform after <span lang="de">statt</span> is the one being replaced.</p></div></details>
-<details><summary>Check the shopping message</summary><div class="answer"><p lang="de" id="listen-shop">Die Suppe kostet fünf Euro. Brot haben wir heute leider nicht mehr.</p><p>The soup costs €5, and there is no bread left today. <span lang="de">Nicht mehr</span> tells you it is no longer available.</p></div></details>
-<p>After checking, change one time, platform or item and ask a partner to read the new version. Repeat back only the changed detail.</p></section>
+<details><summary>Open all six transcripts</summary><div class="answer">
+<p><strong>1 (Tuesday, 08:45)</strong> <span lang="de" id="listen-appointment">Der Deutschkurs beginnt am Dienstag um Viertel vor neun.</span></p>
+<p><strong>2 (platform 7)</strong> <span lang="de" id="listen-station">Der Zug nach Bonn fährt heute von Gleis sieben statt von Gleis vier.</span></p>
+<p><strong>3 (no bread)</strong> <span lang="de" id="listen-shop">Die Suppe kostet fünf Euro. Brot haben wir heute leider nicht mehr.</span></p>
+<p><strong>4 (0152 43 68 12)</strong> <span lang="de" id="listen-number">Hallo, hier ist Jana. Bitte ruf mich zurück. Meine Nummer ist null eins fünf zwei, dreiundvierzig, achtundsechzig, zwölf.</span></p>
+<p><strong>5 (3 May)</strong> <span lang="de" id="listen-date">Ich mache eine Party. Die Party ist am dritten Mai um acht Uhr.</span></p>
+<p><strong>6 (rain on Sunday)</strong> <span lang="de" id="listen-weather">Am Wochenende wird es warm. Am Samstag sind es fünfundzwanzig Grad. Am Sonntag regnet es.</span></p>
+</div></details>
+<p>After checking, change one detail, such as the time, platform, number or day. Ask a partner to read the new version and repeat back only the changed detail.</p></section>
+<section class="panel"><h2>Build a 10-minute daily listening routine</h2>
+<ol><li><strong>Gist first (2 min):</strong> play a clip once and say in English or Hindi what it is about: an appointment, a station or a shop.</li>
+<li><strong>Details (4 min):</strong> play again and write only numbers, days and places. At A1, most exam questions test exactly these.</li>
+<li><strong>Check (2 min):</strong> open the transcript and underline the word that gave the answer.</li>
+<li><strong>Shadow (2 min):</strong> read the transcript aloud with the audio to fix the rhythm in your memory.</li></ol>
+<p>When you get five or six right, try the <a href="goethe-a1-mock-test.html">Goethe A1 mini mock test</a>. It mixes listening with reading, writing and speaking. To train German sounds with recorded audio, start <a href="chapter/chapter-a1-1-alphabet.html">Klarweg A1 Chapter 1 (the alphabet) free</a>.</p></section>
+<section class="panel"><h2>Official references</h2><ul><li><a href="https://www.goethe.de/en/spr/prf/ueb/pa1.html">Goethe-Institut A1 practice materials with exam audio</a></li></ul></section>
 <script src="kw-a1-listening-voice.js" defer></script>
+<script src="kw-guide-check.js" defer></script>

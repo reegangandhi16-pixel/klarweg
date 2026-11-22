@@ -89,7 +89,18 @@ for (const pages of batches) {
 .guide-back{display:inline-flex;align-items:center;min-height:44px;font-weight:650}
 @media(max-width:760px){.guide-contents ul{display:grid;grid-template-columns:minmax(0,1fr)}.guide-contents a{padding-left:0}}
 @media(max-width:480px){.guide-hero .btn,.guide-next .btn{width:100%;text-align:center}.guide-table table{min-width:24rem}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}${content.includes('data-speak=') ? '\n[data-speak][hidden]{display:none}' : ''}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}${content.includes('data-speak=') ? '\n[data-speak][hidden]{display:none}\n.guide-content .btn{min-height:44px}' : ''}${content.includes('data-guide-check') ? `
+.guide-check fieldset{margin:1rem 0 0;padding:.8rem 1rem;border:1px solid var(--line);border-radius:.75rem}
+.guide-check legend{padding:0 .3rem;font-weight:650;max-width:100%}
+.guide-check label{display:flex;gap:.6rem;align-items:flex-start;min-height:44px;padding:.35rem 0;cursor:pointer}
+.guide-check input{margin-top:.45rem;flex:none;width:1.1rem;height:1.1rem;accent-color:var(--forest)}
+.guide-check .is-right{border-color:var(--forest);background:#f1f8f3}
+.guide-check .is-wrong{border-color:#b45309;background:#fff8ec}
+.guide-check .check-verdict{margin:.4rem 0 0;font-weight:650}
+.guide-check .check-why{margin:.3rem 0 0}
+.guide-check .actions{margin-top:1rem}
+.guide-check .check-score{font-weight:650;margin-top:.8rem}
+.guide-check [hidden]{display:none}` : ''}
 </style>
 <script type="application/ld+json">${schema}</script>
 </head>

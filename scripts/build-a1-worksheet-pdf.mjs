@@ -15,28 +15,28 @@ const html = `<!doctype html><html lang="en"><meta charset="utf-8">
 <title>Klarweg A1 German Worksheet with Hindi Cues</title>
 <style>
 @page { size: A4; margin: 18mm; }
-body { color:#172537; font:12.5pt/1.55 "Helvetica Neue",Arial,sans-serif; }
+body { color:#172537; font:11pt/1.4 "Helvetica Neue",Arial,sans-serif; }
 [lang=hi] { font-family:"Kohinoor Devanagari","Devanagari Sangam MN",sans-serif; }
 section { break-after:page; }
 section:last-child { break-after:auto; }
 header { border-top:4px solid #14634d; padding-top:8mm; }
 .brand { margin:0;color:#14634d;font-weight:700;letter-spacing:.05em; }
 h1,h2 { color:#143f34;line-height:1.16; }
-h1 { margin:.4em 0; font-size:29pt; }
+h1 { margin:.3em 0; font-size:24pt; }
 h2 { margin:.45em 0; font-size:25pt; }
 ol { padding-left:7mm; }
-li { break-inside:avoid; padding-left:2mm;margin:0 0 4mm; }
-.write-line { height:8mm; border-bottom:1px solid #8a9f98; }
+li { break-inside:avoid; padding-left:2mm;margin:0 0 2.2mm; }
+.write-line { height:6.5mm; border-bottom:1px solid #8a9f98; }
 footer { border-top:1px solid #a7b9b2;padding-top:3mm;margin-top:8mm;font-size:10pt;color:#38534b; }
 a { color:inherit; }
 </style><body>
-<section><header><p class="brand">Klarweg · A1 practice</p><h1>German A1 Worksheet</h1><p lang="hi">हिंदी संकेतों के साथ छह अभ्यास</p></header>
+<section><header><p class="brand">Klarweg · A1 practice</p><h1>German A1 Worksheet</h1><p lang="hi">हिंदी संकेतों के साथ 20 अभ्यास</p></header>
 <p>Name: ________________________ &nbsp; Date: __________________</p>
-<p>Write your answers first. Compare them with the key on page 2.</p>${worksheet}
-<footer>1 / 2 · <a href="https://klarweg.in/german-a1-worksheet-hindi">Klarweg A1 Worksheet Online</a></footer></section>
+<p>Write your answers first. Compare them with the answer key on the last page.</p>${worksheet}
+<footer><a href="https://klarweg.in/german-a1-worksheet-hindi">Klarweg A1 Worksheet Online</a></footer></section>
 <section><header><p class="brand">Klarweg · A1 practice</p><h2>Answer Key</h2></header>
 <p>Circle the wording you missed. Cover the model, then say or write the corrected answer again.</p>${lists[1]}
-<footer>2 / 2 · <a href="https://klarweg.in/german-a1-worksheet-hindi">Klarweg A1 Worksheet Online</a></footer></section>
+<footer><a href="https://klarweg.in/german-a1-worksheet-hindi">Klarweg A1 Worksheet Online</a></footer></section>
 </body></html>`;
 
 const chrome = findChrome();

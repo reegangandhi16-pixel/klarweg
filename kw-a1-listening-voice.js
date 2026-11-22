@@ -41,6 +41,9 @@
       const clip = { button, utterance };
       playing = clip;
       button.textContent = 'Stop ' + button.dataset.playLabel.slice(5);
+      utterance.onstart = () => {
+        if (playing === clip) status.textContent = 'Play a clip, then write your answer before opening the transcript.';
+      };
       utterance.onend = () => reset(button, clip);
       utterance.onerror = () => {
         if (playing !== clip) return;

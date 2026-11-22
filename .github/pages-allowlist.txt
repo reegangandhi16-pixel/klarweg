@@ -1572,6 +1572,7 @@ goethe-b1-exam-preparation-plan.html
 b1-german-ausbildung-interview.html
 a1-speaking-practice-family-reunion.html
 kw-a1-listening-voice.js
+kw-guide-check.js
 downloads/klarweg-a1-worksheet-hindi.pdf
 
 # Keyword-led German learning guides, batch 4

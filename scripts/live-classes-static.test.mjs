@@ -367,22 +367,35 @@ test('LIVE GATE: the homepage FAQ structured data matches the visible answers', 
   assert.deepEqual(structured, Object.fromEntries(Object.keys(structured).map((q) => [q, visible[q]])));
 });
 
-test('LIVE: the homepage FAQ names the A1 waitlist without claiming enrolment is open (D8)', () => {
+test('LIVE: the homepage FAQ separates teacher demos, demo slots and course enrolment, and follows the live switches', () => {
   const Q = 'Are there live classes or teachers?';
   const { visible, structured } = homepageFaq(read('index.html'));
   assert.ok(visible[Q] && structured[Q], 'the question is in the visible FAQ and the FAQPage data');
   assert.equal(visible[Q], structured[Q], 'identical text in the visible FAQ and the structured data');
   const a = visible[Q];
-  assert.match(a, /The first course, Beginner German \(A1\), is taking free waitlist registrations: enrolment is not open yet and the start date has not been announced\./);
-  assert.equal(/No live classes|deliberate|things a teacher would/i.test(a), false, 'the pre-D1 wording is gone');
   const D = loadData();
-  // no date or other number: only the level name and the approved consultation fee
-  assert.equal(/\d/.test(a.replace('A1', '').replace(D.consultation.feeLabel, '')), false, 'no date, other fee or number in the answer');
-  assert.ok(a.includes(`Online booking for a ${D.consultation.feeLabel} personal consultation is not open yet.`));
+  const M = D.marketplace;
+  // teacher demos: stated as bookable only while the page switch is on, with the fee and length from the data file
+  if (M.demoBookingEnabled) {
+    assert.ok(a.includes(`Teacher demos can be booked online now: a ${D.consultation.durationMinutes}-minute demo with a teacher costs ${D.consultation.feeLabel}.`));
+  } else {
+    assert.equal(/can be booked/i.test(a), false, 'no bookable demo while demo booking is switched off');
+  }
+  // slots: never a fixed time or date on the homepage; learners are sent to the live availability
+  assert.match(a, /Open demo times change every week, so check the current slots before you plan\./);
+  assert.equal(/\b\d{1,2}(?::\d{2})?\s*(?:am|pm)\b|\b(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)s?\b/i.test(a), false, 'no slot day or time that would go stale');
+  // regular courses: enrolment must match the checkout switch and the published courses
+  const openCourse = D.courses.some((k) => !k.draft && k.enrolment === 'open');
+  if (!M.courseCheckoutEnabled && !openCourse) {
+    assert.match(a, /enrolment is not open yet: no batch has a start date, so course fees cannot be paid yet\./);
+  } else {
+    assert.equal(/enrolment is not open yet/.test(a), false, 'course checkout is on: update the homepage FAQ');
+  }
+  assert.equal(/waitlist|No live classes|personal consultation is not open/i.test(a), false, 'the pre-demo wording is gone');
   assert.equal(/request a .{0,10}consultation/i.test(a), false, 'no request-by-email wording');
   const raw = read('index.html');
-  assert.match(raw, /<div class="faq-answer">\s*Yes\. Alongside[\s\S]*?<a href="live-classes.html">Live Classes<\/a> page\.\s*<\/div>/, 'the visible answer links the page');
-  if (!D.courses.some((k) => !k.draft && k.enrolment === 'open')) {
+  assert.match(raw, /<div class="faq-answer">\s*Yes\. Alongside[\s\S]*?<a href="live-classes.html#demo">Live Classes<\/a> page\.\s*<\/div>/, 'the visible answer links the live demo availability');
+  if (!openCourse) {
     assert.equal(launchBlockers(D).some((b) => /index\.html/.test(b)), false, 'the homepage raises no launch blocker');
   }
 });

@@ -2796,6 +2796,49 @@ a.level-node:hover .level-view .arrow { transform: translateX(3px); }
   background: #fff;
 }
 
+/* Homepage Lifetime card: "Limited time" badge straddling the top border.
+   Brand green + gold on cream; no orange. The card must not clip the badge. */
+.price-card.center.has-limited-badge { overflow: visible; }
+.price-card.center.has-limited-badge::before { left: 24px; right: 24px; }
+.limited-badge {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px 8px 12px;
+  border-radius: var(--r-full);
+  background: linear-gradient(135deg, #2A6660 0%, var(--accent) 45%, var(--accent-deep) 100%);
+  border: 1px solid #D9B45A;
+  color: #F7E3A6;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow:
+    0 0 0 4px #FFF8EC,
+    0 10px 24px -10px rgba(20,51,49,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.18);
+  pointer-events: none;
+}
+.limited-badge-spark {
+  width: 10px; height: 10px; flex: none;
+  background: #E8C66E;
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+}
+@media (max-width: 900px) {
+  .price-card.center.has-limited-badge { margin-top: 12px; }
+}
+@media (max-width: 600px) {
+  .limited-badge { font-size: 11px; letter-spacing: 0.12em; padding: 8px 16px 8px 12px; }
+}
+
 .price-card.center .price-title {
   font-family: var(--font-display);
   font-size: 32px;
@@ -5868,8 +5911,9 @@ body {
 
       </div>
 
-      <!-- Lifetime — the centerpiece. Premium without a top label. -->
-      <div class="price-card center">
+      <!-- Lifetime — the centerpiece, with the homepage-only "Limited time" badge. -->
+      <div class="price-card center has-limited-badge">
+        <span class="limited-badge"><span class="limited-badge-spark" aria-hidden="true"></span>Limited time</span>
         <div class="price-title">Klarweg Lifetime</div>
         <p class="price-sub">A1 through C2. Forever. Plus everything future.</p>
 

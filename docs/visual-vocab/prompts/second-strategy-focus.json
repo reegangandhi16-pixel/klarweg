@@ -3125,5 +3125,306 @@
   "type": "week",
   "day": 4,
   "cap": "donnerstags = every Thursday"
+ },
+ "netto--net": {
+  "type": "grammar",
+  "de": "Wie viel verdienst du netto?",
+  "hl": "netto",
+  "role": "focus",
+  "cap": "netto = net (after tax)"
+ },
+ "darum--that-s-why": {
+  "type": "grammar",
+  "de": "Ich war krank, darum bin ich nicht gekommen.",
+  "hl": "darum",
+  "role": "focus",
+  "cap": "darum = that's why"
+ },
+ "sodass--so-that": {
+  "type": "grammar",
+  "de": "Er sprach sehr leise, sodass ich ihn kaum verstand.",
+  "hl": "sodass",
+  "role": "focus",
+  "cap": "sodass = so that (result)"
+ },
+ "der-werbetrick--advertising-trick": {
+  "type": "grammar",
+  "de": "Vorsicht mit Werbetricks!",
+  "hl": "Werbetricks",
+  "role": "focus",
+  "cap": "der Werbetrick = advertising trick"
+ },
+ "finnland--finland": {
+  "type": "map",
+  "iso": [
+   "FI"
+  ],
+  "cap": "Finnland = Finland"
+ },
+ "der-die-alte--oneself-the-old-one": {
+  "type": "grammar",
+  "de": "Er blieb bis zuletzt ganz der Alte.",
+  "hl": "ganz der Alte",
+  "role": "focus",
+  "cap": "ganz der Alte bleiben = to stay the same as ever"
+ },
+ "derselbe--same": {
+  "type": "grammar",
+  "de": "Wir buchten dasselbe Hotel wie letztes Jahr.",
+  "hl": "dasselbe",
+  "role": "focus",
+  "cap": "derselbe / dieselbe / dasselbe = the same"
+ },
+ "gruendlich--thorough": {
+  "type": "grammar",
+  "de": "Sie plante die Reise sehr gründlich.",
+  "hl": "gründlich",
+  "role": "focus",
+  "cap": "gründlich = thorough(ly)"
+ },
+ "fruehere--previous": {
+  "type": "grammar",
+  "de": "Meine frühere Stelle war weniger interessant.",
+  "hl": "frühere",
+  "role": "focus",
+  "cap": "frühere = previous, former"
+ },
+ "befriedigend--satisfying": {
+  "type": "grammar",
+  "de": "Ich hoffe, einen befriedigenden Job zu finden.",
+  "hl": "befriedigenden",
+  "role": "focus",
+  "cap": "befriedigend = satisfying"
+ },
+ "die-nutzung--usage": {
+  "type": "grammar",
+  "de": "Die Nutzung wird einfacher werden.",
+  "hl": "Nutzung",
+  "role": "focus",
+  "cap": "die Nutzung = use, usage"
+ },
+ "geschehen--happen": {
+  "type": "grammar",
+  "de": "Was wird als Nächstes geschehen?",
+  "hl": "geschehen",
+  "role": "focus",
+  "cap": "geschehen = to happen"
+ },
+ "der-bedarf--need": {
+  "type": "grammar",
+  "de": "Der Bedarf an Ökostrom wächst.",
+  "hl": "Bedarf an",
+  "role": "focus",
+  "cap": "der Bedarf an (+ D) = need, demand for"
+ },
+ "gesellschaftlich--social": {
+  "type": "grammar",
+  "de": "Das ist ein gesellschaftliches Thema.",
+  "hl": "gesellschaftliches",
+  "role": "focus",
+  "cap": "gesellschaftlich = social, societal"
+ },
+ "abhaengen--be-dependent-on": {
+  "type": "grammar",
+  "de": "Das hängt vom Budget ab.",
+  "hl": "hängt vom Budget ab",
+  "role": "focus",
+  "cap": "abhängen von = to depend on"
+ },
+ "beruecksichtigen--consider": {
+  "type": "grammar",
+  "de": "Wir müssen das Budget berücksichtigen.",
+  "hl": "berücksichtigen",
+  "role": "focus",
+  "cap": "berücksichtigen = to consider, take into account"
+ },
+ "ausser-acht-lassen--disregard": {
+  "type": "grammar",
+  "de": "Wir dürfen das Budget nicht außer Acht lassen.",
+  "hl": "außer Acht lassen",
+  "role": "focus",
+  "cap": "außer Acht lassen = to disregard"
+ },
+ "angeben--state": {
+  "type": "grammar",
+  "de": "Bitte geben Sie Ihren Namen an.",
+  "hl": "geben Sie Ihren Namen an",
+  "role": "focus",
+  "cap": "angeben = to state, give (details)"
+ },
+ "grundsaetzlich--in-general": {
+  "type": "grammar",
+  "de": "Grundsätzlich ist die Behandlung erfolgreich.",
+  "hl": "Grundsätzlich",
+  "role": "focus",
+  "cap": "grundsätzlich = in general, basically"
+ },
+ "merken--notice": {
+  "type": "grammar",
+  "de": "Er merkt, dass ich nervös bin.",
+  "hl": "merkt",
+  "role": "focus",
+  "cap": "merken = to notice"
+ },
+ "erarbeiten--develop": {
+  "type": "grammar",
+  "de": "Der Theatermacher erarbeitet ein neues Stück.",
+  "hl": "erarbeitet",
+  "role": "focus",
+  "cap": "erarbeiten = to develop, work out"
+ },
+ "der-durchschnitt--average": {
+  "type": "grammar",
+  "de": "Im Durchschnitt wird weniger Fleisch gegessen.",
+  "hl": "Im Durchschnitt",
+  "role": "focus",
+  "cap": "im Durchschnitt = on average"
+ },
+ "national--national": {
+  "type": "grammar",
+  "de": "Die nationale Würde muss respektiert werden.",
+  "hl": "nationale",
+  "role": "focus",
+  "cap": "national = national"
+ },
+ "der-umgang--dealing-handling": {
+  "type": "grammar",
+  "de": "Der Umgang miteinander wird verbessert.",
+  "hl": "Umgang miteinander",
+  "role": "focus",
+  "cap": "der Umgang (mit) = dealing with, treatment of"
+ },
+ "der-anspruch--entitlement-claim": {
+  "type": "grammar",
+  "de": "Sie hat Anspruch auf Unterstützung.",
+  "hl": "Anspruch auf",
+  "role": "focus",
+  "cap": "Anspruch auf (+ A) haben = to be entitled to"
+ },
+ "abmelden--sign-off-deregister": {
+  "type": "grammar",
+  "de": "Ich muss mich vom Kurs abmelden.",
+  "hl": "mich vom Kurs abmelden",
+  "role": "focus",
+  "cap": "sich abmelden = to sign off, deregister"
+ },
+ "die-ansicht--opinion": {
+  "type": "grammar",
+  "de": "Meiner Ansicht nach ist Globalisierung wichtig.",
+  "hl": "Meiner Ansicht nach",
+  "role": "focus",
+  "cap": "meiner Ansicht nach = in my opinion"
+ },
+ "pauschal--across-the-board": {
+  "type": "grammar",
+  "de": "Pauschal kann man das nicht sagen.",
+  "hl": "Pauschal",
+  "role": "focus",
+  "cap": "pauschal = across the board, sweepingly"
+ },
+ "profitieren--profit": {
+  "type": "grammar",
+  "de": "Kleine Firmen profitieren nicht vom Weltmarkt.",
+  "hl": "profitieren nicht vom Weltmarkt",
+  "role": "focus",
+  "cap": "profitieren von = to profit from"
+ },
+ "asien--asia": {
+  "type": "grammar",
+  "de": "Viele Firmen verlegen ihre Produktion nach Asien.",
+  "hl": "nach Asien",
+  "role": "focus",
+  "cap": "Asien = Asia"
+ },
+ "das-missverstaendnis--misunderstanding": {
+  "type": "grammar",
+  "de": "Das klingt nach einem Missverständnis.",
+  "hl": "Missverständnis",
+  "role": "focus",
+  "cap": "das Missverständnis = misunderstanding"
+ },
+ "tierisch--animal-like": {
+  "type": "grammar",
+  "de": "Das ist ja tierisch lustig.",
+  "hl": "tierisch lustig",
+  "role": "focus",
+  "cap": "tierisch (colloquial) = really, extremely"
+ },
+ "liegen--be-located": {
+  "type": "grammar",
+  "de": "Wo liegt das Krankenhaus?",
+  "hl": "Wo liegt",
+  "role": "focus",
+  "cap": "liegen = to be located"
+ },
+ "machen--make-do": {
+  "type": "grammar",
+  "de": "Das macht die Sache einfacher.",
+  "hl": "macht die Sache einfacher",
+  "role": "focus",
+  "cap": "machen = to make (here: to make easier)"
+ },
+ "eingehen--enter-into-agree-to-to-respond-to-engage-with": {
+  "type": "grammar",
+  "de": "Er ging auf ihre Argumente ein.",
+  "hl": "ging auf ihre Argumente ein",
+  "role": "focus",
+  "cap": "auf etwas eingehen = to respond to, engage with"
+ },
+ "erstaunlich--astonishing": {
+  "type": "grammar",
+  "de": "Es ist erstaunlich, so einen jungen Regisseur ausgezeichnet zu sehen.",
+  "hl": "erstaunlich",
+  "role": "focus",
+  "cap": "erstaunlich = astonishing"
+ },
+ "fernliegen--be-far-from-one-s-mind": {
+  "type": "grammar",
+  "de": "Es liegt mir fern, das zu behaupten.",
+  "hl": "Es liegt mir fern",
+  "role": "focus",
+  "cap": "es liegt mir fern = it is far from my mind"
+ },
+ "jeglich--any-every": {
+  "type": "grammar",
+  "de": "Jegliche Hilfe ist willkommen.",
+  "hl": "Jegliche",
+  "role": "focus",
+  "cap": "jeglich = any (at all)"
+ },
+ "leichtfallen--be-easy": {
+  "type": "grammar",
+  "de": "Es fällt mir leicht, die Merkformel zu behalten.",
+  "hl": "Es fällt mir leicht",
+  "role": "focus",
+  "cap": "leichtfallen = to be easy (for someone)"
+ },
+ "staendig--constant-continual": {
+  "type": "grammar",
+  "de": "Er übt ständig für die Ausstellung.",
+  "hl": "ständig",
+  "role": "focus",
+  "cap": "ständig = constantly"
+ },
+ "die-ich-botschaft--i-message": {
+  "type": "grammar",
+  "de": "Eine Ich-Botschaft kann zur Problemlösung beitragen.",
+  "hl": "Ich-Botschaft",
+  "role": "focus",
+  "cap": "die Ich-Botschaft = I-message (speaking about your own feelings)"
+ },
+ "werben--advertise-recruit": {
+  "type": "grammar",
+  "de": "Es kommt oft vor, dass Kollegen aggressiv werben.",
+  "hl": "aggressiv werben",
+  "role": "focus",
+  "cap": "werben = to advertise, to recruit"
+ },
+ "daherkommen--come-along-appear": {
+  "type": "grammar",
+  "de": "Die Gelegenheit kommt ganz unerwartet daher.",
+  "hl": "kommt ganz unerwartet daher",
+  "role": "focus",
+  "cap": "daherkommen = to come along, appear"
  }
 }

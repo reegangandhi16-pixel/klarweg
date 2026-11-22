@@ -333,7 +333,9 @@ const CHAPTER = {
     { de: 'vor einer Frage stehen', pos: 'verb', level: 'B1', en: 'to be confronted with a question', hi: 'सवाल का सामना करना',
       ex: 'Ich stehe vor der Frage, ob ich ein neues Handy kaufen soll.', exEn: 'I\'m facing the question of whether I should buy a new phone.', exHi: 'Main is sawaal ka saamna kar raha hoon ki naya phone khareedoon ya nahi.',
       ex2: 'Viele Kunden stehen vor der gleichen Frage.', ex2En: 'Many customers face the same question.', ex2Hi: 'Kai grahak isi sawaal ka saamna karte hain.',
-      advanced: { synonyms: ['sich fragen'], opposites: [], collocations: ['vor der Frage stehen, ob …'] } },
+      advanced: { synonyms: ['sich fragen'], opposites: [], collocations: ['vor der Frage stehen, ob …'] },
+      img: { src: '/api/media/vocab-img/2cd587fd308269f752b1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person standing at a fork in a path, choosing a route.' }
+    },
     { de: 'stumm', pos: 'adjective', level: 'B1', en: 'mute, silent', hi: 'मौन, ख़ामोश',
       ex: 'Das Handy war den ganzen Tag stumm.', exEn: 'The phone was on mute all day.', exHi: 'Phone poore din mute tha.',
       ex2: 'Könnten Sie bitte stumm bleiben, während ich telefoniere?', ex2En: 'Could you please stay quiet while I\'m on the phone?', ex2Hi: 'Kya aap kripya khamosh reh sakte hain jab tak main phone par baat kar raha hoon?',

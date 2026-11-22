@@ -264,7 +264,9 @@ const CHAPTER = {
     },
     { de: 'fortschrittlich', pos: 'adjective', level: 'B1', en: 'progressive', hi: 'प्रगतिशील',
       ex: 'Wegen der fortschrittlichen Idee wurde das Projekt gelobt.', exEn: 'Because of the progressive idea, the project was praised.', exHi: 'Pragatisheel vichaar ki wajah se, project ki sarahna hui.',
-      advanced: { synonyms: ['modern', 'innovativ'], opposites: ['rückständig'], collocations: [] } },
+      advanced: { synonyms: ['modern', 'innovativ'], opposites: ['rückständig'], collocations: [] },
+      img: { src: '/api/media/vocab-img/3f567f50f352a0980355', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A progressive architectural building model with solar panels and rooftop greenery.' }
+    },
     { de: 'geraten', pos: 'verb', level: 'B1', en: 'to fall into, end up in', hi: 'फंस जाना',
       ex: 'Wegen der hohen Miete geriet die Familie in Schwierigkeiten.', exEn: 'Because of the high rent, the family fell into difficulties.', exHi: 'Zyada kiraye ki wajah se, parivaar mushkil mein pad gaya.',
       conj: { praesens: 'gerät', praeteritum: 'geriet', perfekt: 'ist geraten' },
@@ -326,7 +328,9 @@ const CHAPTER = {
     },
     { de: 'zusätzlich', pos: 'adjective', level: 'B1', en: 'additional', hi: 'अतिरिक्त',
       ex: 'Wegen des Vitaminmangels nimmt sie zusätzliche Tabletten.', exEn: 'Because of the vitamin deficiency, she takes additional tablets.', exHi: 'Vitamin ki kami ki wajah se, woh atirikt goliyaan leti hai.',
-      advanced: { synonyms: ['extra'], opposites: [], collocations: ['zusätzliche Kosten'] } },
+      advanced: { synonyms: ['extra'], opposites: [], collocations: ['zusätzliche Kosten'] },
+      img: { src: '/api/media/vocab-img/7b5fe73c3c92316abcd5', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An extra blister pack of tablets next to a daily pill box.' }
+    },
     { de: 'beten', pos: 'verb', level: 'B1', en: 'to pray', hi: 'प्रार्थना करना',
       ex: 'Während des Essens betete die Familie jeden Abend.', exEn: 'During the meal, the family prayed every evening.', exHi: 'Khaane ke dauran, parivaar har shaam prarthana karta tha.',
       conj: { praesens: 'betet', praeteritum: 'betete', perfekt: 'hat gebetet' },
@@ -340,7 +344,9 @@ const CHAPTER = {
     },
     { de: 'Stiftungsvermögen', art: 'das', gender: 'n', plural: '— (Sg.)', pos: 'noun', level: 'B1', en: 'endowment capital', hi: 'दान निधि पूंजी',
       ex: 'Wegen des hohen Stiftungsvermögens war die Jahresmiete sehr niedrig.', exEn: 'Because of the high endowment capital, the yearly rent was very low.', exHi: 'Kam daan nidhi ki wajah se, vaarshik kiraya bahut kam tha.',
-      advanced: { synonyms: [], opposites: [], collocations: [] } },
+      advanced: { synonyms: [], opposites: [], collocations: [] },
+      img: { src: '/api/media/vocab-img/57bb656209c9e8f5cbe2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A miniature institutional building supported by a solid foundation of gold bars.' }
+    },
     { de: 'Vitamin', art: 'das', gender: 'n', plural: 'Vitamine', pos: 'noun', level: 'B1', en: 'vitamin', hi: 'विटामिन',
       ex: 'Wegen der Vitamine in Karotten isst sie gern Gemüse.', exEn: 'Because of the vitamins in carrots, she likes eating vegetables.', exHi: 'Gaajar mein vitamin hone ki wajah se, use sabzi khana pasand hai.',
       advanced: { synonyms: [], opposites: [], collocations: ['Vitamine einnehmen'] },
@@ -366,7 +372,9 @@ const CHAPTER = {
     },
     { de: 'Urgroßvater', art: 'der', gender: 'm', plural: 'Urgroßväter', pos: 'noun', level: 'B1', en: 'great-grandfather', hi: 'परदादा',
       ex: 'Die Wohnung meines Urgroßvaters lag in einer Sozialsiedlung.', exEn: 'My great-grandfather\'s apartment was in a social housing project.', exHi: 'Mere pardaada ka ghar ek samajik awas mein tha.',
-      advanced: { synonyms: [], opposites: ['Urgroßmutter'], collocations: [] } },
+      advanced: { synonyms: [], opposites: ['Urgroßmutter'], collocations: [] },
+      img: { src: '/api/media/vocab-img/5a9936fef95e1fdec45c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Elderly great-grandfather in an armchair surrounded by three younger generations' }
+    },
     { de: 'Zustand', art: 'der', gender: 'm', plural: 'Zustände', pos: 'noun', level: 'B1', en: 'state, condition', hi: 'हालत',
       ex: 'Wegen des schlechten Zustands musste das Gebäude renoviert werden.', exEn: 'Because of the poor condition, the building had to be renovated.', exHi: 'Kharaab haalat ki wajah se, imarat ko renovate karna pada.',
       advanced: { synonyms: ['Verfassung'], opposites: [], collocations: ['in gutem Zustand sein'] },

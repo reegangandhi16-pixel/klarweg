@@ -252,7 +252,9 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/1038acceef4be36e1b48', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person lazily lounging in a hammock between two trees' }
     },
     { de: 'herrlich', pos: 'adjective', en: 'glorious, wonderful', hi: 'शानदार',
-      ex: 'Es muss herrlich sein, dort zu zelten.', exEn: 'It must be glorious to camp there.' },
+      ex: 'Es muss herrlich sein, dort zu zelten.', exEn: 'It must be glorious to camp there.',
+      img: { src: '../public/vocab-img/d13f7f481f27bfb9000f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A camper with outstretched arms admiring a glorious mountain sunrise.' }
+    },
     { de: 'im Freien', pos: 'adverb', en: 'outdoors, in the open air', hi: 'खुले में',
       ex: 'Wir planen, im Freien zu übernachten.', exEn: 'We\'re planning to sleep outdoors.',
       img: { src: '../public/vocab-img/ffaf72c9007ff0103dfa', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'picnic blanket with a basket on a green meadow under trees, open air' }
@@ -300,7 +302,9 @@ const CHAPTER = {
       img: { src: '../public/vocab-img/e63ccd2f3f077f0d5b16', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person enjoying a cup of coffee and a slice of cake at a café table by the sea' }
     },
     { de: 'Himmel', art: 'der', gender: 'm', plural: 'Himmel', pos: 'noun', en: 'sky', hi: 'आकाश',
-      ex: 'Es ist schön, abends den Himmel zu beobachten.', exEn: 'It\'s nice to watch the sky in the evenings.' },
+      ex: 'Es ist schön, abends den Himmel zu beobachten.', exEn: 'It\'s nice to watch the sky in the evenings.',
+      img: { src: '../public/vocab-img/56883bd6378b38f12675', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person sitting on grass gazing up at the sky' }
+    },
     { de: 'Kompromiss', art: 'der', gender: 'm', plural: 'Kompromisse', pos: 'noun', en: 'compromise', hi: 'समझौता',
       ex: 'Wir versuchen, einen Kompromiss zu finden.', exEn: 'We\'re trying to find a compromise.',
       img: { src: '../public/vocab-img/2fc315a621d48eeb1848', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'people each holding one half of the same cake, both content' }

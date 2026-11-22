@@ -283,7 +283,7 @@ const CHAPTER = {
     { de: 'sogar', pos: 'adverb', en: 'even', hi: 'यहाँ तक कि', ex: 'Ich frage, ob es sogar heute möglich ist.', exEn: 'I’m asking whether it’s even possible today.', vis: { kind: 'grammar', de: 'Sie arbeitet sogar am Sonntag.', hl: 'sogar', role: 'focus', cap: 'sogar = even (more than expected)' } },
     { de: 'unpraktisch', pos: 'adjective', en: 'impractical', hi: 'अव्यावहारिक', ex: 'Sie fragt sich, ob das unpraktisch ist.', exEn: 'She wonders whether that’s impractical.', img: { src: '/api/media/vocab-img/2ab54fb435687aa9f95b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person trying to eat soup with a holy spoon' } },
     { de: 'unter', pos: 'preposition', en: 'under; among', hi: 'नीचे; में से', ex: 'Weißt du, ob der Schlüssel unter der Matte liegt?', exEn: 'Do you know whether the key lies under the mat?' },
-    { de: 'vorn', pos: 'adverb', en: 'at the front', hi: 'सामने', ex: 'Frag, ob wir vorn sitzen dürfen.', exEn: 'Ask whether we’re allowed to sit at the front.' }
+    { de: 'vorn', pos: 'adverb', en: 'at the front', hi: 'सामने', ex: 'Frag, ob wir vorn sitzen dürfen.', exEn: 'Ask whether we’re allowed to sit at the front.', img: { src: '/api/media/vocab-img/4b18a4e5f6cda7c69bf2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two friends sitting in the front row of a cinema' } }
   ],
 
   // ---------- Indirekte Frage (rule cards) ----------

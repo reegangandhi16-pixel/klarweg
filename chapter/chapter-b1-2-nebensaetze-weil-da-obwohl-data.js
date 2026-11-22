@@ -331,7 +331,9 @@ const CHAPTER = {
     { de: 'Abenteuer', art: 'das', gender: 'n', plural: 'Abenteuer', pos: 'noun', level: 'B1', en: 'adventure', hi: 'रोमांच',
       ex: 'Der Urlaub war ein echtes Abenteuer.', exEn: 'The holiday was a real adventure.', exHi: 'Chutti ek sacha romanch thi.',
       ex2: 'Sie sucht immer neue Abenteuer.', ex2En: 'She\'s always looking for new adventures.', ex2Hi: 'Woh hamesha naye romanch dhundhti hai.',
-      advanced: { synonyms: ['Erlebnis'], opposites: ['Routine', 'Alltag'], collocations: ['ein Abenteuer erleben', 'auf Abenteuer aus sein'] } },
+      advanced: { synonyms: ['Erlebnis'], opposites: ['Routine', 'Alltag'], collocations: ['ein Abenteuer erleben', 'auf Abenteuer aus sein'] },
+      img: { src: '/api/media/vocab-img/07eaf83498a8e1c26431', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An explorer with a backpack standing on a cliff edge.' }
+    },
     { de: 'Boot', art: 'das', gender: 'n', plural: 'Boote', pos: 'noun', level: 'B1', en: 'boat', hi: 'नाव',
       ex: 'Wir sind mit dem Boot zur Insel gefahren.', exEn: 'We took the boat to the island.', exHi: 'Hum naav se dweep gaye.',
       ex2: 'Das Boot liegt am Steg.', ex2En: 'The boat is at the jetty.', ex2Hi: 'Naav ghaat par hai.',
@@ -381,7 +383,9 @@ const CHAPTER = {
     { de: 'Perspektive', art: 'die', gender: 'f', plural: 'Perspektiven', pos: 'noun', level: 'B1', en: 'perspective', hi: 'दृष्टिकोण',
       ex: 'Aus ihrer Perspektive war alles in Ordnung.', exEn: 'From her perspective, everything was fine.', exHi: 'Uske drishtikon se, sab theek tha.',
       ex2: 'Wir brauchen eine neue Perspektive auf das Problem.', ex2En: 'We need a new perspective on the problem.', ex2Hi: 'Humein samasya par ek naya drishtikon chahiye.',
-      advanced: { synonyms: ['Sichtweise', 'Blickwinkel'], opposites: [], collocations: ['aus ihrer Perspektive', 'die Perspektive wechseln'] } },
+      advanced: { synonyms: ['Sichtweise', 'Blickwinkel'], opposites: [], collocations: ['aus ihrer Perspektive', 'die Perspektive wechseln'] },
+      img: { src: '../public/vocab-img/10586e185eebe620eeb9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people viewing a cylinder from different angles showing different shapes.' }
+    },
     { de: 'Stadtatmosphäre', art: 'die', gender: 'f', plural: '— (Sg.)', pos: 'noun', level: 'B1', en: 'city atmosphere', hi: 'शहर का माहौल',
       ex: 'Die Stadtatmosphäre in Berlin gefällt mir.', exEn: 'I like the city atmosphere in Berlin.', exHi: 'Mujhe Berlin ka shahar wala mahaul pasand hai.',
       ex2: 'Nach dem Strandurlaub vermisse ich die Stadtatmosphäre.', ex2En: 'After the beach holiday, I miss the city atmosphere.', ex2Hi: 'Beach holiday ke baad, mujhe shahar ka mahaul yaad aata hai.',

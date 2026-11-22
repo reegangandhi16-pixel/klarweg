@@ -152,13 +152,6 @@
   "role": "focus",
   "cap": "also gut = very well"
  },
- "alzheimer--alzheimer-s-disease": {
-  "key": "alzheimer--alzheimer-s-disease",
-  "type": "scene",
-  "scene": "Show an elderly man sitting beside a caring young woman holding his hand gently while they both look at family portraits in a memory book.",
-  "hl": "Alzheimer",
-  "cap": "Caring support for an elderly relative with memory loss"
- },
  "am--at-the": {
   "key": "am--at-the",
   "type": "grammar",
@@ -232,11 +225,11 @@
   "hl": "fallen"
  },
  "angeben--state": {
-  "key": "angeben--state",
-  "type": "scene",
-  "scene": "Show a person filling out an official registration form at a reception desk, writing their details in the top field.",
-  "cap": "Stating required personal information on a form",
-  "hl": "geben"
+  "type": "grammar",
+  "de": "Bitte geben Sie Ihren Namen an.",
+  "hl": "geben Sie Ihren Namen an",
+  "role": "focus",
+  "cap": "angeben = to state, give (details)"
  },
  "angemessen--appropriate-adequate": {
   "key": "angemessen--appropriate-adequate",
@@ -467,13 +460,6 @@
   "role": "preposition",
   "cap": "Formal preposition governing the genitive case"
  },
- "bic--swift-bic": {
-  "key": "bic--swift-bic",
-  "type": "scene",
-  "scene": "Show a bank payment card resting beside an electronic tablet displaying an online bank transfer form.",
-  "cap": "Bank identifier code on an online payment form",
-  "hl": "BIC"
- },
  "bilingual--bilingual": {
   "key": "bilingual--bilingual",
   "type": "scene",
@@ -518,26 +504,12 @@
   "role": "focus",
   "cap": "bloß = only, just"
  },
- "blutig--bloody": {
-  "key": "blutig--bloody",
-  "type": "scene",
-  "scene": "Show an open first-aid kit on a table, with sterile gauze pads, antiseptic spray, and rolled white bandages ready for use.",
-  "cap": "First-aid supplies ready to treat a wound",
-  "hl": "blutig"
- },
  "budgetverantwortlich--responsible-for-the-budget": {
   "key": "budgetverantwortlich--responsible-for-the-budget",
   "type": "scene",
   "scene": "Show a professional seated at an office desk thoughtfully reviewing financial spreadsheets on a tablet and signing an approval document.",
   "cap": "Holding direct responsibility for managing and approving the budget.",
   "hl": "budgetverantwortlich"
- },
- "buergerlich--middle-class-civic": {
-  "key": "buergerlich--middle-class-civic",
-  "type": "scene",
-  "scene": "Show a tidy, comfortable living room of an established family home, with full bookshelves, framed family photos, and a dining table.",
-  "cap": "A comfortable, respectable middle-class family home.",
-  "hl": "bürgerlichen"
  },
  "bulgarisch--bulgarian": {
   "key": "bulgarisch--bulgarian",
@@ -1023,13 +995,6 @@
   "role": "verb",
   "cap": "\"sich lassen\" serves as an alternative to the passive voice"
  },
- "das-pdf-dokument--pdf-document": {
-  "key": "das-pdf-dokument--pdf-document",
-  "type": "scene",
-  "scene": "Show an open laptop on a tidy wooden desk displaying a multi-page digital document with neat paragraphs and layout, viewed at a slight three-quarter angle.",
-  "cap": "A multi-page PDF document on a laptop screen",
-  "hl": "PDF-Dokument"
- },
  "das-perfekt--perfect-tense": {
   "key": "das-perfekt--perfect-tense",
   "type": "grammar",
@@ -1396,13 +1361,6 @@
   "role": "akkusativ",
   "cap": "Definite article in the accusative case"
  },
- "der-absatz--sales": {
-  "key": "der-absatz--sales",
-  "type": "scene",
-  "scene": "Show a beverage store manager smiling while stocking empty shelves with crates of reusable glass water bottles as shoppers put bottles into their shopping baskets",
-  "cap": "Sales of reusable bottles are rising",
-  "hl": "Absatz"
- },
  "der-akkusativ--accusative": {
   "key": "der-akkusativ--accusative",
   "type": "grammar",
@@ -1462,11 +1420,11 @@
   "cap": "der Autor beschreibt = the author describes"
  },
  "der-bedarf--need": {
-  "key": "der-bedarf--need",
-  "type": "scene",
-  "scene": "Show technicians installing modern solar panels on the roof of a suburban house with wind turbines visible in the distance",
-  "cap": "Growing need and demand for green electricity",
-  "hl": "Bedarf"
+  "type": "grammar",
+  "de": "Der Bedarf an Ökostrom wächst.",
+  "hl": "Bedarf an",
+  "role": "focus",
+  "cap": "der Bedarf an (+ D) = need, demand for"
  },
  "der-bedarf--need-demand": {
   "key": "der-bedarf--need-demand",
@@ -1545,13 +1503,6 @@
   "cap": "Displaying strong personal character and integrity",
   "hl": "Charakter"
  },
- "der-coversong--cover-song": {
-  "key": "der-coversong--cover-song",
-  "type": "scene",
-  "scene": "Show a singer at a vintage microphone on a small stage performing an iconic acoustic melody with a guitarist beside her",
-  "cap": "Performing a cover version of a famous song",
-  "hl": "Coversong"
- },
  "der-datensatz--data-set": {
   "key": "der-datensatz--data-set",
   "type": "scene",
@@ -1589,13 +1540,6 @@
   "role": "article",
   "cap": "'Dieser' is a demonstrative article specifying a noun"
  },
- "der-dialekt--dialect": {
-  "key": "der-dialekt--dialect",
-  "type": "scene",
-  "scene": "Show two elderly villagers in regional alpine clothing chatting animatedly outside a wooden alpine chalet, while a passing hiker stops and listens intently.",
-  "cap": "Locals conversing in their regional dialect",
-  "hl": "Dialekt"
- },
  "der-die-alleinernaehrer-in--sole-breadwinner": {
   "key": "der-die-alleinernaehrer-in--sole-breadwinner",
   "type": "scene",
@@ -1604,11 +1548,11 @@
   "hl": "Alleinernährer"
  },
  "der-die-alte--oneself-the-old-one": {
-  "key": "der-die-alte--oneself-the-old-one",
-  "type": "scene",
-  "scene": "Show a cheerful older man laughing heartily at an outdoor dining table, his arms spread wide as his lifelong friends smile back.",
-  "cap": "Remaining the same old familiar self",
-  "hl": "Alte"
+  "type": "grammar",
+  "de": "Er blieb bis zuletzt ganz der Alte.",
+  "hl": "ganz der Alte",
+  "role": "focus",
+  "cap": "ganz der Alte bleiben = to stay the same as ever"
  },
  "der-die-amtsinhaber-in--incumbent-office-holder": {
   "key": "der-die-amtsinhaber-in--incumbent-office-holder",
@@ -1837,12 +1781,6 @@
   "role": "subject",
   "cap": "The family name (surname) comes after the first name"
  },
- "der-favorit--favourite": {
-  "type": "scene",
-  "scene": "Show a person smiling while holding their favourite teal mug, with several other mugs standing untouched on the shelf behind.",
-  "cap": "The one you like best",
-  "hl": "Favorit"
- },
  "der-februar--february": {
   "type": "year",
   "month": 2,
@@ -1976,13 +1914,6 @@
   "scene": "Show a stylish woman in a timeless, perfectly tailored coat and dark sunglasses stepping gracefully out of an old European opera house.",
   "cap": "The very epitome of classic elegance",
   "hl": "Inbegriff"
- },
- "der-indie-pop--indie-pop": {
-  "key": "der-indie-pop--indie-pop",
-  "type": "scene",
-  "scene": "Show a small indie band performing on a cozy wooden stage in an intimate café: an electric guitar player, a keyboardist, and a singer at a vintage microphone.",
-  "cap": "A live band playing indie-pop music",
-  "hl": "Indie-Pop"
  },
  "der-infinitiv--infinitive": {
   "key": "der-infinitiv--infinitive",
@@ -2143,13 +2074,6 @@
   "hl": "Kreditkartenbetrug",
   "cap": "Unauthorized credit card charges or fraud"
  },
- "der-langspielfilm--feature-length-film": {
-  "key": "der-langspielfilm--feature-length-film",
-  "type": "scene",
-  "scene": "Show an audience sitting quietly in the darkened rows of a cinema, watching a wide illuminated movie screen from behind.",
-  "hl": "Langspielfilm",
-  "cap": "Watching a full-length movie in a cinema"
- },
  "der-lauf--course-run": {
   "key": "der-lauf--course-run",
   "type": "scene",
@@ -2275,13 +2199,6 @@
   "hl": "weil ich krank bin",
   "role": "adverb",
   "cap": "Subordinate clause: the verb goes to the end"
- },
- "der-neffe--nephew": {
-  "key": "der-neffe--nephew",
-  "type": "scene",
-  "scene": "Show an adult proudly watching a young boy play a small acoustic guitar in a living room.",
-  "cap": "An uncle listening to his musical nephew",
-  "hl": "Neffe"
  },
  "der-negationsartikel--negation-article": {
   "key": "der-negationsartikel--negation-article",
@@ -2532,13 +2449,6 @@
   "cap": "A secured spot as a student at university",
   "hl": "Studienplatz"
  },
- "der-stundenlohn--hourly-wage": {
-  "key": "der-stundenlohn--hourly-wage",
-  "type": "scene",
-  "scene": "Show a wall clock showing one hour passing next to a neat small stack of euro coins on a wooden table.",
-  "cap": "Payment calculated per hour of work",
-  "hl": "Stundenlohn"
- },
  "der-superlativ--superlative": {
   "type": "grammar",
   "de": "Die Zugspitze ist der höchste Berg Deutschlands.",
@@ -2739,13 +2649,6 @@
   "role": "subject",
   "cap": "A constituent component or affix of a word"
  },
- "der-zeitpunkt--time": {
-  "key": "der-zeitpunkt--time",
-  "type": "scene",
-  "scene": "Show a wall clock with hands pointing precisely at twelve, while a person taps their wrist watch looking up expectantly.",
-  "cap": "A specific, exact point in time",
-  "hl": "Zeitpunkt"
- },
  "derzeit--currently-at-present": {
   "type": "grammar",
   "de": "Derzeit läuft die Untersuchung.",
@@ -2877,11 +2780,11 @@
   "hl": "Anredeformel"
  },
  "die-ansicht--opinion": {
-  "key": "die-ansicht--opinion",
-  "type": "scene",
-  "scene": "Show a person in a small discussion group calmly placing one hand over their chest while explaining their viewpoint to attentive colleagues.",
-  "cap": "Expressing one's personal view in a discussion",
-  "hl": "Ansicht"
+  "type": "grammar",
+  "de": "Meiner Ansicht nach ist Globalisierung wichtig.",
+  "hl": "Meiner Ansicht nach",
+  "role": "focus",
+  "cap": "meiner Ansicht nach = in my opinion"
  },
  "die-ansicht--view-opinion": {
   "key": "die-ansicht--view-opinion",
@@ -2938,13 +2841,6 @@
   "scene": "Show a lecturer drawing a clean hierarchy diagram of thesis, premises, and conclusions with connected boxes on a blackboard.",
   "cap": "A clearly structured line of argument",
   "hl": "Argumentationsstruktur"
- },
- "die-art--kind-type-manner": {
-  "key": "die-art--kind-type-manner",
-  "type": "scene",
-  "scene": "Show a traveler standing on the open rear platform of a vintage scenic train as it winds through lush mountain valleys.",
-  "cap": "A unique way and style of traveling",
-  "hl": "Art"
  },
  "die-atombombe--atomic-bomb": {
   "type": "grammar",
@@ -3037,13 +2933,6 @@
   "role": "focus",
   "cap": "An explosive device"
  },
- "die-branche--field-of-business": {
-  "key": "die-branche--field-of-business",
-  "type": "scene",
-  "scene": "Show people in hard hats and safety vests discussing blueprints on an active modern building site, representing work in a specific economic sector.",
-  "cap": "A specific field of business or industry",
-  "hl": "Branche"
- },
  "die-branche--sector-industry": {
   "key": "die-branche--sector-industry",
   "type": "scene",
@@ -3072,13 +2961,6 @@
   "role": "focus",
   "cap": "die Daten wurden erhoben = the data were collected"
  },
- "die-eigenschaft--characteristic": {
-  "key": "die-eigenschaft--characteristic",
-  "type": "scene",
-  "scene": "Show an adult calmly kneeling beside a young child who is struggling to tie shoelaces, demonstrating calm endurance.",
-  "cap": "Patience as an important personal quality",
-  "hl": "Eigenschaft"
- },
  "die-einschraenkung--limitation-caveat": {
   "key": "die-einschraenkung--limitation-caveat",
   "type": "scene",
@@ -3098,13 +2980,6 @@
   "type": "scene",
   "scene": "Show an engaged employee smiling attentively while listening to colleagues during a team project meeting.",
   "cap": "A constructive attitude toward daily work",
-  "hl": "Einstellung"
- },
- "die-einstellung--attitude": {
-  "key": "die-einstellung--attitude",
-  "type": "scene",
-  "scene": "Show a person calmly packing a healthy packed lunch into a bag, smiling before heading out in the morning.",
-  "cap": "A healthy mindset and balanced attitude",
   "hl": "Einstellung"
  },
  "die-elite--elite": {
@@ -3143,13 +3018,6 @@
   "hl": "Ergebnisse, auf denen",
   "role": "focus",
   "cap": "die Ergebnisse, auf denen ... = the results, on which ..."
- },
- "die-ewigkeit--ages-eternity": {
-  "key": "die-ewigkeit--ages-eternity",
-  "type": "scene",
-  "scene": "Show two old friends greeting each other warmly with outstretched arms on a train platform after many years apart.",
-  "cap": "Meeting again after what felt like ages",
-  "hl": "Ewigkeit"
  },
  "die-experimentell-ueberprueften-theoretischen-modelle--experimentally-verified-theoretical-models": {
   "key": "die-experimentell-ueberprueften-theoretischen-modelle--experimentally-verified-theoretical-models",
@@ -3581,13 +3449,6 @@
   "cap": "The female head of human resources",
   "hl": "Personalchefin"
  },
- "die-pflicht--duty": {
-  "key": "die-pflicht--duty",
-  "type": "scene",
-  "scene": "Show a worker in an industrial workshop putting on safety goggles and a hard hat next to a clear safety checklist board.",
-  "cap": "An official obligation or duty at work",
-  "hl": "Pflichten"
- },
  "die-pflichtveranstaltung--compulsory-event": {
   "key": "die-pflichtveranstaltung--compulsory-event",
   "type": "scene",
@@ -3882,13 +3743,6 @@
   "cap": "Managing multiple languages officially: language policy",
   "hl": "Sprachenpolitik"
  },
- "die-sprachentwicklung--language-development": {
-  "key": "die-sprachentwicklung--language-development",
-  "type": "scene",
-  "scene": "Show a mother sitting on a rug with her toddler, pointing at a picture book of animals, the toddler excitedly pointing and babbling back as they communicate.",
-  "cap": "The gradual process of language development in early childhood",
-  "hl": "Sprachentwicklung"
- },
  "die-sprachkenntnisse--language-skills": {
   "key": "die-sprachkenntnisse--language-skills",
   "type": "scene",
@@ -3903,13 +3757,6 @@
    "CH"
   ],
   "cap": "Switzerland is famous for its distinct language regions"
- },
- "die-standarduebersicht--standard-overview": {
-  "key": "die-standarduebersicht--standard-overview",
-  "type": "scene",
-  "scene": "Show a tablet screen displaying a neat dashboard layout with simplified cards, circular summary gauges, and organized rows showing financial account balances.",
-  "cap": "The default dashboard showing a standard overview of accounts",
-  "hl": "Standardübersicht"
  },
  "die-stelle--place-stead": {
   "key": "die-stelle--place-stead",
@@ -3977,13 +3824,6 @@
   "hl": "Umschreibung",
   "role": "focus",
   "cap": "die die Umschreibung = paraphrase"
- },
- "die-unterrichtsform--form-of-instruction": {
-  "key": "die-unterrichtsform--form-of-instruction",
-  "type": "scene",
-  "scene": "Show a modern classroom arranged in small round tables where groups of four students collaborate energetically with notebooks, replacing traditional rows.",
-  "cap": "Collaborative group work as an engaging form of instruction",
-  "hl": "Unterrichtsform"
  },
  "die-unterrichtszeit--class-time-lesson-time": {
   "key": "die-unterrichtszeit--class-time-lesson-time",
@@ -4856,11 +4696,11 @@
   "cap": "Formal discourse adverb adding an additional point"
  },
  "fernliegen--be-far-from-one-s-mind": {
-  "key": "fernliegen--be-far-from-one-s-mind",
-  "type": "scene",
-  "scene": "Show a person in a meeting calmly raising both hands in a polite, open gesture, with a sincere and reassuring facial expression to clarify an intention.",
-  "cap": "Far from intending to make such a bold claim",
-  "hl": "liegt mir fern"
+  "type": "grammar",
+  "de": "Es liegt mir fern, das zu behaupten.",
+  "hl": "Es liegt mir fern",
+  "role": "focus",
+  "cap": "es liegt mir fern = it is far from my mind"
  },
  "festlegen--determine-establish-fix": {
   "key": "festlegen--determine-establish-fix",
@@ -5100,18 +4940,18 @@
   "hl": "geregeltes"
  },
  "geschehen--happen": {
-  "key": "geschehen--happen",
-  "type": "scene",
-  "scene": "Show a group of spectators on the edge of their seats at an outdoor magic show, leaning forward with wide eyes anticipating what happens next.",
-  "cap": "Wondering what will happen next.",
-  "hl": "geschehen"
+  "type": "grammar",
+  "de": "Was wird als Nächstes geschehen?",
+  "hl": "geschehen",
+  "role": "focus",
+  "cap": "geschehen = to happen"
  },
  "gesellschaftlich--social": {
-  "key": "gesellschaftlich--social",
-  "type": "scene",
-  "scene": "Show a diverse group of community members sitting in a circle in a town hall, actively listening and discussing an important public topic together.",
-  "cap": "A social topic concerning the wider community.",
-  "hl": "gesellschaftliches"
+  "type": "grammar",
+  "de": "Das ist ein gesellschaftliches Thema.",
+  "hl": "gesellschaftliches",
+  "role": "focus",
+  "cap": "gesellschaftlich = social, societal"
  },
  "gesellschaftspolitisch--socio-political": {
   "key": "gesellschaftspolitisch--socio-political",
@@ -5172,11 +5012,11 @@
   "hl": "Grundsätzlich"
  },
  "grundsaetzlich--in-general": {
-  "key": "grundsaetzlich--in-general",
-  "type": "scene",
-  "scene": "Show a doctor smiling reassuringly at a relieved patient while reviewing medical charts during a consultation.",
-  "cap": "In general: the treatment is typically successful.",
-  "hl": "Grundsätzlich"
+  "type": "grammar",
+  "de": "Grundsätzlich ist die Behandlung erfolgreich.",
+  "hl": "Grundsätzlich",
+  "role": "focus",
+  "cap": "grundsätzlich = in general, basically"
  },
  "gutschreiben--credit": {
   "key": "gutschreiben--credit",
@@ -5602,11 +5442,11 @@
   "hl": "lösungsorientierten"
  },
  "machen--make-do": {
-  "key": "machen--make-do",
-  "type": "scene",
-  "scene": "Show a person smiling as they use a well-designed simple tool to effortlessly assemble a piece of wooden furniture.",
-  "cap": "Making the task much simpler",
-  "hl": "macht"
+  "type": "grammar",
+  "de": "Das macht die Sache einfacher.",
+  "hl": "macht die Sache einfacher",
+  "role": "focus",
+  "cap": "machen = to make (here: to make easier)"
  },
  "machen--make-to-cause": {
   "key": "machen--make-to-cause",
@@ -6545,11 +6385,11 @@
   "hl": "ständig"
  },
  "staendig--constant-continual": {
-  "key": "staendig--constant-continual",
-  "type": "scene",
-  "scene": "Show an artist in a studio surrounded by multiple finished and unfinished canvases, intently painting at an easel late into the evening.",
-  "cap": "Constantly practising for the exhibition",
-  "hl": "ständig"
+  "type": "grammar",
+  "de": "Er übt ständig für die Ausstellung.",
+  "hl": "ständig",
+  "role": "focus",
+  "cap": "ständig = constantly"
  },
  "stattfinden--take-place": {
   "type": "grammar",
@@ -6650,18 +6490,11 @@
   "hl": "Theoriegeleitete"
  },
  "tierisch--animal-like": {
-  "key": "tierisch--animal-like",
-  "type": "scene",
-  "scene": "Show two friends sitting on a park bench laughing uncontrollably together at a hilarious joke.",
-  "cap": "Colloquially used for 'really' or 'extremely' funny",
-  "hl": "tierisch"
- },
- "tolerant--tolerant": {
-  "key": "tolerant--tolerant",
-  "type": "scene",
-  "scene": "Show an extended family of different ages sharing a meal together with smiles and mutual respect.",
-  "cap": "An open-minded and tolerant family",
-  "hl": "tolerant"
+  "type": "grammar",
+  "de": "Das ist ja tierisch lustig.",
+  "hl": "tierisch lustig",
+  "role": "focus",
+  "cap": "tierisch (colloquial) = really, extremely"
  },
  "tolerieren--tolerate": {
   "key": "tolerieren--tolerate",
@@ -7483,12 +7316,6 @@
   "scene": "Show a manager speaking calmly to a colleague at a desk with an open, friendly hand gesture, the colleague nodding and listening.",
   "cap": "Wording criticism politely and carefully",
   "hl": "formuliert"
- },
- "um-sich-herum--around-oneself": {
-  "type": "scene",
-  "scene": "Show a man standing in the middle of a circle of smiling, laughing people at a garden party, turning his head to look at the friendly faces all around him.",
-  "cap": "um sich herum = all around oneself",
-  "hl": "Um sich herum"
  },
  "die-beherrschung--mastery-command": {
   "type": "scene",
@@ -8802,6 +8629,403 @@
   "type": "week",
   "day": 4,
   "cap": "donnerstags = every Thursday"
+ },
+ "netto--net": {
+  "type": "grammar",
+  "de": "Wie viel verdienst du netto?",
+  "hl": "netto",
+  "role": "focus",
+  "cap": "netto = net (after tax)"
+ },
+ "darum--that-s-why": {
+  "type": "grammar",
+  "de": "Ich war krank, darum bin ich nicht gekommen.",
+  "hl": "darum",
+  "role": "focus",
+  "cap": "darum = that's why"
+ },
+ "sodass--so-that": {
+  "type": "grammar",
+  "de": "Er sprach sehr leise, sodass ich ihn kaum verstand.",
+  "hl": "sodass",
+  "role": "focus",
+  "cap": "sodass = so that (result)"
+ },
+ "der-werbetrick--advertising-trick": {
+  "type": "grammar",
+  "de": "Vorsicht mit Werbetricks!",
+  "hl": "Werbetricks",
+  "role": "focus",
+  "cap": "der Werbetrick = advertising trick"
+ },
+ "finnland--finland": {
+  "type": "map",
+  "iso": [
+   "FI"
+  ],
+  "cap": "Finnland = Finland"
+ },
+ "derselbe--same": {
+  "type": "grammar",
+  "de": "Wir buchten dasselbe Hotel wie letztes Jahr.",
+  "hl": "dasselbe",
+  "role": "focus",
+  "cap": "derselbe / dieselbe / dasselbe = the same"
+ },
+ "gruendlich--thorough": {
+  "type": "grammar",
+  "de": "Sie plante die Reise sehr gründlich.",
+  "hl": "gründlich",
+  "role": "focus",
+  "cap": "gründlich = thorough(ly)"
+ },
+ "fruehere--previous": {
+  "type": "grammar",
+  "de": "Meine frühere Stelle war weniger interessant.",
+  "hl": "frühere",
+  "role": "focus",
+  "cap": "frühere = previous, former"
+ },
+ "befriedigend--satisfying": {
+  "type": "grammar",
+  "de": "Ich hoffe, einen befriedigenden Job zu finden.",
+  "hl": "befriedigenden",
+  "role": "focus",
+  "cap": "befriedigend = satisfying"
+ },
+ "die-nutzung--usage": {
+  "type": "grammar",
+  "de": "Die Nutzung wird einfacher werden.",
+  "hl": "Nutzung",
+  "role": "focus",
+  "cap": "die Nutzung = use, usage"
+ },
+ "abhaengen--be-dependent-on": {
+  "type": "grammar",
+  "de": "Das hängt vom Budget ab.",
+  "hl": "hängt vom Budget ab",
+  "role": "focus",
+  "cap": "abhängen von = to depend on"
+ },
+ "beruecksichtigen--consider": {
+  "type": "grammar",
+  "de": "Wir müssen das Budget berücksichtigen.",
+  "hl": "berücksichtigen",
+  "role": "focus",
+  "cap": "berücksichtigen = to consider, take into account"
+ },
+ "ausser-acht-lassen--disregard": {
+  "type": "grammar",
+  "de": "Wir dürfen das Budget nicht außer Acht lassen.",
+  "hl": "außer Acht lassen",
+  "role": "focus",
+  "cap": "außer Acht lassen = to disregard"
+ },
+ "merken--notice": {
+  "type": "grammar",
+  "de": "Er merkt, dass ich nervös bin.",
+  "hl": "merkt",
+  "role": "focus",
+  "cap": "merken = to notice"
+ },
+ "erarbeiten--develop": {
+  "type": "grammar",
+  "de": "Der Theatermacher erarbeitet ein neues Stück.",
+  "hl": "erarbeitet",
+  "role": "focus",
+  "cap": "erarbeiten = to develop, work out"
+ },
+ "der-durchschnitt--average": {
+  "type": "grammar",
+  "de": "Im Durchschnitt wird weniger Fleisch gegessen.",
+  "hl": "Im Durchschnitt",
+  "role": "focus",
+  "cap": "im Durchschnitt = on average"
+ },
+ "national--national": {
+  "type": "grammar",
+  "de": "Die nationale Würde muss respektiert werden.",
+  "hl": "nationale",
+  "role": "focus",
+  "cap": "national = national"
+ },
+ "der-umgang--dealing-handling": {
+  "type": "grammar",
+  "de": "Der Umgang miteinander wird verbessert.",
+  "hl": "Umgang miteinander",
+  "role": "focus",
+  "cap": "der Umgang (mit) = dealing with, treatment of"
+ },
+ "der-anspruch--entitlement-claim": {
+  "type": "grammar",
+  "de": "Sie hat Anspruch auf Unterstützung.",
+  "hl": "Anspruch auf",
+  "role": "focus",
+  "cap": "Anspruch auf (+ A) haben = to be entitled to"
+ },
+ "abmelden--sign-off-deregister": {
+  "type": "grammar",
+  "de": "Ich muss mich vom Kurs abmelden.",
+  "hl": "mich vom Kurs abmelden",
+  "role": "focus",
+  "cap": "sich abmelden = to sign off, deregister"
+ },
+ "pauschal--across-the-board": {
+  "type": "grammar",
+  "de": "Pauschal kann man das nicht sagen.",
+  "hl": "Pauschal",
+  "role": "focus",
+  "cap": "pauschal = across the board, sweepingly"
+ },
+ "profitieren--profit": {
+  "type": "grammar",
+  "de": "Kleine Firmen profitieren nicht vom Weltmarkt.",
+  "hl": "profitieren nicht vom Weltmarkt",
+  "role": "focus",
+  "cap": "profitieren von = to profit from"
+ },
+ "asien--asia": {
+  "type": "grammar",
+  "de": "Viele Firmen verlegen ihre Produktion nach Asien.",
+  "hl": "nach Asien",
+  "role": "focus",
+  "cap": "Asien = Asia"
+ },
+ "das-missverstaendnis--misunderstanding": {
+  "type": "grammar",
+  "de": "Das klingt nach einem Missverständnis.",
+  "hl": "Missverständnis",
+  "role": "focus",
+  "cap": "das Missverständnis = misunderstanding"
+ },
+ "liegen--be-located": {
+  "type": "grammar",
+  "de": "Wo liegt das Krankenhaus?",
+  "hl": "Wo liegt",
+  "role": "focus",
+  "cap": "liegen = to be located"
+ },
+ "eingehen--enter-into-agree-to-to-respond-to-engage-with": {
+  "type": "grammar",
+  "de": "Er ging auf ihre Argumente ein.",
+  "hl": "ging auf ihre Argumente ein",
+  "role": "focus",
+  "cap": "auf etwas eingehen = to respond to, engage with"
+ },
+ "erstaunlich--astonishing": {
+  "type": "grammar",
+  "de": "Es ist erstaunlich, so einen jungen Regisseur ausgezeichnet zu sehen.",
+  "hl": "erstaunlich",
+  "role": "focus",
+  "cap": "erstaunlich = astonishing"
+ },
+ "jeglich--any-every": {
+  "type": "grammar",
+  "de": "Jegliche Hilfe ist willkommen.",
+  "hl": "Jegliche",
+  "role": "focus",
+  "cap": "jeglich = any (at all)"
+ },
+ "leichtfallen--be-easy": {
+  "type": "grammar",
+  "de": "Es fällt mir leicht, die Merkformel zu behalten.",
+  "hl": "Es fällt mir leicht",
+  "role": "focus",
+  "cap": "leichtfallen = to be easy (for someone)"
+ },
+ "die-ich-botschaft--i-message": {
+  "type": "grammar",
+  "de": "Eine Ich-Botschaft kann zur Problemlösung beitragen.",
+  "hl": "Ich-Botschaft",
+  "role": "focus",
+  "cap": "die Ich-Botschaft = I-message (speaking about your own feelings)"
+ },
+ "werben--advertise-recruit": {
+  "type": "grammar",
+  "de": "Es kommt oft vor, dass Kollegen aggressiv werben.",
+  "hl": "aggressiv werben",
+  "role": "focus",
+  "cap": "werben = to advertise, to recruit"
+ },
+ "daherkommen--come-along-appear": {
+  "type": "grammar",
+  "de": "Die Gelegenheit kommt ganz unerwartet daher.",
+  "hl": "kommt ganz unerwartet daher",
+  "role": "focus",
+  "cap": "daherkommen = to come along, appear"
+ },
+ "alzheimer--alzheimer-s-disease": {
+  "key": "alzheimer--alzheimer-s-disease",
+  "type": "scene",
+  "scene": "Show an elderly man sitting beside a caring young woman holding his hand gently while they both look at family portraits in a memory book.",
+  "hl": "Alzheimer",
+  "cap": "Caring support for an elderly relative with memory loss"
+ },
+ "bic--swift-bic": {
+  "key": "bic--swift-bic",
+  "type": "scene",
+  "scene": "Show a bank payment card resting beside an electronic tablet displaying an online bank transfer form.",
+  "cap": "Bank identifier code on an online payment form",
+  "hl": "BIC"
+ },
+ "blutig--bloody": {
+  "key": "blutig--bloody",
+  "type": "scene",
+  "scene": "Show an open first-aid kit on a table, with sterile gauze pads, antiseptic spray, and rolled white bandages ready for use.",
+  "cap": "First-aid supplies ready to treat a wound",
+  "hl": "blutig"
+ },
+ "buergerlich--middle-class-civic": {
+  "key": "buergerlich--middle-class-civic",
+  "type": "scene",
+  "scene": "Show a tidy, comfortable living room of an established family home, with full bookshelves, framed family photos, and a dining table.",
+  "cap": "A comfortable, respectable middle-class family home.",
+  "hl": "bürgerlichen"
+ },
+ "das-pdf-dokument--pdf-document": {
+  "key": "das-pdf-dokument--pdf-document",
+  "type": "scene",
+  "scene": "Show an open laptop on a tidy wooden desk displaying a multi-page digital document with neat paragraphs and layout, viewed at a slight three-quarter angle.",
+  "cap": "A multi-page PDF document on a laptop screen",
+  "hl": "PDF-Dokument"
+ },
+ "der-absatz--sales": {
+  "key": "der-absatz--sales",
+  "type": "scene",
+  "scene": "Show a beverage store manager smiling while stocking empty shelves with crates of reusable glass water bottles as shoppers put bottles into their shopping baskets",
+  "cap": "Sales of reusable bottles are rising",
+  "hl": "Absatz"
+ },
+ "der-coversong--cover-song": {
+  "key": "der-coversong--cover-song",
+  "type": "scene",
+  "scene": "Show a singer at a vintage microphone on a small stage performing an iconic acoustic melody with a guitarist beside her",
+  "cap": "Performing a cover version of a famous song",
+  "hl": "Coversong"
+ },
+ "der-dialekt--dialect": {
+  "key": "der-dialekt--dialect",
+  "type": "scene",
+  "scene": "Show two elderly villagers in regional alpine clothing chatting animatedly outside a wooden alpine chalet, while a passing hiker stops and listens intently.",
+  "cap": "Locals conversing in their regional dialect",
+  "hl": "Dialekt"
+ },
+ "der-favorit--favourite": {
+  "type": "scene",
+  "scene": "Show a person smiling while holding their favourite teal mug, with several other mugs standing untouched on the shelf behind.",
+  "cap": "The one you like best",
+  "hl": "Favorit"
+ },
+ "der-indie-pop--indie-pop": {
+  "key": "der-indie-pop--indie-pop",
+  "type": "scene",
+  "scene": "Show a small indie band performing on a cozy wooden stage in an intimate café: an electric guitar player, a keyboardist, and a singer at a vintage microphone.",
+  "cap": "A live band playing indie-pop music",
+  "hl": "Indie-Pop"
+ },
+ "der-langspielfilm--feature-length-film": {
+  "key": "der-langspielfilm--feature-length-film",
+  "type": "scene",
+  "scene": "Show an audience sitting quietly in the darkened rows of a cinema, watching a wide illuminated movie screen from behind.",
+  "hl": "Langspielfilm",
+  "cap": "Watching a full-length movie in a cinema"
+ },
+ "der-neffe--nephew": {
+  "key": "der-neffe--nephew",
+  "type": "scene",
+  "scene": "Show an adult proudly watching a young boy play a small acoustic guitar in a living room.",
+  "cap": "An uncle listening to his musical nephew",
+  "hl": "Neffe"
+ },
+ "der-stundenlohn--hourly-wage": {
+  "key": "der-stundenlohn--hourly-wage",
+  "type": "scene",
+  "scene": "Show a wall clock showing one hour passing next to a neat small stack of euro coins on a wooden table.",
+  "cap": "Payment calculated per hour of work",
+  "hl": "Stundenlohn"
+ },
+ "der-zeitpunkt--time": {
+  "key": "der-zeitpunkt--time",
+  "type": "scene",
+  "scene": "Show a wall clock with hands pointing precisely at twelve, while a person taps their wrist watch looking up expectantly.",
+  "cap": "A specific, exact point in time",
+  "hl": "Zeitpunkt"
+ },
+ "die-art--kind-type-manner": {
+  "key": "die-art--kind-type-manner",
+  "type": "scene",
+  "scene": "Show a traveler standing on the open rear platform of a vintage scenic train as it winds through lush mountain valleys.",
+  "cap": "A unique way and style of traveling",
+  "hl": "Art"
+ },
+ "die-branche--field-of-business": {
+  "key": "die-branche--field-of-business",
+  "type": "scene",
+  "scene": "Show people in hard hats and safety vests discussing blueprints on an active modern building site, representing work in a specific economic sector.",
+  "cap": "A specific field of business or industry",
+  "hl": "Branche"
+ },
+ "die-eigenschaft--characteristic": {
+  "key": "die-eigenschaft--characteristic",
+  "type": "scene",
+  "scene": "Show an adult calmly kneeling beside a young child who is struggling to tie shoelaces, demonstrating calm endurance.",
+  "cap": "Patience as an important personal quality",
+  "hl": "Eigenschaft"
+ },
+ "die-einstellung--attitude": {
+  "key": "die-einstellung--attitude",
+  "type": "scene",
+  "scene": "Show a person calmly packing a healthy packed lunch into a bag, smiling before heading out in the morning.",
+  "cap": "A healthy mindset and balanced attitude",
+  "hl": "Einstellung"
+ },
+ "die-ewigkeit--ages-eternity": {
+  "key": "die-ewigkeit--ages-eternity",
+  "type": "scene",
+  "scene": "Show two old friends greeting each other warmly with outstretched arms on a train platform after many years apart.",
+  "cap": "Meeting again after what felt like ages",
+  "hl": "Ewigkeit"
+ },
+ "die-pflicht--duty": {
+  "key": "die-pflicht--duty",
+  "type": "scene",
+  "scene": "Show a worker in an industrial workshop putting on safety goggles and a hard hat next to a clear safety checklist board.",
+  "cap": "An official obligation or duty at work",
+  "hl": "Pflichten"
+ },
+ "die-sprachentwicklung--language-development": {
+  "key": "die-sprachentwicklung--language-development",
+  "type": "scene",
+  "scene": "Show a mother sitting on a rug with her toddler, pointing at a picture book of animals, the toddler excitedly pointing and babbling back as they communicate.",
+  "cap": "The gradual process of language development in early childhood",
+  "hl": "Sprachentwicklung"
+ },
+ "die-standarduebersicht--standard-overview": {
+  "key": "die-standarduebersicht--standard-overview",
+  "type": "scene",
+  "scene": "Show a tablet screen displaying a neat dashboard layout with simplified cards, circular summary gauges, and organized rows showing financial account balances.",
+  "cap": "The default dashboard showing a standard overview of accounts",
+  "hl": "Standardübersicht"
+ },
+ "die-unterrichtsform--form-of-instruction": {
+  "key": "die-unterrichtsform--form-of-instruction",
+  "type": "scene",
+  "scene": "Show a modern classroom arranged in small round tables where groups of four students collaborate energetically with notebooks, replacing traditional rows.",
+  "cap": "Collaborative group work as an engaging form of instruction",
+  "hl": "Unterrichtsform"
+ },
+ "tolerant--tolerant": {
+  "key": "tolerant--tolerant",
+  "type": "scene",
+  "scene": "Show an extended family of different ages sharing a meal together with smiles and mutual respect.",
+  "cap": "An open-minded and tolerant family",
+  "hl": "tolerant"
+ },
+ "um-sich-herum--around-oneself": {
+  "type": "scene",
+  "scene": "Show a man standing in the middle of a circle of smiling, laughing people at a garden party, turning his head to look at the friendly faces all around him.",
+  "cap": "um sich herum = all around oneself",
+  "hl": "Um sich herum"
  },
  "das-deutschbuch--german-book": {
   "key": "das-deutschbuch--german-book",

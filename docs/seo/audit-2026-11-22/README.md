@@ -41,9 +41,11 @@ Built from the files changed in PRs #361–369, #371 and #372 (Git), deduplicate
 
 ## Facts verified for this batch (22 Nov 2026)
 
-- **Klarweg prices** — `access/worker/src/products.js` == live `https://klarweg.in/kw-products.js`: A1 ₹1,999, A2 ₹2,999, B1 ₹3,999, B2 ₹4,999, C1 ₹7,999, C2 ₹8,999 (2-year access), Lifetime ₹4,999 (no expiry).
+- **Klarweg prices** — `access/worker/src/products.js` (identical on `deploy/access-marketplace-on-73417bc5`, the source of live access Worker 5852e9de) == live `https://klarweg.in/kw-products.js`: A1 ₹1,999, A2 ₹2,999, B1 ₹3,999, B2 ₹4,999, C1 ₹7,999, C2 ₹8,999 (2-year access), Lifetime ₹4,999 (no expiry).
 - **Live classes** — live `GET /api/enrol/catalog`: `enabled:false`, every course `batches:[]`; listed fees group ₹16,000 (₹13,000 with GROUP3000), one-to-one ₹22,000 (₹15,000 with PERSONAL7000), A1–B2, one teacher. Live `GET /api/demo/availability`: `enabled:true`, `testMode:false`, ₹100, 20 min, Fri/Sun after 16:20 IST; slots were shown only for 22 Nov.
-- **Goethe India exam fees** (goethe.de/ins/in exam pages): Jan 2027 dates — A1 ₹10,000, A2 ₹12,000, B1 ₹20,000 (module ₹5,000), B2 ₹22,000 (module ₹5,500). Remaining Dec 2026 dates — A1 ₹9,400, B1 ₹18,800 (₹4,700), B2 ₹21,200 (₹5,300). Klarweg’s two fee pages still showed the 5 Nov figures → fixed.
+- **Goethe India exam fees** (goethe.de/ins/in exam pages, every listed date and result page checked on 22 Nov 2026): Jan 2027 dates — A1 ₹10,000, A2 ₹12,000, B1 ₹20,000 (module ₹5,000), B2 ₹22,000 (module ₹5,500). Remaining Dec 2026 dates — A1 ₹9,400, B1 ₹18,800 (₹4,700), B2 ₹21,200 (₹5,300). Klarweg’s two fee pages still showed the 5 Nov figures → fixed.
+  - **Scope:** identical at every listed Goethe-Institut / Max Mueller Bhavan centre (New Delhi, Mumbai, Pune, Bangalore, Chennai, Kolkata) and listed partner venue (e.g. Trichy, Kolhapur, Jaipur, Noida, Vadodara): A1 27 dates, A2 15, B1/B2 20 module listings each. Goethe-Zentren that run their own booking are not in this listing and are not claimed.
+  - **Candidate category:** these are standard prices incl. 18% GST. Detail pages (A1 New Delhi 04.01.2027, A2 Pune 13.01.2027, B1/B2 New Delhi 05.01.2027) state a 20% rebate for candidates who attended a Goethe-Institut course within 6 months of the exam: A1 ₹8,000, A2 ₹9,600, B1 ₹16,000 (module ₹4,000), B2 ₹17,600 (module ₹4,400). Pages now state the scope and the rebate.
 - **Certificates** — Klarweg issues none (claims removed in 1e90e21, Sprint 1b).
 
 ## Biggest issues found (before → after)

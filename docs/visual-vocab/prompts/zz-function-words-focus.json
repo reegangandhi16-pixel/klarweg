@@ -370,5 +370,69 @@
  "beim-alten-bleiben--stay-the-same": {
   "tier": "text-only",
   "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "genau--exactly": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "das-wort--word": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "dreimal--three-times": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "das-semester--semester": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "danach--afterwards": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "stattfinden--take-place": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "wiedergeben--reproduce-retell": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-hauptschule--secondary-school": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-sprachwissenschaft--linguistics": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "damit--with-it-that": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "werden--will-to-become": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-hauptsache--main-point-main-thing": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "konnte--could": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "fremd--foreign-alien-strange": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "relativ--relative": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "donnerstags--on-thursdays": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
  }
 }

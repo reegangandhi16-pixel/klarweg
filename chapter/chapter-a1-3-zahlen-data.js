@@ -346,7 +346,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/b732e4b66bd992ac5371', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A wooden abacus with colourful sliding beads arranged in counted groups.' }
     },
     { de: 'Handynummer', art: 'die', gender: 'f', plural: 'Handynummern', pos: 'noun', en: 'mobile number', hi: 'मोबाइल नंबर',
-      ex: 'Wie ist deine Handynummer?', exEn: 'What is your mobile number?' },
+      ex: 'Wie ist deine Handynummer?', exEn: 'What is your mobile number?',
+      img: { src: '/api/media/vocab-img/68a998b34246e3422e9d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'new acquaintances smiling as one holds out a smartphone screen so the other can scan or save a contact into their phone', cap: 'Exchanging mobile numbers to stay in touch', hl: 'Handynummer' }
+    },
     { de: 'Telefonnummer', art: 'die', gender: 'f', plural: 'Telefonnummern', pos: 'noun', en: 'phone number', hi: 'टेलीफ़ोन नंबर',
       ex: 'Meine Telefonnummer ist neu.', exEn: 'My phone number is new.',
       img: { src: '/api/media/vocab-img/56ba9fa42c36e6a72d64', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Tapping digits on a smartphone keypad.' }

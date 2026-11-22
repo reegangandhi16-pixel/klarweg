@@ -189,5 +189,29 @@
   "alt": "A researcher proving her thesis with data",
   "strategy": "direct",
   "note": "retry prompt after manual QA fail 2026-11-21 (picture did not teach the card's meaning/example)"
+ },
+ "der-ehemann--husband": {
+  "subject": "Show a smiling woman wearing a wedding ring pointing proudly at a man beside her who also wears a wedding ring and is busy typing on a laptop at a home desk; a framed wedding photo of the two of them hangs on the wall behind.",
+  "alt": "A woman pointing at her husband working at his laptop",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-22 (man alone, no marriage cue)"
+ },
+ "einladen--invite": {
+  "subject": "Show a young man at an apartment door handing his friend a colourful invitation card decorated with a small drawn balloon; the friend smiles and holds the card with both hands.",
+  "alt": "A man handing a friend an invitation card",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-22 (read as giving a present)"
+ },
+ "die-pruefung--exam": {
+  "subject": "Show a quiet exam hall with several students writing at separate desks in rows, each with an exam sheet and a pen, while an invigilator stands beside a large wall clock.",
+  "alt": "Students writing an exam in a quiet hall",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-22 (read as studying)"
+ },
+ "bluten--bleed": {
+  "subject": "Show a close-up of a hand with a small cut on the index finger and a single red drop of blood, while the other hand holds a plaster ready to stick on it.",
+  "alt": "A finger with a small bleeding cut and a plaster",
+  "strategy": "direct",
+  "note": "retry prompt after manual QA fail 2026-11-22 (no visible bleeding)"
  }
 }

@@ -229,13 +229,17 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/5718db9371ffcbb62742', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A shopping tote holding a few groceries on a table.' }
     },
     { de: 'genug', pos: 'adverb', en: 'enough', hi: 'काफ़ी',
-      ex: 'Ich habe genug Zeit.', exEn: 'I have enough time.' },
+      ex: 'Ich habe genug Zeit.', exEn: 'I have enough time.',
+      img: { src: '/api/media/vocab-img/6960d867e4e01f2a2d7c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A guest gesturing with an open palm to signal enough tea.' }
+    },
     { de: 'so', pos: 'adverb', en: 'this way, like this', hi: 'इस तरह',
       ex: 'So sagt man das auf Deutsch.', exEn: 'That is how you say it in German.',
       img: { src: '/api/media/vocab-img/aa0bffd9a22776dcd063', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A potter demonstrating the exact hand position to an apprentice.' }
     },
     { de: 'Ding', art: 'das', gender: 'n', plural: 'Dinge', pos: 'noun', en: 'thing', hi: 'वस्तु',
-      ex: 'Was ist das für ein Ding?', exEn: 'What kind of thing is that?' },
+      ex: 'Was ist das für ein Ding?', exEn: 'What kind of thing is that?',
+      img: { src: '/api/media/vocab-img/8f1be7c429e2c35b4755', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person inspecting an unusual geometric object on a pedestal.' }
+    },
     { de: 'Meer', art: 'das', gender: 'n', plural: 'Meere', pos: 'noun', en: 'sea', hi: 'समुद्र',
       ex: 'Ich sehe das Meer.', exEn: 'I see the sea.',
       img: { src: '/api/media/vocab-img/3ee3037afd4bfee2ed6c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'calm sea waves meeting a sandy beach' }

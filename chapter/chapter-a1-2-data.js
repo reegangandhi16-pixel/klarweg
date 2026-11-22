@@ -240,11 +240,17 @@ const CHAPTER = {
   // Coaching verbs/adjectives carry no article; the 6 nouns do.
   vocab: [
     { de: 'Aussprache', art: 'die', gender: 'f', plural: 'Aussprachen', pos: 'noun', en: 'pronunciation', hi: 'उच्चारण',
-      ex: 'Die Aussprache ist wichtig.', exEn: 'Pronunciation is important.' },
+      ex: 'Die Aussprache ist wichtig.', exEn: 'Pronunciation is important.',
+      img: { src: '/api/media/vocab-img/98d18ce869bfb9c7af6c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A coach demonstrating clear mouth shape for pronunciation to a learner.' }
+    },
     { de: 'Betonung', art: 'die', gender: 'f', plural: 'Betonungen', pos: 'noun', en: 'stress, accent', hi: 'बल (ज़ोर)',
-      ex: 'Achte auf die Betonung.', exEn: 'Pay attention to the stress.' },
+      ex: 'Achte auf die Betonung.', exEn: 'Pay attention to the stress.',
+      img: { src: '/api/media/vocab-img/f2dfca9aad2b7e7e8f8e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'language teacher gently touching their throat while clearly enunciating a word for an attentive adult beginner', cap: 'Paying attention to word stress and accentuation', hl: 'Betonung' }
+    },
     { de: 'Satzmelodie', art: 'die', gender: 'f', plural: 'Satzmelodien', pos: 'noun', en: 'intonation', hi: 'वाक्य की लय',
-      ex: 'Die Satzmelodie steigt bei Fragen.', exEn: 'Intonation rises in questions.' },
+      ex: 'Die Satzmelodie steigt bei Fragen.', exEn: 'Intonation rises in questions.',
+      img: { src: '/api/media/vocab-img/bfd51f345ec10af5db2c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person in profile with a visual voice wave rising upward.' }
+    },
     { de: 'Wortanfang', art: 'der', gender: 'm', plural: 'Wortanfänge', pos: 'noun', en: 'start of the word', hi: 'शब्द का आरंभ',
       ex: 'Am Wortanfang hörst du den ersten Laut.', exEn: 'At the start of the word you hear the first sound.',
       vis: { kind: 'grammar', de: 'Am Wortanfang hörst du den ersten Laut.', hl: 'Wortanfang', role: 'place', cap: 'The initial sound or letters of a word' }

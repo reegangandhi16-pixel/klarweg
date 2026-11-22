@@ -226,7 +226,9 @@ const CHAPTER = {
       vis: { kind: 'grammar', de: 'Wo wohnst du?', hl: 'Wo', role: 'question', cap: 'Question word asking about a location or place' }
     },
     { de: 'woher', pos: 'question word', en: 'from where', hi: 'कहाँ से',
-      ex: 'Woher kommst du?', exEn: 'Where do you come from?' },
+      ex: 'Woher kommst du?', exEn: 'Where do you come from?',
+      img: { src: '/api/media/vocab-img/fbec8e5ef76435d473c9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A traveler with luggage looking back toward a distant village.' }
+    },
     { de: 'warum', pos: 'question word', en: 'why', hi: 'क्यों',
       ex: 'Warum lernst du Deutsch?', exEn: 'Why are you learning German?' },
     { de: 'wie viel/viele', pos: 'question word', en: 'how much / how many', hi: 'कितना / कितने',
@@ -250,7 +252,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/6a5e51885a977da47133', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person fitting final puzzle piece' }
     },
     { de: 'genau', pos: 'adverb', en: 'exactly', hi: 'बिल्कुल',
-      ex: 'Genau! Das ist richtig.', exEn: 'Exactly! That is right.' },
+      ex: 'Genau! Das ist richtig.', exEn: 'Exactly! That is right.',
+      vis: { kind: 'grammar', de: 'Genau! Das ist richtig.', hl: 'Genau', role: 'focus', cap: 'genau = exactly' }
+    },
     { de: 'notieren', pos: 'verb', en: 'to note down', hi: 'नोट करना',
       ex: 'Notiere die Antwort.', exEn: 'Note down the answer.',
       conj: { praesens: 'notiert', praeteritum: 'notierte', perfekt: 'hat notiert' },
@@ -281,7 +285,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/a80c25ce2632e769a9c4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'wooden blocks arranged in size order' }
     },
     { de: 'Situation', art: 'die', gender: 'f', plural: 'Situationen', pos: 'noun', en: 'situation', hi: 'स्थिति',
-      ex: 'In dieser Situation fragt man "Wie bitte?".', exEn: 'In this situation you ask "Pardon?".' },
+      ex: 'In dieser Situation fragt man "Wie bitte?".', exEn: 'In this situation you ask "Pardon?".',
+      img: { src: '/api/media/vocab-img/1a494d94f589c1a1c3b2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'customer in a noisy, crowded cafe leaning slightly toward the barista behind the counter, cupping a hand to their ear to', cap: 'A challenging situation requiring someone to ask for clarification', hl: 'Situation' }
+    },
     { de: 'Tabelle', art: 'die', gender: 'f', plural: 'Tabellen', pos: 'noun', en: 'table, chart', hi: 'सारणी',
       ex: 'Schreib die Wörter in die Tabelle.', exEn: 'Write the words in the table.'
     },

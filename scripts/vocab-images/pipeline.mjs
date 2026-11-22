@@ -535,7 +535,12 @@ async function apply() {
     const updates = new Map();
     (ch.C.vocab || []).forEach((v, i) => {
       if (v.img || v.vis) return;
-      const img = imgFor(conceptKey(v), ch); if (img) { updates.set(i, img); return; }
+      const img = imgFor(conceptKey(v), ch);
+      if (img) {
+        // hl is chosen from one card's example; another card of the same concept may word it differently
+        if (img.hl && !(v.ex || "").includes(img.hl)) delete img.hl;
+        updates.set(i, img); return;
+      }
       const vis = visFor(conceptKey(v)); if (vis) updates.set(i, { field: "vis", value: vis });
     });
     if (!updates.size) continue;

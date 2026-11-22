@@ -209,7 +209,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/c14e0f56239374ac2e06', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'city skyline with buildings and streets' }
     },
     { de: 'Text', art: 'der', gender: 'm', plural: 'Texte', pos: 'noun', en: 'text', hi: 'पाठ',
-      ex: 'Lies den Text laut.', exEn: 'Read the text aloud.' },
+      ex: 'Lies den Text laut.', exEn: 'Read the text aloud.',
+      img: { src: '/api/media/vocab-img/4c274091b11a3b59c6ca', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open book displaying neat printed paragraphs of text.' }
+    },
     { de: 'Deutsche', art: 'der/die', pos: 'noun', en: 'German (person)', hi: 'जर्मन (व्यक्ति)',
       ex: 'Anna ist Deutsche.', exEn: 'Anna is German (a German woman).',
       vis: { kind: 'map', iso: ['DE'], cap: 'Germany, country of a German citizen', src: '../public/vocab-map/ce3e4bed2954.svg' }
@@ -385,11 +387,17 @@ const CHAPTER = {
     { de: 'Kanada', pos: 'country', en: 'Canada', hi: 'कनाडा',
       ex: 'Kanada ist im Norden.', exEn: 'Canada is in the north.' },
     { de: 'Mexiko', pos: 'country', en: 'Mexico', hi: 'मेक्सिको',
-      ex: 'Mexiko ist in Nordamerika.', exEn: 'Mexico is in North America.' },
+      ex: 'Mexiko ist in Nordamerika.', exEn: 'Mexico is in North America.',
+      img: { src: '/api/media/vocab-img/164f3032375810be55a3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A sombrero, a bowl of guacamole with chips, and a cactus.' }
+    },
     { de: 'Brasilien', pos: 'country', en: 'Brazil', hi: 'ब्राज़ील',
-      ex: 'Brasilien ist in Südamerika.', exEn: 'Brazil is in South America.' },
+      ex: 'Brasilien ist in Südamerika.', exEn: 'Brazil is in South America.',
+      img: { src: '/api/media/vocab-img/3306a1c75a6811f88f3e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A cable car ascending Sugarloaf Mountain over blue ocean water.' }
+    },
     { de: 'Argentinien', pos: 'country', en: 'Argentina', hi: 'अर्जेंटीना',
-      ex: 'Sie ist argentinisch — aus Argentinien.', exEn: 'She is Argentinian — from Argentina.' },
+      ex: 'Sie ist argentinisch — aus Argentinien.', exEn: 'She is Argentinian — from Argentina.',
+      img: { src: '/api/media/vocab-img/84446f9285db5ac1bb88', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Yerba mate gourd and leather boots evoking Argentina' }
+    },
     { de: 'argentinisch', pos: 'adjective', en: 'Argentinian', hi: 'अर्जेंटीनी',
       ex: 'Das ist argentinisch.', exEn: 'That is Argentinian.' },
     { de: 'Neuseeland', pos: 'country', en: 'New Zealand', hi: 'न्यूज़ीलैंड',
@@ -422,7 +430,9 @@ const CHAPTER = {
     { de: 'Ukraine', art: 'die', gender: 'f', plural: '—', pos: 'country', en: 'Ukraine', hi: 'यूक्रेन',
       ex: 'Kiew ist in der Ukraine.', exEn: 'Kyiv is in Ukraine.' },
     { de: 'Slowakei', art: 'die', gender: 'f', plural: '—', pos: 'country', en: 'Slovakia', hi: 'स्लोवाकिया',
-      ex: 'Die Slowakei liegt in Europa.', exEn: 'Slovakia is in Europe.' },
+      ex: 'Die Slowakei liegt in Europa.', exEn: 'Slovakia is in Europe.',
+      img: { src: '/api/media/vocab-img/c9bc83e6fc93a71d84f4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A historic four-towered hilltop castle beside a river in Slovakia.' }
+    },
     { de: 'Niederlande', art: 'die', plural: 'Niederlande', pos: 'country', en: 'Netherlands', hi: 'नीदरलैंड',
       ex: 'Amsterdam ist in den Niederlanden.', exEn: 'Amsterdam is in the Netherlands.',
       img: { src: '/api/media/vocab-img/c37450ac43378784da5a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A windmill beside a canal with tulips and a parked bicycle.' }
@@ -432,7 +442,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/d251e96b164504a76133', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A miniature Statue of Liberty holding a torch on a pedestal.' }
     },
     { de: 'Iran', art: 'der', gender: 'm', plural: '—', pos: 'country', en: 'Iran', hi: 'ईरान',
-      ex: 'Teheran ist im Iran.', exEn: 'Tehran is in Iran.' },
+      ex: 'Teheran ist im Iran.', exEn: 'Tehran is in Iran.',
+      img: { src: '/api/media/vocab-img/7328f5378c7d0f48ea98', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'The Azadi Tower standing in a sunlit plaza in Tehran.' }
+    },
     { de: 'Irak', art: 'der', gender: 'm', plural: '—', pos: 'country', en: 'Iraq', hi: 'इराक़',
       ex: 'Bagdad ist im Irak.', exEn: 'Baghdad is in Iraq.' },
     { de: 'Libanon', art: 'der', gender: 'm', plural: '—', pos: 'country', en: 'Lebanon', hi: 'लेबनान',

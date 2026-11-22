@@ -327,7 +327,9 @@ const CHAPTER = {
       ex: 'Würde sich eine Reparatur lohnen?', exEn: 'Would a repair be worth it?', exHi: 'Kya repair karwana faayde ka hoga?',
       ex2: 'Es lohnt sich, auf das Sonderangebot zu warten.', ex2En: 'It\'s worth waiting for the special offer.', ex2Hi: 'Special offer ka intzaar karna faayde ka hai.',
       conj: { praesens: 'lohnt sich', praeteritum: 'lohnte sich', perfekt: 'hat sich gelohnt' },
-      advanced: { synonyms: ['sich rentieren'], opposites: [], collocations: ['sich lohnen, … zu …', 'eine Reparatur lohnt sich'] } },
+      advanced: { synonyms: ['sich rentieren'], opposites: [], collocations: ['sich lohnen, … zu …', 'eine Reparatur lohnt sich'] },
+      img: { src: '/api/media/vocab-img/88084b745b8f5bfcc141', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'auto mechanic and a car owner looking under an open car hood, thoughtfully considering repair costs', cap: 'Deciding whether fixing the car is worth it.', hl: 'lohnen' }
+    },
     { de: 'vor einer Frage stehen', pos: 'verb', level: 'B1', en: 'to be confronted with a question', hi: 'सवाल का सामना करना',
       ex: 'Ich stehe vor der Frage, ob ich ein neues Handy kaufen soll.', exEn: 'I\'m facing the question of whether I should buy a new phone.', exHi: 'Main is sawaal ka saamna kar raha hoon ki naya phone khareedoon ya nahi.',
       ex2: 'Viele Kunden stehen vor der gleichen Frage.', ex2En: 'Many customers face the same question.', ex2Hi: 'Kai grahak isi sawaal ka saamna karte hain.',

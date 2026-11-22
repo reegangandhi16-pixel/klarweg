@@ -302,7 +302,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/33bcadd197600d5cf5f8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A popular teacher surrounded by happy students' }
     },
     { de: 'berühmt', pos: 'adjective', en: 'famous', hi: 'प्रसिद्ध',
-      ex: 'Die Stadt ist berühmt.', exEn: 'The city is famous.' },
+      ex: 'Die Stadt ist berühmt.', exEn: 'The city is famous.',
+      img: { src: '/api/media/vocab-img/e73455445db200d853a0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Tourists admiring and photographing a famous grand monument.' }
+    },
     { de: 'beschreiben', pos: 'verb', en: 'to describe', hi: 'वर्णन करना',
       ex: 'Beschreibe deinen Freund.', exEn: 'Describe your friend.',
       conj: { praesens: 'beschreibt', praeteritum: 'beschrieb', perfekt: 'hat beschrieben' },
@@ -322,7 +324,9 @@ const CHAPTER = {
     { de: 'cool', pos: 'adjective', en: 'cool', hi: 'कूल',
       ex: 'Die Jacke ist cool.', exEn: 'The jacket is cool.' },
     { de: 'doof', pos: 'adjective', en: 'silly, dumb', hi: 'बेवकूफ़',
-      ex: 'Das ist doof.', exEn: 'That is silly.' },
+      ex: 'Das ist doof.', exEn: 'That is silly.',
+      img: { src: '/api/media/vocab-img/e8dfddc1ac214f6b63a5', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An exasperated person looking at an ice cream scoop dropped on pavement.' }
+    },
     { de: 'einfach', pos: 'adjective / adverb', en: 'easy; simply', hi: 'आसान / बस',
       ex: 'Die Regel ist einfach.', exEn: 'The rule is easy.',
       img: { src: '/api/media/vocab-img/f2340156d0f2b62e3c0c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A child easily fitting a wooden block into a puzzle.' }
@@ -391,7 +395,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/3657e173db765a87b493', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A long road stretching into the distance across fields' }
     },
     { de: 'langweilig', pos: 'adjective', en: 'boring', hi: 'उबाऊ',
-      ex: 'Der Film ist langweilig.', exEn: 'The film is boring.' },
+      ex: 'Der Film ist langweilig.', exEn: 'The film is boring.',
+      img: { src: '/api/media/vocab-img/4a0e08578897ff957fb2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A bored person yawning on a sofa while watching television.' }
+    },
     { de: 'leer', pos: 'adjective', en: 'empty', hi: 'खाली',
       ex: 'Der Kühlschrank ist leer.', exEn: 'The fridge is empty.',
       img: { src: '/api/media/vocab-img/626b8c3c81f1f875496a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An empty wooden bowl on a bare table' }
@@ -456,7 +462,9 @@ const CHAPTER = {
     { de: 'wichtig', pos: 'adjective', en: 'important', hi: 'महत्वपूर्ण',
       ex: 'Die Aussprache ist wichtig.', exEn: 'Pronunciation is important.' },
     { de: 'wunderbar', pos: 'adjective', en: 'wonderful', hi: 'अद्भुत',
-      ex: 'Das Wetter ist wunderbar.', exEn: 'The weather is wonderful.' },
+      ex: 'Das Wetter ist wunderbar.', exEn: 'The weather is wonderful.',
+      img: { src: '/api/media/vocab-img/a5b76e347b9de8033f20', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person smiling joyfully with outstretched arms in a sunny meadow.' }
+    },
     { de: 'wunderschön', pos: 'adjective', en: 'beautiful', hi: 'बेहद सुंदर',
       ex: 'Die Stadt ist wunderschön.', exEn: 'The city is beautiful.',
       img: { src: '/api/media/vocab-img/3e16d8a4796801e7152c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A charming historic town square with pastel cottages and flower boxes.' }
@@ -516,7 +524,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/4c913f257b66fda23154', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A friendly person offering a warm cup of tea.' }
     },
     { de: 'top', pos: 'adjective', en: 'top, great', hi: 'बढ़िया',
-      ex: 'Das Hotel ist top.', exEn: 'The hotel is top.' },
+      ex: 'Das Hotel ist top.', exEn: 'The hotel is top.',
+      img: { src: '/api/media/vocab-img/37eaa3f01307c5afbe7d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A luxury hotel bed with pillows and a service bell.' }
+    },
     { de: 'typisch', pos: 'adjective', en: 'typical', hi: 'विशिष्ट',
       ex: 'Das ist typisch deutsch.', exEn: 'That is typically German.',
       img: { src: '/api/media/vocab-img/aae89b08b1a437178ba2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A braided pretzel with salt crystals on a checkered cloth.' }

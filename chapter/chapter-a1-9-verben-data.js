@@ -227,9 +227,13 @@ const CHAPTER = {
     },
     // — Passive —
     { de: 'Deutschbuch', art: 'das', gender: 'n', plural: 'Deutschbücher', pos: 'noun', en: 'German book', hi: 'जर्मन किताब',
-      ex: 'Das Deutschbuch ist neu.', exEn: 'The German book is new.' },
+      ex: 'Das Deutschbuch ist neu.', exEn: 'The German book is new.',
+      img: { src: '/api/media/vocab-img/22f0d07a43563bf06183', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'open language textbook lying on a tidy study desk beside a pair of headphones, a notebook, and a pen', cap: 'A freshly opened German coursebook ready for study.', hl: 'Deutschbuch' }
+    },
     { de: 'Kapitel', art: 'das', gender: 'n', plural: 'Kapitel', pos: 'noun', en: 'chapter', hi: 'अध्याय',
-      ex: 'Wir lernen Kapitel neun.', exEn: 'We are learning chapter nine.' },
+      ex: 'Wir lernen Kapitel neun.', exEn: 'We are learning chapter nine.',
+      img: { src: '/api/media/vocab-img/3fe9d9e429992e390bed', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'open book showing the beginning of a fresh numbered section' }
+    },
     { de: 'Übungsbuch', art: 'das', gender: 'n', plural: 'Übungsbücher', pos: 'noun', en: 'exercise book', hi: 'अभ्यास पुस्तिका',
       ex: 'Das Übungsbuch hat viele Seiten.', exEn: 'The exercise book has many pages.',
       img: { src: '/api/media/vocab-img/0f3850815ba69661afec', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open exercise workbook with a pencil.' }
@@ -257,7 +261,9 @@ const CHAPTER = {
       vis: { kind: 'grammar', de: 'Wir möchten heute Deutsch lernen.', hl: 'lernen', role: 'verb', cap: 'The basic, unconjugated verb form (infinitive)' }
     },
     { de: 'Lernwortschatz', art: 'der', gender: 'm', plural: '—', pos: 'noun', en: 'vocabulary list', hi: 'शब्द-सूची',
-      ex: 'Der Lernwortschatz hat 22 Wörter.', exEn: 'The vocabulary list has 22 words.' },
+      ex: 'Der Lernwortschatz hat 22 Wörter.', exEn: 'The vocabulary list has 22 words.',
+      img: { src: '/api/media/vocab-img/578413ec699f06df74aa', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A vocabulary notebook with two neat columns and index tabs.' }
+    },
     { de: 'Endung', art: 'die', gender: 'f', plural: 'Endungen', pos: 'noun', en: 'ending', hi: 'अंत-प्रत्यय',
       ex: 'Die Endung für "ich" ist -e.', exEn: 'The ending for "ich" is -e.' },
     { de: 'Regel', art: 'die', gender: 'f', plural: 'Regeln', pos: 'noun', en: 'rule', hi: 'नियम',

@@ -210,7 +210,9 @@ const CHAPTER = {
     },
     { de: 'sagen', pos: 'verb', en: 'to say', hi: 'कहना',
       ex: 'Sag das noch einmal!', exEn: 'Say that once more!',
-      conj: { praesens: 'sagt', praeteritum: 'sagte', perfekt: 'hat gesagt' } },
+      conj: { praesens: 'sagt', praeteritum: 'sagte', perfekt: 'hat gesagt' },
+      img: { src: '/api/media/vocab-img/2dc24a90071cac644123', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person speaking expressively to a listening friend.' }
+    },
     { de: 'schreiben', pos: 'verb', en: 'to write', hi: 'लिखना',
       ex: 'Schreibst du die Antwort?', exEn: 'Are you writing the answer?',
       conj: { praesens: 'schreibt', praeteritum: 'schrieb', perfekt: 'hat geschrieben' },
@@ -256,7 +258,9 @@ const CHAPTER = {
     },
     // — Passive —
     { de: 'Wort', art: 'das', gender: 'n', plural: 'Wörter', pos: 'noun', en: 'word', hi: 'शब्द',
-      ex: 'Was bedeutet dieses Wort?', exEn: 'What does this word mean?' },
+      ex: 'Was bedeutet dieses Wort?', exEn: 'What does this word mean?',
+      vis: { kind: 'grammar', de: 'Was bedeutet dieses Wort?', hl: 'Wort', role: 'focus', cap: 'das Wort = word' }
+    },
     { de: 'Sprache', art: 'die', gender: 'f', plural: 'Sprachen', pos: 'noun', en: 'language', hi: 'भाषा',
       ex: 'Deutsch ist eine schöne Sprache.', exEn: 'German is a beautiful language.',
       img: { src: '/api/media/vocab-img/4bfc2fd511d99f310136', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people conversing with intertwining colorful speech bubbles.' }

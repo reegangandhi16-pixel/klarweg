@@ -268,7 +268,9 @@ const CHAPTER = {
     { de: 'geraten', pos: 'verb', level: 'B1', en: 'to fall into, end up in', hi: 'फंस जाना',
       ex: 'Wegen der hohen Miete geriet die Familie in Schwierigkeiten.', exEn: 'Because of the high rent, the family fell into difficulties.', exHi: 'Zyada kiraye ki wajah se, parivaar mushkil mein pad gaya.',
       conj: { praesens: 'gerät', praeteritum: 'geriet', perfekt: 'ist geraten' },
-      advanced: { synonyms: ['hineingeraten'], opposites: [], collocations: ['in Schwierigkeiten geraten'] } },
+      advanced: { synonyms: ['hineingeraten'], opposites: [], collocations: ['in Schwierigkeiten geraten'] },
+      img: { src: '/api/media/vocab-img/0a9fa9375e1615630bd6', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'worried couple sitting at a kitchen table surrounded by utility envelopes, looking troubled as they review their monthly', cap: 'Falling into financial difficulties.', hl: 'geriet' }
+    },
     { de: 'halten', pos: 'verb', level: 'B1', en: 'to be on (a diet)', hi: 'रहना (डाइट पर)',
       ex: 'Trotz des Feiertags hält sie weiterhin Diät.', exEn: 'Despite the holiday, she is still on a diet.', exHi: 'Chutti ke bawajood, woh diet par hi hai.',
       conj: { praesens: 'hält', praeteritum: 'hielt', perfekt: 'hat gehalten' },
@@ -277,7 +279,9 @@ const CHAPTER = {
     },
     { de: 'katholisch', pos: 'adjective', level: 'B1', en: 'Catholic', hi: 'कैथोलिक',
       ex: 'Wegen ihres katholischen Glaubens half die Familie oft in der Kirche.', exEn: 'Because of their Catholic faith, the family often helped at the church.', exHi: 'Apne Catholic vishwas ki wajah se, parivaar aksar church mein madad karta tha.',
-      advanced: { synonyms: [], opposites: [], collocations: [] } },
+      advanced: { synonyms: [], opposites: [], collocations: [] },
+      img: { src: '/api/media/vocab-img/610b310a8f0fe6ee19c1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'family carrying boxes of donated food into a parish hall entrance next to a classic stone church with an arched doorway', cap: 'Helping out at church guided by their Catholic faith.', hl: 'katholischen' }
+    },
     { de: 'produziert', pos: 'adjective', level: 'B1', en: 'produced', hi: 'उत्पादित',
       ex: 'Trotz des hohen Preises kauft er nur biologisch produziertes Gemüse.', exEn: 'Despite the high price, he only buys organically produced vegetables.', exHi: 'Zyada keemat ke bawajood, woh sirf organic tareeke se banaya gaya sabzi khareedta hai.',
       advanced: { synonyms: ['hergestellt'], opposites: [], collocations: [] },
@@ -292,7 +296,9 @@ const CHAPTER = {
     { de: 'stammen', pos: 'verb', level: 'B1', en: 'to originate (from + Dat.)', hi: 'से आना (मूल)',
       ex: 'Die Stadtmauer stammt aus der Entstehungszeit der Stadt.', exEn: 'The city wall dates from the city\'s time of origin.', exHi: 'Yeh shahar ki deewar shahar ke utpatti kaal se hai.',
       conj: { praesens: 'stammt', praeteritum: 'stammte', perfekt: 'hat gestammt' },
-      advanced: { synonyms: ['herkommen'], opposites: [], collocations: ['stammen aus + Dat.'] } },
+      advanced: { synonyms: ['herkommen'], opposites: [], collocations: ['stammen aus + Dat.'] },
+      img: { src: '/api/media/vocab-img/849793dd41639578144d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'ancient, weathered medieval stone city wall standing proudly adjacent to modern paved streets and buildings', cap: 'The stone wall dates from the city\'s founding era', hl: 'stammt' }
+    },
     { de: 'symbolisch', pos: 'adjective', level: 'B1', en: 'symbolic', hi: 'प्रतीकात्मक',
       ex: 'Wegen der Tradition hat der Nachtwächter heute nur eine symbolische Funktion.', exEn: 'Because of tradition, today the night watchman only has a symbolic function.', exHi: 'Parampara ki wajah se, aaj raat prahri ka sirf pratikatmak kaam hai.',
       advanced: { synonyms: [], opposites: [], collocations: [] },
@@ -409,7 +415,9 @@ const CHAPTER = {
     },
     { de: 'Selbsthilfe', art: 'die', gender: 'f', plural: '— (Sg.)', pos: 'noun', level: 'B1', en: 'self-help', hi: 'स्व-सहायता',
       ex: 'Wegen der Selbsthilfe-Initiative wurde die Siedlung schnell gebaut.', exEn: 'Because of the self-help initiative, the settlement was built quickly.', exHi: 'Swayam-sahayata pahal ki wajah se, basti jaldi bani.',
-      advanced: { synonyms: [], opposites: [], collocations: ['Selbsthilfe leisten'] } },
+      advanced: { synonyms: [], opposites: [], collocations: ['Selbsthilfe leisten'] },
+      img: { src: '/api/media/vocab-img/4dd5497266d8a9c45992', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'cooperative group of neighborhood residents collaboratively assembling wooden raised garden beds and a shared community ', cap: 'Neighbors organizing a self-help initiative to build together', hl: 'Selbsthilfe' }
+    },
     { de: 'Speise', art: 'die', gender: 'f', plural: 'Speisen', pos: 'noun', level: 'B1', en: 'food, dish', hi: 'भोजन',
       ex: 'Während des Essens gab es viele vegetarische Speisen.', exEn: 'During the meal, there were many vegetarian dishes.', exHi: 'Khaane ke dauran, kai shakahari vyanjan the.',
       advanced: { synonyms: ['Gericht', 'Essen'], opposites: [], collocations: [] },

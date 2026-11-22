@@ -3015,5 +3015,115 @@
   "hl": "beim Alten geblieben",
   "role": "focus",
   "cap": "beim Alten bleiben = to stay the same"
+ },
+ "genau--exactly": {
+  "type": "grammar",
+  "de": "Genau! Das ist richtig.",
+  "hl": "Genau",
+  "role": "focus",
+  "cap": "genau = exactly"
+ },
+ "das-wort--word": {
+  "type": "grammar",
+  "de": "Was bedeutet dieses Wort?",
+  "hl": "Wort",
+  "role": "focus",
+  "cap": "das Wort = word"
+ },
+ "dreimal--three-times": {
+  "type": "grammar",
+  "de": "Ich war dreimal in Berlin.",
+  "hl": "dreimal",
+  "role": "focus",
+  "cap": "dreimal = three times"
+ },
+ "das-semester--semester": {
+  "type": "grammar",
+  "de": "Das Semester war lang.",
+  "hl": "Semester",
+  "role": "focus",
+  "cap": "das Semester = semester (university term)"
+ },
+ "danach--afterwards": {
+  "type": "grammar",
+  "de": "Danach gehen wir ins Café.",
+  "hl": "Danach",
+  "role": "focus",
+  "cap": "danach = afterwards"
+ },
+ "stattfinden--take-place": {
+  "type": "grammar",
+  "de": "Die Prüfung findet am Freitag statt.",
+  "hl": "findet am Freitag statt",
+  "role": "focus",
+  "cap": "stattfinden = to take place"
+ },
+ "wiedergeben--reproduce-retell": {
+  "type": "grammar",
+  "de": "Gib den Text mit eigenen Worten wieder.",
+  "hl": "Gib den Text mit eigenen Worten wieder",
+  "role": "focus",
+  "cap": "wiedergeben = to retell, to reproduce"
+ },
+ "die-hauptschule--secondary-school": {
+  "type": "grammar",
+  "de": "Rohan war auf einer Hauptschule.",
+  "hl": "Hauptschule",
+  "role": "focus",
+  "cap": "die Hauptschule = lower secondary school (Germany)"
+ },
+ "die-sprachwissenschaft--linguistics": {
+  "type": "grammar",
+  "de": "Ich studiere Sprachwissenschaft.",
+  "hl": "Sprachwissenschaft",
+  "role": "focus",
+  "cap": "die Sprachwissenschaft = linguistics"
+ },
+ "damit--with-it-that": {
+  "type": "grammar",
+  "de": "Ich habe ein Tablet und arbeite damit.",
+  "hl": "damit",
+  "role": "focus",
+  "cap": "damit = with it (here: with the tablet)"
+ },
+ "werden--will-to-become": {
+  "type": "grammar",
+  "de": "Ich wollte Bankkaufmann werden.",
+  "hl": "werden",
+  "role": "focus",
+  "cap": "werden = to become"
+ },
+ "die-hauptsache--main-point-main-thing": {
+  "type": "grammar",
+  "de": "Die Hauptsache sind die drei Stufen.",
+  "hl": "Hauptsache",
+  "role": "focus",
+  "cap": "die Hauptsache = the main thing"
+ },
+ "konnte--could": {
+  "type": "grammar",
+  "de": "Abends konnte ich ins Kino gehen.",
+  "hl": "konnte",
+  "role": "focus",
+  "cap": "konnte = could (Präteritum of können)"
+ },
+ "fremd--foreign-alien-strange": {
+  "type": "grammar",
+  "de": "Am Anfang war alles fremd.",
+  "hl": "fremd",
+  "role": "focus",
+  "cap": "fremd = strange, unfamiliar"
+ },
+ "relativ--relative": {
+  "type": "grammar",
+  "de": "Ihr Leben war relativ ruhig.",
+  "hl": "relativ",
+  "role": "focus",
+  "cap": "relativ = relatively"
+ },
+ "donnerstags--on-thursdays": {
+  "type": "week",
+  "day": 4,
+  "cap": "donnerstags = every Thursday"
  }
 }

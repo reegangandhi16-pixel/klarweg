@@ -518,13 +518,6 @@
   "role": "focus",
   "cap": "bloß = only, just"
  },
- "bluten--bleed": {
-  "key": "bluten--bleed",
-  "type": "scene",
-  "scene": "Show a person calmly applying an adhesive bandage to a small cut on a fingertip, with no visible blood.",
-  "cap": "Treating a bleeding fingertip with a plaster",
-  "hl": "blutet"
- },
  "blutig--bloody": {
   "key": "blutig--bloody",
   "type": "scene",
@@ -702,13 +695,6 @@
   "cap": "Stamping the official calendar date onto a document.",
   "hl": "Datum"
  },
- "das-deutschbuch--german-book": {
-  "key": "das-deutschbuch--german-book",
-  "type": "scene",
-  "scene": "Show an open language textbook lying on a tidy study desk beside a pair of headphones, a notebook, and a pen.",
-  "cap": "A freshly opened German coursebook ready for study.",
-  "hl": "Deutschbuch"
- },
  "das-deutsche--german": {
   "key": "das-deutsche--german",
   "type": "map",
@@ -740,13 +726,6 @@
   "cap": "Natural body chemicals released during exercise",
   "hl": "Endorphine"
  },
- "das-englisch-studium--english-degree": {
-  "key": "das-englisch-studium--english-degree",
-  "type": "scene",
-  "scene": "Show a university student sitting in a lecture hall surrounded by tall stacks of thick classic literature books and study notes.",
-  "cap": "Pursuing academic degree studies in English literature",
-  "hl": "Englisch-Studium"
- },
  "das-erachten--opinion-view": {
   "key": "das-erachten--opinion-view",
   "type": "scene",
@@ -776,13 +755,6 @@
   "hl": "regnen wird",
   "role": "verb",
   "cap": "Future tense expressing an upcoming event"
- },
- "das-geburtsdatum--date-of-birth": {
-  "key": "das-geburtsdatum--date-of-birth",
-  "type": "scene",
-  "scene": "Show a mother in a hospital room calmly filling out an administrative form on a clipboard next to a newborn sleeping peacefully in a bassinet.",
-  "cap": "Entering the official date of birth on an application",
-  "hl": "Geburtsdatum"
  },
  "das-gegenargument--counterargument": {
   "key": "das-gegenargument--counterargument",
@@ -834,13 +806,6 @@
   "cap": "Setting up a centralized web platform for services",
   "hl": "Internetportal"
  },
- "das-jahrestreffen--yearly-meeting": {
-  "key": "das-jahrestreffen--yearly-meeting",
-  "type": "scene",
-  "scene": "Show a large group of club members gathered warmly in a garden pavilion for their traditional annual reunion.",
-  "cap": "An annual assembly gathering members once a year",
-  "hl": "Jahrestreffen"
- },
  "das-jahrhundert--century": {
   "key": "das-jahrhundert--century",
   "type": "scene",
@@ -861,13 +826,6 @@
   "scene": "Show parliamentarians sitting in an assembly hall voting by raising green voter cards in front of rows of microphones.",
   "cap": "Legislation establishing binding national climate targets",
   "hl": "Klimaschutzgesetz"
- },
- "das-konto--account": {
-  "key": "das-konto--account",
-  "type": "scene",
-  "scene": "Show a person standing in front of an automated bank teller machine, looking into an open, empty leather wallet with disappointment.",
-  "cap": "Having no remaining funds in one's bank balance",
-  "hl": "Konto"
  },
  "das-kontrastwort--contrast-word": {
   "type": "grammar",
@@ -945,13 +903,6 @@
   "scene": "Show a sleek modern corporate skyscraper headquarters with glass facades and neatly tailored executives walking through the bright atrium.",
   "cap": "Headquarters of a major brand company",
   "hl": "Markenunternehmen"
- },
- "das-mausi--little-mouse": {
-  "key": "das-mausi--little-mouse",
-  "type": "scene",
-  "scene": "Show a loving mother crouching down to gently hug her giggling young daughter on a playground bench.",
-  "cap": "A mother warmly greeting her young child",
-  "hl": "Mausi"
  },
  "das-menschenleben--human-life": {
   "key": "das-menschenleben--human-life",
@@ -1271,11 +1222,11 @@
   "hl": "Schulsystem"
  },
  "das-semester--semester": {
-  "key": "das-semester--semester",
-  "type": "scene",
-  "scene": "Show a tired university student sitting at a library desk piled with books and lecture notes under a desk lamp.",
-  "cap": "The end of an intensive academic semester",
-  "hl": "Semester"
+  "type": "grammar",
+  "de": "Das Semester war lang.",
+  "hl": "Semester",
+  "role": "focus",
+  "cap": "das Semester = semester (university term)"
  },
  "das-sportpensum--exercise-quota-sports-workload": {
   "key": "das-sportpensum--exercise-quota-sports-workload",
@@ -1329,11 +1280,11 @@
   "cap": "A question word beginning with W"
  },
  "das-wort--word": {
-  "key": "das-wort--word",
-  "type": "scene",
-  "scene": "Show a person looking closely at an open hardcover dictionary, pointing a finger at a specific entry on the page.",
-  "cap": "Looking up an unfamiliar word in a dictionary",
-  "hl": "Wort"
+  "type": "grammar",
+  "de": "Was bedeutet dieses Wort?",
+  "hl": "Wort",
+  "role": "focus",
+  "cap": "das Wort = word"
  },
  "das-wort-die-woerter-die-worte--word-words": {
   "key": "das-wort-die-woerter-die-worte--word-words",
@@ -1489,13 +1440,6 @@
   "role": "article",
   "cap": "Definite article before a masculine noun"
  },
- "der-august--august": {
-  "key": "der-august--august",
-  "type": "scene",
-  "scene": "Show people relaxing under sun umbrellas at an outdoor café in midsummer with bright golden sunshine and ripe sunflowers blooming nearby",
-  "cap": "Midsummer season in August",
-  "hl": "August"
- },
  "der-ausdruck--expression-phrase": {
   "key": "der-ausdruck--expression-phrase",
   "type": "scene",
@@ -1587,13 +1531,6 @@
   "cap": "Members of an industry trade association in a meeting",
   "hl": "Branchenverband"
  },
- "der-briefstandard--letter-standard-format": {
-  "key": "der-briefstandard--letter-standard-format",
-  "type": "scene",
-  "scene": "Show a printed formal letter on a desk showing neat folded creases, standard margin spacing, and an envelope ready nearby",
-  "cap": "Following the standard business letter format",
-  "hl": "Briefstandard"
- },
  "der-bundesverband--federal-association": {
   "key": "der-bundesverband--federal-association",
   "type": "scene",
@@ -1607,13 +1544,6 @@
   "scene": "Show a calm woman standing firm and confident in a decisive team discussion while others listen attentively",
   "cap": "Displaying strong personal character and integrity",
   "hl": "Charakter"
- },
- "der-cousin--cousin": {
-  "key": "der-cousin--cousin",
-  "type": "scene",
-  "scene": "Show a young boy carrying a bright surfboard under his arm at a sandy beach alongside an older relative smiling at him",
-  "cap": "The speaker's young cousin at the beach with his surfboard",
-  "hl": "Cousin"
  },
  "der-coversong--cover-song": {
   "key": "der-coversong--cover-song",
@@ -1659,13 +1589,6 @@
   "role": "article",
   "cap": "'Dieser' is a demonstrative article specifying a noun"
  },
- "der-dezember--december": {
-  "key": "der-dezember--december",
-  "type": "scene",
-  "scene": "Show a town square covered in fresh white snow, adorned with festive warm fairy lights and evergreen garlands on lamp posts in the evening.",
-  "cap": "A snowy city square decorated for December",
-  "hl": "Dezember"
- },
  "der-dialekt--dialect": {
   "key": "der-dialekt--dialect",
   "type": "scene",
@@ -1694,26 +1617,12 @@
   "cap": "The incumbent official celebrating an election victory",
   "hl": "Amtsinhaber"
  },
- "der-die-angehoerige--relative": {
-  "key": "der-die-angehoerige--relative",
-  "type": "scene",
-  "scene": "Show a smiling host opening an apartment door to embrace an arriving family member, who stands in the doorway holding a travel bag.",
-  "cap": "A relative arriving for a family visit",
-  "hl": "Angehörige"
- },
  "der-die-arbeitslose-r--unemployed-person": {
   "key": "der-die-arbeitslose-r--unemployed-person",
   "type": "scene",
   "scene": "Show a person sitting attentively across a modern office desk from an advisor, reviewing open career vacancies displayed on a monitor.",
   "cap": "Seeking new opportunities at an employment agency",
   "hl": "Arbeitslose"
- },
- "der-die-arme--poor-thing-poor-one": {
-  "key": "der-die-arme--poor-thing-poor-one",
-  "type": "scene",
-  "scene": "Show a stressed person patting their pockets and searching through an open backpack in frustration, while a companion looks on with sympathy.",
-  "cap": "The poor guy unable to find what he needs",
-  "hl": "Arme"
  },
  "der-die-asylberechtigte-r--person-entitled-to-asylum": {
   "key": "der-die-asylberechtigte-r--person-entitled-to-asylum",
@@ -1996,13 +1905,6 @@
   "cap": "Tracing each step in a chain of reasoning",
   "hl": "Gedankenschritt"
  },
- "der-gegenvorschlag--counterproposal": {
-  "key": "der-gegenvorschlag--counterproposal",
-  "type": "scene",
-  "scene": "Show two business colleagues at a negotiation table; one slides across a new paper sheet while offering an alternative idea with an open hand gesture.",
-  "cap": "Presenting a counterproposal during negotiations",
-  "hl": "Gegenvorschlag"
- },
  "der-geist--soul-mind": {
   "key": "der-geist--soul-mind",
   "type": "scene",
@@ -2241,13 +2143,6 @@
   "hl": "Kreditkartenbetrug",
   "cap": "Unauthorized credit card charges or fraud"
  },
- "der-kursort--course-location": {
-  "key": "der-kursort--course-location",
-  "type": "scene",
-  "scene": "Show a person standing outdoors on a sidewalk consulting a map on a phone, looking up toward a modern community education centre entrance.",
-  "hl": "Kursort",
-  "cap": "Finding the location of an educational course"
- },
  "der-langspielfilm--feature-length-film": {
   "key": "der-langspielfilm--feature-length-film",
   "type": "scene",
@@ -2290,13 +2185,6 @@
   "hl": "Lerninhalt",
   "cap": "Subject material and study topics to learn"
  },
- "der-maerz--march": {
-  "key": "der-maerz--march",
-  "type": "scene",
-  "scene": "Show delicate snowdrops and green shoots pushing through lingering patches of melting snow in late winter sunshine.",
-  "hl": "März",
-  "cap": "March brings the arrival of early spring"
- },
  "der-markenname--brand-name": {
   "type": "grammar",
   "de": "Ich habe den Markennamen sofort erkannt.",
@@ -2338,13 +2226,6 @@
   "scene": "Show an international summit room with delegates seated in a circle, one representative raising a placard to cast a formal vote.",
   "cap": "A delegate voting on behalf of a member state",
   "hl": "Mitgliedsstaat"
- },
- "der-mittwoch--wednesday": {
-  "key": "der-mittwoch--wednesday",
-  "type": "scene",
-  "scene": "Show a wall calendar grid where the middle weekday column is highlighted, and a student sitting at a desk with an open textbook.",
-  "cap": "Midweek study routine",
-  "hl": "Mittwoch"
  },
  "der-mobilfunkanbieter--mobile-network-provider": {
   "key": "der-mobilfunkanbieter--mobile-network-provider",
@@ -2447,13 +2328,6 @@
   "cap": "Golden autumn foliage in October",
   "hl": "Oktober"
  },
- "der-onkel--uncle": {
-  "key": "der-onkel--uncle",
-  "type": "scene",
-  "scene": "Show an adult man in a jacket standing on an apartment balcony overlooking a city skyline, holding a mug and smiling.",
-  "cap": "An uncle at his city apartment",
-  "hl": "Onkel"
- },
  "der-osten--east": {
   "key": "der-osten--east",
   "type": "scene",
@@ -2467,13 +2341,6 @@
   "hl": "wird heute geschrieben",
   "role": "verb",
   "cap": "Passive: the action matters, not who does it"
- },
- "der-pop--pop": {
-  "key": "der-pop--pop",
-  "type": "scene",
-  "scene": "Show a singer on a brightly lit concert stage singing into a microphone with colorful spotlights and an energetic crowd below.",
-  "cap": "A vibrant pop concert performance",
-  "hl": "Pop"
  },
  "der-possessivartikel--possessive-article": {
   "key": "der-possessivartikel--possessive-article",
@@ -2497,13 +2364,6 @@
   "cap": "Broadcasting an informative radio report",
   "hl": "Radiobericht"
  },
- "der-realschulabschluss--secondary-school-leaving-certificate": {
-  "key": "der-realschulabschluss--secondary-school-leaving-certificate",
-  "type": "scene",
-  "scene": "Show a teenage graduate in smart clothes holding an embossed diploma folder with a proud smile, standing outside a modern school.",
-  "cap": "Holding a secondary school graduation certificate",
-  "hl": "Realschulabschluss"
- },
  "der-refrain--refrain-chorus": {
   "key": "der-refrain--refrain-chorus",
   "type": "scene",
@@ -2524,13 +2384,6 @@
   "scene": "Show a legal advisor and a client seated at a conference table, carefully reviewing an organized dossier of documents and incident reports.",
   "cap": "Analyzing all details to understand the facts of the matter",
   "hl": "Sachverhalt"
- },
- "der-samstag--saturday": {
-  "key": "der-samstag--saturday",
-  "type": "scene",
-  "scene": "Show friends gathering for an evening party in a cozy living room decorated with string lights, enjoying drinks and chatting happily.",
-  "cap": "Celebrating together at a weekend party on Saturday",
-  "hl": "Samstag"
  },
  "der-samstagabend--saturday-evening": {
   "key": "der-samstagabend--saturday-evening",
@@ -2637,13 +2490,6 @@
   "cap": "Enjoying the vibrant city festival on Saturday",
   "hl": "Sonnabend"
  },
- "der-sonntag--sunday": {
-  "key": "der-sonntag--sunday",
-  "type": "scene",
-  "scene": "Show a person sleeping peacefully under a warm blanket in a sunlit bedroom, with morning light gently coming through curtains.",
-  "cap": "Sleeping late and resting on a quiet Sunday",
-  "hl": "Sonntag"
- },
  "der-sonntagnachmittag--sunday-afternoon": {
   "key": "der-sonntagnachmittag--sunday-afternoon",
   "type": "scene",
@@ -2734,13 +2580,6 @@
   "scene": "Show a person sitting in an armchair reading a thick book, holding a finger on a paragraph while looking at the surrounding pages thoughtfully.",
   "cap": "Understanding meaning through the surrounding context",
   "hl": "Textzusammenhang"
- },
- "der-tiername--animal-name": {
-  "key": "der-tiername--animal-name",
-  "type": "scene",
-  "scene": "Show a smiling child gently petting a fluffy cat sitting on a rug, the cat wearing a small collar with a polished blank round tag.",
-  "cap": "The name given to a pet or animal",
-  "hl": "Tiernamen"
  },
  "der-titel--title": {
   "key": "der-titel--title",
@@ -2907,13 +2746,6 @@
   "cap": "A specific, exact point in time",
   "hl": "Zeitpunkt"
  },
- "der-zeitraum--period-of-time": {
-  "key": "der-zeitraum--period-of-time",
-  "type": "scene",
-  "scene": "Show a desktop monthly calendar with a red bracket line spanning across two consecutive weeks.",
-  "cap": "A defined span or period of time",
-  "hl": "Zeitraum"
- },
  "derzeit--currently-at-present": {
   "type": "grammar",
   "de": "Derzeit läuft die Untersuchung.",
@@ -2995,13 +2827,6 @@
   "role": "adjective",
   "cap": "No article: the ending -en on heißen shows masculine accusative"
  },
- "die-aeusserung--remark": {
-  "key": "die-aeusserung--remark",
-  "type": "scene",
-  "scene": "Show two colleagues chatting over coffee; one smiles warmly and blushes slightly after the other speaks kindly to her.",
-  "cap": "A spoken comment or remark",
-  "hl": "Äußerung"
- },
  "die-alltagssprache--everyday-language": {
   "key": "die-alltagssprache--everyday-language",
   "type": "scene",
@@ -3036,13 +2861,6 @@
   "scene": "Show an office worker looking attentively at a newly arrived email notification on their computer screen with a questioning gesture.",
   "cap": "An incoming customer inquiry or request",
   "hl": "Anfrage"
- },
- "die-angabe--detail-piece-of-info": {
-  "key": "die-angabe--detail-piece-of-info",
-  "type": "scene",
-  "scene": "Show a person carefully checking off individual items on an official document with a green checkmark stamp.",
-  "cap": "A specific piece of entered information or detail",
-  "hl": "Angaben"
  },
  "die-annahme--assumption": {
   "key": "die-annahme--assumption",
@@ -3184,13 +3002,6 @@
   "cap": "Placing stress and emphasis on a specific syllable",
   "hl": "Betonung"
  },
- "die-betonung--stress-accent": {
-  "key": "die-betonung--stress-accent",
-  "type": "scene",
-  "scene": "Show a language teacher gently touching their throat while clearly enunciating a word for an attentive adult beginner.",
-  "cap": "Paying attention to word stress and accentuation",
-  "hl": "Betonung"
- },
  "die-bezeichnung--term": {
   "key": "die-bezeichnung--term",
   "type": "scene",
@@ -3239,13 +3050,6 @@
   "scene": "Show automotive assembly robots welding car bodies along an automated production line, illustrating a major industrial sector.",
   "cap": "A major industrial sector",
   "hl": "Branche"
- },
- "die-cousine--cousin": {
-  "key": "die-cousine--cousin",
-  "type": "scene",
-  "scene": "Show an athletic woman in a warm wetsuit holding a large kitesurf wing on a windswept winter beach with ocean spray.",
-  "cap": "The cousin kitesurfing in cold winter weather",
-  "hl": "Cousine"
  },
  "die-daten-anhand-derer--data-on-the-basis-of-which": {
   "type": "grammar",
@@ -3325,13 +3129,6 @@
   "role": "verb",
   "cap": "Learning the correct verb ending for different personal pronouns",
   "scene": "Show a German conjugation table on a whiteboard with the verb ending -e circled in red."
- },
- "die-englischlehrerin--english-teacher": {
-  "key": "die-englischlehrerin--english-teacher",
-  "type": "scene",
-  "scene": "Show a smiling teacher standing before adult students in a bright seminar room, holding a folder and speaking expressively.",
-  "cap": "An English teacher communicating fluently",
-  "hl": "Englischlehrerin"
  },
  "die-entscheidung-die--decision-which": {
   "type": "grammar",
@@ -3425,13 +3222,6 @@
   "cap": "Parenting seen as a shared responsibility rather than a woman's task",
   "hl": "Frauensache"
  },
- "die-fremdsprache--foreign-language": {
-  "key": "die-fremdsprache--foreign-language",
-  "type": "scene",
-  "scene": "Show a diverse group of adults sitting in a circle in a bright classroom, practicing conversational dialogue with headphones and notebooks.",
-  "cap": "Adult learners practicing a foreign language together",
-  "hl": "Fremdsprache"
- },
  "die-funktionsverbgefuege--light-verb-constructions": {
   "key": "die-funktionsverbgefuege--light-verb-constructions",
   "type": "grammar",
@@ -3503,26 +3293,19 @@
   "cap": "Signing off with a closing formula at the end of a message",
   "hl": "Grußformel"
  },
- "die-handynummer--mobile-number": {
-  "key": "die-handynummer--mobile-number",
-  "type": "scene",
-  "scene": "Show two new acquaintances smiling as one holds out a smartphone screen so the other can scan or save a contact into their phone.",
-  "cap": "Exchanging mobile numbers to stay in touch",
-  "hl": "Handynummer"
- },
  "die-hauptsache--main-point-main-thing": {
-  "key": "die-hauptsache--main-point-main-thing",
-  "type": "scene",
-  "scene": "Show a teacher pointing with an open hand to the single topmost, brightly illuminated section of a large diagram on an easel.",
-  "cap": "Highlighting the main thing that matters most",
-  "hl": "Hauptsache"
+  "type": "grammar",
+  "de": "Die Hauptsache sind die drei Stufen.",
+  "hl": "Hauptsache",
+  "role": "focus",
+  "cap": "die Hauptsache = the main thing"
  },
  "die-hauptschule--secondary-school": {
-  "key": "die-hauptschule--secondary-school",
-  "type": "scene",
-  "scene": "Show teenage students working together in a vocational school workshop, assembling a small wooden birdhouse under a teacher's guidance.",
-  "cap": "Students gaining hands-on practical skills at secondary school",
-  "hl": "Hauptschule"
+  "type": "grammar",
+  "de": "Rohan war auf einer Hauptschule.",
+  "hl": "Hauptschule",
+  "role": "focus",
+  "cap": "die Hauptschule = lower secondary school (Germany)"
  },
  "die-hausnummer--house-number": {
   "key": "die-hausnummer--house-number",
@@ -3897,13 +3680,6 @@
   "cap": "A broadcast advice and consumer tips show",
   "hl": "Ratgebersendung"
  },
- "die-realschule--secondary-modern-school": {
-  "key": "die-realschule--secondary-modern-school",
-  "type": "scene",
-  "scene": "Show teenage students aged around fifteen carrying backpacks exiting a modern brick school building after classes.",
-  "cap": "German intermediate secondary school leading to vocational training",
-  "hl": "Realschule"
- },
  "die-rechtskraeftig-festgestellten-persoenlichen-angaben--legally-established-personal-details": {
   "key": "die-rechtskraeftig-festgestellten-persoenlichen-angaben--legally-established-personal-details",
   "type": "scene",
@@ -3954,13 +3730,6 @@
   "scene": "Show a person in comfortable morning clothes calmly sipping herbal tea while stretching on a yoga mat beside an unrolled mat and an open notebook at sunrise.",
   "cap": "A calm, regular morning routine practiced daily",
   "hl": "Routine"
- },
- "die-rueckfahrt--return-trip": {
-  "key": "die-rueckfahrt--return-trip",
-  "type": "scene",
-  "scene": "Show a traveler with a backpack sitting on a wooden bench at an open-air mountain railway platform, waiting patiently for the train heading back down.",
-  "cap": "Waiting at the platform for the return trip home",
-  "hl": "Rückfahrt"
  },
  "die-rufnummer--phone-number": {
   "key": "die-rufnummer--phone-number",
@@ -4035,13 +3804,6 @@
   "cap": "Admiring the striking beauty of a historic city",
   "hl": "Schönheit"
  },
- "die-schulbildung--education": {
-  "key": "die-schulbildung--education",
-  "type": "scene",
-  "scene": "Show an old-fashioned rural one-room schoolhouse interior with plain wooden desks, a simple slate blackboard, and children listening attentively to a teacher.",
-  "cap": "Basic rural school education from the past",
-  "hl": "Schulbildung"
- },
  "die-schulpflicht--compulsory-schooling": {
   "key": "die-schulpflicht--compulsory-schooling",
   "type": "scene",
@@ -4063,13 +3825,6 @@
   "role": "focus",
   "cap": "die Selbstbestimmung = self-determination"
  },
- "die-selbsthilfe--self-help": {
-  "key": "die-selbsthilfe--self-help",
-  "type": "scene",
-  "scene": "Show a cooperative group of neighborhood residents collaboratively assembling wooden raised garden beds and a shared community shed in a public park.",
-  "cap": "Neighbors organizing a self-help initiative to build together",
-  "hl": "Selbsthilfe"
- },
  "die-silbe--syllable": {
   "key": "die-silbe--syllable",
   "type": "grammar",
@@ -4084,13 +3839,6 @@
   "hl": "Haus",
   "role": "subject",
   "cap": "Häuser → Haus: the singular form"
- },
- "die-situation--situation": {
-  "key": "die-situation--situation",
-  "type": "scene",
-  "scene": "Show a customer in a noisy, crowded cafe leaning slightly toward the barista behind the counter, cupping a hand to their ear to hear better.",
-  "cap": "A challenging situation requiring someone to ask for clarification",
-  "hl": "Situation"
  },
  "die-sowjetunion--soviet-union": {
   "type": "map",
@@ -5337,13 +5085,6 @@
   "role": "focus",
   "cap": "gerade = at the moment, just now"
  },
- "geraten--fall-into-end-up-in": {
-  "key": "geraten--fall-into-end-up-in",
-  "type": "scene",
-  "scene": "Show a worried couple sitting at a kitchen table surrounded by utility envelopes, looking troubled as they review their monthly budget.",
-  "cap": "Falling into financial difficulties.",
-  "hl": "geriet"
- },
  "geraten--get-into-turn-out": {
   "key": "geraten--get-into-turn-out",
   "type": "scene",
@@ -5451,20 +5192,6 @@
   "hl": "habe",
   "role": "verb",
   "cap": "Auxiliary verb 'haben' forming the Perfekt tense."
- },
- "haette--would-like-to-have": {
-  "key": "haette--would-like-to-have",
-  "type": "scene",
-  "scene": "Show a customer at a cozy café counter smiling politely as they order a cup of coffee from a barista.",
-  "cap": "Politely ordering: 'I would like a coffee.'",
-  "hl": "hätte"
- },
- "haette-gern--would-like": {
-  "key": "haette-gern--would-like",
-  "type": "scene",
-  "scene": "Show a guest at a bistro table gesturing gently toward the menu, politely asking the waiter for a cup of coffee.",
-  "cap": "Polite phrasing: 'I would like (to have)...'",
-  "hl": "hätte gern"
  },
  "handeln--be-about": {
   "key": "handeln--be-about",
@@ -5760,26 +5487,12 @@
   "role": "focus",
   "cap": "jetzt = now"
  },
- "katholisch--catholic": {
-  "key": "katholisch--catholic",
-  "type": "scene",
-  "scene": "Show a family carrying boxes of donated food into a parish hall entrance next to a classic stone church with an arched doorway.",
-  "cap": "Helping out at church guided by their Catholic faith.",
-  "hl": "katholischen"
- },
  "kaum--barely-hardly": {
   "type": "grammar",
   "de": "Ich habe kaum Zeit.",
   "hl": "kaum",
   "role": "focus",
   "cap": "kaum = barely, hardly"
- },
- "koennte--could": {
-  "key": "koennte--could",
-  "type": "scene",
-  "scene": "Show a traveler at an information desk leaning forward with an open, friendly posture and questioning expression toward the clerk.",
-  "cap": "Polite request: Could you help me?",
-  "hl": "Könnten"
  },
  "konjugiert--conjugated-inflected": {
   "key": "konjugiert--conjugated-inflected",
@@ -5790,11 +5503,11 @@
   "cap": "Grammar term: inflected or conjugated according to grammatical rules."
  },
  "konnte--could": {
-  "key": "konnte--could",
-  "type": "scene",
-  "scene": "Show a person happily purchasing a ticket at a glowing cinema counter in the evening, holding a box of popcorn with movie theater doors visible behind.",
-  "cap": "Able to go to the cinema in the evening.",
-  "hl": "konnte"
+  "type": "grammar",
+  "de": "Abends konnte ich ins Kino gehen.",
+  "hl": "konnte",
+  "role": "focus",
+  "cap": "konnte = could (Präteritum of können)"
  },
  "kraft--by-virtue-of": {
   "type": "grammar",
@@ -5972,13 +5685,6 @@
   "hl": "mehrmals",
   "role": "focus",
   "cap": "mehrmals = repeatedly, several times"
- },
- "meinen--mean-to-be-of-the-opinion": {
-  "key": "meinen--mean-to-be-of-the-opinion",
-  "type": "scene",
-  "scene": "Show two friends at a dining table, one gesturing open-handed towards a large pizza to suggest dividing it equally.",
-  "cap": "Expressing the opinion that sharing is best",
-  "hl": "meine"
  },
  "meinen--think-to-mean": {
   "key": "meinen--think-to-mean",
@@ -6313,13 +6019,6 @@
   "role": "focus",
   "cap": "offenbar = apparently, obviously"
  },
- "offline--offline": {
-  "key": "offline--offline",
-  "type": "scene",
-  "scene": "Show a person sitting peacefully under a leafy tree reading a printed paperback book, their smartphone tucked away face down.",
-  "cap": "Taking time away from the internet, fully offline.",
-  "hl": "offline"
- },
  "oftmals--often-frequently": {
   "type": "grammar",
   "de": "Sie besuchte oftmals das Labor.",
@@ -6473,11 +6172,11 @@
   "hl": "reines"
  },
  "relativ--relative": {
-  "key": "relativ--relative",
-  "type": "scene",
-  "scene": "Show a person resting comfortably in an armchair on a garden porch with a cup of tea, away from city rush.",
-  "cap": "Enjoying a relatively calm and quiet life",
-  "hl": "relativ"
+  "type": "grammar",
+  "de": "Ihr Leben war relativ ruhig.",
+  "hl": "relativ",
+  "role": "focus",
+  "cap": "relativ = relatively"
  },
  "restriktiver-relativsatz--restrictive-relative-clause": {
   "type": "grammar",
@@ -6698,13 +6397,6 @@
   "role": "verb",
   "cap": "'sich lassen' + infinitive expressing passive possibility"
  },
- "sich-lohnen--be-worth-it": {
-  "key": "sich-lohnen--be-worth-it",
-  "type": "scene",
-  "scene": "Show an auto mechanic and a car owner looking under an open car hood, thoughtfully considering repair costs.",
-  "cap": "Deciding whether fixing the car is worth it.",
-  "hl": "lohnen"
- },
  "sicher--certain": {
   "key": "sicher--certain",
   "type": "scene",
@@ -6845,13 +6537,6 @@
   ],
   "cap": "Spoken widely across Spain and Latin America"
  },
- "spontan--spontaneous": {
-  "key": "spontan--spontaneous",
-  "type": "scene",
-  "scene": "Show two friends hastily packing small bags, smiling excitedly as they grab their car keys by the door to drive into the city.",
-  "cap": "Spontaneously driving into the city",
-  "hl": "Spontan"
- },
  "staendig--constant": {
   "key": "staendig--constant",
   "type": "scene",
@@ -6866,19 +6551,12 @@
   "cap": "Constantly practising for the exhibition",
   "hl": "ständig"
  },
- "stammen--originate": {
-  "key": "stammen--originate",
-  "type": "scene",
-  "scene": "Show an ancient, weathered medieval stone city wall standing proudly adjacent to modern paved streets and buildings.",
-  "cap": "The stone wall dates from the city's founding era",
-  "hl": "stammt"
- },
  "stattfinden--take-place": {
-  "key": "stattfinden--take-place",
-  "type": "scene",
-  "scene": "Show students sitting at individual desks in a quiet university hall writing an exam under the supervision of an invigilator.",
-  "cap": "The exam takes place on Friday",
-  "hl": "findet"
+  "type": "grammar",
+  "de": "Die Prüfung findet am Freitag statt.",
+  "hl": "findet am Freitag statt",
+  "role": "focus",
+  "cap": "stattfinden = to take place"
  },
  "stehen--be-to-take-a-stance": {
   "type": "grammar",
@@ -7485,11 +7163,11 @@
   "cap": "Auxiliary verb forming the future tense ('will change')"
  },
  "werden--will-to-become": {
-  "key": "werden--will-to-become",
-  "type": "scene",
-  "scene": "Show a young professional dressed in a smart business suit shaking hands across a polished desk with a bank manager inside a bright bank lobby.",
-  "cap": "Entering a professional career path at a bank",
-  "hl": "werden"
+  "type": "grammar",
+  "de": "Ich wollte Bankkaufmann werden.",
+  "hl": "werden",
+  "role": "focus",
+  "cap": "werden = to become"
  },
  "wesentlich--considerable": {
   "type": "grammar",
@@ -9070,6 +8748,375 @@
   "hl": "beim Alten geblieben",
   "role": "focus",
   "cap": "beim Alten bleiben = to stay the same"
+ },
+ "genau--exactly": {
+  "type": "grammar",
+  "de": "Genau! Das ist richtig.",
+  "hl": "Genau",
+  "role": "focus",
+  "cap": "genau = exactly"
+ },
+ "dreimal--three-times": {
+  "type": "grammar",
+  "de": "Ich war dreimal in Berlin.",
+  "hl": "dreimal",
+  "role": "focus",
+  "cap": "dreimal = three times"
+ },
+ "danach--afterwards": {
+  "type": "grammar",
+  "de": "Danach gehen wir ins Café.",
+  "hl": "Danach",
+  "role": "focus",
+  "cap": "danach = afterwards"
+ },
+ "wiedergeben--reproduce-retell": {
+  "type": "grammar",
+  "de": "Gib den Text mit eigenen Worten wieder.",
+  "hl": "Gib den Text mit eigenen Worten wieder",
+  "role": "focus",
+  "cap": "wiedergeben = to retell, to reproduce"
+ },
+ "die-sprachwissenschaft--linguistics": {
+  "type": "grammar",
+  "de": "Ich studiere Sprachwissenschaft.",
+  "hl": "Sprachwissenschaft",
+  "role": "focus",
+  "cap": "die Sprachwissenschaft = linguistics"
+ },
+ "damit--with-it-that": {
+  "type": "grammar",
+  "de": "Ich habe ein Tablet und arbeite damit.",
+  "hl": "damit",
+  "role": "focus",
+  "cap": "damit = with it (here: with the tablet)"
+ },
+ "fremd--foreign-alien-strange": {
+  "type": "grammar",
+  "de": "Am Anfang war alles fremd.",
+  "hl": "fremd",
+  "role": "focus",
+  "cap": "fremd = strange, unfamiliar"
+ },
+ "donnerstags--on-thursdays": {
+  "type": "week",
+  "day": 4,
+  "cap": "donnerstags = every Thursday"
+ },
+ "das-deutschbuch--german-book": {
+  "key": "das-deutschbuch--german-book",
+  "type": "scene",
+  "scene": "Show an open language textbook lying on a tidy study desk beside a pair of headphones, a notebook, and a pen.",
+  "cap": "A freshly opened German coursebook ready for study.",
+  "hl": "Deutschbuch"
+ },
+ "das-englisch-studium--english-degree": {
+  "key": "das-englisch-studium--english-degree",
+  "type": "scene",
+  "scene": "Show a university student sitting in a lecture hall surrounded by tall stacks of thick classic literature books and study notes.",
+  "cap": "Pursuing academic degree studies in English literature",
+  "hl": "Englisch-Studium"
+ },
+ "das-geburtsdatum--date-of-birth": {
+  "key": "das-geburtsdatum--date-of-birth",
+  "type": "scene",
+  "scene": "Show a mother in a hospital room calmly filling out an administrative form on a clipboard next to a newborn sleeping peacefully in a bassinet.",
+  "cap": "Entering the official date of birth on an application",
+  "hl": "Geburtsdatum"
+ },
+ "das-jahrestreffen--yearly-meeting": {
+  "key": "das-jahrestreffen--yearly-meeting",
+  "type": "scene",
+  "scene": "Show a large group of club members gathered warmly in a garden pavilion for their traditional annual reunion.",
+  "cap": "An annual assembly gathering members once a year",
+  "hl": "Jahrestreffen"
+ },
+ "das-konto--account": {
+  "key": "das-konto--account",
+  "type": "scene",
+  "scene": "Show a person standing in front of an automated bank teller machine, looking into an open, empty leather wallet with disappointment.",
+  "cap": "Having no remaining funds in one's bank balance",
+  "hl": "Konto"
+ },
+ "das-mausi--little-mouse": {
+  "key": "das-mausi--little-mouse",
+  "type": "scene",
+  "scene": "Show a loving mother crouching down to gently hug her giggling young daughter on a playground bench.",
+  "cap": "A mother warmly greeting her young child",
+  "hl": "Mausi"
+ },
+ "der-august--august": {
+  "key": "der-august--august",
+  "type": "scene",
+  "scene": "Show people relaxing under sun umbrellas at an outdoor café in midsummer with bright golden sunshine and ripe sunflowers blooming nearby",
+  "cap": "Midsummer season in August",
+  "hl": "August"
+ },
+ "der-briefstandard--letter-standard-format": {
+  "key": "der-briefstandard--letter-standard-format",
+  "type": "scene",
+  "scene": "Show a printed formal letter on a desk showing neat folded creases, standard margin spacing, and an envelope ready nearby",
+  "cap": "Following the standard business letter format",
+  "hl": "Briefstandard"
+ },
+ "der-cousin--cousin": {
+  "key": "der-cousin--cousin",
+  "type": "scene",
+  "scene": "Show a young boy carrying a bright surfboard under his arm at a sandy beach alongside an older relative smiling at him",
+  "cap": "The speaker's young cousin at the beach with his surfboard",
+  "hl": "Cousin"
+ },
+ "der-dezember--december": {
+  "key": "der-dezember--december",
+  "type": "scene",
+  "scene": "Show a town square covered in fresh white snow, adorned with festive warm fairy lights and evergreen garlands on lamp posts in the evening.",
+  "cap": "A snowy city square decorated for December",
+  "hl": "Dezember"
+ },
+ "der-die-angehoerige--relative": {
+  "key": "der-die-angehoerige--relative",
+  "type": "scene",
+  "scene": "Show a smiling host opening an apartment door to embrace an arriving family member, who stands in the doorway holding a travel bag.",
+  "cap": "A relative arriving for a family visit",
+  "hl": "Angehörige"
+ },
+ "der-die-arme--poor-thing-poor-one": {
+  "key": "der-die-arme--poor-thing-poor-one",
+  "type": "scene",
+  "scene": "Show a stressed person patting their pockets and searching through an open backpack in frustration, while a companion looks on with sympathy.",
+  "cap": "The poor guy unable to find what he needs",
+  "hl": "Arme"
+ },
+ "der-gegenvorschlag--counterproposal": {
+  "key": "der-gegenvorschlag--counterproposal",
+  "type": "scene",
+  "scene": "Show two business colleagues at a negotiation table; one slides across a new paper sheet while offering an alternative idea with an open hand gesture.",
+  "cap": "Presenting a counterproposal during negotiations",
+  "hl": "Gegenvorschlag"
+ },
+ "der-kursort--course-location": {
+  "key": "der-kursort--course-location",
+  "type": "scene",
+  "scene": "Show a person standing outdoors on a sidewalk consulting a map on a phone, looking up toward a modern community education centre entrance.",
+  "hl": "Kursort",
+  "cap": "Finding the location of an educational course"
+ },
+ "der-maerz--march": {
+  "key": "der-maerz--march",
+  "type": "scene",
+  "scene": "Show delicate snowdrops and green shoots pushing through lingering patches of melting snow in late winter sunshine.",
+  "hl": "März",
+  "cap": "March brings the arrival of early spring"
+ },
+ "der-mittwoch--wednesday": {
+  "key": "der-mittwoch--wednesday",
+  "type": "scene",
+  "scene": "Show a wall calendar grid where the middle weekday column is highlighted, and a student sitting at a desk with an open textbook.",
+  "cap": "Midweek study routine",
+  "hl": "Mittwoch"
+ },
+ "der-onkel--uncle": {
+  "key": "der-onkel--uncle",
+  "type": "scene",
+  "scene": "Show an adult man in a jacket standing on an apartment balcony overlooking a city skyline, holding a mug and smiling.",
+  "cap": "An uncle at his city apartment",
+  "hl": "Onkel"
+ },
+ "der-pop--pop": {
+  "key": "der-pop--pop",
+  "type": "scene",
+  "scene": "Show a singer on a brightly lit concert stage singing into a microphone with colorful spotlights and an energetic crowd below.",
+  "cap": "A vibrant pop concert performance",
+  "hl": "Pop"
+ },
+ "der-realschulabschluss--secondary-school-leaving-certificate": {
+  "key": "der-realschulabschluss--secondary-school-leaving-certificate",
+  "type": "scene",
+  "scene": "Show a teenage graduate in smart clothes holding an embossed diploma folder with a proud smile, standing outside a modern school.",
+  "cap": "Holding a secondary school graduation certificate",
+  "hl": "Realschulabschluss"
+ },
+ "der-samstag--saturday": {
+  "key": "der-samstag--saturday",
+  "type": "scene",
+  "scene": "Show friends gathering for an evening party in a cozy living room decorated with string lights, enjoying drinks and chatting happily.",
+  "cap": "Celebrating together at a weekend party on Saturday",
+  "hl": "Samstag"
+ },
+ "der-sonntag--sunday": {
+  "key": "der-sonntag--sunday",
+  "type": "scene",
+  "scene": "Show a person sleeping peacefully under a warm blanket in a sunlit bedroom, with morning light gently coming through curtains.",
+  "cap": "Sleeping late and resting on a quiet Sunday",
+  "hl": "Sonntag"
+ },
+ "der-tiername--animal-name": {
+  "key": "der-tiername--animal-name",
+  "type": "scene",
+  "scene": "Show a smiling child gently petting a fluffy cat sitting on a rug, the cat wearing a small collar with a polished blank round tag.",
+  "cap": "The name given to a pet or animal",
+  "hl": "Tiernamen"
+ },
+ "der-zeitraum--period-of-time": {
+  "key": "der-zeitraum--period-of-time",
+  "type": "scene",
+  "scene": "Show a desktop monthly calendar with a red bracket line spanning across two consecutive weeks.",
+  "cap": "A defined span or period of time",
+  "hl": "Zeitraum"
+ },
+ "die-aeusserung--remark": {
+  "key": "die-aeusserung--remark",
+  "type": "scene",
+  "scene": "Show two colleagues chatting over coffee; one smiles warmly and blushes slightly after the other speaks kindly to her.",
+  "cap": "A spoken comment or remark",
+  "hl": "Äußerung"
+ },
+ "die-angabe--detail-piece-of-info": {
+  "key": "die-angabe--detail-piece-of-info",
+  "type": "scene",
+  "scene": "Show a person carefully checking off individual items on an official document with a green checkmark stamp.",
+  "cap": "A specific piece of entered information or detail",
+  "hl": "Angaben"
+ },
+ "die-betonung--stress-accent": {
+  "key": "die-betonung--stress-accent",
+  "type": "scene",
+  "scene": "Show a language teacher gently touching their throat while clearly enunciating a word for an attentive adult beginner.",
+  "cap": "Paying attention to word stress and accentuation",
+  "hl": "Betonung"
+ },
+ "die-cousine--cousin": {
+  "key": "die-cousine--cousin",
+  "type": "scene",
+  "scene": "Show an athletic woman in a warm wetsuit holding a large kitesurf wing on a windswept winter beach with ocean spray.",
+  "cap": "The cousin kitesurfing in cold winter weather",
+  "hl": "Cousine"
+ },
+ "die-englischlehrerin--english-teacher": {
+  "key": "die-englischlehrerin--english-teacher",
+  "type": "scene",
+  "scene": "Show a smiling teacher standing before adult students in a bright seminar room, holding a folder and speaking expressively.",
+  "cap": "An English teacher communicating fluently",
+  "hl": "Englischlehrerin"
+ },
+ "die-fremdsprache--foreign-language": {
+  "key": "die-fremdsprache--foreign-language",
+  "type": "scene",
+  "scene": "Show a diverse group of adults sitting in a circle in a bright classroom, practicing conversational dialogue with headphones and notebooks.",
+  "cap": "Adult learners practicing a foreign language together",
+  "hl": "Fremdsprache"
+ },
+ "die-handynummer--mobile-number": {
+  "key": "die-handynummer--mobile-number",
+  "type": "scene",
+  "scene": "Show two new acquaintances smiling as one holds out a smartphone screen so the other can scan or save a contact into their phone.",
+  "cap": "Exchanging mobile numbers to stay in touch",
+  "hl": "Handynummer"
+ },
+ "die-realschule--secondary-modern-school": {
+  "key": "die-realschule--secondary-modern-school",
+  "type": "scene",
+  "scene": "Show teenage students aged around fifteen carrying backpacks exiting a modern brick school building after classes.",
+  "cap": "German intermediate secondary school leading to vocational training",
+  "hl": "Realschule"
+ },
+ "die-rueckfahrt--return-trip": {
+  "key": "die-rueckfahrt--return-trip",
+  "type": "scene",
+  "scene": "Show a traveler with a backpack sitting on a wooden bench at an open-air mountain railway platform, waiting patiently for the train heading back down.",
+  "cap": "Waiting at the platform for the return trip home",
+  "hl": "Rückfahrt"
+ },
+ "die-schulbildung--education": {
+  "key": "die-schulbildung--education",
+  "type": "scene",
+  "scene": "Show an old-fashioned rural one-room schoolhouse interior with plain wooden desks, a simple slate blackboard, and children listening attentively to a teacher.",
+  "cap": "Basic rural school education from the past",
+  "hl": "Schulbildung"
+ },
+ "die-selbsthilfe--self-help": {
+  "key": "die-selbsthilfe--self-help",
+  "type": "scene",
+  "scene": "Show a cooperative group of neighborhood residents collaboratively assembling wooden raised garden beds and a shared community shed in a public park.",
+  "cap": "Neighbors organizing a self-help initiative to build together",
+  "hl": "Selbsthilfe"
+ },
+ "die-situation--situation": {
+  "key": "die-situation--situation",
+  "type": "scene",
+  "scene": "Show a customer in a noisy, crowded cafe leaning slightly toward the barista behind the counter, cupping a hand to their ear to hear better.",
+  "cap": "A challenging situation requiring someone to ask for clarification",
+  "hl": "Situation"
+ },
+ "geraten--fall-into-end-up-in": {
+  "key": "geraten--fall-into-end-up-in",
+  "type": "scene",
+  "scene": "Show a worried couple sitting at a kitchen table surrounded by utility envelopes, looking troubled as they review their monthly budget.",
+  "cap": "Falling into financial difficulties.",
+  "hl": "geriet"
+ },
+ "haette--would-like-to-have": {
+  "key": "haette--would-like-to-have",
+  "type": "scene",
+  "scene": "Show a customer at a cozy café counter smiling politely as they order a cup of coffee from a barista.",
+  "cap": "Politely ordering: 'I would like a coffee.'",
+  "hl": "hätte"
+ },
+ "haette-gern--would-like": {
+  "key": "haette-gern--would-like",
+  "type": "scene",
+  "scene": "Show a guest at a bistro table gesturing gently toward the menu, politely asking the waiter for a cup of coffee.",
+  "cap": "Polite phrasing: 'I would like (to have)...'",
+  "hl": "hätte gern"
+ },
+ "katholisch--catholic": {
+  "key": "katholisch--catholic",
+  "type": "scene",
+  "scene": "Show a family carrying boxes of donated food into a parish hall entrance next to a classic stone church with an arched doorway.",
+  "cap": "Helping out at church guided by their Catholic faith.",
+  "hl": "katholischen"
+ },
+ "koennte--could": {
+  "key": "koennte--could",
+  "type": "scene",
+  "scene": "Show a traveler at an information desk leaning forward with an open, friendly posture and questioning expression toward the clerk.",
+  "cap": "Polite request: Could you help me?",
+  "hl": "Könnten"
+ },
+ "meinen--mean-to-be-of-the-opinion": {
+  "key": "meinen--mean-to-be-of-the-opinion",
+  "type": "scene",
+  "scene": "Show two friends at a dining table, one gesturing open-handed towards a large pizza to suggest dividing it equally.",
+  "cap": "Expressing the opinion that sharing is best",
+  "hl": "meine"
+ },
+ "offline--offline": {
+  "key": "offline--offline",
+  "type": "scene",
+  "scene": "Show a person sitting peacefully under a leafy tree reading a printed paperback book, their smartphone tucked away face down.",
+  "cap": "Taking time away from the internet, fully offline.",
+  "hl": "offline"
+ },
+ "sich-lohnen--be-worth-it": {
+  "key": "sich-lohnen--be-worth-it",
+  "type": "scene",
+  "scene": "Show an auto mechanic and a car owner looking under an open car hood, thoughtfully considering repair costs.",
+  "cap": "Deciding whether fixing the car is worth it.",
+  "hl": "lohnen"
+ },
+ "spontan--spontaneous": {
+  "key": "spontan--spontaneous",
+  "type": "scene",
+  "scene": "Show two friends hastily packing small bags, smiling excitedly as they grab their car keys by the door to drive into the city.",
+  "cap": "Spontaneously driving into the city",
+  "hl": "Spontan"
+ },
+ "stammen--originate": {
+  "key": "stammen--originate",
+  "type": "scene",
+  "scene": "Show an ancient, weathered medieval stone city wall standing proudly adjacent to modern paved streets and buildings.",
+  "cap": "The stone wall dates from the city's founding era",
+  "hl": "stammt"
  },
  "der-juli--july": {
   "key": "der-juli--july",

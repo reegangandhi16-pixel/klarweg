@@ -281,7 +281,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/bfefb585d77e844be380', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A brass door key on a smooth surface' }
     },
     { de: 'Karte', art: 'die', gender: 'f', plural: 'Karten', pos: 'noun', en: 'card', hi: 'कार्ड',
-      ex: 'Die Karte ist neu.', exEn: 'The card is new.' },
+      ex: 'Die Karte ist neu.', exEn: 'The card is new.',
+      img: { src: '/api/media/vocab-img/4834271a436870fdc609', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand holding a sleek plastic card with a gold microchip.' }
+    },
     { de: 'leer', pos: 'adjective', en: 'empty', hi: 'खाली',
       ex: 'Der Tisch ist leer.', exEn: 'The table is empty.',
       compare: { comparative: 'leerer', superlative: 'am leersten' },
@@ -298,7 +300,9 @@ const CHAPTER = {
     },
     // — Passive (mostly neuter & masculine compound nouns) —
     { de: 'Artikelbild', art: 'das', gender: 'n', plural: 'Artikelbilder', pos: 'noun', en: 'article picture', hi: 'लेख-चित्र',
-      ex: 'Das Artikelbild zeigt ein Auto.', exEn: 'The article picture shows a car.' },
+      ex: 'Das Artikelbild zeigt ein Auto.', exEn: 'The article picture shows a car.',
+      img: { src: '/api/media/vocab-img/d6de7cfccfd1edb6157e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A featured car photograph positioned above text columns in a magazine.' }
+    },
     { de: 'Butterbrot', art: 'das', gender: 'n', plural: 'Butterbrote', pos: 'noun', en: 'sandwich', hi: 'सैंडविच',
       ex: 'Das Butterbrot schmeckt gut.', exEn: 'The sandwich tastes good.',
       img: { src: '/api/media/vocab-img/2392a14aafa1a5f3934d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A slice of buttered bread on a cutting board' }
@@ -320,7 +324,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/1d25500b2851f81ba057', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open lined exercise book with a pencil' }
     },
     { de: 'Kursplakat', art: 'das', gender: 'n', plural: 'Kursplakate', pos: 'noun', en: 'course poster', hi: 'कोर्स पोस्टर',
-      ex: 'Das Kursplakat hängt an der Wand.', exEn: 'The course poster hangs on the wall.' },
+      ex: 'Das Kursplakat hängt an der Wand.', exEn: 'The course poster hangs on the wall.',
+      img: { src: '/api/media/vocab-img/5cf0f2103f4bfe1ca302', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A colourful poster with an open book icon on a wall.' }
+    },
     { de: 'Paar', art: 'das', gender: 'n', plural: 'Paare', pos: 'noun', en: 'pair', hi: 'जोड़ा',
       ex: 'Arbeitet in Paaren!', exEn: 'Work in pairs!',
       img: { src: '/api/media/vocab-img/bc0ad48e21b98d22b530', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A pair of people standing together smiling.' }
@@ -340,7 +346,9 @@ const CHAPTER = {
     { de: 'Bericht', art: 'der', gender: 'm', plural: 'Berichte', pos: 'noun', en: 'report', hi: 'रिपोर्ट',
       ex: 'Der Bericht ist fertig.', exEn: 'The report is finished.' },
     { de: 'Blog', art: 'der', gender: 'm', plural: 'Blogs', pos: 'noun', en: 'blog', hi: 'ब्लॉग',
-      ex: 'Der Blog ist auf Deutsch.', exEn: 'The blog is in German.' },
+      ex: 'Der Blog ist auf Deutsch.', exEn: 'The blog is in German.',
+      img: { src: '/api/media/vocab-img/44a7f2f1d1dc75b62d5f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A laptop showing an online blog layout with an author avatar.' }
+    },
     { de: 'Eintrag', art: 'der', gender: 'm', plural: 'Einträge', pos: 'noun', en: 'entry', hi: 'प्रविष्टि',
       ex: 'Der Eintrag ist kurz.', exEn: 'The entry is short.' },
     { de: 'Kindergarten', art: 'der', gender: 'm', plural: 'Kindergärten', pos: 'noun', en: 'kindergarten', hi: 'किंडरगार्टन',
@@ -364,7 +372,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/e6469dbe6f8ad4fa7be5', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A tablet screen displaying a side advertisement banner with a sneaker.' }
     },
     { de: 'Assoziation', art: 'die', gender: 'f', plural: 'Assoziationen', pos: 'noun', en: 'association', hi: 'संबंध',
-      ex: 'Die Assoziation hilft beim Merken.', exEn: 'The association helps you remember.' },
+      ex: 'Die Assoziation hilft beim Merken.', exEn: 'The association helps you remember.',
+      img: { src: '/api/media/vocab-img/4ab64ae6c528bee4ce4a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A cloud and an umbrella connected by a glowing golden thread.' }
+    },
     { de: 'Autobahn', art: 'die', gender: 'f', plural: 'Autobahnen', pos: 'noun', en: 'highway', hi: 'राजमार्ग',
       ex: 'Die Autobahn ist frei.', exEn: 'The highway is clear.',
       img: { src: '/api/media/vocab-img/eb7fbfc931a0079f08cd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A wide multi-lane highway with moving traffic.' }
@@ -483,7 +493,9 @@ const CHAPTER = {
     },
     { de: 'markieren', pos: 'verb', en: 'to highlight, mark', hi: 'चिह्नित करना',
       ex: 'Markiere das Nomen.', exEn: 'Highlight the noun.',
-      conj: { praesens: 'markiert', praeteritum: 'markierte', perfekt: 'hat markiert' } },
+      conj: { praesens: 'markiert', praeteritum: 'markierte', perfekt: 'hat markiert' },
+      img: { src: '/api/media/vocab-img/f616041e0c23419b4edd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand using a yellow highlighter on a page.' }
+    },
     { de: 'unterstreichen', pos: 'verb', en: 'to underline', hi: 'रेखांकित करना',
       ex: 'Unterstreiche den Artikel.', exEn: 'Underline the article.',
       conj: { praesens: 'unterstreicht', praeteritum: 'unterstrich', perfekt: 'hat unterstrichen' },

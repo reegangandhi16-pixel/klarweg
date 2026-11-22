@@ -131,6 +131,47 @@ Yes, because they now serve different tasks:
 5. **Accessibility:** TalkBack reads the button labels and the status message; buttons are at least 44 px.
 6. **Pass criteria:** audio starts within 2 s on 4G and within 5 s throttled; nothing autoplays; the transcript is available in every state; total data per page is under 1 MB.
 
+## Batch 2 release and homepage FAQ (22 Nov 2026)
+
+- PR #375 (asset versions) merged `6e89164a`; PR #376 (batch 2) merged `1b7c3bfb`, deployed 08:41 UTC. Both verified in a fresh headless Chrome profile (no cookies) at 1280 and 375 px, as listed in the tracker.
+- Spouse-visa wording rechecked against the mission page (dated 16 Feb 2026) before merging. The page now quotes it: A1 is mandatory for "almost everyone" marrying a German and for "a majority of" spouses whose partner lacks a high-skilled-work permit. The page names no other exemption categories and points to the Consular Service Portal. The one-year rule applies to the exam date at application.
+- PR #378 fixes the homepage FAQ. It separates teacher demos, slots and course enrolment, and the D8 test now follows `marketplace.demoBookingEnabled` / `courseCheckoutEnabled`. CI is green and it awaits merge.
+
+### Recorded audio: confirmed rate (no spend)
+
+Google Cloud pricing page, read 22 Nov 2026: Chirp 3 HD costs US$0.00003 per character ($30 per 1M), with the first 1M characters per month free. The existing pipelines use `de-DE-Chirp3-HD-*` voices.
+
+- 18 clips = 1,719 characters, about $0.05; with three takes each (5,157 characters), about $0.15. That is $0 if the month's free tier is unused.
+- No recurring cost: there is no Text-to-Speech subscription, and MP3s on the site add no hosting cost.
+
+## Batch 3 (22 Nov 2026): 10 manual audits + 1 recheck
+
+Query evidence: the keyword workbook (no volumes) plus Google `gl=in&hl=en&pws=0` on 22 Nov. Format facts were verified in Goethe-Zertifikat B2 Durchführungsbestimmungen (1 Sept 2025). Lesson estimates come from the Goethe-Institut India exam pages for A1/A2/B1/B2: 80–200 / 200–350 / 350–650 / 600–800 lessons of 45 min from zero.
+
+| URL | Target query (type) | Gap | Fix |
+|---|---|---|---|
+| german-a2-mini-practice-test | German A2 exam preparation (exact; now the only owner) | 4 untimed tasks, no format or fee | Format, pass rule, fee, 8-item checked test, SMS + speaking models |
+| german-a2-listening-practice | German A2 listening practice (teaching-value; retargeted) | No check, no exam structure | Hören table (once/twice plays), 6-item check, same 3 clips |
+| german-a2-writing-practice-online | German A2 writing practice (teaching-value; retargeted) | One informal task, no limits | Both task types with word limits and models, register check |
+| german-b2-speaking-practice-online | German B2 speaking practice (teaching-value; was "German B2 classes online") | No format; borrowed another page's keyword | Verified format, presentation structure, phrase check |
+| german-b2-mini-practice-test | German B2 exam preparation (exact) | No modules, pass rule or fee | Module table, fees, 6-item test, forum-post task |
+| german-b2-listening-practice | German B2 listening practice (secondary: Goethe B2 exam preparation) | No check | Module facts, 5-item check, routine |
+| german-classes-for-working-professionals | exact | No time or fee facts | Weeks per level at 6/10 h, format table, current options |
+| a1-to-b2-german-course-duration | exact | Invented 460-hour budget | Goethe ranges, weeks at 6/10/15 h, 186 chapters, deadline worksheet |
+| german-a1-30-day-study-plan | German A1 study plan (exact) | Implied one month = A1 | Honest 30 h vs 60–150 h, chapters 1–17, day-30 check |
+| german-a1-syllabus-checklist | German A1 syllabus (exact) | No topic list | All 47 chapters as topics, exam-part table, checklist |
+
+No new audio was added. The two listening pages reuse their existing clips.
+
+### Recheck: learn-german-online-india vs courses (not counted as a new audit)
+
+After batch 2 the two pages serve different tasks:
+
+- **learn-german-online-india** ("learn German online India") routes by goal: spouse visa, Ausbildung, university, no deadline.
+- **courses** ("online German language course India") is the level catalogue and fee table.
+
+Remaining overlap: both show self-paced prices, and they come from one source, so keep the figures in sync. `courses` did not link back to the goal guide, so one link was added. Keep both pages; no redirect or noindex.
+
 ## Next batch (proposed order)
 
-Batch 3: `german-a2-mini-practice-test` (moved from batch 2), `learn-german-online-india` vs `courses` overlap audit, then the three A2 guides that share the “German A2 exam preparation” seed (`german-a2-listening-practice`, `german-a2-writing-practice-online`, with the mini test), `german-b2-speaking-practice-online`, `german-classes-for-working-professionals`, `a1-to-b2-german-course-duration`, `german-a1-30-day-study-plan` and `german-a1-syllabus-checklist`.
+Batch 4: the next 10 provisional P2 URLs by tracker order: `b1-german-ausbildung-interview`, `b2-german-for-nurses`, `dsh-exam-preparation`, `german-ausbildung-weekly-study-plan`, `german-conversation-practice-online`, `german-for-doctors`, then four more by priority.

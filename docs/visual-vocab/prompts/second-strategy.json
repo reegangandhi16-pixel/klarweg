@@ -699,11 +699,11 @@
   "hl": "Endorphine"
  },
  "das-erachten--opinion-view": {
-  "key": "das-erachten--opinion-view",
-  "type": "scene",
-  "scene": "Show a professional at a conference table gesturing thoughtfully with open hands while giving their considered assessment to colleagues.",
-  "cap": "Expressing one's considered personal opinion or assessment",
-  "hl": "Erachten"
+  "type": "grammar",
+  "de": "Nach meinem Erachten wird sich nicht viel ändern.",
+  "hl": "Nach meinem Erachten",
+  "role": "focus",
+  "cap": "nach meinem Erachten = in my opinion"
  },
  "das-fragewort--question-word": {
   "key": "das-fragewort--question-word",
@@ -1540,13 +1540,6 @@
   "role": "article",
   "cap": "'Dieser' is a demonstrative article specifying a noun"
  },
- "der-die-alleinernaehrer-in--sole-breadwinner": {
-  "key": "der-die-alleinernaehrer-in--sole-breadwinner",
-  "type": "scene",
-  "scene": "Show an exhausted parent stepping inside the front door carrying grocery bags, greeted joyfully by two small children in the entryway.",
-  "cap": "A sole breadwinner providing for the family",
-  "hl": "Alleinernährer"
- },
  "der-die-alte--oneself-the-old-one": {
   "type": "grammar",
   "de": "Er blieb bis zuletzt ganz der Alte.",
@@ -1567,13 +1560,6 @@
   "scene": "Show a person sitting attentively across a modern office desk from an advisor, reviewing open career vacancies displayed on a monitor.",
   "cap": "Seeking new opportunities at an employment agency",
   "hl": "Arbeitslose"
- },
- "der-die-asylberechtigte-r--person-entitled-to-asylum": {
-  "key": "der-die-asylberechtigte-r--person-entitled-to-asylum",
-  "type": "scene",
-  "scene": "Show a smiling person receiving an apartment key from a social worker inside a clean, sunlit flat with wooden floors.",
-  "cap": "Receiving the keys to a newly granted home",
-  "hl": "Asylberechtigte"
  },
  "der-die-berechtigte--entitled-authorized-person": {
   "type": "grammar",
@@ -2151,13 +2137,6 @@
   "cap": "A delegate voting on behalf of a member state",
   "hl": "Mitgliedsstaat"
  },
- "der-mobilfunkanbieter--mobile-network-provider": {
-  "key": "der-mobilfunkanbieter--mobile-network-provider",
-  "type": "scene",
-  "scene": "Show a modern telecommunications store interior with smartphones on display tables and an employee consulting a customer beside a SIM card tray.",
-  "cap": "A customer service store of a mobile network provider",
-  "hl": "Mobilfunkanbieter"
- },
  "der-montag--monday": {
   "key": "der-montag--monday",
   "type": "scene",
@@ -2582,13 +2561,6 @@
   "hl": "Wertewandel",
   "role": "focus",
   "cap": "der der Wertewandel = change of values"
- },
- "der-wirtschaftsprozess--economic-process": {
-  "key": "der-wirtschaftsprozess--economic-process",
-  "type": "scene",
-  "scene": "Show a bustling modern container port with automated cranes loading standard shipping containers onto an outgoing cargo vessel.",
-  "cap": "Ongoing operations of production, transport, and trade",
-  "hl": "Wirtschaftsprozess"
  },
  "der-wirtschaftssektor--economic-sector": {
   "key": "der-wirtschaftssektor--economic-sector",
@@ -3645,11 +3617,11 @@
   "cap": "Sentence negation placed at the end of the clause"
  },
  "die-scheinehe--sham-marriage": {
-  "key": "die-scheinehe--sham-marriage",
-  "type": "scene",
-  "scene": "Show two people in wedding attire standing awkwardly beside each other at a registry office desk, avoiding eye contact while an official examines paperwork.",
-  "cap": "A sham marriage conducted solely for official paperwork",
-  "hl": "Scheinehe"
+  "type": "grammar",
+  "de": "Es steht fest, dass es sich um eine Scheinehe handelt.",
+  "hl": "Scheinehe",
+  "role": "focus",
+  "cap": "die Scheinehe = sham marriage (only on paper)"
  },
  "die-schlussformel--closing-formula": {
   "key": "die-schlussformel--closing-formula",
@@ -4303,11 +4275,11 @@
   "hl": "ergab"
  },
  "ergehen--fare-get-on": {
-  "key": "ergehen--fare-get-on",
-  "type": "scene",
-  "scene": "Show two old friends meeting in a cozy café, warmly greeting each other with open hands and inquiring about how life has treated them.",
-  "cap": "Asking how someone has fared over time",
-  "hl": "ergangen"
+  "type": "grammar",
+  "de": "Wie ist es ihnen ergangen?",
+  "hl": "Wie ist es ihnen ergangen",
+  "role": "focus",
+  "cap": "Wie ist es dir ergangen? = How did it go for you?"
  },
  "erheben--collect": {
   "key": "erheben--collect",
@@ -6840,11 +6812,11 @@
   "cap": "vor = to (before the hour)"
  },
  "voraussetzen--presuppose-require": {
-  "key": "voraussetzen--presuppose-require",
-  "type": "scene",
-  "scene": "Show a job interviewer and an applicant in an office talking over a desk, with an illustrated world globe displayed prominently on a nearby shelf.",
-  "cap": "A job position that presupposes international experience.",
-  "hl": ""
+  "type": "grammar",
+  "de": "Die Stelle setzt Auslandserfahrung voraus.",
+  "hl": "setzt Auslandserfahrung voraus",
+  "role": "focus",
+  "cap": "voraussetzen = to require, presuppose"
  },
  "voraussichtlich--expected": {
   "key": "voraussichtlich--expected",
@@ -8853,6 +8825,111 @@
   "hl": "kommt ganz unerwartet daher",
   "role": "focus",
   "cap": "daherkommen = to come along, appear"
+ },
+ "ausnutzen--exploit-take-advantage": {
+  "type": "grammar",
+  "de": "Das Thema wird in den Medien oft ausgenutzt.",
+  "hl": "ausgenutzt",
+  "role": "focus",
+  "cap": "ausnutzen = to exploit, take advantage of"
+ },
+ "empfinden--feel-perceive": {
+  "type": "grammar",
+  "de": "Sie empfindet große Freude bei der Arbeit.",
+  "hl": "empfindet große Freude",
+  "role": "focus",
+  "cap": "empfinden = to feel, perceive"
+ },
+ "entscheidend--decisive-crucial": {
+  "type": "grammar",
+  "de": "Das war ein entscheidender Moment.",
+  "hl": "entscheidender",
+  "role": "focus",
+  "cap": "entscheidend = decisive, crucial"
+ },
+ "missverstehen--misunderstand": {
+  "type": "grammar",
+  "de": "Bitte versteh mich nicht falsch – ich wurde missverstanden.",
+  "hl": "missverstanden",
+  "role": "focus",
+  "cap": "missverstehen = to misunderstand"
+ },
+ "bewusst--deliberate-conscious-aware": {
+  "type": "grammar",
+  "de": "Sie hat sich bewusst dafür entschieden.",
+  "hl": "bewusst",
+  "role": "focus",
+  "cap": "bewusst = deliberate(ly), conscious(ly)"
+ },
+ "ausloesen--trigger-set-off": {
+  "type": "grammar",
+  "de": "Ihre Beurteilung löst eine Diskussion aus.",
+  "hl": "löst eine Diskussion aus",
+  "role": "focus",
+  "cap": "auslösen = to trigger, set off"
+ },
+ "bestimmen--determine-decide": {
+  "type": "grammar",
+  "de": "Die Kompetenz des Teams bestimmt die Lage.",
+  "hl": "bestimmt",
+  "role": "focus",
+  "cap": "bestimmen = to determine, decide"
+ },
+ "thematisieren--address-raise-a-topic": {
+  "type": "grammar",
+  "de": "Darum thematisierte die Familie das Problem.",
+  "hl": "thematisierte",
+  "role": "focus",
+  "cap": "thematisieren = to raise (a topic)"
+ },
+ "verallgemeinern--generalise": {
+  "type": "grammar",
+  "de": "Man sollte nicht verallgemeinern.",
+  "hl": "verallgemeinern",
+  "role": "focus",
+  "cap": "verallgemeinern = to generalise"
+ },
+ "zurueckhaltend--reserved-restrained": {
+  "type": "grammar",
+  "de": "Er ist eher zurückhaltend.",
+  "hl": "zurückhaltend",
+  "role": "focus",
+  "cap": "zurückhaltend = reserved, restrained"
+ },
+ "endgueltig--final-definitive": {
+  "type": "grammar",
+  "de": "Das war die endgültige Entscheidung.",
+  "hl": "endgültige",
+  "role": "focus",
+  "cap": "endgültig = final, definitive"
+ },
+ "der-die-alleinernaehrer-in--sole-breadwinner": {
+  "key": "der-die-alleinernaehrer-in--sole-breadwinner",
+  "type": "scene",
+  "scene": "Show an exhausted parent stepping inside the front door carrying grocery bags, greeted joyfully by two small children in the entryway.",
+  "cap": "A sole breadwinner providing for the family",
+  "hl": "Alleinernährer"
+ },
+ "der-die-asylberechtigte-r--person-entitled-to-asylum": {
+  "key": "der-die-asylberechtigte-r--person-entitled-to-asylum",
+  "type": "scene",
+  "scene": "Show a smiling person receiving an apartment key from a social worker inside a clean, sunlit flat with wooden floors.",
+  "cap": "Receiving the keys to a newly granted home",
+  "hl": "Asylberechtigte"
+ },
+ "der-mobilfunkanbieter--mobile-network-provider": {
+  "key": "der-mobilfunkanbieter--mobile-network-provider",
+  "type": "scene",
+  "scene": "Show a modern telecommunications store interior with smartphones on display tables and an employee consulting a customer beside a SIM card tray.",
+  "cap": "A customer service store of a mobile network provider",
+  "hl": "Mobilfunkanbieter"
+ },
+ "der-wirtschaftsprozess--economic-process": {
+  "key": "der-wirtschaftsprozess--economic-process",
+  "type": "scene",
+  "scene": "Show a bustling modern container port with automated cranes loading standard shipping containers onto an outgoing cargo vessel.",
+  "cap": "Ongoing operations of production, transport, and trade",
+  "hl": "Wirtschaftsprozess"
  },
  "alzheimer--alzheimer-s-disease": {
   "key": "alzheimer--alzheimer-s-disease",

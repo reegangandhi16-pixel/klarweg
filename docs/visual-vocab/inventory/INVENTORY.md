@@ -14,24 +14,24 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | Text-only (function words / grammar constructions) | 568 |
 | Illustrable concepts | 7893 |
 | Chapters without word cards | b2-14-goethe-mini-test-1 (review quiz), b2-26-goethe-mini-test-2 (review quiz), b2-36-goethe-halbzeit-test (review quiz), b2-43-goethe-mini-3 (review quiz), b2-53-goethe-mini-4 (none) |
-| Already illustrated (A1·01 pilot) | 5141 |
-| **New images needed** | **2752** (2090 direct, 662 conceptual) |
-| …used on a free Chapter 1 page (public files) | 22 |
-| …used only in paid chapters (gated files) | 2730 |
+| Already illustrated (A1·01 pilot) | 5223 |
+| **New images needed** | **2670** (2030 direct, 640 conceptual) |
+| …used on a free Chapter 1 page (public files) | 20 |
+| …used only in paid chapters (gated files) | 2650 |
 | Cards served by reusing another card's image | 663 |
 | Headwords with several meanings | 578 (309 look like the same meaning worded differently — review) |
 
 ## Cost and storage (estimate)
-- Expected generations incl. re-rolls: **3501** × $0.039 = **$136.54** (interactive) · **$68.27** if the 50 % batch mode is available for this model (to verify).
-- Assets: 11008 files ≈ **52.3 MB** (AVIF+WebP × 400/800w, pilot average 19.5 KB per word); a learner downloads only one variant per card (≈ 3–6 KB).
+- Expected generations incl. re-rolls: **3396** × $0.039 = **$132.44** (interactive) · **$66.22** if the 50 % batch mode is available for this model (to verify).
+- Assets: 10680 files ≈ **50.8 MB** (AVIF+WebP × 400/800w, pilot average 19.5 KB per word); a learner downloads only one variant per card (≈ 3–6 KB).
 
 ## Per level
 | Level | Chapters | With cards | Checkpoints | Cards | Image | Concept | Text-only | New images (first use here) |
 |---|---|---|---|---|---|---|---|---|
-| A1 | 47 | 47 | 0 | 1984 | 1480 | 269 | 235 | 300 |
-| A2 | 35 | 35 | 0 | 1607 | 1270 | 272 | 65 | 270 |
+| A1 | 47 | 47 | 0 | 1984 | 1480 | 269 | 235 | 298 |
+| A2 | 35 | 35 | 0 | 1607 | 1270 | 272 | 65 | 267 |
 | B1 | 35 | 35 | 0 | 2128 | 1712 | 296 | 120 | 465 |
-| B2 | 69 | 64 | 4 | 2569 | 2142 | 405 | 22 | 1282 |
+| B2 | 69 | 64 | 4 | 2569 | 2142 | 405 | 22 | 1205 |
 | C1 | 43 | 43 | 0 | 231 | 88 | 86 | 57 | 87 |
 | C2 | 29 | 29 | 0 | 711 | 423 | 112 | 176 | 348 |
 
@@ -60,9 +60,9 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | a1-20-modalverben1 | paid | 18 | 14 | 2 | 2 | 13 |
 | a1-21-uhrzeit | paid | 44 | 26 | 12 | 6 | 15 |
 | a1-22-berufe | paid | 135 | 118 | 14 | 3 | 127 |
-| a1-23-familie | paid | 43 | 37 | 0 | 6 | 38 |
+| a1-23-familie | paid | 43 | 37 | 0 | 6 | 39 |
 | a1-24-datum | paid | 66 | 35 | 12 | 19 | 27 |
-| a1-25-trennbar | paid | 31 | 31 | 0 | 0 | 26 |
+| a1-25-trennbar | paid | 31 | 31 | 0 | 0 | 27 |
 | a1-26-goethe3 | paid | 33 | 23 | 9 | 1 | 29 |
 | a1-27-praeteritum | paid | 8 | 4 | 3 | 1 | 2 |
 | a1-28-perfekt | paid | 4 | 1 | 0 | 3 | 1 |
@@ -88,20 +88,20 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | a2-1-genitiv | free | 17 | 11 | 5 | 1 | 12 |
 | a2-2-perfekt-review | paid | 19 | 16 | 1 | 2 | 12 |
 | a2-3-artikel-review | paid | 48 | 37 | 9 | 2 | 39 |
-| a2-4-weil | paid | 49 | 33 | 12 | 4 | 39 |
+| a2-4-weil | paid | 49 | 33 | 12 | 4 | 40 |
 | a2-5-dass | paid | 116 | 88 | 25 | 3 | 91 |
 | a2-6-modalverben-praeteritum | paid | 36 | 31 | 4 | 1 | 29 |
 | a2-7-possessivartikel-dativ | paid | 30 | 28 | 1 | 1 | 25 |
 | a2-8-komparativ-superlativ | paid | 76 | 63 | 9 | 4 | 61 |
 | a2-9-vergleiche-als-wie | paid | 96 | 76 | 14 | 6 | 72 |
-| a2-10-goethe-mini-1 | paid | 34 | 24 | 5 | 5 | 20 |
+| a2-10-goethe-mini-1 | paid | 34 | 24 | 5 | 5 | 21 |
 | a2-11-wenn | paid | 57 | 46 | 10 | 1 | 44 |
 | a2-12-reflexive-verben | paid | 71 | 64 | 5 | 2 | 63 |
 | a2-13-praepositionen-dativ | paid | 26 | 22 | 2 | 2 | 23 |
 | a2-14-wechselpraepositionen | paid | 59 | 49 | 10 | 0 | 55 |
 | a2-15-positions-richtungsverben | paid | 35 | 29 | 5 | 1 | 25 |
 | a2-16-goethe-mini-2 | paid | 59 | 46 | 11 | 2 | 48 |
-| a2-17-werden | paid | 21 | 17 | 4 | 0 | 16 |
+| a2-17-werden | paid | 21 | 17 | 4 | 0 | 17 |
 | a2-18-ortsangaben | paid | 35 | 5 | 23 | 7 | 25 |
 | a2-19-indirekte-fragen | paid | 67 | 49 | 15 | 3 | 51 |
 | a2-20-was-fuer-ein | paid | 42 | 36 | 6 | 0 | 33 |
@@ -155,18 +155,18 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | b1-33-je-desto-umso | paid | 44 | 35 | 9 | 0 | 22 |
 | b1-34-partizipien-als-adjektive | paid | 81 | 70 | 9 | 2 | 61 |
 | b1-35-goethe-zertifikat-b1-final | paid | 39 | 25 | 5 | 9 | 20 |
-| b2-01-erweiterte-satzklammer | free | 34 | 23 | 11 | 0 | 18 |
-| b2-02-verbalkomplex | paid | 34 | 21 | 12 | 1 | 24 |
-| b2-03-informationsstruktur-thema-rhema | paid | 34 | 27 | 7 | 0 | 24 |
-| b2-04-formales-es | paid | 34 | 32 | 2 | 0 | 21 |
-| b2-05-korrelat-es | paid | 34 | 32 | 2 | 0 | 20 |
-| b2-06-es-in-festen-ausdruecken | paid | 34 | 33 | 1 | 0 | 19 |
-| b2-07-verbergaenzungen-erkennen | paid | 34 | 31 | 3 | 0 | 22 |
-| b2-08-valenz-von-verben | paid | 34 | 29 | 5 | 0 | 21 |
-| b2-09-trennbar-vs-untrennbar | paid | 33 | 23 | 10 | 0 | 24 |
-| b2-10-haeufige-b2-verben | paid | 33 | 26 | 7 | 0 | 23 |
-| b2-11-stellung-von-nicht | paid | 33 | 32 | 1 | 0 | 24 |
-| b2-12-doppelte-verneinung-litotes | paid | 33 | 32 | 1 | 0 | 14 |
+| b2-01-erweiterte-satzklammer | free | 34 | 23 | 11 | 0 | 20 |
+| b2-02-verbalkomplex | paid | 34 | 21 | 12 | 1 | 26 |
+| b2-03-informationsstruktur-thema-rhema | paid | 34 | 27 | 7 | 0 | 26 |
+| b2-04-formales-es | paid | 34 | 32 | 2 | 0 | 22 |
+| b2-05-korrelat-es | paid | 34 | 32 | 2 | 0 | 23 |
+| b2-06-es-in-festen-ausdruecken | paid | 34 | 33 | 1 | 0 | 23 |
+| b2-07-verbergaenzungen-erkennen | paid | 34 | 31 | 3 | 0 | 23 |
+| b2-08-valenz-von-verben | paid | 34 | 29 | 5 | 0 | 24 |
+| b2-09-trennbar-vs-untrennbar | paid | 33 | 23 | 10 | 0 | 28 |
+| b2-10-haeufige-b2-verben | paid | 33 | 26 | 7 | 0 | 24 |
+| b2-11-stellung-von-nicht | paid | 33 | 32 | 1 | 0 | 28 |
+| b2-12-doppelte-verneinung-litotes | paid | 33 | 32 | 1 | 0 | 16 |
 | b2-13-nuancierte-negation | paid | 33 | 32 | 1 | 0 | 11 |
 | b2-14-goethe-mini-test-1 | paid | 0 (review quiz) | 0 | 0 | 0 | 0 |
 | b2-15-konzessivsaetze-obgleich | paid | 54 | 33 | 21 | 0 | 12 |
@@ -178,12 +178,12 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | b2-21-sowohl-als-auch | paid | 54 | 32 | 21 | 1 | 29 |
 | b2-22-weder-noch | paid | 54 | 37 | 14 | 3 | 29 |
 | b2-23-nicht-nur-sondern-auch | paid | 54 | 54 | 0 | 0 | 26 |
-| b2-24-einerseits-andererseits | paid | 53 | 53 | 0 | 0 | 23 |
-| b2-25-verbindungsadverbien | paid | 53 | 53 | 0 | 0 | 21 |
+| b2-24-einerseits-andererseits | paid | 53 | 53 | 0 | 0 | 24 |
+| b2-25-verbindungsadverbien | paid | 53 | 53 | 0 | 0 | 33 |
 | b2-26-goethe-mini-test-2 | paid | 0 (review quiz) | 0 | 0 | 0 | 0 |
-| b2-27-perfekt-vs-praeteritum | paid | 52 | 31 | 21 | 0 | 18 |
-| b2-28-tempuswechsel-im-text | paid | 49 | 29 | 20 | 0 | 19 |
-| b2-29-futur1-vermutungen | paid | 52 | 50 | 1 | 1 | 28 |
+| b2-27-perfekt-vs-praeteritum | paid | 52 | 31 | 21 | 0 | 34 |
+| b2-28-tempuswechsel-im-text | paid | 49 | 29 | 20 | 0 | 32 |
+| b2-29-futur1-vermutungen | paid | 52 | 50 | 1 | 1 | 34 |
 | b2-30-alternativen-zum-futur | paid | 54 | 50 | 4 | 0 | 39 |
 | b2-31-konjunktiv2-vergangenheit | paid | 51 | 42 | 9 | 0 | 25 |
 | b2-32-konjunktiv2-vermutungen | paid | 51 | 36 | 15 | 0 | 25 |
@@ -252,7 +252,7 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | c1-26-passiv-und-passiversatzformen | paid | 5 | 5 | 0 | 0 | 2 |
 | c1-27-funktionsverbgefuege-im-akademischen-deutsch | paid | 5 | 0 | 5 | 0 | 1 |
 | c1-28-goethe-mini-4 | paid | 5 | 2 | 3 | 0 | 2 |
-| c1-29-verben-mit-praefixen-sicher-unterscheiden | paid | 5 | 5 | 0 | 0 | 2 |
+| c1-29-verben-mit-praefixen-sicher-unterscheiden | paid | 5 | 5 | 0 | 0 | 3 |
 | c1-30-nomen-mit-numerusbesonderheiten | paid | 5 | 3 | 2 | 0 | 4 |
 | c1-31-adversativangaben-und-gegensaetze-ausdruecken | paid | 5 | 0 | 3 | 2 | 0 |
 | c1-32-kohaerenz-und-textverknuepfung | paid | 5 | 1 | 3 | 1 | 1 |

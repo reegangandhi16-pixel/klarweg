@@ -3426,5 +3426,110 @@
   "hl": "kommt ganz unerwartet daher",
   "role": "focus",
   "cap": "daherkommen = to come along, appear"
+ },
+ "voraussetzen--presuppose-require": {
+  "type": "grammar",
+  "de": "Die Stelle setzt Auslandserfahrung voraus.",
+  "hl": "setzt Auslandserfahrung voraus",
+  "role": "focus",
+  "cap": "voraussetzen = to require, presuppose"
+ },
+ "ausnutzen--exploit-take-advantage": {
+  "type": "grammar",
+  "de": "Das Thema wird in den Medien oft ausgenutzt.",
+  "hl": "ausgenutzt",
+  "role": "focus",
+  "cap": "ausnutzen = to exploit, take advantage of"
+ },
+ "empfinden--feel-perceive": {
+  "type": "grammar",
+  "de": "Sie empfindet große Freude bei der Arbeit.",
+  "hl": "empfindet große Freude",
+  "role": "focus",
+  "cap": "empfinden = to feel, perceive"
+ },
+ "entscheidend--decisive-crucial": {
+  "type": "grammar",
+  "de": "Das war ein entscheidender Moment.",
+  "hl": "entscheidender",
+  "role": "focus",
+  "cap": "entscheidend = decisive, crucial"
+ },
+ "missverstehen--misunderstand": {
+  "type": "grammar",
+  "de": "Bitte versteh mich nicht falsch – ich wurde missverstanden.",
+  "hl": "missverstanden",
+  "role": "focus",
+  "cap": "missverstehen = to misunderstand"
+ },
+ "die-scheinehe--sham-marriage": {
+  "type": "grammar",
+  "de": "Es steht fest, dass es sich um eine Scheinehe handelt.",
+  "hl": "Scheinehe",
+  "role": "focus",
+  "cap": "die Scheinehe = sham marriage (only on paper)"
+ },
+ "bewusst--deliberate-conscious-aware": {
+  "type": "grammar",
+  "de": "Sie hat sich bewusst dafür entschieden.",
+  "hl": "bewusst",
+  "role": "focus",
+  "cap": "bewusst = deliberate(ly), conscious(ly)"
+ },
+ "ausloesen--trigger-set-off": {
+  "type": "grammar",
+  "de": "Ihre Beurteilung löst eine Diskussion aus.",
+  "hl": "löst eine Diskussion aus",
+  "role": "focus",
+  "cap": "auslösen = to trigger, set off"
+ },
+ "bestimmen--determine-decide": {
+  "type": "grammar",
+  "de": "Die Kompetenz des Teams bestimmt die Lage.",
+  "hl": "bestimmt",
+  "role": "focus",
+  "cap": "bestimmen = to determine, decide"
+ },
+ "thematisieren--address-raise-a-topic": {
+  "type": "grammar",
+  "de": "Darum thematisierte die Familie das Problem.",
+  "hl": "thematisierte",
+  "role": "focus",
+  "cap": "thematisieren = to raise (a topic)"
+ },
+ "verallgemeinern--generalise": {
+  "type": "grammar",
+  "de": "Man sollte nicht verallgemeinern.",
+  "hl": "verallgemeinern",
+  "role": "focus",
+  "cap": "verallgemeinern = to generalise"
+ },
+ "zurueckhaltend--reserved-restrained": {
+  "type": "grammar",
+  "de": "Er ist eher zurückhaltend.",
+  "hl": "zurückhaltend",
+  "role": "focus",
+  "cap": "zurückhaltend = reserved, restrained"
+ },
+ "ergehen--fare-get-on": {
+  "type": "grammar",
+  "de": "Wie ist es ihnen ergangen?",
+  "hl": "Wie ist es ihnen ergangen",
+  "role": "focus",
+  "cap": "Wie ist es dir ergangen? = How did it go for you?"
+ },
+ "endgueltig--final-definitive": {
+  "type": "grammar",
+  "de": "Das war die endgültige Entscheidung.",
+  "hl": "endgültige",
+  "role": "focus",
+  "cap": "endgültig = final, definitive"
+ },
+ "das-erachten--opinion-view": {
+  "type": "grammar",
+  "de": "Nach meinem Erachten wird sich nicht viel ändern.",
+  "hl": "Nach meinem Erachten",
+  "role": "focus",
+  "cap": "nach meinem Erachten = in my opinion"
  }
 }

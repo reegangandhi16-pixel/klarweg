@@ -74,6 +74,63 @@ Klarweg has no analytics by owner choice (privacy policy §7), so learner action
 - ₹100 demo bookings and their referring page: needs an owner decision on attribution
 - self-paced purchases and live enrolments (Cashfree orders)
 
+## Batch 1 release (22 Nov 2026)
+
+- PR #373 merged as `3f85d5d4` and deployed to klarweg-site `a57ce09` (Pages build 07:52–07:53 UTC). Before merging: required check `npm-test` and `live-classes` passed on the final commit `56bb6769`; no review comments; Codex review had no findings.
+- **Live checks** (desktop 1280 px and a 375 px same-origin frame with a 371 px viewport):
+  - all 12 pages return 200, with no horizontal overflow and every touch target at least 44 px;
+  - all 70 unique internal links return 200;
+  - mini mock: a real click on Check scored 3 of 6, with per-item verdicts and explanations, and focus moved to the score;
+  - listening: a real click started German TTS and a second click stopped it; with no German voice the play buttons hide, the fallback message shows and the transcripts stay available;
+  - the live worksheet PDF matches the repo (sha256 `fc8d352d…`, 3 pages, answer key on the last page);
+  - the ₹100 demo flow showed the teacher and 16 slots on 22 Nov and stopped before payment (no booking made);
+  - A1 and Lifetime checkout buttons are wired (`data-kw-buy`, `kw-checkout.js`) and were not clicked.
+- **Incident:** a request made about a minute before the Pages build went live left Cloudflare serving a cached 404 for `kw-guide-check.js` and the old 6-exercise PDF (`cf-cache-status: HIT`, `max-age=14400`). Fix PR #375 versions both URLs (`?v=20261122a`). Without it, the stale entries expire by about 11:52 UTC.
+
+## Batch 2 (22 Nov 2026): 10 manual audits
+
+All query evidence is from `German-Language-Keywords-India.xlsx` (India keywords sheet), with no verified volumes, plus Google `gl=in&hl=en&pws=0` results from 22 Nov. Per-URL details are in the tracker (`audit_status = Manual (batch 2…)`).
+
+| URL | Target query (type) | User task | Concrete gap | Fix |
+|---|---|---|---|---|
+| german-a1-for-spouse-visa | A1 German for spouse visa (exact) | Do I need A1, which exam, how to prepare | Abstract answer: no named exams, no one-year rule, no route | Official rules quoted (mission page of 16 Feb 2026; Make it in Germany skilled-worker exemption), at-a-glance table, 5-step route |
+| a1-speaking-practice-family-reunion | German A1 speaking practice (teaching-value; was a duplicate seed) | Practise spelling, numbers, appointments | 302 words, no check, same keyword as the visa guide | Retargeted to the Sprechen Teil 1 spelling and number skills (verified in Durchführungsbestimmungen §3.3); 8-item self-check; partner drill |
+| a1 | German A1 course (exact) | Decide on the course and its total cost | Stale "waitlist open" FAQ; no total cost or time | FAQ corrected; ₹11,999 total and 60–150 h guideline |
+| courses | online German language course India (exact) | Compare levels and prices | No prices; unsourced hours; B1 card said "the level for spouse visas" | Static fee table; cards show prices; blurbs corrected |
+| live-classes | online German classes with live teacher (exact) | Book a demo or enrol | Hero did not say no batch is open | "Batch dates to be announced"; price-card footer |
+| one-to-one-german-classes-online | 1 to 1 German classes online (exact) | Fee and terms | No fee, status or terms | Facts table from the live catalog, terms, unpublished lesson count stated |
+| weekend-german-classes-online | weekend German classes online (exact) | Find a weekend class | Never said Klarweg has no weekend batch | Answer first: none listed; demos Fri/Sun from 16:20 IST |
+| goethe/a1-exam | Goethe A1 exam (existing intent) | Format, scoring, fee | No fee figure; no links to the new practice pages | Fee in the summary; practice links |
+| goethe-b1-exam-preparation-plan | Goethe B1 exam preparation online (exact) | Plan the last month | Generic plan, no format or pass rule | Module table, day-by-day plan, Lesen Teil 4 self-check |
+| online-german-b1-classes | German B1 classes online (exact) | Choose a route and check readiness | No fees, no status | Self-paced vs live table, 6-item readiness check |
+
+**Also fixed:** "Lifetime is cheaper than two levels" was wrong, because A1 + A2 cost ₹4,998. Corrected on the certificate-fees page and on courses.
+
+**Not changed, owner decision:** the homepage FAQ still says demo booking "is not open yet" and describes an A1 waitlist. The demo has been live since 20 Nov. That wording is pinned by `scripts/live-classes-static.test.mjs` (decision D8), so changing it needs your approval of new wording and a test update.
+
+### Spouse-visa pair: do both deserve to stay?
+
+Yes, because they now serve different tasks:
+
+- **german-a1-for-spouse-visa.** Primary query: “A1 German for spouse visa”; secondary: “A1 German course for family reunion visa”. It answers the requirement question (who, which exam, how recent, fee link, route). It links down to the drill, the mini mock, A1 Chapter 1 and the A1 course.
+- **a1-speaking-practice-family-reunion.** Primary query: “German A1 speaking practice” (a teaching-value topic with no researched volume; the SERP is mostly exam practice and YouTube). It is a practice tool and links up to the visa guide and across to goethe/a1-sprechen.
+- The URL slug still says “family-reunion”. The content keeps that audience, so no redirect is needed. Nothing was redirected, deleted or noindexed.
+
+### Recorded audio (no spend made)
+
+- **Clips:** 18 transcripts with `data-speak` across 5 pages: A1 listening 6, mini mock 6, A2 listening 3, pronunciation (ch) 2, B2 listening 1. That is 1,719 characters in total.
+- **Estimated cost:** about $0.05 at Chirp 3 HD list price ($30 per 1M characters, the existing pipeline), or under $0.20 with three takes for review. Check the current price on the GCP billing page before approving.
+- **Output:** 18 MP3s, about 2–3 minutes of audio, roughly 1–1.5 MB at 48–64 kbps. They would be served with `preload="none"` and the device voice kept as a fallback.
+
+**Android playback test plan, before and after:**
+
+1. **Devices:** one low-end Android 10–11 phone (2–3 GB RAM), one recent Android 14 phone, and Samsung Internet on a Galaxy device.
+2. **Browsers:** Chrome stable, Samsung Internet and Firefox for Android.
+3. **Baseline (today):** record whether a German voice exists (`speechSynthesis.getVoices()`), whether the play buttons appear, and whether the fallback text shows.
+4. **With MP3s:** test first play on a 3G-throttled connection, pause/resume, switching clips mid-play, screen lock during playback, headphones, and media volume vs ring volume.
+5. **Accessibility:** TalkBack reads the button labels and the status message; buttons are at least 44 px.
+6. **Pass criteria:** audio starts within 2 s on 4G and within 5 s throttled; nothing autoplays; the transcript is available in every state; total data per page is under 1 MB.
+
 ## Next batch (proposed order)
 
-`german-a1-for-spouse-visa` + `a1-speaking-practice-family-reunion` (consolidation decision), `a1`, `courses`, `live-classes`, `one-to-one-german-classes-online`, `weekend-german-classes-online`, `goethe/a1-exam`, `goethe-b1-exam-preparation-plan`, `online-german-b1-classes`, `german-a2-mini-practice-test`.
+Batch 3: `german-a2-mini-practice-test` (moved from batch 2), `learn-german-online-india` vs `courses` overlap audit, then the three A2 guides that share the “German A2 exam preparation” seed (`german-a2-listening-practice`, `german-a2-writing-practice-online`, with the mini test), `german-b2-speaking-practice-online`, `german-classes-for-working-professionals`, `a1-to-b2-german-course-duration`, `german-a1-30-day-study-plan` and `german-a1-syllabus-checklist`.

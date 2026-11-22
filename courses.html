@@ -123,6 +123,32 @@
   </div>
 </section>
 
+<!-- ========== FEES AND ROUTES ========== -->
+<section>
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Fees</span>
+      <h2 class="display-md">What each route costs.</h2>
+      <p class="lede">Self-paced levels are one-time payments with two years of access; Lifetime covers A1 to C2 with no expiry. Prices checked against the checkout on 22 November 2026.</p>
+    </div>
+    <div style="overflow-x:auto">
+    <table class="ktable" style="min-width:560px">
+      <thead><tr><th scope="col">Level</th><th scope="col">Self-paced course</th><th scope="col">Live classes with a teacher</th><th scope="col">Goethe exam, from Jan 2027</th></tr></thead>
+      <tbody>
+        <tr><td><a href="a1.html">A1</a></td><td>₹1,999</td><td rowspan="4">Group ₹16,000, one-to-one ₹22,000 per level, before coupons. No batch has dates yet; a ₹100 demo can be booked. <a href="live-classes.html">Live classes</a></td><td>₹10,000</td></tr>
+        <tr><td><a href="a2.html">A2</a></td><td>₹2,999</td><td>₹12,000</td></tr>
+        <tr><td><a href="b1.html">B1</a></td><td>₹3,999</td><td>₹20,000</td></tr>
+        <tr><td><a href="b2.html">B2</a></td><td>₹4,999</td><td>₹22,000</td></tr>
+        <tr><td><a href="c1.html">C1</a></td><td>₹7,999</td><td>Not offered</td><td>See your exam centre</td></tr>
+        <tr><td><a href="c2.html">C2</a></td><td>₹8,999</td><td>Not offered</td><td>See your exam centre</td></tr>
+        <tr><td>Lifetime, A1–C2</td><td>₹4,999</td><td colspan="2">The same price as B2 alone. Any route to B1 or beyond costs more as separate levels; A1 + A2 alone cost ₹4,998.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="margin-top:16px">Exam fees are paid to the exam centre and are the standard Goethe-Institut India prices including GST. Klarweg does not issue certificates. Every cost in one place: <a href="german-course-cost-india.html">the cost of learning German in India</a>.</p>
+  </div>
+</section>
+
 <!-- ========== WHAT'S IN EVERY COURSE ========== -->
 <section>
   <div class="container">
@@ -224,12 +250,12 @@
 <script>
 /* Level data — mirrors the roadmap pages. */
 var LEVELS = [
-  { code:'A1', name:'Foundations',   color:'var(--g-subject)', chapters:47, hours:'~60–80 h',  cefr:'Goethe-Zertifikat A1', blurb:'Introduce yourself, order food, ask directions. Where German stops feeling random.', href:'a1.html' },
-  { code:'A2', name:'Elementary',    color:'var(--g-verb)',    chapters:35, hours:'~100–150 h', cefr:'Goethe-Zertifikat A2', blurb:'Hold short conversations about family, work and daily life with growing ease.', href:'a2.html' },
-  { code:'B1', name:'Intermediate',  color:'var(--g-object)',  chapters:35, hours:'~180–240 h', cefr:'Goethe-Zertifikat B1', blurb:'Manage travel, write personal letters. The level for spouse visas and Ausbildung.', href:'b1.html' },
-  { code:'B2', name:'Upper-int.',    color:'var(--g-time)',    chapters:69, hours:'~200–260 h', cefr:'Goethe-Zertifikat B2', blurb:'Argue a point, discuss abstract topics. Required by most German universities.', href:'b2.html' },
-  { code:'C1', name:'Advanced',      color:'var(--g-place)',   chapters:43, hours:'~260–320 h', cefr:'Goethe-Zertifikat C1', blurb:'Express yourself fluently and spontaneously, for academic and professional life.', href:'c1.html' },
-  { code:'C2', name:'Mastery',       color:'var(--g-akkusativ)',chapters:29,hours:'~320–400 h', cefr:'Goethe-Zertifikat C2 · GDS', blurb:'Operate in German at near-native level, with full command of nuance.', href:'c2.html' }
+  { code:'A1', name:'Foundations',   color:'var(--g-subject)', chapters:47, price:'₹1,999',  cefr:'Goethe-Zertifikat A1', blurb:'Introduce yourself, order food, ask directions. Where German stops feeling random.', href:'a1.html' },
+  { code:'A2', name:'Elementary',    color:'var(--g-verb)',    chapters:35, price:'₹2,999', cefr:'Goethe-Zertifikat A2', blurb:'Hold short conversations about family, work and daily life with growing ease.', href:'a2.html' },
+  { code:'B1', name:'Intermediate',  color:'var(--g-object)',  chapters:35, price:'₹3,999', cefr:'Goethe-Zertifikat B1', blurb:'Manage travel, explain opinions and write personal letters. Often asked for Ausbildung and long-term residence.', href:'b1.html' },
+  { code:'B2', name:'Upper-int.',    color:'var(--g-time)',    chapters:69, price:'₹4,999', cefr:'Goethe-Zertifikat B2', blurb:'Argue a point and discuss abstract topics. Often asked for nursing recognition and skilled jobs.', href:'b2.html' },
+  { code:'C1', name:'Advanced',      color:'var(--g-place)',   chapters:43, price:'₹7,999', cefr:'Goethe-Zertifikat C1', blurb:'Express yourself fluently and spontaneously. The level most German-taught degree programmes ask for.', href:'c1.html' },
+  { code:'C2', name:'Mastery',       color:'var(--g-akkusativ)',chapters:29,price:'₹8,999', cefr:'Goethe-Zertifikat C2 · GDS', blurb:'Operate in German at near-native level, with full command of nuance.', href:'c2.html' }
 ];
 var arrow = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 document.getElementById('levels-grid').innerHTML = LEVELS.map(function (l) {
@@ -237,7 +263,7 @@ document.getElementById('levels-grid').innerHTML = LEVELS.map(function (l) {
     + '<div class="level-badge" style="background:' + l.color + '">' + l.code + '</div>'
     + '<h3>' + l.name + '</h3>'
     + '<p>' + l.blurb + '</p>'
-    + '<div class="level-meta" style="margin-top:14px">' + l.chapters + ' chapters · ' + l.hours + '</div>'
+    + '<div class="level-meta" style="margin-top:14px">' + l.chapters + ' chapters · ' + l.price + ' for 2 years</div>'
     + '<div class="level-meta">' + l.cefr + '</div>'
     + '<span class="card-link">Explore ' + l.code + ' ' + arrow + '</span>'
     + '</a>';

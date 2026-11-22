@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { SOCIAL_HTML } from './footer-social.mjs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
@@ -37,7 +38,8 @@ test('resource selection preserves public PDFs and publisher registration withou
     } else assert.match(resources, /Open official PDF/);
     assert.doesNotMatch(s, /<a[^>]+\sdownload(?:\s|=|>)/);
     assert.doesNotMatch(s, /<script[^>]+src=|<form\b|kw-auth|kw-enrol|data-kw-buy|<iframe\b|<audio\b/);
-    for (const [,href] of s.matchAll(/href="(https:[^\"]+)"/g)) {
+    /* the sitewide footer social links are the only other external links */
+    for (const [,href] of s.replace(SOCIAL_HTML, '').matchAll(/href="(https:[^\"]+)"/g)) {
       const u = new URL(decode(href));
       assert.ok([new URL(SITE_BASE).hostname, 'www.klett-sprachen.de'].includes(u.hostname));
     }

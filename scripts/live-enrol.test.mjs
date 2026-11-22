@@ -13,6 +13,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { spawnSync, execFileSync } from 'node:child_process';
 import { faviconOnlyFileChange } from './favicon-only-diff.mjs';
+import { footerSocialOnlyFileChange } from './footer-social.mjs';
 import { ROOT, loadData, checkData } from './live-classes-readiness.mjs';
 
 const read = (f) => fs.readFileSync(path.join(ROOT, f), 'utf8');
@@ -211,6 +212,8 @@ test('SCOPE: no Exam Portal, audio, legal, or self-paced checkout file changes o
   if (!changed.some((f) => !/\.test\.mjs$/.test(f) && /live-classes|^kw-(live|consult|enrol)\.js$|^access\/worker\/src\/(consultations|enrolments)\.js$/.test(f))) return;
   const forbidden = changed.filter((f) => /^(exam|exam-content|exam-worker|audio|public\/audio)\/|audio|^refund-policy\.html$|^kw-checkout\.js$|^kw-products\.js$|^kw-auth\.js$|^access\/worker\/src\/(orders|entitlements|products|exam-proxy)\.js$/i.test(f)
     /* a sitewide favicon <link> swap is not a legal-content change */
-    && !(f === 'refund-policy.html' && faviconOnlyFileChange(f, base, ROOT)));
+    && !(f === 'refund-policy.html' && faviconOnlyFileChange(f, base, ROOT))
+    /* nor is the sitewide footer social-links update (scripts/footer-social.mjs) */
+    && !footerSocialOnlyFileChange(f, base, ROOT));
   assert.deepEqual(forbidden, []);
 });

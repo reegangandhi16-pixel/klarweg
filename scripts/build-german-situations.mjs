@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { SITE_BASE } from './site-origin.mjs';
+import { applyFooterSocial } from './footer-social.mjs';
 import { escapeHtml } from './build-seo-practice.mjs';
 
 const root = new URL('../', import.meta.url);
@@ -128,7 +129,7 @@ for (const lesson of lessons) {
   const file = lessonPath(lesson);
   assert.ok(allowlist.has(file), 'Missing allowlist entry: ' + file);
   assert.equal(sitemap.split(`<loc>${SITE_BASE}/${file}</loc>`).length, 2, 'Missing or repeated sitemap entry: ' + file);
-  const page = render(lesson);
+  const page = applyFooterSocial(render(lesson));
   if (check) assert.equal(read(file), page, 'Stale generated lesson: ' + file);
   else fs.writeFileSync(new URL(file, root), page);
 }

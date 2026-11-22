@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SITE_BASE } from './site-origin.mjs';
+import { applyFooterSocial } from './footer-social.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const LEVELS = ['a1', 'a2', 'b1', 'b2'];
@@ -211,6 +212,7 @@ export function renderPractice(guides = loadGuides()) {
       mainEntity: { '@type': 'ItemList', numberOfItems: guides.length, itemListElement: orderedGuides.map((g, i) => ({ '@type': 'ListItem', position: i + 1, name: g.title, url: pageUrl(g.slug) })) }
     })
   }));
+  for (const [file, html] of outputs) outputs.set(file, applyFooterSocial(html));
   return outputs;
 }
 

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { SITE_BASE } from './site-origin.mjs';
+import { applyFooterSocial } from './footer-social.mjs';
 import { escapeHtml as esc } from './build-seo-practice.mjs';
 
 const root = new URL('../', import.meta.url);
@@ -46,7 +47,7 @@ for (const pages of batches) {
       url, mainEntityOfPage:url, inLanguage:language,
       publisher:{'@type':'Organization',name:'Klarweg',url:SITE_BASE+'/'}
     }).replaceAll('<','\\u003c');
-    const page = `<!doctype html>
+    const page = applyFooterSocial(`<!doctype html>
 <!-- Generated from ${guidesDirectory + file} by scripts/build-keyword-guides.mjs. -->
 <html lang="en">
 <head>
@@ -123,7 +124,7 @@ ${content}
 <footer class="footer">Klarweg · ${link('privacy.html','Privacy')}</footer>
 </body>
 </html>
-`;
+`);
     if (check) assert.equal(read(file),page,'Stale keyword guide: ' + file);
     else fs.writeFileSync(new URL(file,root),page);
   }

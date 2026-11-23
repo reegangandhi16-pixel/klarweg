@@ -456,7 +456,9 @@ const CHAPTER = {
       vis: { kind: 'grammar', de: 'Der Hund bellt laut.', hl: 'Der', role: 'article', cap: 'Definite article before a masculine noun' }
     },
     { de: 'Plural', art: 'der', gender: 'm', plural: 'Plurale', pos: 'noun', en: 'plural', hi: 'बहुवचन',
-      ex: 'Im Plural heißt es immer "die".', exEn: 'In the plural it is always "die".' },
+      ex: 'Im Plural heißt es immer "die".', exEn: 'In the plural it is always "die".',
+      img: { src: '/api/media/vocab-img/01dfddf80f93f486c877', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A single apple on the left contrasted with five apples on the right.' }
+    },
     { de: 'Singular', art: 'der', gender: 'm', plural: 'Singulare', pos: 'noun', en: 'singular', hi: 'एकवचन',
       ex: 'Der Singular von "Bücher" ist "Buch".', exEn: 'The singular of "Bücher" is "Buch".',
       img: { src: '/api/media/vocab-img/1be2fa2aad8482627087', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A single book on the left contrasted with a stack of books.' }

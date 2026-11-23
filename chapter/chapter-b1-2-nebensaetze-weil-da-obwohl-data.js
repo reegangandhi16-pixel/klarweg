@@ -243,7 +243,9 @@ const CHAPTER = {
     { de: 'da', pos: 'grammar', level: 'B1', en: 'as, since, because (formal reason)', hi: 'चूंकि, क्योंकि (औपचारिक)',
       ex: 'Da ich krank bin, bleibe ich heute zu Hause.', exEn: 'Since I\'m sick, I\'m staying home today.', exHi: 'Chunki main bimar hoon, main aaj ghar par rahoonga.',
       ex2: 'Da es schon spät ist, fahren wir jetzt los.', ex2En: 'Since it\'s already late, we\'re leaving now.', ex2Hi: 'Chunki der ho chuki hai, hum ab nikalte hain.',
-      advanced: { synonyms: ['weil'], opposites: [], collocations: ['Da … , Hauptsatz.'] } },
+      advanced: { synonyms: ['weil'], opposites: [], collocations: ['Da … , Hauptsatz.'] },
+      vis: { kind: 'grammar', de: 'Da ich krank bin, bleibe ich heute zu Hause.', hl: 'Da', role: 'focus', cap: 'da = as, since, because (formal reason)' }
+    },
     { de: 'Abneigung', art: 'die', gender: 'f', plural: 'Abneigungen', pos: 'noun', level: 'B1', en: 'dislike, aversion', hi: 'नापसंदगी',
       ex: 'Er hat eine Abneigung gegen laute Musik.', exEn: 'He has a dislike of loud music.', exHi: 'Use tez awaaz wale sangeet se nafrat hai.',
       ex2: 'Ihre Abneigung gegen Pilze ist bekannt.', ex2En: 'Her dislike of mushrooms is well known.', ex2Hi: 'Mushroom ke prati uski napasandagi jaani-mani hai.',
@@ -401,7 +403,9 @@ const CHAPTER = {
     { de: 'Wiese', art: 'die', gender: 'f', plural: 'Wiesen', pos: 'noun', level: 'B1', en: 'meadow', hi: 'घास का मैदान',
       ex: 'Die Kinder spielen auf der Wiese.', exEn: 'The children are playing in the meadow.', exHi: 'Bachche maidan mein khel rahe hain.',
       ex2: 'Hinter dem Strand liegt eine grüne Wiese.', ex2En: 'Behind the beach lies a green meadow.', ex2Hi: 'Samudra tat ke peeche ek hara-bhara maidan hai.',
-      advanced: { synonyms: ['Rasen', 'Grünfläche'], opposites: [], collocations: ['auf der Wiese liegen', 'eine grüne Wiese'] } },
+      advanced: { synonyms: ['Rasen', 'Grünfläche'], opposites: [], collocations: ['auf der Wiese liegen', 'eine grüne Wiese'] },
+      img: { src: '/api/media/vocab-img/a2a45b82deecbadf7d6b', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two children playing with a ball in an expansive wildflower meadow.' }
+    },
     { de: 'verzweifelt', pos: 'adjective', level: 'B1', en: 'desperate', hi: 'हताश',
       ex: 'Er suchte verzweifelt nach seinem Schlüssel.', exEn: 'He desperately searched for his key.', exHi: 'Woh hataashaipurvak apni chaabi dhoondh raha tha.',
       ex2: 'Sie war verzweifelt, weil sie den Bus verpasst hatte.', ex2En: 'She was desperate because she\'d missed the bus.', ex2Hi: 'Woh hataash thi kyunki uski bus chhoot gayi thi.',

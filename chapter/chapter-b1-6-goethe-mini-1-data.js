@@ -251,7 +251,9 @@ const CHAPTER = {
     { de: 'vorbereitet', pos: 'adjective', en: 'prepared', hi: 'तैयार', ex: 'Ich bin gut auf die Prüfung vorbereitet.', exEn: 'I\'m well prepared for the exam.', img: { src: '/api/media/vocab-img/bcbd7cb4b07195c78392', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A confident student sitting at an organised desk with tidy study materials.' } },
     { de: 'Probeprüfung', art: 'die', gender: 'f', plural: 'Probeprüfungen', pos: 'noun', en: 'mock exam', hi: 'नकली परीक्षा', ex: 'Die Probeprüfung findet heute Abend statt.', exEn: 'The mock exam takes place this evening.' },
     { de: 'wiederholen', pos: 'verb', en: 'to review, repeat', hi: 'दोहराना', ex: 'Wir sollten die Grammatik noch einmal wiederholen.', exEn: 'We should review the grammar once more.',
-      conj: { praesens: 'wiederholt', praeteritum: 'wiederholte', perfekt: 'hat wiederholt' } },
+      conj: { praesens: 'wiederholt', praeteritum: 'wiederholte', perfekt: 'hat wiederholt' },
+      img: { src: '/api/media/vocab-img/f1e9ea5e16641bf294fb', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A student at a desk reviewing highlighted notes in a notebook.' }
+    },
     { de: 'verwechseln', pos: 'verb', en: 'to confuse, mix up', hi: 'भ्रमित करना', ex: 'Ich verwechsle oft wegen und trotz.', exEn: 'I often confuse "wegen" and "trotz".',
       conj: { praesens: 'verwechselt', praeteritum: 'verwechselte', perfekt: 'hat verwechselt' },
       img: { src: '/api/media/vocab-img/ad4f5c4fac7f53761052', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person scratching their head between two nearly identical mugs.' }

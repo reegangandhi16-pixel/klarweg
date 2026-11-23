@@ -266,7 +266,9 @@ const CHAPTER = {
       conj: { praesens: 'achtet', praeteritum: 'achtete', perfekt: 'hat geachtet' } },
     { de: 'nachsprechen', pos: 'verb', en: 'to repeat (after)', hi: 'दोहराना (बाद में)',
       ex: 'Sprich die Wörter nach.', exEn: 'Repeat the words after me.',
-      conj: { praesens: 'spricht nach', praeteritum: 'sprach nach', perfekt: 'hat nachgesprochen' } },
+      conj: { praesens: 'spricht nach', praeteritum: 'sprach nach', perfekt: 'hat nachgesprochen' },
+      img: { src: '/api/media/vocab-img/ce22541919456681f260', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A teacher speaking and listening while a student repeats after them.' }
+    },
     { de: 'mitsprechen', pos: 'verb', en: 'to speak along', hi: 'साथ बोलना',
       ex: 'Sprich mit mir mit.', exEn: 'Speak along with me.',
       conj: { praesens: 'spricht mit', praeteritum: 'sprach mit', perfekt: 'hat mitgesprochen' },

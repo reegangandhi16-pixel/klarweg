@@ -666,5 +666,405 @@
  "das-erachten--opinion-view": {
   "tier": "text-only",
   "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "folgend--following-next": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: 5 attempts, last had English text in the picture → sentence-focus visual (owner: chapter 1 complete)"
+ },
+ "saemtlich--all-entire": {
+  "tier": "text-only",
+  "reason": "manual 2026-11-23: determiner, 3 failed attempts → sentence-focus visual (owner: chapter 1 complete)"
+ },
+ "der-club--club": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "der-freitag--friday": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → calendar strip"
+ },
+ "der-juni--june": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → calendar strip"
+ },
+ "der-september--september": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → calendar strip"
+ },
+ "der-fehler--mistake": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "der-satzakzent--sentence-stress": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "voneinander--from-one-another": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "problemlos--unproblematic-smooth": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "da--as-since-because": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "wirken--seem-have-an-effect-on": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "das-wortspiel--pun-play-on-words": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "ausschliesslich--exclusive": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "sich-irren--be-wrong-confuse": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "aussagekraeftig--meaningful": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "das-prinzip--principle": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "der-einfluss--influence": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "das-gewissen--conscience": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "aufhalten--stop": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-wuerde--dignity": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-funktion--function": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "zuverlaessig--reliable": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "widersprechen--contradict": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "der-irrsinn--insanity": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "nicht-sondern--not-but-rather": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "der-gruender--founder": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "je-desto--more-the-more": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-diskriminierung--discrimination": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-elite--elite": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "vielsprachig--multilingual": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "verurteilen--condemn-sentence": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "vorkommen--occur-happen-to-seem-appear": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "der-spielraum--scope-leeway": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "der-die-stellvertreter-in--deputy-representative": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "einsehen--realise-see-the-point": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "erhoffen--hope-for": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "mitverantwortlich--jointly-responsible-partly-to-blame": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "der-zusammenhang--connection-context": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "hofieren--court-fawn-over": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "reichen--be-enough-pass-reach": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "vertiefen--deepen-intensify": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "das-ansehen--reputation-prestige": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "eingestehen--admit-confess": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "final--final": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "genuegend--sufficient-enough": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "hauptsaechlich--mainly-primarily": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "respektvoll--respectful": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "vernuenftig--reasonable-sensible": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-vorliebe--preference-fondness": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-wette--bet-wager": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "erachten--regard-deem": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "erfassen--grasp-record-capture": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "schaetzen--value-estimate-appreciate": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "scheren--shear-care": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-selbstbeherrschung--self-control": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "sondern--but-but-rather": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-suchtkrankheit--addictive-illness": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "der-aerger--incident-trouble": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "das-hausverbot--ban-from-the-premises": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "pauschalisieren--generalise-lump-together": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "prinzipiell--in-principle": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "angehen--tackle-approach": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "reformieren--reform": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "unentbehrlich--indispensable": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "der-widerstand--resistance": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "auswendig-lernen--learn-by-heart": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-grenze--border-limit": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "ernsthaft--serious-earnest": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "laufen--run-walk-work": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "markant--striking-distinctive": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-notwendigkeit--necessity": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-wochenendbeziehung--weekend-relationship": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "abschwaechen--weaken-tone-down": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "ertraeglich--bearable-tolerable": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "der-hirnschaden--brain-damage": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "schmerzlindernd--pain-relieving": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "bankrott--bankrupt": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "drauflos--straight-ahead-without-thinking": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "unbewusst--unconscious-subconscious": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "das-volontariat--traineeship": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "angelehnt--leaning-against-based-on": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "ankaufen--buy-up": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-empfindung--sensation-feeling": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "fassen--grasp-seize-compose-oneself": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-haltung--attitude-posture": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-rechenschaft--accountability": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "wegkommen--get-lost-come-off": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "glaubhaft--credible-believable": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "unverschlossen--unlocked": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "charakteristisch--characteristic": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-kunstikone--art-icon": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "der-die-sprachforscher-in--language-researcher": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-wende--turning-point-change": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "zumeist--mostly": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "begeben--proceed-set-off": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "einraeumen--concede-grant": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "die-innovation--innovation": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "der-berufswunsch--career-aspiration": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
+ },
+ "geben--give-there-is-are": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23 (round 3, 547 images): picture did not teach the card meaning → sentence-focus visual"
  }
 }

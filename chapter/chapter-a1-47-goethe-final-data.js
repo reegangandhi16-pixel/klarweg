@@ -233,7 +233,7 @@ const CHAPTER = {
   vocab: [
     // ===== Active Support =====
     { de: 'auswendig', pos: 'adverb', en: 'by heart', hi: 'याद, कंठस्थ', ex: 'Ich lerne die Wörter auswendig.', exEn: 'I learn the words by heart.', img: { src: '/api/media/vocab-img/42529998f7f55d518731', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A student reciting from memory with closed eyes beside a notebook' } },
-    { de: 'Fehler', art: 'der', gender: 'm', plural: 'Fehler', pos: 'noun', en: 'mistake', hi: 'गलती', ex: 'Ich mache weniger Fehler.', exEn: 'I make fewer mistakes.' },
+    { de: 'Fehler', art: 'der', gender: 'm', plural: 'Fehler', pos: 'noun', en: 'mistake', hi: 'गलती', ex: 'Ich mache weniger Fehler.', exEn: 'I make fewer mistakes.', vis: { kind: 'grammar', de: 'Ich mache weniger Fehler.', hl: 'Fehler', role: 'focus', cap: 'der Fehler = mistake' } },
     { de: 'Punkt', art: 'der', gender: 'm', plural: 'Punkte', pos: 'noun', en: 'point (mark)', hi: 'अंक', ex: 'Ich brauche mehr Punkte.', exEn: 'I need more points.' },
     { de: 'Test', art: 'der', gender: 'm', plural: 'Tests', pos: 'noun', en: 'test', hi: 'परीक्षा', ex: 'Der Test war leicht.', exEn: 'The test was easy.' },
     { de: 'Tipp', art: 'der', gender: 'm', plural: 'Tipps', pos: 'noun', en: 'tip', hi: 'सुझाव', ex: 'Das ist ein guter Tipp.', exEn: 'That is a good tip.', img: { src: '/api/media/vocab-img/e6318cff40141ed9abe1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'friend whispering advice bringing a bright idea' } },

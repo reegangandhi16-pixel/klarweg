@@ -258,7 +258,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/bfaf0752399d5fba873c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A student smiling at a green checkmark on paper' }
     },
     { de: 'falsch', pos: 'adjective', en: 'wrong', hi: 'ग़लत',
-      ex: 'Die Antwort ist falsch.', exEn: 'The answer is wrong.' },
+      ex: 'Die Antwort ist falsch.', exEn: 'The answer is wrong.',
+      img: { src: '/api/media/vocab-img/6853e4d4ee1757443966', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A round wooden peg unable to fit into a triangular hole.' }
+    },
     { de: 'schön', pos: 'adjective', en: 'nice, pretty', hi: 'सुंदर',
       ex: 'Die Stadt ist schön.', exEn: 'The city is beautiful.',
       compare: { comparative: 'schöner', superlative: 'am schönsten' },
@@ -423,7 +425,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/e2e0c1481b98e18b13fe', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A rusted, battered bicycle next to a gleaming new bicycle.' }
     },
     { de: 'normal', pos: 'adjective', en: 'normal', hi: 'सामान्य',
-      ex: 'Der Tag ist normal.', exEn: 'The day is normal.' },
+      ex: 'Der Tag ist normal.', exEn: 'The day is normal.',
+      img: { src: '/api/media/vocab-img/a87b883a789b5fc49253', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'calm person pouring coffee into a ceramic mug beside a bowl of cereal, starting an ordinary morning peacefully', cap: 'An ordinary, completely normal day.', hl: 'normal' }
+    },
     { de: 'perfekt', pos: 'adjective', en: 'perfect', hi: 'उत्तम',
       ex: 'Alles ist perfekt.', exEn: 'Everything is perfect.',
       img: { src: '/api/media/vocab-img/7f9e44aa345a05edae2c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand placing the final strawberry on a flawless cake.' }

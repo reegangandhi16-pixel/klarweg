@@ -267,7 +267,9 @@ const CHAPTER = {
     },
     // — Reference / System —
     { de: 'Satz', art: 'der', gender: 'm', plural: 'Sätze', pos: 'noun', en: 'sentence', hi: 'वाक्य',
-      ex: 'Bilde einen Satz.', exEn: 'Form a sentence.' },
+      ex: 'Bilde einen Satz.', exEn: 'Form a sentence.',
+      img: { src: '/api/media/vocab-img/7a833cc67ff002f4ef88', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'adult learner at a wooden desk arranging three distinct, letter-free colored blocks into an aligned row to construct a c', cap: 'Putting words in order to form a complete sentence', hl: 'Satz' }
+    },
     { de: 'Art', art: 'die', gender: 'f', plural: 'Arten', pos: 'noun', en: 'type, kind', hi: 'प्रकार',
       ex: 'Welche Art von Frage ist das?', exEn: 'What type of question is that?',
       img: { src: '/api/media/vocab-img/9aab200975784b2786ad', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Three different types of leaves arranged in a row.' }

@@ -246,7 +246,9 @@ const CHAPTER = {
       vis: { kind: 'grammar', de: 'Das Essen schmeckt. Es ist gut.', hl: 'Es', role: 'subject', cap: 'Neuter personal pronoun referring back to \'das Essen\'' }
     },
     { de: 'wir', pos: 'pronoun', en: 'we', hi: 'हम',
-      ex: 'Wir sind Studenten.', exEn: 'We are students.' },
+      ex: 'Wir sind Studenten.', exEn: 'We are students.',
+      img: { src: '/api/media/vocab-img/af90f427919c6773d000', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Three university students standing together holding notebooks and backpacks.' }
+    },
     { de: 'ihr', pos: 'pronoun', en: 'you (plural)', hi: 'तुम सब',
       ex: 'Woher kommt ihr?', exEn: 'Where do you all come from?',
       img: { src: '/api/media/vocab-img/50dcbfbc27fa5bb75401', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person addressing a group of three friends with open hands.' }

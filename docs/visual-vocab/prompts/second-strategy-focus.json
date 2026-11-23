@@ -3531,5 +3531,699 @@
   "hl": "Nach meinem Erachten",
   "role": "focus",
   "cap": "nach meinem Erachten = in my opinion"
+ },
+ "folgend--following-next": {
+  "type": "grammar",
+  "de": "Am folgenden Tag kommt der Arzt.",
+  "hl": "folgenden",
+  "role": "focus",
+  "cap": "folgend = following, next"
+ },
+ "saemtlich--all-entire": {
+  "type": "grammar",
+  "de": "Sämtliche Studien sollen eine positive Entwicklung zeigen.",
+  "hl": "Sämtliche",
+  "role": "focus",
+  "cap": "sämtlich = all, entire"
+ },
+ "der-club--club": {
+  "type": "grammar",
+  "de": "Der Club ist neu.",
+  "hl": "Club",
+  "role": "focus",
+  "cap": "der Club = club"
+ },
+ "der-freitag--friday": {
+  "type": "week",
+  "day": 5,
+  "cap": "Freitag = Friday, the fifth day of the German week"
+ },
+ "der-juni--june": {
+  "type": "year",
+  "month": 6,
+  "cap": "Juni = June, the sixth month"
+ },
+ "der-september--september": {
+  "type": "year",
+  "month": 9,
+  "cap": "September = the ninth month"
+ },
+ "der-fehler--mistake": {
+  "type": "grammar",
+  "de": "Ich mache weniger Fehler.",
+  "hl": "Fehler",
+  "role": "focus",
+  "cap": "der Fehler = mistake"
+ },
+ "der-satzakzent--sentence-stress": {
+  "type": "grammar",
+  "de": "Achtet auf den Satzakzent!",
+  "hl": "Satzakzent",
+  "role": "focus",
+  "cap": "der Satzakzent = sentence stress"
+ },
+ "voneinander--from-one-another": {
+  "type": "grammar",
+  "de": "Wir lernen voneinander.",
+  "hl": "voneinander",
+  "role": "focus",
+  "cap": "voneinander = from one another"
+ },
+ "problemlos--unproblematic-smooth": {
+  "type": "grammar",
+  "de": "Der Berufswechsel verlief problemlos.",
+  "hl": "problemlos",
+  "role": "focus",
+  "cap": "problemlos = unproblematic, smooth"
+ },
+ "da--as-since-because": {
+  "type": "grammar",
+  "de": "Da ich krank bin, bleibe ich heute zu Hause.",
+  "hl": "Da",
+  "role": "focus",
+  "cap": "da = as, since, because (formal reason)"
+ },
+ "wirken--seem-have-an-effect-on": {
+  "type": "grammar",
+  "de": "Der Spruch wirkt auf viele Leute überzeugend.",
+  "hl": "wirkt",
+  "role": "focus",
+  "cap": "wirken = to seem, have an effect on (+ auf Akk.)"
+ },
+ "das-wortspiel--pun-play-on-words": {
+  "type": "grammar",
+  "de": "Ein gutes Wortspiel bleibt im Kopf.",
+  "hl": "Wortspiel",
+  "role": "focus",
+  "cap": "das Wortspiel = pun, play on words"
+ },
+ "ausschliesslich--exclusive": {
+  "type": "grammar",
+  "de": "Er sprach ausschließlich Deutsch.",
+  "hl": "ausschließlich",
+  "role": "focus",
+  "cap": "ausschließlich = exclusive(ly)"
+ },
+ "sich-irren--be-wrong-confuse": {
+  "type": "grammar",
+  "de": "Man irrt sich manchmal in der Person.",
+  "hl": "irrt sich",
+  "role": "focus",
+  "cap": "sich irren = to be wrong, confuse (in + Dativ)"
+ },
+ "aussagekraeftig--meaningful": {
+  "type": "grammar",
+  "de": "Ich habe endlich ein aussagekräftiges Bewerbungsschreiben fertig.",
+  "hl": "aussagekräftiges",
+  "role": "focus",
+  "cap": "aussagekräftig = meaningful"
+ },
+ "das-prinzip--principle": {
+  "type": "grammar",
+  "de": "Das Prinzip der Stadtplanung ist einfach.",
+  "hl": "Prinzip",
+  "role": "focus",
+  "cap": "das Prinzip = principle"
+ },
+ "der-einfluss--influence": {
+  "type": "grammar",
+  "de": "Sein Einfluss auf die Musikgeschichte war groß.",
+  "hl": "Einfluss",
+  "role": "focus",
+  "cap": "der Einfluss = influence"
+ },
+ "das-gewissen--conscience": {
+  "type": "grammar",
+  "de": "Mein Gewissen lässt mich nicht in Ruhe.",
+  "hl": "Gewissen",
+  "role": "focus",
+  "cap": "das Gewissen = conscience"
+ },
+ "aufhalten--stop": {
+  "type": "grammar",
+  "de": "Die Klimaerwärmung muss aufgehalten werden.",
+  "hl": "aufgehalten",
+  "role": "focus",
+  "cap": "aufhalten = to stop"
+ },
+ "die-wuerde--dignity": {
+  "type": "grammar",
+  "de": "Die nationale Würde muss respektiert werden.",
+  "hl": "Würde",
+  "role": "focus",
+  "cap": "die Würde = dignity"
+ },
+ "die-funktion--function": {
+  "type": "grammar",
+  "de": "Welche Funktion erfüllt der Verein?",
+  "hl": "Funktion",
+  "role": "focus",
+  "cap": "die Funktion = function"
+ },
+ "zuverlaessig--reliable": {
+  "type": "grammar",
+  "de": "Wir brauchen jemanden, der zuverlässig ist.",
+  "hl": "zuverlässig",
+  "role": "focus",
+  "cap": "zuverlässig = reliable"
+ },
+ "widersprechen--contradict": {
+  "type": "grammar",
+  "de": "Je mehr Verbraucher wissen, desto kritischer widersprechen sie.",
+  "hl": "widersprechen",
+  "role": "focus",
+  "cap": "widersprechen = to contradict"
+ },
+ "der-irrsinn--insanity": {
+  "type": "grammar",
+  "de": "Das ist reiner Irrsinn.",
+  "hl": "Irrsinn",
+  "role": "focus",
+  "cap": "der Irrsinn = insanity"
+ },
+ "nicht-sondern--not-but-rather": {
+  "type": "grammar",
+  "de": "Es war nicht der Dieb, sondern der Ethnologe.",
+  "hl": "sondern",
+  "role": "focus",
+  "cap": "nicht ..., sondern ... = not … but rather …"
+ },
+ "der-gruender--founder": {
+  "type": "grammar",
+  "de": "Der Gründer musste improvisieren.",
+  "hl": "Gründer",
+  "role": "focus",
+  "cap": "der Gründer = founder (male)"
+ },
+ "je-desto--more-the-more": {
+  "type": "grammar",
+  "de": "Je schneller wir entscheiden, desto besser.",
+  "hl": "Je",
+  "role": "focus",
+  "cap": "je … desto = the more … the more"
+ },
+ "die-diskriminierung--discrimination": {
+  "type": "grammar",
+  "de": "Ist die Diskriminierung am Arbeitsmarkt zurückgegangen?",
+  "hl": "Diskriminierung",
+  "role": "focus",
+  "cap": "die Diskriminierung = discrimination"
+ },
+ "die-elite--elite": {
+  "type": "grammar",
+  "de": "Es liegt mir fern zu behaupten, dass nur die Elite gute Drehbücher schreibt.",
+  "hl": "Elite",
+  "role": "focus",
+  "cap": "die Elite = elite"
+ },
+ "vielsprachig--multilingual": {
+  "type": "grammar",
+  "de": "Die Ausstellung ist vielsprachig.",
+  "hl": "vielsprachig",
+  "role": "focus",
+  "cap": "vielsprachig = multilingual"
+ },
+ "verurteilen--condemn-sentence": {
+  "type": "grammar",
+  "de": "Man kann sie nicht verurteilen, weil ihr Wunsch verständlich ist.",
+  "hl": "verurteilen",
+  "role": "focus",
+  "cap": "verurteilen = to condemn, sentence"
+ },
+ "vorkommen--occur-happen-to-seem-appear": {
+  "type": "grammar",
+  "de": "Es kommt oft vor, dass Kollegen aggressiv werben.",
+  "hl": "kommt oft vor",
+  "role": "focus",
+  "cap": "vorkommen = to occur, happen; to seem, appear"
+ },
+ "der-spielraum--scope-leeway": {
+  "type": "grammar",
+  "de": "Es gibt immer einen Spielraum für Verbesserung.",
+  "hl": "Spielraum",
+  "role": "focus",
+  "cap": "der Spielraum = scope, leeway"
+ },
+ "der-die-stellvertreter-in--deputy-representative": {
+  "type": "grammar",
+  "de": "Der Stellvertreter übernimmt die Leitung.",
+  "hl": "Stellvertreter",
+  "role": "focus",
+  "cap": "Stellvertreter/in = deputy, representative"
+ },
+ "einsehen--realise-see-the-point": {
+  "type": "grammar",
+  "de": "Das kann ich einsehen.",
+  "hl": "einsehen",
+  "role": "focus",
+  "cap": "einsehen = to realise, see the point"
+ },
+ "erhoffen--hope-for": {
+  "type": "grammar",
+  "de": "Die Geschäftsleitung erhofft sich jemanden mit Kommunikationsstärke.",
+  "hl": "erhofft",
+  "role": "focus",
+  "cap": "erhoffen = to hope for"
+ },
+ "mitverantwortlich--jointly-responsible-partly-to-blame": {
+  "type": "grammar",
+  "de": "Er ist mitverantwortlich für den Fehler.",
+  "hl": "mitverantwortlich",
+  "role": "focus",
+  "cap": "mitverantwortlich = jointly responsible, partly to blame"
+ },
+ "der-zusammenhang--connection-context": {
+  "type": "grammar",
+  "de": "Es gibt einen klaren Zusammenhang zwischen beiden Ereignissen.",
+  "hl": "Zusammenhang",
+  "role": "focus",
+  "cap": "der Zusammenhang = connection, context"
+ },
+ "hofieren--court-fawn-over": {
+  "type": "grammar",
+  "de": "Deine Zufriedenheit war deutlich zu erkennen, sodass die Personaler dich sofort hofierten.",
+  "hl": "hofierten",
+  "role": "focus",
+  "cap": "hofieren = to court, fawn over"
+ },
+ "reichen--be-enough-pass-reach": {
+  "type": "grammar",
+  "de": "Das Budget reichte für den Umzug nicht, sodass wir sparen mussten.",
+  "hl": "reichte",
+  "role": "focus",
+  "cap": "reichen = to be enough, pass, reach"
+ },
+ "vertiefen--deepen-intensify": {
+  "type": "grammar",
+  "de": "Die Projektleitung ist unverzichtbar, sodass wir die Strukturierung sofort vertiefen müssen.",
+  "hl": "vertiefen",
+  "role": "focus",
+  "cap": "vertiefen = to deepen, intensify"
+ },
+ "das-ansehen--reputation-prestige": {
+  "type": "grammar",
+  "de": "Unser Ansehen wächst, indem wir ein positives Arbeitsumfeld schaffen.",
+  "hl": "Ansehen",
+  "role": "focus",
+  "cap": "das Ansehen = reputation, prestige"
+ },
+ "eingestehen--admit-confess": {
+  "type": "grammar",
+  "de": "Ich wirke nicht arrogant, indem ich meine Fehler eingestehe.",
+  "hl": "eingestehe",
+  "role": "focus",
+  "cap": "eingestehen = to admit, confess"
+ },
+ "final--final": {
+  "type": "grammar",
+  "de": "Das ist die finale Version.",
+  "hl": "finale",
+  "role": "focus",
+  "cap": "final = final"
+ },
+ "genuegend--sufficient-enough": {
+  "type": "grammar",
+  "de": "Wir haben genügend Zeit.",
+  "hl": "genügend",
+  "role": "focus",
+  "cap": "genügend = sufficient, enough"
+ },
+ "hauptsaechlich--mainly-primarily": {
+  "type": "grammar",
+  "de": "Wir verkaufen hauptsächlich handgemachte Produkte.",
+  "hl": "hauptsächlich",
+  "role": "focus",
+  "cap": "hauptsächlich = mainly, primarily"
+ },
+ "respektvoll--respectful": {
+  "type": "grammar",
+  "de": "Ich löse Konflikte dadurch, dass ich respektvoll nachfrage.",
+  "hl": "respektvoll",
+  "role": "focus",
+  "cap": "respektvoll = respectful"
+ },
+ "vernuenftig--reasonable-sensible": {
+  "type": "grammar",
+  "de": "Das ist ein vernünftiger Vorschlag.",
+  "hl": "vernünftiger",
+  "role": "focus",
+  "cap": "vernünftig = reasonable, sensible"
+ },
+ "die-vorliebe--preference-fondness": {
+  "type": "grammar",
+  "de": "Meine Vorliebe für diesen Job wuchs, ohne dass jemand mich überzeugte.",
+  "hl": "Vorliebe",
+  "role": "focus",
+  "cap": "die Vorliebe = preference, fondness"
+ },
+ "die-wette--bet-wager": {
+  "type": "grammar",
+  "de": "Er gewann die Wette.",
+  "hl": "Wette",
+  "role": "focus",
+  "cap": "die Wette = bet, wager"
+ },
+ "erachten--regard-deem": {
+  "type": "grammar",
+  "de": "Ich erachte diese Arbeit als wichtig, weil sie sowohl der Gesellschaft als auch dem Einzelnen nützt.",
+  "hl": "erachte",
+  "role": "focus",
+  "cap": "erachten = to regard, deem"
+ },
+ "erfassen--grasp-record-capture": {
+  "type": "grammar",
+  "de": "Sie erfasst sowohl die Lebenslage als auch die Notlage der Familien.",
+  "hl": "erfasst",
+  "role": "focus",
+  "cap": "erfassen = to grasp, record, capture"
+ },
+ "schaetzen--value-estimate-appreciate": {
+  "type": "grammar",
+  "de": "Ich schätze deine Ehrlichkeit sehr.",
+  "hl": "schätze",
+  "role": "focus",
+  "cap": "schätzen = to value, estimate, appreciate"
+ },
+ "scheren--shear-care": {
+  "type": "grammar",
+  "de": "Das schert mich nicht.",
+  "hl": "schert",
+  "role": "focus",
+  "cap": "scheren = to shear, care (slang)"
+ },
+ "die-selbstbeherrschung--self-control": {
+  "type": "grammar",
+  "de": "Somit stärkt die Selbstbeherrschung weder das Vertrauen noch die Zuneigung.",
+  "hl": "Selbstbeherrschung",
+  "role": "focus",
+  "cap": "die Selbstbeherrschung = self-control"
+ },
+ "sondern--but-but-rather": {
+  "type": "grammar",
+  "de": "Er ist nicht faul, sondern beschäftigt.",
+  "hl": "sondern",
+  "role": "focus",
+  "cap": "sondern = but, but rather"
+ },
+ "die-suchtkrankheit--addictive-illness": {
+  "type": "grammar",
+  "de": "Eine Suchtkrankheit betrifft viele Familien.",
+  "hl": "Suchtkrankheit",
+  "role": "focus",
+  "cap": "die Suchtkrankheit = addictive illness"
+ },
+ "der-aerger--incident-trouble": {
+  "type": "grammar",
+  "de": "Es gab Ärger im Büro.",
+  "hl": "Ärger",
+  "role": "focus",
+  "cap": "der Ärger = incident, trouble"
+ },
+ "das-hausverbot--ban-from-the-premises": {
+  "type": "grammar",
+  "de": "Er bekam ein Hausverbot.",
+  "hl": "Hausverbot",
+  "role": "focus",
+  "cap": "das Hausverbot = ban from the premises"
+ },
+ "pauschalisieren--generalise-lump-together": {
+  "type": "grammar",
+  "de": "Wir sollten nicht pauschalisieren.",
+  "hl": "pauschalisieren",
+  "role": "focus",
+  "cap": "pauschalisieren = to generalise, lump together"
+ },
+ "prinzipiell--in-principle": {
+  "type": "grammar",
+  "de": "Prinzipiell stimme ich zu.",
+  "hl": "Prinzipiell",
+  "role": "focus",
+  "cap": "prinzipiell = in principle"
+ },
+ "angehen--tackle-approach": {
+  "type": "grammar",
+  "de": "Sie gingen das Problem sofort an.",
+  "hl": "gingen",
+  "role": "focus",
+  "cap": "angehen = to tackle, approach"
+ },
+ "reformieren--reform": {
+  "type": "grammar",
+  "de": "Die Regierung reformierte das System.",
+  "hl": "reformierte",
+  "role": "focus",
+  "cap": "reformieren = to reform"
+ },
+ "unentbehrlich--indispensable": {
+  "type": "grammar",
+  "de": "Ihre Hilfe war unentbehrlich.",
+  "hl": "unentbehrlich",
+  "role": "focus",
+  "cap": "unentbehrlich = indispensable"
+ },
+ "der-widerstand--resistance": {
+  "type": "grammar",
+  "de": "Der Widerstand gegen die Reform wuchs.",
+  "hl": "Widerstand",
+  "role": "focus",
+  "cap": "der Widerstand = resistance"
+ },
+ "auswendig-lernen--learn-by-heart": {
+  "type": "grammar",
+  "de": "Wir hätten die Fragen auswendig lernen sollen.",
+  "hl": "auswendig lernen",
+  "role": "focus",
+  "cap": "auswendig lernen = to learn by heart"
+ },
+ "die-grenze--border-limit": {
+  "type": "grammar",
+  "de": "Er hatte seine Grenze erreicht.",
+  "hl": "Grenze",
+  "role": "focus",
+  "cap": "die Grenze = border, limit"
+ },
+ "ernsthaft--serious-earnest": {
+  "type": "grammar",
+  "de": "Das war eine ernsthafte Warnung.",
+  "hl": "ernsthafte",
+  "role": "focus",
+  "cap": "ernsthaft = serious, earnest"
+ },
+ "laufen--run-walk-work": {
+  "type": "grammar",
+  "de": "Die Maschine lief reibungslos.",
+  "hl": "lief",
+  "role": "focus",
+  "cap": "laufen = to run, walk, work"
+ },
+ "markant--striking-distinctive": {
+  "type": "grammar",
+  "de": "Das Gebäude hatte eine markante Fassade.",
+  "hl": "markante",
+  "role": "focus",
+  "cap": "markant = striking, distinctive"
+ },
+ "die-notwendigkeit--necessity": {
+  "type": "grammar",
+  "de": "Die Notwendigkeit einer Reform war klar.",
+  "hl": "Notwendigkeit",
+  "role": "focus",
+  "cap": "die Notwendigkeit = necessity"
+ },
+ "die-wochenendbeziehung--weekend-relationship": {
+  "type": "grammar",
+  "de": "Sie führten eine Wochenendbeziehung.",
+  "hl": "Wochenendbeziehung",
+  "role": "focus",
+  "cap": "die Wochenendbeziehung = weekend relationship"
+ },
+ "abschwaechen--weaken-tone-down": {
+  "type": "grammar",
+  "de": "Sie schwächten die Kritik ab.",
+  "hl": "schwächten",
+  "role": "focus",
+  "cap": "abschwächen = to weaken, tone down"
+ },
+ "ertraeglich--bearable-tolerable": {
+  "type": "grammar",
+  "de": "Der Schmerz war erträglich.",
+  "hl": "erträglich",
+  "role": "focus",
+  "cap": "erträglich = bearable, tolerable"
+ },
+ "der-hirnschaden--brain-damage": {
+  "type": "grammar",
+  "de": "Der Unfall verursachte einen Hirnschaden.",
+  "hl": "Hirnschaden",
+  "role": "focus",
+  "cap": "der Hirnschaden = brain damage"
+ },
+ "schmerzlindernd--pain-relieving": {
+  "type": "grammar",
+  "de": "Das Medikament war schmerzlindernd.",
+  "hl": "schmerzlindernd",
+  "role": "focus",
+  "cap": "schmerzlindernd = pain-relieving"
+ },
+ "bankrott--bankrupt": {
+  "type": "grammar",
+  "de": "Die Firma ging bankrott.",
+  "hl": "bankrott",
+  "role": "focus",
+  "cap": "bankrott = bankrupt"
+ },
+ "drauflos--straight-ahead-without-thinking": {
+  "type": "grammar",
+  "de": "Er redete einfach drauflos.",
+  "hl": "drauflos",
+  "role": "focus",
+  "cap": "drauflos = straight ahead, without thinking"
+ },
+ "unbewusst--unconscious-subconscious": {
+  "type": "grammar",
+  "de": "Das war eine unbewusste Reaktion.",
+  "hl": "unbewusste",
+  "role": "focus",
+  "cap": "unbewusst = unconscious, subconscious"
+ },
+ "das-volontariat--traineeship": {
+  "type": "grammar",
+  "de": "Sie absolvierte ein Volontariat bei der Zeitung.",
+  "hl": "Volontariat",
+  "role": "focus",
+  "cap": "das Volontariat = traineeship"
+ },
+ "angelehnt--leaning-against-based-on": {
+  "type": "grammar",
+  "de": "Die Geschichte war angelehnt an wahre Ereignisse.",
+  "hl": "angelehnt",
+  "role": "focus",
+  "cap": "angelehnt = leaning against, based on"
+ },
+ "ankaufen--buy-up": {
+  "type": "grammar",
+  "de": "Die Firma kaufte das Grundstück an.",
+  "hl": "kaufte",
+  "role": "focus",
+  "cap": "ankaufen = to buy up"
+ },
+ "die-empfindung--sensation-feeling": {
+  "type": "grammar",
+  "de": "Ihre Empfindung war intensiv.",
+  "hl": "Empfindung",
+  "role": "focus",
+  "cap": "die Empfindung = sensation, feeling"
+ },
+ "fassen--grasp-seize-compose-oneself": {
+  "type": "grammar",
+  "de": "Sie fasste sich schnell.",
+  "hl": "fasste",
+  "role": "focus",
+  "cap": "fassen = to grasp, seize, compose oneself"
+ },
+ "die-haltung--attitude-posture": {
+  "type": "grammar",
+  "de": "Ihre Haltung war respektvoll.",
+  "hl": "Haltung",
+  "role": "focus",
+  "cap": "die Haltung = attitude, posture"
+ },
+ "die-rechenschaft--accountability": {
+  "type": "grammar",
+  "de": "Sie mussten Rechenschaft ablegen.",
+  "hl": "Rechenschaft",
+  "role": "focus",
+  "cap": "die Rechenschaft = accountability"
+ },
+ "wegkommen--get-lost-come-off": {
+  "type": "grammar",
+  "de": "Er kam gut weg.",
+  "hl": "kam gut weg",
+  "role": "focus",
+  "cap": "wegkommen = to get lost, come off"
+ },
+ "glaubhaft--credible-believable": {
+  "type": "grammar",
+  "de": "Seine Aussage war glaubhaft.",
+  "hl": "glaubhaft",
+  "role": "focus",
+  "cap": "glaubhaft = credible, believable"
+ },
+ "unverschlossen--unlocked": {
+  "type": "grammar",
+  "de": "Die Tür war unverschlossen.",
+  "hl": "unverschlossen",
+  "role": "focus",
+  "cap": "unverschlossen = unlocked"
+ },
+ "charakteristisch--characteristic": {
+  "type": "grammar",
+  "de": "Diese Farbe war charakteristisch für seinen Stil.",
+  "hl": "charakteristisch",
+  "role": "focus",
+  "cap": "charakteristisch = characteristic"
+ },
+ "die-kunstikone--art-icon": {
+  "type": "grammar",
+  "de": "Das Gemälde war eine Kunstikone.",
+  "hl": "Kunstikone",
+  "role": "focus",
+  "cap": "die Kunstikone = art icon"
+ },
+ "der-die-sprachforscher-in--language-researcher": {
+  "type": "grammar",
+  "de": "Der Sprachforscher untersuchte seltene Dialekte.",
+  "hl": "Sprachforscher",
+  "role": "focus",
+  "cap": "Sprachforscher/in = language researcher"
+ },
+ "die-wende--turning-point-change": {
+  "type": "grammar",
+  "de": "Die Wende veränderte das Land grundlegend.",
+  "hl": "Wende",
+  "role": "focus",
+  "cap": "die Wende = turning point, change"
+ },
+ "zumeist--mostly": {
+  "type": "grammar",
+  "de": "Die Besucher waren zumeist Touristen.",
+  "hl": "zumeist",
+  "role": "focus",
+  "cap": "zumeist = mostly"
+ },
+ "begeben--proceed-set-off": {
+  "type": "grammar",
+  "de": "Sie begaben sich zur Rezeption.",
+  "hl": "begaben",
+  "role": "focus",
+  "cap": "begeben = to proceed, set off"
+ },
+ "einraeumen--concede-grant": {
+  "type": "grammar",
+  "de": "Sie räumte den Fehler ein.",
+  "hl": "räumte",
+  "role": "focus",
+  "cap": "einräumen = to concede, grant"
+ },
+ "die-innovation--innovation": {
+  "type": "grammar",
+  "de": "Die Firma lebt von Innovation.",
+  "hl": "Innovation",
+  "role": "focus",
+  "cap": "die Innovation = innovation"
+ },
+ "der-berufswunsch--career-aspiration": {
+  "type": "grammar",
+  "de": "Ihr Berufswunsch war klar.",
+  "hl": "Berufswunsch",
+  "role": "focus",
+  "cap": "der Berufswunsch = career aspiration"
+ },
+ "geben--give-there-is-are": {
+  "type": "grammar",
+  "de": "Es gibt manchmal einen Beschwerdebrief.",
+  "hl": "gibt",
+  "role": "focus",
+  "cap": "geben = to give, there is/are"
  }
 }

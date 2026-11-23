@@ -274,7 +274,9 @@ const CHAPTER = {
     { de: 'dabeihaben', pos: 'verb', level: 'B1', en: 'to have with oneself', hi: 'साथ रखना',
       ex: 'Hast du deine EC-Karte dabei?', exEn: 'Do you have your debit card with you?', exHi: 'Kya tumhare paas apna debit card hai?',
       conj: { praesens: 'hat dabei', praeteritum: 'hatte dabei', perfekt: 'hat dabeigehabt' },
-      advanced: { synonyms: ['mitbringen'], opposites: [], collocations: ['etwas dabeihaben'] } },
+      advanced: { synonyms: ['mitbringen'], opposites: [], collocations: ['etwas dabeihaben'] },
+      img: { src: '/api/media/vocab-img/8e189dd53775679e043c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person pulling a payment card out of an open wallet.' }
+    },
     { de: 'daher', pos: 'grammar', level: 'B1', en: 'therefore (synonym of deshalb — recognise only, not this chapter\'s active grammar)', hi: 'इसलिए (केवल पहचान के लिए)',
       ex: 'Es war spät, daher gingen wir schnell nach Hause.', exEn: 'It was late, therefore we went home quickly.', exHi: 'Der ho gayi thi, isliye hum jaldi ghar chale gaye.',
       advanced: { synonyms: ['deshalb', 'darum'], opposites: [], collocations: [] } },
@@ -406,7 +408,9 @@ const CHAPTER = {
     { de: 'wirken', pos: 'verb', level: 'B1', en: 'to seem, have an effect on (+ auf Akk.)', hi: 'लगना, असर डालना',
       ex: 'Der Spruch wirkt auf viele Leute überzeugend.', exEn: 'The slogan seems convincing to many people.', exHi: 'Yeh naara kai logon ko vishwasniya lagta hai.',
       conj: { praesens: 'wirkt', praeteritum: 'wirkte', perfekt: 'hat gewirkt' },
-      advanced: { synonyms: ['erscheinen'], opposites: [], collocations: ['auf jemanden wirken'] } },
+      advanced: { synonyms: ['erscheinen'], opposites: [], collocations: ['auf jemanden wirken'] },
+      vis: { kind: 'grammar', de: 'Der Spruch wirkt auf viele Leute überzeugend.', hl: 'wirkt', role: 'focus', cap: 'wirken = to seem, have an effect on (+ auf Akk.)' }
+    },
     { de: 'zurückgehen', pos: 'verb', level: 'B1', en: 'to go back, decline', hi: 'वापस जाना, कम होना',
       ex: 'Die Verkäufe sind nach der Werbung zurückgegangen.', exEn: 'Sales declined after the advertisement.', exHi: 'Vigyapan ke baad bikri kam ho gayi.',
       conj: { praesens: 'geht zurück', praeteritum: 'ging zurück', perfekt: 'ist zurückgegangen' },
@@ -467,7 +471,9 @@ const CHAPTER = {
     },
     { de: 'Wortspiel', art: 'das', gender: 'n', plural: 'Wortspiele', pos: 'noun', level: 'B1', en: 'pun, play on words', hi: 'शब्दों का खेल',
       ex: 'Ein gutes Wortspiel bleibt im Kopf.', exEn: 'A good pun stays in your head.', exHi: 'Ek achha shabd-khel dimaag mein reh jaata hai.',
-      advanced: { synonyms: [], opposites: [], collocations: [] } },
+      advanced: { synonyms: [], opposites: [], collocations: [] },
+      vis: { kind: 'grammar', de: 'Ein gutes Wortspiel bleibt im Kopf.', hl: 'Wortspiel', role: 'focus', cap: 'das Wortspiel = pun, play on words' }
+    },
     { de: 'Geldautomat', art: 'der', gender: 'm', plural: 'Geldautomaten', pos: 'noun', level: 'B1', en: 'ATM', hi: 'एटीएम',
       ex: 'Der Geldautomat um die Ecke hat gerade Probleme.', exEn: 'The ATM around the corner has problems right now.', exHi: 'Kone wala ATM abhi kharab hai.',
       advanced: { synonyms: [], opposites: [], collocations: ['Geld am Geldautomaten abheben'] },

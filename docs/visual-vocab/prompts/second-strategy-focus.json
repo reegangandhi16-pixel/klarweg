@@ -4225,5 +4225,26 @@
   "hl": "gibt",
   "role": "focus",
   "cap": "geben = to give, there is/are"
+ },
+ "annehmen--assume-suppose-to-accept-adopt": {
+  "type": "grammar",
+  "de": "Man kann annehmen, dass es besser wird.",
+  "hl": "annehmen",
+  "role": "focus",
+  "cap": "annehmen = to assume, suppose"
+ },
+ "betreffen--concern-affect": {
+  "type": "grammar",
+  "de": "Das betrifft uns alle.",
+  "hl": "betrifft",
+  "role": "focus",
+  "cap": "betreffen = to concern, affect"
+ },
+ "die-einrichtung--facility-furnishing-institution": {
+  "type": "grammar",
+  "de": "Die Einrichtung hilft bei der Integration.",
+  "hl": "Einrichtung",
+  "role": "focus",
+  "cap": "die Einrichtung = institution, facility"
  }
 }

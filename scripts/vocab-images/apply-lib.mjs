@@ -55,7 +55,17 @@ export function imgLiteral(img) {
   if (img.widths) parts.push(`widths: [${img.widths.join(", ")}]`);
   if (img.w) parts.push(`w: ${+img.w}, h: ${+img.h}`);
   parts.push(`alt: ${q(img.alt)}`);
+  // Second visual strategy (2026-11-19): UI-rendered caption, highlighted form
+  // of the word in the card's example sentence, and two-panel pairs.
+  if (img.cap) parts.push(`cap: ${q(img.cap)}`);
+  if (img.hl) parts.push(`hl: ${q(img.hl)}`);
+  if (img.pair) parts.push(`pair: [${img.pair.map((p) => `{ src: ${q(p.src)}, alt: ${q(p.alt)}, label: ${q(p.label)} }`).join(", ")}]`);
   return `img: { ${parts.join(", ")} }`;
+}
+/* vis: a UI-rendered visual (no image file): number | grammar | map | week | year. */
+export function visLiteral(vis) {
+  const val = (v) => (Array.isArray(v) ? `[${v.map(val).join(", ")}]` : typeof v === "string" ? q(v) : typeof v === "number" ? String(v) : (() => { throw new Error("vis: unsupported value " + JSON.stringify(v)); })());
+  return `vis: { ${Object.entries(vis).map(([k, v]) => `${k}: ${val(v)}`).join(", ")} }`;
 }
 
 export function evalChapter(src, filename = "chapter.js") {
@@ -74,10 +84,13 @@ export function applyImages(src, updates, { replace = false, filename } = {}) {
   if (found.spans.length !== (before.vocab || []).length) throw new Error(`${filename}: scanner found ${found.spans.length} entries, data has ${(before.vocab || []).length}`);
   const edits = [];
   let skipped = 0;
-  for (const [idx, img] of updates) {
+  // updates: Map(idx → img) or Map(idx → { field: "vis", value }) for UI-rendered visuals.
+  const norm = (u) => (u && u.field === "vis" ? { field: "vis", value: u.value } : { field: "img", value: u });
+  for (const [idx, u] of updates) {
+    const { field, value } = norm(u);
     const [s, e] = found.spans[idx];
     const body = src.slice(s, e + 1);
-    if (before.vocab[idx].img) {
+    if (before.vocab[idx][field]) {
       if (!replace) { skipped++; continue; }
       throw new Error(`${filename}: replacing an existing img is not supported in-place (entry ${idx})`);
     }
@@ -86,7 +99,7 @@ export function applyImages(src, updates, { replace = false, filename } = {}) {
     while (k > s && /\s/.test(src[k])) k--;
     const needsComma = src[k] !== "," && src[k] !== "{";
     const multiline = body.includes("\n");
-    const ins = (needsComma ? "," : "") + (multiline ? "\n      " : " ") + imgLiteral(img) + (multiline ? "\n    " : " ");
+    const ins = (needsComma ? "," : "") + (multiline ? "\n      " : " ") + (field === "vis" ? visLiteral(value) : imgLiteral(value)) + (multiline ? "\n    " : " ");
     edits.push([k + 1, e, ins]);
   }
   edits.sort((a, b) => b[0] - a[0]);
@@ -95,8 +108,9 @@ export function applyImages(src, updates, { replace = false, filename } = {}) {
   // verify: identical except the img fields we added
   const after = evalChapter(out, filename);
   const expected = JSON.parse(JSON.stringify(before));
-  for (const [idx, img] of updates) if (!before.vocab[idx].img) expected.vocab[idx].img = JSON.parse(JSON.stringify(img));
-  const strip = (C) => { const c = JSON.parse(JSON.stringify(C)); c.vocab.forEach((v) => { if (v.img) v.img = JSON.stringify(v.img, Object.keys(v.img).sort()); }); return c; };
-  if (!isDeepStrictEqual(strip(after), strip(expected))) throw new Error(`${filename}: verification failed — data would change beyond img`);
+  for (const [idx, u] of updates) { const { field, value } = norm(u); if (!before.vocab[idx][field]) expected.vocab[idx][field] = JSON.parse(JSON.stringify(value)); }
+  const canon = (o) => JSON.stringify(o, (k, v) => (v && typeof v === "object" && !Array.isArray(v) ? Object.fromEntries(Object.keys(v).sort().map((x) => [x, v[x]])) : v));
+  const strip = (C) => { const c = JSON.parse(JSON.stringify(C)); c.vocab.forEach((v) => { for (const f of ["img", "vis"]) if (v[f]) v[f] = canon(v[f]); }); return c; };
+  if (!isDeepStrictEqual(strip(after), strip(expected))) throw new Error(`${filename}: verification failed — data would change beyond img/vis`);
   return { src: out, added: edits.length, skipped };
 }

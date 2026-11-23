@@ -230,10 +230,10 @@ const CHAPTER = {
 
   // ---------- Vocabulary (4 words) ----------
   vocab: [
-    { de: 'haben (Perfekt)', pos: 'verb', en: 'to have (helper verb)', hi: 'सहायक क्रिया', ex: 'Ich habe Deutsch gelernt.', exEn: 'I have studied German.', conj: { praesens: 'hat', praeteritum: 'hatte', perfekt: 'hat gehabt' } },
-    { de: 'passieren', pos: 'verb', en: 'to happen', hi: 'होना, घटित होना', ex: 'Was ist passiert?', exEn: 'What happened?', conj: { praesens: 'passiert', praeteritum: 'passierte', perfekt: 'ist passiert' } },
-    { de: 'Partizip', art: 'das', gender: 'n', plural: 'Partizipien', pos: 'noun', en: 'participle', hi: 'कृदंत', ex: 'Das Partizip steht am Ende.', exEn: 'The participle stands at the end.' },
-    { de: 'Perfekt', art: 'das', gender: 'n', plural: '—', pos: 'noun', en: 'perfect tense', hi: 'पूर्ण भूतकाल', ex: 'Das Perfekt ist die Sprechsprache der Vergangenheit.', exEn: 'The Perfekt is the spoken past tense.' }
+    { de: 'haben (Perfekt)', pos: 'verb', en: 'to have (helper verb)', hi: 'सहायक क्रिया', ex: 'Ich habe Deutsch gelernt.', exEn: 'I have studied German.', conj: { praesens: 'hat', praeteritum: 'hatte', perfekt: 'hat gehabt' }, vis: { kind: 'grammar', de: 'Ich habe Deutsch gelernt.', hl: 'habe', role: 'verb', cap: 'Auxiliary verb \'haben\' forming the Perfekt tense.' } },
+    { de: 'passieren', pos: 'verb', en: 'to happen', hi: 'होना, घटित होना', ex: 'Was ist passiert?', exEn: 'What happened?', conj: { praesens: 'passiert', praeteritum: 'passierte', perfekt: 'ist passiert' }, img: { src: '/api/media/vocab-img/c10cc360e1f27ce5f443', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person looking surprised at an overturned cup of spilled water.' } },
+    { de: 'Partizip', art: 'das', gender: 'n', plural: 'Partizipien', pos: 'noun', en: 'participle', hi: 'कृदंत', ex: 'Das Partizip steht am Ende.', exEn: 'The participle stands at the end.', vis: { kind: 'grammar', de: 'Sie hat einen Brief geschrieben.', hl: 'geschrieben', role: 'verb', cap: '"geschrieben" is the past participle at the end of the sentence' } },
+    { de: 'Perfekt', art: 'das', gender: 'n', plural: '—', pos: 'noun', en: 'perfect tense', hi: 'पूर्ण भूतकाल', ex: 'Das Perfekt ist die Sprechsprache der Vergangenheit.', exEn: 'The Perfekt is the spoken past tense.', vis: { kind: 'grammar', de: 'Er hat geschlafen.', hl: 'hat geschlafen', role: 'verb', cap: 'The Perfekt tense formed with haben and a past participle' } }
   ],
 
   // ---------- The Perfekt (rule cards → accordion) ----------

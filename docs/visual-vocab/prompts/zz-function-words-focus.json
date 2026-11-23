@@ -1,0 +1,670 @@
+{
+ "alle--all-everyone": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "alles-klar--all-good-okay": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "andeuten--hint-at-indicate": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "angehen--concern": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "aufgeben--forsake-give-up": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "ausdruecken--express": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "ausgezeichnet--excellent": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "ausserhalb-von--outside-of": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "bemerkenswert--remarkable": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "d-h--i-e-meaning": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "da--as-since": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "damit--so-that": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "darueber--about-that": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "das-bedauern--regret": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "das-stichwort--keyword-cue": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "das-thema--topic": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "deshalb--that-s-why-therefore": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "dich--you": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-ausrede--excuse": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-bereitschaft--readiness": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-eifersucht--jealousy": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-epidemie--epidemic": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-evidenz--evidence": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-ich-aussage--i-statement": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-kritikfaehigkeit--ability-to-take-criticism": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-lebenslage--life-situation": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-leistungsbereitschaft--willingness-to-perform": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-liberalitaet--liberality-tolerance": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-macke--quirk-flaw": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-patenschaft--sponsorship-godparenthood": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-verzeihung--pardon-excuse-me": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-wahrheit--truth": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "dir--you": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "diskurspraegend--discourse-shaping": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "duerfen--may-to-be-allowed": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "effektiv--effective": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "elementar--elementary-fundamental": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "ergreifen--seize-take": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "evident--evident": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "gemein--mean-common": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "gestehen--confess": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "geteilt--divided-shared": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "glauben--believe-to-think": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "grad--at-the-moment": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "herankommen--approach": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "ihn--him-it": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "ihnen--you": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "klar--of-course-sure": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "laufen--run-to-go": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "mehrfach--repeatedly-multiple-times": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "mit--with-by": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "mithilfe--with-the-help-of": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "noch-einmal--once-more-again": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "obwohl--although-even-though": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "problematisch--problematic": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "relevant--relevant": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "respektieren--respect": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "schaetzen--value": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "sich-beziehen-auf--refer-to": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "sich-entschuldigen--apologise": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "so--so-so-so": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "so--so-such": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "sollen--be-meant-to-to-be-the-point": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "treffen--meet-hit-make": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "trotz--despite": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "vorhaben--plan-intend": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "wach-halten--keep-awake-keep-alive": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "waehrend--during": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: function word / case pronoun — picture did not teach the meaning → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "waere--would-be": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "wieso--why": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "wollte--wanted-to": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "wuerde--would": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-20: abstract/grammar word — picture showed only a related scene → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "vor-allem--especially-above-all": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "moeglich--possible": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "tausend-dank--thanks-a-million": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "was-fuer-ein--what-kind-of-a": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "bilden--form": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "nummerieren--number": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "darauf--upon-it-to-it": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "das-befinden--well-being-how-one-feels": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "die-form--form-shape": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "die-methode--method": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "besser--better": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "der-nachteil--disadvantage": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "preiswert--cheap-good-value": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "dahinter--behind-it": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "genuegen--suffice-be-enough": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "obwohl--although": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "danach--after-that": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "sich-eignen--be-suitable-for": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "eventuell--potential-possibly": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "fassen--make": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "beim-alten-bleiben--stay-the-same": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-21: abstract word, picture did not teach the meaning → sentence-focus visual"
+ },
+ "genau--exactly": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "das-wort--word": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "dreimal--three-times": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "das-semester--semester": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "danach--afterwards": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "stattfinden--take-place": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "wiedergeben--reproduce-retell": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-hauptschule--secondary-school": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-sprachwissenschaft--linguistics": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "damit--with-it-that": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "werden--will-to-become": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-hauptsache--main-point-main-thing": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "konnte--could": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "fremd--foreign-alien-strange": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "relativ--relative": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "donnerstags--on-thursdays": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "netto--net": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "darum--that-s-why": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "sodass--so-that": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "der-werbetrick--advertising-trick": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "finnland--finland": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "der-die-alte--oneself-the-old-one": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "derselbe--same": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "gruendlich--thorough": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "fruehere--previous": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "befriedigend--satisfying": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-nutzung--usage": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "geschehen--happen": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "der-bedarf--need": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "gesellschaftlich--social": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "abhaengen--be-dependent-on": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "beruecksichtigen--consider": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "ausser-acht-lassen--disregard": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "angeben--state": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "grundsaetzlich--in-general": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "merken--notice": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "erarbeiten--develop": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "der-durchschnitt--average": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "national--national": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "der-umgang--dealing-handling": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "der-anspruch--entitlement-claim": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "abmelden--sign-off-deregister": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-ansicht--opinion": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "pauschal--across-the-board": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "profitieren--profit": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "asien--asia": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "das-missverstaendnis--misunderstanding": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "tierisch--animal-like": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "liegen--be-located": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "machen--make-do": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "eingehen--enter-into-agree-to-to-respond-to-engage-with": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "erstaunlich--astonishing": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "fernliegen--be-far-from-one-s-mind": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "jeglich--any-every": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "leichtfallen--be-easy": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "staendig--constant-continual": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-ich-botschaft--i-message": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "werben--advertise-recruit": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "daherkommen--come-along-appear": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-22: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "voraussetzen--presuppose-require": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "ausnutzen--exploit-take-advantage": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "empfinden--feel-perceive": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "entscheidend--decisive-crucial": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "missverstehen--misunderstand": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "die-scheinehe--sham-marriage": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "bewusst--deliberate-conscious-aware": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "ausloesen--trigger-set-off": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "bestimmen--determine-decide": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "thematisieren--address-raise-a-topic": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "verallgemeinern--generalise": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "zurueckhaltend--reserved-restrained": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "ergehen--fare-get-on": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "endgueltig--final-definitive": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "das-erachten--opinion-view": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ }
+}

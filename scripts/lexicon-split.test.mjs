@@ -91,7 +91,7 @@ test('published pages load only the public dictionary files', () => {
   for (const f of ['chapter/global-lexicon.js', 'chapter/story-lexicon.js']) assert.ok(!allow.includes(f), f + ' (full dictionary) must not be published');
   const wf = read('.github/workflows/deploy-pages.yml');
   assert.ok(!/[|( ]global-lexicon\.js[|)]/.test(wf) && !/[|( ]story-lexicon\.js[|)]/.test(wf), 'deploy workflow does not accept the full dictionary');
-  assert.match(read('chapter/chapter-app.js'), /'global-lexicon-public\.js'/);
+  assert.match(read('chapter/chapter-app.js'), /'global-lexicon-public\.js\?v=\d+'/);
   assert.ok(read('account/review.html').includes('../chapter/global-lexicon-public.js'));
   assert.ok(read('account/review.html').includes("'/saved-words/lexicon'"));
   for (const f of fs.readdirSync(path.join(ROOT, 'chapter')).filter((x) => /^chapter-.+\.html$/.test(x))) {

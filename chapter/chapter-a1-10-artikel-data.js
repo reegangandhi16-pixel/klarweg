@@ -234,7 +234,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/98f94b1965ee0838a8cd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Blue passenger car on a paved road' }
     },
     { de: 'Buch', art: 'das', gender: 'n', plural: 'Bücher', pos: 'noun', en: 'book', hi: 'किताब',
-      ex: 'Das Buch liegt auf dem Tisch.', exEn: 'The book is on the table.' },
+      ex: 'Das Buch liegt auf dem Tisch.', exEn: 'The book is on the table.',
+      img: { src: '../public/vocab-img/a1-1/buch', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A closed teal hardcover book' }
+    },
     { de: 'Computer', art: 'der', gender: 'm', plural: 'Computer', pos: 'noun', en: 'computer', hi: 'कंप्यूटर',
       ex: 'Der Computer ist schnell.', exEn: 'The computer is fast.',
       img: { src: '/api/media/vocab-img/4f1f7cde74c18f798ce0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A desktop computer on a wooden desk.' }
@@ -248,13 +250,21 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/a39bbadd0ff5ba3803e8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A simple wooden dining table' }
     },
     { de: 'Straße', art: 'die', gender: 'f', plural: 'Straßen', pos: 'noun', en: 'street', hi: 'सड़क',
-      ex: 'Die Straße ist lang.', exEn: 'The street is long.' },
+      ex: 'Die Straße ist lang.', exEn: 'The street is long.',
+      img: { src: '../public/vocab-img/a1-1/strasse', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A quiet town street with trees and houses on both sides' }
+    },
     { de: 'der/die/das', pos: 'article (definite)', en: 'the', hi: 'निश्चित आर्टिकल',
-      ex: 'der Tisch, die Straße, das Buch', exEn: 'the table, the street, the book' },
+      ex: 'der Tisch, die Straße, das Buch', exEn: 'the table, the street, the book',
+      vis: { kind: 'grammar', de: 'Der Tisch ist aus Holz.', hl: 'Der', role: 'article', cap: '\'Der\' is the definite article for masculine nouns' }
+    },
     { de: 'die', pos: 'article (plural)', en: 'the (plural)', hi: 'the (बहुवचन)',
-      ex: 'die Bücher, die Tische', exEn: 'the books, the tables' },
+      ex: 'die Bücher, die Tische', exEn: 'the books, the tables',
+      vis: { kind: 'grammar', de: 'Die Bücher liegen auf dem Tisch.', hl: 'Die', role: 'article', cap: 'Definite article for plural nouns' }
+    },
     { de: 'ein/eine', pos: 'article (indefinite)', en: 'a, an', hi: 'अनिश्चित आर्टिकल',
-      ex: 'ein Tisch, eine Straße', exEn: 'a table, a street' },
+      ex: 'ein Tisch, eine Straße', exEn: 'a table, a street',
+      vis: { kind: 'grammar', de: 'Das ist ein Tisch und eine Lampe.', hl: 'ein', role: 'article', cap: 'Indefinite article in German.' }
+    },
     // — Active support —
     { de: 'Beispiel', art: 'das', gender: 'n', plural: 'Beispiele', pos: 'noun', en: 'example', hi: 'उदाहरण',
       ex: 'Das ist ein gutes Beispiel.', exEn: 'That is a good example.' },
@@ -271,7 +281,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/bfefb585d77e844be380', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A brass door key on a smooth surface' }
     },
     { de: 'Karte', art: 'die', gender: 'f', plural: 'Karten', pos: 'noun', en: 'card', hi: 'कार्ड',
-      ex: 'Die Karte ist neu.', exEn: 'The card is new.' },
+      ex: 'Die Karte ist neu.', exEn: 'The card is new.',
+      img: { src: '/api/media/vocab-img/4834271a436870fdc609', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand holding a sleek plastic card with a gold microchip.' }
+    },
     { de: 'leer', pos: 'adjective', en: 'empty', hi: 'खाली',
       ex: 'Der Tisch ist leer.', exEn: 'The table is empty.',
       compare: { comparative: 'leerer', superlative: 'am leersten' },
@@ -279,12 +291,18 @@ const CHAPTER = {
     },
     { de: 'merken', pos: 'verb', en: 'to remember, note', hi: 'याद रखना',
       ex: 'Merke dir den Artikel!', exEn: 'Remember the article!',
-      conj: { praesens: 'merkt', praeteritum: 'merkte', perfekt: 'hat gemerkt' } },
+      conj: { praesens: 'merkt', praeteritum: 'merkte', perfekt: 'hat gemerkt' },
+      img: { src: '/api/media/vocab-img/3ed6726b9f1d39c0838c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person tapping their temple with a string tied on their finger.' }
+    },
     { de: 'noch', pos: 'adverb', en: 'yet, still, any', hi: 'अभी / और',
-      ex: 'Hast du noch eine Karte?', exEn: 'Do you have another card?' },
+      ex: 'Hast du noch eine Karte?', exEn: 'Do you have another card?',
+      vis: { kind: 'grammar', de: 'Hast du noch eine Karte?', hl: 'noch', role: 'focus', cap: 'noch = yet, still, any' }
+    },
     // — Passive (mostly neuter & masculine compound nouns) —
     { de: 'Artikelbild', art: 'das', gender: 'n', plural: 'Artikelbilder', pos: 'noun', en: 'article picture', hi: 'लेख-चित्र',
-      ex: 'Das Artikelbild zeigt ein Auto.', exEn: 'The article picture shows a car.' },
+      ex: 'Das Artikelbild zeigt ein Auto.', exEn: 'The article picture shows a car.',
+      img: { src: '/api/media/vocab-img/d6de7cfccfd1edb6157e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A featured car photograph positioned above text columns in a magazine.' }
+    },
     { de: 'Butterbrot', art: 'das', gender: 'n', plural: 'Butterbrote', pos: 'noun', en: 'sandwich', hi: 'सैंडविच',
       ex: 'Das Butterbrot schmeckt gut.', exEn: 'The sandwich tastes good.',
       img: { src: '/api/media/vocab-img/2392a14aafa1a5f3934d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A slice of buttered bread on a cutting board' }
@@ -306,7 +324,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/1d25500b2851f81ba057', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open lined exercise book with a pencil' }
     },
     { de: 'Kursplakat', art: 'das', gender: 'n', plural: 'Kursplakate', pos: 'noun', en: 'course poster', hi: 'कोर्स पोस्टर',
-      ex: 'Das Kursplakat hängt an der Wand.', exEn: 'The course poster hangs on the wall.' },
+      ex: 'Das Kursplakat hängt an der Wand.', exEn: 'The course poster hangs on the wall.',
+      img: { src: '/api/media/vocab-img/5cf0f2103f4bfe1ca302', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A colourful poster with an open book icon on a wall.' }
+    },
     { de: 'Paar', art: 'das', gender: 'n', plural: 'Paare', pos: 'noun', en: 'pair', hi: 'जोड़ा',
       ex: 'Arbeitet in Paaren!', exEn: 'Work in pairs!',
       img: { src: '/api/media/vocab-img/bc0ad48e21b98d22b530', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A pair of people standing together smiling.' }
@@ -326,7 +346,9 @@ const CHAPTER = {
     { de: 'Bericht', art: 'der', gender: 'm', plural: 'Berichte', pos: 'noun', en: 'report', hi: 'रिपोर्ट',
       ex: 'Der Bericht ist fertig.', exEn: 'The report is finished.' },
     { de: 'Blog', art: 'der', gender: 'm', plural: 'Blogs', pos: 'noun', en: 'blog', hi: 'ब्लॉग',
-      ex: 'Der Blog ist auf Deutsch.', exEn: 'The blog is in German.' },
+      ex: 'Der Blog ist auf Deutsch.', exEn: 'The blog is in German.',
+      img: { src: '/api/media/vocab-img/44a7f2f1d1dc75b62d5f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A laptop showing an online blog layout with an author avatar.' }
+    },
     { de: 'Eintrag', art: 'der', gender: 'm', plural: 'Einträge', pos: 'noun', en: 'entry', hi: 'प्रविष्टि',
       ex: 'Der Eintrag ist kurz.', exEn: 'The entry is short.' },
     { de: 'Kindergarten', art: 'der', gender: 'm', plural: 'Kindergärten', pos: 'noun', en: 'kindergarten', hi: 'किंडरगार्टन',
@@ -346,9 +368,13 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/13d5ef53eb61107b0b2d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A sick person resting in bed' }
     },
     { de: 'Anzeige', art: 'die', gender: 'f', plural: 'Anzeigen', pos: 'noun', en: 'advert', hi: 'विज्ञापन',
-      ex: 'Die Anzeige ist im Blog.', exEn: 'The advert is in the blog.' },
+      ex: 'Die Anzeige ist im Blog.', exEn: 'The advert is in the blog.',
+      img: { src: '/api/media/vocab-img/e6469dbe6f8ad4fa7be5', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A tablet screen displaying a side advertisement banner with a sneaker.' }
+    },
     { de: 'Assoziation', art: 'die', gender: 'f', plural: 'Assoziationen', pos: 'noun', en: 'association', hi: 'संबंध',
-      ex: 'Die Assoziation hilft beim Merken.', exEn: 'The association helps you remember.' },
+      ex: 'Die Assoziation hilft beim Merken.', exEn: 'The association helps you remember.',
+      img: { src: '/api/media/vocab-img/4ab64ae6c528bee4ce4a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A cloud and an umbrella connected by a glowing golden thread.' }
+    },
     { de: 'Autobahn', art: 'die', gender: 'f', plural: 'Autobahnen', pos: 'noun', en: 'highway', hi: 'राजमार्ग',
       ex: 'Die Autobahn ist frei.', exEn: 'The highway is clear.',
       img: { src: '/api/media/vocab-img/eb7fbfc931a0079f08cd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A wide multi-lane highway with moving traffic.' }
@@ -358,11 +384,17 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/416645d17628177effee', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A glass bottle with a cork stopper.' }
     },
     { de: 'Homepage', art: 'die', gender: 'f', plural: 'Homepages', pos: 'noun', en: 'homepage', hi: 'होमपेज',
-      ex: 'Die Homepage ist neu.', exEn: 'The homepage is new.' },
+      ex: 'Die Homepage ist neu.', exEn: 'The homepage is new.',
+      img: { src: '/api/media/vocab-img/d1927c1ef3af936375e4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A computer monitor showing a clean website homepage layout.' }
+    },
     { de: 'Methode', art: 'die', gender: 'f', plural: 'Methoden', pos: 'noun', en: 'method', hi: 'तरीका',
-      ex: 'Die Methode ist einfach.', exEn: 'The method is simple.' },
+      ex: 'Die Methode ist einfach.', exEn: 'The method is simple.',
+      vis: { kind: 'grammar', de: 'Die Methode ist einfach.', hl: 'Methode', role: 'focus', cap: 'die Methode = method' }
+    },
     { de: 'Mindmap', art: 'die', gender: 'f', plural: 'Mindmaps', pos: 'noun', en: 'mind map', hi: 'माइंड मैप',
-      ex: 'Die Mindmap zeigt die Artikel.', exEn: 'The mind map shows the articles.' },
+      ex: 'Die Mindmap zeigt die Artikel.', exEn: 'The mind map shows the articles.',
+      img: { src: '/api/media/vocab-img/4f3cb446d8edd734d2df', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A whiteboard with a branching diagram connecting a central circle to satellites.' }
+    },
     { de: 'Nudel', art: 'die', gender: 'f', plural: 'Nudeln', pos: 'noun', en: 'noodle', hi: 'नूडल',
       ex: 'Die Nudel ist lang.', exEn: 'The noodle is long.',
       img: { src: '/api/media/vocab-img/cd4c65629a07bce1485a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A long noodle strand lifted on a fork' }
@@ -384,12 +416,18 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/3ccb7b085a4da63ac60e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person researching with open books at desk' }
     },
     { de: 'thematisch', pos: 'adjective', en: 'thematic', hi: 'विषय-आधारित',
-      ex: 'Ordne die Wörter thematisch.', exEn: 'Sort the words thematically.' },
+      ex: 'Ordne die Wörter thematisch.', exEn: 'Sort the words thematically.',
+      img: { src: '/api/media/vocab-img/37e418d420d6b2ac1cd3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Winter clothes and beach gear sorted into separate piles.' }
+    },
     { de: 'verwenden', pos: 'verb', en: 'to use', hi: 'इस्तेमाल करना',
       ex: 'Verwende den richtigen Artikel.', exEn: 'Use the correct article.',
-      conj: { praesens: 'verwendet', praeteritum: 'verwendete', perfekt: 'hat verwendet' } },
+      conj: { praesens: 'verwendet', praeteritum: 'verwendete', perfekt: 'hat verwendet' },
+      img: { src: '/api/media/vocab-img/ba65febe1966d25a7491', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A craftsperson using a chisel to carve a block of timber.' }
+    },
     { de: 'weitere', pos: 'adjective', en: 'further, more', hi: 'और / अतिरिक्त',
-      ex: 'Nenne weitere Beispiele.', exEn: 'Name further examples.' },
+      ex: 'Nenne weitere Beispiele.', exEn: 'Name further examples.',
+      img: { src: '/api/media/vocab-img/b6d80b075b16e79e0a75', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand adding two more wooden cubes to an existing row.' }
+    },
     { de: 'ziehen', pos: 'verb', en: 'to draw (a card)', hi: 'खींचना / कार्ड निकालना',
       ex: 'Zieh eine Karte vom Stapel.', exEn: 'Draw a card from the pile.',
       conj: { praesens: 'zieht', praeteritum: 'zog', perfekt: 'hat gezogen' },
@@ -402,36 +440,62 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/5403784c533107914944', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A reporter speaking into a microphone' }
     },
     { de: 'bestimmt', pos: 'adjective', en: 'definite', hi: 'निश्चित',
-      ex: 'der, die, das sind bestimmte Artikel.', exEn: 'der, die, das are definite articles.' },
+      ex: 'Der, die, das sind bestimmte Artikel.', exEn: 'Der, die, das are definite articles.',
+      img: { src: '/api/media/vocab-img/203ff8156e6f92137371', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand pointing directly at one specific red apple among green ones.' }
+    },
     { de: 'Nomen', art: 'das', gender: 'n', plural: 'Nomen', pos: 'noun', en: 'noun', hi: 'संज्ञा',
-      ex: 'Jedes Nomen hat einen Artikel.', exEn: 'Every noun has an article.' },
+      ex: 'Jedes Nomen hat einen Artikel.', exEn: 'Every noun has an article.',
+      vis: { kind: 'grammar', de: 'Der Hund schläft im Garten.', hl: 'Hund', role: 'subject', cap: '"Hund" is a capitalized German noun with an article' }
+    },
     { de: 'Wortende', art: 'das', gender: 'n', plural: 'Wortenden', pos: 'noun', en: 'word ending', hi: 'शब्द का अंत',
-      ex: 'Das Wortende -ung ist feminin.', exEn: 'The word ending -ung is feminine.' },
+      ex: 'Das Wortende -ung ist feminin.', exEn: 'The word ending -ung is feminine.',
+      vis: { kind: 'grammar', de: 'die Zeitung', hl: 'ung', role: 'focus', cap: 'The word ending -ung: these nouns are feminine' }
+    },
     { de: 'Artikel', art: 'der', gender: 'm', plural: 'Artikel', pos: 'noun', en: 'article (gram.)', hi: 'आर्टिकल',
-      ex: 'Lerne den Artikel mit dem Nomen.', exEn: 'Learn the article with the noun.' },
+      ex: 'Lerne den Artikel mit dem Nomen.', exEn: 'Learn the article with the noun.',
+      vis: { kind: 'grammar', de: 'Der Hund bellt laut.', hl: 'Der', role: 'article', cap: 'Definite article before a masculine noun' }
+    },
     { de: 'Plural', art: 'der', gender: 'm', plural: 'Plurale', pos: 'noun', en: 'plural', hi: 'बहुवचन',
       ex: 'Im Plural heißt es immer "die".', exEn: 'In the plural it is always "die".' },
     { de: 'Singular', art: 'der', gender: 'm', plural: 'Singulare', pos: 'noun', en: 'singular', hi: 'एकवचन',
-      ex: 'Der Singular von "Bücher" ist "Buch".', exEn: 'The singular of "Bücher" is "Buch".' },
+      ex: 'Der Singular von "Bücher" ist "Buch".', exEn: 'The singular of "Bücher" is "Buch".',
+      img: { src: '/api/media/vocab-img/1be2fa2aad8482627087', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A single book on the left contrasted with a stack of books.' }
+    },
     { de: 'Wortteil', art: 'der', gender: 'm', plural: 'Wortteile', pos: 'noun', en: 'word part', hi: 'शब्दांश',
-      ex: 'Der Wortteil "-chen" ist neutrum.', exEn: 'The word part "-chen" is neuter.' },
+      ex: 'Der Wortteil „-chen“ macht ein Nomen zum Neutrum.', exEn: 'The word part “-chen” makes a noun neuter.',
+      vis: { kind: 'grammar', de: 'Der Wortteil "-chen" ist ein Neutrum.', hl: 'Wortteil', role: 'subject', cap: 'A constituent component or affix of a word' }
+    },
     { de: 'Pluralendung', art: 'die', gender: 'f', plural: 'Pluralendungen', pos: 'noun', en: 'plural ending', hi: 'बहुवचन-प्रत्यय',
-      ex: 'Die Pluralendung ist oft -e oder -en.', exEn: 'The plural ending is often -e or -en.' },
+      ex: 'Die Pluralendung ist oft -e oder -en.', exEn: 'The plural ending is often -e or -en.',
+      vis: { kind: 'grammar', de: 'Ich habe zwei Kinder.', hl: 'Kinder', role: 'object', cap: 'Kind → Kinder: the plural ending -er' }
+    },
     { de: 'Pluralform', art: 'die', gender: 'f', plural: 'Pluralformen', pos: 'noun', en: 'plural form', hi: 'बहुवचन रूप',
-      ex: 'Die Pluralform von "Auto" ist "Autos".', exEn: 'The plural form of "Auto" is "Autos".' },
+      ex: 'Die Pluralform von "Auto" ist "Autos".', exEn: 'The plural form of "Auto" is "Autos".',
+      vis: { kind: 'grammar', de: 'Wir haben zwei Autos.', hl: 'Autos', role: 'object', cap: 'Auto → Autos: the plural form' }
+    },
     { de: 'Wortgruppe', art: 'die', gender: 'f', plural: 'Wortgruppen', pos: 'noun', en: 'word group', hi: 'शब्द-समूह',
-      ex: 'Ordne die Wortgruppe nach Artikel.', exEn: 'Sort the word group by article.' },
+      ex: 'Ordne die Wortgruppe nach Artikel.', exEn: 'Sort the word group by article.',
+      vis: { kind: 'grammar', de: 'Das kleine rote Auto steht vor der Tür.', hl: 'Das kleine rote Auto', role: 'subject', cap: 'Several words that belong together as one unit' }
+    },
     { de: 'feminin', pos: 'adjective', en: 'feminine', hi: 'स्त्रीलिंग',
-      ex: '"die Straße" ist feminin.', exEn: '"die Straße" is feminine.' },
+      ex: '"die Straße" ist feminin.', exEn: '"die Straße" is feminine.',
+      vis: { kind: 'grammar', de: '"die Straße" ist feminin.', hl: 'feminin', role: 'adjective', cap: 'Grammatical gender classification for nouns with \'die\'' }
+    },
     { de: 'maskulin', pos: 'adjective', en: 'masculine', hi: 'पुल्लिंग',
       ex: '"der Tisch" ist maskulin.', exEn: '"der Tisch" is masculine.' },
     { de: 'neutrum', pos: 'noun/adjective', en: 'neuter', hi: 'नपुंसकलिंग',
-      ex: '"das Buch" ist neutrum.', exEn: '"das Buch" is neuter.' },
+      ex: '"Das Buch" ist Neutrum.', exEn: '"Das Buch" is neuter.',
+      vis: { kind: 'grammar', de: '„Buch“ ist ein Neutrum: das Buch.', hl: 'das', role: 'article', cap: 'Neuter nouns take the article das' }
+    },
     { de: 'unbestimmt', pos: 'adjective', en: 'indefinite', hi: 'अनिश्चित',
-      ex: 'ein und eine sind unbestimmte Artikel.', exEn: 'ein and eine are indefinite articles.' },
+      ex: '"Ein" und "eine" sind unbestimmte Artikel.', exEn: '"ein" and "eine" are indefinite articles.',
+      vis: { kind: 'grammar', de: '„Ein“ und „eine“ sind unbestimmte Artikel.', hl: 'unbestimmte', role: 'adjective', cap: 'Grammar term: indefinite (referring to non-specific items)', example: '„Ein“ und „eine“ sind unbestimmte Artikel.' }
+    },
     { de: 'markieren', pos: 'verb', en: 'to highlight, mark', hi: 'चिह्नित करना',
       ex: 'Markiere das Nomen.', exEn: 'Highlight the noun.',
-      conj: { praesens: 'markiert', praeteritum: 'markierte', perfekt: 'hat markiert' } },
+      conj: { praesens: 'markiert', praeteritum: 'markierte', perfekt: 'hat markiert' },
+      img: { src: '/api/media/vocab-img/f616041e0c23419b4edd', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand using a yellow highlighter on a page.' }
+    },
     { de: 'unterstreichen', pos: 'verb', en: 'to underline', hi: 'रेखांकित करना',
       ex: 'Unterstreiche den Artikel.', exEn: 'Underline the article.',
       conj: { praesens: 'unterstreicht', praeteritum: 'unterstrich', perfekt: 'hat unterstrichen' },

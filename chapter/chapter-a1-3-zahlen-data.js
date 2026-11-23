@@ -224,7 +224,9 @@ const CHAPTER = {
   // Numbers carry no article; the 6 nouns do. pos drives the card label.
   vocab: [
     { de: 'null', pos: 'number', en: 'zero', hi: 'शून्य',
-      ex: 'Null Fehler — sehr gut!', exEn: 'Zero mistakes — very good!' },
+      ex: 'Null Fehler — sehr gut!', exEn: 'Zero mistakes — very good!',
+      vis: { kind: 'number', n: 0 }
+    },
     { de: 'eins', pos: 'number', en: 'one', hi: 'एक',
       ex: 'Ich habe ein Buch — Nummer eins.', exEn: 'I have one book — number one.' },
     { de: 'zwei', pos: 'number', en: 'two', hi: 'दो',
@@ -248,75 +250,131 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/d012a78c90a98819d2c1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Six books standing neatly on a shelf' }
     },
     { de: 'sieben', pos: 'number', en: 'seven', hi: 'सात',
-      ex: 'Eine Woche hat sieben Tage.', exEn: 'A week has seven days.' },
+      ex: 'Eine Woche hat sieben Tage.', exEn: 'A week has seven days.',
+      img: { src: '/api/media/vocab-img/c3080a23711ce84a0ee2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Seven red apples arranged in a row on a wooden table.' }
+    },
     { de: 'acht', pos: 'number', en: 'eight', hi: 'आठ',
       ex: 'Die Schule beginnt um acht.', exEn: 'School begins at eight.',
       img: { src: '/api/media/vocab-img/013283f32ecac02adff4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Eight red apples arranged in two neat rows.' }
     },
     { de: 'neun', pos: 'number', en: 'nine', hi: 'नौ',
-      ex: 'Neun minus eins ist acht.', exEn: 'Nine minus one is eight.' },
+      ex: 'Neun minus eins ist acht.', exEn: 'Nine minus one is eight.',
+      img: { src: '/api/media/vocab-img/d9ab798d56c40525fb82', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Nine fresh strawberries arranged in a grid on a plate.' }
+    },
     { de: 'zehn', pos: 'number', en: 'ten', hi: 'दस',
       ex: 'Zehn Finger, zehn Zahlen.', exEn: 'Ten fingers, ten numbers.',
       img: { src: '/api/media/vocab-img/1adb497f1a703ac970da', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two open hands showing ten fingers' }
     },
     { de: 'elf', pos: 'number', en: 'eleven', hi: 'ग्यारह',
-      ex: 'Elf Spieler sind ein Team.', exEn: 'Eleven players are a team.' },
+      ex: 'Elf Spieler sind ein Team.', exEn: 'Eleven players are a team.',
+      img: { src: '/api/media/vocab-img/b0278493b85857f43500', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Eleven soccer players in matching jerseys standing in team formation.' }
+    },
     { de: 'zwölf', pos: 'number', en: 'twelve', hi: 'बारह',
       ex: 'Ein Jahr hat zwölf Monate.', exEn: 'A year has twelve months.',
       img: { src: '/api/media/vocab-img/8143a84b650b3f090ade', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'open carton with twelve brown eggs' }
     },
     { de: 'dreizehn', pos: 'number', en: 'thirteen', hi: 'तेरह',
-      ex: 'Mein Bruder ist dreizehn.', exEn: 'My brother is thirteen.' },
+      ex: 'Mein Bruder ist dreizehn.', exEn: 'My brother is thirteen.',
+      vis: { kind: 'number', n: 13 }
+    },
     { de: 'vierzehn', pos: 'number', en: 'fourteen', hi: 'चौदह',
-      ex: 'Vierzehn Tage sind zwei Wochen.', exEn: 'Fourteen days are two weeks.' },
+      ex: 'Vierzehn Tage sind zwei Wochen.', exEn: 'Fourteen days are two weeks.',
+      vis: { kind: 'number', n: 14 }
+    },
     { de: 'fünfzehn', pos: 'number', en: 'fifteen', hi: 'पंद्रह',
-      ex: 'Das Buch kostet fünfzehn Euro.', exEn: 'The book costs fifteen euros.' },
+      ex: 'Das Buch kostet fünfzehn Euro.', exEn: 'The book costs fifteen euros.',
+      vis: { kind: 'number', n: 15 }
+    },
     { de: 'sechzehn', pos: 'number', en: 'sixteen', hi: 'सोलह',
-      ex: 'Sechzehn — nicht "sechszehn"!', exEn: 'Sixteen — not "sechszehn"!' },
+      ex: 'Sechzehn — nicht "sechszehn"!', exEn: 'Sixteen — not "sechszehn"!',
+      vis: { kind: 'number', n: 16 }
+    },
     { de: 'siebzehn', pos: 'number', en: 'seventeen', hi: 'सत्रह',
-      ex: 'Siebzehn — nicht "siebenzehn"!', exEn: 'Seventeen — not "siebenzehn"!' },
+      ex: 'Siebzehn — nicht "siebenzehn"!', exEn: 'Seventeen — not "siebenzehn"!',
+      vis: { kind: 'number', n: 17 }
+    },
     { de: 'achtzehn', pos: 'number', en: 'eighteen', hi: 'अठारह',
-      ex: 'Mit achtzehn ist man erwachsen.', exEn: 'At eighteen you are an adult.' },
+      ex: 'Mit achtzehn ist man erwachsen.', exEn: 'At eighteen you are an adult.',
+      vis: { kind: 'number', n: 18 }
+    },
     { de: 'neunzehn', pos: 'number', en: 'nineteen', hi: 'उन्नीस',
-      ex: 'Neunzehn kommt vor zwanzig.', exEn: 'Nineteen comes before twenty.' },
+      ex: 'Neunzehn kommt vor zwanzig.', exEn: 'Nineteen comes before twenty.',
+      vis: { kind: 'number', n: 19 }
+    },
     { de: 'zwanzig', pos: 'number', en: 'twenty', hi: 'बीस',
-      ex: 'Zwanzig Euro, bitte.', exEn: 'Twenty euros, please.' },
+      ex: 'Zwanzig Euro, bitte.', exEn: 'Twenty euros, please.',
+      vis: { kind: 'number', n: 20 }
+    },
     { de: 'einundzwanzig', pos: 'number', en: 'twenty-one', hi: 'इक्कीस',
-      ex: 'Ich bin einundzwanzig Jahre alt.', exEn: 'I am twenty-one years old.' },
+      ex: 'Ich bin einundzwanzig Jahre alt.', exEn: 'I am twenty-one years old.',
+      vis: { kind: 'number', n: 21 }
+    },
     { de: 'zweiundzwanzig', pos: 'number', en: 'twenty-two', hi: 'बाईस',
-      ex: 'Sie ist zweiundzwanzig.', exEn: 'She is twenty-two.' },
+      ex: 'Sie ist zweiundzwanzig.', exEn: 'She is twenty-two.',
+      vis: { kind: 'number', n: 22 }
+    },
     { de: 'dreiundzwanzig', pos: 'number', en: 'twenty-three', hi: 'तेईस',
-      ex: 'Zimmer dreiundzwanzig, bitte.', exEn: 'Room twenty-three, please.' },
+      ex: 'Zimmer dreiundzwanzig, bitte.', exEn: 'Room twenty-three, please.',
+      vis: { kind: 'number', n: 23 }
+    },
     { de: 'vierundzwanzig', pos: 'number', en: 'twenty-four', hi: 'चौबीस',
-      ex: 'Ein Tag hat vierundzwanzig Stunden.', exEn: 'A day has twenty-four hours.' },
+      ex: 'Ein Tag hat vierundzwanzig Stunden.', exEn: 'A day has twenty-four hours.',
+      vis: { kind: 'number', n: 24 }
+    },
     { de: 'fünfundzwanzig', pos: 'number', en: 'twenty-five', hi: 'पच्चीस',
-      ex: 'Das kostet fünfundzwanzig Euro.', exEn: 'That costs twenty-five euros.' },
+      ex: 'Das kostet fünfundzwanzig Euro.', exEn: 'That costs twenty-five euros.',
+      vis: { kind: 'number', n: 25 }
+    },
     { de: 'sechsundzwanzig', pos: 'number', en: 'twenty-six', hi: 'छब्बीस',
-      ex: 'Das Alphabet hat sechsundzwanzig Buchstaben.', exEn: 'The alphabet has twenty-six letters.' },
+      ex: 'Das Alphabet hat sechsundzwanzig Buchstaben.', exEn: 'The alphabet has twenty-six letters.',
+      vis: { kind: 'number', n: 26 }
+    },
     { de: 'siebenundzwanzig', pos: 'number', en: 'twenty-seven', hi: 'सत्ताईस',
-      ex: 'Meine Schwester wird siebenundzwanzig.', exEn: 'My sister is turning twenty-seven.' },
+      ex: 'Meine Schwester wird siebenundzwanzig.', exEn: 'My sister is turning twenty-seven.',
+      vis: { kind: 'number', n: 27 }
+    },
     { de: 'achtundzwanzig', pos: 'number', en: 'twenty-eight', hi: 'अट्ठाईस',
-      ex: 'Der Februar hat achtundzwanzig Tage.', exEn: 'February has twenty-eight days.' },
+      ex: 'Der Februar hat achtundzwanzig Tage.', exEn: 'February has twenty-eight days.',
+      vis: { kind: 'number', n: 28 }
+    },
     { de: 'neunundzwanzig', pos: 'number', en: 'twenty-nine', hi: 'उनतीस',
-      ex: 'Neunundzwanzig plus eins ist dreißig.', exEn: 'Twenty-nine plus one is thirty.' },
+      ex: 'Neunundzwanzig plus eins ist dreißig.', exEn: 'Twenty-nine plus one is thirty.',
+      vis: { kind: 'number', n: 29 }
+    },
     { de: 'Zahl', art: 'die', gender: 'f', plural: 'Zahlen', pos: 'noun', en: 'number, figure', hi: 'संख्या',
-      ex: 'Welche Zahl hörst du?', exEn: 'Which number do you hear?' },
+      ex: 'Welche Zahl hörst du?', exEn: 'Which number do you hear?',
+      img: { src: '/api/media/vocab-img/b732e4b66bd992ac5371', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A wooden abacus with colourful sliding beads arranged in counted groups.' }
+    },
     { de: 'Handynummer', art: 'die', gender: 'f', plural: 'Handynummern', pos: 'noun', en: 'mobile number', hi: 'मोबाइल नंबर',
-      ex: 'Wie ist deine Handynummer?', exEn: 'What is your mobile number?' },
+      ex: 'Wie ist deine Handynummer?', exEn: 'What is your mobile number?',
+      img: { src: '/api/media/vocab-img/68a998b34246e3422e9d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'new acquaintances smiling as one holds out a smartphone screen so the other can scan or save a contact into their phone', cap: 'Exchanging mobile numbers to stay in touch', hl: 'Handynummer' }
+    },
     { de: 'Telefonnummer', art: 'die', gender: 'f', plural: 'Telefonnummern', pos: 'noun', en: 'phone number', hi: 'टेलीफ़ोन नंबर',
-      ex: 'Meine Telefonnummer ist neu.', exEn: 'My phone number is new.' },
+      ex: 'Meine Telefonnummer ist neu.', exEn: 'My phone number is new.',
+      img: { src: '/api/media/vocab-img/56ba9fa42c36e6a72d64', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Tapping digits on a smartphone keypad.' }
+    },
     { de: 'E-Mail-Adresse', art: 'die', gender: 'f', plural: 'E-Mail-Adressen', pos: 'noun', en: 'email address', hi: 'ईमेल पता',
-      ex: 'Meine E-Mail-Adresse hat einen Punkt.', exEn: 'My email address has a dot.' },
+      ex: 'Meine E-Mail-Adresse hat einen Punkt.', exEn: 'My email address has a dot.',
+      img: { src: '/api/media/vocab-img/e18c141fc08aa796d28f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A tablet showing a contact form field with an envelope icon.' }
+    },
     { de: 'Punkt', art: 'der', gender: 'm', plural: 'Punkte', pos: 'noun', en: 'dot, point', hi: 'बिंदु',
       ex: 'anna.berlin — hier ist ein Punkt.', exEn: 'anna.berlin — here is a dot.' },
     { de: 'Unterstrich', art: 'der', gender: 'm', plural: 'Unterstriche', pos: 'noun', en: 'underscore', hi: 'अंडरस्कोर',
-      ex: 'anna_berlin — das ist ein Unterstrich.', exEn: 'anna_berlin — that is an underscore.' },
+      ex: 'anna_berlin — das ist ein Unterstrich.', exEn: 'anna_berlin — that is an underscore.',
+      vis: { kind: 'grammar', de: 'anna_berlin', hl: '_', role: 'focus', cap: 'The underscore character' }
+    },
     { de: 'dann', pos: 'adverb', en: 'then, next', hi: 'फिर',
-      ex: 'Erst zehn, dann elf, dann zwölf.', exEn: 'First ten, then eleven, then twelve.' },
+      ex: 'Erst zehn, dann elf, dann zwölf.', exEn: 'First ten, then eleven, then twelve.',
+      img: { src: '/api/media/vocab-img/915a61b137dce8de77da', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Three plant pots displaying consecutive growth stages from sprout to bloom.' }
+    },
     { de: 'plus', pos: 'operator', en: 'plus', hi: 'जोड़ (धन)',
-      ex: 'Vier plus drei ist sieben.', exEn: 'Four plus three is seven.' },
+      ex: 'Vier plus drei ist sieben.', exEn: 'Four plus three is seven.',
+      img: { src: '/api/media/vocab-img/765a823395e085c32c29', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A three-dimensional plus sign between four spheres and three spheres.' }
+    },
     { de: 'minus', pos: 'operator', en: 'minus', hi: 'घटा (ऋण)',
-      ex: 'Zehn minus zwei ist acht.', exEn: 'Ten minus two is eight.' }
+      ex: 'Zehn minus zwei ist acht.', exEn: 'Ten minus two is eight.',
+      img: { src: '/api/media/vocab-img/f87753542ffa938c2f53', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Ten apples on a table with two being taken away.' }
+    }
   ],
 
   // ---------- Number System (rule cards → accordion) ----------

@@ -210,15 +210,25 @@ const CHAPTER = {
   vocab: [
     // — Core question words —
     { de: 'wer', pos: 'question word', en: 'who', hi: 'कौन',
-      ex: 'Wer bist du?', exEn: 'Who are you?' },
+      ex: 'Wer bist du?', exEn: 'Who are you?',
+      vis: { kind: 'grammar', de: 'Wer bist du?', hl: 'Wer', role: 'question', cap: 'Question word asking about a person' }
+    },
     { de: 'was', pos: 'question word', en: 'what', hi: 'क्या',
-      ex: 'Was ist das?', exEn: 'What is that?' },
+      ex: 'Was ist das?', exEn: 'What is that?',
+      img: { src: '/api/media/vocab-img/9204169e7f450e909f00', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person curiously examining an unfamiliar abstract object.' }
+    },
     { de: 'wie', pos: 'question word', en: 'how; what', hi: 'कैसे',
-      ex: 'Wie heißt du?', exEn: 'What is your name?' },
+      ex: 'Wie heißt du?', exEn: 'What is your name?',
+      vis: { kind: 'grammar', de: 'Wie heißt du?', hl: 'Wie', role: 'question', cap: 'Question word asking for name, manner, or state (\'how / what\')' }
+    },
     { de: 'wo', pos: 'question word', en: 'where', hi: 'कहाँ',
-      ex: 'Wo wohnst du?', exEn: 'Where do you live?' },
+      ex: 'Wo wohnst du?', exEn: 'Where do you live?',
+      vis: { kind: 'grammar', de: 'Wo wohnst du?', hl: 'Wo', role: 'question', cap: 'Question word asking about a location or place' }
+    },
     { de: 'woher', pos: 'question word', en: 'from where', hi: 'कहाँ से',
-      ex: 'Woher kommst du?', exEn: 'Where do you come from?' },
+      ex: 'Woher kommst du?', exEn: 'Where do you come from?',
+      img: { src: '/api/media/vocab-img/fbec8e5ef76435d473c9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A traveler with luggage looking back toward a distant village.' }
+    },
     { de: 'warum', pos: 'question word', en: 'why', hi: 'क्यों',
       ex: 'Warum lernst du Deutsch?', exEn: 'Why are you learning German?' },
     { de: 'wie viel/viele', pos: 'question word', en: 'how much / how many', hi: 'कितना / कितने',
@@ -242,14 +252,20 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/6a5e51885a977da47133', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person fitting final puzzle piece' }
     },
     { de: 'genau', pos: 'adverb', en: 'exactly', hi: 'बिल्कुल',
-      ex: 'Genau! Das ist richtig.', exEn: 'Exactly! That is right.' },
+      ex: 'Genau! Das ist richtig.', exEn: 'Exactly! That is right.',
+      vis: { kind: 'grammar', de: 'Genau! Das ist richtig.', hl: 'Genau', role: 'focus', cap: 'genau = exactly' }
+    },
     { de: 'notieren', pos: 'verb', en: 'to note down', hi: 'नोट करना',
       ex: 'Notiere die Antwort.', exEn: 'Note down the answer.',
-      conj: { praesens: 'notiert', praeteritum: 'notierte', perfekt: 'hat notiert' } },
+      conj: { praesens: 'notiert', praeteritum: 'notierte', perfekt: 'hat notiert' },
+      img: { src: '/api/media/vocab-img/e6e7dcca5167c3dbc604', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person writing with a pen on a blank notepad.' }
+    },
     // — Passive —
     { de: 'bekannt', pos: 'adjective', en: 'well-known', hi: 'प्रसिद्ध',
       ex: 'Die Person ist bekannt.', exEn: 'The person is well-known.',
-      compare: { comparative: 'bekannter', superlative: 'am bekanntesten' } },
+      compare: { comparative: 'bekannter', superlative: 'am bekanntesten' },
+      img: { src: '/api/media/vocab-img/750d7014b5c042b3aea6', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Several passers-by smiling and waving in recognition at a well-known person.' }
+    },
     { de: 'Interview', art: 'das', gender: 'n', plural: 'Interviews', pos: 'noun', en: 'interview', hi: 'साक्षात्कार',
       ex: 'Macht ein Interview.', exEn: 'Do an interview.',
       img: { src: '/api/media/vocab-img/e8d129aef9a940942116', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A reporter interviewing a person with a microphone' }
@@ -257,7 +273,9 @@ const CHAPTER = {
     { de: 'Symbol', art: 'das', gender: 'n', plural: 'Symbole', pos: 'noun', en: 'symbol', hi: 'प्रतीक',
       ex: 'Das Symbol bedeutet "Frage".', exEn: 'The symbol means "question".' },
     { de: 'Bildgeschichte', art: 'die', gender: 'f', plural: 'Bildgeschichten', pos: 'noun', en: 'comic strip, picture story', hi: 'चित्र-कथा',
-      ex: 'Lies die Bildgeschichte.', exEn: 'Read the comic strip.' },
+      ex: 'Lies die Bildgeschichte.', exEn: 'Read the comic strip.',
+      img: { src: '/api/media/vocab-img/38d91708032333246eb0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An open comic book showing a wordless four-panel picture story.' }
+    },
     { de: 'Notiz', art: 'die', gender: 'f', plural: 'Notizen', pos: 'noun', en: 'note', hi: 'टिप्पणी',
       ex: 'Mach eine Notiz.', exEn: 'Make a note.',
       img: { src: '/api/media/vocab-img/24ed5e3df629f53f9e37', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A sticky note and pencil on a desk' }
@@ -267,9 +285,12 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/a80c25ce2632e769a9c4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'wooden blocks arranged in size order' }
     },
     { de: 'Situation', art: 'die', gender: 'f', plural: 'Situationen', pos: 'noun', en: 'situation', hi: 'स्थिति',
-      ex: 'In dieser Situation fragt man "Wie bitte?".', exEn: 'In this situation you ask "Pardon?".' },
+      ex: 'In dieser Situation fragt man "Wie bitte?".', exEn: 'In this situation you ask "Pardon?".',
+      img: { src: '/api/media/vocab-img/1a494d94f589c1a1c3b2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'customer in a noisy, crowded cafe leaning slightly toward the barista behind the counter, cupping a hand to their ear to', cap: 'A challenging situation requiring someone to ask for clarification', hl: 'Situation' }
+    },
     { de: 'Tabelle', art: 'die', gender: 'f', plural: 'Tabellen', pos: 'noun', en: 'table, chart', hi: 'सारणी',
-      ex: 'Schreib die Wörter in die Tabelle.', exEn: 'Write the words in the table.' },
+      ex: 'Schreib die Wörter in die Tabelle.', exEn: 'Write the words in the table.'
+    },
     { de: 'mischen', pos: 'verb', en: 'to mix, shuffle', hi: 'मिलाना',
       ex: 'Mische die Karten.', exEn: 'Shuffle the cards.',
       conj: { praesens: 'mischt', praeteritum: 'mischte', perfekt: 'hat gemischt' },
@@ -288,24 +309,36 @@ const CHAPTER = {
     // — Reference / System (classroom instruction verbs & terms) —
     { de: 'ankreuzen', pos: 'verb', en: 'to tick, mark', hi: 'निशान लगाना',
       ex: 'Kreuze die richtige Antwort an.', exEn: 'Tick the correct answer.',
-      conj: { praesens: 'kreuzt an', praeteritum: 'kreuzte an', perfekt: 'hat angekreuzt' } },
+      conj: { praesens: 'kreuzt an', praeteritum: 'kreuzte an', perfekt: 'hat angekreuzt' },
+      img: { src: '/api/media/vocab-img/8f885e9fdc09c86005d0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hand marking a cross in a square checkbox on a sheet.' }
+    },
     { de: 'bilden', pos: 'verb', en: 'to form', hi: 'बनाना',
       ex: 'Bilde eine Frage.', exEn: 'Form a question.',
-      conj: { praesens: 'bildet', praeteritum: 'bildete', perfekt: 'hat gebildet' } },
+      conj: { praesens: 'bildet', praeteritum: 'bildete', perfekt: 'hat gebildet' },
+      vis: { kind: 'grammar', de: 'Bilde eine Frage.', hl: 'Bilde', role: 'focus', cap: 'bilden = to form (eine Frage bilden)' }
+    },
     { de: 'Fragewort', art: 'das', gender: 'n', plural: 'Fragewörter', pos: 'noun', en: 'question word', hi: 'प्रश्नवाचक शब्द',
-      ex: '"Wer" ist ein Fragewort.', exEn: '"Wer" is a question word.' },
+      ex: '"Wer" ist ein Fragewort.', exEn: '"Wer" is a question word.',
+      vis: { kind: 'grammar', de: 'Wer kommt heute zur Party?', hl: 'Wer', role: 'question', cap: 'Question word introducing an open interrogative question' }
+    },
     { de: 'W-Wort', art: 'das', gender: 'n', plural: 'W-Wörter', pos: 'noun', en: 'W-word', hi: 'W-शब्द',
-      ex: 'Alle W-Wörter beginnen mit W.', exEn: 'All W-words begin with W.' },
+      ex: 'Alle W-Wörter beginnen mit W.', exEn: 'All W-words begin with W.',
+      vis: { kind: 'grammar', de: 'Wo wohnst du?', hl: 'Wo', role: 'question', cap: 'A question word beginning with W' }
+    },
     { de: 'W-Frage', art: 'die', gender: 'f', plural: 'W-Fragen', pos: 'noun', en: 'W-question', hi: 'W-प्रश्न',
-      ex: 'Eine W-Frage beginnt mit einem W-Wort.', exEn: 'A W-question begins with a W-word.' },
-    { de: 'kreisen', pos: 'verb', en: 'to circle', hi: 'घेरना',
-      ex: 'Kreise das W-Wort ein.', exEn: 'Circle the W-word.',
+      ex: 'Eine W-Frage beginnt mit einem W-Wort.', exEn: 'A W-question begins with a W-word.',
+      vis: { kind: 'grammar', de: 'Wo wohnst du?', hl: 'Wo', role: 'question', cap: 'A W-question starts with a W-word' }
+    },
+    { de: 'kreisen', pos: 'verb', en: 'to circle', hi: 'चक्कर लगाना',
+      ex: 'Ein Vogel kreist über dem Feld.', exEn: 'A bird is circling over the field.',
       conj: { praesens: 'kreist', praeteritum: 'kreiste', perfekt: 'hat gekreist' },
       img: { src: '/api/media/vocab-img/cc36ac725518f32b57a8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A hawk circling in the sky' }
     },
     { de: 'nummerieren', pos: 'verb', en: 'to number', hi: 'क्रमांक देना',
       ex: 'Nummeriere die Sätze.', exEn: 'Number the sentences.',
-      conj: { praesens: 'nummeriert', praeteritum: 'nummerierte', perfekt: 'hat nummeriert' } },
+      conj: { praesens: 'nummeriert', praeteritum: 'nummerierte', perfekt: 'hat nummeriert' },
+      vis: { kind: 'grammar', de: 'Nummeriere die Sätze.', hl: 'Nummeriere', role: 'focus', cap: 'nummerieren = to number' }
+    },
     { de: 'ordnen', pos: 'verb', en: 'to arrange, order', hi: 'क्रम में लगाना',
       ex: 'Ordne die Wörter.', exEn: 'Arrange the words.',
       conj: { praesens: 'ordnet', praeteritum: 'ordnete', perfekt: 'hat geordnet' },

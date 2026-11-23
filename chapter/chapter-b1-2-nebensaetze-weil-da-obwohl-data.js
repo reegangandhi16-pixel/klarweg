@@ -219,7 +219,9 @@ const CHAPTER = {
     { de: 'jedenfalls', pos: 'adverb', level: 'B1', en: 'in any case, anyway', hi: 'हर हाल में',
       ex: 'Ich habe jedenfalls versucht, pünktlich zu sein.', exEn: 'In any case, I tried to be on time.', exHi: 'Main har haal mein samay par aane ki koshish ki.',
       ex2: 'Jedenfalls war die Reise ein Erlebnis.', ex2En: 'In any case, the trip was an experience.', ex2Hi: 'Har haal mein, yatra ek anubhav thi.',
-      advanced: { synonyms: ['auf jeden Fall', 'zumindest'], opposites: ['keinesfalls'], collocations: ['jedenfalls nicht', 'ich, jedenfalls'] } },
+      advanced: { synonyms: ['auf jeden Fall', 'zumindest'], opposites: ['keinesfalls'], collocations: ['jedenfalls nicht', 'ich, jedenfalls'] },
+      vis: { kind: 'grammar', de: 'Ich habe jedenfalls versucht, pünktlich zu sein.', hl: 'jedenfalls', role: 'focus', cap: 'jedenfalls = in any case, anyway' }
+    },
     { de: 'aufbauen', pos: 'verb', level: 'B1', en: 'to build, set up', hi: 'बनाना, स्थापित करना',
       ex: 'Wir haben das Zelt zusammen aufgebaut.', exEn: 'We set up the tent together.', exHi: 'Humne tambu milkar khada kiya.',
       ex2: 'Sie baut ihre eigene Firma auf.', ex2En: 'She is building her own company.', ex2Hi: 'Woh apni khud ki company bana rahi hai.',
@@ -272,28 +274,40 @@ const CHAPTER = {
       ex: 'Meine Tasche liegt im Kofferraum.', exEn: 'My bag is lying in the car boot.', exHi: 'Meri bag gaadi ki dicky mein rakhi hai.',
       ex2: 'Nach dem ersten Halbjahr liegt sie in Führung.', ex2En: 'After the first half, she\'s in the lead.', ex2Hi: 'Pehle half ke baad, woh aage hai.',
       conj: { praesens: 'liegt', praeteritum: 'lag', perfekt: 'hat gelegen' },
-      advanced: { synonyms: ['sich befinden'], opposites: ['stehen'], collocations: ['in Führung liegen', 'auf dem Tisch liegen'] } },
+      advanced: { synonyms: ['sich befinden'], opposites: ['stehen'], collocations: ['in Führung liegen', 'auf dem Tisch liegen'] },
+      img: { src: '/api/media/vocab-img/f02cf82cfa538e21f09a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A book lying flat on a wooden desk' }
+    },
     { de: 'mehrfach', pos: 'adverb', level: 'B1', en: 'repeatedly, multiple times', hi: 'बार-बार',
       ex: 'Ich habe ihn mehrfach angerufen.', exEn: 'I called him repeatedly.', exHi: 'Maine use baar-baar phone kiya.',
       ex2: 'Der Fehler ist mehrfach aufgetreten.', ex2En: 'The error occurred multiple times.', ex2Hi: 'Galti kai baar hui.',
-      advanced: { synonyms: ['wiederholt', 'mehrmals'], opposites: ['einmal'], collocations: ['mehrfach versuchen', 'mehrfach anrufen'] } },
+      advanced: { synonyms: ['wiederholt', 'mehrmals'], opposites: ['einmal'], collocations: ['mehrfach versuchen', 'mehrfach anrufen'] },
+      vis: { kind: 'grammar', de: 'Ich habe ihn mehrfach angerufen.', hl: 'mehrfach', role: 'focus', cap: 'mehrfach = repeatedly, several times' }
+    },
     { de: 'obwohl', pos: 'grammar', level: 'B1', en: 'although, even though', hi: 'हालांकि, बावजूद',
       ex: 'Obwohl es regnet, gehen wir spazieren.', exEn: 'Although it\'s raining, we\'re going for a walk.', exHi: 'Halanki barish ho rahi hai, hum tehalne jaate hain.',
       ex2: 'Obwohl er müde war, hat er weitergearbeitet.', ex2En: 'Although he was tired, he kept working.', ex2Hi: 'Halanki woh thaka hua tha, usne kaam karna jaari rakha.',
-      advanced: { synonyms: ['trotzdem (as adverb, not conjunction)'], opposites: [], collocations: ['Obwohl … , Hauptsatz.'] } },
+      advanced: { synonyms: ['trotzdem (as adverb, not conjunction)'], opposites: [], collocations: ['Obwohl … , Hauptsatz.'] },
+      vis: { kind: 'grammar', de: 'Obwohl es regnet, gehen wir spazieren.', hl: 'Obwohl', role: 'focus', cap: 'obwohl = although: it rains, and we still go (verb at the end)' }
+    },
     { de: 'offenbar', pos: 'adverb', level: 'B1', en: 'apparently, obviously', hi: 'ज़ाहिर है, प्रतीत होता है',
       ex: 'Offenbar hat er die Nachricht nicht gelesen.', exEn: 'Apparently he didn\'t read the message.', exHi: 'Zahir hai usne sandesh nahi padha.',
       ex2: 'Sie ist offenbar schon gegangen.', ex2En: 'She has apparently already left.', ex2Hi: 'Woh zahir taur par pehle hi chali gayi.',
-      advanced: { synonyms: ['anscheinend', 'wohl'], opposites: [], collocations: ['offenbar nicht', 'ganz offenbar'] } },
+      advanced: { synonyms: ['anscheinend', 'wohl'], opposites: [], collocations: ['offenbar nicht', 'ganz offenbar'] },
+      vis: { kind: 'grammar', de: 'Offenbar hat er die Nachricht nicht gelesen.', hl: 'Offenbar', role: 'focus', cap: 'offenbar = apparently, obviously' }
+    },
     { de: 'schiefgehen', pos: 'verb', level: 'B1', en: 'to go wrong', hi: 'गलत होना',
       ex: 'Bei der Präsentation ist alles schiefgegangen.', exEn: 'Everything went wrong during the presentation.', exHi: 'Presentation ke dauran sab kuch galat ho gaya.',
       ex2: 'Hoffentlich geht heute nichts schief.', ex2En: 'Hopefully nothing goes wrong today.', ex2Hi: 'Ummeed hai aaj kuch bhi galat na ho.',
       conj: { praesens: 'geht schief', praeteritum: 'ging schief', perfekt: 'ist schiefgegangen' },
-      advanced: { synonyms: ['misslingen', 'scheitern'], opposites: ['gelingen', 'klappen'], collocations: ['etwas geht schief', 'alles ist schiefgegangen'] } },
+      advanced: { synonyms: ['misslingen', 'scheitern'], opposites: ['gelingen', 'klappen'], collocations: ['etwas geht schief', 'alles ist schiefgegangen'] },
+      img: { src: '/api/media/vocab-img/e9396e0ab342f75e5c73', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A flustered presenter as a display easel collapses on stage.' }
+    },
     { de: 'solche', pos: 'pronoun', level: 'B1', en: 'such, of that kind', hi: 'ऐसे, इस तरह के',
       ex: 'Solche Ideen hatte ich noch nie.', exEn: 'I\'ve never had such ideas.', exHi: 'Mujhe kabhi aise vichar nahi aaye the.',
       ex2: 'Mit solchen Problemen kenne ich mich aus.', ex2En: 'I know my way around such problems.', ex2Hi: 'Aise samasyaon ke saath mujhe anubhav hai.',
-      advanced: { synonyms: ['derartige', 'so ein'], opposites: [], collocations: ['solche Leute', 'so etwas wie solche'] } },
+      advanced: { synonyms: ['derartige', 'so ein'], opposites: [], collocations: ['solche Leute', 'so etwas wie solche'] },
+      vis: { kind: 'grammar', de: 'Solche Ideen hatte ich noch nie.', hl: 'Solche', role: 'focus', cap: 'solche = such, of that kind' }
+    },
     { de: 'spazieren', pos: 'verb', level: 'B1', en: 'to walk, stroll (spazieren gehen)', hi: 'टहलना',
       ex: 'Wir gehen jeden Abend spazieren.', exEn: 'We go for a walk every evening.', exHi: 'Hum har shaam tehalne jaate hain.',
       ex2: 'Sie ist am Fluss entlang spaziert.', ex2En: 'She strolled along the river.', ex2Hi: 'Woh nadi ke kinare tehli.',
@@ -311,11 +325,15 @@ const CHAPTER = {
     { de: 'weg sein', pos: 'idiom', level: 'B1', en: 'to be gone', hi: 'गायब होना',
       ex: 'Mein Schlüssel ist plötzlich weg.', exEn: 'My key is suddenly gone.', exHi: 'Meri chaabi achanak gayab ho gayi.',
       ex2: 'Nach dem Sturm war das ganze Zelt weg.', ex2En: 'After the storm, the whole tent was gone.', ex2Hi: 'Toofan ke baad, poora tambu gayab tha.',
-      advanced: { synonyms: ['verschwunden sein', 'verloren sein'], opposites: ['da sein'], collocations: ['ganz weg sein', 'plötzlich weg sein'] } },
+      advanced: { synonyms: ['verschwunden sein', 'verloren sein'], opposites: ['da sein'], collocations: ['ganz weg sein', 'plötzlich weg sein'] },
+      img: { src: '/api/media/vocab-img/a53a540f37050f6466d1', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person anxiously searching inside an empty coat pocket for their keys.' }
+    },
     { de: 'Abenteuer', art: 'das', gender: 'n', plural: 'Abenteuer', pos: 'noun', level: 'B1', en: 'adventure', hi: 'रोमांच',
       ex: 'Der Urlaub war ein echtes Abenteuer.', exEn: 'The holiday was a real adventure.', exHi: 'Chutti ek sacha romanch thi.',
       ex2: 'Sie sucht immer neue Abenteuer.', ex2En: 'She\'s always looking for new adventures.', ex2Hi: 'Woh hamesha naye romanch dhundhti hai.',
-      advanced: { synonyms: ['Erlebnis'], opposites: ['Routine', 'Alltag'], collocations: ['ein Abenteuer erleben', 'auf Abenteuer aus sein'] } },
+      advanced: { synonyms: ['Erlebnis'], opposites: ['Routine', 'Alltag'], collocations: ['ein Abenteuer erleben', 'auf Abenteuer aus sein'] },
+      img: { src: '/api/media/vocab-img/07eaf83498a8e1c26431', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An explorer with a backpack standing on a cliff edge.' }
+    },
     { de: 'Boot', art: 'das', gender: 'n', plural: 'Boote', pos: 'noun', level: 'B1', en: 'boat', hi: 'नाव',
       ex: 'Wir sind mit dem Boot zur Insel gefahren.', exEn: 'We took the boat to the island.', exHi: 'Hum naav se dweep gaye.',
       ex2: 'Das Boot liegt am Steg.', ex2En: 'The boat is at the jetty.', ex2Hi: 'Naav ghaat par hai.',
@@ -365,11 +383,15 @@ const CHAPTER = {
     { de: 'Perspektive', art: 'die', gender: 'f', plural: 'Perspektiven', pos: 'noun', level: 'B1', en: 'perspective', hi: 'दृष्टिकोण',
       ex: 'Aus ihrer Perspektive war alles in Ordnung.', exEn: 'From her perspective, everything was fine.', exHi: 'Uske drishtikon se, sab theek tha.',
       ex2: 'Wir brauchen eine neue Perspektive auf das Problem.', ex2En: 'We need a new perspective on the problem.', ex2Hi: 'Humein samasya par ek naya drishtikon chahiye.',
-      advanced: { synonyms: ['Sichtweise', 'Blickwinkel'], opposites: [], collocations: ['aus ihrer Perspektive', 'die Perspektive wechseln'] } },
+      advanced: { synonyms: ['Sichtweise', 'Blickwinkel'], opposites: [], collocations: ['aus ihrer Perspektive', 'die Perspektive wechseln'] },
+      img: { src: '../public/vocab-img/10586e185eebe620eeb9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people viewing a cylinder from different angles showing different shapes.' }
+    },
     { de: 'Stadtatmosphäre', art: 'die', gender: 'f', plural: '— (Sg.)', pos: 'noun', level: 'B1', en: 'city atmosphere', hi: 'शहर का माहौल',
       ex: 'Die Stadtatmosphäre in Berlin gefällt mir.', exEn: 'I like the city atmosphere in Berlin.', exHi: 'Mujhe Berlin ka shahar wala mahaul pasand hai.',
       ex2: 'Nach dem Strandurlaub vermisse ich die Stadtatmosphäre.', ex2En: 'After the beach holiday, I miss the city atmosphere.', ex2Hi: 'Beach holiday ke baad, mujhe shahar ka mahaul yaad aata hai.',
-      advanced: { synonyms: ['Großstadtflair'], opposites: ['Landleben'], collocations: ['die Stadtatmosphäre genießen'] } },
+      advanced: { synonyms: ['Großstadtflair'], opposites: ['Landleben'], collocations: ['die Stadtatmosphäre genießen'] },
+      img: { src: '/api/media/vocab-img/224b4574892ad94eb086', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A lively city street with outdoor cafés, bicyclists, and townhouses.' }
+    },
     { de: 'Strandpromenade', art: 'die', gender: 'f', plural: 'Strandpromenaden', pos: 'noun', level: 'B1', en: 'beach promenade', hi: 'समुद्र तट पथ',
       ex: 'Wir sind die Strandpromenade entlang gelaufen.', exEn: 'We walked along the beach promenade.', exHi: 'Hum samudra tat path ke saath saath chale.',
       ex2: 'Abends ist die Strandpromenade sehr voll.', ex2En: 'In the evening, the beach promenade gets very crowded.', ex2Hi: 'Shaam ko samudra tat path bahut bhida hota hai.',
@@ -389,15 +411,21 @@ const CHAPTER = {
     { de: 'Zeug', art: 'das', gender: 'n', plural: '— (Sg.)', pos: 'noun', level: 'B1', en: 'stuff, things', hi: 'सामान',
       ex: 'Wessen Zeug liegt auf dem Tisch?', exEn: 'Whose stuff is on the table?', exHi: 'Table par kiska saaman rakha hai?',
       ex2: 'Ich muss mein ganzes Zeug einpacken.', ex2En: 'I have to pack all my stuff.', ex2Hi: 'Mujhe apna saara saaman pack karna hai.',
-      advanced: { synonyms: ['Sachen', 'Kram'], opposites: [], collocations: ['mein ganzes Zeug', 'Zeug liegen lassen'] } },
+      advanced: { synonyms: ['Sachen', 'Kram'], opposites: [], collocations: ['mein ganzes Zeug', 'Zeug liegen lassen'] },
+      img: { src: '/api/media/vocab-img/4cdd8ca3e78d628e9ef9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A table covered in a messy assortment of miscellaneous stuff.' }
+    },
     { de: 'Kausalsatz', art: 'der', gender: 'm', plural: 'Kausalsätze', pos: 'noun', level: 'B1', en: 'causal clause', hi: 'कारण-वाचक वाक्य',
       ex: 'Ein Kausalsatz mit "weil" nennt einen Grund.', exEn: 'A causal clause with "weil" states a reason.', exHi: '"weil" wala kaaran-vachak vaakya ek kaaran batata hai.',
       ex2: 'Auch "da" leitet einen Kausalsatz ein.', ex2En: '"da" also introduces a causal clause.', ex2Hi: '"da" bhi ek kaaran-vachak vaakya shuru karta hai.',
-      advanced: { synonyms: ['Grundsatz'], opposites: ['Konzessivsatz'], collocations: ['ein Kausalsatz mit weil/da'] } },
+      advanced: { synonyms: ['Grundsatz'], opposites: ['Konzessivsatz'], collocations: ['ein Kausalsatz mit weil/da'] },
+      vis: { kind: 'grammar', de: 'Ich bleibe zu Hause, weil es regnet.', hl: 'weil es regnet', role: 'adverb', cap: 'A causal clause with \'weil\' gives the reason for an action' }
+    },
     { de: 'Konzessivsatz', art: 'der', gender: 'm', plural: 'Konzessivsätze', pos: 'noun', level: 'B1', en: 'concessive clause', hi: 'रियायती वाक्य',
       ex: 'Ein Konzessivsatz mit "obwohl" zeigt einen Gegensatz.', exEn: 'A concessive clause with "obwohl" shows a contrast.', exHi: '"obwohl" wala riyaayati vaakya ek vipreet baat dikhata hai.',
       ex2: 'Konzessivsätze beginnen oft mit "obwohl".', ex2En: 'Concessive clauses often begin with "obwohl".', ex2Hi: 'Riyaayati vaakya aksar "obwohl" se shuru hote hain.',
-      advanced: { synonyms: [], opposites: ['Kausalsatz'], collocations: ['ein Konzessivsatz mit obwohl'] } }
+      advanced: { synonyms: [], opposites: ['Kausalsatz'], collocations: ['ein Konzessivsatz mit obwohl'] },
+      vis: { kind: 'grammar', de: 'Wir gehen spazieren, obwohl es regnet.', hl: 'obwohl es regnet', role: 'adverb', cap: 'A concessive clause expresses an unexpected contrast' }
+    }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

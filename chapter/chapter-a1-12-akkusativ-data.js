@@ -192,10 +192,14 @@ const CHAPTER = {
   // ---------- Vocabulary (15 words) ----------
   vocab: [
     { de: 'den', pos: 'article (accusative)', en: 'the (masc. acc.)', hi: 'the (कर्म, पु.)',
-      ex: 'Ich sehe den Mann.', exEn: 'I see the man.' },
+      ex: 'Ich sehe den Mann.', exEn: 'I see the man.',
+      vis: { kind: 'grammar', de: 'Ich sehe den Mann.', hl: 'den', role: 'akkusativ', cap: 'Definite article in the accusative case' }
+    },
     { de: 'haben', pos: 'verb', en: 'to have', hi: 'होना (पास)',
       ex: 'Ich habe einen Stift.', exEn: 'I have a pen.',
-      conj: { praesens: 'hat', praeteritum: 'hatte', perfekt: 'hat gehabt' } },
+      conj: { praesens: 'hat', praeteritum: 'hatte', perfekt: 'hat gehabt' },
+      img: { src: '/api/media/vocab-img/bd609c527f8050d37d8f', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person holding a yellow pen in their hand.' }
+    },
     { de: 'finden', pos: 'verb', en: 'to find', hi: 'ढूँढ़ना (मिलना)',
       ex: 'Ich finde den Schlüssel nicht.', exEn: 'I can\'t find the key.',
       conj: { praesens: 'findet', praeteritum: 'fand', perfekt: 'hat gefunden' },
@@ -207,7 +211,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/d82473e5e49f8464430e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person searching for something under a sofa.' }
     },
     { de: 'alles', pos: 'pronoun', en: 'everything', hi: 'सब कुछ',
-      ex: 'Ich habe alles.', exEn: 'I have everything.' },
+      ex: 'Ich habe alles.', exEn: 'I have everything.',
+      img: { src: '/api/media/vocab-img/512ca6efbc75ac062844', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person standing beside a fully packed suitcase.' }
+    },
     { de: 'Geschäft', art: 'das', gender: 'n', plural: 'Geschäfte', pos: 'noun', en: 'shop', hi: 'दुकान',
       ex: 'Das Geschäft ist offen.', exEn: 'The shop is open.',
       img: { src: '/api/media/vocab-img/9093c5c67e95a2e35df4', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A small street shop with an overhead awning.' }
@@ -219,21 +225,33 @@ const CHAPTER = {
     { de: 'Sache', art: 'die', gender: 'f', plural: 'Sachen', pos: 'noun', en: 'thing', hi: 'चीज़',
       ex: 'Ich brauche die Sache.', exEn: 'I need the thing.' },
     { de: 'ein paar', pos: 'phrase', en: 'a few', hi: 'कुछ',
-      ex: 'Ich kaufe ein paar Sachen.', exEn: 'I buy a few things.' },
+      ex: 'Ich kaufe ein paar Sachen.', exEn: 'I buy a few things.',
+      img: { src: '/api/media/vocab-img/5718db9371ffcbb62742', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A shopping tote holding a few groceries on a table.' }
+    },
     { de: 'genug', pos: 'adverb', en: 'enough', hi: 'काफ़ी',
-      ex: 'Ich habe genug Zeit.', exEn: 'I have enough time.' },
+      ex: 'Ich habe genug Zeit.', exEn: 'I have enough time.',
+      img: { src: '/api/media/vocab-img/6960d867e4e01f2a2d7c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A guest gesturing with an open palm to signal enough tea.' }
+    },
     { de: 'so', pos: 'adverb', en: 'this way, like this', hi: 'इस तरह',
-      ex: 'So sagt man das auf Deutsch.', exEn: 'That is how you say it in German.' },
+      ex: 'So sagt man das auf Deutsch.', exEn: 'That is how you say it in German.',
+      img: { src: '/api/media/vocab-img/aa0bffd9a22776dcd063', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A potter demonstrating the exact hand position to an apprentice.' }
+    },
     { de: 'Ding', art: 'das', gender: 'n', plural: 'Dinge', pos: 'noun', en: 'thing', hi: 'वस्तु',
-      ex: 'Was ist das für ein Ding?', exEn: 'What kind of thing is that?' },
+      ex: 'Was ist das für ein Ding?', exEn: 'What kind of thing is that?',
+      img: { src: '/api/media/vocab-img/8f1be7c429e2c35b4755', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person inspecting an unusual geometric object on a pedestal.' }
+    },
     { de: 'Meer', art: 'das', gender: 'n', plural: 'Meere', pos: 'noun', en: 'sea', hi: 'समुद्र',
       ex: 'Ich sehe das Meer.', exEn: 'I see the sea.',
       img: { src: '/api/media/vocab-img/3ee3037afd4bfee2ed6c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'calm sea waves meeting a sandy beach' }
     },
     { de: 'Akkusativ', art: 'der', gender: 'm', plural: 'Akkusative', pos: 'noun', en: 'accusative', hi: 'कर्म कारक',
-      ex: 'Der Akkusativ ist das Objekt.', exEn: 'The accusative is the object.' },
+      ex: 'Der Akkusativ ist das Objekt.', exEn: 'The accusative is the object.',
+      vis: { kind: 'grammar', de: 'Ich kaufe einen Apfel.', hl: 'einen Apfel', role: 'akkusativ', cap: 'Direct object in the accusative case' }
+    },
     { de: 'Nominativ', art: 'der', gender: 'm', plural: 'Nominative', pos: 'noun', en: 'nominative', hi: 'कर्ता कारक',
-      ex: 'Der Nominativ ist das Subjekt.', exEn: 'The nominative is the subject.' }
+      ex: 'Der Nominativ ist das Subjekt.', exEn: 'The nominative is the subject.',
+      vis: { kind: 'grammar', de: 'Der Hund bellt laut.', hl: 'Der Hund', role: 'subject', cap: 'Subject in the nominative case' }
+    }
   ],
 
   // ---------- Accusative (rule cards → accordion) ----------

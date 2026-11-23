@@ -240,17 +240,27 @@ const CHAPTER = {
   // Coaching verbs/adjectives carry no article; the 6 nouns do.
   vocab: [
     { de: 'Aussprache', art: 'die', gender: 'f', plural: 'Aussprachen', pos: 'noun', en: 'pronunciation', hi: 'उच्चारण',
-      ex: 'Die Aussprache ist wichtig.', exEn: 'Pronunciation is important.' },
+      ex: 'Die Aussprache ist wichtig.', exEn: 'Pronunciation is important.',
+      img: { src: '/api/media/vocab-img/98d18ce869bfb9c7af6c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A coach demonstrating clear mouth shape for pronunciation to a learner.' }
+    },
     { de: 'Betonung', art: 'die', gender: 'f', plural: 'Betonungen', pos: 'noun', en: 'stress, accent', hi: 'बल (ज़ोर)',
-      ex: 'Achte auf die Betonung.', exEn: 'Pay attention to the stress.' },
+      ex: 'Achte auf die Betonung.', exEn: 'Pay attention to the stress.',
+      img: { src: '/api/media/vocab-img/f2dfca9aad2b7e7e8f8e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'language teacher gently touching their throat while clearly enunciating a word for an attentive adult beginner', cap: 'Paying attention to word stress and accentuation', hl: 'Betonung' }
+    },
     { de: 'Satzmelodie', art: 'die', gender: 'f', plural: 'Satzmelodien', pos: 'noun', en: 'intonation', hi: 'वाक्य की लय',
-      ex: 'Die Satzmelodie steigt bei Fragen.', exEn: 'Intonation rises in questions.' },
+      ex: 'Die Satzmelodie steigt bei Fragen.', exEn: 'Intonation rises in questions.',
+      img: { src: '/api/media/vocab-img/bfd51f345ec10af5db2c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person in profile with a visual voice wave rising upward.' }
+    },
     { de: 'Wortanfang', art: 'der', gender: 'm', plural: 'Wortanfänge', pos: 'noun', en: 'start of the word', hi: 'शब्द का आरंभ',
-      ex: 'Am Wortanfang hörst du den ersten Laut.', exEn: 'At the start of the word you hear the first sound.' },
+      ex: 'Am Wortanfang hörst du den ersten Laut.', exEn: 'At the start of the word you hear the first sound.',
+      vis: { kind: 'grammar', de: 'Am Wortanfang hörst du den ersten Laut.', hl: 'Wortanfang', role: 'place', cap: 'The initial sound or letters of a word' }
+    },
     { de: 'Silbenanfang', art: 'der', gender: 'm', plural: 'Silbenanfänge', pos: 'noun', en: 'start of the syllable', hi: 'अक्षर का आरंभ',
       ex: 'Am Silbenanfang steht oft ein Konsonant.', exEn: 'A consonant often stands at the start of the syllable.' },
     { de: 'Wortinnere', art: 'das', gender: 'n', plural: 'Wortinneren', pos: 'noun', en: 'the inside of a word', hi: 'शब्द का भीतरी भाग',
-      ex: 'Im Wortinneren ist der Vokal oft kurz.', exEn: 'Inside the word the vowel is often short.' },
+      ex: 'Im Wortinneren ist der Vokal oft kurz.', exEn: 'Inside the word the vowel is often short.',
+      vis: { kind: 'grammar', de: 'das Fenster', hl: 'nst', role: 'focus', cap: 'Inside a word: neither the start nor the end' }
+    },
     { de: 'achten', pos: 'verb', en: 'to pay attention', hi: 'ध्यान देना',
       ex: 'Achte auf die langen Vokale!', exEn: 'Pay attention to the long vowels!',
       conj: { praesens: 'achtet', praeteritum: 'achtete', perfekt: 'hat geachtet' } },
@@ -259,7 +269,9 @@ const CHAPTER = {
       conj: { praesens: 'spricht nach', praeteritum: 'sprach nach', perfekt: 'hat nachgesprochen' } },
     { de: 'mitsprechen', pos: 'verb', en: 'to speak along', hi: 'साथ बोलना',
       ex: 'Sprich mit mir mit.', exEn: 'Speak along with me.',
-      conj: { praesens: 'spricht mit', praeteritum: 'sprach mit', perfekt: 'hat mitgesprochen' } },
+      conj: { praesens: 'spricht mit', praeteritum: 'sprach mit', perfekt: 'hat mitgesprochen' },
+      img: { src: '/api/media/vocab-img/f3fc26f7c57b04a28303', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A student speaking aloud along with their teacher.' }
+    },
     { de: 'klopfen', pos: 'verb', en: 'to knock, to tap', hi: 'थपथपाना',
       ex: 'Wir klopfen den Rhythmus.', exEn: 'We tap the rhythm.',
       conj: { praesens: 'klopft', praeteritum: 'klopfte', perfekt: 'hat geklopft' },
@@ -287,9 +299,13 @@ const CHAPTER = {
     },
     { de: 'betont', pos: 'adjective', en: 'stressed (syllable)', hi: 'बलाघात वाला',
       ex: 'Die erste Silbe ist betont.', exEn: 'The first syllable is stressed.',
-      compare: { comparative: 'stärker betont', superlative: 'am stärksten betont' } },
+      compare: { comparative: 'stärker betont', superlative: 'am stärksten betont' },
+      img: { src: '/api/media/vocab-img/9a4e5d4d79cb25597be0', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Three bells in a line, with the first prominently striking and ringing.' }
+    },
     { de: 'noch einmal', pos: 'phrase', en: 'once more, again', hi: 'एक बार और',
-      ex: 'Sag das bitte noch einmal.', exEn: 'Please say that once more.' }
+      ex: 'Sag das bitte noch einmal.', exEn: 'Please say that once more.',
+      vis: { kind: 'grammar', de: 'Sag das bitte noch einmal.', hl: 'noch einmal', role: 'focus', cap: 'noch einmal = once more, again' }
+    }
   ],
 
   // ---------- Sound System (rule cards → accordion) ----------

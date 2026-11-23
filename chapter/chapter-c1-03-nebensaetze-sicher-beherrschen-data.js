@@ -184,12 +184,16 @@ const CHAPTER = {
       note: 'The deliberate structural design of a complex sentence, balancing multiple clauses.',
       ex1: { de: 'Die Satzarchitektur dieses Textes ist beeindruckend komplex.', en: 'The sentence architecture of this text is impressively complex.', hi: 'Iss text ki vaakya sanrachnaa prabhaavshaali roop se jatil hai.' },
       ex2: { de: 'Gute Satzarchitektur erleichtert das Verständnis langer Texte.', en: 'Good sentence architecture makes understanding long texts easier.', hi: 'Achhi vaakya sanrachnaa lambe texts ko samajhna aasaan banaati hai.' },
-      collocations: ['komplexe Satzarchitektur', 'elegante Satzarchitektur'] },
+      collocations: ['komplexe Satzarchitektur', 'elegante Satzarchitektur'],
+      vis: { kind: 'grammar', de: 'Eine komplexe Satzarchitektur prägt diesen Fachtext.', hl: 'Satzarchitektur', role: 'subject', cap: 'Sentence architecture describing structural design of sentences' }
+    },
     { de: 'die Nebensatzhierarchie', ipa: '[ˈneːbənzatsˌhiːʁaʁˌçiː]', en: 'subordinate clause hierarchy', hi: 'upvaakya padakram', pos: 'Noun · fem.', register: 'C1 · academic/grammatical', clauseFunction: 'Structural concept',
       note: 'The layered relationship between main clause, subordinate clause, and embedded clauses.',
       ex1: { de: 'Die Nebensatzhierarchie zeigt, welche Information am wichtigsten ist.', en: 'The subordinate clause hierarchy shows which information is most important.', hi: 'Upvaakya padakram dikhaata hai ki kaunsi jaankaari sabse mahatvapurn hai.' },
       ex2: { de: 'Ohne klare Nebensatzhierarchie wirkt ein Text unübersichtlich.', en: 'Without a clear subordinate clause hierarchy, a text seems confusing.', hi: 'Bina spasht upvaakya padakram ke, ek text uljhaa hua lagta hai.' },
-      collocations: ['klare Nebensatzhierarchie', 'Nebensatzhierarchie aufbauen'] },
+      collocations: ['klare Nebensatzhierarchie', 'Nebensatzhierarchie aufbauen'],
+      vis: { kind: 'grammar', de: 'Er weiß, dass sie kommt, wenn es nicht regnet.', hl: 'wenn es nicht regnet', role: 'adverb', cap: 'Nested subordinate clause dependent on another' }
+    },
     { de: 'verschachteln', ipa: '[fɛɐ̯ˈʃaxtl̩n]', en: 'to nest / embed', hi: 'nest karna', pos: 'Verb', register: 'C1 · academic/stylistic', clauseFunction: 'Nested clause verb',
       note: 'To embed one clause inside another to add narrative or logical depth.',
       ex1: { de: 'Erfahrene Autoren verschachteln Nebensätze geschickt.', en: 'Experienced authors skillfully nest subordinate clauses.', hi: 'Anubhavi lekhak upvaakyon ko kushaltaa se nest karte hain.' },
@@ -201,12 +205,16 @@ const CHAPTER = {
       note: 'Reducing a relative clause into a shorter participial attribute or nominal form for elegance.',
       ex1: { de: 'Durch Satzreduktion wirkt der Text prägnanter.', en: 'Through sentence reduction, the text seems more concise.', hi: 'Vaakya samkshepan ke jariye, text zyaada sankshipt lagta hai.' },
       ex2: { de: 'Satzreduktion ersetzt oft Relativsätze durch Partizipialattribute.', en: 'Sentence reduction often replaces relative clauses with participial attributes.', hi: 'Vaakya samkshepan aksar relative clauses ko participial attributes se badal deta hai.' },
-      collocations: ['Satzreduktion anwenden', 'stilistische Satzreduktion'] },
+      collocations: ['Satzreduktion anwenden', 'stilistische Satzreduktion'],
+      vis: { kind: 'grammar', de: 'Er hofft, die Prüfung bald zu bestehen.', hl: 'die Prüfung bald zu bestehen', role: 'object', cap: 'Sentence reduction using an infinitive clause' }
+    },
     { de: 'die Informationsstruktur', ipa: '[ɪnfɔʁmaˈtsi̯oːnsˌʃtʁʊktuːɐ̯]', en: 'information structure', hi: 'jaankaari sanrachnaa', pos: 'Noun · fem.', register: 'C1 · academic', clauseFunction: 'Information flow concept',
       note: 'The logical ordering of known information, new information, evidence, and conclusion within a sentence.',
       ex1: { de: 'Die Informationsstruktur des Absatzes ist klar gegliedert.', en: 'The information structure of the paragraph is clearly organized.', hi: 'Paragraph ki jaankaari sanrachnaa spasht roop se vyavasthit hai.' },
       ex2: { de: 'Eine logische Informationsstruktur erleichtert das Lesen.', en: 'A logical information structure makes reading easier.', hi: 'Ek taarkik jaankaari sanrachnaa padhna aasaan banaati hai.' },
-      collocations: ['logische Informationsstruktur', 'klare Informationsstruktur'] }
+      collocations: ['logische Informationsstruktur', 'klare Informationsstruktur'],
+      vis: { kind: 'grammar', de: 'Den Schlüssel habe ich im Auto gefunden.', hl: 'im Auto', role: 'focus', cap: 'Known information first, the new information last' }
+    }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

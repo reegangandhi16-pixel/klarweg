@@ -41,15 +41,24 @@ test('every vocab image follows the access rules, exists, is small, and has alt 
       const k = conceptKey(v);
       if (srcByConcept.has(k)) assert.equal(im.src, srcByConcept.get(k), `${where}: one concept, one image`);
       else srcByConcept.set(k, im.src);
-      const pub = PUBLIC.exec(im.src), gat = GATED.exec(im.src);
-      assert.ok(pub || gat, `${where}: src must be a public vocab-img path or the gated media route (${im.src})`);
+      if (im.cap !== undefined) assert.ok(typeof im.cap === 'string' && im.cap.length >= 4 && im.cap.length <= 90, `${where}: caption 4–90 chars`);
+      if (im.hl !== undefined) assert.ok(typeof im.hl === 'string' && (v.ex || '').includes(im.hl), `${where}: hl "${im.hl}" must occur in the example sentence`);
+      if (im.pair !== undefined) {
+        assert.ok(Array.isArray(im.pair) && im.pair.length === 2, `${where}: a pair has exactly two panels`);
+        assert.equal(im.pair[0].src, im.src, `${where}: img.src is the first panel (gating probe)`);
+        for (const p of im.pair) assert.ok(typeof p.label === 'string' && p.label.length >= 2 && p.label.length <= 32 && typeof p.alt === 'string' && p.alt.length >= 8, `${where}: panel label/alt`);
+      }
+      // every picture a card shows (single image or both panels) follows the same access rules
+      for (const one of im.pair ? im.pair.map((p) => p.src) : [im.src]) {
+      const pub = PUBLIC.exec(one), gat = GATED.exec(one);
+      assert.ok(pub || gat, `${where}: src must be a public vocab-img path or the gated media route (${one})`);
       if (gat) {
         assert.ok(!ch.free, `${where}: a free chapter cannot use a gated image`);
         assert.ok(Array.isArray(gatedMap[gat[1]]), `${where}: ${gat[1]} is not in docs/visual-vocab/gated-images.json`);
         (gatedLevels.get(gat[1]) || gatedLevels.set(gat[1], new Set()).get(gat[1])).add(ch.level.toUpperCase());
         continue;
       }
-      if (ch.free) publicUsedByFree.add(im.src);
+      if (ch.free) publicUsedByFree.add(one);
       for (const f of im.formats || ['webp']) for (const px of im.widths || [800]) {
         const rel = 'public/vocab-img/' + pub[1] + '-' + px + '.' + f;
         const abs = path.join(ROOT, rel);
@@ -57,6 +66,7 @@ test('every vocab image follows the access rules, exists, is small, and has alt 
         const size = fs.statSync(abs).size;
         assert.ok(size > 1024 && size <= MAX_BYTES, `${rel}: ${size} bytes`);
         assert.ok(allow.has(rel), `${rel} is not in .github/pages-allowlist.txt`);
+      }
       }
     }
   }
@@ -78,7 +88,11 @@ test('text-only concepts (grammar/function words) carry no image', () => {
     if (v.img && classify(v).tier === 'text-only') {
       const ov = path.join(ROOT, 'docs/visual-vocab/inventory/overrides.json');
       const overrides = JSON.parse(fs.readFileSync(ov, 'utf8'));
-      assert.ok(overrides[conceptKey(v)], `${ch.id} ${v.de}: text-only word has an image (add an override if intended)`);
+      // owner policy 2026-11-19: reviewed contextual / second-strategy pictures are allowed
+      const reviewed = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/visual-vocab/prompts/coverage-2.json'), 'utf8'));
+      const second = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/visual-vocab/prompts/second-strategy.json'), 'utf8'));
+      const k = conceptKey(v);
+      assert.ok(overrides[k] || (reviewed[k] && reviewed[k].subject) || (second[k] && ['scene', 'pair'].includes(second[k].type)), `${ch.id} ${v.de}: text-only word has an image (add an override if intended)`);
     }
   }
 });
@@ -150,11 +164,11 @@ test('renderer keeps img optional and degrades gracefully', () => {
 test('Images on/off control and gated-image probe (accessibility, no downloads when off, fail closed)', () => {
   const app = fs.readFileSync(path.join(ROOT, 'chapter/chapter-app.js'), 'utf8');
   // the control: a real button with aria-pressed, controlling the grid, only where images exist
-  assert.match(app, /if \(C\.vocab\.some\(w => w\.img && w\.img\.src\)\) \{/);
+  assert.match(app, /if \(C\.vocab\.some\(w => \(w\.img && w\.img\.src\) \|\| w\.vis\)\) \{/);
   assert.match(app, /el\('button', \{ class: 'filter-chip vocab-img-toggle', type: 'button', 'aria-pressed': String\(vocabImages\), 'aria-controls': 'vocab-grid' \}/);
   assert.match(app, /localStorage\.setItem\(VOCAB_IMG_PREF, vocabImages \? 'on' : 'off'\)/);
   // off: no figure is built at all (so nothing downloads), and not even the probe is sent
-  assert.match(app, /const fig = vocabImages \? vocabFigure\(w, card\) : null;/);
+  assert.match(app, /const fig = vocabImages \? \(vocabFigure\(w, card\) \|\| vocabVisual\(w\)\) : null;/);
   assert.match(app, /\(vocabImages \? probeGatedImages\(\) : Promise\.resolve\(\)\)\.then/);
   // gated figures only after a successful authenticated probe; timeout/error = no figures
   assert.match(app, /if \(GATED_IMG\.test\(im\.src\) && gatedImgOk !== true\) return null;/);
@@ -163,4 +177,48 @@ test('Images on/off control and gated-image probe (accessibility, no downloads w
   const css = fs.readFileSync(path.join(ROOT, 'chapter/chapter.css'), 'utf8');
   assert.match(css, /\.vocab-img-toggle:focus-visible \{ outline: 2px solid var\(--accent\)/);
   assert.match(css, /\.btn, \.dash-nav-item, \.filter-chip,/, 'the control inherits the 44px touch target of .filter-chip');
+});
+
+test('UI-rendered visuals (vis): valid kinds, public maps only, German stays page text', () => {
+  const ROLES = ['subject', 'verb', 'object', 'time', 'place', 'akkusativ', 'dativ', 'genitiv', 'modalverb', 'article', 'preposition', 'negation', 'adjective', 'adverb', 'question', 'focus'];
+  for (const ch of CHAPTERS) for (const v of ch.C.vocab || []) {
+    if (!v.vis) continue;
+    const x = v.vis, where = `${ch.id} ${v.de}`;
+    assert.ok(!v.img, `${where}: a card has img OR vis, never both`);
+    if (x.cap !== undefined) assert.ok(typeof x.cap === 'string' && x.cap.length >= 4 && x.cap.length <= 90, `${where}: caption`);
+    switch (x.kind) {
+      case 'number': assert.ok(Number.isInteger(x.n) && x.n >= 0, `${where}: n`); break;
+      case 'grammar': assert.ok(typeof x.de === 'string' && x.de.includes(x.hl) && x.hl.trim() && ROLES.includes(x.role), `${where}: grammar sentence/hl/role`); break;
+      case 'week': assert.ok(x.day >= 1 && x.day <= 7, where); break;
+      case 'year': assert.ok(x.month >= 1 && x.month <= 12, where); break;
+      case 'map': {
+        const m = /^\.\.\/(public\/vocab-map\/[0-9a-f]{12}\.svg)$/.exec(x.src);
+        assert.ok(m, `${where}: map src`);
+        const abs = path.join(ROOT, m[1]);
+        assert.ok(fs.existsSync(abs) && fs.statSync(abs).size <= 150 * 1024, `${where}: ${m[1]} exists and is ≤150 KB`);
+        assert.ok(allow.has(m[1]), `${m[1]} is not in .github/pages-allowlist.txt`);
+        assert.ok(!/<text|<image|href=/.test(fs.readFileSync(abs, 'utf8')), `${m[1]}: no text or external refs inside the map`);
+        break;
+      }
+      default: assert.fail(`${where}: unknown vis kind ${x.kind}`);
+    }
+  }
+  const app = fs.readFileSync(path.join(ROOT, 'chapter/chapter-app.js'), 'utf8');
+  assert.match(app, /function vocabVisual\(w\)/);
+  assert.match(app, /function highlightExample\(box, hl\)/);
+});
+
+test('the img/vis writer adds pairs, captions and vis without touching anything else', () => {
+  const ch = CHAPTERS.find((c) => (c.C.vocab || []).filter((v) => !v.img && !v.vis).length >= 2);
+  const src = fs.readFileSync(path.join(ROOT, 'chapter', ch.file), 'utf8');
+  const idx = (ch.C.vocab || []).map((v, i) => (!v.img && !v.vis ? i : -1)).filter((i) => i >= 0).slice(0, 2);
+  const pair = { src: '/api/media/vocab-img/0123456789abcdef0123', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Sunny park / person shivering', cap: 'Expected warmth, but it is cold', hl: '',
+    pair: [{ src: '/api/media/vocab-img/0123456789abcdef0123', alt: 'A sunny park bench', label: 'expected: warm' }, { src: '/api/media/vocab-img/abcdef0123456789abcd', alt: 'A person shivering', label: 'but: cold' }] };
+  delete pair.hl;
+  const vis = { kind: 'grammar', de: 'Ich gebe dem Mann das Buch.', hl: 'dem Mann', role: 'dativ', cap: 'Dative object' };
+  const out = applyImages(src, new Map([[idx[0], pair], [idx[1], { field: 'vis', value: vis }]]), { filename: ch.file });
+  assert.equal(out.added, 2);
+  const after = evalChapter(out.src, ch.file);
+  assert.deepEqual(after.vocab[idx[0]].img, pair);
+  assert.deepEqual(after.vocab[idx[1]].vis, vis);
 });

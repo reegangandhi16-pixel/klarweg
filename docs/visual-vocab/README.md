@@ -35,7 +35,7 @@ Production serves assets with `cache-control: max-age=14400` (4 h). The A1·01 p
 alone loads `chapter.css?v=23` and `chapter-app.js?v=37` (data `?v=8`), so returning
 visitors get the image renderer immediately. The other 257 chapter pages keep
 `v=22`/`v=36`; the new files are backward compatible for them. **The next site-wide
-bump must use v=24 / v=38 or higher** (enforced by `scripts/chapter-responsive.test.mjs`).
+bump must use v=25 / v=39 or higher** (enforced by `scripts/chapter-responsive.test.mjs`).
 
 ## Assets
 

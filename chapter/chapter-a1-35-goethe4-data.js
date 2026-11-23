@@ -226,8 +226,8 @@ const CHAPTER = {
   // ---------- Vocabulary (3 words) ----------
   vocab: [
     { de: 'Reisebericht', art: 'der', gender: 'm', plural: 'Reiseberichte', pos: 'noun', en: 'travel report, travelogue', hi: 'यात्रा वृत्तांत', ex: 'Ich schreibe einen Reisebericht.', exEn: 'I write a travel report.' },
-    { de: 'Urlaubsnachricht', art: 'die', gender: 'f', plural: 'Urlaubsnachrichten', pos: 'noun', en: 'holiday message', hi: 'छुट्टी का संदेश', ex: 'Ich habe eine Urlaubsnachricht geschickt.', exEn: 'I sent a holiday message.' },
-    { de: 'tatsächlich', pos: 'adverb', en: 'actually, really', hi: 'सचमुच', ex: 'Die Reise war tatsächlich toll.', exEn: 'The trip was actually great.' }
+    { de: 'Urlaubsnachricht', art: 'die', gender: 'f', plural: 'Urlaubsnachrichten', pos: 'noun', en: 'holiday message', hi: 'छुट्टी का संदेश', ex: 'Ich habe eine Urlaubsnachricht geschickt.', exEn: 'I sent a holiday message.', img: { src: '/api/media/vocab-img/ba56ba35e949db64bfec', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A holiday postcard with a palm tree illustration beside an envelope.' } },
+    { de: 'tatsächlich', pos: 'adverb', en: 'actually, really', hi: 'सचमुच', ex: 'Die Reise war tatsächlich toll.', exEn: 'The trip was actually great.', vis: { kind: 'grammar', de: 'Die Reise war tatsächlich toll.', hl: 'tatsächlich', role: 'focus', cap: 'tatsächlich = actually, really' } }
   ],
 
   // ---------- Grammar Review (application, not new theory) ----------

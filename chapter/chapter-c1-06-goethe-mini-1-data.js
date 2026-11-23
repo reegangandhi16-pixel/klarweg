@@ -196,7 +196,9 @@ const CHAPTER = {
     { de: 'der Rhythmus', ipa: '[ˈʁʏtmʊs]', en: 'rhythm', hi: 'lai', pos: 'Noun · masc.', register: 'C1 · stylistic', note: 'Refers to sentence rhythm from Chapter 4 — alternating short and long sentences.',
       ex1: { de: 'Ein guter Rhythmus entsteht durch abwechselnde Satzlängen.', en: 'A good rhythm emerges through alternating sentence lengths.', hi: 'Ek achha lai badalte hue vaakya lambaai se banta hai.' },
       ex2: { de: 'Der Rhythmus des Textes wirkt monoton.', en: 'The rhythm of the text seems monotonous.', hi: 'Text ka lai ekaakhi lagta hai.' },
-      collocations: ['einen Rhythmus finden', 'stilistischer Rhythmus'] },
+      collocations: ['einen Rhythmus finden', 'stilistischer Rhythmus'],
+      img: { src: '/api/media/vocab-img/3d43a1903d65015f6c9c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Hands tapping a hand drum with radiating pulse rings.' }
+    },
     { de: 'die Struktur', ipa: '[ʃtʁʊkˈtuːɐ̯]', en: 'structure', hi: 'sanrachnaa', pos: 'Noun · fem.', register: 'C1 · academic', note: 'Central concept across Chapters 3-5 for clause hierarchy and argument organization.',
       ex1: { de: 'Die Struktur des Entwurfs war klar erkennbar.', en: 'The structure of the draft was clearly recognizable.', hi: 'Draft ki sanrachnaa spasht roop se pehchaani jaa sakti thi.' },
       ex2: { de: 'Eine logische Struktur erleichtert das Verständnis.', en: 'A logical structure makes understanding easier.', hi: 'Ek taarkik sanrachnaa samajhna aasaan banaati hai.' },

@@ -233,10 +233,11 @@ test('258 chapter pages load the new asset versions and nothing else changed in 
   assert.equal(pages.length, 258);
   for (const f of pages) {
     const h = fs.readFileSync(path.join(ROOT, 'chapter', f), 'utf8');
-    // Visual Vocabulary, all levels: every page moves to chapter.css?v=24 /
-    // chapter-app.js?v=38 (image renderer + Images on/off control). v=23/37
-    // were A1·01-only (PR #326) and must not come back.
-    const [cssV, appV] = ['24', '38'];
+    // Visual Vocabulary coverage 2 (PR #348): every page moves to chapter.css?v=25 /
+    // chapter-app.js?v=39 (sentence-focus visuals, versioned popup dictionary).
+    // v=24/38 were the all-levels release; v=23/37 were A1·01-only (PR #326).
+    const [cssV, appV] = ['25', '39'];
+    assert.ok(!h.includes('href="chapter.css?v=24"') && !h.includes('src="chapter-app.js?v=38"'), f);
     assert.ok(h.includes('href="chapter.css?v=' + cssV + '"') && h.includes('src="chapter-app.js?v=' + appV + '"'), f);
     assert.ok(!h.includes('src="chapter-app.js?v=33"'), f);
     assert.ok(!h.includes('href="chapter.css?v=22"') && !h.includes('href="chapter.css?v=23"') && !h.includes('src="chapter-app.js?v=36"') && !h.includes('src="chapter-app.js?v=37"'), f);

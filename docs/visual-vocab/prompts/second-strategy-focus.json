@@ -1,0 +1,3535 @@
+{
+ "absolut--absolutely": {
+  "type": "grammar",
+  "de": "Das war absolut die richtige Entscheidung.",
+  "hl": "absolut",
+  "role": "focus",
+  "cap": "absolut = absolutely"
+ },
+ "aeusserst--extremely-utmost": {
+  "type": "grammar",
+  "de": "Es ist äußerst wichtig, ein Handwerk zu beherrschen.",
+  "hl": "äußerst",
+  "role": "focus",
+  "cap": "äußerst = extremely, utmost"
+ },
+ "akademischer-deutschsprecher--academic-german-speaker": {
+  "type": "grammar",
+  "de": "Wir sind jetzt akademische Deutschsprecher.",
+  "hl": "akademische Deutschsprecher",
+  "role": "focus",
+  "cap": "akademischer Deutschsprecher = academic German speaker"
+ },
+ "alles-in-allem--all-in-all": {
+  "type": "grammar",
+  "de": "Alles in allem war die Konferenz ein Erfolg.",
+  "hl": "Alles in allem",
+  "role": "focus",
+  "cap": "alles in allem = all in all"
+ },
+ "allzu--all-too": {
+  "type": "grammar",
+  "de": "Manche geben allzu oft vor, interessiert zu sein.",
+  "hl": "allzu",
+  "role": "focus",
+  "cap": "allzu = all too"
+ },
+ "als--as": {
+  "type": "grammar",
+  "de": "Ich arbeite als Lehrer.",
+  "hl": "als",
+  "role": "focus",
+  "cap": "als = as"
+ },
+ "als--than": {
+  "type": "grammar",
+  "de": "Berlin ist größer als Bonn.",
+  "hl": "als",
+  "role": "focus",
+  "cap": "als = than"
+ },
+ "als--when": {
+  "type": "grammar",
+  "de": "Als ich klein war, spielte ich jeden Tag Fußball.",
+  "hl": "Als",
+  "role": "focus",
+  "cap": "als = when (one past event)"
+ },
+ "also-gut--very-well": {
+  "type": "grammar",
+  "de": "Also gut, wir sollten jetzt los.",
+  "hl": "Also gut",
+  "role": "focus",
+  "cap": "also gut = very well"
+ },
+ "an--x": {
+  "type": "grammar",
+  "de": "Ich schreibe an Max.",
+  "hl": "an",
+  "role": "focus",
+  "cap": "an = to (write to)"
+ },
+ "an-d--over": {
+  "type": "grammar",
+  "de": "An den Wochenenden ruhe ich mich aus.",
+  "hl": "An",
+  "role": "focus",
+  "cap": "an (+D) = over (a period)"
+ },
+ "an-sich--in-itself": {
+  "type": "grammar",
+  "de": "Das ist an sich kein Problem.",
+  "hl": "an sich",
+  "role": "focus",
+  "cap": "an sich = in itself"
+ },
+ "andererseits--on-the-other-hand": {
+  "type": "grammar",
+  "de": "Andererseits ist der Preis fair.",
+  "hl": "Andererseits",
+  "role": "focus",
+  "cap": "andererseits = on the other hand"
+ },
+ "andernfalls--otherwise": {
+  "type": "grammar",
+  "de": "Andernfalls lässt sich der Zeitplan nicht einhalten.",
+  "hl": "Andernfalls",
+  "role": "focus",
+  "cap": "andernfalls = otherwise"
+ },
+ "angesichts--in-view-of-given": {
+  "type": "grammar",
+  "de": "Angesichts des Defekts lässt sich das nicht vermeiden.",
+  "hl": "Angesichts",
+  "role": "focus",
+  "cap": "angesichts = in view of, given"
+ },
+ "anhand--on-the-basis-of-using": {
+  "type": "grammar",
+  "de": "Anhand mehrerer Fallstudien belegt die Autorin ihre These.",
+  "hl": "Anhand",
+  "role": "focus",
+  "cap": "anhand = on the basis of, using"
+ },
+ "anlaesslich--on-the-occasion-of": {
+  "type": "grammar",
+  "de": "Anlässlich des Ankunftsabends gab es ein Fest.",
+  "hl": "Anlässlich",
+  "role": "focus",
+  "cap": "anlässlich = on the occasion of"
+ },
+ "anscheinend--apparently": {
+  "type": "grammar",
+  "de": "Anscheinend steigt die Lebensqualität hier.",
+  "hl": "Anscheinend",
+  "role": "focus",
+  "cap": "anscheinend = apparently"
+ },
+ "arg--badly-very": {
+  "type": "grammar",
+  "de": "Sie war arg enttäuscht.",
+  "hl": "arg",
+  "role": "focus",
+  "cap": "arg = badly, very"
+ },
+ "auch--also-too": {
+  "type": "grammar",
+  "de": "Ich komme auch aus Indien.",
+  "hl": "auch",
+  "role": "focus",
+  "cap": "auch = also, too"
+ },
+ "auf-evidenz-basieren--be-based-on-evidence": {
+  "type": "grammar",
+  "de": "Die Empfehlung basiert auf solider wissenschaftlicher Evidenz.",
+  "hl": "basiert auf solider wissenschaftlicher Evidenz",
+  "role": "focus",
+  "cap": "auf Evidenz basieren = be based on evidence"
+ },
+ "aufgrund--due-to-because-of": {
+  "type": "grammar",
+  "de": "Aufgrund der neuen Datenlage musste die Hypothese revidiert werden.",
+  "hl": "Aufgrund",
+  "role": "focus",
+  "cap": "aufgrund = due to, because of"
+ },
+ "aufgrund--on-the-basis-of-because-of": {
+  "type": "grammar",
+  "de": "Aufgrund der Studie wurde das Verfahren geändert.",
+  "hl": "Aufgrund",
+  "role": "focus",
+  "cap": "aufgrund = on the basis of, because of"
+ },
+ "aus-den-augen-verlieren--lose-touch": {
+  "type": "grammar",
+  "de": "Wir hatten uns fast aus den Augen verloren.",
+  "hl": "aus den Augen verloren",
+  "role": "focus",
+  "cap": "aus den Augen verlieren = to lose touch"
+ },
+ "aus-wissenschaftlicher-sicht--from-a-scientific-point-of-view": {
+  "type": "grammar",
+  "de": "Aus wissenschaftlicher Sicht ist die Fragestellung noch nicht ausreichend geklärt.",
+  "hl": "Aus wissenschaftlicher Sicht",
+  "role": "focus",
+  "cap": "aus wissenschaftlicher Sicht = from a scientific point of view"
+ },
+ "bestimmt--certainly-surely": {
+  "type": "grammar",
+  "de": "Er kommt bestimmt.",
+  "hl": "bestimmt",
+  "role": "focus",
+  "cap": "bestimmt = certainly, surely"
+ },
+ "bestimmt--definitely": {
+  "type": "grammar",
+  "de": "Der lange Sommertag wird bestimmt schön.",
+  "hl": "bestimmt",
+  "role": "focus",
+  "cap": "bestimmt = definitely"
+ },
+ "bevor--before": {
+  "type": "grammar",
+  "de": "Bevor wir weiterreden, sollten wir zuhören.",
+  "hl": "Bevor",
+  "role": "focus",
+  "cap": "bevor = before"
+ },
+ "beziehungsweise--or-rather-respectively": {
+  "type": "grammar",
+  "de": "Anna, beziehungsweise Rohan, kommt später.",
+  "hl": "beziehungsweise",
+  "role": "focus",
+  "cap": "beziehungsweise = or rather, respectively"
+ },
+ "bis--until-till": {
+  "type": "grammar",
+  "de": "Ich arbeite bis fünf Uhr.",
+  "hl": "bis",
+  "role": "focus",
+  "cap": "bis = until, till"
+ },
+ "bloss--only-just": {
+  "type": "grammar",
+  "de": "Ich hätte bloß eine kleine Frage.",
+  "hl": "bloß",
+  "role": "focus",
+  "cap": "bloß = only, just"
+ },
+ "ca--approx": {
+  "type": "grammar",
+  "de": "Die Fahrt dauert ca. drei Stunden.",
+  "hl": "ca.",
+  "role": "focus",
+  "cap": "ca. = approx."
+ },
+ "co--and-company": {
+  "type": "grammar",
+  "de": "Café Schmidt & Co",
+  "hl": "& Co",
+  "role": "focus",
+  "cap": "& Co = and company"
+ },
+ "contra--con": {
+  "type": "grammar",
+  "de": "Ein Argument contra die Globalisierung ist, dass kleine Firmen nicht profitieren.",
+  "hl": "contra",
+  "role": "focus",
+  "cap": "contra = con (against)"
+ },
+ "dann--then": {
+  "type": "grammar",
+  "de": "Wenn es regnet, dann bleiben wir zu Hause.",
+  "hl": "dann",
+  "role": "focus",
+  "cap": "dann = then"
+ },
+ "daran--about-that": {
+  "type": "grammar",
+  "de": "Ich denke oft daran.",
+  "hl": "daran",
+  "role": "focus",
+  "cap": "daran = about that"
+ },
+ "darauf--that": {
+  "type": "grammar",
+  "de": "Darauf freue ich mich schon.",
+  "hl": "Darauf",
+  "role": "focus",
+  "cap": "darauf = to that"
+ },
+ "das-duerfte-stimmen--that-is-likely-to-be-true": {
+  "type": "grammar",
+  "de": "Schreib nicht \"Das stimmt\", schreib lieber \"Das dürfte stimmen\".",
+  "hl": "Das dürfte stimmen",
+  "role": "focus",
+  "cap": "Das dürfte stimmen. = That is likely to be true."
+ },
+ "das-register--register": {
+  "type": "grammar",
+  "de": "Das Register bestimmt, welche Adjektive und Konstruktionen passend sind.",
+  "hl": "Register",
+  "role": "focus",
+  "cap": "das Register = register (linguistic)"
+ },
+ "dass--that": {
+  "type": "grammar",
+  "de": "Ich glaube, dass Deutsch wichtig ist.",
+  "hl": "dass",
+  "role": "focus",
+  "cap": "dass = that (sends verb to the end)"
+ },
+ "davon--of-it-from-it": {
+  "type": "grammar",
+  "de": "Ich habe nichts davon gewusst.",
+  "hl": "davon",
+  "role": "focus",
+  "cap": "davon = of it, from it"
+ },
+ "davor--before-that-in-front-of-it": {
+  "type": "grammar",
+  "de": "Ärzte warnen davor, zu viel Zucker zu essen.",
+  "hl": "davor",
+  "role": "focus",
+  "cap": "davor = before that, in front of it"
+ },
+ "dazu--in-addition-to-that": {
+  "type": "grammar",
+  "de": "Dazu brauche ich noch ein Foto.",
+  "hl": "Dazu",
+  "role": "focus",
+  "cap": "dazu = in addition, to that"
+ },
+ "dazu--that-about-it": {
+  "type": "grammar",
+  "de": "Was meinst du dazu?",
+  "hl": "dazu",
+  "role": "focus",
+  "cap": "dazu = to that, about it"
+ },
+ "der-autor-beschreibt--author-describes": {
+  "type": "grammar",
+  "de": "Der Autor beschreibt die Auswirkungen des Klimawandels.",
+  "hl": "Der Autor beschreibt",
+  "role": "focus",
+  "cap": "der Autor beschreibt = the author describes"
+ },
+ "der-bericht-dem-zufolge--report-according-to-which": {
+  "type": "grammar",
+  "de": "Der Bericht, dem zufolge die Zahlen gestiegen sind, sorgte für Aufsehen.",
+  "hl": "Der Bericht, dem zufolge",
+  "role": "focus",
+  "cap": "der Bericht, dem zufolge ... = the report, according to which ..."
+ },
+ "der-die-berechtigte--entitled-authorized-person": {
+  "type": "grammar",
+  "de": "Nur der Berechtigte darf die Zahlung entgegennehmen.",
+  "hl": "Berechtigte",
+  "role": "focus",
+  "cap": "der/die der/die Berechtigte = the entitled/authorized person"
+ },
+ "der-lerneffekt--learning-effect": {
+  "type": "grammar",
+  "de": "Der Lerneffekt war deutlich sichtbar.",
+  "hl": "Lerneffekt",
+  "role": "focus",
+  "cap": "der der Lerneffekt = learning effect"
+ },
+ "der-urlaubstyp--holiday-type": {
+  "type": "grammar",
+  "de": "Sie ist eher der ruhige Urlaubstyp.",
+  "hl": "Urlaubstyp",
+  "role": "focus",
+  "cap": "der der Urlaubstyp = holiday type"
+ },
+ "der-wertewandel--change-of-values": {
+  "type": "grammar",
+  "de": "Der Wertewandel prägt die junge Generation.",
+  "hl": "Wertewandel",
+  "role": "focus",
+  "cap": "der der Wertewandel = change of values"
+ },
+ "derzeit--currently-at-present": {
+  "type": "grammar",
+  "de": "Derzeit läuft die Untersuchung.",
+  "hl": "Derzeit",
+  "role": "focus",
+  "cap": "derzeit = currently, at present"
+ },
+ "die-arbeitsmarktpolitikreform--labor-market-policy-reform": {
+  "type": "grammar",
+  "de": "Die Arbeitsmarktpolitikreform wird kontrovers diskutiert.",
+  "hl": "Arbeitsmarktpolitikreform",
+  "role": "focus",
+  "cap": "die Arbeitsmarktpolitikreform = labor-market policy reform"
+ },
+ "die-argumentation-macht-deutlich-dass--argumentation-makes-clear-that": {
+  "type": "grammar",
+  "de": "Die Argumentation macht deutlich, dass beide Faktoren zusammenwirken.",
+  "hl": "Die Argumentation macht deutlich, dass",
+  "role": "focus",
+  "cap": "die Argumentation macht deutlich, dass = the argumentation makes clear that"
+ },
+ "die-begruendung--justification-reasoning": {
+  "type": "grammar",
+  "de": "Die Begründung des Urteils umfasst mehrere Seiten.",
+  "hl": "Begründung",
+  "role": "focus",
+  "cap": "die Begründung = justification, reasoning"
+ },
+ "die-bildungserwartung--educational-expectation": {
+  "type": "grammar",
+  "de": "Obgleich die Bildungserwartung hoch ist, wählen viele einen praktischen Weg.",
+  "hl": "Bildungserwartung",
+  "role": "focus",
+  "cap": "die die Bildungserwartung = educational expectation"
+ },
+ "die-daten-anhand-derer--data-on-the-basis-of-which": {
+  "type": "grammar",
+  "de": "Die Daten, anhand derer die Analyse durchgeführt wurde, stammen aus einer großen Stichprobe.",
+  "hl": "Daten, anhand derer",
+  "role": "focus",
+  "cap": "die Daten, anhand derer ... = the data, on the basis of which ..."
+ },
+ "die-daten-belegen-dass--data-show-prove-that": {
+  "type": "grammar",
+  "de": "Die Daten belegen, dass die Methode zuverlässig funktioniert.",
+  "hl": "Daten belegen, dass",
+  "role": "focus",
+  "cap": "die Daten belegen, dass = the data show/prove that"
+ },
+ "die-daten-wurden-erhoben--data-were-collected": {
+  "type": "grammar",
+  "de": "Die Daten wurden über einen Zeitraum von zwei Jahren erhoben.",
+  "hl": "Die Daten wurden über einen Zeitraum von zwei Jahren erhoben",
+  "role": "focus",
+  "cap": "die Daten wurden erhoben = the data were collected"
+ },
+ "die-entscheidung-die--decision-which": {
+  "type": "grammar",
+  "de": "Die Entscheidung, die gestern getroffen wurde, betrifft Tausende Mitarbeiter.",
+  "hl": "Entscheidung, die",
+  "role": "focus",
+  "cap": "die Entscheidung, die ... = the decision, which ..."
+ },
+ "die-ergebnisse-auf-denen--results-on-which": {
+  "type": "grammar",
+  "de": "Die Ergebnisse, auf denen diese Theorie beruht, stammen aus mehreren Ländern.",
+  "hl": "Ergebnisse, auf denen",
+  "role": "focus",
+  "cap": "die Ergebnisse, auf denen ... = the results, on which ..."
+ },
+ "die-international-anerkannte-wissenschaftlich-entwickelte-me--internationally-recognized-scientifically-developed-method": {
+  "type": "grammar",
+  "de": "Die international anerkannte wissenschaftlich entwickelte Methode wird nun weltweit eingesetzt.",
+  "hl": "anerkannte wissenschaftlich entwickelte Methode",
+  "role": "focus",
+  "cap": "an internationally recognised, scientifically developed method"
+ },
+ "die-selbstbestimmung--self-determination": {
+  "type": "grammar",
+  "de": "Das Recht auf Selbstbestimmung ist grundgesetzlich verankert.",
+  "hl": "Selbstbestimmung",
+  "role": "focus",
+  "cap": "die Selbstbestimmung = self-determination"
+ },
+ "die-umschreibung--paraphrase": {
+  "type": "grammar",
+  "de": "Die Umschreibung wird verständlicher sein.",
+  "hl": "Umschreibung",
+  "role": "focus",
+  "cap": "die die Umschreibung = paraphrase"
+ },
+ "dienstags--on-tuesdays": {
+  "type": "grammar",
+  "de": "Dienstags spiele ich Tennis.",
+  "hl": "Dienstags",
+  "role": "focus",
+  "cap": "dienstags = on Tuesdays"
+ },
+ "dies-legt-nahe-dass--this-suggests-that": {
+  "type": "grammar",
+  "de": "Dies legt nahe, dass weitere Untersuchungen notwendig sind.",
+  "hl": "Dies legt nahe, dass",
+  "role": "focus",
+  "cap": "dies legt nahe, dass = this suggests that"
+ },
+ "dies-waere-problematisch--this-would-be-problematic": {
+  "type": "grammar",
+  "de": "Dies wäre problematisch, wenn die Daten öffentlich würden.",
+  "hl": "Dies wäre problematisch",
+  "role": "focus",
+  "cap": "Dies wäre problematisch. = This would be problematic."
+ },
+ "diesmal--this-time": {
+  "type": "grammar",
+  "de": "Diesmal habe ich es genau gelesen.",
+  "hl": "Diesmal",
+  "role": "focus",
+  "cap": "diesmal = this time"
+ },
+ "drin-sein--be-in-be-possible": {
+  "type": "grammar",
+  "de": "Eine Ausrede ist nicht drin.",
+  "hl": "drin",
+  "role": "focus",
+  "cap": "drin sein = to be in, be possible"
+ },
+ "durchaus--thoroughly-definitely": {
+  "type": "grammar",
+  "de": "Das ist durchaus möglich.",
+  "hl": "durchaus",
+  "role": "focus",
+  "cap": "durchaus = thoroughly, definitely"
+ },
+ "ebenfalls--also-likewise": {
+  "type": "grammar",
+  "de": "Das Ladekabel war ebenfalls im Angebot.",
+  "hl": "ebenfalls",
+  "role": "focus",
+  "cap": "ebenfalls = also, likewise"
+ },
+ "ebenfalls--likewise-also": {
+  "type": "grammar",
+  "de": "Sie kommt ebenfalls zur Party.",
+  "hl": "ebenfalls",
+  "role": "focus",
+  "cap": "ebenfalls = likewise, also"
+ },
+ "ebenso--likewise-also": {
+  "type": "grammar",
+  "de": "Anna kommt, Rohan ebenso.",
+  "hl": "ebenso",
+  "role": "focus",
+  "cap": "ebenso = likewise, also"
+ },
+ "ebenso--likewise-equally": {
+  "type": "grammar",
+  "de": "Ebenso wichtig ist die Berücksichtigung sozialer Faktoren.",
+  "hl": "Ebenso",
+  "role": "focus",
+  "cap": "ebenso = likewise, equally"
+ },
+ "echt-wirklich--really-genuinely": {
+  "type": "grammar",
+  "de": "Das ist echt schön.",
+  "hl": "echt",
+  "role": "focus",
+  "cap": "echt (wirklich) = really, genuinely"
+ },
+ "eher--rather": {
+  "type": "grammar",
+  "de": "Er war eher schüchtern als mutig.",
+  "hl": "eher",
+  "role": "focus",
+  "cap": "eher = rather"
+ },
+ "eine-moegliche-erklaerung-waere--possible-explanation-would-be": {
+  "type": "grammar",
+  "de": "Eine mögliche Erklärung wäre, dass Universitäten KI-Tools aktiv fördern.",
+  "hl": "Eine mögliche Erklärung wäre",
+  "role": "focus",
+  "cap": "eine mögliche Erklärung wäre = a possible explanation would be"
+ },
+ "eines-tages--one-day": {
+  "type": "grammar",
+  "de": "Eines Tages möchte ich einen eigenen Garten haben.",
+  "hl": "Eines Tages",
+  "role": "focus",
+  "cap": "eines Tages = one day (Genitiv time expression)"
+ },
+ "einfach--simply": {
+  "type": "grammar",
+  "de": "Sag es einfach so wie immer.",
+  "hl": "einfach",
+  "role": "focus",
+  "cap": "einfach = simply"
+ },
+ "einfach-so--just-like-that": {
+  "type": "grammar",
+  "de": "Das wird nicht einfach so passieren.",
+  "hl": "einfach so",
+  "role": "focus",
+  "cap": "einfach so = just like that"
+ },
+ "einige--some-several": {
+  "type": "grammar",
+  "de": "Ich frage mich, ob einige Leute schon da sind.",
+  "hl": "einige",
+  "role": "focus",
+  "cap": "einige = some, several"
+ },
+ "einschliesslich--including": {
+  "type": "grammar",
+  "de": "Der Preis, einschließlich Steuer, ist fair.",
+  "hl": "einschließlich",
+  "role": "focus",
+  "cap": "einschließlich = including"
+ },
+ "entgegen--contrary-to": {
+  "type": "grammar",
+  "de": "Entgegen den Erwartungen stieg die Nachfrage weiter.",
+  "hl": "Entgegen",
+  "role": "focus",
+  "cap": "entgegen = contrary to"
+ },
+ "erst--only-not-until": {
+  "type": "grammar",
+  "de": "Wir feiern erst nach der Prüfung.",
+  "hl": "erst",
+  "role": "focus",
+  "cap": "erst = only, not until"
+ },
+ "erst-mal--first": {
+  "type": "grammar",
+  "de": "Erst mal checke ich die Kommentare.",
+  "hl": "Erst mal",
+  "role": "focus",
+  "cap": "erst mal = first (of all)"
+ },
+ "es-besteht-ein-zusammenhang-zwischen--there-is-a-connection-between": {
+  "type": "grammar",
+  "de": "Es besteht ein Zusammenhang zwischen Bildung und Einkommen.",
+  "hl": "Es besteht ein Zusammenhang zwischen",
+  "role": "focus",
+  "cap": "es besteht ein Zusammenhang zwischen = there is a connection between"
+ },
+ "etwa--approximately-about": {
+  "type": "grammar",
+  "de": "Die Fahrt dauert etwa zwanzig Minuten.",
+  "hl": "etwa",
+  "role": "focus",
+  "cap": "etwa = approximately, about"
+ },
+ "etwas--something": {
+  "type": "grammar",
+  "de": "Ich hätte gern etwas Ruhe.",
+  "hl": "etwas",
+  "role": "focus",
+  "cap": "etwas = something"
+ },
+ "etwas--something-anything": {
+  "type": "grammar",
+  "de": "Möchten Sie etwas trinken?",
+  "hl": "etwas",
+  "role": "focus",
+  "cap": "etwas = something, anything"
+ },
+ "euch--you-all": {
+  "type": "grammar",
+  "de": "Ich vergesse euch nicht.",
+  "hl": "euch",
+  "role": "focus",
+  "cap": "euch = you all (accusative)"
+ },
+ "euer-eure--your": {
+  "type": "grammar",
+  "de": "Wo ist euer Haus?",
+  "hl": "euer",
+  "role": "focus",
+  "cap": "euer/eure = your (plural)"
+ },
+ "fliessend--fluently": {
+  "type": "grammar",
+  "de": "Ich will fließend Deutsch sprechen.",
+  "hl": "fließend",
+  "role": "focus",
+  "cap": "fließend = fluently"
+ },
+ "freitags--on-fridays": {
+  "type": "grammar",
+  "de": "Freitags gehe ich aus.",
+  "hl": "Freitags",
+  "role": "focus",
+  "cap": "freitags = on Fridays"
+ },
+ "ganz--completely-all-the-way-quite": {
+  "type": "grammar",
+  "de": "Mein Zertifikat ist ganz neu.",
+  "hl": "ganz",
+  "role": "focus",
+  "cap": "ganz = completely, all the way, quite"
+ },
+ "ganz--quite-completely": {
+  "type": "grammar",
+  "de": "Das ist ganz einfach.",
+  "hl": "ganz",
+  "role": "focus",
+  "cap": "ganz = quite, completely"
+ },
+ "gar--at-all": {
+  "type": "grammar",
+  "de": "Das ist gar nicht schlecht.",
+  "hl": "gar",
+  "role": "focus",
+  "cap": "gar = at all"
+ },
+ "gegen--around": {
+  "type": "grammar",
+  "de": "Er kam gegen acht Uhr an.",
+  "hl": "gegen",
+  "role": "focus",
+  "cap": "gegen = around (time)"
+ },
+ "gehen-um--be-about": {
+  "type": "grammar",
+  "de": "Heute geht es um Medien.",
+  "hl": "geht es um",
+  "role": "focus",
+  "cap": "gehen um = to be about"
+ },
+ "gell--right": {
+  "type": "grammar",
+  "de": "Das ist toll, gell?",
+  "hl": "gell",
+  "role": "focus",
+  "cap": "gell = right (tag question, regional)"
+ },
+ "gemaess--in-accordance-with-pursuant-to": {
+  "type": "grammar",
+  "de": "Gemäß Artikel 5 der Verfassung ist die Meinungsfreiheit geschützt.",
+  "hl": "Gemäß",
+  "role": "focus",
+  "cap": "gemäß = in accordance with, pursuant to"
+ },
+ "gerade--at-the-moment-just-now": {
+  "type": "grammar",
+  "de": "Ich lerne gerade Deutsch.",
+  "hl": "gerade",
+  "role": "focus",
+  "cap": "gerade = at the moment, just now"
+ },
+ "gestern--yesterday": {
+  "type": "grammar",
+  "de": "Gestern war ich zu Hause.",
+  "hl": "Gestern",
+  "role": "focus",
+  "cap": "gestern = yesterday"
+ },
+ "heute--today": {
+  "type": "grammar",
+  "de": "Heute habe ich keine Zeit.",
+  "hl": "Heute",
+  "role": "focus",
+  "cap": "heute = today"
+ },
+ "hinsichtlich--regarding-with-respect-to": {
+  "type": "grammar",
+  "de": "Hinsichtlich der Kosten gibt es noch Fragen.",
+  "hl": "Hinsichtlich",
+  "role": "focus",
+  "cap": "hinsichtlich = regarding, with respect to"
+ },
+ "hinsichtlich--with-regard-to-in-terms-of": {
+  "type": "grammar",
+  "de": "Hinsichtlich der Methodik gibt es deutliche Unterschiede zwischen den Studien.",
+  "hl": "Hinsichtlich",
+  "role": "focus",
+  "cap": "hinsichtlich = with regard to, in terms of"
+ },
+ "im-folgenden--in-the-following-below": {
+  "type": "grammar",
+  "de": "Im Folgenden sollten wir die Ergebnisse zusammenfassen.",
+  "hl": "Im Folgenden",
+  "role": "focus",
+  "cap": "im Folgenden = in the following, below"
+ },
+ "im-hinblick-auf--with-a-view-to-regarding": {
+  "type": "grammar",
+  "de": "Im Hinblick auf die begrenzten Ressourcen muss priorisiert werden.",
+  "hl": "Im Hinblick auf",
+  "role": "focus",
+  "cap": "im Hinblick auf = with a view to, regarding"
+ },
+ "im-rahmen-von--within-the-framework-of-as-part-of": {
+  "type": "grammar",
+  "de": "Im Rahmen von diesem Projekt entstanden mehrere Publikationen.",
+  "hl": "Im Rahmen von",
+  "role": "focus",
+  "cap": "im Rahmen von = within the framework of, as part of"
+ },
+ "immer--always": {
+  "type": "grammar",
+  "de": "Ich frühstücke immer.",
+  "hl": "immer",
+  "role": "focus",
+  "cap": "immer = always"
+ },
+ "immer-wenn--whenever": {
+  "type": "grammar",
+  "de": "Immer wenn ich komme, bellt ihr Hund.",
+  "hl": "Immer wenn",
+  "role": "focus",
+  "cap": "immer wenn = whenever"
+ },
+ "in-bezug-auf--with-regard-to": {
+  "type": "grammar",
+  "de": "In Bezug auf die Kosten müssen wir noch entscheiden.",
+  "hl": "In Bezug auf",
+  "role": "focus",
+  "cap": "in Bezug auf = with regard to"
+ },
+ "in-diesem-zusammenhang--in-this-context-in-this-connection": {
+  "type": "grammar",
+  "de": "In diesem Zusammenhang ist auch die Rolle der Medien zu betrachten.",
+  "hl": "In diesem Zusammenhang",
+  "role": "focus",
+  "cap": "in diesem Zusammenhang = in this context, in this connection"
+ },
+ "infolge--as-a-result-of-due-to": {
+  "type": "grammar",
+  "de": "Infolge des Notrufs wird sofort reagiert.",
+  "hl": "Infolge",
+  "role": "focus",
+  "cap": "infolge = as a result of, due to"
+ },
+ "infolge--as-a-result-of-owing-to": {
+  "type": "grammar",
+  "de": "Infolge des Klimawandels häufen sich Extremwetterereignisse.",
+  "hl": "Infolge",
+  "role": "focus",
+  "cap": "infolge = as a result of, owing to"
+ },
+ "infrage-kommen--be-an-option-be-considered": {
+  "type": "grammar",
+  "de": "Kommt eine Geschäftsverhandlung noch infrage?",
+  "hl": "infrage",
+  "role": "focus",
+  "cap": "infrage kommen = to be an option, be considered"
+ },
+ "innerhalb-von--within": {
+  "type": "grammar",
+  "de": "Innerhalb von zwei Minuten sind Sie da.",
+  "hl": "Innerhalb von",
+  "role": "focus",
+  "cap": "innerhalb von = within"
+ },
+ "insgesamt--in-total-altogether": {
+  "type": "grammar",
+  "de": "Insgesamt kommen zwanzig Gäste.",
+  "hl": "Insgesamt",
+  "role": "focus",
+  "cap": "insgesamt = in total, altogether"
+ },
+ "insgesamt--overall-altogether": {
+  "type": "grammar",
+  "de": "Insgesamt bestätigen die Ergebnisse die ursprüngliche Hypothese.",
+  "hl": "Insgesamt",
+  "role": "focus",
+  "cap": "insgesamt = overall, altogether"
+ },
+ "insgesamt--overall-in-total": {
+  "type": "grammar",
+  "de": "Insgesamt überwiegen die Vorteile.",
+  "hl": "Insgesamt",
+  "role": "focus",
+  "cap": "insgesamt = overall, in total"
+ },
+ "inzwischen--meanwhile-by-now": {
+  "type": "grammar",
+  "de": "Inzwischen kenne ich alle im Kurs.",
+  "hl": "Inzwischen",
+  "role": "focus",
+  "cap": "inzwischen = meanwhile, by now"
+ },
+ "irgendetwas--something-anything": {
+  "type": "grammar",
+  "de": "Könnten Sie mir irgendetwas Vegetarisches empfehlen?",
+  "hl": "irgendetwas",
+  "role": "focus",
+  "cap": "irgendetwas = something, anything"
+ },
+ "irgendwann--sometime": {
+  "type": "grammar",
+  "de": "Irgendwann werden wir alle Drohnen nutzen.",
+  "hl": "Irgendwann",
+  "role": "focus",
+  "cap": "irgendwann = sometime"
+ },
+ "irgendwo--somewhere": {
+  "type": "grammar",
+  "de": "Irgendwo muss die Forschung ja nützen.",
+  "hl": "Irgendwo",
+  "role": "focus",
+  "cap": "irgendwo = somewhere"
+ },
+ "ja--x": {
+  "type": "grammar",
+  "de": "Das ist ja toll!",
+  "hl": "ja",
+  "role": "focus",
+  "cap": "ja = (modal particle)"
+ },
+ "jaehrig--year-old": {
+  "type": "grammar",
+  "de": "Der zehnjährige Enkel ist so groß wie ich.",
+  "hl": "zehnjährige",
+  "role": "focus",
+  "cap": "-jährig = -year-old (as in zehnjährig)"
+ },
+ "jahrelang--for-years": {
+  "type": "grammar",
+  "de": "Er lebte jahrelang auf der Alm.",
+  "hl": "jahrelang",
+  "role": "focus",
+  "cap": "jahrelang = for years"
+ },
+ "jedenfalls--in-any-case-anyway": {
+  "type": "grammar",
+  "de": "Ich habe jedenfalls versucht, pünktlich zu sein.",
+  "hl": "jedenfalls",
+  "role": "focus",
+  "cap": "jedenfalls = in any case, anyway"
+ },
+ "jederzeit--at-any-time": {
+  "type": "grammar",
+  "de": "Du kannst die Flasche jederzeit zurückbringen.",
+  "hl": "jederzeit",
+  "role": "focus",
+  "cap": "jederzeit = at any time"
+ },
+ "jetzt--now": {
+  "type": "grammar",
+  "de": "Jetzt nicht, bitte.",
+  "hl": "Jetzt",
+  "role": "focus",
+  "cap": "jetzt = now"
+ },
+ "kaum--barely-hardly": {
+  "type": "grammar",
+  "de": "Ich habe kaum Zeit.",
+  "hl": "kaum",
+  "role": "focus",
+  "cap": "kaum = barely, hardly"
+ },
+ "kraft--by-virtue-of": {
+  "type": "grammar",
+  "de": "Kraft seines Amtes unterzeichnete er den Vertrag.",
+  "hl": "Kraft",
+  "role": "focus",
+  "cap": "kraft = by virtue of"
+ },
+ "kraft--by-virtue-of-on-the-strength-of": {
+  "type": "grammar",
+  "de": "Kraft seines Amtes unterzeichnete der Minister das Dekret.",
+  "hl": "Kraft",
+  "role": "focus",
+  "cap": "kraft = by virtue of, on the strength of"
+ },
+ "kuerzlich--shortly-recently": {
+  "type": "grammar",
+  "de": "Das Gemälde wurde kürzlich restauriert.",
+  "hl": "kürzlich",
+  "role": "focus",
+  "cap": "kürzlich = shortly, recently"
+ },
+ "kurz--just": {
+  "type": "grammar",
+  "de": "Es ist kurz nach acht.",
+  "hl": "kurz",
+  "role": "focus",
+  "cap": "kurz = just (after/before)"
+ },
+ "laengst--for-a-long-time": {
+  "type": "grammar",
+  "de": "Das Problem ist längst bekannt.",
+  "hl": "längst",
+  "role": "focus",
+  "cap": "längst = for a long time (already)"
+ },
+ "lauter--all": {
+  "type": "grammar",
+  "de": "Vor lauter Aufregung konnte er nicht sprechen.",
+  "hl": "lauter",
+  "role": "focus",
+  "cap": "lauter = all (vor lauter Aufregung: from all the excitement)"
+ },
+ "lebenslang--lifelong": {
+  "type": "grammar",
+  "de": "Er spricht über sein lebenslanges Lernen.",
+  "hl": "lebenslanges",
+  "role": "focus",
+  "cap": "lebenslang = lifelong"
+ },
+ "mal--sometime-just": {
+  "type": "grammar",
+  "de": "Komm mal her!",
+  "hl": "mal",
+  "role": "focus",
+  "cap": "mal = sometime; just"
+ },
+ "manchmal--sometimes": {
+  "type": "grammar",
+  "de": "Manchmal koche ich.",
+  "hl": "Manchmal",
+  "role": "focus",
+  "cap": "manchmal = sometimes"
+ },
+ "mangels--for-lack-of": {
+  "type": "grammar",
+  "de": "Mangels Beweisen wurde der Fall eingestellt.",
+  "hl": "Mangels",
+  "role": "focus",
+  "cap": "mangels = for lack of"
+ },
+ "maximal--maximum-at-most": {
+  "type": "grammar",
+  "de": "Maximal 500 Euro Miete.",
+  "hl": "Maximal",
+  "role": "focus",
+  "cap": "maximal = maximum, at most"
+ },
+ "mega--really": {
+  "type": "grammar",
+  "de": "Eine Wanderung zur Bergstation wäre mega schön.",
+  "hl": "mega",
+  "role": "focus",
+  "cap": "mega = really"
+ },
+ "mehr--more-anymore": {
+  "type": "grammar",
+  "de": "Ich habe keine Zeit mehr.",
+  "hl": "mehr",
+  "role": "focus",
+  "cap": "mehr = more, anymore"
+ },
+ "mehrmals--repeatedly-several-times": {
+  "type": "grammar",
+  "de": "Ich habe den Trailer mehrmals gesehen.",
+  "hl": "mehrmals",
+  "role": "focus",
+  "cap": "mehrmals = repeatedly, several times"
+ },
+ "meinetwegen--fine-with-me-for-my-sake": {
+  "type": "grammar",
+  "de": "Meinetwegen brauchst du nicht früh aufzustehen.",
+  "hl": "Meinetwegen",
+  "role": "focus",
+  "cap": "meinetwegen = fine with me, for my sake"
+ },
+ "meistens--mostly-usually": {
+  "type": "grammar",
+  "de": "Meistens esse ich mit Max.",
+  "hl": "Meistens",
+  "role": "focus",
+  "cap": "meistens = mostly, usually"
+ },
+ "mittlerweile--meanwhile": {
+  "type": "grammar",
+  "de": "Mittlerweile hatte sich vieles verändert.",
+  "hl": "Mittlerweile",
+  "role": "focus",
+  "cap": "mittlerweile = meanwhile"
+ },
+ "mittlerweile--meanwhile-by-now": {
+  "type": "grammar",
+  "de": "Ist die Diskriminierung mittlerweile zurückgegangen?",
+  "hl": "mittlerweile",
+  "role": "focus",
+  "cap": "mittlerweile = meanwhile, by now"
+ },
+ "momentan--at-the-moment": {
+  "type": "grammar",
+  "de": "Momentan war sie sehr beschäftigt.",
+  "hl": "Momentan",
+  "role": "focus",
+  "cap": "momentan = at the moment"
+ },
+ "nach-angaben--according-to-statements-reports-of": {
+  "type": "grammar",
+  "de": "Nach Angaben der Behörde wurden alle Auflagen erfüllt.",
+  "hl": "Nach Angaben",
+  "role": "focus",
+  "cap": "nach Angaben ... = according to statements/reports of ..."
+ },
+ "neulich--recently": {
+  "type": "grammar",
+  "de": "Neulich habe ich eine Sendung über den Wettbewerb gesehen.",
+  "hl": "Neulich",
+  "role": "focus",
+  "cap": "neulich = recently"
+ },
+ "neulich--recently-the-other-day": {
+  "type": "grammar",
+  "de": "Neulich haben wir uns getroffen.",
+  "hl": "Neulich",
+  "role": "focus",
+  "cap": "neulich = recently, the other day"
+ },
+ "nicht-nur--not-only": {
+  "type": "grammar",
+  "de": "Nicht nur Tee, auch Kaffee.",
+  "hl": "Nicht nur",
+  "role": "focus",
+  "cap": "nicht nur = not only"
+ },
+ "nicht-zuletzt--not-least": {
+  "type": "grammar",
+  "de": "Nicht zuletzt dank internationaler Zusammenarbeit konnte das Problem gelöst werden.",
+  "hl": "Nicht zuletzt",
+  "role": "focus",
+  "cap": "nicht zuletzt = not least"
+ },
+ "nie--never": {
+  "type": "grammar",
+  "de": "Ich frühstücke nie.",
+  "hl": "nie",
+  "role": "focus",
+  "cap": "nie = never"
+ },
+ "nie-mehr--never-again": {
+  "type": "grammar",
+  "de": "Als das passierte, wollte ich nie mehr umziehen.",
+  "hl": "nie mehr",
+  "role": "focus",
+  "cap": "nie mehr = never again"
+ },
+ "niemals--never": {
+  "type": "grammar",
+  "de": "Er verließ die Alm niemals im Winter.",
+  "hl": "niemals",
+  "role": "focus",
+  "cap": "niemals = never"
+ },
+ "niemand--nobody": {
+  "type": "grammar",
+  "de": "Wenn niemand kommt, ist die Feier traurig.",
+  "hl": "niemand",
+  "role": "focus",
+  "cap": "niemand = nobody"
+ },
+ "nirgends--nowhere": {
+  "type": "grammar",
+  "de": "Nirgends ist es schöner als hier.",
+  "hl": "Nirgends",
+  "role": "focus",
+  "cap": "nirgends = nowhere"
+ },
+ "nirgendwo--nowhere": {
+  "type": "grammar",
+  "de": "Diesen Fahrschein bekommt man nirgendwo billiger.",
+  "hl": "nirgendwo",
+  "role": "focus",
+  "cap": "nirgendwo = nowhere"
+ },
+ "noch--yet-still-any": {
+  "type": "grammar",
+  "de": "Hast du noch eine Karte?",
+  "hl": "noch",
+  "role": "focus",
+  "cap": "noch = yet, still, any"
+ },
+ "noch-mal--again-once-more": {
+  "type": "grammar",
+  "de": "Sag das noch mal, bitte.",
+  "hl": "noch mal",
+  "role": "focus",
+  "cap": "noch mal = again, once more"
+ },
+ "normalerweise--normally-usually": {
+  "type": "grammar",
+  "de": "Normalerweise lerne ich zu Hause.",
+  "hl": "Normalerweise",
+  "role": "focus",
+  "cap": "normalerweise = normally, usually"
+ },
+ "nun--now": {
+  "type": "grammar",
+  "de": "Nun weiß ich, worauf ich warte.",
+  "hl": "Nun",
+  "role": "focus",
+  "cap": "nun = now"
+ },
+ "ob--whether-if": {
+  "type": "grammar",
+  "de": "Ich weiß nicht, ob er kommt.",
+  "hl": "ob",
+  "role": "focus",
+  "cap": "ob = whether, if"
+ },
+ "offenbar--apparently-obviously": {
+  "type": "grammar",
+  "de": "Offenbar hat er die Nachricht nicht gelesen.",
+  "hl": "Offenbar",
+  "role": "focus",
+  "cap": "offenbar = apparently, obviously"
+ },
+ "oftmals--often-frequently": {
+  "type": "grammar",
+  "de": "Sie besuchte oftmals das Labor.",
+  "hl": "oftmals",
+  "role": "focus",
+  "cap": "oftmals = often, frequently"
+ },
+ "ohnehin--anyway-in-any-case": {
+  "type": "grammar",
+  "de": "Sie war ohnehin müde.",
+  "hl": "ohnehin",
+  "role": "focus",
+  "cap": "ohnehin = anyway, in any case"
+ },
+ "per--via": {
+  "type": "grammar",
+  "de": "Wenn ich Fragen habe, schreibe ich per E-Mail.",
+  "hl": "per",
+  "role": "focus",
+  "cap": "per = via"
+ },
+ "recht--quite-rather": {
+  "type": "grammar",
+  "de": "Das war recht schwierig.",
+  "hl": "recht",
+  "role": "focus",
+  "cap": "recht = quite, rather"
+ },
+ "recht-haben--be-right": {
+  "type": "grammar",
+  "de": "Du hast recht — die Seilbahn ist besser.",
+  "hl": "hast recht",
+  "role": "focus",
+  "cap": "recht haben = to be right"
+ },
+ "rechtskraeftig-werden--become-legally-binding-final": {
+  "type": "grammar",
+  "de": "Das Urteil wird erst nach Ablauf der Frist rechtskräftig.",
+  "hl": "rechtskräftig",
+  "role": "focus",
+  "cap": "rechtskräftig werden = to become legally binding/final"
+ },
+ "rund--around-about": {
+  "type": "grammar",
+  "de": "Rund zwanzig Gäste kommen.",
+  "hl": "Rund",
+  "role": "focus",
+  "cap": "rund = around, about"
+ },
+ "samstags--on-saturdays": {
+  "type": "grammar",
+  "de": "Samstags feiern wir.",
+  "hl": "Samstags",
+  "role": "focus",
+  "cap": "samstags = on Saturdays"
+ },
+ "schlimmstenfalls--in-the-worst-case": {
+  "type": "grammar",
+  "de": "Schlimmstenfalls sollten wir einen Puffertag einplanen.",
+  "hl": "Schlimmstenfalls",
+  "role": "focus",
+  "cap": "schlimmstenfalls = in the worst case"
+ },
+ "schon-mal--before-already-once": {
+  "type": "grammar",
+  "de": "Weißt du, ob er das schon mal gemacht hat?",
+  "hl": "schon mal",
+  "role": "focus",
+  "cap": "schon mal = before, already once"
+ },
+ "schon-wieder--yet-again": {
+  "type": "grammar",
+  "de": "Es regnet schon wieder!",
+  "hl": "schon wieder",
+  "role": "focus",
+  "cap": "schon wieder = yet again"
+ },
+ "sehr--very": {
+  "type": "grammar",
+  "de": "Sehr gut! Danke.",
+  "hl": "Sehr",
+  "role": "focus",
+  "cap": "sehr = very"
+ },
+ "sehr-geehrte-r--dear": {
+  "type": "grammar",
+  "de": "Sehr geehrte Damen und Herren, ...",
+  "hl": "Sehr geehrte",
+  "role": "focus",
+  "cap": "sehr geehrte(r) = dear (formal letter/email opener)"
+ },
+ "sein-seine--his-its": {
+  "type": "grammar",
+  "de": "Sein Name ist Bello.",
+  "hl": "Sein",
+  "role": "focus",
+  "cap": "sein/seine = his, its"
+ },
+ "seit--since": {
+  "type": "grammar",
+  "de": "Seit unserem Streit haben wir viel gelernt.",
+  "hl": "Seit",
+  "role": "focus",
+  "cap": "seit = since"
+ },
+ "seit--since-for": {
+  "type": "grammar",
+  "de": "Ich lerne seit einem Jahr Deutsch.",
+  "hl": "seit",
+  "role": "focus",
+  "cap": "seit = since, for"
+ },
+ "seitdem--since": {
+  "type": "grammar",
+  "de": "Seitdem sprechen wir offener miteinander.",
+  "hl": "Seitdem",
+  "role": "focus",
+  "cap": "seitdem = since"
+ },
+ "seitdem--since-then": {
+  "type": "grammar",
+  "de": "Seitdem lebte sie glücklich auf dem Land.",
+  "hl": "Seitdem",
+  "role": "focus",
+  "cap": "seitdem = since then"
+ },
+ "seitens--on-the-part-of": {
+  "type": "grammar",
+  "de": "Seitens der Regierung gab es bislang keine Stellungnahme.",
+  "hl": "Seitens",
+  "role": "focus",
+  "cap": "seitens = on the part of"
+ },
+ "selber--self-oneself": {
+  "type": "grammar",
+  "de": "Ich werde das selber machen.",
+  "hl": "selber",
+  "role": "focus",
+  "cap": "selber = self, oneself"
+ },
+ "selbst--oneself-even": {
+  "type": "grammar",
+  "de": "Ich mache das selbst.",
+  "hl": "selbst",
+  "role": "focus",
+  "cap": "selbst = oneself, even"
+ },
+ "selbstverstaendlich--of-course": {
+  "type": "grammar",
+  "de": "Selbstverständlich helfe ich dir bei der Bewerbung.",
+  "hl": "Selbstverständlich",
+  "role": "focus",
+  "cap": "selbstverständlich = of course"
+ },
+ "selten--rarely-seldom": {
+  "type": "grammar",
+  "de": "Ich koche selten.",
+  "hl": "selten",
+  "role": "focus",
+  "cap": "selten = rarely, seldom"
+ },
+ "sicherlich--certainly-surely": {
+  "type": "grammar",
+  "de": "Ihre Beurteilung löst sicherlich eine Diskussion aus.",
+  "hl": "sicherlich",
+  "role": "focus",
+  "cap": "sicherlich = certainly, surely"
+ },
+ "sie--she-they": {
+  "type": "grammar",
+  "de": "Sie heißt Lena.",
+  "hl": "Sie",
+  "role": "focus",
+  "cap": "sie = she; they"
+ },
+ "sie-pl--they": {
+  "type": "grammar",
+  "de": "Sie kommen aus Indien.",
+  "hl": "Sie",
+  "role": "focus",
+  "cap": "sie (Pl.) = they"
+ },
+ "so-ein--such-a": {
+  "type": "grammar",
+  "de": "So ein Film ist genauso gut wie ein Buch.",
+  "hl": "So ein",
+  "role": "focus",
+  "cap": "so ein = such a"
+ },
+ "sobald--as-soon-as": {
+  "type": "grammar",
+  "de": "Sobald wir die Entscheidung bekommen, werden wir feiern gehen.",
+  "hl": "Sobald",
+  "role": "focus",
+  "cap": "sobald = as soon as"
+ },
+ "solche--such-of-that-kind": {
+  "type": "grammar",
+  "de": "Solche Ideen hatte ich noch nie.",
+  "hl": "Solche",
+  "role": "focus",
+  "cap": "solche = such, of that kind"
+ },
+ "sonntags--on-sundays": {
+  "type": "grammar",
+  "de": "Sonntags ruhe ich mich aus.",
+  "hl": "Sonntags",
+  "role": "focus",
+  "cap": "sonntags = on Sundays"
+ },
+ "sowie--as-well-as": {
+  "type": "grammar",
+  "de": "Die Stadt hat Parks sowie Museen.",
+  "hl": "sowie",
+  "role": "focus",
+  "cap": "sowie = as well as"
+ },
+ "sowieso--anyway": {
+  "type": "grammar",
+  "de": "Er startet nächste Woche sowieso.",
+  "hl": "sowieso",
+  "role": "focus",
+  "cap": "sowieso = anyway"
+ },
+ "sowieso--anyway-in-any-case": {
+  "type": "grammar",
+  "de": "Es wird sowieso streng kontrolliert.",
+  "hl": "sowieso",
+  "role": "focus",
+  "cap": "sowieso = anyway, in any case"
+ },
+ "spaeter--later": {
+  "type": "grammar",
+  "de": "Bis später!",
+  "hl": "später",
+  "role": "focus",
+  "cap": "später = later"
+ },
+ "spaetestens--at-the-latest": {
+  "type": "grammar",
+  "de": "Wir treffen uns spätestens um fünf.",
+  "hl": "spätestens",
+  "role": "focus",
+  "cap": "spätestens = at the latest"
+ },
+ "stets--always-constantly": {
+  "type": "grammar",
+  "de": "Sie ist stets vorbereitet.",
+  "hl": "stets",
+  "role": "focus",
+  "cap": "stets = always, constantly"
+ },
+ "stundenweise--hourly": {
+  "type": "grammar",
+  "de": "Man könnte auch stundenweise arbeiten.",
+  "hl": "stundenweise",
+  "role": "focus",
+  "cap": "stundenweise = hourly"
+ },
+ "taeglich--daily": {
+  "type": "grammar",
+  "de": "Ich lerne täglich Deutsch.",
+  "hl": "täglich",
+  "role": "focus",
+  "cap": "täglich = daily"
+ },
+ "tagsueber--during-the-day": {
+  "type": "grammar",
+  "de": "Tagsüber jobbe ich, abends blogge ich.",
+  "hl": "Tagsüber",
+  "role": "focus",
+  "cap": "tagsüber = during the day"
+ },
+ "tatsaechlich--actually-in-fact": {
+  "type": "grammar",
+  "de": "Tatsächlich widersprechen manche Wissenschaftler ihrem Resümee.",
+  "hl": "Tatsächlich",
+  "role": "focus",
+  "cap": "tatsächlich = actually, in fact"
+ },
+ "tatsaechlich--actually-really": {
+  "type": "grammar",
+  "de": "Die Reise war tatsächlich toll.",
+  "hl": "tatsächlich",
+  "role": "focus",
+  "cap": "tatsächlich = actually, really"
+ },
+ "teilweise--partly-partially": {
+  "type": "grammar",
+  "de": "Die Hypothese wurde teilweise bestätigt.",
+  "hl": "teilweise",
+  "role": "focus",
+  "cap": "teilweise = partly, partially"
+ },
+ "thematisieren--address-as-a-topic-thematize": {
+  "type": "grammar",
+  "de": "Der Artikel thematisiert die wachsende Ungleichheit.",
+  "hl": "thematisiert",
+  "role": "focus",
+  "cap": "thematisieren = to address as a topic, thematize"
+ },
+ "uebermorgen--day-after-tomorrow": {
+  "type": "grammar",
+  "de": "Übermorgen fahren wir in die Berge.",
+  "hl": "Übermorgen",
+  "role": "focus",
+  "cap": "übermorgen = day after tomorrow"
+ },
+ "ueberzeugt-sein--be-convinced": {
+  "type": "grammar",
+  "de": "Ich bin völlig überzeugt davon.",
+  "hl": "überzeugt",
+  "role": "focus",
+  "cap": "überzeugt sein = to be convinced (von + D.)"
+ },
+ "uebrigens--by-the-way": {
+  "type": "grammar",
+  "de": "Übrigens, ich habe einen Prospekt gefunden.",
+  "hl": "Übrigens",
+  "role": "focus",
+  "cap": "übrigens = by the way"
+ },
+ "uebrigens--by-the-way-incidentally": {
+  "type": "grammar",
+  "de": "Der Tennisprofi behauptet übrigens, er trainiere täglich.",
+  "hl": "übrigens",
+  "role": "focus",
+  "cap": "übrigens = by the way, incidentally"
+ },
+ "umgangssprachlich--colloquial": {
+  "type": "grammar",
+  "de": "Das ist ein umgangssprachlicher Ausdruck.",
+  "hl": "umgangssprachlicher",
+  "role": "focus",
+  "cap": "umgangssprachlich = colloquial"
+ },
+ "unbedingt--absolutely-definitely": {
+  "type": "grammar",
+  "de": "Ihr solltet unbedingt üben.",
+  "hl": "unbedingt",
+  "role": "focus",
+  "cap": "unbedingt = absolutely, definitely"
+ },
+ "unbedingt--necessarily-absolutely": {
+  "type": "grammar",
+  "de": "Ich brauche nicht unbedingt diese Stelle.",
+  "hl": "unbedingt",
+  "role": "focus",
+  "cap": "unbedingt = necessarily, absolutely"
+ },
+ "und--and": {
+  "type": "grammar",
+  "de": "Ich lerne und ich arbeite.",
+  "hl": "und",
+  "role": "focus",
+  "cap": "und = and"
+ },
+ "unter-anderem--among-other-things": {
+  "type": "grammar",
+  "de": "Unter anderem wurde auch die Methodik kritisiert.",
+  "hl": "Unter anderem",
+  "role": "focus",
+  "cap": "unter anderem = among other things"
+ },
+ "unter-anderem--amongst-other-things": {
+  "type": "grammar",
+  "de": "Der Roman handelt unter anderem von Freiheit.",
+  "hl": "unter anderem",
+  "role": "focus",
+  "cap": "unter anderem = amongst other things"
+ },
+ "unter-beruecksichtigung--taking-into-account-in-consideration-of": {
+  "type": "grammar",
+  "de": "Unter Berücksichtigung aller Aspekte empfiehlt der Ausschuss eine Reform.",
+  "hl": "Unter Berücksichtigung",
+  "role": "focus",
+  "cap": "unter Berücksichtigung = taking into account, in consideration of"
+ },
+ "unter-diesen-voraussetzungen--under-these-conditions": {
+  "type": "grammar",
+  "de": "Unter diesen Voraussetzungen kann die Reform gelingen.",
+  "hl": "Unter diesen Voraussetzungen",
+  "role": "focus",
+  "cap": "unter diesen Voraussetzungen = under these conditions"
+ },
+ "urspruenglich--originally": {
+  "type": "grammar",
+  "de": "Ursprünglich war er Experte für Elektronik.",
+  "hl": "Ursprünglich",
+  "role": "focus",
+  "cap": "ursprünglich = originally"
+ },
+ "usw--und-so-weiter": {
+  "type": "grammar",
+  "de": "Wir brauchen Schläger, Klettergurte usw.",
+  "hl": "usw.",
+  "role": "focus",
+  "cap": "usw. = und so weiter (etc.)"
+ },
+ "vergleichsweise--comparatively": {
+  "type": "grammar",
+  "de": "Der Chip war vergleichsweise günstig.",
+  "hl": "vergleichsweise",
+  "role": "focus",
+  "cap": "vergleichsweise = comparatively"
+ },
+ "vermutlich--presumably": {
+  "type": "grammar",
+  "de": "Vermutlich kommt er später.",
+  "hl": "Vermutlich",
+  "role": "focus",
+  "cap": "vermutlich = presumably"
+ },
+ "voellig--completely": {
+  "type": "grammar",
+  "de": "Ich bin völlig überzeugt davon.",
+  "hl": "völlig",
+  "role": "focus",
+  "cap": "völlig = completely"
+ },
+ "voellig--completely-utterly": {
+  "type": "grammar",
+  "de": "Es hängt völlig von der Vielfalt des Publikums ab.",
+  "hl": "völlig",
+  "role": "focus",
+  "cap": "völlig = completely, utterly"
+ },
+ "vor--x": {
+  "type": "grammar",
+  "de": "Es ist Viertel vor fünf. (4:45)",
+  "hl": "vor",
+  "role": "focus",
+  "cap": "vor = to (before the hour)"
+ },
+ "vorgestern--day-before-yesterday": {
+  "type": "grammar",
+  "de": "Vorgestern hatten wir Besuch.",
+  "hl": "Vorgestern",
+  "role": "focus",
+  "cap": "vorgestern = the day before yesterday"
+ },
+ "vormittags--in-the-late-morning": {
+  "type": "grammar",
+  "de": "Vormittags habe ich Kurs.",
+  "hl": "Vormittags",
+  "role": "focus",
+  "cap": "vormittags = in the late morning(s)"
+ },
+ "was--something": {
+  "type": "grammar",
+  "de": "Ich musste noch was besorgen.",
+  "hl": "was",
+  "role": "focus",
+  "cap": "was = something (colloquial for etwas)"
+ },
+ "weiterhin--still-furthermore": {
+  "type": "grammar",
+  "de": "Der Vertrag bleibt weiterhin gültig.",
+  "hl": "weiterhin",
+  "role": "focus",
+  "cap": "weiterhin = still, furthermore"
+ },
+ "wenn--when": {
+  "type": "grammar",
+  "de": "Wenn ich Zeit habe, lese ich ein Buch.",
+  "hl": "Wenn",
+  "role": "focus",
+  "cap": "wenn = when(ever) (repeated/future)"
+ },
+ "wenngleich--although-even-though": {
+  "type": "grammar",
+  "de": "Wenngleich die Ergebnisse vielversprechend sind, braucht es weitere Forschung.",
+  "hl": "Wenngleich",
+  "role": "focus",
+  "cap": "wenngleich = although, even though"
+ },
+ "wesentlich--considerable": {
+  "type": "grammar",
+  "de": "Das war eine wesentliche Verbesserung.",
+  "hl": "wesentliche",
+  "role": "focus",
+  "cap": "wesentlich = considerable"
+ },
+ "wesentlich--essential-substantial": {
+  "type": "grammar",
+  "de": "Wir sollten das Teilthema wesentlich gründlicher besprechen.",
+  "hl": "wesentlich",
+  "role": "focus",
+  "cap": "wesentlich = essential, substantial"
+ },
+ "wirklich--really": {
+  "type": "grammar",
+  "de": "Deutsch ist wirklich schön.",
+  "hl": "wirklich",
+  "role": "focus",
+  "cap": "wirklich = really"
+ },
+ "womit--with-what": {
+  "type": "grammar",
+  "de": "Womit hast du das Kätzchen gefüttert?",
+  "hl": "Womit",
+  "role": "focus",
+  "cap": "womit = with what"
+ },
+ "woran--about-what": {
+  "type": "grammar",
+  "de": "Woran denkst du gerade?",
+  "hl": "Woran",
+  "role": "focus",
+  "cap": "woran = about what"
+ },
+ "woran--what": {
+  "type": "grammar",
+  "de": "Woran erinnerst du dich?",
+  "hl": "Woran",
+  "role": "focus",
+  "cap": "woran = what (question about a thing, an + D./A.)"
+ },
+ "worauf--what-for": {
+  "type": "grammar",
+  "de": "Worauf wartest du?",
+  "hl": "Worauf",
+  "role": "focus",
+  "cap": "worauf = what … for"
+ },
+ "worauf--what-on-for": {
+  "type": "grammar",
+  "de": "Worauf musstest du warten?",
+  "hl": "Worauf",
+  "role": "focus",
+  "cap": "worauf = what … on/for (wo + preposition)"
+ },
+ "worueber--about-what": {
+  "type": "grammar",
+  "de": "Worüber schreibst du den Blogbeitrag?",
+  "hl": "Worüber",
+  "role": "focus",
+  "cap": "worüber = about what"
+ },
+ "worum--about-what": {
+  "type": "grammar",
+  "de": "Worum geht es in der Umfrage?",
+  "hl": "Worum",
+  "role": "focus",
+  "cap": "worum = about what (worum geht es?)"
+ },
+ "wovon--about-what": {
+  "type": "grammar",
+  "de": "Wovon könnte der Workshop handeln?",
+  "hl": "Wovon",
+  "role": "focus",
+  "cap": "wovon = about what"
+ },
+ "ziemlich--quite-rather": {
+  "type": "grammar",
+  "de": "Der Film war ziemlich spannend.",
+  "hl": "ziemlich",
+  "role": "focus",
+  "cap": "ziemlich = quite, rather"
+ },
+ "zufolge--according-to": {
+  "type": "grammar",
+  "de": "Der Studie zufolge sinkt die Zahl.",
+  "hl": "zufolge",
+  "role": "focus",
+  "cap": "zufolge = according to"
+ },
+ "zugunsten--in-favour-of": {
+  "type": "grammar",
+  "de": "Die Entscheidung fiel zugunsten der Mitarbeiter aus.",
+  "hl": "zugunsten",
+  "role": "focus",
+  "cap": "zugunsten = in favour of"
+ },
+ "zumindest--at-least": {
+  "type": "grammar",
+  "de": "Wenn ich schon spare, will ich zumindest reisen.",
+  "hl": "zumindest",
+  "role": "focus",
+  "cap": "zumindest = at least"
+ },
+ "zusaetzlich--additionally-in-addition": {
+  "type": "grammar",
+  "de": "Zusätzlich wurden Interviews mit Experten geführt.",
+  "hl": "Zusätzlich",
+  "role": "focus",
+  "cap": "zusätzlich = additionally, in addition"
+ },
+ "zusammenfassend-laesst-sich-feststellen--in-summary-it-can-be-stated": {
+  "type": "grammar",
+  "de": "Zusammenfassend lässt sich feststellen, dass der Klimawandel weitreichende Folgen hat.",
+  "hl": "Zusammenfassend lässt sich feststellen",
+  "role": "focus",
+  "cap": "zusammenfassend lässt sich feststellen = in summary, it can be stated"
+ },
+ "zwischendurch--in-between-now-and-then": {
+  "type": "grammar",
+  "de": "Ich kümmere mich zwischendurch um das Verkehrsschild.",
+  "hl": "zwischendurch",
+  "role": "focus",
+  "cap": "zwischendurch = in between, now and then"
+ },
+ "ein-vergleich-zeigt-dass--comparison-shows-that": {
+  "type": "grammar",
+  "de": "Ein Vergleich zeigt, dass die beiden Modelle deutlich abweichen.",
+  "hl": "Ein Vergleich zeigt, dass",
+  "role": "focus",
+  "cap": "ein Vergleich zeigt, dass = a comparison shows that"
+ },
+ "abschliessend--in-conclusion": {
+  "type": "grammar",
+  "de": "Abschließend soll gesagt werden, dass alles gut lief.",
+  "hl": "Abschließend",
+  "role": "focus",
+  "cap": "abschließend = in conclusion"
+ },
+ "abschliessend--in-conclusion-finally": {
+  "type": "grammar",
+  "de": "Abschließend lässt sich sagen, dass KI den Unterricht sinnvoll ergänzen kann.",
+  "hl": "Abschließend",
+  "role": "focus",
+  "cap": "abschließend = in conclusion, finally"
+ },
+ "allerdings--however-admittedly": {
+  "type": "grammar",
+  "de": "Allerdings gibt es Ausnahmen.",
+  "hl": "Allerdings",
+  "role": "focus",
+  "cap": "allerdings = however, admittedly"
+ },
+ "ausgerechnet--of-all-things": {
+  "type": "grammar",
+  "de": "Ausgerechnet heute regnete es.",
+  "hl": "Ausgerechnet",
+  "role": "focus",
+  "cap": "ausgerechnet = of all things"
+ },
+ "ausserdem--besides-moreover": {
+  "type": "grammar",
+  "de": "Außerdem bringe ich Musik mit, wenn wir feiern.",
+  "hl": "Außerdem",
+  "role": "focus",
+  "cap": "außerdem = besides, moreover"
+ },
+ "dabei--thereby-in-doing-so": {
+  "type": "grammar",
+  "de": "Sie las die Anzeige, dabei lächelte sie.",
+  "hl": "dabei",
+  "role": "focus",
+  "cap": "dabei = thereby, in doing so"
+ },
+ "dafuer--for-that-for-it": {
+  "type": "grammar",
+  "de": "Ich weiß nicht, ob ich dafür Zeit habe.",
+  "hl": "dafür",
+  "role": "focus",
+  "cap": "dafür = for that, for it"
+ },
+ "dafuer--instead-in-return-to-make-up-for-it": {
+  "type": "grammar",
+  "de": "Oma kann nicht mehr putzen, dafür kocht sie für alle.",
+  "hl": "dafür",
+  "role": "focus",
+  "cap": "dafür = instead, in return, to make up for it"
+ },
+ "dagegen--against-on-the-other-hand": {
+  "type": "grammar",
+  "de": "Mein Bruder mag Kaffee, ich dagegen trinke lieber Tee.",
+  "hl": "dagegen",
+  "role": "focus",
+  "cap": "dagegen = on the other hand (contrast)"
+ },
+ "daraufhin--thereupon-as-a-result": {
+  "type": "grammar",
+  "de": "Sie protestierten, daraufhin änderte sich die Regel.",
+  "hl": "daraufhin",
+  "role": "focus",
+  "cap": "daraufhin = thereupon, as a result"
+ },
+ "deshalb--therefore": {
+  "type": "grammar",
+  "de": "Es ist kalt. Deshalb trage ich eine warme Jacke.",
+  "hl": "Deshalb",
+  "role": "focus",
+  "cap": "deshalb = therefore"
+ },
+ "doch--but-yet-on-the-contrary": {
+  "type": "grammar",
+  "de": "Es ist spät, doch ich lerne weiter.",
+  "hl": "doch",
+  "role": "focus",
+  "cap": "doch = but, yet, on the contrary"
+ },
+ "eben--just-simply": {
+  "type": "grammar",
+  "de": "Das ist eben so.",
+  "hl": "eben",
+  "role": "focus",
+  "cap": "eben = just, simply"
+ },
+ "eigentlich--actually": {
+  "type": "grammar",
+  "de": "Eigentlich habe ich keine Zeit.",
+  "hl": "Eigentlich",
+  "role": "focus",
+  "cap": "eigentlich = actually"
+ },
+ "gleichermassen--equally-in-equal-measure": {
+  "type": "grammar",
+  "de": "Die Regel gilt für Kinder und Erwachsene gleichermaßen.",
+  "hl": "gleichermaßen",
+  "role": "focus",
+  "cap": "gleichermaßen = equally, in the same way"
+ },
+ "gleichfalls--likewise-you-too": {
+  "type": "grammar",
+  "de": "„Schönes Wochenende!“ – „Danke, gleichfalls!“",
+  "hl": "gleichfalls",
+  "role": "focus",
+  "cap": "gleichfalls = likewise, you too (reply to a wish)"
+ },
+ "hoechstens--at-the-most": {
+  "type": "grammar",
+  "de": "Die Fahrtzeit beträgt höchstens drei Stunden.",
+  "hl": "höchstens",
+  "role": "focus",
+  "cap": "höchstens = at the most"
+ },
+ "insbesondere--especially": {
+  "type": "grammar",
+  "de": "Ich interessiere mich insbesondere für Rock.",
+  "hl": "insbesondere",
+  "role": "focus",
+  "cap": "insbesondere = especially"
+ },
+ "insbesondere--in-particular-especially": {
+  "type": "grammar",
+  "de": "Insbesondere sollte man Fördermaßnahmen ausbauen.",
+  "hl": "Insbesondere",
+  "role": "focus",
+  "cap": "insbesondere = in particular, especially"
+ },
+ "jedoch--however-though": {
+  "type": "grammar",
+  "de": "Jedoch musste er zunächst eine Arbeitserlaubnis beantragen.",
+  "hl": "Jedoch",
+  "role": "focus",
+  "cap": "jedoch = however, though"
+ },
+ "jeweils--each-respectively": {
+  "type": "grammar",
+  "de": "Wir bekommen jeweils eine Karte.",
+  "hl": "jeweils",
+  "role": "focus",
+  "cap": "jeweils = each, respectively"
+ },
+ "meinetwegen--as-far-as-i-m-concerned-fine-by-me": {
+  "type": "grammar",
+  "de": "Meinetwegen können wir auch erst morgen anfangen.",
+  "hl": "Meinetwegen",
+  "role": "focus",
+  "cap": "meinetwegen = as far as I'm concerned, fine by me"
+ },
+ "mindestens--at-least": {
+  "type": "grammar",
+  "de": "Mindestens fünfzehn Leute kommen.",
+  "hl": "Mindestens",
+  "role": "focus",
+  "cap": "mindestens = at least"
+ },
+ "nichtsdestotrotz--nevertheless-nonetheless": {
+  "type": "grammar",
+  "de": "Nichtsdestotrotz setzte das Team das Projekt fort.",
+  "hl": "Nichtsdestotrotz",
+  "role": "focus",
+  "cap": "nichtsdestotrotz = nevertheless, nonetheless"
+ },
+ "nur--only": {
+  "type": "grammar",
+  "de": "Ich habe nur eine Stunde.",
+  "hl": "nur",
+  "role": "focus",
+  "cap": "nur = only"
+ },
+ "scheinbar--apparent-apparently": {
+  "type": "grammar",
+  "de": "Die Aufgabe ist nur scheinbar einfach.",
+  "hl": "scheinbar",
+  "role": "focus",
+  "cap": "scheinbar = seemingly (it looks so, but is not)"
+ },
+ "schliesslich--finally-eventually": {
+  "type": "grammar",
+  "de": "Schließlich fand sie ihren Traumjob.",
+  "hl": "Schließlich",
+  "role": "focus",
+  "cap": "schließlich = finally, eventually"
+ },
+ "sogar--even": {
+  "type": "grammar",
+  "de": "Sie arbeitet sogar am Sonntag.",
+  "hl": "sogar",
+  "role": "focus",
+  "cap": "sogar = even (more than expected)"
+ },
+ "somit--thus-therefore": {
+  "type": "grammar",
+  "de": "Alle Unterlagen sind vollständig; somit können wir den Antrag einreichen.",
+  "hl": "somit",
+  "role": "focus",
+  "cap": "somit = thus, therefore (a conclusion follows)"
+ },
+ "sonst--otherwise-anything-else": {
+  "type": "grammar",
+  "de": "Sonst noch etwas?",
+  "hl": "Sonst",
+  "role": "focus",
+  "cap": "sonst = otherwise, anything else"
+ },
+ "sozusagen--so-to-speak": {
+  "type": "grammar",
+  "de": "Er ist sozusagen der Chef.",
+  "hl": "sozusagen",
+  "role": "focus",
+  "cap": "sozusagen = so to speak"
+ },
+ "stattdessen--instead": {
+  "type": "grammar",
+  "de": "Ich hatte keine Zeit zu kochen. Stattdessen habe ich Pizza bestellt.",
+  "hl": "Stattdessen",
+  "role": "focus",
+  "cap": "stattdessen = instead (of that)"
+ },
+ "trotzdem--nevertheless": {
+  "type": "grammar",
+  "de": "Die Temperatur ist niedrig. Trotzdem gehen wir wandern.",
+  "hl": "Trotzdem",
+  "role": "focus",
+  "cap": "trotzdem = nevertheless"
+ },
+ "trotzdem--nevertheless-still": {
+  "type": "grammar",
+  "de": "Es regnete stark. Trotzdem fand das Konzert statt.",
+  "hl": "Trotzdem",
+  "role": "focus",
+  "cap": "trotzdem = nevertheless (it happens despite the problem)"
+ },
+ "vielmehr--rather-instead": {
+  "type": "grammar",
+  "de": "Es geht nicht um den Preis, sondern vielmehr um die Qualität.",
+  "hl": "vielmehr",
+  "role": "focus",
+  "cap": "vielmehr = rather (corrects what came before)"
+ },
+ "wenigstens--at-least": {
+  "type": "grammar",
+  "de": "Das Hotel war teuer, aber wenigstens war das Frühstück gut.",
+  "hl": "wenigstens",
+  "role": "focus",
+  "cap": "wenigstens = at least (one good point)"
+ },
+ "zudem--in-addition": {
+  "type": "grammar",
+  "de": "Zudem ist die Gebühr gering.",
+  "hl": "Zudem",
+  "role": "focus",
+  "cap": "zudem = in addition"
+ },
+ "zunaechst--initially": {
+  "type": "grammar",
+  "de": "Zunächst muss der Ausweis gezeigt werden.",
+  "hl": "Zunächst",
+  "role": "focus",
+  "cap": "zunächst = initially"
+ },
+ "allerdings--however-though": {
+  "type": "grammar",
+  "de": "Die Zahlen sind positiv. Allerdings bleibt die Unsicherheit hoch.",
+  "hl": "Allerdings",
+  "role": "focus",
+  "cap": "allerdings = however, though"
+ },
+ "ausserdem--furthermore-besides": {
+  "type": "grammar",
+  "de": "Die Methode ist effizient. Außerdem lässt sie sich leicht auf andere Fälle übertragen.",
+  "hl": "Außerdem",
+  "role": "focus",
+  "cap": "außerdem = furthermore, besides"
+ },
+ "beispielsweise--for-example": {
+  "type": "grammar",
+  "de": "Beispielsweise zeigt die Fallstudie aus Deutschland ähnliche Muster.",
+  "hl": "Beispielsweise",
+  "role": "focus",
+  "cap": "beispielsweise = for example"
+ },
+ "daher--therefore-hence": {
+  "type": "grammar",
+  "de": "Die Ergebnisse sind eindeutig; daher erübrigt sich eine weitere Diskussion.",
+  "hl": "daher",
+  "role": "focus",
+  "cap": "daher = therefore, hence"
+ },
+ "demgegenueber--in-contrast-by-contrast": {
+  "type": "grammar",
+  "de": "Demgegenüber zeigt die zweite Studie ein völlig anderes Bild.",
+  "hl": "Demgegenüber",
+  "role": "focus",
+  "cap": "demgegenüber = in contrast, by contrast"
+ },
+ "deshalb--therefore-that-s-why": {
+  "type": "grammar",
+  "de": "Die Frist wurde verpasst; deshalb wurde der Antrag abgelehnt.",
+  "hl": "deshalb",
+  "role": "focus",
+  "cap": "deshalb = therefore, that's why"
+ },
+ "gleichwohl--nonetheless-all-the-same": {
+  "type": "grammar",
+  "de": "Die Beweislage ist dünn; gleichwohl überzeugt die Argumentation.",
+  "hl": "gleichwohl",
+  "role": "focus",
+  "cap": "gleichwohl = nonetheless, all the same"
+ },
+ "hingegen--on-the-other-hand-whereas": {
+  "type": "grammar",
+  "de": "Die erste Methode ist zeitaufwendig; die zweite hingegen liefert schnellere Ergebnisse.",
+  "hl": "hingegen",
+  "role": "focus",
+  "cap": "hingegen = on the other hand, whereas"
+ },
+ "indes--however-meanwhile": {
+  "type": "grammar",
+  "de": "Die Regierung feierte den Erfolg. Kritiker äußerten indes erhebliche Bedenken.",
+  "hl": "indes",
+  "role": "focus",
+  "cap": "indes = however, meanwhile"
+ },
+ "infolgedessen--as-a-result-consequently": {
+  "type": "grammar",
+  "de": "Der Vertrag wurde gebrochen; infolgedessen wurde eine Klage eingereicht.",
+  "hl": "infolgedessen",
+  "role": "focus",
+  "cap": "infolgedessen = as a result, consequently"
+ },
+ "somit--thus-consequently": {
+  "type": "grammar",
+  "de": "Alle Daten wurden überprüft; somit ist das Ergebnis belastbar.",
+  "hl": "somit",
+  "role": "focus",
+  "cap": "somit = thus, consequently"
+ },
+ "dennoch--nevertheless": {
+  "type": "grammar",
+  "de": "Die Kritik war scharf; dennoch hielt der Autor an seiner These fest.",
+  "hl": "dennoch",
+  "role": "focus",
+  "cap": "dennoch = nevertheless"
+ },
+ "folglich--consequently": {
+  "type": "grammar",
+  "de": "Die Prämissen sind korrekt; folglich muss die Schlussfolgerung ebenfalls zutreffen.",
+  "hl": "folglich",
+  "role": "focus",
+  "cap": "folglich = consequently"
+ },
+ "gleichzeitig--simultaneously-at-the-same-time": {
+  "type": "grammar",
+  "de": "Sie telefoniert und kocht gleichzeitig.",
+  "hl": "gleichzeitig",
+  "role": "focus",
+  "cap": "gleichzeitig = simultaneously / at the same time"
+ },
+ "aber--but": {
+  "type": "grammar",
+  "de": "Ich habe Zeit, aber kein Geld.",
+  "hl": "aber",
+  "role": "focus",
+  "cap": "aber = but"
+ },
+ "allerdings--though-however": {
+  "type": "grammar",
+  "de": "Wir wollen ein Café eröffnen. Allerdings brauchen wir genug Kapital, um es zu finanzieren.",
+  "hl": "Allerdings",
+  "role": "focus",
+  "cap": "allerdings = though, however"
+ },
+ "also--so-therefore": {
+  "type": "grammar",
+  "de": "Es regnet, also bleibe ich hier.",
+  "hl": "also",
+  "role": "focus",
+  "cap": "also = so, therefore"
+ },
+ "denn--because": {
+  "type": "grammar",
+  "de": "Ich gehe, denn ich habe Zeit.",
+  "hl": "denn",
+  "role": "focus",
+  "cap": "denn = because (normal order)"
+ },
+ "falls--in-case": {
+  "type": "grammar",
+  "de": "Sie nahm einen Regenschirm mit, falls es regnen sollte.",
+  "hl": "falls",
+  "role": "focus",
+  "cap": "falls = in case"
+ },
+ "jedoch--however": {
+  "type": "grammar",
+  "de": "Dein Lebenslauf ist gut. Jedoch brauchst du auch ein überzeugendes Anschreiben.",
+  "hl": "Jedoch",
+  "role": "focus",
+  "cap": "jedoch = however"
+ },
+ "nachdem--after": {
+  "type": "grammar",
+  "de": "Nachdem wir uns kennengelernt hatten, wurden wir Freunde.",
+  "hl": "Nachdem",
+  "role": "focus",
+  "cap": "nachdem = after"
+ },
+ "oder--or": {
+  "type": "grammar",
+  "de": "Tee oder Kaffee? — Keinen Kaffee, danke.",
+  "hl": "oder",
+  "role": "focus",
+  "cap": "oder = or"
+ },
+ "waehrend--while": {
+  "type": "grammar",
+  "de": "Während wir kochen, reden wir ruhig weiter.",
+  "hl": "Während",
+  "role": "focus",
+  "cap": "während = while (simultaneous)"
+ },
+ "weil--because": {
+  "type": "grammar",
+  "de": "Ich lerne Deutsch, weil ich hier arbeiten möchte.",
+  "hl": "weil",
+  "role": "focus",
+  "cap": "weil = because (the verb goes to the end)"
+ },
+ "wie--as": {
+  "type": "grammar",
+  "de": "Der Kuchen war so gut wie im Restaurant.",
+  "hl": "so gut wie",
+  "role": "focus",
+  "cap": "so … wie = as … as (equal)"
+ },
+ "wie--as-like": {
+  "type": "grammar",
+  "de": "Ich bin so groß wie du.",
+  "hl": "so groß wie",
+  "role": "focus",
+  "cap": "so … wie = as … as (equal)"
+ },
+ "wohingegen--whereas": {
+  "type": "grammar",
+  "de": "Die urbanen Gebiete verzeichneten Wachstum, wohingegen ländliche Regionen stagnierten.",
+  "hl": "wohingegen",
+  "role": "focus",
+  "cap": "wohingegen = whereas"
+ },
+ "da--since-as": {
+  "type": "grammar",
+  "de": "Da die Datenlage unzureichend ist, sind weitere Studien nötig.",
+  "hl": "Da",
+  "role": "focus",
+  "cap": "da = since, as"
+ },
+ "vor-diesem-hintergrund--against-this-background": {
+  "type": "grammar",
+  "de": "Vor diesem Hintergrund erscheint die Entscheidung nachvollziehbar.",
+  "hl": "Vor diesem Hintergrund",
+  "role": "focus",
+  "cap": "vor diesem Hintergrund = against this background"
+ },
+ "meines-erachtens--in-my-view-in-my-opinion": {
+  "type": "grammar",
+  "de": "Meines Erachtens sollte künstliche Intelligenz den Unterricht verändern.",
+  "hl": "Meines Erachtens",
+  "role": "focus",
+  "cap": "meines Erachtens = in my view, in my opinion"
+ },
+ "einerseits-andererseits--on-the-one-hand-on-the-other-hand": {
+  "type": "grammar",
+  "de": "Einerseits bietet die Technologie Chancen, andererseits bestehen Risiken.",
+  "hl": "Einerseits bietet die Technologie Chancen, andererseits",
+  "role": "focus",
+  "cap": "einerseits …, andererseits … = on the one hand ... on the other hand"
+ },
+ "je-desto--the": {
+  "type": "grammar",
+  "de": "Je mehr du übst, desto sicherer wirst du.",
+  "hl": "Je mehr du übst, desto sicherer",
+  "role": "focus",
+  "cap": "je + comparative …, desto + comparative = the ... the (proportional comparison)"
+ },
+ "denn--then": {
+  "type": "grammar",
+  "de": "Was machst du denn?",
+  "hl": "denn",
+  "role": "focus",
+  "cap": "denn = then (in questions)"
+ },
+ "doch--indeed-after-all": {
+  "type": "grammar",
+  "de": "Komm doch mit!",
+  "hl": "doch",
+  "role": "focus",
+  "cap": "doch = indeed, after all"
+ },
+ "oder--right": {
+  "type": "grammar",
+  "de": "Das Wetter ist schön, oder?",
+  "hl": "oder",
+  "role": "focus",
+  "cap": "oder = right? (tag)"
+ },
+ "bei-genauer-betrachtung--on-closer-inspection": {
+  "type": "grammar",
+  "de": "Bei genauer Betrachtung erweist sich die Annahme als unhaltbar.",
+  "hl": "Bei genauer Betrachtung",
+  "role": "focus",
+  "cap": "bei genauer Betrachtung = on closer inspection"
+ },
+ "bei-naeherem-hinsehen--looking-more-closely": {
+  "type": "grammar",
+  "de": "Bei näherem Hinsehen fallen mehrere methodische Schwächen auf.",
+  "hl": "Bei näherem Hinsehen",
+  "role": "focus",
+  "cap": "bei näherem Hinsehen = looking more closely"
+ },
+ "aufgrund--because-of-due-to": {
+  "type": "grammar",
+  "de": "Aufgrund des schlechten Wetters fiel die Veranstaltung aus.",
+  "hl": "Aufgrund",
+  "role": "focus",
+  "cap": "aufgrund = because of, due to"
+ },
+ "dank--thanks-to": {
+  "type": "grammar",
+  "de": "Dank der Unterstützung konnten wir das Projekt abschließen.",
+  "hl": "Dank",
+  "role": "focus",
+  "cap": "dank + Genitiv/Dativ = thanks to"
+ },
+ "entgegen--against-contrary-to": {
+  "type": "grammar",
+  "de": "Entgegen meiner Erwartung war er pünktlich.",
+  "hl": "Entgegen",
+  "role": "focus",
+  "cap": "entgegen = against, contrary to (+ Dativ)"
+ },
+ "inklusive--including": {
+  "type": "grammar",
+  "de": "Der Preis ist inklusive Frühstück.",
+  "hl": "inklusive",
+  "role": "focus",
+  "cap": "inklusive = including"
+ },
+ "mittels--by-means-of": {
+  "type": "grammar",
+  "de": "Mittels einer neuen Methode konnte das Problem gelöst werden.",
+  "hl": "Mittels",
+  "role": "focus",
+  "cap": "mittels = by means of"
+ },
+ "ungeachtet--regardless-of": {
+  "type": "grammar",
+  "de": "Ungeachtet der Kritik setzte das Team die Arbeit fort.",
+  "hl": "Ungeachtet",
+  "role": "focus",
+  "cap": "ungeachtet = regardless of"
+ },
+ "mittels--by-means-of-using": {
+  "type": "grammar",
+  "de": "Mittels eines speziellen Verfahrens wurde die Probe analysiert.",
+  "hl": "Mittels",
+  "role": "focus",
+  "cap": "mittels = by means of, using"
+ },
+ "ungeachtet--regardless-of-irrespective-of": {
+  "type": "grammar",
+  "de": "Ungeachtet der Kritik hält die Regierung an ihrem Kurs fest.",
+  "hl": "Ungeachtet",
+  "role": "focus",
+  "cap": "ungeachtet = regardless of, irrespective of"
+ },
+ "zugunsten--in-favor-of": {
+  "type": "grammar",
+  "de": "Das Gericht entschied zugunsten der Klägerin.",
+  "hl": "zugunsten",
+  "role": "focus",
+  "cap": "zugunsten = in favor of"
+ },
+ "zulasten--at-the-expense-of": {
+  "type": "grammar",
+  "de": "Die Kürzungen gehen zulasten der ärmsten Haushalte.",
+  "hl": "zulasten",
+  "role": "focus",
+  "cap": "zulasten = at the expense of"
+ },
+ "zwecks--for-the-purpose-of": {
+  "type": "grammar",
+  "de": "Zwecks Identifikation ist ein amtlicher Ausweis vorzulegen.",
+  "hl": "Zwecks",
+  "role": "focus",
+  "cap": "zwecks = for the purpose of"
+ },
+ "mit--with-by": {
+  "type": "grammar",
+  "de": "Ich fahre mit dem Zug.",
+  "hl": "mit",
+  "role": "focus",
+  "cap": "mit + Dativ = with; by (means of transport)"
+ },
+ "sich-beziehen-auf--refer-to": {
+  "type": "grammar",
+  "de": "Der Artikel bezieht sich auf eine neue Studie.",
+  "hl": "bezieht sich auf",
+  "role": "focus",
+  "cap": "sich beziehen auf + Akkusativ = to refer to"
+ },
+ "dich--you": {
+  "type": "grammar",
+  "de": "Ich sehe dich.",
+  "hl": "dich",
+  "role": "focus",
+  "cap": "Akkusativ: du → dich (you as the object)"
+ },
+ "ihn--him-it": {
+  "type": "grammar",
+  "de": "Ich kenne ihn.",
+  "hl": "ihn",
+  "role": "focus",
+  "cap": "Akkusativ: er → ihn (him; it for masculine nouns)"
+ },
+ "dir--you": {
+  "type": "grammar",
+  "de": "Ich danke dir.",
+  "hl": "dir",
+  "role": "focus",
+  "cap": "Dativ: du → dir (to you); danken takes the dative"
+ },
+ "ihnen--you": {
+  "type": "grammar",
+  "de": "Das Kleid steht Ihnen gut.",
+  "hl": "Ihnen",
+  "role": "focus",
+  "cap": "Dativ, formal: Sie → Ihnen (to you)"
+ },
+ "alle--all-everyone": {
+  "type": "grammar",
+  "de": "Wir laden alle ein.",
+  "hl": "alle",
+  "role": "focus",
+  "cap": "alle = all, everyone (plural)"
+ },
+ "obwohl--although-even-though": {
+  "type": "grammar",
+  "de": "Obwohl es regnet, gehen wir spazieren.",
+  "hl": "Obwohl",
+  "role": "focus",
+  "cap": "obwohl = although: it rains, and we still go (verb at the end)"
+ },
+ "da--as-since": {
+  "type": "grammar",
+  "de": "Da ich vorbereitet bin, bin ich ruhig.",
+  "hl": "Da",
+  "role": "focus",
+  "cap": "da = as, since: gives the reason (verb at the end)"
+ },
+ "deshalb--that-s-why-therefore": {
+  "type": "grammar",
+  "de": "Es regnet. Deshalb bleiben wir zu Hause.",
+  "hl": "Deshalb",
+  "role": "focus",
+  "cap": "deshalb = that's why: the result follows, verb comes next"
+ },
+ "trotz--despite": {
+  "type": "grammar",
+  "de": "Trotz des Regens gehen wir spazieren.",
+  "hl": "Trotz",
+  "role": "focus",
+  "cap": "trotz + Genitiv = despite"
+ },
+ "waehrend--during": {
+  "type": "grammar",
+  "de": "Während der Reise haben wir fotografiert.",
+  "hl": "Während",
+  "role": "focus",
+  "cap": "während + Genitiv = during"
+ },
+ "damit--so-that": {
+  "type": "grammar",
+  "de": "Ich erkläre die Grammatik, damit die Schüler sie verstehen.",
+  "hl": "damit",
+  "role": "focus",
+  "cap": "damit = so that: states a purpose (verb at the end)"
+ },
+ "mithilfe--with-the-help-of": {
+  "type": "grammar",
+  "de": "Mithilfe moderner Software lässt sich die Analyse beschleunigen.",
+  "hl": "Mithilfe",
+  "role": "focus",
+  "cap": "mithilfe + Genitiv (or von + Dativ) = with the help of"
+ },
+ "darueber--about-that": {
+  "type": "grammar",
+  "de": "Wir sollten darüber noch einmal sprechen.",
+  "hl": "darüber",
+  "role": "focus",
+  "cap": "darüber = about that (sprechen über etwas → darüber sprechen)"
+ },
+ "ausserhalb-von--outside-of": {
+  "type": "grammar",
+  "de": "Außerhalb von Berlin ist es ruhiger als in der Stadt.",
+  "hl": "Außerhalb von",
+  "role": "focus",
+  "cap": "außerhalb von + Dativ = outside of"
+ },
+ "noch-einmal--once-more-again": {
+  "type": "grammar",
+  "de": "Sag das bitte noch einmal.",
+  "hl": "noch einmal",
+  "role": "focus",
+  "cap": "noch einmal = once more, again"
+ },
+ "so--so-so-so": {
+  "type": "grammar",
+  "de": "So, Herr Wolan, fangen wir an.",
+  "hl": "So",
+  "role": "focus",
+  "cap": "so = so, well (to start); so lala = so-so"
+ },
+ "laufen--run-to-go": {
+  "type": "grammar",
+  "de": "Die Reise ist gut gelaufen.",
+  "hl": "gut gelaufen",
+  "role": "focus",
+  "cap": "gut laufen = to go well (Perfekt: ist gut gelaufen)"
+ },
+ "das-thema--topic": {
+  "type": "grammar",
+  "de": "Welches Thema interessiert dich?",
+  "hl": "Thema",
+  "role": "focus",
+  "cap": "das Thema = topic"
+ },
+ "klar--of-course-sure": {
+  "type": "grammar",
+  "de": "Klar, machen wir das!",
+  "hl": "Klar",
+  "role": "focus",
+  "cap": "klar = sure, of course (spoken)"
+ },
+ "alles-klar--all-good-okay": {
+  "type": "grammar",
+  "de": "Alles klar bei dir?",
+  "hl": "Alles klar",
+  "role": "focus",
+  "cap": "Alles klar? = All good? / Okay"
+ },
+ "so--so-such": {
+  "type": "grammar",
+  "de": "So ein Pech!",
+  "hl": "So ein",
+  "role": "focus",
+  "cap": "so ein … = such a …"
+ },
+ "duerfen--may-to-be-allowed": {
+  "type": "grammar",
+  "de": "Darf ich hereinkommen?",
+  "hl": "Darf",
+  "role": "focus",
+  "cap": "dürfen = may, to be allowed (ich darf)"
+ },
+ "ausdruecken--express": {
+  "type": "grammar",
+  "de": "Ich kann das gut ausdrücken.",
+  "hl": "ausdrücken",
+  "role": "focus",
+  "cap": "ausdrücken = to express (in words)"
+ },
+ "glauben--believe-to-think": {
+  "type": "grammar",
+  "de": "Ich glaube, dass Filme gute Lehrer sind.",
+  "hl": "glaube",
+  "role": "focus",
+  "cap": "glauben = to believe, to think (an opinion)"
+ },
+ "das-stichwort--keyword-cue": {
+  "type": "grammar",
+  "de": "Das Stichwort ist „Präteritum“.",
+  "hl": "Stichwort",
+  "role": "focus",
+  "cap": "das Stichwort = keyword, cue"
+ },
+ "sollen--be-meant-to-to-be-the-point": {
+  "type": "grammar",
+  "de": "Was soll dieser Vergleich?",
+  "hl": "soll",
+  "role": "focus",
+  "cap": "Was soll …? = What's the point of …?"
+ },
+ "die-verzeihung--pardon-excuse-me": {
+  "type": "grammar",
+  "de": "Verzeihung, ist der Platz noch frei?",
+  "hl": "Verzeihung",
+  "role": "focus",
+  "cap": "Verzeihung = excuse me, pardon (polite)"
+ },
+ "wollte--wanted-to": {
+  "type": "grammar",
+  "de": "Ich wollte das Zertifikat bekommen.",
+  "hl": "wollte",
+  "role": "focus",
+  "cap": "wollte = wanted to (Präteritum of wollen)"
+ },
+ "das-bedauern--regret": {
+  "type": "grammar",
+  "de": "Zu meinem Bedauern kann ich nicht zur Feier kommen.",
+  "hl": "Zu meinem Bedauern",
+  "role": "focus",
+  "cap": "zu meinem Bedauern = to my regret (formal)"
+ },
+ "sich-entschuldigen--apologise": {
+  "type": "grammar",
+  "de": "Ich möchte mich für die Verspätung entschuldigen.",
+  "hl": "entschuldigen",
+  "role": "focus",
+  "cap": "sich entschuldigen (für) = to apologise (for)"
+ },
+ "d-h--i-e-meaning": {
+  "type": "grammar",
+  "de": "Das Zentrum ist autofrei, d.h. ohne Pkw.",
+  "hl": "d.h.",
+  "role": "focus",
+  "cap": "d.h. = das heißt = i.e., that is"
+ },
+ "effektiv--effective": {
+  "type": "grammar",
+  "de": "Wenn man effektiv lernt, spart man Zeit.",
+  "hl": "effektiv",
+  "role": "focus",
+  "cap": "effektiv = effective(ly), with a real result"
+ },
+ "gestehen--confess": {
+  "type": "grammar",
+  "de": "Er gesteht, dass er das Fenster kaputt gemacht hat.",
+  "hl": "gesteht",
+  "role": "focus",
+  "cap": "gestehen = to confess, to admit"
+ },
+ "waere--would-be": {
+  "type": "grammar",
+  "de": "Ich wäre gern in Deutschland.",
+  "hl": "wäre",
+  "role": "focus",
+  "cap": "wäre = would be (Konjunktiv II of sein)"
+ },
+ "wuerde--would": {
+  "type": "grammar",
+  "de": "Ich würde gern mehr reisen.",
+  "hl": "würde",
+  "role": "focus",
+  "cap": "würde + infinitive = would (wishes, polite requests)"
+ },
+ "wieso--why": {
+  "type": "grammar",
+  "de": "Wieso hast du aufgehört, Deutsch zu lernen?",
+  "hl": "Wieso",
+  "role": "focus",
+  "cap": "wieso = why (= warum)"
+ },
+ "mehrfach--repeatedly-multiple-times": {
+  "type": "grammar",
+  "de": "Ich habe ihn mehrfach angerufen.",
+  "hl": "mehrfach",
+  "role": "focus",
+  "cap": "mehrfach = repeatedly, several times"
+ },
+ "ausgezeichnet--excellent": {
+  "type": "grammar",
+  "de": "Manche Werbeanzeigen sind ausgezeichnet gemacht.",
+  "hl": "ausgezeichnet",
+  "role": "focus",
+  "cap": "ausgezeichnet = excellent(ly)"
+ },
+ "vorhaben--plan-intend": {
+  "type": "grammar",
+  "de": "Ich habe vor, morgen zu üben.",
+  "hl": "habe vor",
+  "role": "focus",
+  "cap": "vorhaben = to plan (ich habe vor, … zu …)"
+ },
+ "aufgeben--forsake-give-up": {
+  "type": "grammar",
+  "de": "Er will seinen alten Beruf aufgeben.",
+  "hl": "aufgeben",
+  "role": "focus",
+  "cap": "aufgeben = to give up (separable: er gibt … auf)"
+ },
+ "relevant--relevant": {
+  "type": "grammar",
+  "de": "Diese Information ist für die Prüfung relevant.",
+  "hl": "relevant",
+  "role": "focus",
+  "cap": "relevant (für) = relevant (to)"
+ },
+ "angehen--concern": {
+  "type": "grammar",
+  "de": "Das geht mich nichts an.",
+  "hl": "geht mich nichts an",
+  "role": "focus",
+  "cap": "Das geht mich nichts an. = That doesn't concern me."
+ },
+ "die-wahrheit--truth": {
+  "type": "grammar",
+  "de": "Er wird die Wahrheit sagen.",
+  "hl": "Wahrheit",
+  "role": "focus",
+  "cap": "die Wahrheit sagen = to tell the truth"
+ },
+ "die-ausrede--excuse": {
+  "type": "grammar",
+  "de": "Er wird sicher eine Ausrede finden.",
+  "hl": "Ausrede",
+  "role": "focus",
+  "cap": "die Ausrede = excuse (a made-up reason)"
+ },
+ "grad--at-the-moment": {
+  "type": "grammar",
+  "de": "Ich bin grad beschäftigt.",
+  "hl": "grad",
+  "role": "focus",
+  "cap": "grad (spoken) = gerade = at the moment"
+ },
+ "schaetzen--value": {
+  "type": "grammar",
+  "de": "Ich schätze deine Ehrlichkeit sehr.",
+  "hl": "schätze",
+  "role": "focus",
+  "cap": "schätzen = to value, to appreciate"
+ },
+ "die-ich-aussage--i-statement": {
+  "type": "grammar",
+  "de": "Eine Ich-Aussage erleichtert das Gespräch.",
+  "hl": "Ich-Aussage",
+  "role": "focus",
+  "cap": "die Ich-Aussage = I-statement („Ich fühle mich …“)"
+ },
+ "ergreifen--seize-take": {
+  "type": "grammar",
+  "de": "Neue Maßnahmen sind ergriffen worden.",
+  "hl": "ergriffen",
+  "role": "focus",
+  "cap": "Maßnahmen ergreifen = to take measures"
+ },
+ "die-patenschaft--sponsorship-godparenthood": {
+  "type": "grammar",
+  "de": "Sie übernimmt eine Patenschaft für das Projekt.",
+  "hl": "Patenschaft",
+  "role": "focus",
+  "cap": "die Patenschaft = sponsorship; godparenthood"
+ },
+ "problematisch--problematic": {
+  "type": "grammar",
+  "de": "Der Wohlstand ist problematisch, wenn er Umweltprobleme verursacht.",
+  "hl": "problematisch",
+  "role": "focus",
+  "cap": "problematisch = problematic"
+ },
+ "herankommen--approach": {
+  "type": "grammar",
+  "de": "Die Katze versucht, an den Vogel heranzukommen.",
+  "hl": "heranzukommen",
+  "role": "focus",
+  "cap": "herankommen (an + Akk.) = to approach, to get close to"
+ },
+ "geteilt--divided-shared": {
+  "type": "grammar",
+  "de": "Die Meinungen sind geteilt.",
+  "hl": "geteilt",
+  "role": "focus",
+  "cap": "geteilt = divided (opinions); shared"
+ },
+ "die-lebenslage--life-situation": {
+  "type": "grammar",
+  "de": "Er ist in einer schwierigen Lebenslage.",
+  "hl": "Lebenslage",
+  "role": "focus",
+  "cap": "die Lebenslage = life situation, circumstances"
+ },
+ "die-leistungsbereitschaft--willingness-to-perform": {
+  "type": "grammar",
+  "de": "Der Chef lobt ihre hohe Leistungsbereitschaft.",
+  "hl": "Leistungsbereitschaft",
+  "role": "focus",
+  "cap": "die Leistungsbereitschaft = willingness to perform"
+ },
+ "bemerkenswert--remarkable": {
+  "type": "grammar",
+  "de": "Das Programm ist bemerkenswert.",
+  "hl": "bemerkenswert",
+  "role": "focus",
+  "cap": "bemerkenswert = remarkable"
+ },
+ "die-epidemie--epidemic": {
+  "type": "grammar",
+  "de": "Die Epidemie breitete sich schnell aus.",
+  "hl": "Epidemie",
+  "role": "focus",
+  "cap": "die Epidemie = epidemic"
+ },
+ "die-macke--quirk-flaw": {
+  "type": "grammar",
+  "de": "Jeder hat seine kleinen Macken.",
+  "hl": "Macken",
+  "role": "focus",
+  "cap": "die Macke = quirk, little flaw (spoken)"
+ },
+ "respektieren--respect": {
+  "type": "grammar",
+  "de": "Man sollte die Meinung anderer respektieren.",
+  "hl": "respektieren",
+  "role": "focus",
+  "cap": "respektieren = to respect"
+ },
+ "treffen--meet-hit-make": {
+  "type": "grammar",
+  "de": "Die Koalition traf eine schwierige Entscheidung.",
+  "hl": "traf eine schwierige Entscheidung",
+  "role": "focus",
+  "cap": "eine Entscheidung treffen = to make a decision"
+ },
+ "wach-halten--keep-awake-keep-alive": {
+  "type": "grammar",
+  "de": "Kaffee kann dich wach halten.",
+  "hl": "wach halten",
+  "role": "focus",
+  "cap": "wach halten = keep awake; die Erinnerung wach halten = keep alive"
+ },
+ "die-eifersucht--jealousy": {
+  "type": "grammar",
+  "de": "Eifersucht zerstörte ihre Freundschaft.",
+  "hl": "Eifersucht",
+  "role": "focus",
+  "cap": "die Eifersucht = jealousy"
+ },
+ "elementar--elementary-fundamental": {
+  "type": "grammar",
+  "de": "Das war ein elementarer Fehler.",
+  "hl": "elementarer",
+  "role": "focus",
+  "cap": "elementar = fundamental, basic"
+ },
+ "die-liberalitaet--liberality-tolerance": {
+  "type": "grammar",
+  "de": "Ihre Liberalität war bekannt.",
+  "hl": "Liberalität",
+  "role": "focus",
+  "cap": "die Liberalität = liberality, open-minded tolerance"
+ },
+ "gemein--mean-common": {
+  "type": "grammar",
+  "de": "Das war eine gemeine Bemerkung.",
+  "hl": "gemeine",
+  "role": "focus",
+  "cap": "gemein = mean, nasty (also: common)"
+ },
+ "die-kritikfaehigkeit--ability-to-take-criticism": {
+  "type": "grammar",
+  "de": "Meine Kritikfähigkeit wächst.",
+  "hl": "Kritikfähigkeit",
+  "role": "focus",
+  "cap": "die Kritikfähigkeit = ability to take criticism"
+ },
+ "die-bereitschaft--readiness": {
+  "type": "grammar",
+  "de": "Ihre Bereitschaft, sich auf die Prüfung vorzubereiten, ist hoch.",
+  "hl": "Bereitschaft",
+  "role": "focus",
+  "cap": "die Bereitschaft = readiness, willingness"
+ },
+ "die-evidenz--evidence": {
+  "type": "grammar",
+  "de": "Die Evidenz spricht für diese Theorie.",
+  "hl": "Evidenz",
+  "role": "focus",
+  "cap": "die Evidenz = evidence (academic)"
+ },
+ "andeuten--hint-at-indicate": {
+  "type": "grammar",
+  "de": "Der Autor deutet nur an, was er meint.",
+  "hl": "deutet nur an",
+  "role": "focus",
+  "cap": "andeuten = to hint at (separable: deutet … an)"
+ },
+ "evident--evident": {
+  "type": "grammar",
+  "de": "Der Zusammenhang ist evident.",
+  "hl": "evident",
+  "role": "focus",
+  "cap": "evident = evident, obvious (formal)"
+ },
+ "diskurspraegend--discourse-shaping": {
+  "type": "grammar",
+  "de": "Ihr Werk gilt als diskursprägend für die Debatte.",
+  "hl": "diskursprägend",
+  "role": "focus",
+  "cap": "diskursprägend = shaping the public debate"
+ },
+ "vor-allem--especially-above-all": {
+  "type": "grammar",
+  "de": "Vor allem werde ich ruhiger.",
+  "hl": "Vor allem",
+  "role": "focus",
+  "cap": "vor allem = especially, above all"
+ },
+ "moeglich--possible": {
+  "type": "grammar",
+  "de": "Sie fragt, ob ein späterer Termin möglich ist.",
+  "hl": "möglich",
+  "role": "focus",
+  "cap": "möglich = possible"
+ },
+ "tausend-dank--thanks-a-million": {
+  "type": "grammar",
+  "de": "Tausend Dank für die Karte!",
+  "hl": "Tausend Dank",
+  "role": "focus",
+  "cap": "Tausend Dank! = Thanks a million!"
+ },
+ "was-fuer-ein--what-kind-of-a": {
+  "type": "grammar",
+  "de": "Was für ein Buch ist das?",
+  "hl": "Was für ein",
+  "role": "focus",
+  "cap": "Was für ein …? = What kind of …?"
+ },
+ "bilden--form": {
+  "type": "grammar",
+  "de": "Bilde eine Frage.",
+  "hl": "Bilde",
+  "role": "focus",
+  "cap": "bilden = to form (eine Frage bilden)"
+ },
+ "nummerieren--number": {
+  "type": "grammar",
+  "de": "Nummeriere die Sätze.",
+  "hl": "Nummeriere",
+  "role": "focus",
+  "cap": "nummerieren = to number"
+ },
+ "darauf--upon-it-to-it": {
+  "type": "grammar",
+  "de": "Reagiere darauf.",
+  "hl": "darauf",
+  "role": "focus",
+  "cap": "darauf = to it (reagieren auf → darauf)"
+ },
+ "das-befinden--well-being-how-one-feels": {
+  "type": "grammar",
+  "de": "Man fragt nach dem Befinden: \"Wie geht es dir?\"",
+  "hl": "Befinden",
+  "role": "focus",
+  "cap": "das Befinden = how someone feels"
+ },
+ "die-form--form-shape": {
+  "type": "grammar",
+  "de": "Welche Form hat das Verb?",
+  "hl": "Form",
+  "role": "focus",
+  "cap": "die Form = form (of a word); shape"
+ },
+ "die-methode--method": {
+  "type": "grammar",
+  "de": "Die Methode ist einfach.",
+  "hl": "Methode",
+  "role": "focus",
+  "cap": "die Methode = method"
+ },
+ "besser--better": {
+  "type": "grammar",
+  "de": "Heute ist es besser.",
+  "hl": "besser",
+  "role": "focus",
+  "cap": "besser = better (gut → besser)"
+ },
+ "der-nachteil--disadvantage": {
+  "type": "grammar",
+  "de": "Das ist ein Nachteil.",
+  "hl": "Nachteil",
+  "role": "focus",
+  "cap": "der Nachteil = disadvantage"
+ },
+ "preiswert--cheap-good-value": {
+  "type": "grammar",
+  "de": "Die Fahrkarte ist sehr preiswert.",
+  "hl": "preiswert",
+  "role": "focus",
+  "cap": "preiswert = good value"
+ },
+ "dahinter--behind-it": {
+  "type": "grammar",
+  "de": "Das ist der Grund, der dahinter steht.",
+  "hl": "dahinter",
+  "role": "focus",
+  "cap": "dahinter = behind it"
+ },
+ "genuegen--suffice-be-enough": {
+  "type": "grammar",
+  "de": "Ein kurzer Blick genügt, um den Trick zu erkennen.",
+  "hl": "genügt",
+  "role": "focus",
+  "cap": "genügen = to be enough"
+ },
+ "obwohl--although": {
+  "type": "grammar",
+  "de": "Obwohl ich nervös bin, schaffe ich es.",
+  "hl": "Obwohl",
+  "role": "focus",
+  "cap": "obwohl = although (verb at the end)"
+ },
+ "danach--after-that": {
+  "type": "grammar",
+  "de": "Du kümmerst dich am besten erst danach darum.",
+  "hl": "danach",
+  "role": "focus",
+  "cap": "danach = after that"
+ },
+ "sich-eignen--be-suitable-for": {
+  "type": "grammar",
+  "de": "Sie eignet sich sehr gut für diese Stelle.",
+  "hl": "eignet sich",
+  "role": "focus",
+  "cap": "sich eignen (für) = to be suitable (for)"
+ },
+ "eventuell--potential-possibly": {
+  "type": "grammar",
+  "de": "Wir werden eventuell später kommen.",
+  "hl": "eventuell",
+  "role": "focus",
+  "cap": "eventuell = possibly, maybe"
+ },
+ "fassen--make": {
+  "type": "grammar",
+  "de": "Ich werde einen guten Vorsatz fassen.",
+  "hl": "Vorsatz fassen",
+  "role": "focus",
+  "cap": "einen Vorsatz fassen = to make a resolution"
+ },
+ "beim-alten-bleiben--stay-the-same": {
+  "type": "grammar",
+  "de": "Zum Glück war alles beim Alten geblieben.",
+  "hl": "beim Alten geblieben",
+  "role": "focus",
+  "cap": "beim Alten bleiben = to stay the same"
+ },
+ "genau--exactly": {
+  "type": "grammar",
+  "de": "Genau! Das ist richtig.",
+  "hl": "Genau",
+  "role": "focus",
+  "cap": "genau = exactly"
+ },
+ "das-wort--word": {
+  "type": "grammar",
+  "de": "Was bedeutet dieses Wort?",
+  "hl": "Wort",
+  "role": "focus",
+  "cap": "das Wort = word"
+ },
+ "dreimal--three-times": {
+  "type": "grammar",
+  "de": "Ich war dreimal in Berlin.",
+  "hl": "dreimal",
+  "role": "focus",
+  "cap": "dreimal = three times"
+ },
+ "das-semester--semester": {
+  "type": "grammar",
+  "de": "Das Semester war lang.",
+  "hl": "Semester",
+  "role": "focus",
+  "cap": "das Semester = semester (university term)"
+ },
+ "danach--afterwards": {
+  "type": "grammar",
+  "de": "Danach gehen wir ins Café.",
+  "hl": "Danach",
+  "role": "focus",
+  "cap": "danach = afterwards"
+ },
+ "stattfinden--take-place": {
+  "type": "grammar",
+  "de": "Die Prüfung findet am Freitag statt.",
+  "hl": "findet am Freitag statt",
+  "role": "focus",
+  "cap": "stattfinden = to take place"
+ },
+ "wiedergeben--reproduce-retell": {
+  "type": "grammar",
+  "de": "Gib den Text mit eigenen Worten wieder.",
+  "hl": "Gib den Text mit eigenen Worten wieder",
+  "role": "focus",
+  "cap": "wiedergeben = to retell, to reproduce"
+ },
+ "die-hauptschule--secondary-school": {
+  "type": "grammar",
+  "de": "Rohan war auf einer Hauptschule.",
+  "hl": "Hauptschule",
+  "role": "focus",
+  "cap": "die Hauptschule = lower secondary school (Germany)"
+ },
+ "die-sprachwissenschaft--linguistics": {
+  "type": "grammar",
+  "de": "Ich studiere Sprachwissenschaft.",
+  "hl": "Sprachwissenschaft",
+  "role": "focus",
+  "cap": "die Sprachwissenschaft = linguistics"
+ },
+ "damit--with-it-that": {
+  "type": "grammar",
+  "de": "Ich habe ein Tablet und arbeite damit.",
+  "hl": "damit",
+  "role": "focus",
+  "cap": "damit = with it (here: with the tablet)"
+ },
+ "werden--will-to-become": {
+  "type": "grammar",
+  "de": "Ich wollte Bankkaufmann werden.",
+  "hl": "werden",
+  "role": "focus",
+  "cap": "werden = to become"
+ },
+ "die-hauptsache--main-point-main-thing": {
+  "type": "grammar",
+  "de": "Die Hauptsache sind die drei Stufen.",
+  "hl": "Hauptsache",
+  "role": "focus",
+  "cap": "die Hauptsache = the main thing"
+ },
+ "konnte--could": {
+  "type": "grammar",
+  "de": "Abends konnte ich ins Kino gehen.",
+  "hl": "konnte",
+  "role": "focus",
+  "cap": "konnte = could (Präteritum of können)"
+ },
+ "fremd--foreign-alien-strange": {
+  "type": "grammar",
+  "de": "Am Anfang war alles fremd.",
+  "hl": "fremd",
+  "role": "focus",
+  "cap": "fremd = strange, unfamiliar"
+ },
+ "relativ--relative": {
+  "type": "grammar",
+  "de": "Ihr Leben war relativ ruhig.",
+  "hl": "relativ",
+  "role": "focus",
+  "cap": "relativ = relatively"
+ },
+ "donnerstags--on-thursdays": {
+  "type": "week",
+  "day": 4,
+  "cap": "donnerstags = every Thursday"
+ },
+ "netto--net": {
+  "type": "grammar",
+  "de": "Wie viel verdienst du netto?",
+  "hl": "netto",
+  "role": "focus",
+  "cap": "netto = net (after tax)"
+ },
+ "darum--that-s-why": {
+  "type": "grammar",
+  "de": "Ich war krank, darum bin ich nicht gekommen.",
+  "hl": "darum",
+  "role": "focus",
+  "cap": "darum = that's why"
+ },
+ "sodass--so-that": {
+  "type": "grammar",
+  "de": "Er sprach sehr leise, sodass ich ihn kaum verstand.",
+  "hl": "sodass",
+  "role": "focus",
+  "cap": "sodass = so that (result)"
+ },
+ "der-werbetrick--advertising-trick": {
+  "type": "grammar",
+  "de": "Vorsicht mit Werbetricks!",
+  "hl": "Werbetricks",
+  "role": "focus",
+  "cap": "der Werbetrick = advertising trick"
+ },
+ "finnland--finland": {
+  "type": "map",
+  "iso": [
+   "FI"
+  ],
+  "cap": "Finnland = Finland"
+ },
+ "der-die-alte--oneself-the-old-one": {
+  "type": "grammar",
+  "de": "Er blieb bis zuletzt ganz der Alte.",
+  "hl": "ganz der Alte",
+  "role": "focus",
+  "cap": "ganz der Alte bleiben = to stay the same as ever"
+ },
+ "derselbe--same": {
+  "type": "grammar",
+  "de": "Wir buchten dasselbe Hotel wie letztes Jahr.",
+  "hl": "dasselbe",
+  "role": "focus",
+  "cap": "derselbe / dieselbe / dasselbe = the same"
+ },
+ "gruendlich--thorough": {
+  "type": "grammar",
+  "de": "Sie plante die Reise sehr gründlich.",
+  "hl": "gründlich",
+  "role": "focus",
+  "cap": "gründlich = thorough(ly)"
+ },
+ "fruehere--previous": {
+  "type": "grammar",
+  "de": "Meine frühere Stelle war weniger interessant.",
+  "hl": "frühere",
+  "role": "focus",
+  "cap": "frühere = previous, former"
+ },
+ "befriedigend--satisfying": {
+  "type": "grammar",
+  "de": "Ich hoffe, einen befriedigenden Job zu finden.",
+  "hl": "befriedigenden",
+  "role": "focus",
+  "cap": "befriedigend = satisfying"
+ },
+ "die-nutzung--usage": {
+  "type": "grammar",
+  "de": "Die Nutzung wird einfacher werden.",
+  "hl": "Nutzung",
+  "role": "focus",
+  "cap": "die Nutzung = use, usage"
+ },
+ "geschehen--happen": {
+  "type": "grammar",
+  "de": "Was wird als Nächstes geschehen?",
+  "hl": "geschehen",
+  "role": "focus",
+  "cap": "geschehen = to happen"
+ },
+ "der-bedarf--need": {
+  "type": "grammar",
+  "de": "Der Bedarf an Ökostrom wächst.",
+  "hl": "Bedarf an",
+  "role": "focus",
+  "cap": "der Bedarf an (+ D) = need, demand for"
+ },
+ "gesellschaftlich--social": {
+  "type": "grammar",
+  "de": "Das ist ein gesellschaftliches Thema.",
+  "hl": "gesellschaftliches",
+  "role": "focus",
+  "cap": "gesellschaftlich = social, societal"
+ },
+ "abhaengen--be-dependent-on": {
+  "type": "grammar",
+  "de": "Das hängt vom Budget ab.",
+  "hl": "hängt vom Budget ab",
+  "role": "focus",
+  "cap": "abhängen von = to depend on"
+ },
+ "beruecksichtigen--consider": {
+  "type": "grammar",
+  "de": "Wir müssen das Budget berücksichtigen.",
+  "hl": "berücksichtigen",
+  "role": "focus",
+  "cap": "berücksichtigen = to consider, take into account"
+ },
+ "ausser-acht-lassen--disregard": {
+  "type": "grammar",
+  "de": "Wir dürfen das Budget nicht außer Acht lassen.",
+  "hl": "außer Acht lassen",
+  "role": "focus",
+  "cap": "außer Acht lassen = to disregard"
+ },
+ "angeben--state": {
+  "type": "grammar",
+  "de": "Bitte geben Sie Ihren Namen an.",
+  "hl": "geben Sie Ihren Namen an",
+  "role": "focus",
+  "cap": "angeben = to state, give (details)"
+ },
+ "grundsaetzlich--in-general": {
+  "type": "grammar",
+  "de": "Grundsätzlich ist die Behandlung erfolgreich.",
+  "hl": "Grundsätzlich",
+  "role": "focus",
+  "cap": "grundsätzlich = in general, basically"
+ },
+ "merken--notice": {
+  "type": "grammar",
+  "de": "Er merkt, dass ich nervös bin.",
+  "hl": "merkt",
+  "role": "focus",
+  "cap": "merken = to notice"
+ },
+ "erarbeiten--develop": {
+  "type": "grammar",
+  "de": "Der Theatermacher erarbeitet ein neues Stück.",
+  "hl": "erarbeitet",
+  "role": "focus",
+  "cap": "erarbeiten = to develop, work out"
+ },
+ "der-durchschnitt--average": {
+  "type": "grammar",
+  "de": "Im Durchschnitt wird weniger Fleisch gegessen.",
+  "hl": "Im Durchschnitt",
+  "role": "focus",
+  "cap": "im Durchschnitt = on average"
+ },
+ "national--national": {
+  "type": "grammar",
+  "de": "Die nationale Würde muss respektiert werden.",
+  "hl": "nationale",
+  "role": "focus",
+  "cap": "national = national"
+ },
+ "der-umgang--dealing-handling": {
+  "type": "grammar",
+  "de": "Der Umgang miteinander wird verbessert.",
+  "hl": "Umgang miteinander",
+  "role": "focus",
+  "cap": "der Umgang (mit) = dealing with, treatment of"
+ },
+ "der-anspruch--entitlement-claim": {
+  "type": "grammar",
+  "de": "Sie hat Anspruch auf Unterstützung.",
+  "hl": "Anspruch auf",
+  "role": "focus",
+  "cap": "Anspruch auf (+ A) haben = to be entitled to"
+ },
+ "abmelden--sign-off-deregister": {
+  "type": "grammar",
+  "de": "Ich muss mich vom Kurs abmelden.",
+  "hl": "mich vom Kurs abmelden",
+  "role": "focus",
+  "cap": "sich abmelden = to sign off, deregister"
+ },
+ "die-ansicht--opinion": {
+  "type": "grammar",
+  "de": "Meiner Ansicht nach ist Globalisierung wichtig.",
+  "hl": "Meiner Ansicht nach",
+  "role": "focus",
+  "cap": "meiner Ansicht nach = in my opinion"
+ },
+ "pauschal--across-the-board": {
+  "type": "grammar",
+  "de": "Pauschal kann man das nicht sagen.",
+  "hl": "Pauschal",
+  "role": "focus",
+  "cap": "pauschal = across the board, sweepingly"
+ },
+ "profitieren--profit": {
+  "type": "grammar",
+  "de": "Kleine Firmen profitieren nicht vom Weltmarkt.",
+  "hl": "profitieren nicht vom Weltmarkt",
+  "role": "focus",
+  "cap": "profitieren von = to profit from"
+ },
+ "asien--asia": {
+  "type": "grammar",
+  "de": "Viele Firmen verlegen ihre Produktion nach Asien.",
+  "hl": "nach Asien",
+  "role": "focus",
+  "cap": "Asien = Asia"
+ },
+ "das-missverstaendnis--misunderstanding": {
+  "type": "grammar",
+  "de": "Das klingt nach einem Missverständnis.",
+  "hl": "Missverständnis",
+  "role": "focus",
+  "cap": "das Missverständnis = misunderstanding"
+ },
+ "tierisch--animal-like": {
+  "type": "grammar",
+  "de": "Das ist ja tierisch lustig.",
+  "hl": "tierisch lustig",
+  "role": "focus",
+  "cap": "tierisch (colloquial) = really, extremely"
+ },
+ "liegen--be-located": {
+  "type": "grammar",
+  "de": "Wo liegt das Krankenhaus?",
+  "hl": "Wo liegt",
+  "role": "focus",
+  "cap": "liegen = to be located"
+ },
+ "machen--make-do": {
+  "type": "grammar",
+  "de": "Das macht die Sache einfacher.",
+  "hl": "macht die Sache einfacher",
+  "role": "focus",
+  "cap": "machen = to make (here: to make easier)"
+ },
+ "eingehen--enter-into-agree-to-to-respond-to-engage-with": {
+  "type": "grammar",
+  "de": "Er ging auf ihre Argumente ein.",
+  "hl": "ging auf ihre Argumente ein",
+  "role": "focus",
+  "cap": "auf etwas eingehen = to respond to, engage with"
+ },
+ "erstaunlich--astonishing": {
+  "type": "grammar",
+  "de": "Es ist erstaunlich, so einen jungen Regisseur ausgezeichnet zu sehen.",
+  "hl": "erstaunlich",
+  "role": "focus",
+  "cap": "erstaunlich = astonishing"
+ },
+ "fernliegen--be-far-from-one-s-mind": {
+  "type": "grammar",
+  "de": "Es liegt mir fern, das zu behaupten.",
+  "hl": "Es liegt mir fern",
+  "role": "focus",
+  "cap": "es liegt mir fern = it is far from my mind"
+ },
+ "jeglich--any-every": {
+  "type": "grammar",
+  "de": "Jegliche Hilfe ist willkommen.",
+  "hl": "Jegliche",
+  "role": "focus",
+  "cap": "jeglich = any (at all)"
+ },
+ "leichtfallen--be-easy": {
+  "type": "grammar",
+  "de": "Es fällt mir leicht, die Merkformel zu behalten.",
+  "hl": "Es fällt mir leicht",
+  "role": "focus",
+  "cap": "leichtfallen = to be easy (for someone)"
+ },
+ "staendig--constant-continual": {
+  "type": "grammar",
+  "de": "Er übt ständig für die Ausstellung.",
+  "hl": "ständig",
+  "role": "focus",
+  "cap": "ständig = constantly"
+ },
+ "die-ich-botschaft--i-message": {
+  "type": "grammar",
+  "de": "Eine Ich-Botschaft kann zur Problemlösung beitragen.",
+  "hl": "Ich-Botschaft",
+  "role": "focus",
+  "cap": "die Ich-Botschaft = I-message (speaking about your own feelings)"
+ },
+ "werben--advertise-recruit": {
+  "type": "grammar",
+  "de": "Es kommt oft vor, dass Kollegen aggressiv werben.",
+  "hl": "aggressiv werben",
+  "role": "focus",
+  "cap": "werben = to advertise, to recruit"
+ },
+ "daherkommen--come-along-appear": {
+  "type": "grammar",
+  "de": "Die Gelegenheit kommt ganz unerwartet daher.",
+  "hl": "kommt ganz unerwartet daher",
+  "role": "focus",
+  "cap": "daherkommen = to come along, appear"
+ },
+ "voraussetzen--presuppose-require": {
+  "type": "grammar",
+  "de": "Die Stelle setzt Auslandserfahrung voraus.",
+  "hl": "setzt Auslandserfahrung voraus",
+  "role": "focus",
+  "cap": "voraussetzen = to require, presuppose"
+ },
+ "ausnutzen--exploit-take-advantage": {
+  "type": "grammar",
+  "de": "Das Thema wird in den Medien oft ausgenutzt.",
+  "hl": "ausgenutzt",
+  "role": "focus",
+  "cap": "ausnutzen = to exploit, take advantage of"
+ },
+ "empfinden--feel-perceive": {
+  "type": "grammar",
+  "de": "Sie empfindet große Freude bei der Arbeit.",
+  "hl": "empfindet große Freude",
+  "role": "focus",
+  "cap": "empfinden = to feel, perceive"
+ },
+ "entscheidend--decisive-crucial": {
+  "type": "grammar",
+  "de": "Das war ein entscheidender Moment.",
+  "hl": "entscheidender",
+  "role": "focus",
+  "cap": "entscheidend = decisive, crucial"
+ },
+ "missverstehen--misunderstand": {
+  "type": "grammar",
+  "de": "Bitte versteh mich nicht falsch – ich wurde missverstanden.",
+  "hl": "missverstanden",
+  "role": "focus",
+  "cap": "missverstehen = to misunderstand"
+ },
+ "die-scheinehe--sham-marriage": {
+  "type": "grammar",
+  "de": "Es steht fest, dass es sich um eine Scheinehe handelt.",
+  "hl": "Scheinehe",
+  "role": "focus",
+  "cap": "die Scheinehe = sham marriage (only on paper)"
+ },
+ "bewusst--deliberate-conscious-aware": {
+  "type": "grammar",
+  "de": "Sie hat sich bewusst dafür entschieden.",
+  "hl": "bewusst",
+  "role": "focus",
+  "cap": "bewusst = deliberate(ly), conscious(ly)"
+ },
+ "ausloesen--trigger-set-off": {
+  "type": "grammar",
+  "de": "Ihre Beurteilung löst eine Diskussion aus.",
+  "hl": "löst eine Diskussion aus",
+  "role": "focus",
+  "cap": "auslösen = to trigger, set off"
+ },
+ "bestimmen--determine-decide": {
+  "type": "grammar",
+  "de": "Die Kompetenz des Teams bestimmt die Lage.",
+  "hl": "bestimmt",
+  "role": "focus",
+  "cap": "bestimmen = to determine, decide"
+ },
+ "thematisieren--address-raise-a-topic": {
+  "type": "grammar",
+  "de": "Darum thematisierte die Familie das Problem.",
+  "hl": "thematisierte",
+  "role": "focus",
+  "cap": "thematisieren = to raise (a topic)"
+ },
+ "verallgemeinern--generalise": {
+  "type": "grammar",
+  "de": "Man sollte nicht verallgemeinern.",
+  "hl": "verallgemeinern",
+  "role": "focus",
+  "cap": "verallgemeinern = to generalise"
+ },
+ "zurueckhaltend--reserved-restrained": {
+  "type": "grammar",
+  "de": "Er ist eher zurückhaltend.",
+  "hl": "zurückhaltend",
+  "role": "focus",
+  "cap": "zurückhaltend = reserved, restrained"
+ },
+ "ergehen--fare-get-on": {
+  "type": "grammar",
+  "de": "Wie ist es ihnen ergangen?",
+  "hl": "Wie ist es ihnen ergangen",
+  "role": "focus",
+  "cap": "Wie ist es dir ergangen? = How did it go for you?"
+ },
+ "endgueltig--final-definitive": {
+  "type": "grammar",
+  "de": "Das war die endgültige Entscheidung.",
+  "hl": "endgültige",
+  "role": "focus",
+  "cap": "endgültig = final, definitive"
+ },
+ "das-erachten--opinion-view": {
+  "type": "grammar",
+  "de": "Nach meinem Erachten wird sich nicht viel ändern.",
+  "hl": "Nach meinem Erachten",
+  "role": "focus",
+  "cap": "nach meinem Erachten = in my opinion"
+ }
+}

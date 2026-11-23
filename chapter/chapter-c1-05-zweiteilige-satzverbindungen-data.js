@@ -199,12 +199,16 @@ const CHAPTER = {
       note: 'Presents exactly two mutually exclusive options — never combine with "und".',
       ex1: { de: 'Entweder akzeptieren wir das Risiko, oder wir ändern den Plan.', en: 'Either we accept the risk, or we change the plan.', hi: 'Ya toh hum risk accept karte hain, ya hum plan badalte hain.' },
       ex2: { de: 'Entweder kommt er heute, oder er kommt gar nicht.', en: 'Either he comes today, or he doesn\'t come at all.', hi: 'Ya toh woh aaj aata hai, ya bilkul nahi aata.' },
-      collocations: ['entweder ... oder entscheiden', 'entweder ... oder wählen'] },
+      collocations: ['entweder ... oder entscheiden', 'entweder ... oder wählen'],
+      img: { src: '/api/media/vocab-img/4fded328532dfb4a6787', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A pathway splitting toward a study desk or a game console.' }
+    },
     { de: 'weder ... noch', ipa: '[ˈveːdɐ nɔx]', en: 'neither ... nor', hi: 'na toh ... na hi', pos: 'Korrelativkonnektor', register: 'C1 · neutral/formal', connectorCategory: 'Negation',
       note: 'Negates both alternatives simultaneously — never pair "weder" with "oder".',
       ex1: { de: 'Weder die Kritiker noch die Befürworter konnten überzeugen.', en: 'Neither the critics nor the supporters could convince.', hi: 'Na toh aalochak, na hi samarthak convince kar sake.' },
       ex2: { de: 'Sie hatte weder Zeit noch Geduld für die Diskussion.', en: 'She had neither time nor patience for the discussion.', hi: 'Uske paas charcha ke liye na toh samay tha, na hi dhairya.' },
-      collocations: ['weder ... noch bestätigen', 'weder ... noch möglich'] },
+      collocations: ['weder ... noch bestätigen', 'weder ... noch möglich'],
+      img: { src: '/api/media/vocab-img/3e1475078c9d7884b404', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person politely pushing away both a coffee mug and a teacup.' }
+    },
     { de: 'zwar ... aber', ipa: '[tsvaːɐ̯ ˈaːbɐ]', en: 'admittedly ... but', hi: 'sach hai ki ... lekin', pos: 'Korrelativkonnektor', register: 'C1 · academic/formal', connectorCategory: 'Contrast',
       note: 'Concedes a point before contrasting it — a classic academic rhetorical structure.',
       ex1: { de: 'Zwar war die Stichprobe klein, aber die Ergebnisse waren signifikant.', en: 'Admittedly the sample was small, but the results were significant.', hi: 'Sach hai ki namoona chhota tha, lekin parinaam mahatvapurn thay.' },
@@ -214,7 +218,9 @@ const CHAPTER = {
       note: 'Expresses a proportional relationship — both clauses require a comparative adjective, and "je" starts a verb-final clause.',
       ex1: { de: 'Je größer die Stichprobe, desto zuverlässiger die Ergebnisse.', en: 'The larger the sample, the more reliable the results.', hi: 'Jitna bada namoona, utne vishvaasneey parinaam.' },
       ex2: { de: 'Je mehr man übt, desto besser wird man.', en: 'The more one practises, the better one becomes.', hi: 'Jitna zyaada practice karo, utna behtar bante ho.' },
-      collocations: ['je ... desto besser', 'je ... desto zuverlässiger'] }
+      collocations: ['je ... desto besser', 'je ... desto zuverlässiger'],
+      vis: { kind: 'grammar', de: 'Je mehr du übst, desto sicherer wirst du.', hl: 'Je mehr du übst, desto sicherer', role: 'focus', cap: 'je + comparative …, desto + comparative = the ... the (proportional comparison)' }
+    }
   ],
 
   // ---------- Grammar (rule cards → accordion) ----------

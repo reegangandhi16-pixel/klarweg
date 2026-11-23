@@ -3,7 +3,7 @@
    → server deadline. Invalid state transitions are rejected with 409. */
 import { fail, now, readJsonBody, sha256Hex, DEVICE_ID_RE } from './http.js';
 import { log } from './log.js';
-import { MODES, EXAM_MODULES, apiMode, modeBlock, moduleOnly, moduleChoice, practiceParts, singleExaminer } from './flags.js';
+import { MODES, EXAM_MODULES, assignableStatuses, apiMode, modeBlock, moduleOnly, moduleChoice, practiceParts, singleExaminer } from './flags.js';
 import { hasExamAccess, hasRole } from './auth.js';
 import { releaseSet, practicePool, RELEASE_MESSAGES } from './release.js';
 import { formRow, levelConfig, moduleConfig, loadPackage } from './content.js';
@@ -11,7 +11,11 @@ import { countWords } from './wordcount.js';
 import { BANDS, rubricTotal, rubricUnits } from './scoring.js';
 import { signMediaToken, MEDIA_TTL_MS } from './media.js';
 import { sameExaminerRated } from './core.js';
+
+/* SQL literal list of the assignable form statuses — built only from the fixed values in flags.js, never from env text */
+const statusSql = (env) => assignableStatuses(env).map((x) => `'${x}'`).join(',');
 import {
+
   loadAttempt, attemptModules, audit, requireRequestId, idempotent, acquireLease, requireLease,
   computeDeadline, speakingPrepEnd, settle, submitModule, finalizeModule, scoreModule, buildResult, incident, SAVE_GRACE_MS, RESULT_LABEL
 } from './core.js';
@@ -152,7 +156,7 @@ export async function availability(env, userId) {
       if (!reason && !(await hasExamAccess(env, userId, lvl, def.access_scope)) && !(await hasRole(env, userId, ['exam_admin']))) reason = 'no_access';
       if (!reason) {
         const forms = (await env.DB.prepare(`SELECT f.id FROM forms f JOIN level_configs l ON l.id = f.level_config_id
-            WHERE f.status = 'live' AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')})`).bind(lvl, ...def.kinds).all()).results
+            WHERE f.status IN (${statusSql(env)}) AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')})`).bind(lvl, ...def.kinds).all()).results
           .filter((f) => !rs.ids || rs.ids.includes(f.id));
         if (!forms.length) reason = 'no_forms';
       }
@@ -179,7 +183,7 @@ async function partAvailability(env, userId, mode, def, pp) {
       let parts = [];
       if (!reason) {
         const forms = (await env.DB.prepare(`SELECT f.id, f.level_config_id FROM forms f JOIN level_configs l ON l.id = f.level_config_id
-            WHERE f.status = 'live' AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')})`).bind(lvl, ...def.kinds).all()).results
+            WHERE f.status IN (${statusSql(env)}) AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')})`).bind(lvl, ...def.kinds).all()).results
           .filter((f) => pool.ids.includes(f.id));
         if (!forms.length) reason = 'no_forms';
         else parts = practisableParts(await levelConfig(env, forms[0].level_config_id), module);
@@ -249,7 +253,7 @@ export async function createAttempt(env, userId, request) {
   }
 
   const forms = (await env.DB.prepare(`SELECT f.id, f.release, f.level_config_id FROM forms f JOIN level_configs l ON l.id = f.level_config_id
-      WHERE f.status = 'live' AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')}) ORDER BY f.id`).bind(lvl, ...def.kinds).all()).results
+      WHERE f.status IN (${statusSql(env)}) AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')}) ORDER BY f.id`).bind(lvl, ...def.kinds).all()).results
     .filter((f) => !rs.ids || rs.ids.includes(f.id));   // a release set narrows the pool; it never adds a form
   if (!forms.length) fail(409, 'no_forms_available');
   /* ENGINE §7.3 repeat-avoidance: among the forms THIS user has attempted least often (never attempted = 0, so unseen

@@ -1,6 +1,6 @@
 /* The active learner release set (EXAM_RELEASE_FORMS) and whether it may be used at all. Server-side only: the client
    never names a form, and nothing here substitutes one form for another. */
-import { releaseForms, practicePartForms, moduleOnly } from './flags.js';
+import { releaseForms, practicePartForms, moduleOnly, isAssignableStatus } from './flags.js';
 import { log } from './log.js';
 
 /* → { block: null | 'release_unconfigured' | 'release_misconfigured', ids: null | string[] }
@@ -14,7 +14,7 @@ export async function releaseSet(env) {
   const byId = Object.fromEntries(rows.map((r) => [r.id, r]));
   const bad = rf.ids.filter((id) => {
     const f = byId[id];
-    return !f || f.status !== 'live' || (f.kind === 'synthetic' && f.purpose !== 'practice');
+    return !f || !isAssignableStatus(env, f.status) || (f.kind === 'synthetic' && f.purpose !== 'practice');
   });
   if (bad.length) { log(env, 'release_misconfigured', { reason: 'ineligible_forms', forms: bad }); return { block: 'release_misconfigured', ids: null }; }
   return { block: null, ids: rf.ids };
@@ -33,7 +33,7 @@ export async function practicePool(env) {
   const rows = (await env.DB.prepare(`SELECT id, kind, purpose, status FROM forms WHERE id IN (${pf.ids.map((_, i) => `?${i + 1}`).join(',')})`)
     .bind(...pf.ids).all()).results;
   const byId = Object.fromEntries(rows.map((r) => [r.id, r]));
-  const bad = pf.ids.filter((id) => { const f = byId[id]; return !f || f.status !== 'live' || (f.kind === 'synthetic' && f.purpose !== 'practice'); });
+  const bad = pf.ids.filter((id) => { const f = byId[id]; return !f || !isAssignableStatus(env, f.status) || (f.kind === 'synthetic' && f.purpose !== 'practice'); });
   if (bad.length) { log(env, 'pool_misconfigured', { reason: 'ineligible_forms', forms: bad }); return { block: 'pool_misconfigured', ids: null }; }
   return { block: null, ids: pf.ids };
 }

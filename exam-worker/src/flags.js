@@ -28,9 +28,18 @@
                              is the only examiner). Each round stays blind (the rater view never shows another round's
                              bands), and every result built from such ratings says so (same_examiner); it is never shown
                              as two independent raters.
+     EXAM_REVIEW_FORMS       unset (default): only forms with status 'live' may be assigned, listed in a release set or
+                             practice pool. "on": forms with status 'review' (a review-staging build, build-release.mjs
+                             --review-staging: content whose originality/academic sign-off is still open) are assignable
+                             too. INTERNAL STAGING ONLY — production never sets it (test/review-staging.test.mjs fails if
+                             any production wrangler config does), so unreviewed forms cannot reach learners.
    EXAM_ROUTES lives in klarweg-access (the /exam/* proxy). */
 
 const on = (v) => v === 'on';
+
+/* EXAM_REVIEW_FORMS: which form statuses may be assigned (see the header). Always a fixed literal list, never env text. */
+export const assignableStatuses = (env) => (on(env.EXAM_REVIEW_FORMS) ? ['live', 'review'] : ['live']);
+export const isAssignableStatus = (env, status) => assignableStatuses(env).includes(status);
 
 /* EXAM_SINGLE_EXAMINER: one examiner may give both rating rounds (see the header) */
 export const singleExaminer = (env) => on(env.EXAM_SINGLE_EXAMINER);

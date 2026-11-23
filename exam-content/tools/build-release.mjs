@@ -12,6 +12,7 @@
 
    Usage: node exam-content/tools/build-release.mjs --release r000 [--purpose test|learner] [--out DIR] [formDir ...]
    (--purpose learner: explicit formDirs required; system-test fixtures such as S0 are refused)
+   (--review-staging: internal staging of forms whose originality sign-off is open; status 'review', see buildRelease)
    (default --out: <os tmp>/klarweg-exam-build; nothing is uploaded — see docs/exam/RUNBOOK-EXAM-INFRA.md) */
 import fs from 'node:fs';
 import os from 'node:os';
@@ -31,14 +32,24 @@ const OBJECTIVE = new Set(['binary_choice', 'mcq_single', 'matching_pool', 'spea
    purpose 'learner': a release meant for learners — the forms must be named explicitly and none may be a system-test
    fixture (synthetic purpose system_test, e.g. S0). Which forms a learner release contains is decided elsewhere. */
 export const RELEASE_PURPOSES = Object.freeze(['test', 'learner']);
-export function buildRelease({ release, formDirs, purpose = 'test', levelsDir = path.join(ROOT, 'levels'), builtAt = new Date().toISOString(), repoRoot = REPO_ROOT }) {
+/* reviewStaging (CLI --review-staging): a LOCAL/INTERNAL staging build of forms whose content review is still open.
+   - Only the 'originality' validation error is tolerated (that gate is a human sign-off, never self-declared);
+     every other validation error still aborts the build.
+   - Refused for purpose 'learner'.
+   - Every form is written with status 'review' (never 'live'), whatever form.json says. The exam Worker assigns a
+     'review' form only when EXAM_REVIEW_FORMS = "on", a switch production never sets (exam-worker test enforces it),
+     so even a mistaken import of a staging registry cannot reach a learner.
+   - The manifest says review_staging: true and lists each form's open originality checks. */
+export const REVIEW_STATUS = 'review';
+export function buildRelease({ release, formDirs, purpose = 'test', reviewStaging = false, levelsDir = path.join(ROOT, 'levels'), builtAt = new Date().toISOString(), repoRoot = REPO_ROOT }) {
+  if (reviewStaging && purpose !== 'test') throw new Error('a review-staging build is never a learner release (use --purpose test)');
   if (!ID.release.test(release || '')) throw new Error(`invalid release id ${release}`);
   if (!RELEASE_PURPOSES.includes(purpose)) throw new Error(`invalid release purpose ${purpose} (${RELEASE_PURPOSES.join('|')})`);
   if (purpose === 'learner' && !(formDirs && formDirs.length)) throw new Error('a learner release needs an explicit list of form directories');
   const files = new Map();             // r2 key → Buffer
   const put = (key, data) => files.set(key, Buffer.isBuffer(data) ? data : Buffer.from(typeof data === 'string' ? data : JSON.stringify(data, null, 2)));
   const base = `releases/${release}`;
-  const manifest = { release, purpose, built_at: builtAt, level_configs: [], forms: [], assets: {} };
+  const manifest = { release, purpose, built_at: builtAt, ...(reviewStaging ? { review_staging: true } : {}), level_configs: [], forms: [], assets: {} };
   /* A learner release never overwrites: plain INSERT, so an existing form, module, item, key or asset id aborts the whole
      import (SCHEMA §2: IDs are immutable; changed content needs a new revision). Check first with
      tools/registry-preflight.mjs. Test/dev releases keep INSERT OR REPLACE for re-imports. Level configs are shared
@@ -62,8 +73,11 @@ export function buildRelease({ release, formDirs, purpose = 'test', levelsDir = 
       throw new Error(`refusing to build ${kind} form from inside the public product repo (${path.relative(repoRoot, dir)}); real exam content belongs in the private content repo`);
     }
     const v = validateForm(dir, { levelsDir });
-    if (!v.ok) throw new Error(`form ${dir} failed validation:\n` + v.errors.map((e) => `  ${e.code}: ${e.msg}`).join('\n'));
+    const blocking = reviewStaging ? v.errors.filter((e) => e.code !== 'originality') : v.errors;
+    if (blocking.length) throw new Error(`form ${dir} failed validation:\n` + blocking.map((e) => `  ${e.code}: ${e.msg}`).join('\n'));
+    const originalityOpen = v.errors.filter((e) => e.code === 'originality').length;
     const { form, tasks, items, keys, assets } = loadForm(dir);
+    const formStatus = reviewStaging ? REVIEW_STATUS : form.status;
     if (purpose === 'learner' && form.kind === 'synthetic' && form.purpose !== 'practice') {
       throw new Error(`refusing ${form.id} in a learner release: synthetic purpose ${form.purpose} (system-test fixtures never reach learners)`);
     }
@@ -158,12 +172,13 @@ export function buildRelease({ release, formDirs, purpose = 'test', levelsDir = 
 
     const keysKey = `${base}/keys/${fslug}.json`;
     put(keysKey, keys);
-    manifest.forms.push({ id: form.id, kind: form.kind, purpose: form.purpose || null, label: form.label, level_config: form.level_config, rev: form.rev, status: form.status,
+    manifest.forms.push({ id: form.id, kind: form.kind, purpose: form.purpose || null, label: form.label, level_config: form.level_config, rev: form.rev, status: formStatus,
+      ...(reviewStaging ? { originality_checks_open: originalityOpen } : {}),
       modules: modulesOut, keys_key: keysKey, assets: formAssets.length });
 
     /* registry SQL */
     rows.forms.push({ id: form.id });
-    sql.push(`${ins} forms (id, level_config_id, kind, purpose, label, status, rev, release, created_at) VALUES (${q(form.id)}, ${q(form.level_config)}, ${q(form.kind)}, ${q(form.purpose || null)}, ${q(form.label)}, ${q(form.status)}, ${q(form.rev)}, ${q(release)}, ${q(builtAt)});`);   // purpose: migration 0003
+    sql.push(`${ins} forms (id, level_config_id, kind, purpose, label, status, rev, release, created_at) VALUES (${q(form.id)}, ${q(form.level_config)}, ${q(form.kind)}, ${q(form.purpose || null)}, ${q(form.label)}, ${q(formStatus)}, ${q(form.rev)}, ${q(release)}, ${q(builtAt)});`);   // purpose: migration 0003
     for (const [m, o] of Object.entries(modulesOut)) {
       const order = lcMod(m).order;
       rows.form_modules.push({ form_id: form.id, module: m, package_sha256: o.sha256 });
@@ -233,10 +248,11 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const opt = (n, d) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : d; };
   const release = opt('--release', 'r000');
   const purpose = opt('--purpose', 'test');
+  const reviewStaging = argv.includes('--review-staging');
   const out = opt('--out', path.join(os.tmpdir(), 'klarweg-exam-build'));
   const dirs = argv.filter((a, i) => !a.startsWith('--') && !['--release', '--out', '--purpose'].includes(argv[i - 1]));
   // only a test/dev build may default to every form in the tree; a learner build names its forms
-  const b = buildRelease({ release, purpose, formDirs: dirs.length || purpose === 'learner' ? dirs : findForms(path.join(ROOT, 'forms')) });
+  const b = buildRelease({ release, purpose, reviewStaging, formDirs: dirs.length || purpose === 'learner' ? dirs : findForms(path.join(ROOT, 'forms')) });
   writeRelease(b, out);
   console.log(JSON.stringify({ release, out, files: b.files.size, forms: b.manifest.forms.map((f) => f.id) }));
 }

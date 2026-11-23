@@ -177,7 +177,7 @@ A learner's status screen also re-checks an order with Cashfree every time it is
 
   `consultations.test.mjs` covers the ₹100 booking the same way.
 - `scripts/live-enrol.test.mjs`: the page switch, validator interlocks, the browser-side rules (no amount, no gateway status, every outcome screen), demo-booking retry and email removal, and the predeploy guard run against temporary copies.
-- `scripts/live-payments-demo.mjs --e2e`: headless Chrome through both flows with the real Worker and a **mock** Cashfree checkout (local only). It covers:
+- `scripts/live-marketplace-demo.mjs --e2e`: headless Chrome through both flows with the real Worker and a **mock** Cashfree checkout (local only). It covers:
   - failure then retry;
   - cancel then retry;
   - bank delay then reconcile;
@@ -187,4 +187,4 @@ A learner's status screen also re-checks an order with Cashfree every time it is
   - a forged webhook;
   - 390 px mobile.
 
-  It saves screenshots. Run `node scripts/live-payments-demo.mjs` without `--e2e` to click through it yourself.
+  It saves screenshots. Run `node scripts/live-marketplace-demo.mjs` without `--e2e` to click through it yourself.

@@ -1,0 +1,45 @@
+.pdf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem 1.25rem;
+  margin-top: 1.25rem;
+}
+.pdf-actions .pdf-download {
+  color: #102719;
+  min-height: 44px;
+}
+.pdf-actions a:not(.pdf-download) {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.pdf-preview {
+  margin: 2rem 0 0;
+}
+.pdf-preview figcaption {
+  margin-bottom: .75rem;
+  color: var(--ink-secondary);
+  font-weight: 600;
+}
+.pdf-preview img {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  border: 1px solid var(--hairline-strong);
+  border-radius: .5rem;
+  background: #fff;
+}
+.pdf-chapters {
+  display: grid;
+  gap: .625rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--hairline);
+  max-width: 22rem;
+}
+.pdf-chapters .btn {
+  justify-content: center;
+  text-align: center;
+}

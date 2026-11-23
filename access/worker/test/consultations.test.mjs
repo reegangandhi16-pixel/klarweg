@@ -729,7 +729,7 @@ test('separation: the consultation module never reaches the self-paced entitleme
   assert.equal(/grantProduct|entitlements\.js|products\.js|user_entitlements|\bFROM orders\b|INTO orders/.test(code), false);
   assert.equal(/mailchannels|sendgrid|resend|smtp|send_?email|sendMail|\bMAIL\b|whatsapp|sms/i.test(code), false);
   const imports = [...code.matchAll(/from\s+["'](\.[^"']+)["']/g)].map((m) => m[1]).sort();
-  assert.deepEqual(imports, ['./auth.js', './cashfree-config.js', './sessions.js']);
+  assert.deepEqual(imports, ['./auth.js', './cashfree-config.js', './live-catalog.js', './sessions.js']);  // live-catalog.js: pure marketplace data
   const wh = fs.readFileSync(path.join(WORKER_DIR, 'src', 'webhooks-cashfree.js'), 'utf8');
   assert.ok(wh.indexOf('isConsultOrderId(claimedOrderId)') < wh.indexOf('await grantProduct('), 'consultation orders branch off before the grant');
 });

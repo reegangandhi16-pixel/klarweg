@@ -4,11 +4,14 @@ import { createOrder, getOrder } from "./orders.js";
 import { cashfreeWebhook } from "./webhooks-cashfree.js";
 import { consultAvailability, createConsultBooking, getConsultBooking, getConsultJoin, listConsultBookings, reconcileRecentConsultBookings } from "./consultations.js";
 import { enrolCatalog, enrolQuote, createEnrolCheckout, getEnrolment, listEnrolments, reconcileRecentPayments } from "./enrolments.js";
+import { demoAvailability, createDemoBooking, rescheduleDemo } from "./live-demos.js";
+import { liveAdminOverview, liveAdminSlots, liveAdminBatch, liveAdminTeacher, liveAdminCoupon, liveAdminDemo, liveAdminEnrolment } from "./live-admin.js";
 import { aiStatus, aiRequest } from "./ai.js";
 import { speechStatus, speechTranscribe, speechTaskCheck } from "./speech.js";
 import { listResources, createResourceLink, streamResource, RESOURCE_ROUTES } from "./resources.js";
 import { chapterScript, CHAPTER_ROUTE } from "./chapters.js";
 import { examProxy } from "./exam-proxy.js";
+import { forgotPassword, checkResetToken, resetPassword } from "./password-reset.js";
 import { mfaStatus, mfaEnroll, mfaEnrollConfirm, mfaVerify, mfaRegenerateRecoveryCodes } from "./mfa-routes.js";
 import { cookieProbeSet, cookieProbeCheck } from "./cookie-probe.js";
 import {
@@ -19,6 +22,7 @@ import {
   reviewSavedWord
 } from "./saved-words.js";
 import { listProgress, saveProgress } from "./progress.js";
+import { accountOverview, updateProfile, setAvatar, removeAvatar, changePassword, deleteAccount } from "./account.js";
 function json(data, status = 200) {
   return Response.json(data, { status });
 }
@@ -137,6 +141,36 @@ async function route(request, env, ctx) {
       return withCors(await getEnrolment(request, env, enrolMatch[1]), request);
     }
 
+    /* ₹100 Friday/Sunday demo classes (live-demos.js). Off unless
+       DEMO_BOOKING matches CASHFREE_ENV; status and join links use the
+       /consult/bookings/:ref routes above (same table, kind = 'demo'). */
+    if (request.method === "GET" && url.pathname === "/demo/availability") {
+      return withCors(await demoAvailability(request, env), request);
+    }
+    if (request.method === "POST" && url.pathname === "/demo/bookings") {
+      return withCors(await createDemoBooking(request, env), request);
+    }
+    const demoMoveMatch = url.pathname.match(/^\/demo\/bookings\/(KWC-[2-9A-HJ-NP-Z]{8})\/reschedule$/);
+    if (request.method === "POST" && demoMoveMatch) {
+      return withCors(await rescheduleDemo(request, env, demoMoveMatch[1]), request);
+    }
+
+    /* Live marketplace administration (live-admin.js): LIVE_ADMIN_EMAILS
+       + a fresh second factor; everything else is refused. */
+    if (url.pathname.startsWith("/live-admin/")) {
+      const p = url.pathname;
+      if (request.method === "GET" && p === "/live-admin/overview") return withCors(await liveAdminOverview(request, env), request);
+      if (request.method === "POST" && p === "/live-admin/slots") return withCors(await liveAdminSlots(request, env), request);
+      if (request.method === "POST" && p === "/live-admin/batches") return withCors(await liveAdminBatch(request, env), request);
+      if (request.method === "POST" && p === "/live-admin/teachers") return withCors(await liveAdminTeacher(request, env), request);
+      if (request.method === "POST" && p === "/live-admin/coupons") return withCors(await liveAdminCoupon(request, env), request);
+      const dm = p.match(/^\/live-admin\/demos\/(KWC-[2-9A-HJ-NP-Z]{8})$/);
+      if (request.method === "POST" && dm) return withCors(await liveAdminDemo(request, env, dm[1]), request);
+      const em = p.match(/^\/live-admin\/enrolments\/(KWE-[2-9A-HJ-NP-Z]{8})$/);
+      if (request.method === "POST" && em) return withCors(await liveAdminEnrolment(request, env, em[1]), request);
+      return withCors(json({ ok: false, error: "Not found." }, 404), request);
+    }
+
     if (request.method === "POST" && url.pathname === "/auth/signup") {
       return withCors(await signup(request, env, ctx), request);
     }
@@ -160,6 +194,18 @@ async function route(request, env, ctx) {
       return googleLoginRedirect(request, env);
     }
 
+    /* Forgot / reset password (password-reset.js). Off unless
+       PASSWORD_RESET = "on" and the selected mail transport is configured. */
+    if (request.method === "POST" && url.pathname === "/auth/password/forgot") {
+      return withCors(await forgotPassword(request, env, ctx), request);
+    }
+    if (request.method === "POST" && url.pathname === "/auth/password/reset/check") {
+      return withCors(await checkResetToken(request, env, ctx), request);
+    }
+    if (request.method === "POST" && url.pathname === "/auth/password/reset") {
+      return withCors(await resetPassword(request, env, ctx), request);
+    }
+
     if (request.method === "POST" && url.pathname === "/auth/logout") {
       return withCors(await logout(request, env), request);
     }
@@ -179,6 +225,21 @@ if (request.method === "GET" && url.pathname === "/auth/me") {
         "POST /auth/mfa/enroll/confirm": mfaEnrollConfirm,
         "POST /auth/mfa/verify": mfaVerify,
         "POST /auth/mfa/recovery-codes": mfaRegenerateRecoveryCodes
+      }[`${request.method} ${url.pathname}`];
+      if (handler) return withCors(await handler(request, env), request);
+    }
+
+    /* The signed-in learner's own account page (account.js): profile,
+       photo, preferred level, password change, guarded self-deletion.
+       Session-derived user only; never touches entitlements or orders. */
+    if (url.pathname === "/account" || url.pathname.startsWith("/account/")) {
+      const handler = {
+        "GET /account": accountOverview,
+        "POST /account/profile": updateProfile,
+        "POST /account/avatar": setAvatar,
+        "DELETE /account/avatar": removeAvatar,
+        "POST /account/password": changePassword,
+        "POST /account/delete": deleteAccount
       }[`${request.method} ${url.pathname}`];
       if (handler) return withCors(await handler(request, env), request);
     }

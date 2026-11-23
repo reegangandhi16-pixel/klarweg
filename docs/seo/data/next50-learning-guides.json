@@ -125,7 +125,14 @@
         "die Kinder",
         "The plural changes the ending, not simply the article."
       ]
-    ]
+    ],
+    "followup": {
+      "title": "Describe three relationships from a family tree",
+      "prompt": "Marta and Uwe are Lina’s parents. Tom is Lina’s brother. Say the relationships from Lina’s perspective.",
+      "model": "Marta ist meine Mutter. Uwe ist mein Vater. Tom ist mein Bruder.",
+      "check": "The possessive depends on the noun. Use meine Mutter and mein Vater or mein Bruder.",
+      "language": "de"
+    }
   },
   {
     "kind": "vocabulary",
@@ -253,7 +260,14 @@
         "das Gemüse",
         "Use the collective noun rather than inventing a regular plural."
       ]
-    ]
+    ],
+    "followup": {
+      "title": "Build a meal from a short menu",
+      "prompt": "The menu lists Gemüsesuppe, Linsensalat, Apfelkuchen and Mineralwasser. Pick a starter, a main item and a drink, then place the order.",
+      "model": "Ich nehme die Gemüsesuppe, den Linsensalat und ein Mineralwasser, bitte.",
+      "check": "Gemüsesuppe and Mineralwasser are recognizable compounds. Masculine der Linsensalat becomes den Linsensalat when you order it.",
+      "language": "de"
+    }
   },
   {
     "kind": "vocabulary",
@@ -509,7 +523,14 @@
         "die Hose",
         "Avoid transferring the English plural form automatically."
       ]
-    ]
+    ],
+    "followup": {
+      "title": "Describe the item that fits the request",
+      "prompt": "Your friend wants a light shirt in size M. Compare a blue cotton shirt in M with a black wool coat in L.",
+      "model": "Das blaue Baumwollhemd in Größe M passt besser. Der schwarze Wollmantel in Größe L ist zu groß und zu warm.",
+      "check": "Hemd and Mantel are different items. Name the size and material to explain the choice.",
+      "language": "de"
+    }
   },
   {
     "kind": "vocabulary",
@@ -637,7 +658,14 @@
         "der Schreibtisch",
         "Tisch is the broader word for a table."
       ]
-    ]
+    ],
+    "followup": {
+      "title": "Place items in an imaginary room",
+      "prompt": "Imagine a lamp on the table, a bag under the chair and a shelf next to the door. Describe the room without pointing.",
+      "model": "Die Lampe steht auf dem Tisch. Die Tasche liegt unter dem Stuhl. Das Regal steht neben der Tür.",
+      "check": "The clauses answer where, so dem Tisch, dem Stuhl and der Tür are dative forms.",
+      "language": "de"
+    }
   },
   {
     "kind": "vocabulary",
@@ -765,7 +793,14 @@
         "Wir treffen uns vor dem Rathaus.",
         "The model describes a meeting location."
       ]
-    ]
+    ],
+    "followup": {
+      "title": "Choose a destination for each errand",
+      "prompt": "Where would you borrow a book, collect a prescription and catch a regional train? Use a different place in each answer.",
+      "model": "Ich leihe ein Buch in der Bibliothek aus, hole Medikamente in der Apotheke und nehme den Zug am Bahnhof.",
+      "check": "Bibliothek is where you borrow a book. Buchhandlung is where you normally buy one.",
+      "language": "de"
+    }
   },
   {
     "kind": "vocabulary",
@@ -893,7 +928,14 @@
         "Ich fahre mit dem Zug.",
         "Mit is followed by dem Zug in this expression."
       ]
-    ]
+    ],
+    "followup": {
+      "title": "Choose transport for two trips",
+      "prompt": "A bus reaches the old town every ten minutes. A regional train reaches a different city in forty minutes. Explain how you would travel to each place.",
+      "model": "In die Altstadt fahre ich mit dem Bus. In die andere Stadt fahre ich mit dem Regionalzug.",
+      "check": "Use mit dem for Bus and Regionalzug. Give the destination before the mode if you want to contrast two journeys.",
+      "language": "de"
+    }
   },
   {
     "kind": "vocabulary",
@@ -1021,7 +1063,14 @@
         "die Wolke",
         "Wind names moving air, not a cloud."
       ]
-    ]
+    ],
+    "followup": {
+      "title": "Make two plans from a forecast",
+      "prompt": "Read: Am Samstag regnet es. Am Sonntag ist es sonnig und mild. Make one indoor and one outdoor plan.",
+      "model": "Am Samstag gehe ich ins Kino, weil es regnet. Am Sonntag mache ich einen Spaziergang, weil es sonnig und mild ist.",
+      "check": "Use the forecast vocabulary directly. Put the finite verb at the end of each weil clause.",
+      "language": "de"
+    }
   },
   {
     "kind": "vocabulary",
@@ -1149,7 +1198,14 @@
         "der Arm",
         "Hand names the hand itself."
       ]
-    ]
+    ],
+    "followup": {
+      "title": "Name the exact side and body part",
+      "prompt": "Point to your left shoulder, right hand and both knees, then say what you are pointing to in German.",
+      "model": "Das ist meine linke Schulter. Das ist meine rechte Hand. Das sind meine Knie.",
+      "check": "For two knees, use das sind rather than das ist. Add linke or rechte when the side matters.",
+      "language": "de"
+    }
   },
   {
     "kind": "vocabulary",
@@ -1277,7 +1333,14 @@
         "No: it means a male boss.",
         "The similar English spelling can suggest the wrong meaning."
       ]
-    ]
+    ],
+    "followup": {
+      "title": "Turn a first-day message into a checklist",
+      "prompt": "Read: Holen Sie den Ausweis am Empfang ab. Um zehn ist die Teambesprechung. Fragen Sie danach die IT nach Ihrem Zugang. What do you do first, second and third?",
+      "model": "Pick up your ID at reception, attend the team meeting at ten, then ask IT about access.",
+      "check": "Danach tells you when the IT step happens. Empfang is the place where you pick up the ID.",
+      "language": "en"
+    }
   },
   {
     "kind": "vocabulary",
@@ -1405,7 +1468,14 @@
         "No: it means an application.",
         "Distinguish the action of applying from a decision."
       ]
-    ]
+    ],
+    "followup": {
+      "title": "Extract actions from an enrollment email",
+      "prompt": "Read: Bitte laden Sie bis Freitag den Zulassungsbescheid hoch und überweisen Sie den Semesterbeitrag. Which two tasks are required, and what deadline is given?",
+      "model": "Upload the admission letter and pay the semester contribution by Friday.",
+      "check": "Zulassungsbescheid is a document and Semesterbeitrag is a payment. The phrase bis Freitag sets the deadline.",
+      "language": "en"
+    }
   },
   {
     "kind": "vocabulary",
@@ -1789,7 +1859,14 @@
         "Der Drucker funktioniert nicht.",
         "Describe the observed problem without inventing a cause."
       ]
-    ]
+    ],
+    "followup": {
+      "title": "Report a login problem clearly",
+      "prompt": "You can open the app but your account login fails after a password reset. Write a support message that includes what you tried.",
+      "model": "Ich kann die App öffnen, aber ich kann mich nicht anmelden. Ich habe mein Passwort bereits zurückgesetzt. Die Fehlermeldung erscheint weiterhin. Können Sie mir bitte helfen?",
+      "check": "Name the point of failure and an attempted fix. Keep passwords and security codes out of the message.",
+      "language": "de"
+    }
   },
   {
     "kind": "vocabulary",
@@ -2301,7 +2378,14 @@
         "Daten",
         "The plural is not formed with a regular -s."
       ]
-    ]
+    ],
+    "followup": {
+      "title": "Choose the appointment matching a message",
+      "prompt": "The message says kommenden Dienstag um halb drei. Your calendar offers Tuesday at 14:30 and Wednesday at 15:30. Select the right slot.",
+      "model": "Dienstag um 14:30 Uhr. Halb drei means half an hour before three.",
+      "check": "Read back the weekday and time together. In German, halb refers to the upcoming hour.",
+      "language": "de"
+    }
   },
   {
     "kind": "vocabulary",
@@ -2727,7 +2811,14 @@
         "This brief expression fits the transaction."
       ]
     ],
-    "transfer": "Replace the order with a different familiar dish and drink. Have your partner make one item unavailable, then choose an alternative. Keep ingredient questions truthful to the fictional scenario and practise confirming what you understood. Do not infer an answer from a menu picture or from the name of a dish."
+    "transfer": "Replace the order with a different familiar dish and drink. Have your partner make one item unavailable, then choose an alternative. Keep ingredient questions truthful to the fictional scenario and practise confirming what you understood. Do not infer an answer from a menu picture or from the name of a dish.",
+    "followup": {
+      "title": "Order a soup with one ingredient change",
+      "prompt": "Ask if the tomato soup contains cream. If it does, ask for the vegetable soup without cream.",
+      "model": "Ist Sahne in der Tomatensuppe? Dann nehme ich die Gemüsesuppe ohne Sahne, bitte.",
+      "check": "Check that you ask about the first dish before ordering the second. Ohne names the ingredient you want left out.",
+      "language": "de"
+    }
   },
   {
     "kind": "conversation",
@@ -2812,7 +2903,14 @@
         "Change only the direction needed for the new route."
       ]
     ],
-    "transfer": "Draw a tiny fictional map with a park, station and traffic light. Reverse the left turn and give a new route. Your partner should draw or trace what they hear before seeing your map. Compare the result and identify whether the error involved the landmark, the order of steps or the direction word."
+    "transfer": "Draw a tiny fictional map with a park, station and traffic light. Reverse the left turn and give a new route. Your partner should draw or trace what they hear before seeing your map. Compare the result and identify whether the error involved the landmark, the order of steps or the direction word.",
+    "followup": {
+      "title": "Follow a two-turn route to the library",
+      "prompt": "Imagine a street with a pharmacy on your right. The library is around the next corner on the left. Give the route from where you are standing.",
+      "model": "Gehen Sie geradeaus bis zur Apotheke. Biegen Sie danach links ab. Die Bibliothek ist gleich um die Ecke.",
+      "check": "Trace the route as you speak. Bis zur Apotheke marks how far to go before turning.",
+      "language": "de"
+    }
   },
   {
     "kind": "conversation",
@@ -2897,7 +2995,14 @@
         "The answer combines a direction and a landmark."
       ]
     ],
-    "transfer": "Change the stay to three nights and the room to a double room. Then invent a different location for the lift. Ask the breakfast question again and let the receptionist give a different answer. This prevents the exercise from becoming a memorised policy claim about accommodation."
+    "transfer": "Change the stay to three nights and the room to a double room. Then invent a different location for the lift. Ask the breakfast question again and let the receptionist give a different answer. This prevents the exercise from becoming a memorised policy claim about accommodation.",
+    "followup": {
+      "title": "Correct a check-in date",
+      "prompt": "The receptionist thinks your reservation starts on Friday. It actually starts today, Thursday, for two nights. Say the dates clearly.",
+      "model": "Meine Reservierung beginnt heute, am Donnerstag. Ich bleibe zwei Nächte. Können Sie das bitte noch einmal prüfen?",
+      "check": "Say both the intended start date and length of stay. Ask them to check the booking before requesting a different room.",
+      "language": "de"
+    }
   },
   {
     "kind": "conversation",
@@ -2982,7 +3087,14 @@
         "Dort hinten supplies that location."
       ]
     ],
-    "transfer": "Make the first garment too small and ask about another size. Then swap customer and staff roles. Your aim is to respond to a new practical detail, not to repeat an entire transaction regardless of the other person’s answer. Keep a short record of article or pronoun changes you needed."
+    "transfer": "Make the first garment too small and ask about another size. Then swap customer and staff roles. Your aim is to respond to a new practical detail, not to repeat an entire transaction regardless of the other person’s answer. Keep a short record of article or pronoun changes you needed.",
+    "followup": {
+      "title": "Exchange an item for a smaller size",
+      "prompt": "You bought a shirt yesterday. It is too big. Ask for an exchange and request size M.",
+      "model": "Ich habe das Hemd gestern gekauft. Es ist zu groß. Kann ich es gegen Größe M umtauschen?",
+      "check": "Use es for das Hemd. Gegen Größe M tells the seller what you want in exchange.",
+      "language": "de"
+    }
   },
   {
     "kind": "conversation",
@@ -3067,7 +3179,14 @@
         "Use the telephone introduction, not a literal English word order."
       ]
     ],
-    "transfer": "Put two chairs back to back and practise without looking at each other. Spell a fictional surname and have the listener write it down. Change one letter in the next round. Confirm what was heard before continuing, and never use a real password or sensitive account detail as practice material."
+    "transfer": "Put two chairs back to back and practise without looking at each other. Spell a fictional surname and have the listener write it down. Change one letter in the next round. Confirm what was heard before continuing, and never use a real password or sensitive account detail as practice material.",
+    "followup": {
+      "title": "Take a callback message",
+      "prompt": "Write down the caller, time and number from this fictional message: Herr Yilmaz ruft an. Bitte rufen Sie ihn morgen um zehn unter 0123 456789 zurück.",
+      "model": "Anrufer: Herr Yilmaz. Rückruf: morgen um zehn. Nummer: 0123 456789.",
+      "check": "Read back the time and number separately. Zurückrufen means calling the original caller back.",
+      "language": "de"
+    }
   },
   {
     "kind": "conversation",
@@ -3152,7 +3271,14 @@
         "The model explicitly says seit gestern Abend."
       ]
     ],
-    "transfer": "Use a neutral role-play card with a different fictional duration and practise the question-answer pattern. If you are practising for an actual appointment, describe your own information accurately and use the language support you need. Do not treat this rehearsal as an assessment of symptoms or substitute its answer for a clinician’s question."
+    "transfer": "Use a neutral role-play card with a different fictional duration and practise the question-answer pattern. If you are practising for an actual appointment, describe your own information accurately and use the language support you need. Do not treat this rehearsal as an assessment of symptoms or substitute its answer for a clinician’s question.",
+    "followup": {
+      "title": "Name a body part and say when discomfort started",
+      "prompt": "For speaking practice, tell a receptionist you have had pain in your left knee since Monday. Ask for an appointment.",
+      "model": "Seit Montag habe ich Schmerzen im linken Knie. Kann ich einen Termin bekommen?",
+      "check": "Seit Montag gives the start point. Im linken Knie identifies the side and place. This is a language exercise.",
+      "language": "de"
+    }
   },
   {
     "kind": "conversation",
@@ -3237,7 +3363,14 @@
         "Use nach with this city destination."
       ]
     ],
-    "transfer": "Change the destination, time and track independently. Ask your partner to repeat only the detail that was unclear, then summarise the full journey information. A successful rehearsal involves both asking and checking; saying a correct question is only half the activity if you do not understand the answer."
+    "transfer": "Change the destination, time and track independently. Ask your partner to repeat only the detail that was unclear, then summarise the full journey information. A successful rehearsal involves both asking and checking; saying a correct question is only half the activity if you do not understand the answer.",
+    "followup": {
+      "title": "Confirm which platform changes",
+      "prompt": "A notice says the 14:18 train to Bonn leaves from platform 7 instead of 4. Ask the person beside you to confirm the new platform.",
+      "model": "Entschuldigung, fährt der Zug um 14:18 Uhr nach Bonn jetzt von Gleis sieben? Ja, von Gleis sieben statt vier.",
+      "check": "Statt vier identifies the original platform. Check the departure time and destination before changing platforms.",
+      "language": "de"
+    }
   },
   {
     "kind": "conversation",
@@ -3322,7 +3455,14 @@
         "It is an original communication exercise, not a hiring rule."
       ]
     ],
-    "transfer": "Replace the developer role with a role you understand and choose a truthful activity to explain. Describe what you did and why it helped, without copying an invented achievement. Ask a teacher to review clarity, verb forms and relevant vocabulary. Do not use a rehearsed answer when it does not address the actual question."
+    "transfer": "Replace the developer role with a role you understand and choose a truthful activity to explain. Describe what you did and why it helped, without copying an invented achievement. Ask a teacher to review clarity, verb forms and relevant vocabulary. Do not use a rehearsed answer when it does not address the actual question.",
+    "followup": {
+      "title": "Adapt your introduction to two roles",
+      "prompt": "You organised stock at a shop and trained a new colleague. Write one version for a warehouse role and one for a customer-support role.",
+      "model": "Warehouse: Ich habe Warenbestände kontrolliert und Lieferungen sortiert. Support: Ich habe neue Kolleginnen und Kollegen eingearbeitet und Fragen zum Ablauf beantwortet.",
+      "check": "Select the detail that matches the advertised job. Keep your claims tied to something you actually did.",
+      "language": "de"
+    }
   },
   {
     "kind": "conversation",
@@ -3407,7 +3547,14 @@
         "This requests a confirmation of the agreed appointment."
       ]
     ],
-    "transfer": "Offer two new times and make your partner unavailable for the first. After agreeing, each person writes the day and time without looking at the script. Compare notes. If they differ, practise the confirmation step again instead of assuming that a polite response proves the details were understood."
+    "transfer": "Offer two new times and make your partner unavailable for the first. After agreeing, each person writes the day and time without looking at the script. Compare notes. If they differ, practise the confirmation step again instead of assuming that a polite response proves the details were understood.",
+    "followup": {
+      "title": "Offer realistic alternatives",
+      "prompt": "Your dentist offers Tuesday at ten. You cannot attend then. Offer Wednesday after three or Friday morning, then confirm Friday at nine.",
+      "model": "Am Dienstag um zehn kann ich leider nicht. Geht Mittwoch nach drei oder Freitagvormittag? Freitag um neun passt mir. Vielen Dank.",
+      "check": "Use am with days and um with a clock time. End with one confirmed appointment.",
+      "language": "de"
+    }
   },
   {
     "kind": "conversation",
@@ -3662,7 +3809,14 @@
         "The listener explicitly checks the channel."
       ]
     ],
-    "transfer": "Give your partner a short instruction with one intentionally missing detail. The listener must ask a focused question before acting. Repeat with an unclear word, time and place. Compare which clarification phrase helps each time, and avoid treating a repeated sentence as an explanation when its meaning remains unknown."
+    "transfer": "Give your partner a short instruction with one intentionally missing detail. The listener must ask a focused question before acting. Repeat with an unclear word, time and place. Compare which clarification phrase helps each time, and avoid treating a repeated sentence as an explanation when its meaning remains unknown.",
+    "followup": {
+      "title": "Fix three different misunderstandings",
+      "prompt": "Practise one request when a speaker is too fast, one when you do not know a word, and one when you are unsure how a surname is spelled.",
+      "model": "Könnten Sie bitte langsamer sprechen? Was bedeutet Abfahrt? Wie schreibt man Ihren Nachnamen?",
+      "check": "Choose the question that fixes the specific problem. Repeating the same sentence more slowly will not necessarily explain a word you do not know.",
+      "language": "de"
+    }
   },
   {
     "kind": "conversation",
@@ -3832,7 +3986,14 @@
         "Länger compares duration here."
       ]
     ],
-    "transfer": "Compare two fictional study options using time, location and ability to concentrate. Give each option one advantage and one disadvantage. Then explain which criterion you prioritise. Change the priority in a second round and see whether your conclusion changes; a useful comparison makes the reason for the choice visible."
+    "transfer": "Compare two fictional study options using time, location and ability to concentrate. Give each option one advantage and one disadvantage. Then explain which criterion you prioritise. Change the priority in a second round and see whether your conclusion changes; a useful comparison makes the reason for the choice visible.",
+    "followup": {
+      "title": "Choose between two job offers",
+      "prompt": "Offer A is 30 hours per week with a shorter commute. Offer B is 40 hours per week with higher pay. State which one fits you and name a trade-off.",
+      "model": "Ich würde Angebot A wählen, weil mir ein kurzer Arbeitsweg wichtig ist. Dafür wäre mein Einkommen niedriger als bei Angebot B.",
+      "check": "Dafür introduces the trade-off. Tie the choice to your own priority, such as time or income.",
+      "language": "de"
+    }
   },
   {
     "kind": "writing",
@@ -3892,7 +4053,14 @@
         "The message is between friends."
       ]
     ],
-    "transfer": "Write a new message about a different learning activity. Include one thing you enjoy, one difficulty and one genuine question for the reader. Keep the greeting and ending informal. After drafting, underline each question and check whether the earlier information helps the reader answer it."
+    "transfer": "Write a new message about a different learning activity. Include one thing you enjoy, one difficulty and one genuine question for the reader. Keep the greeting and ending informal. After drafting, underline each question and check whether the earlier information helps the reader answer it.",
+    "followup": {
+      "title": "Send an update after moving",
+      "prompt": "Tell a friend where you moved, how you like the new place and when they can visit.",
+      "model": "Hallo Mira, ich wohne jetzt in Leipzig. Die Wohnung ist klein, aber sehr hell. Hast du am Samstag Zeit? Dann kannst du mich besuchen. Liebe Grüße, Jana",
+      "check": "Check for all three details. Keep du and the informal sign-off consistent.",
+      "language": "de"
+    }
   },
   {
     "kind": "writing",
@@ -3952,7 +4120,14 @@
         "Use the informal request for a friend."
       ]
     ],
-    "transfer": "Change the event to a study afternoon and choose your own fictional day, time and place. Include one preparation detail and a reply request. Check that the recipient could tell the event date and reply date apart. Do not leave a copied food-preference question in a message where it serves no purpose."
+    "transfer": "Change the event to a study afternoon and choose your own fictional day, time and place. Include one preparation detail and a reply request. Check that the recipient could tell the event date and reply date apart. Do not leave a copied food-preference question in a message where it serves no purpose.",
+    "followup": {
+      "title": "Invite a friend and ask for a reply",
+      "prompt": "Invite a friend to a picnic in the park on Sunday at noon. Ask them to reply by Friday and bring something to drink.",
+      "model": "Hallo Ben, wir machen am Sonntag um zwölf ein Picknick im Stadtpark. Möchtest du mitkommen? Bring bitte etwas zu trinken mit. Sag mir bitte bis Freitag Bescheid. Viele Grüße, Lea",
+      "check": "Am Sonntag is the event date and bis Freitag is the response deadline. Make both easy to find.",
+      "language": "de"
+    }
   },
   {
     "kind": "writing",
@@ -4012,7 +4187,14 @@
         "Use it with a consistently formal message."
       ]
     ],
-    "transfer": "Write a cancellation for a fictional language consultation. Identify the old time, give a concise reason and offer a new option. Then check the real provider’s actual cancellation instructions separately if you use the message outside practice. A well-written email cannot by itself change the provider’s conditions."
+    "transfer": "Write a cancellation for a fictional language consultation. Identify the old time, give a concise reason and offer a new option. Then check the real provider’s actual cancellation instructions separately if you use the message outside practice. A well-written email cannot by itself change the provider’s conditions.",
+    "followup": {
+      "title": "Cancel and offer two new times",
+      "prompt": "Cancel a Monday 9 a.m. appointment because you have to work. Offer Wednesday after two or Thursday morning.",
+      "model": "Guten Tag, leider muss ich meinen Termin am Montag um neun Uhr absagen, weil ich arbeiten muss. Wäre Mittwoch nach vierzehn Uhr oder Donnerstagvormittag möglich? Freundliche Grüße, Samira Khan",
+      "check": "Include the original date and time so the recipient can identify the appointment. Both replacement options should be in your message.",
+      "language": "de"
+    }
   },
   {
     "kind": "writing",
@@ -4132,7 +4314,14 @@
         "She describes simple conversation ability instead."
       ]
     ],
-    "transfer": "Write a new enquiry about a reading club or workshop. Choose three necessary questions and supply one relevant fact about your interest. Read the draft from the recipient’s perspective: can each question be answered directly, and have you avoided asking the same thing twice in different words?"
+    "transfer": "Write a new enquiry about a reading club or workshop. Choose three necessary questions and supply one relevant fact about your interest. Read the draft from the recipient’s perspective: can each question be answered directly, and have you avoided asking the same thing twice in different words?",
+    "followup": {
+      "title": "Ask about a beginner class",
+      "prompt": "Write to a language school. Ask when the next beginner class starts, whether it meets on Saturdays and how to register.",
+      "model": "Guten Tag, ich interessiere mich für Ihren Anfängerkurs. Wann beginnt der nächste Kurs? Findet er auch samstags statt? Wie kann ich mich anmelden? Vielen Dank und freundliche Grüße, Arun Mehta",
+      "check": "Three questions need three answers. Include the course name so the office can respond without asking what you mean.",
+      "language": "de"
+    }
   },
   {
     "kind": "writing",
@@ -4192,7 +4381,14 @@
         "The model identifies the affected material."
       ]
     ],
-    "transfer": "Write a fictional complaint about unclear audio or a missing meeting link. Identify only what you observed and ask for a relevant next step. Do not copy the missing-pages detail into the new scenario. A reader should be able to tell the problem and requested action without guessing."
+    "transfer": "Write a fictional complaint about unclear audio or a missing meeting link. Identify only what you observed and ask for a relevant next step. Do not copy the missing-pages detail into the new scenario. A reader should be able to tell the problem and requested action without guessing.",
+    "followup": {
+      "title": "Request a replacement for the wrong delivery",
+      "prompt": "You ordered a blue jacket in size M but received a black one in size S. Describe the mismatch and ask for a replacement.",
+      "model": "Guten Tag, ich habe eine blaue Jacke in Größe M bestellt. Geliefert wurde eine schwarze Jacke in Größe S. Bitte schicken Sie mir die bestellte Jacke und teilen Sie mir mit, wie ich die falsche Ware zurücksenden kann. Freundliche Grüße, Pia Wolf",
+      "check": "State ordered and received details next to each other. Ask for the remedy and instructions for returning the wrong item.",
+      "language": "de"
+    }
   },
   {
     "kind": "writing",
@@ -4312,7 +4508,14 @@
         "Check actual employer instructions before choosing real attachments."
       ]
     ],
-    "transfer": "Draft a cover email for a role you understand, using truthful or clearly fictional practice details. Name one relevant activity rather than copying the customer-service claim automatically. Check spelling of the recipient and attachment names. Separate language feedback from any real assessment of eligibility or hiring rules."
+    "transfer": "Draft a cover email for a role you understand, using truthful or clearly fictional practice details. Name one relevant activity rather than copying the customer-service claim automatically. Check spelling of the recipient and attachment names. Separate language feedback from any real assessment of eligibility or hiring rules.",
+    "followup": {
+      "title": "Send an application with clear attachments",
+      "prompt": "Write an email for an advertised internship. Name the position, state what is attached and provide a polite closing.",
+      "model": "Betreff: Bewerbung um das ausgeschriebene Praktikum. Guten Tag, anbei sende ich Ihnen meine Bewerbung für das Praktikum. Im Anhang finden Sie meinen Lebenslauf und mein Anschreiben. Mit freundlichen Grüßen, Nisha Patel",
+      "check": "Match the subject to the vacancy title. Attach each file you mention before sending.",
+      "language": "de"
+    }
   },
   {
     "kind": "writing",
@@ -4372,7 +4575,14 @@
         "Keep the formal relationship consistent."
       ]
     ],
-    "transfer": "Use the same structure for an enquiry about a workshop. Write a new subject, purpose and two practical questions. After drafting, label each sentence by its job. Remove a sentence if it repeats another point without helping the recipient answer. Keep language choices consistent with the actual relationship."
+    "transfer": "Use the same structure for an enquiry about a workshop. Write a new subject, purpose and two practical questions. After drafting, label each sentence by its job. Remove a sentence if it repeats another point without helping the recipient answer. Keep language choices consistent with the actual relationship.",
+    "followup": {
+      "title": "Change the tone for a school office",
+      "prompt": "Rewrite “Hallo, schick mir bitte das Formular. Danke, Mia” as a first message to an office whose contact person you do not know.",
+      "model": "Sehr geehrte Damen und Herren, könnten Sie mir bitte das Anmeldeformular zusenden? Vielen Dank. Mit freundlichen Grüßen, Mia Becker",
+      "check": "Check greeting, polite request and closing. Keep the purpose of the original message.",
+      "language": "de"
+    }
   },
   {
     "kind": "writing",
@@ -4507,7 +4717,14 @@
         "Geschlossen means closed; the other shop is opposite the station."
       ]
     ],
-    "transfer": "Create a new notice by changing only the destination, time and old/new track. Give it to a partner who has not seen your changes. Ask the same five kinds of questions. This checks whether they retrieve information from the new text instead of remembering answers from the original. Do not use the fictional notice to plan an actual journey."
+    "transfer": "Create a new notice by changing only the destination, time and old/new track. Give it to a partner who has not seen your changes. Ask the same five kinds of questions. This checks whether they retrieve information from the new text instead of remembering answers from the original. Do not use the fictional notice to plan an actual journey.",
+    "followup": {
+      "title": "Read a changed departure",
+      "prompt": "Read: RE 18 nach Bonn: Heute Abfahrt um 16:42 Uhr von Gleis 5 statt Gleis 2. Write down the train, time and correct platform.",
+      "model": "RE 18, 16:42 Uhr, Gleis 5.",
+      "check": "The word statt marks the platform replaced by the new one. If you wrote Gleis 2, read the whole phrase again.",
+      "language": "de"
+    }
   },
   {
     "kind": "reading",
@@ -4582,7 +4799,14 @@
         "The response date comes before the Saturday outing."
       ]
     ],
-    "transfer": "Read the email once for purpose and once for dates. Then cover it and make a small table with course days, outing day, meeting time and reply day. Reopen the text and correct only the fields that were wrong. This makes a date-confusion problem visible without treating every unfamiliar word as equally important."
+    "transfer": "Read the email once for purpose and once for dates. Then cover it and make a small table with course days, outing day, meeting time and reply day. Reopen the text and correct only the fields that were wrong. This makes a date-confusion problem visible without treating every unfamiliar word as equally important.",
+    "followup": {
+      "title": "Find the action in a short email",
+      "prompt": "Read: Hallo Sara, kannst du am Dienstag um 17 Uhr zum Café am Bahnhof kommen? Schreib mir bitte bis Montag. Liebe Grüße, Nils. When and where is the meeting, and when should Sara reply?",
+      "model": "Meeting: Tuesday at 17:00, café at the station. Reply: by Monday.",
+      "check": "Am Dienstag and bis Montag refer to different actions. The reply deadline comes before the meeting.",
+      "language": "en"
+    }
   },
   {
     "kind": "reading",
@@ -4657,7 +4881,14 @@
         "The final paragraph gives the requested response."
       ]
     ],
-    "transfer": "Write two lists: facts stated in the advert and questions still unanswered. Include furnishings and access in the first list only if the passage supports them. Put price and internet arrangements in the second because they are not supplied. The skill is recognising the boundary of the information, not guessing a realistic rental agreement."
+    "transfer": "Write two lists: facts stated in the advert and questions still unanswered. Include furnishings and access in the first list only if the passage supports them. Put price and internet arrangements in the second because they are not supplied. The skill is recognising the boundary of the information, not guessing a realistic rental agreement.",
+    "followup": {
+      "title": "Separate rent, extra costs and deposit",
+      "prompt": "Read: Kaltmiete: 620 Euro. Nebenkosten: 130 Euro. Strom nicht enthalten. Kaution: 1.860 Euro. What is the listed monthly total before electricity, and what is due as a deposit?",
+      "model": "The listed monthly total before electricity is 750 euros. The deposit is 1,860 euros.",
+      "check": "Add Kaltmiete and Nebenkosten for the listed recurring amount. Kaution is a separate deposit.",
+      "language": "en"
+    }
   },
   {
     "kind": "reading",
@@ -4732,7 +4963,14 @@
         "The message explicitly says it is not needed."
       ]
     ],
-    "transfer": "Underline the unchanged information once and changed information twice. Then write a short reminder containing only day, time, new room and preparation task. Compare it against the original. If the reminder adds a cancellation or a new time, remove the unsupported detail rather than changing the source to match your memory."
+    "transfer": "Underline the unchanged information once and changed information twice. Then write a short reminder containing only day, time, new room and preparation task. Compare it against the original. If the reminder adds a cancellation or a new time, remove the unsupported detail rather than changing the source to match your memory.",
+    "followup": {
+      "title": "Pick the class that fits a work schedule",
+      "prompt": "Course A: Montag und Mittwoch, 18–19 Uhr. Kurs B: Samstag, 10–12 Uhr. You work weekday evenings and need two hours per week. Which one works?",
+      "model": "Kurs B passt, weil ich werktags abends arbeite. Der Samstagskurs dauert zwei Stunden.",
+      "check": "The two courses offer equal weekly time here. The choice depends on availability.",
+      "language": "de"
+    }
   },
   {
     "kind": "reading",

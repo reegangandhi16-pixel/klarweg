@@ -4,414 +4,41 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--
-  LIVE CLASSES — PUBLIC (waitlist launch, owner-approved 2026-10-20, D8)
-  Published: the teacher profile reegan-gandhi and the course live-a1
-  as a WAITLIST (enrolment "waitlist", nextBatch null: no start date
-  is set). Every other teacher and course in live-classes-data.js
-  stays draft: true and is never rendered on a deployed host.
-  The page is in .github/pages-allowlist.txt, sitemap.xml, the site
-  nav and footer, and has a canonical link.
-  To publish more, or to open enrolment:
-    1. Add verified teachers / courses to live-classes-data.js as
-       non-draft entries; showDrafts stays false.
-    2. Open enrolment only with a real nextBatch date AND complete
-       payment arrangements (see docs/live-classes-owner-decisions.md,
-       part B); then update the homepage FAQ and terms.html §4A.
-    3. If the consultation fee changes, update the two meta descriptions
-       below by hand; the visible page copy reads it from the data file.
-       Name a level range there only if published teachers and courses
-       cover it (the hero range is computed from the data).
-    `npm run live:readiness` checks all of the above; see
-    docs/live-classes-launch-readiness.md.
+  LIVE CLASSES — TEACHER MARKETPLACE (owner brief 2026-11-20)
+  Choose a teacher → book a ₹100 demo (Friday/Sunday, after 4 PM IST) →
+  buy a teacher × level × format course (A1–B2, Group or One-to-One).
+  Content: live-classes-data.js (teachers, verified courses, policies) and
+  live-marketplace-pricing.js (display prices). Behaviour: kw-marketplace.js.
+  Every amount is decided by the access Worker (access/worker/src/
+  live-catalog.js, enrolments.js, live-demos.js); the page never decides
+  that a payment succeeded. Payments stay OFF until the owner switches on
+  marketplace.demoBookingEnabled / courseCheckoutEnabled here AND the
+  Worker's DEMO_BOOKING / ENROL_PAYMENTS (docs/live-marketplace.md).
+  `npm run test:marketplace` and `npm test` check this page.
 -->
-<title>Live Classes · Klarweg — Learn German live with a teacher</title>
-<meta name="description" content="Live, teacher-led German classes from Klarweg. Join the free waitlist for Beginner German (A1), taught in Hindi and English; the start date is still to be announced. Online booking for the ₹100 personal consultation is not open yet.">
+<title>Live German Classes with Verified Teachers · Klarweg</title>
+<meta name="description" content="Choose your German teacher. Live A1–B2 courses in small groups or one-to-one, taught in Hindi and English. Meet your teacher first in a 20-minute ₹100 demo on Friday or Sunday evening.">
 <link rel="canonical" href="https://klarweg.in/live-classes.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Klarweg">
-<meta property="og:title" content="Live Classes · Klarweg — Learn German live with a teacher">
-<meta property="og:description" content="Live, teacher-led German classes. Join the free waitlist for Beginner German (A1); the start date is still to be announced. Online booking for the ₹100 personal consultation is not open yet.">
+<meta property="og:title" content="Live German Classes with Verified Teachers · Klarweg">
+<meta property="og:description" content="Live A1–B2 German courses, Group or One-to-One, taught in Hindi and English. Book a 20-minute ₹100 demo with your teacher first.">
 <meta property="og:url" content="https://klarweg.in/live-classes.html">
 <meta property="og:image" content="https://klarweg.in/site-icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="live-marketplace.css?v=20261121a">
 <link rel="icon" href="favicon.ico" sizes="48x48"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#FAFAF7">
-<style>
-  /* Match the shared Klarweg shell: warm canvas, editorial type,
-     neutral learning surfaces and the homepage green conversion CTA. */
-  :root {
-    --live-navy: #0E0E10;
-    --live-navy-2: #F4F3EE;
-    --live-navy-ink: #5A5A60;
-    --live-gold: #0E0E10;
-    --live-gold-tint: #F4F3EE;
-    --live-gold-deep: #5A5A60;
-    --live-line: rgba(14,14,16,0.09);
-  }
-  :focus-visible { outline: 2px solid var(--live-navy); outline-offset: 2px; }
-  /* Alternate warm surfaces to keep long sections easy to scan. */
-  body { background: var(--bg-canvas); }
-  .section-warm, .cta-band { background: var(--bg-elevated); border-top: 1px solid var(--live-line); border-bottom: 0; }
-  .section-elevated { background: var(--bg-canvas); border-top: 1px solid var(--live-line); }
-  .on-navy :focus-visible { outline-color: var(--live-gold); }
-  section[id], [id="book-form"] { scroll-margin-top: 80px; }
-  .vh { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
-
-  .btn-live { background: var(--cta-green); color: #fff; border-radius: var(--r-lg); box-shadow: 0 8px 24px -8px rgba(31,168,75,0.3); }
-  .btn-live:hover { background: #1a9342; transform: translateY(-1px); box-shadow: 0 12px 32px -8px rgba(31,168,75,0.4); }
-  .btn-gold { background: var(--cta-green); color: #fff; font-weight: 600; }
-  .btn-gold:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(31,168,75,0.22); }
-  .nav-cta.nav-cta-live { background: var(--cta-green); }
-  .nav-login, .nav-cta { white-space: nowrap; }
-  /* Small phones: the sticky bar + drawer carry the booking CTA. */
-  @media (max-width: 480px) { .nav-actions .nav-cta { display: none; } }
-  .rule-gold { display: block; width: 36px; height: 3px; border-radius: 2px; background: var(--live-gold); margin-bottom: 16px; }
-  .pill-live { background: var(--bg-elevated); border-color: var(--hairline); color: var(--ink-secondary); }
-  .pill-live .pill-dot { background: var(--live-gold); }
-  .draft-flag {
-    display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; border-radius: var(--r-xs);
-    font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-    background: repeating-linear-gradient(-45deg, var(--live-gold-tint), var(--live-gold-tint) 6px, #FFF 6px, #FFF 12px);
-    color: var(--live-gold-deep); border: 1px dashed rgba(138,90,0,0.4);
-  }
-  .draft-banner {
-    background: var(--live-gold-tint); border-bottom: 1px solid rgba(138,90,0,0.18);
-    font-size: 13px; color: var(--live-gold-deep); padding: 8px 0; text-align: center;
-  }
-  .draft-banner strong { font-weight: 600; }
-
-  /* ---------- hero ---------- */
-  .live-hero { padding: 80px 0 96px; }
-  .live-hero-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 64px; align-items: center; }
-  .live-hero h1 { margin: 0 0 24px; }
-  .live-hero .lede { max-width: 560px; }
-  .hero-points { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 24px 0 0; padding: 0; list-style: none; font-size: 15px; color: var(--ink-secondary); }
-  .hero-points li { display: flex; align-items: center; gap: 8px; }
-  .hero-points li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--live-gold); box-shadow: 0 0 0 3px var(--live-gold-tint); }
-  @media (max-width: 980px) { .live-hero-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; } }
-  @media (max-width: 768px) { .live-hero { padding: 48px 0 64px; } }
-
-  .session-card {
-    background: var(--bg-surface); color: var(--ink-primary); border: 1px solid var(--hairline); border-radius: 24px; padding: 36px;
-    box-shadow: var(--shadow-card); position: relative; overflow: hidden;
-  }
-  .session-card::after {
-    content: ''; position: absolute; right: -80px; top: -80px; width: 240px; height: 240px; border-radius: 50%;
-    border: 1px solid var(--hairline); pointer-events: none;
-  }
-  .session-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 24px; }
-  .session-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--live-gold); display: flex; align-items: center; gap: 8px; }
-  .session-label::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--live-gold); }
-  .session-meta { font-size: 12px; color: var(--live-navy-ink); }
-  .bubble { border-radius: 16px; padding: 16px 16px; margin-bottom: 12px; max-width: 92%; }
-  .bubble-who { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
-  .bubble-t { background: var(--bg-elevated); color: var(--ink-primary); border-bottom-left-radius: 4px; }
-  .bubble-t .bubble-who { color: var(--live-gold); }
-  .bubble-s { background: var(--bg-canvas); color: var(--ink-primary); margin-left: auto; border-bottom-right-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
-  .bubble-s .bubble-who { color: var(--live-navy-ink); }
-  .bubble .de-italic { font-size: 19px; line-height: 1.4; }
-  .bubble del { text-decoration-color: var(--live-gold); text-decoration-thickness: 2px; opacity: 0.75; }
-  .correction { background: var(--bg-warm); color: var(--ink-primary); border: 1px solid var(--hairline); border-radius: 16px; padding: 16px 24px 16px; margin-top: 16px; }
-  .correction-head { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--live-gold-deep); margin-bottom: 8px; }
-  .correction .correction-sentence { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: 24px; line-height: 1.35; margin: 0 0 8px; }
-  .correction p { margin: 0; font-size: 14px; color: var(--ink-secondary); line-height: 1.5; }
-  .session-steps { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; padding: 0; list-style: none; counter-reset: s; }
-  .session-steps li { counter-increment: s; font-size: 12px; color: var(--live-navy-ink); border: 1px solid var(--hairline); border-radius: var(--r-full); padding: 4px 12px; }
-  .session-steps li::before { content: counter(s) '  '; color: var(--live-gold); font-family: var(--font-mono); white-space: pre; }
-  .session-caption { font-size: 12px; color: var(--ink-tertiary); margin: 12px 0 0; text-align: center; }
-  @media (max-width: 480px) { .session-card { padding: 24px 16px; border-radius: 16px; } .correction { padding: 16px; } .correction .correction-sentence { font-size: 21px; } }
-
-  /* ---------- two ways ---------- */
-  .ways { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-  .way { padding: 36px; display: flex; flex-direction: column; }
-  .way h3 { font-family: var(--font-display); font-weight: 600; font-size: 26px; letter-spacing: -0.02em; margin: 12px 0 8px; }
-  .way > p { margin: 0 0 24px; color: var(--ink-secondary); font-size: 16px; }
-  .way dl { margin: 0 0 24px; display: grid; grid-template-columns: 112px 1fr; gap: 12px 16px; font-size: 15px; }
-  .way dt { color: var(--ink-tertiary); font-size: 13px; padding-top: 2px; }
-  .way dd { margin: 0; color: var(--ink-primary); }
-  .way .btn { margin-top: auto; align-self: flex-start; }
-  .way-live { border-color: var(--hairline-strong); box-shadow: var(--shadow-soft); }
-  @media (max-width: 860px) { .ways { grid-template-columns: minmax(0, 1fr); } }
-  @media (max-width: 480px) { .way { padding: 24px; } .way dl { grid-template-columns: 1fr; gap: 4px; } .way dd { margin-bottom: 8px; } }
-
-  /* ---------- filters ---------- */
-  .filters { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; margin-bottom: 36px; }
-  .filters[hidden], .quotes[hidden] { display: none; }
-  .filter-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; min-width: 0; }
-  .filter-label { font-size: 13px; font-weight: 600; color: var(--ink-tertiary); margin-right: 4px; }
-  .chip {
-    min-height: 44px; padding: 8px 16px; border-radius: var(--r-full); border: 1px solid var(--hairline-strong);
-    background: var(--bg-surface); font-size: 14px; font-weight: 500; color: var(--ink-secondary);
-    transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
-  }
-  .chip:hover { border-color: var(--live-navy); color: var(--ink-primary); }
-  .chip[aria-pressed="true"] { background: var(--live-navy); border-color: var(--live-navy); color: #fff; }
-  .select-sm { min-height: 44px; font: inherit; font-size: 14px; padding: 8px 36px 8px 16px; border-radius: var(--r-full); border: 1px solid var(--hairline-strong); background: var(--bg-surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%236F6F73' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center; appearance: none; -webkit-appearance: none; color: var(--ink-primary); }
-  .results-note { font-size: 14px; color: var(--ink-tertiary); margin: -16px 0 24px; }
-  @media (max-width: 680px) {
-    .filters { flex-direction: column; align-items: stretch; gap: 16px; min-width: 0; }
-    .filters > .filter-group { max-width: none; }
-    .filter-scroll { flex-wrap: nowrap; overflow-x: auto; width: calc(100% + 40px); margin: 0 -20px; padding: 0 20px 4px; scrollbar-width: none; }
-    .filter-scroll::-webkit-scrollbar { display: none; }
-    .chip { flex: 0 0 auto; }
-  }
-
-  /* ---------- teacher directory: one row per teacher, hairline rules ---------- */
-  .teacher-grid { display: block; border-top: 1px solid var(--live-line); }
-  .t-card { display: grid; grid-template-columns: 72px minmax(0, 1fr) minmax(200px, auto); gap: 8px 28px; align-items: start; padding: 28px 0; border-bottom: 1px solid var(--live-line); }
-  .t-avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--bg-elevated); color: var(--ink-primary); display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 0 0 1px var(--live-line), 0 0 0 4px #fff, 0 0 0 5px rgba(251,191,36,0.45); }
-  .t-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
-  .t-avatar span { font-family: var(--font-display); font-size: 24px; font-weight: 500; letter-spacing: -0.01em; line-height: 1; }
-  .t-body { min-width: 0; }
-  .t-name { font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -0.02em; margin: 2px 0 2px; color: var(--live-navy); overflow-wrap: anywhere; display: flex; align-items: center; gap: 10px; }
-  .t-headline { margin: 0 0 8px; font-size: 15px; color: var(--ink-secondary); line-height: 1.5; }
-  .t-reviews { margin: 0 0 12px; font-size: 13px; color: var(--ink-tertiary); }
-  .t-sample .t-star { color: var(--live-gold); }
-  .sample-flag { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; border: 1px dashed var(--live-gold-deep); color: var(--live-gold-deep); font-size: 11px; font-weight: 600; letter-spacing: 0.02em; }
-  .t-avail { display: inline-flex; align-items: center; gap: 6px; margin: 0 0 10px; padding: 3px 10px; border-radius: 999px; font-size: 12.5px; font-weight: 600; color: var(--ink-secondary); border: 1px solid rgba(14,14,16,0.14); }
-  .t-avail.on { color: var(--g-object); border-color: rgba(46,125,50,0.25); background: rgba(46,125,50,0.06); }
-  .t-avail-what { font-weight: 400; }
-  .t-facts { margin: 4px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 14px; color: var(--ink-secondary); }
-  .t-facts li { display: flex; gap: 8px; align-items: flex-start; }
-  .t-facts svg { flex: 0 0 auto; margin-top: 3px; color: var(--live-gold-deep); }
-  .lvl-row { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
-  .lvl { font-family: var(--font-mono); font-size: 11.5px; font-weight: 500; padding: 3px 7px; border-radius: var(--r-xs); background: #fff; color: var(--ink-quaternary); border: 1px solid var(--live-line); }
-  .lvl.on { background: var(--live-navy); border-color: var(--live-navy); color: #fff; }
-  .t-side { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; text-align: right; }
-  .t-price { margin: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
-  .t-price-label { font-size: 11.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--live-gold-deep); }
-  .t-price-value { font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.02em; color: var(--live-navy); font-variant-numeric: tabular-nums; }
-  .t-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-  .t-actions .btn { padding: 10px 16px; font-size: 14px; justify-content: center; }
-  @media (max-width: 760px) {
-    .t-card { grid-template-columns: 56px minmax(0, 1fr); gap: 4px 16px; padding: 24px 0; }
-    .t-avatar { width: 56px; height: 56px; }
-    .t-avatar span { font-size: 19px; }
-    .t-name { font-size: 20px; }
-    .t-side { grid-column: 2; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; text-align: left; margin-top: 8px; }
-    .t-price { align-items: flex-start; }
-    .t-actions { justify-content: flex-start; }
-  }
-  @media (max-width: 420px) { .t-actions { width: 100%; } .t-actions .btn { flex: 1 1 auto; } }
-  /* the profile dialog keeps its portrait */
-  .portrait { position: relative; aspect-ratio: 4 / 3; background: var(--bg-elevated); overflow: hidden; }
-  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
-  .portrait-mono { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--live-gold); }
-  .portrait-mono span { font-family: var(--font-display); font-size: 48px; font-weight: 500; letter-spacing: -0.02em; line-height: 1; }
-  .portrait-mono small { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--live-navy-ink); }
-  .portrait .draft-flag { position: absolute; top: 12px; left: 12px; }
-
-  .empty-state { border: 1px dashed var(--hairline-strong); border-radius: var(--r-lg); padding: 48px 24px; text-align: center; background: var(--bg-surface); }
-  .empty-state h3 { font-family: var(--font-display); font-weight: 600; font-size: 22px; margin: 0 0 8px; }
-  .empty-state p { margin: 0 auto 24px; max-width: 520px; color: var(--ink-secondary); font-size: 16px; }
-
-  /* ---------- profile dialog ---------- */
-  .t-dialog { width: min(880px, calc(100% - 32px)); max-height: calc(100vh - 48px); padding: 0; border: 0; border-radius: 24px; background: var(--bg-surface); color: var(--ink-primary); box-shadow: var(--shadow-modal); overflow: hidden; }
-  #t-dialog-content { max-height: calc(100vh - 48px); overflow-y: auto; overscroll-behavior: contain; }
-  .t-dialog::backdrop { background: rgba(15,23,42,0.55); }
-  .t-dialog-grid { display: grid; grid-template-columns: 300px 1fr; }
-  .t-dialog .portrait { aspect-ratio: auto; min-height: 100%; }
-  .t-dialog-body { padding: 36px 64px 36px 36px; }
-  .t-dialog-close { position: absolute; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; background: var(--bg-elevated); font-size: 16px; color: var(--ink-secondary); z-index: 2; }
-  .t-dialog-close:hover { color: var(--ink-primary); }
-  .t-dialog h2 { font-family: var(--font-display); font-weight: 600; font-size: 32px; letter-spacing: -0.02em; margin: 0 0 8px; overflow-wrap: anywhere; }
-  .t-dialog .t-headline { font-size: 17px; }
-  .profile-dl { margin: 24px 0; display: grid; grid-template-columns: 160px 1fr; gap: 12px 24px; font-size: 15px; border-top: 1px solid var(--hairline-light); padding-top: 24px; }
-  .profile-dl dt { color: var(--ink-tertiary); font-size: 13px; padding-top: 2px; }
-  .profile-dl dd { margin: 0; }
-  .profile-dl ul { margin: 0; padding-left: 16px; }
-  .approach { background: var(--bg-warm); border-radius: var(--r-md); padding: 16px 24px; font-size: 16px; color: var(--ink-secondary); margin: 0 0 24px; }
-  .approach strong { display: block; color: var(--ink-primary); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
-  @media (max-width: 760px) {
-    .t-dialog { width: 100%; max-width: 100%; max-height: 92vh; margin: auto 0 0; border-radius: 24px 24px 0 0; }
-    #t-dialog-content { max-height: 92vh; }
-    .t-dialog-close { background: rgba(255,255,255,0.92); }
-    .t-dialog-grid { grid-template-columns: 1fr; }
-    .t-dialog .portrait { aspect-ratio: 16 / 9; min-height: 0; }
-    .t-dialog-body { padding: 24px 20px 36px; }
-    .t-dialog h2 { font-size: 26px; }
-    .profile-dl { grid-template-columns: 1fr; gap: 4px; }
-    .profile-dl dd { margin-bottom: 12px; }
-  }
-
-  /* ---------- courses ---------- */
-  .course-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-  .filters [hidden] { display: none !important; }
-  .course-grid.single { grid-template-columns: minmax(0, 760px); }
-  @media (max-width: 860px) { .course-grid { grid-template-columns: minmax(0, 1fr); } }
-  .c-card { background: var(--bg-surface); border: 1px solid var(--hairline); border-radius: var(--r-lg); padding: 36px; display: flex; flex-direction: column; }
-  .c-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 16px; }
-  .c-status { margin-left: auto; }
-  .c-card h3 { font-family: var(--font-display); font-weight: 600; font-size: 24px; letter-spacing: -0.02em; margin: 0 0 16px; }
-  .c-obj { margin: 0 0 24px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .c-obj li { display: flex; gap: 12px; font-size: 15px; color: var(--ink-secondary); line-height: 1.5; }
-  .c-obj li::before { content: ''; flex: 0 0 auto; width: 12px; height: 2px; margin-top: 11px; background: var(--live-gold); }
-  .c-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 24px; margin: 0 0 24px; padding: 24px 0 0; border-top: 1px solid var(--hairline-light); }
-  .c-facts dt { font-size: 12px; color: var(--ink-tertiary); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
-  .c-facts dd { margin: 0; font-size: 15px; color: var(--ink-primary); }
-  .c-facts .tba { color: var(--ink-tertiary); font-style: italic; }
-  .c-facts .c-tba { grid-column: 1 / -1; }
-  .c-facts .t-link { font: inherit; color: var(--ink-primary); background: none; border: 0; padding: 0; cursor: pointer; text-decoration: underline; text-decoration-color: var(--live-gold); text-decoration-thickness: 2px; text-underline-offset: 4px; }
-  .c-facts .t-link:hover { color: var(--live-gold-deep); }
-  .c-price { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 16px; padding: 16px 24px; border-radius: var(--r-md); background: var(--bg-elevated); margin-bottom: 24px; }
-  .c-price-label { font-size: 13px; color: var(--ink-tertiary); }
-  .c-price-val { font-family: var(--font-display); font-size: 24px; font-weight: 600; letter-spacing: -0.02em; }
-  .c-price-val.tba { font-family: var(--font-ui); font-size: 15px; font-weight: 500; color: var(--ink-secondary); }
-  .c-price-terms { flex-basis: 100%; font-size: 13px; color: var(--ink-tertiary); }
-  .c-note { margin: 0 0 24px; padding: 10px 12px; border-left: 3px solid var(--live-gold); background: var(--live-gold-tint); border-radius: 0 8px 8px 0; font-size: 13.5px; line-height: 1.5; color: var(--ink-secondary); }
-  .c-card .btn { margin-top: auto; align-self: flex-start; }
-  .status { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: var(--r-full); border: 1px solid var(--hairline); color: var(--ink-secondary); background: var(--bg-surface); }
-  .status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-quaternary); }
-  .status-open { color: var(--g-object); border-color: rgba(46,125,50,0.25); background: rgba(46,125,50,0.06); }
-  .status-open::before { background: var(--g-object); }
-  .status-waitlist { color: var(--live-gold-deep); border-color: rgba(138,90,0,0.25); background: var(--live-gold-tint); }
-  .status-waitlist::before { background: var(--live-gold); }
-  @media (max-width: 480px) { .c-card { padding: 24px; } .c-facts { grid-template-columns: 1fr; } .c-status { margin-left: 0; } .c-card .btn { align-self: stretch; justify-content: center; } }
-
-  /* ---------- journey ---------- */
-  .journey { display: grid; grid-template-columns: repeat(5, 1fr); gap: 24px; margin: 0; padding: 0; list-style: none; counter-reset: j; }
-  .journey li { counter-increment: j; position: relative; padding-top: 48px; }
-  .journey li::before { content: counter(j, decimal-leading-zero); position: absolute; top: 0; left: 0; font-family: var(--font-mono); font-size: 13px; color: var(--live-navy); background: var(--bg-elevated); border-radius: var(--r-xs); padding: 4px 8px; }
-  .journey li::after { content: ''; position: absolute; top: 14px; left: 48px; right: -12px; height: 1px; background: var(--hairline-strong); }
-  .journey li:last-child::after { display: none; }
-  .journey h3 { font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: -0.01em; margin: 0 0 8px; }
-  .journey p { margin: 0; font-size: 15px; color: var(--ink-secondary); line-height: 1.55; }
-  @media (max-width: 980px) {
-    .journey { grid-template-columns: 1fr; gap: 0; }
-    .journey li { padding: 0 0 36px 64px; }
-    .journey li::after { top: 36px; left: 18px; right: auto; bottom: 8px; width: 1px; height: auto; }
-  }
-
-  /* ---------- method ---------- */
-  .method-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .method-grid .card { padding: 24px; }
-  .method-grid .card h3 { font-size: 19px; margin: 12px 0 8px; }
-  .method-grid .card p { font-size: 15px; }
-  .method-de { font-family: var(--font-german); font-style: italic; font-weight: 500; font-size: 15px; color: var(--ink-primary); margin-top: 16px !important; padding-top: 12px; border-top: 1px solid var(--hairline-light); }
-  .method-feature { grid-column: span 2; background: var(--bg-elevated); color: var(--ink-primary); border-color: var(--hairline); }
-  .method-feature h3 { color: var(--ink-primary); }
-  .method-feature p { color: var(--live-navy-ink) !important; }
-  .method-feature .card-num { color: var(--live-gold); }
-  .cefr-line { display: flex; gap: 4px; margin-top: 24px; }
-  .cefr-line span { flex: 1; text-align: center; font-family: var(--font-mono); font-size: 12px; padding: 8px 0; border-radius: var(--r-xs); background: var(--bg-surface); color: var(--ink-secondary); }
-  .cefr-line span:nth-child(-n+2) { background: var(--bg-warm); }
-  @media (max-width: 1080px) { .method-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .method-grid { grid-template-columns: 1fr; } .method-feature { grid-column: auto; } }
-
-  /* ---------- consultation ---------- */
-  .book { background: var(--bg-elevated); color: var(--ink-primary); border-top: 1px solid var(--hairline); }
-  .book-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: start; }
-  .book .eyebrow { color: var(--live-gold); }
-  .book h2 { color: var(--ink-primary); margin: 0 0 16px; }
-  .book .lede { color: var(--live-navy-ink); }
-  .fee { display: flex; align-items: baseline; gap: 16px; margin: 36px 0 8px; }
-  .fee-amt { font-family: var(--font-display); font-size: 64px; font-weight: 500; letter-spacing: -0.03em; color: var(--live-gold); line-height: 1; }
-  .fee-unit { font-size: 15px; color: var(--live-navy-ink); }
-  .fee-note { font-size: 16px; color: var(--ink-secondary); margin: 0 0 36px; max-width: 460px; }
-  .fee-note strong { color: var(--live-gold); font-weight: 600; }
-  .book-steps { margin: 0 0 36px; padding: 0; list-style: none; counter-reset: b; display: flex; flex-direction: column; gap: 16px; }
-  .book-steps li { counter-increment: b; display: flex; gap: 16px; font-size: 15px; color: var(--live-navy-ink); line-height: 1.5; }
-  .book-steps li::before { content: counter(b); flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--hairline-strong); color: var(--live-gold); font-family: var(--font-mono); font-size: 13px; display: flex; align-items: center; justify-content: center; }
-  .conditions { border-top: 1px solid var(--hairline); padding-top: 24px; font-size: 14px; color: var(--live-navy-ink); }
-  .conditions h3 { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-primary); margin: 0 0 12px; font-weight: 600; }
-  .conditions ul { margin: 0; padding-left: 16px; display: flex; flex-direction: column; gap: 8px; }
-  .conditions a { color: var(--live-gold); text-decoration: underline; text-underline-offset: 3px; }
-
-  .book-card { background: var(--bg-surface); color: var(--ink-primary); border-radius: 24px; padding: 36px; border: 1px solid var(--hairline); box-shadow: var(--shadow-card); }
-  .book-card h3 { font-family: var(--font-display); font-weight: 600; font-size: 24px; letter-spacing: -0.02em; margin: 0 0 4px; }
-  .book-card .sub { margin: 0 0 24px; font-size: 14px; color: var(--ink-tertiary); }
-  .form-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
-  .book-card .form-row { margin-bottom: 16px; }
-  .book-card .form-row input, .book-card .form-row select, .book-card .form-row textarea { width: 100%; min-height: 48px; }
-  .book-card .form-row textarea { min-height: 96px; }
-  .book-card .form-row input:focus, .book-card .form-row select:focus, .book-card .form-row textarea:focus { border-color: var(--live-navy); box-shadow: 0 0 0 3px rgba(15,23,42,0.12); }
-  .req { color: var(--live-gold-deep); }
-  .opt { font-weight: 400; color: var(--ink-tertiary); }
-  .field-err { font-size: 13px; color: #B42318; margin: 0; }
-  .form-row [aria-invalid="true"] { border-color: #B42318; }
-  fieldset.form-row { border: 0; padding: 0; margin: 0 0 16px; min-width: 0; }
-  fieldset.form-row legend { font-size: 13px; font-weight: 600; color: var(--ink-secondary); padding: 0; margin-bottom: 8px; }
-  .times { display: flex; flex-wrap: wrap; gap: 8px; }
-  .time-opt { position: relative; }
-  .time-opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-  .time-opt > span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border-radius: var(--r-full); border: 1px solid var(--hairline-strong); font-size: 14px; color: var(--ink-secondary); cursor: pointer; transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
-  .time-opt input:checked + span { background: var(--live-navy); border-color: var(--live-navy); color: #fff; }
-  .time-opt input:focus-visible + span { outline: 2px solid var(--live-navy); outline-offset: 2px; }
-  .consent { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: var(--ink-secondary); margin: 8px 0 24px; }
-  .consent input { width: 20px; height: 20px; margin: 2px 0 0; flex: 0 0 auto; accent-color: var(--live-navy); }
-  .consent a { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
-  .book-card .btn { width: 100%; justify-content: center; }
-  .form-foot { font-size: 13px; color: var(--ink-tertiary); margin: 16px 0 0; text-align: center; }
-  .err-summary { background: #FEF3F2; border: 1px solid rgba(180,35,24,0.25); color: #B42318; border-radius: var(--r-md); padding: 12px 16px; font-size: 14px; margin-bottom: 16px; }
-  .err-summary:focus { outline: 2px solid #B42318; outline-offset: 2px; }
-  .done h3 { margin-bottom: 8px; }
-  .done p { margin: 0 0 16px; font-size: 15px; color: var(--ink-secondary); }
-  .book-closed { background: var(--live-gold-tint); border-radius: var(--r-md); padding: 16px; margin-bottom: 24px; color: var(--ink-primary); }
-  .book-closed h3 { margin: 0 0 6px; font-size: 17px; }
-  .book-closed p { margin: 0; font-size: 14px; line-height: 1.5; }
-  .done-notice { background: var(--live-gold-tint); border-radius: var(--r-md); padding: 16px; font-size: 14px; color: var(--ink-primary); margin-bottom: 24px; }
-  .done pre { white-space: pre-wrap; word-break: break-word; font-family: var(--font-mono); font-size: 12px; background: var(--bg-elevated); border-radius: var(--r-md); padding: 16px; margin: 0 0 16px; max-height: 220px; overflow: auto; }
-  .done-actions { display: flex; flex-wrap: wrap; gap: 8px; }
-  .done-actions .btn { width: auto; flex: 1 1 auto; }
-  .done a.inline, .nojs-request a.inline { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
-  .nojs-request p { margin: 8px 0 0; font-size: 15px; color: var(--ink-secondary); line-height: 1.55; }
-  @media (max-width: 980px) { .book-grid { grid-template-columns: minmax(0, 1fr); gap: 48px; } }
-  @media (max-width: 520px) { .book-card { padding: 24px 16px; border-radius: 16px; } .form-2 { grid-template-columns: 1fr; } .fee-amt { font-size: 52px; } }
-
-  /* ---------- trust ---------- */
-  .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-  .trust-grid .card a { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
-  .quotes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 24px; }
-  .quote { margin: 0; }
-  .quote blockquote { margin: 0 0 16px; font-family: var(--font-display); font-size: 20px; line-height: 1.45; }
-  .quote figcaption { font-size: 14px; color: var(--ink-tertiary); }
-  .quote figcaption strong { color: var(--ink-primary); font-weight: 600; }
-  @media (max-width: 860px) { .trust-grid, .quotes { grid-template-columns: 1fr; } }
-
-  .faq-a-inner a { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
-  .faq-a-inner .link-btn { color: var(--ink-primary); }
-  .faq-q:focus-visible { outline-offset: -2px; }
-  .cta-band .lede a { color: var(--ink-primary); text-decoration: underline; text-underline-offset: 3px; }
-
-  /* ---------- mobile sticky CTA ---------- */
-  .sticky-book { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 40; display: none; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 16px; border-radius: var(--r-lg); background: var(--bg-surface); color: var(--ink-primary); border: 1px solid var(--hairline); box-shadow: var(--shadow-card); transform: translateY(calc(100% + 24px)); transition: transform var(--dur-slow) var(--ease); }
-  .sticky-book.show { transform: none; }
-  .sticky-book p { margin: 0; font-size: 13px; line-height: 1.35; color: var(--live-navy-ink); }
-  .sticky-book p strong { color: var(--ink-primary); display: block; font-size: 14px; }
-  .sticky-book .btn { padding: 12px 16px; font-size: 14px; flex: 0 0 auto; }
-  @media (max-width: 760px) { .sticky-book { display: flex; } }
-  @media (max-width: 340px) { .sticky-book p > span { display: none; } }
-  .payment-guide { display: grid; grid-template-columns: 1.2fr 1fr; gap: 36px; margin-top: 36px; padding: 36px; border: 1px solid var(--hairline); border-radius: var(--r-lg); background: var(--bg-surface); }
-  .payment-guide h3 { font-family: var(--font-display); font-size: 26px; font-weight: 500; margin: 12px 0; }
-  .payment-guide p { font-size: 14px; color: var(--ink-secondary); margin: 0 0 12px; }
-  .payment-guide-details { border-left: 1px solid var(--hairline); padding-left: 36px; align-self: center; }
-  .payment-guide a { font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
-  .btn, .chip, .t-actions .btn { min-height: 44px; }
-  .on-navy :focus-visible { outline-color: var(--ink-primary); }
-  @media (max-width: 680px) {
-    .payment-guide { grid-template-columns: 1fr; padding: 24px; gap: 24px; }
-    .payment-guide-details { border-left: 0; border-top: 1px solid var(--hairline); padding: 24px 0 0; }
-  }
-</style>
-<!-- Without JavaScript: FAQ answers open, and controls that need kw-live.js
-     (filters, the request form) are hidden; a plain email link replaces the form. -->
-<noscript><style>
-  .js-only { display: none !important; }
-  .faq-a { max-height: none !important; }
-  .faq-q { cursor: default; }
-  .faq-q .chev { display: none; }
-</style></noscript>
+<noscript><style>.mk-js-only{display:none!important}</style></noscript>
 </head>
-<body>
+<body class="mk">
 
 <a class="skip-link" href="#main">Skip to content</a>
-
-<div class="draft-banner" id="draft-banner" hidden><strong>Preview</strong> · Teacher profiles and course details marked “Draft” are templates, not real information.</div>
 
 <!-- ========== NAV (canonical + Live Classes) ========== -->
 <nav class="nav" aria-label="Main navigation">
@@ -425,7 +52,7 @@
       <a href="resources.html">Resources</a>
       <a href="about.html">About</a>
     </div>
-    <div class="nav-actions"><a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link">Log in</a><a href="#book" class="nav-cta nav-cta-live" data-book-open="Book a consultation">Join the waitlist</a></div>
+    <div class="nav-actions"><a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link">Log in</a><a href="#demo" class="nav-cta nav-cta-live">Book Demo — ₹100</a></div>
     <button type="button" class="nav-hamburger" id="nav-hamburger" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu">
       <span class="nav-hamburger-bar"></span>
       <span class="nav-hamburger-bar"></span>
@@ -449,432 +76,189 @@
   </nav>
   <div class="mobile-nav-actions">
     <a href="account/index.html" class="nav-login js-nav-login" id="nav-login-link-mobile">Log in</a>
-    <a href="#book" class="nav-cta nav-cta-live" data-book-open="Book a consultation">Join the waitlist</a>
+    <a href="#demo" class="nav-cta nav-cta-live">Book Demo — ₹100</a>
   </div>
 </div>
 
 <main id="main" tabindex="-1">
 
 <!-- ========== HERO ========== -->
-<section class="live-hero">
-  <div class="container live-hero-grid">
-    <div>
-      <div class="eyebrow-row" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:24px">
-        <span class="pill pill-live"><span class="pill-dot"></span> Live Classes</span>
-        <span class="eyebrow">Teacher-led · Online<span data-live-levels></span></span>
+<section class="mk-hero" aria-labelledby="hero-h">
+  <div class="container mk-hero-grid">
+    <div class="mk-hero-copy">
+      <p class="mk-eyebrow">Live German classes · A1 to B2</p>
+      <h1 id="hero-h" class="mk-display">Live Online German Classes <em>with a Teacher</em></h1>
+      <p class="mk-lede">Learn in a small group or one-to-one, with explanations in Hindi and English. Compare teachers and levels, then meet your preferred teacher in a 20-minute online demo for <strong>₹100</strong>.</p>
+      <div class="mk-hero-ctas">
+        <a href="#teachers" class="mk-btn mk-btn-primary">Find your teacher</a>
+        <a href="#demo" class="mk-btn mk-btn-ghost" data-demo-cta>Book Demo — ₹100</a>
       </div>
-      <h1 class="display-xl">A clear path to German. <span class="accent">With a teacher beside you.</span></h1>
-      <p class="lede">Small-group classes. Clear explanations in Hindi and English. A real teacher to help you speak, understand your mistakes and make steady progress.</p>
-      <div class="hero-ctas">
-        <a href="#teachers" class="btn btn-live" data-none="teachers" data-none-href="#book" data-none-text="Join the waitlist" data-one-text="Meet your teacher">Explore our teachers
-          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="#courses" class="btn btn-secondary" data-none="courses" data-none-href="#how" data-none-text="How live classes work">Explore live courses</a>
-      </div>
-      <ul class="hero-points">
-        <li><span><span data-consult-fee>₹100</span> consultation once online booking opens</span></li>
-        <li><span>Adjusted against your course fee within <span data-consult-days>7 days</span></span></li>
+      <p>Need a more flexible schedule? <a href="courses.html">Try a free self-paced chapter</a>.</p>
+      <ul class="mk-hero-facts">
+        <li><span class="mk-fact-k">Levels</span><span class="mk-fact-v">A1 · A2 · B1 · B2</span></li>
+        <li><span class="mk-fact-k">Formats</span><span class="mk-fact-v">Group · One-to-One</span></li>
+        <li><span class="mk-fact-k">Demo</span><span class="mk-fact-v">Fri &amp; Sun, after 4 PM IST</span></li>
+        <!-- Update when marketplace.courseCheckoutEnabled turns true and a batch has dates. -->
+        <li><span class="mk-fact-k">Courses</span><span class="mk-fact-v">Batch dates to be announced</span></li>
       </ul>
     </div>
-
-    <figure style="margin:0">
-      <div class="session-card on-navy" aria-label="Example of feedback in a live class">
-        <div class="session-top">
-          <span class="session-label">In a live class</span>
-          <span class="session-meta">Example</span>
+    <aside class="mk-pricecard" aria-labelledby="pc-h">
+      <p class="mk-eyebrow" id="pc-h">Course fees · per level</p>
+      <div class="mk-pc-row">
+        <div>
+          <p class="mk-pc-label">Group classes</p>
+          <p class="mk-pc-price"><span class="mk-from">from</span> <strong data-pc="group">₹13,000</strong></p>
+          <p class="mk-pc-note">with code <code>GROUP3000</code> · <s data-pc-orig="group">₹16,000</s></p>
         </div>
-        <div class="bubble bubble-t">
-          <span class="bubble-who">Teacher</span>
-          <span class="de-italic" lang="de">Was hast du am Wochenende gemacht?</span>
+        <div>
+          <p class="mk-pc-label">One-to-One classes</p>
+          <p class="mk-pc-price"><span class="mk-from">from</span> <strong data-pc="individual">₹15,000</strong></p>
+          <p class="mk-pc-note">with code <code>PERSONAL7000</code> · <s data-pc-orig="individual">₹22,000</s></p>
         </div>
-        <div class="bubble bubble-s">
-          <span class="bubble-who">You</span>
-          <span class="de-italic" lang="de">Ich <del>habe</del> ins Kino gegangen.</span>
-        </div>
-        <div class="correction">
-          <div class="correction-head">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7.5 5.5 10.5 11.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Corrected in the moment
-          </div>
-          <p class="correction-sentence" lang="de"><span style="color:var(--g-subject)">Ich</span> <span style="color:var(--g-verb)">bin</span> <span style="color:var(--g-place)">ins Kino</span> <span style="color:var(--g-verb)">gegangen</span>.</p>
-          <p><em>gehen</em> is movement from one place to another, so its Perfekt takes <strong>sein</strong>, not <em>haben</em>. Now say it again.</p>
-        </div>
-        <ol class="session-steps" aria-label="Feedback loop">
-          <li>Speak</li><li>Get corrected</li><li>Understand why</li><li>Say it again</li>
-        </ol>
       </div>
-      <figcaption class="session-caption">An illustration of how feedback works in a live class.</figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- ========== TWO WAYS TO LEARN ========== -->
-<section class="section-warm" id="compare" aria-labelledby="compare-h">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Two ways to learn with Klarweg</span>
-      <h2 class="display-md" id="compare-h">Self-paced or live. Different tools for different needs.</h2>
-      <p class="lede">Both are organised by CEFR level. Self-paced courses cover A1 to C2; each live course lists its own level. Choose the one that fits how you learn and how much time you have. You can also use both.</p>
-    </div>
-    <div class="ways">
-      <article class="card way">
-        <span class="eyebrow">Self-paced courses</span>
-        <h3>Learn on your own schedule</h3>
-        <p>Klarweg's existing chapter-based courses: colour-coded grammar, Hindi-first explanations, audio and exercises, available any time.</p>
-        <dl>
-          <dt>Best for</dt><dd>Flexible study at your own speed</dd>
-          <dt>Guidance</dt><dd>Built-in explanations, exercises and feedback</dd>
-          <dt>Pricing</dt><dd><span data-selfpaced-price>Per level, or Lifetime for all six</span></dd>
-          <dt>Try it</dt><dd>Chapter 1 free at every level</dd>
-        </dl>
-        <a href="courses.html" class="btn btn-secondary">See self-paced courses</a>
-      </article>
-      <article class="card way way-live">
-        <span class="eyebrow" style="color:var(--live-gold-deep)">Live teacher courses</span>
-        <h3>Learn with a teacher, on a timetable</h3>
-        <p>Scheduled online classes led by a teacher, with speaking time, direct correction and a fixed course structure.</p>
-        <dl>
-          <dt>Best for</dt><dd>Accountability, speaking practice and personal feedback</dd>
-          <dt>Guidance</dt><dd>A teacher who explains, corrects and tracks your progress</dd>
-          <dt>Pricing</dt><dd>Per course, shown in full before you pay, in one payment</dd>
-          <dt>Try it</dt><dd><span data-consult-fee>₹100</span> personal consultation with a teacher</dd>
-        </dl>
-        <a href="#book" class="btn btn-live" data-request="interest" data-book-open="Book a consultation">Join the waitlist</a>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ========== TEACHERS ========== -->
-<section id="teachers" aria-labelledby="teachers-h">
-  <div class="container">
-    <div class="section-head">
-      <span class="rule-gold" aria-hidden="true"></span>
-      <span class="eyebrow" data-one-text="Your teacher">The teachers</span>
-      <h2 class="display-md" id="teachers-h" data-one-text="Meet your teacher.">Find the teacher who fits your goal.</h2>
-      <p class="lede" data-none="teachers" data-none-text="Each profile will show the levels, teaching languages and exam experience a teacher actually has. Profiles are published only once those details are confirmed." data-one-text="Levels taught, teaching languages, certificates and exam experience, exactly as the teacher has confirmed them. Open the profile for the full picture.">Compare levels, teaching languages and exam experience, then open a profile for the full picture.</p>
-    </div>
-
-    <div class="filters js-only" role="group" aria-label="Filter teachers">
-      <div class="filter-group filter-scroll" role="group" aria-label="Level taught">
-        <span class="filter-label">Level</span>
-        <button type="button" class="chip" data-tlevel="" aria-pressed="true">All</button>
-        <button type="button" class="chip" data-tlevel="A1" aria-pressed="false">A1</button>
-        <button type="button" class="chip" data-tlevel="A2" aria-pressed="false">A2</button>
-        <button type="button" class="chip" data-tlevel="B1" aria-pressed="false">B1</button>
-        <button type="button" class="chip" data-tlevel="B2" aria-pressed="false">B2</button>
-        <button type="button" class="chip" data-tlevel="C1" aria-pressed="false">C1</button>
-        <button type="button" class="chip" data-tlevel="C2" aria-pressed="false">C2</button>
-      </div>
-      <div class="filter-group">
-        <label class="filter-label" for="t-lang">Teaches in</label>
-        <select id="t-lang" class="select-sm"><option value="">Any language</option></select>
-      </div>
-      <div class="filter-group">
-        <button type="button" class="chip" id="t-exam" aria-pressed="false">Goethe exam prep</button>
-      </div>
-    </div>
-    <p class="results-note" id="t-count" aria-live="polite"></p>
-    <div class="teacher-grid" id="teacher-grid">
-      <noscript><p>Teacher profiles need JavaScript. You can still <a href="contact.html">contact us</a> to be matched with a teacher.</p></noscript>
-    </div>
-  </div>
-</section>
-
-<dialog class="t-dialog" id="t-dialog" aria-labelledby="t-dialog-name">
-  <button type="button" class="t-dialog-close" id="t-dialog-close" aria-label="Close profile">✕</button>
-  <div id="t-dialog-content"></div>
-</dialog>
-
-<!-- ========== COURSES ========== -->
-<section class="section-elevated" id="courses" aria-labelledby="courses-h">
-  <div class="container">
-    <div class="section-head">
-      <span class="rule-gold" aria-hidden="true"></span>
-      <span class="eyebrow">Live course catalogue</span>
-      <h2 class="display-md" id="courses-h">Courses with a clear structure.</h2>
-      <p class="lede">Each course lists its level, format, schedule and fee. Anything not yet confirmed is marked “to be announced”, never guessed.</p>
-    </div>
-    <div class="filters js-only">
-      <div class="filter-group filter-scroll" role="group" aria-label="Filter courses">
-        <button type="button" class="chip" data-cgroup="" aria-pressed="true">All courses</button>
-        <button type="button" class="chip" data-cgroup="beginner" aria-pressed="false">Beginner · A1–A2</button>
-        <button type="button" class="chip" data-cgroup="intermediate" aria-pressed="false">Intermediate · B1–B2</button>
-        <button type="button" class="chip" data-cgroup="advanced" aria-pressed="false">Advanced · C1–C2</button>
-        <button type="button" class="chip" data-cgroup="exam" aria-pressed="false">Goethe prep</button>
-        <button type="button" class="chip" data-cgroup="speaking" aria-pressed="false">Speaking</button>
-      </div>
-    </div>
-    <p class="results-note" id="c-count" aria-live="polite"></p>
-    <div class="course-grid" id="course-grid">
-      <noscript><p data-nojs-course><strong>Beginner German · A1</strong> with Reegan Gandhi: waitlist only. The start date is still to be announced and enrolment is not open. Joining the waitlist is free and is not a booking. The full course details need JavaScript; you can also <a href="contact.html">contact us</a> about live courses.</p></noscript>
-    </div>
-    <aside class="payment-guide" aria-labelledby="payment-guide-h">
-      <div>
-        <span class="eyebrow">Payments through Cashfree</span>
-        <h3 id="payment-guide-h">Your course. One clear payment.</h3>
-        <p>When enrolment opens, review your course and the full fee, then pay securely through Cashfree using UPI, cards or net banking. Your place is confirmed after payment verification.</p>
-      </div>
-      <div class="payment-guide-details">
-        <p>No payment is collected for the waitlist.</p>
-        <p>Eligible <span data-consult-fee>₹100</span> consultation fees are adjusted against your live course fee within <span data-consult-days>7 days</span>.</p>
-        <a href="terms.html#live-classes">Read live-class payment and cancellation terms →</a>
-      </div>
+      <p class="mk-pc-foot">Fees are set per teacher and shown on each course. Course payments open once a batch has dates; until then only the ₹100 demo can be booked. You see the original price, the coupon and the exact amount before you pay. Secure payment through Cashfree.</p>
     </aside>
   </div>
 </section>
 
-<!-- ========== HOW IT WORKS ========== -->
-<section id="how" aria-labelledby="how-h">
+<!-- ========== FILTERS ========== -->
+<div class="mk-filters-wrap" id="filters">
   <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">How live classes work</span>
-      <h2 class="display-md" id="how-h">From first conversation to fluent progress.</h2>
+    <form class="mk-filters" role="search" aria-label="Filter teachers and courses" onsubmit="return false">
+      <fieldset class="mk-filter">
+        <legend>Level</legend>
+        <div class="mk-chips" data-filter="level">
+          <label><input type="radio" name="f-level" value="all" checked><span>All levels</span></label>
+          <label><input type="radio" name="f-level" value="A1"><span>A1</span></label>
+          <label><input type="radio" name="f-level" value="A2"><span>A2</span></label>
+          <label><input type="radio" name="f-level" value="B1"><span>B1</span></label>
+          <label><input type="radio" name="f-level" value="B2"><span>B2</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="mk-filter">
+        <legend>Class format</legend>
+        <div class="mk-chips" data-filter="format">
+          <label><input type="radio" name="f-format" value="all" checked><span>All</span></label>
+          <label><input type="radio" name="f-format" value="group"><span>Group</span></label>
+          <label><input type="radio" name="f-format" value="individual"><span>One-to-One</span></label>
+        </div>
+      </fieldset>
+      <div class="mk-filter mk-filter-select">
+        <label for="f-teacher" class="mk-legend">Teacher</label>
+        <select id="f-teacher" name="f-teacher"><option value="all">All teachers</option></select>
+      </div>
+      <p class="mk-filter-count" id="filter-count" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+
+<!-- ========== TEACHERS ========== -->
+<section class="mk-section" id="teachers" aria-labelledby="teachers-h">
+  <div class="container">
+    <header class="mk-head">
+      <p class="mk-eyebrow">Teachers</p>
+      <h2 id="teachers-h" class="mk-h2">Learn with a teacher you have met.</h2>
+      <p class="mk-sub">Every profile below is published with the teacher's consent. Courses and demos open only for teachers whose profile and levels have been verified.</p>
+    </header>
+    <div class="mk-teachers" id="teacher-grid">
+      <noscript>
+        <article class="mk-tcard"><div class="mk-tcard-body"><h3>Reegan Gandhi</h3><p>German grammar and Goethe exam preparation, explained in Hindi and English. Levels A1–B2, Group and One-to-One. The interactive teacher list, demo booking and checkout need JavaScript; you can also <a href="contact.html">contact us</a>.</p></div></article>
+      </noscript>
     </div>
-    <ol class="journey">
-      <li><h3>Choose a teacher and course</h3><p>Compare profiles and courses, or book a consultation and let a teacher assess your level.</p></li>
-      <li><h3>Understand the plan</h3><p>See the level, schedule, materials and fee before you commit to anything.</p></li>
-      <li><h3>Enrol</h3><p>Pay the course fee online, in full and in one payment. Your place is confirmed only once the payment is verified.</p></li>
-      <li><h3>Attend live online</h3><p>Join your scheduled classes with your teacher, from wherever you are.</p></li>
-      <li><h3>Practise and progress</h3><p>Speak, get corrected and practise again, moving through the course one level at a time.</p></li>
+    <div class="mk-joining mk-js-only" id="joining" hidden>
+      <h3 class="mk-h3">More teachers joining Klarweg</h3>
+      <p class="mk-sub-sm">Listed with their agreement. Their courses and demos open once each profile, its levels and its details are verified.</p>
+      <ul class="mk-joining-list" id="joining-list"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ========== COURSES ========== -->
+<section class="mk-section mk-section-tint" id="courses" aria-labelledby="courses-h">
+  <div class="container">
+    <header class="mk-head">
+      <p class="mk-eyebrow">Courses</p>
+      <h2 id="courses-h" class="mk-h2">Every teacher, every level, two ways to learn.</h2>
+      <p class="mk-sub">Each course is one CEFR level with one teacher. <strong>Group classes</strong> follow a fixed timetable with a small batch; <strong>One-to-One classes</strong> are scheduled with your teacher. Start and end dates are announced per batch.</p>
+    </header>
+    <div class="mk-courses" id="course-grid" aria-live="polite"></div>
+    <p class="mk-empty" id="course-empty" hidden>No course matches these filters. <button type="button" class="mk-link" data-reset-filters>Show all courses</button></p>
+  </div>
+</section>
+
+<!-- ========== DEMO BOOKING ========== -->
+<section class="mk-section" id="demo" aria-labelledby="demo-h">
+  <div class="container mk-demo-grid">
+    <div class="mk-demo-intro">
+      <p class="mk-eyebrow">Book Demo — ₹100</p>
+      <h2 id="demo-h" class="mk-h2">Meet your teacher for 20 minutes.</h2>
+      <p class="mk-sub" data-demo-what>A 20-minute live session with the teacher: a short level check, a sample of how they teach, and a recommendation for your course and format.</p>
+      <ol class="mk-steps-list">
+        <li>Choose a teacher, then a Friday or Sunday.</li>
+        <li>Pick a time after 4:00 PM IST.</li>
+        <li>Sign in, add your contact details, and pay ₹100 through Cashfree.</li>
+        <li>Your booking is confirmed once the payment is verified. Your reference appears here and in My Account, and your teacher emails you the Google Meet link one day before the demo.</li>
+      </ol>
+      <p class="mk-fine" data-demo-rules>You can move a confirmed demo once, free of charge, up to 12 hours before it starts. If the teacher has to cancel, you choose a full refund or a new time.</p>
+    </div>
+    <div class="mk-panel" id="demo-panel" aria-live="polite">
+      <noscript><p>Demo booking needs JavaScript. You can <a href="contact.html">contact us</a> instead.</p></noscript>
+    </div>
+  </div>
+</section>
+
+<!-- ========== HOW IT WORKS ========== -->
+<section class="mk-section mk-section-tint" id="how" aria-labelledby="how-h">
+  <div class="container">
+    <header class="mk-head">
+      <p class="mk-eyebrow">How it works</p>
+      <h2 id="how-h" class="mk-h2">Three steps, no surprises.</h2>
+    </header>
+    <ol class="mk-how">
+      <li><span class="mk-how-n">1</span><h3>Choose a teacher</h3><p>Filter by level and format. Every fee is on the course card: original price, coupon and the amount you pay.</p></li>
+      <li><span class="mk-how-n">2</span><h3>Book a ₹100 demo</h3><p>Twenty minutes on Google Meet, Friday or Sunday after 4 PM IST. You leave with a level check and a course recommendation.</p></li>
+      <li><span class="mk-how-n">3</span><h3>Enrol in your course</h3><p>Choose a batch, apply the coupon and pay securely through Cashfree. Your enrolment is confirmed only after the payment is verified.</p></li>
     </ol>
   </div>
 </section>
 
-<!-- ========== METHOD ========== -->
-<section class="section-warm" aria-labelledby="method-h">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Method</span>
-      <h2 class="display-md" id="method-h">What happens in a live class.</h2>
-      <p class="lede">Self-paced study is ideal for steady input on your own time. A live teacher adds what is hard to do alone: real conversation, immediate correction and someone who notices what you keep getting wrong.</p>
-    </div>
-    <div class="method-grid">
-      <div class="card"><div class="card-num">01</div><h3>Grammar, systematically</h3><p>Each structure explained step by step, with the reasons behind it.</p><p class="method-de" lang="de">weil ich Deutsch lerne</p></div>
-      <div class="card"><div class="card-num">02</div><h3>Guided speaking</h3><p>Build sentences out loud with prompts, then on your own.</p><p class="method-de" lang="de">Ich möchte einen Termin vereinbaren.</p></div>
-      <div class="card"><div class="card-num">03</div><h3>Vocabulary</h3><p>Words learned in context, with gender and plural, and used again in later sessions.</p><p class="method-de" lang="de">der Termin, die Termine</p></div>
-      <div class="card"><div class="card-num">04</div><h3>Listening &amp; pronunciation</h3><p>Hear it, say it, adjust: umlauts, word stress and sentence melody.</p><p class="method-de" lang="de">schön · Müller · Straße</p></div>
-      <div class="card"><div class="card-num">05</div><h3>Feedback &amp; correction</h3><p>Mistakes caught and explained while the sentence is still fresh.</p><p class="method-de" lang="de">Ich bin gegangen – nicht: Ich habe gegangen.</p></div>
-      <div class="card"><div class="card-num">06</div><h3>Goethe preparation</h3><p>Where relevant: exam format, timing and task types, practised module by module.</p><p class="method-de" lang="de">Lesen · Hören · Schreiben · Sprechen</p></div>
-      <div class="card method-feature on-navy"><div class="card-num">07</div><h3>Structured progress through CEFR levels</h3><p>Each course has a defined level and objectives, so you always know what you are working towards and what comes next.</p>
-        <div class="cefr-line" aria-label="CEFR levels A1 to C2"><span>A1</span><span>A2</span><span>B1</span><span>B2</span><span>C1</span><span>C2</span></div>
-      </div>
+<!-- ========== POLICIES / FAQ ========== -->
+<section class="mk-section" id="faq" aria-labelledby="faq-h">
+  <div class="container mk-faq-grid">
+    <header class="mk-head">
+      <p class="mk-eyebrow">Good to know</p>
+      <h2 id="faq-h" class="mk-h2">Clear terms before you pay.</h2>
+      <p class="mk-sub">Questions? <a href="contact.html">Contact us</a>. Live classes are separate from Klarweg's self-paced courses; see our <a href="terms.html">Terms</a> and <a href="refund-policy.html">Refund Policy</a>.</p>
+    </header>
+    <div class="mk-faq">
+      <details><summary>What does the course fee include?</summary><p data-policy="feeIncludes">The course fee covers every live class in the course, the teacher’s class notes and worksheets, and written feedback on your homework. Goethe exam fees are not included.</p></details>
+      <details><summary>How do the coupon codes work?</summary><p>Use <code>GROUP3000</code> on a Group course (₹3,000 off) or <code>PERSONAL7000</code> on a One-to-One course (₹7,000 off). One coupon per course. A coupon cannot be combined with the ₹100 demo fee adjustment; Klarweg's server checks the amount before you pay.</p></details>
+      <details><summary>When do courses start?</summary><p>Start and end dates are announced per batch. Until a batch has dates, a schedule and confirmed enrolment conditions, it shows “To be announced” and no payment is taken. <span data-policy="scheduling">Group batches run on a fixed timetable in Indian Standard Time, shown on the course before you enrol. If a class has to move, we tell you at least 24 hours in advance and schedule a replacement class. One-to-one lessons are scheduled directly with your teacher.</span></p></details>
+      <details><summary>What if I miss a class?</summary><p data-policy="missedClass">Group classes are not recorded, and a missed group class is not refunded or repeated individually. Your teacher shares the class notes and homework so you can catch up, and you can bring questions to the next class. One-to-one lessons can be moved free of charge with at least 24 hours’ notice.</p></details>
+      <details><summary>Cancellations and refunds</summary><p data-policy="cancellationRefund">If you cancel at least 48 hours before the first class, your course fee is refunded in full. If you cancel during the first two weeks of the course, we refund the classes still to come; after that, course fees are not refunded. If Klarweg cancels or postpones a course and the new dates don’t suit you, we refund everything not yet delivered. The 7-day guarantee in our Refund Policy covers self-paced purchases only, not live classes.</p></details>
+      <details><summary>Can I move my demo?</summary><p>Yes, once, free of charge, up to 12 hours before it starts, from this page or My Account. If the teacher has to cancel, you choose a full refund or a new time.</p></details>
     </div>
   </div>
 </section>
 
-<!-- ========== CONSULTATION ========== -->
-<section class="book on-navy" id="book" aria-labelledby="book-h">
-  <div class="container book-grid">
-    <div>
-      <span class="eyebrow">Personal consultation</span>
-      <h2 class="display-md" id="book-h">Talk to a teacher before you decide.</h2>
-      <p class="lede">A one-to-one conversation to assess your level, understand your goal and recommend the right course and teacher.</p>
-      <div class="fee"><span class="fee-amt" data-consult-fee>₹100</span><span class="fee-unit" data-consult-unit>20-minute session on Google Meet</span></div>
-      <p class="fee-note">Enrol in a live course within <strong data-consult-days>7 days</strong> and the <span data-consult-fee>₹100</span> is adjusted against your course fee.</p>
-      <ol class="book-steps" id="book-steps"></ol>
-      <div class="conditions">
-        <h3>Good to know</h3>
-        <ul>
-          <li>Consultations are booked and paid online on this page, never by email. A booking is confirmed only once the payment is verified.</li>
-          <li>Your joining link is shown on this page, when you are signed in, only once your booking is confirmed.</li>
-          <li data-consult-cancel>If we have to cancel, you choose a full refund or a new time. You can move your consultation once, free of charge, with at least 12 hours’ notice; a consultation missed without notice is not refunded.</li>
-          <li>The <span data-consult-dayadj>7-day</span> adjustment applies to live course fees, counted from the date of your consultation.</li>
-          <li>The current <a href="refund-policy.html">Refund Policy</a> covers self-paced purchases. Live-class terms are confirmed with you before you pay.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="book-card" id="book-form">
-      <noscript>
-        <div class="nojs-request">
-          <h3>Online demo booking is not open yet</h3>
-          <p>Nothing can be booked or paid on this page yet, and consultations are not booked by email. To join the free waitlist for a live course, email <a class="inline" href="mailto:klarwegofficial@gmail.com">klarwegofficial@gmail.com</a> with your name, current level, goal and preferred times (IST). Joining the waitlist is free and is not a booking. We reply within two working days, Monday to Friday.</p>
-        </div>
-      </noscript>
-      <!-- Honest closed state: hidden by kw-live.js only when online booking is enabled (the booking script then shows its panel here). -->
-      <div class="book-closed" id="consult-closed" role="note">
-        <h3>Online demo booking is not open yet</h3>
-        <p>When it opens, you will choose a time and pay the <span data-consult-fee>₹100</span> fee online here. Until then, nothing can be booked or paid on this page, and consultations are not booked by email. You can still join the free waitlist below.</p>
-      </div>
-      <form id="consult-form" class="js-only" novalidate>
-        <h3 id="form-title">Join the course waitlist</h3>
-        <p class="sub">Free, and not a booking: we tell you when a suitable course opens. Nothing is charged. Fields marked <span class="req">*</span> are required. We reply <span data-reply-time>within two working days</span>.</p>
-        <div class="err-summary" id="err-summary" role="alert" tabindex="-1" hidden></div>
-        <div class="form-2">
-          <div class="form-row">
-            <label for="bf-name">Name <span class="req">*</span></label>
-            <input id="bf-name" name="name" type="text" autocomplete="name" maxlength="100" required aria-describedby="bf-name-err">
-            <p class="field-err" id="bf-name-err" hidden></p>
-          </div>
-          <div class="form-row">
-            <label for="bf-email">Email <span class="req">*</span></label>
-            <input id="bf-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required aria-describedby="bf-email-err">
-            <p class="field-err" id="bf-email-err" hidden></p>
-          </div>
-        </div>
-        <div class="form-row">
-          <label for="bf-phone">WhatsApp / phone <span class="opt">(optional)</span></label>
-          <input id="bf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30">
-        </div>
-        <div class="form-2">
-          <div class="form-row">
-            <label for="bf-level">Your current level <span class="req">*</span></label>
-            <select id="bf-level" name="level" required aria-describedby="bf-level-err">
-              <option value="">Select…</option>
-              <option>Complete beginner</option>
-              <option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option>
-              <option>Not sure</option>
-            </select>
-            <p class="field-err" id="bf-level-err" hidden></p>
-          </div>
-          <div class="form-row">
-            <label for="bf-goal">Main goal <span class="req">*</span></label>
-            <select id="bf-goal" name="goal" required aria-describedby="bf-goal-err">
-              <option value="">Select…</option>
-              <option>Goethe exam</option>
-              <option>Ausbildung</option>
-              <option>Study in Germany</option>
-              <option>Work / career</option>
-              <option>Family / visa</option>
-              <option>Speaking confidence</option>
-              <option>Other</option>
-            </select>
-            <p class="field-err" id="bf-goal-err" hidden></p>
-          </div>
-        </div>
-        <div class="form-2">
-          <div class="form-row">
-            <label for="bf-teacher">Preferred teacher</label>
-            <select id="bf-teacher" name="teacher"><option value="">Help me choose</option></select>
-          </div>
-          <div class="form-row">
-            <label for="bf-course">Course of interest</label>
-            <select id="bf-course" name="course"><option value="">Not sure yet</option></select>
-          </div>
-        </div>
-        <fieldset class="form-row">
-          <legend>Preferred times (IST) <span class="opt">(choose any)</span></legend>
-          <div class="times">
-            <label class="time-opt"><input type="checkbox" name="times" value="Weekday mornings"><span>Weekday mornings</span></label>
-            <label class="time-opt"><input type="checkbox" name="times" value="Weekday afternoons"><span>Weekday afternoons</span></label>
-            <label class="time-opt"><input type="checkbox" name="times" value="Weekday evenings"><span>Weekday evenings</span></label>
-            <label class="time-opt"><input type="checkbox" name="times" value="Weekends"><span>Weekends</span></label>
-          </div>
-        </fieldset>
-        <div class="form-row">
-          <label for="bf-msg">Anything else? <span class="opt">(optional)</span></label>
-          <textarea id="bf-msg" name="message" maxlength="1000" placeholder="Exam date, deadlines, what you find hardest…"></textarea>
-        </div>
-        <label class="consent"><input type="checkbox" id="bf-consent" required aria-describedby="bf-consent-err"><span>I agree that Klarweg may use these details to respond to my request, as described in the <a href="privacy.html">Privacy Policy</a>. <span class="req">*</span></span></label>
-        <p class="field-err" id="bf-consent-err" hidden style="margin:-16px 0 16px"></p>
-        <button type="submit" class="btn btn-live">Prepare my request
-          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-        <p class="form-foot">Opens your email app with your request filled in, addressed to <span data-contact-email>klarwegofficial@gmail.com</span>.</p>
-      </form>
-
-      <div class="done" id="consult-done" hidden tabindex="-1">
-        <h3>Your request is ready to send</h3>
-        <div class="done-notice" id="done-notice"><strong>Nothing booked or charged.</strong> Your email app should have opened with the request. It is only sent when you press Send there. We reply to confirm we have noted your interest, and write again if a suitable course opens.</div>
-        <p>If your email app didn’t open, copy the request below and email it to <a class="inline" data-contact-mailto href="mailto:klarwegofficial@gmail.com">klarwegofficial@gmail.com</a>.</p>
-        <pre id="consult-preview"></pre>
-        <div class="done-actions">
-          <button type="button" class="btn btn-live" id="copy-request">Copy request</button>
-          <button type="button" class="btn btn-secondary" id="edit-request">Edit request</button>
-        </div>
-        <p class="form-foot" id="copy-status" aria-live="polite"></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== TRUST ========== -->
-<section aria-labelledby="trust-h">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Trust</span>
-      <h2 class="display-md" id="trust-h">Clear information before you commit.</h2>
-    </div>
-    <div class="trust-grid">
-      <div class="card"><div class="card-num">Credentials</div><h3>Only what a teacher holds</h3><p>Profiles list only qualifications and certificates the teacher actually holds. If something isn’t confirmed, it isn’t shown.</p></div>
-      <div class="card"><div class="card-num">Terms</div><h3>Written down, in advance</h3><p>Course fees, schedules and live-class terms are confirmed in writing before you pay. See our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p></div>
-      <div class="card"><div class="card-num">People</div><h3>A real person replies</h3><p>Every request is read and answered by a member of the Klarweg team, usually within two working days. <a href="contact.html">Contact us</a> with any question.</p></div>
-    </div>
-    <div class="quotes" id="quotes"></div>
-  </div>
-</section>
-
-<!-- ========== FAQ ========== -->
-<section class="section-elevated" aria-labelledby="faq-h">
-  <div class="container-narrow">
-    <div class="section-head">
-      <span class="eyebrow">Questions</span>
-      <h2 class="display-md" id="faq-h">Before you book.</h2>
-    </div>
-    <div class="faq">
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa1">How do live courses differ from self-paced courses?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa1"><div class="faq-a-inner">They are separate products. <a href="courses.html">Self-paced courses</a> are Klarweg's chapter-based lessons you work through on your own, any time. Live courses are scheduled online classes with a teacher, focused on speaking, correction and a fixed structure. Each is priced separately, and what a live course includes is confirmed with you in writing before you pay.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa2">Which German level should I start with?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa2"><div class="faq-a-inner">If you've never studied German, start at A1. Otherwise, <button type="button" class="link-btn" data-kw-placement>take the 90-second level check</button>, or book a consultation and the teacher will assess your level with you.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa3">How do I choose a teacher?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa3"><div class="faq-a-inner" data-none="teachers" data-none-text="Teacher profiles appear on this page once each teacher’s qualifications are confirmed. Until then, book a consultation and tell us your goal, level and preferred times, and we’ll suggest a suitable teacher." data-one-text="Live classes are currently taught by one teacher, whose profile is above: the levels taught, teaching languages and exam experience are all listed there. If you’re unsure whether the classes fit your goal, request a consultation and talk it through first.">Filter the <a href="#teachers">teacher profiles</a> by the level you need, the language you'd like explanations in, and exam experience. If you're unsure, choose “Help me choose” in the consultation form and we'll suggest a teacher based on your goal.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa4">What happens during the consultation?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa4"><div class="faq-a-inner">You meet a teacher one-to-one online. They talk with you in German to gauge your level, ask about your goal and timeline, and recommend a course and format. You're under no obligation to enrol afterwards.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa5"><span>How does the <span data-consult-fee>₹100</span> consultation adjustment work?</span><svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa5"><div class="faq-a-inner">The consultation costs <span data-consult-fee>₹100</span>. If you enrol in a live course within <span data-consult-days>7 days</span> of your consultation, that <span data-consult-fee>₹100</span> is deducted from your course fee. After <span data-consult-days>7 days</span> the fee is not adjusted.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa6">What does the course fee include?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa6"><div class="faq-a-inner" data-policy="feeIncludes">The course fee covers every live class in the course, the teacher’s class notes and worksheets, and written feedback on your homework. Goethe exam fees are not included.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa7">How are classes scheduled?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa7"><div class="faq-a-inner" data-policy="scheduling">Group batches run on a fixed timetable in Indian Standard Time, shown on the course before you enrol. If a class has to move, we tell you at least 24 hours in advance and schedule a replacement class. One-to-one lessons are scheduled directly with your teacher.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa8">What happens if I miss a class?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa8"><div class="faq-a-inner" data-policy="missedClass">Group classes are not recorded, and a missed group class is not refunded or repeated individually. Your teacher shares the class notes and homework so you can catch up, and you can bring questions to the next class. One-to-one lessons can be moved free of charge with at least 24 hours’ notice.</div></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" aria-expanded="false" aria-controls="fa9">What are the cancellation and refund terms?<svg class="chev" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75 9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="faq-a" id="fa9"><div class="faq-a-inner" data-policy="cancellationRefund">If you cancel at least 48 hours before the first class, your course fee is refunded in full. If you cancel during the first two weeks of the course, we refund the classes still to come; after that, course fees are not refunded. If Klarweg cancels or postpones a course and the new dates don’t suit you, we refund everything not yet delivered. The 7-day guarantee in our Refund Policy covers self-paced purchases only, not live classes.</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== CTA ========== -->
-<section class="cta-band">
-  <div class="container">
-    <div class="inner">
-      <h2 class="display-md">Start with a conversation.</h2>
-      <p class="lede">Meet a teacher for <span data-consult-fee>₹100</span>, get an honest assessment of your level, and leave with a clear plan. <span data-book-closed>Online booking is not open yet; join the free waitlist to hear when a course opens.</span> Questions first? <a href="contact.html">Contact us</a>.</p>
-      <div class="hero-ctas">
-        <a href="#book" class="btn btn-live" data-request="interest" data-book-open="Book a consultation">Join the waitlist
-          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 7H11M11 7L7 3M11 7L7 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="courses.html" class="btn btn-secondary">Prefer self-paced? See courses</a>
-      </div>
+<section class="mk-cta">
+  <div class="container mk-cta-inner">
+    <h2 class="mk-h2">Not sure which level you are?</h2>
+    <p class="mk-sub">A ₹100 demo gives you a teacher's assessment and a clear recommendation.</p>
+    <div class="mk-hero-ctas">
+      <a href="#demo" class="mk-btn mk-btn-primary" data-demo-cta>Book Demo — ₹100</a>
+      <a href="courses.html" class="mk-btn mk-btn-ghost">Prefer self-paced? See courses</a>
     </div>
   </div>
 </section>
 
 </main>
 
-<div class="sticky-book" id="sticky-book" aria-hidden="true">
-  <p><strong><span data-consult-fee>₹100</span> consultation</strong><span data-book-closed>Online booking is not open yet</span><span data-book-only hidden>Adjusted against your fee within <span data-consult-days>7 days</span></span></p>
-  <a href="#book" class="btn btn-gold" tabindex="-1" data-request="interest" data-book-open="Book">Waitlist</a>
-</div>
+<!-- ========== CHECKOUT (dialog) ========== -->
+<dialog class="mk-dialog" id="checkout" aria-labelledby="co-title">
+  <form method="dialog" class="mk-dialog-close-form"><button class="mk-dialog-x" aria-label="Close checkout">×</button></form>
+  <div id="checkout-body"></div>
+</dialog>
 
 <!-- ========== FOOTER (canonical) ========== -->
 <footer>
@@ -883,7 +267,7 @@
       <div class="footer-brand">
         <a href="index.html" class="nav-logo">Klarweg</a>
         <p>The visual, Hindi-first way to learn German — from A1 to C2, aligned to the Goethe-Zertifikat.</p>
-      </div>
+      <nav class="kw-social" aria-label="Klarweg on social media"><a class="kw-social-link kw-social-instagram" href="https://www.instagram.com/klarwegofficial/" target="_blank" rel="noopener noreferrer" aria-label="Klarweg on Instagram (opens in a new tab)"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a><a class="kw-social-link kw-social-facebook" href="https://www.facebook.com/klarweg" target="_blank" rel="noopener noreferrer" aria-label="Klarweg on Facebook (opens in a new tab)"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a><a class="kw-social-link kw-social-threads" href="https://www.threads.com/@klarwegofficial" target="_blank" rel="noopener noreferrer" aria-label="Klarweg on Threads (opens in a new tab)"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/></svg></a></nav></div>
       <div class="footer-col">
         <h3>Levels</h3>
         <a href="a1.html">A1 · Foundations</a>
@@ -923,13 +307,12 @@
   </div>
 </footer>
 
-<script src="live-classes-data.js"></script>
-<script src="kw-products.js"></script>
-<script src="kw-live.js"></script>
+<script src="live-classes-data.js?v=20261121a"></script>
+<script src="live-marketplace-pricing.js?v=20261121a"></script>
 <script src="site.js"></script>
-<script src="kw-placement.js"></script>
 <script src="kw-config.js"></script>
 <script src="kw-auth.js"></script>
+<script src="kw-marketplace.js?v=20261121a"></script>
 <script>
 /* Header login/account link (desktop + mobile-drawer copies). */
 (function () {

@@ -43,7 +43,7 @@ export function createD1(workerDir) {
       try {
         const out = stmts.map((s) => s._runSync());
         db.exec('COMMIT');
-        return out.map(() => ({ success: true }));
+        return out.map((info) => ({ success: true, meta: { changes: Number(info.changes) } }));
       } catch (e) {
         db.exec('ROLLBACK');
         throw e;

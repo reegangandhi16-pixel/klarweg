@@ -33,3 +33,4 @@ scripts/chapter-resources/.build/
 
 # public site artifact (scripts/site-artifact.sh)
 _site/
+marketplace-shots/

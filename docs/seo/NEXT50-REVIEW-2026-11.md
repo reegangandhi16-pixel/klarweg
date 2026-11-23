@@ -2011,3 +2011,42 @@ Publication authorised by the user on 9 November 2026, including self-merging af
 - Headless Chrome: 100 page/viewport combinations across all 50 pages at 360×780 and 1280×800. No horizontal overflow before or after expanding answers; TOC anchors and language fonts passed.
 - Resources hub checked at both sizes; four category examples inspected visually in hero/content views.
 - Publication is user-authorised. Native German and fluent Hindi human review are still pending; automated checks do not establish that review.
+
+## Additional self-introduction examples
+
+- [ ] du
+- [ ] Ich wohne in Jaipur. Ich lese gern. Wo wohnst du?
+- [ ] Wo wohnen Sie?
+
+## Additional applied-learning examples
+
+- [ ] Ist Sahne in der Tomatensuppe? Dann nehme ich die Gemüsesuppe ohne Sahne, bitte.
+- [ ] Gehen Sie geradeaus bis zur Apotheke. Biegen Sie danach links ab. Die Bibliothek ist gleich um die Ecke.
+- [ ] Meine Reservierung beginnt heute, am Donnerstag. Ich bleibe zwei Nächte. Können Sie das bitte noch einmal prüfen?
+- [ ] Ich habe das Hemd gestern gekauft. Es ist zu groß. Kann ich es gegen Größe M umtauschen?
+- [ ] Anrufer: Herr Yilmaz. Rückruf: morgen um zehn. Nummer: 0123 456789.
+- [ ] Seit Montag habe ich Schmerzen im linken Knie. Kann ich einen Termin bekommen?
+- [ ] Entschuldigung, fährt der Zug um 14:18 Uhr nach Bonn jetzt von Gleis sieben? Ja, von Gleis sieben statt vier.
+- [ ] Am Dienstag um zehn kann ich leider nicht. Geht Mittwoch nach drei oder Freitagvormittag? Freitag um neun passt mir. Vielen Dank.
+- [ ] Könnten Sie bitte langsamer sprechen? Was bedeutet Abfahrt? Wie schreibt man Ihren Nachnamen?
+- [ ] Hallo Mira, ich wohne jetzt in Leipzig. Die Wohnung ist klein, aber sehr hell. Hast du am Samstag Zeit? Dann kannst du mich besuchen. Liebe Grüße, Jana
+- [ ] Hallo Ben, wir machen am Sonntag um zwölf ein Picknick im Stadtpark. Möchtest du mitkommen? Bring bitte etwas zu trinken mit. Sag mir bitte bis Freitag Bescheid. Viele Grüße, Lea
+- [ ] Guten Tag, leider muss ich meinen Termin am Montag um neun Uhr absagen, weil ich arbeiten muss. Wäre Mittwoch nach vierzehn Uhr oder Donnerstagvormittag möglich? Freundliche Grüße, Samira Khan
+- [ ] Guten Tag, ich interessiere mich für Ihren Anfängerkurs. Wann beginnt der nächste Kurs? Findet er auch samstags statt? Wie kann ich mich anmelden? Vielen Dank und freundliche Grüße, Arun Mehta
+- [ ] Guten Tag, ich habe eine blaue Jacke in Größe M bestellt. Geliefert wurde eine schwarze Jacke in Größe S. Bitte schicken Sie mir die bestellte Jacke und teilen Sie mir mit, wie ich die falsche Ware zurücksenden kann. Freundliche Grüße, Pia Wolf
+- [ ] Sehr geehrte Damen und Herren, könnten Sie mir bitte das Anmeldeformular zusenden? Vielen Dank. Mit freundlichen Grüßen, Mia Becker
+- [ ] RE 18, 16:42 Uhr, Gleis 5.
+- [ ] Kurs B passt, weil ich werktags abends arbeite. Der Samstagskurs dauert zwei Stunden.
+- [ ] Marta ist meine Mutter. Uwe ist mein Vater. Tom ist mein Bruder.
+- [ ] Ich nehme die Gemüsesuppe, den Linsensalat und ein Mineralwasser, bitte.
+- [ ] Das blaue Baumwollhemd in Größe M passt besser. Der schwarze Wollmantel in Größe L ist zu groß und zu warm.
+- [ ] Die Lampe steht auf dem Tisch. Die Tasche liegt unter dem Stuhl. Das Regal steht neben der Tür.
+- [ ] Ich leihe ein Buch in der Bibliothek aus, hole Medikamente in der Apotheke und nehme den Zug am Bahnhof.
+- [ ] In die Altstadt fahre ich mit dem Bus. In die andere Stadt fahre ich mit dem Regionalzug.
+- [ ] Am Samstag gehe ich ins Kino, weil es regnet. Am Sonntag mache ich einen Spaziergang, weil es sonnig und mild ist.
+- [ ] Das ist meine linke Schulter. Das ist meine rechte Hand. Das sind meine Knie.
+- [ ] Dienstag um 14:30 Uhr. Halb drei means half an hour before three.
+- [ ] Warehouse: Ich habe Warenbestände kontrolliert und Lieferungen sortiert. Support: Ich habe neue Kolleginnen und Kollegen eingearbeitet und Fragen zum Ablauf beantwortet.
+- [ ] Betreff: Bewerbung um das ausgeschriebene Praktikum. Guten Tag, anbei sende ich Ihnen meine Bewerbung für das Praktikum. Im Anhang finden Sie meinen Lebenslauf und mein Anschreiben. Mit freundlichen Grüßen, Nisha Patel
+- [ ] Ich würde Angebot A wählen, weil mir ein kurzer Arbeitsweg wichtig ist. Dafür wäre mein Einkommen niedriger als bei Angebot B.
+- [ ] Ich kann die App öffnen, aber ich kann mich nicht anmelden. Ich habe mein Passwort bereits zurückgesetzt. Die Fehlermeldung erscheint weiterhin. Können Sie mir bitte helfen?

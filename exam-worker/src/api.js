@@ -131,7 +131,16 @@ function practisableParts(cfg, module) {
 export async function myAttempts(env, userId) {
   const rows = (await env.DB.prepare(`SELECT a.id, a.completed_at, a.module_scope, a.part_scope, f.label, f.kind, r.json FROM attempts a JOIN forms f ON f.id = a.form_id
       LEFT JOIN results r ON r.attempt_id = a.id WHERE a.user_id = ?1 AND a.status = 'completed' ORDER BY a.completed_at DESC LIMIT 20`).bind(userId).all()).results;
-  return { ok: true, attempts: rows.map((r) => {
+  /* Modelltest progress (Issue #384 dashboard): how many of the Modelltests this learner may be assigned they have
+     completed in full. Counts only assignable mock forms (status + learner release set, exactly as assignment does);
+     a form id is never sent to the client. null when no Modelltest is assignable. */
+  const rs = await releaseSet(env);
+  const mockIds = rs.block ? [] : (await env.DB.prepare(`SELECT id FROM forms WHERE kind = 'mock' AND status IN (${statusSql(env)})`).all()).results
+    .map((f) => f.id).filter((id) => !rs.ids || rs.ids.includes(id));
+  const doneIds = mockIds.length ? (await env.DB.prepare(`SELECT DISTINCT form_id FROM attempts WHERE user_id = ?1 AND status = 'completed' AND module_scope IS NULL`).bind(userId).all()).results
+    .map((r) => r.form_id).filter((id) => mockIds.includes(id)) : [];
+  const mockProgress = mockIds.length ? { completed: doneIds.length, total: mockIds.length } : null;
+  return { ok: true, mock_progress: mockProgress, attempts: rows.map((r) => {
     const res = r.json ? JSON.parse(r.json) : null;
     return { attempt_id: r.id, completed_at: r.completed_at, form_label: r.label, test_content: r.kind === 'synthetic',
       ...(partScope(r) !== null ? { practice_part: { module: r.module_scope, part: r.part_scope } } : {}),

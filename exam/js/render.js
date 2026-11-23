@@ -502,7 +502,12 @@ export function attemptHistory(list, formatDate = (ms) => new Date(ms).toLocaleD
       + `<td><button type="button" class="kx-btn kx-btn-quiet" data-act="last-result" data-attempt="${esc(a.attempt_id)}">Ergebnis ansehen</button></td></tr>`;
   }).join('');
   if (!rows) return '';
-  return '<section class="kx-history" aria-labelledby="kx-history-title"><h2 id="kx-history-title">Ihre bisherigen Übungen</h2>'
+  /* Modelltest progress: "3 von 11 Modelltests vollständig bearbeitet" (the next start assigns one not yet taken) */
+  const mp = list.mock_progress;
+  const progress = mp && mp.total > 0
+    ? `<p class="kx-progress-set">${esc(mp.completed)} von ${esc(mp.total)} Modelltests vollständig bearbeitet.${mp.completed < mp.total ? ' Neue Starts wählen bevorzugt einen Modelltest, den Sie noch nicht bearbeitet haben.' : ' Sie haben alle Modelltests bearbeitet; ein neuer Start wiederholt einen davon.'}</p>`
+    : '';
+  return '<section class="kx-history" aria-labelledby="kx-history-title"><h2 id="kx-history-title">Ihre bisherigen Übungen</h2>' + progress
     + `<div class="kx-table-wrap"><table class="kx-table"><caption>Abgeschlossene Übungen (neueste zuerst)</caption><thead><tr><th scope="col">Datum</th><th scope="col">Übung</th>`
     + cols.map((mod) => `<th scope="col">${esc(MODULE_LABELS[mod])}</th>`).join('') + '<th scope="col"><span class="kx-sr">Aktion</span></th></tr></thead>'
     + `<tbody>${rows}</tbody></table></div></section>`;

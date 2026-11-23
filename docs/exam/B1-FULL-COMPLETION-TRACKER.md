@@ -121,7 +121,7 @@ precheck, confidentiality, sleep/wake, focus, autosave rejection, text limit + I
 | O-3 | **M0 spoken instructions** for Hören Teil 1, 3, 4 (M1–M10 have all four): 3 short TTS clips; Chirp 3 HD is within the free monthly quota but any TTS call needs your approval | M0 parity |
 | O-4 | **B2 = OD-14** Google TTS terms (§20(d) under-18) — inquiry drafted, not sent. Also concerns live M0 | all audio |
 | O-5 | **B3 = OD-08** format formulae + "Goethe-Zertifikat" naming with counsel | all forms |
-| O-6 | **Real device test**: one full journey on an iPhone (Safari) and an Android phone (Chrome), incl. microphone + Sprechen playback | launch |
+| O-6 | **Real device test**: one full journey on an iPhone (Safari) and an Android phone (Chrome), incl. microphone + Sprechen playback. Phones grant the microphone only on HTTPS, so the local dev server cannot test Sprechen from a phone. Proposed route, no real content leaves the Mac: (a) engine + microphone + recording on the existing NON-PROD preview with synthetic forms (HTTPS; owner approves a redeploy with this branch); (b) real-form audio decoding from the Mac over the local network (plain HTTP is enough for playback). Real M1–M10 content is never hosted before release | launch |
 | O-7 | Keep OD-50 (no learner choice of a specific Modelltest) or allow choosing M1…M10 | product |
 | O-8 | Confirm the result wording "…derselben **zertifizierten** Prüfperson…" (OWN-2026-11-06-2) is accurate and provable | claims |
 | O-9 | Record which commit the live exam Worker (335b45df) was built from | rollback |

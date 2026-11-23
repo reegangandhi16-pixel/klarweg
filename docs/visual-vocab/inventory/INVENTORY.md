@@ -14,16 +14,16 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | Text-only (function words / grammar constructions) | 568 |
 | Illustrable concepts | 7893 |
 | Chapters without word cards | b2-14-goethe-mini-test-1 (review quiz), b2-26-goethe-mini-test-2 (review quiz), b2-36-goethe-halbzeit-test (review quiz), b2-43-goethe-mini-3 (review quiz), b2-53-goethe-mini-4 (none) |
-| Already illustrated (A1·01 pilot) | 5223 |
-| **New images needed** | **2670** (2030 direct, 640 conceptual) |
-| …used on a free Chapter 1 page (public files) | 20 |
+| Already illustrated (A1·01 pilot) | 5224 |
+| **New images needed** | **2669** (2029 direct, 640 conceptual) |
+| …used on a free Chapter 1 page (public files) | 19 |
 | …used only in paid chapters (gated files) | 2650 |
 | Cards served by reusing another card's image | 663 |
 | Headwords with several meanings | 578 (309 look like the same meaning worded differently — review) |
 
 ## Cost and storage (estimate)
-- Expected generations incl. re-rolls: **3396** × $0.039 = **$132.44** (interactive) · **$66.22** if the 50 % batch mode is available for this model (to verify).
-- Assets: 10680 files ≈ **50.8 MB** (AVIF+WebP × 400/800w, pilot average 19.5 KB per word); a learner downloads only one variant per card (≈ 3–6 KB).
+- Expected generations incl. re-rolls: **3395** × $0.039 = **$132.41** (interactive) · **$66.2** if the 50 % batch mode is available for this model (to verify).
+- Assets: 10676 files ≈ **50.8 MB** (AVIF+WebP × 400/800w, pilot average 19.5 KB per word); a learner downloads only one variant per card (≈ 3–6 KB).
 
 ## Per level
 | Level | Chapters | With cards | Checkpoints | Cards | Image | Concept | Text-only | New images (first use here) |
@@ -31,7 +31,7 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | A1 | 47 | 47 | 0 | 1984 | 1480 | 269 | 235 | 298 |
 | A2 | 35 | 35 | 0 | 1607 | 1270 | 272 | 65 | 267 |
 | B1 | 35 | 35 | 0 | 2128 | 1712 | 296 | 120 | 465 |
-| B2 | 69 | 64 | 4 | 2569 | 2142 | 405 | 22 | 1205 |
+| B2 | 69 | 64 | 4 | 2569 | 2142 | 405 | 22 | 1204 |
 | C1 | 43 | 43 | 0 | 231 | 88 | 86 | 57 | 87 |
 | C2 | 29 | 29 | 0 | 711 | 423 | 112 | 176 | 348 |
 
@@ -155,7 +155,7 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | b1-33-je-desto-umso | paid | 44 | 35 | 9 | 0 | 22 |
 | b1-34-partizipien-als-adjektive | paid | 81 | 70 | 9 | 2 | 61 |
 | b1-35-goethe-zertifikat-b1-final | paid | 39 | 25 | 5 | 9 | 20 |
-| b2-01-erweiterte-satzklammer | free | 34 | 23 | 11 | 0 | 20 |
+| b2-01-erweiterte-satzklammer | free | 34 | 23 | 11 | 0 | 21 |
 | b2-02-verbalkomplex | paid | 34 | 21 | 12 | 1 | 26 |
 | b2-03-informationsstruktur-thema-rhema | paid | 34 | 27 | 7 | 0 | 26 |
 | b2-04-formales-es | paid | 34 | 32 | 2 | 0 | 22 |
@@ -224,7 +224,7 @@ tier decisions can be overridden per concept in `overrides.json` (key → { "tie
 | b2-67-argumentieren-gegenargumente | paid | 5 | 5 | 0 | 0 | 1 |
 | b2-68-redemittel-fuer-diskussionen | paid | 5 | 3 | 2 | 0 | 4 |
 | b2-69-goethe-zertifikat-b2-final | paid | 5 | 2 | 3 | 0 | 2 |
-| c1-01-tempusgebrauch-stilistische-tempuswahl | free | 5 | 0 | 2 | 3 | 2 |
+| c1-01-tempusgebrauch-stilistische-tempuswahl | free | 5 | 0 | 2 | 3 | 3 |
 | c1-02-raum-und-zeit-praezise-ausdruecken | paid | 5 | 0 | 3 | 2 | 0 |
 | c1-03-nebensaetze-sicher-beherrschen | paid | 5 | 1 | 3 | 1 | 1 |
 | c1-04-hauptsaetze-elegant-verbinden | paid | 5 | 0 | 0 | 5 | 0 |

@@ -216,7 +216,9 @@ const CHAPTER = {
       note: 'The narrative technique of layering multiple time levels (background, main narrative, commentary).',
       ex1: { de: 'Die Zeitschichtung im Roman verwirrt manche Leser zunächst.', en: 'The temporal layering in the novel confuses some readers at first.', hi: 'Upanyaas mein samay parat shuru mein kuch pathakon ko uljhaa deti hai.' },
       ex2: { de: 'Das Plusquamperfekt ermöglicht eine klare Zeitschichtung.', en: 'The Plusquamperfekt enables clear temporal layering.', hi: 'Plusquamperfekt ek spasht samay parat sambhav banaata hai.' },
-      collocations: ['narrative Zeitschichtung', 'Zeitschichtung ermöglichen'] },
+      collocations: ['narrative Zeitschichtung', 'Zeitschichtung ermöglichen'],
+      img: { src: '../public/vocab-img/43d9e8fc2f04dc295fef', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A cutaway of earth revealing historical objects in three distinct layers.' }
+    },
     { de: 'die Vermutung', ipa: '[fɛɐ̯ˈmuːtʊŋ]', en: 'assumption / conjecture', hi: 'anumaan', pos: 'Noun · fem.', register: 'C1 · academic/journalistic',
       note: 'Often expressed via Futur I (present assumption) or Futur II (assumption about the past).',
       ex1: { de: 'Die Vermutung wird im Futur II ausgedrückt.', en: 'The assumption is expressed in the Futur II.', hi: 'Anumaan Futur II mein vyakt kiya jaata hai.' },

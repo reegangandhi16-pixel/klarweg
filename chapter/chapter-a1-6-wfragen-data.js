@@ -230,7 +230,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/fbec8e5ef76435d473c9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A traveler with luggage looking back toward a distant village.' }
     },
     { de: 'warum', pos: 'question word', en: 'why', hi: 'क्यों',
-      ex: 'Warum lernst du Deutsch?', exEn: 'Why are you learning German?' },
+      ex: 'Warum lernst du Deutsch?', exEn: 'Why are you learning German?',
+      img: { src: '/api/media/vocab-img/d35e07a6402f630a2ff2', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A student with an open book gesturing inquiringly with raised palms.' }
+    },
     { de: 'wie viel/viele', pos: 'question word', en: 'how much / how many', hi: 'कितना / कितने',
       ex: 'Wie viele Bücher hast du?', exEn: 'How many books do you have?' },
     // — Active support —

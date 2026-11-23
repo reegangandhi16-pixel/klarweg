@@ -333,7 +333,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/6a1af5874b395f50febc', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person walking away and waving goodbye' }
     },
     { de: 'das', pos: 'pronoun', en: 'this, that', hi: 'यह / वह',
-      ex: 'Das ist Anna.', exEn: 'This is Anna.' },
+      ex: 'Das ist Anna.', exEn: 'This is Anna.',
+      img: { src: '/api/media/vocab-img/b7ea001b1c1c549103ca', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person introducing their companion to an arriving guest.' }
+    },
     { de: 'Frau', art: 'die', gender: 'f', plural: 'Frauen', pos: 'noun', en: 'Mrs, Ms; woman', hi: 'श्रीमती / महिला',
       ex: 'Guten Tag, Frau Klein!', exEn: 'Good day, Mrs Klein!',
       img: { src: '/api/media/vocab-img/92d92a0de54aeeacc634', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Woman smiling warmly' }
@@ -348,7 +350,9 @@ const CHAPTER = {
     },
     { de: 'formell', pos: 'adjective', en: 'formal', hi: 'औपचारिक',
       ex: 'Mit dem Lehrer spricht man formell.', exEn: 'With the teacher you speak formally.',
-      compare: { comparative: 'formeller', superlative: 'am formellsten' } },
+      compare: { comparative: 'formeller', superlative: 'am formellsten' },
+      img: { src: '/api/media/vocab-img/d7d862ae057bac71d991', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two professionals in tailored suits greeting each other with a formal handshake.' }
+    },
     { de: 'informell', pos: 'adjective', en: 'informal', hi: 'अनौपचारिक',
       ex: 'Mit Freunden ist es informell.', exEn: 'With friends it is informal.',
       compare: { comparative: 'informeller', superlative: 'am informellsten' },

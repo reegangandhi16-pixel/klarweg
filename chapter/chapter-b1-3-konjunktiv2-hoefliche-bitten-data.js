@@ -288,7 +288,9 @@ const CHAPTER = {
       ex: 'Könnten Sie die App für mich installieren?', exEn: 'Could you install the app for me?', exHi: 'Kya aap mere liye app install kar sakte hain?',
       ex2: 'Ich würde die Software gern selbst installieren.', ex2En: 'I would like to install the software myself.', ex2Hi: 'Main software khud install karna chahoonga.',
       conj: { praesens: 'installiert', praeteritum: 'installierte', perfekt: 'hat installiert' },
-      advanced: { synonyms: ['einrichten'], opposites: ['deinstallieren'], collocations: ['eine App installieren', 'Software installieren'] } },
+      advanced: { synonyms: ['einrichten'], opposites: ['deinstallieren'], collocations: ['eine App installieren', 'Software installieren'] },
+      img: { src: '/api/media/vocab-img/1cad09344de1e1340dd8', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Person installing a new application on a smartphone.' }
+    },
     { de: 'irgendetwas', pos: 'pronoun', level: 'B1', en: 'something, anything', hi: 'कुछ भी',
       ex: 'Könnten Sie mir irgendetwas Vegetarisches empfehlen?', exEn: 'Could you recommend something vegetarian to me?', exHi: 'Kya aap mujhe kuch bhi shakahari suggest kar sakte hain?',
       ex2: 'Hätten Sie irgendetwas gegen Kopfschmerzen?', ex2En: 'Would you have something for a headache?', ex2Hi: 'Kya aapke paas sirdard ke liye kuch hoga?',

@@ -226,7 +226,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/24961c27307f05e4c533', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people working together in pairs at a desk' }
     },
     { de: 'andere', pos: 'adjective', en: 'other', hi: 'अन्य',
-      ex: 'Frag eine andere Person.', exEn: 'Ask another person.' },
+      ex: 'Frag eine andere Person.', exEn: 'Ask another person.',
+      img: { src: '/api/media/vocab-img/669f23ee729ff3a6eed9', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Customer pointing to another apple in a market crate' }
+    },
     { de: 'gegenseitig', pos: 'adjective', en: 'mutual', hi: 'पारस्परिक',
       ex: 'Stellt euch gegenseitig vor.', exEn: 'Introduce each other (mutually).',
       img: { src: '/api/media/vocab-img/f2e0f9c2e1442d47fade', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two people politely gesturing toward each other.' }
@@ -249,7 +251,9 @@ const CHAPTER = {
     },
     { de: 'reagieren', pos: 'verb', en: 'to react', hi: 'प्रतिक्रिया देना',
       ex: 'Wie reagierst du darauf?', exEn: 'How do you react to it?',
-      conj: { praesens: 'reagiert', praeteritum: 'reagierte', perfekt: 'hat reagiert' } },
+      conj: { praesens: 'reagiert', praeteritum: 'reagierte', perfekt: 'hat reagiert' },
+      img: { src: '/api/media/vocab-img/6ba3c52020338e82cd3e', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A doctor testing a knee reflex with a hammer.' }
+    },
     // — Languages —
     { de: 'Deutsch', pos: 'language', en: 'German (language)', hi: 'जर्मन भाषा',
       ex: 'Ich spreche ein bisschen Deutsch.', exEn: 'I speak a little German.',
@@ -353,7 +357,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/2ee5ada64a69b334dfef', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A sunlit terracotta patio with an orange tree and acoustic guitar.' }
     },
     { de: 'Portugal', pos: 'country', en: 'Portugal', hi: 'पुर्तगाल',
-      ex: 'Lissabon ist in Portugal.', exEn: 'Lisbon is in Portugal.' },
+      ex: 'Lissabon ist in Portugal.', exEn: 'Lisbon is in Portugal.',
+      img: { src: '/api/media/vocab-img/fd604f581514b4a56c48', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'The historic stone Belém Tower standing at the water\'s edge.' }
+    },
     { de: 'Polen', pos: 'country', en: 'Poland', hi: 'पोलैंड',
       ex: 'Sie kommt aus Polen.', exEn: 'She comes from Poland.',
       img: { src: '/api/media/vocab-img/17f73b937d00d5239976', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'The historic brick towers of St. Mary\'s Basilica in Kraków.' }
@@ -403,7 +409,9 @@ const CHAPTER = {
     { de: 'Neuseeland', pos: 'country', en: 'New Zealand', hi: 'न्यूज़ीलैंड',
       ex: 'Neuseeland liegt sehr weit weg.', exEn: 'New Zealand is very far away.' },
     { de: 'Indonesien', pos: 'country', en: 'Indonesia', hi: 'इंडोनेशिया',
-      ex: 'Indonesien hat viele Inseln.', exEn: 'Indonesia has many islands.' },
+      ex: 'Indonesien hat viele Inseln.', exEn: 'Indonesia has many islands.',
+      img: { src: '/api/media/vocab-img/2ade99f8c53f01201ea3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Ancient stone stupas of Borobudur overlooking misty Indonesian hills.' }
+    },
     { de: 'Algerien', pos: 'country', en: 'Algeria', hi: 'अल्जीरिया',
       ex: 'Algerien ist in Afrika.', exEn: 'Algeria is in Africa.',
       vis: { kind: 'map', iso: ['DZ'], cap: 'Algeria in North Africa', src: '../public/vocab-map/2493affa87e4.svg' }
@@ -463,7 +471,9 @@ const CHAPTER = {
       vis: { kind: 'grammar', de: 'Guten Tag, wie geht es Ihnen?', hl: 'wie geht es Ihnen?', role: 'question', cap: 'A standard conversational phrase for everyday use' }
     },
     { de: 'Grammatik', art: 'die', gender: 'f', plural: 'Grammatiken', pos: 'noun', en: 'grammar', hi: 'व्याकरण',
-      ex: 'Die Grammatik ist nicht schwer.', exEn: 'The grammar is not hard.' },
+      ex: 'Die Grammatik ist nicht schwer.', exEn: 'The grammar is not hard.',
+      img: { src: '/api/media/vocab-img/37c0c3ac483bc48eb40a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'language student using colored highlighters to mark sentence parts in different shades in a large German workbook', cap: 'Studying sentence patterns and grammar systematically', hl: 'Grammatik' }
+    },
     { de: 'Tafel', art: 'die', gender: 'f', plural: 'Tafeln', pos: 'noun', en: 'blackboard', hi: 'श्यामपट',
       ex: 'Schreib es an die Tafel.', exEn: 'Write it on the blackboard.',
       img: { src: '/api/media/vocab-img/b7ad920ee24715eca336', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'a green blackboard with chalk and eraser' }

@@ -1,0 +1,19 @@
+name: Klarweg Meta Connection Check (Read-only)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  connections:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check connected Meta accounts without publishing
+        env:
+          FACEBOOK_PAGE_ID: ${{ secrets.KLARWEG_FB_PAGE_ID }}
+          FACEBOOK_PAGE_TOKEN: ${{ secrets.KLARWEG_FB_PAGE_TOKEN }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.KLARWEG_THREADS_TOKEN }}
+        run: node social-agent/scripts/check-connections.mjs

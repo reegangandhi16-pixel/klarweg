@@ -1,0 +1,23 @@
+name: Klarweg Social Agent QA
+on:
+  pull_request:
+    paths:
+      - 'social-agent/**'
+      - '.github/workflows/klarweg-social-agent*.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  safe-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run social agent unit tests
+        run: node --test social-agent/scripts/*.test.mjs
+      - name: Verify no live publishing
+        env:
+          SOCIAL_PUBLISH_ENABLED: 'false'
+        run: node social-agent/scripts/agent.mjs --dry-run

@@ -204,8 +204,12 @@ function pickWork(level, limit) {
   // concepts reserved for interactive generation (STORE/interactive-keys.txt) are never batched, so the two never take the same concept
   const reservedFile = path.join(STORE, "interactive-keys.txt");
   const reserved = !only && fs.existsSync(reservedFile) ? new Set(fs.readFileSync(reservedFile, "utf8").split(/\s+/).filter(Boolean)) : null;
+  // STORE/skip-levels.txt (e.g. "c1 c2"): concepts used ONLY by those levels are no longer batched (owner decision 2026-11-23)
+  const skipFile = path.join(STORE, "skip-levels.txt");
+  const skip = !only && fs.existsSync(skipFile) ? new Set(fs.readFileSync(skipFile, "utf8").split(/\s+/).filter(Boolean)) : null;
   for (const it of queue()) {
     if (it.status !== "todo") continue;
+    if (skip && it.audience.every((u) => skip.has(u.level))) continue;
     if (only && !only.has(it.key)) continue;
     if (reserved && reserved.has(it.key)) continue;
     // second-strategy images wait for the evaluation gate (STORE/second-go), except named pilots (--keys)

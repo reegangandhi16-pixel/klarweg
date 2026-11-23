@@ -227,7 +227,7 @@ const CHAPTER = {
     { de: 'geschieden', pos: 'adjective', en: 'divorced', hi: 'तलाक़शुदा', ex: 'Rohans Onkel ist geschieden.', exEn: 'Rohan\u2019s uncle is divorced.', img: { src: '../public/vocab-img/ecb7ed0695eea78c150d', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'wedding rings lying apart on a table with a small gap between them' } },
     { de: 'daf\u00fcr', pos: 'adverb', en: 'instead, in return, to make up for it', hi: 'उसके बदले', ex: 'Oma kann nicht putzen, dafür hilft die ganze Familie.', exEn: 'Grandma cannot clean — to make up for it, the whole family helps.', vis: { kind: 'grammar', de: 'Oma kann nicht mehr putzen, dafür kocht sie für alle.', hl: 'dafür', role: 'focus', cap: 'dafür = instead, in return, to make up for it' } },
     // ===== Passive =====
-    { de: 'folgend', pos: 'adjective', en: 'following, next', hi: 'अगला, निम्नलिखित', ex: 'Am folgenden Tag kommt der Arzt.', exEn: 'The following day the doctor comes.' },
+    { de: 'folgend', pos: 'adjective', en: 'following, next', hi: 'अगला, निम्नलिखित', ex: 'Am folgenden Tag kommt der Arzt.', exEn: 'The following day the doctor comes.', vis: { kind: 'grammar', de: 'Am folgenden Tag kommt der Arzt.', hl: 'folgenden', role: 'focus', cap: 'folgend = following, next' } },
     { de: 'bitter', pos: 'adjective', en: 'bitter', hi: 'कड़वा', ex: 'Der Kaffee im Verein ist bitter.', exEn: 'The coffee at the club is bitter.', img: { src: '../public/vocab-img/26d34c1565760e80fcfe', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'person tasting black coffee from a cup and making a slightly sour face' } }
   ],
 

@@ -666,5 +666,13 @@
  "das-erachten--opinion-view": {
   "tier": "text-only",
   "reason": "manual review 2026-11-23: abstract/grammar word — picture did not teach the meaning of the card sentence → sentence-focus visual (owner decision 2026-11-20)"
+ },
+ "folgend--following-next": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: 5 attempts, last had English text in the picture → sentence-focus visual (owner: chapter 1 complete)"
+ },
+ "saemtlich--all-entire": {
+  "tier": "text-only",
+  "reason": "manual 2026-11-23: determiner, 3 failed attempts → sentence-focus visual (owner: chapter 1 complete)"
  }
 }

@@ -3531,5 +3531,19 @@
   "hl": "Nach meinem Erachten",
   "role": "focus",
   "cap": "nach meinem Erachten = in my opinion"
+ },
+ "folgend--following-next": {
+  "type": "grammar",
+  "de": "Am folgenden Tag kommt der Arzt.",
+  "hl": "folgenden",
+  "role": "focus",
+  "cap": "folgend = following, next"
+ },
+ "saemtlich--all-entire": {
+  "type": "grammar",
+  "de": "Sämtliche Studien sollen eine positive Entwicklung zeigen.",
+  "hl": "Sämtliche",
+  "role": "focus",
+  "cap": "sämtlich = all, entire"
  }
 }

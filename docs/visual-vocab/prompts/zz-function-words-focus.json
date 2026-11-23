@@ -674,5 +674,21 @@
  "saemtlich--all-entire": {
   "tier": "text-only",
   "reason": "manual 2026-11-23: determiner, 3 failed attempts → sentence-focus visual (owner: chapter 1 complete)"
+ },
+ "annehmen--assume-suppose-to-accept-adopt": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: batch picture failed manual review (unclear meaning / English text) → sentence-focus visual (owner: chapter 1 complete, approved going live)"
+ },
+ "betreffen--concern-affect": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: batch picture failed manual review (unclear meaning / English text) → sentence-focus visual (owner: chapter 1 complete, approved going live)"
+ },
+ "die-diskriminierung--discrimination": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: batch picture failed manual review (unclear meaning / English text) → sentence-focus visual (owner: chapter 1 complete, approved going live)"
+ },
+ "die-einrichtung--facility-furnishing-institution": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-23: batch picture failed manual review (unclear meaning / English text) → sentence-focus visual (owner: chapter 1 complete, approved going live)"
  }
 }

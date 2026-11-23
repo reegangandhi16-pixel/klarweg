@@ -1,0 +1,29 @@
+{
+  "timezone": "Asia/Kolkata",
+  "website": "https://klarweg.in",
+  "posts": [
+    {
+      "id": "growth-002",
+      "topic": "Ich habe 20 Jahre vs Ich bin 20 Jahre alt",
+      "status": "draft",
+      "facebook": {
+        "approved": false,
+        "scheduled_at": "2026-11-19T13:00:00+05:30",
+        "image_url": null,
+        "caption": "🇩🇪 Common German mistake: Ich habe 20 Jahre ❌ / Ich bin 20 Jahre alt ✅. How do you say your age in German? Comment below! #LearnGerman #GermanA1 #DeutschLernen #Klarweg"
+      },
+      "threads": {
+        "approved": false,
+        "scheduled_at": "2026-11-19T20:15:00+05:30",
+        "image_url": null,
+        "text": "🇩🇪 German mistake: Don't say 'Ich habe 20 Jahre.' Say 'Ich bin 20 Jahre alt.' ✅ How old are you? Write it in German! #GermanA1 #Klarweg"
+      },
+      "instagram": {
+        "approved": false,
+        "scheduled_at": "2026-11-19T19:30:00+05:30",
+        "slides": [],
+        "caption": "🇩🇪 How do you say your age in German? Swipe for a simple A1 rule and quiz! #LearnGerman #DeutschLernen #Klarweg"
+      }
+    }
+  ]
+}

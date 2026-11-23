@@ -46,12 +46,15 @@ const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; ch
    no-store, set-cookie removal) → service binding → exam Worker. It implies the in-process Access of `mfa`; without mfa
    the local test users' sessions start verified. The browser's Origin is not forwarded (the CSRF guard is covered by the
    Access tests; a same-origin dev page is not a cross-site write). */
-export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID()}`, form = 's0', mfa = false, proxy = process.env.KX_DEV_PROXY === '1', flags = {} } = {}) {
+/* reviewStaging: build the forms as review staging (status 'review'; build-release.mjs --review-staging) — set it together
+   with flags.EXAM_REVIEW_FORMS = 'on' to rehearse forms whose originality sign-off is open (Issue #384), LOCAL ONLY.
+   grantScope: the learner's exam_access scope ('synthetic' default; 'mock' for Modelltests). */
+export async function startDevServer({ port = 0, user = `usr_${crypto.randomUUID()}`, form = 's0', mfa = false, proxy = process.env.KX_DEV_PROXY === '1', flags = {}, reviewStaging = false, grantScope = 'synthetic' } = {}) {
   const FORMS = { s0: [FORM_DIR], ...Object.fromEntries(PRACTICE_LIBRARY.map((f) => [f.name.toLowerCase(), [f.dir]])), practice: PRACTICE_LIBRARY.map((f) => f.dir) };
   if (!FORMS[form] && form.includes('/')) FORMS[form] = [path.resolve(form)];   // a form directory by path (e.g. the private M0 form)
   if (!FORMS[form]) throw new Error(`unknown form ${form} (${Object.keys(FORMS).join('|')})`);
-  const h = makeEnv({ formDirs: FORMS[form], flags });   // flags: Worker vars on top of the test defaults, e.g. EXAM_MODULE_ONLY
-  await grant(h.env, user);
+  const h = makeEnv({ formDirs: FORMS[form], flags, reviewStaging });   // flags: Worker vars on top of the test defaults, e.g. EXAM_MODULE_ONLY
+  await grant(h.env, user, grantScope);
   const users = { learner: user, rater1: `usr_${crypto.randomUUID()}`, rater2: `usr_${crypto.randomUUID()}`, outsider: `usr_${crypto.randomUUID()}`, access: `usr_${crypto.randomUUID()}`, lead: `usr_${crypto.randomUUID()}` };
   await role(h.env, users.rater1, 'rater'); await role(h.env, users.rater2, 'rater'); await role(h.env, users.access, 'exam_admin'); await role(h.env, users.lead, 'lead_rater');
   const aliasFor = (req) => { const m = /(?:^|;\s*)kx-dev-as=([a-z0-9]+)/.exec(req.headers.cookie || ''); return (m && users[m[1]]) ? m[1] : 'learner'; };

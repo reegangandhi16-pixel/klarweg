@@ -1,8 +1,14 @@
-# O-6: HTTPS staging preview and real-phone test (prepared 2026-11-24, NOT deployed)
+# O-6: HTTPS staging preview and real-phone test (deployed to NON-PROD 2026-11-24)
 
 Owner decision (OWN-2026-11-24-3): prepare a secure HTTPS staging preview with dummy content only, isolated from
 production learners and live services. Confirm there is no production impact, extra cost or exposure of private
-content before redeploying. **This file is that confirmation. The redeploy waits for the owner's explicit "go".**
+content before redeploying. This file records those checks.
+
+**Status 2026-11-24:** redeployed to non-prod by a parallel session. The checks below were done first.
+- `klarweg-exam-nonprod` = b5279125 (rollback ffa37711; D1 bookmark taken before: 00000467-00000000-0000512d-0ee2e110798334d6cf751c0120c79e3c).
+- `klarweg-exam-preview` = 193ba35f (rollback c7f02339), built from 1afaa48b.
+- The hosted check passed on a fresh non-prod account. Production `klarweg-exam` is unchanged at 335b45df.
+- The rater-warning and contrast fixes (bdc99b4f, 3e8d699a) came after this build and are not on the preview yet.
 
 ## What would be redeployed
 
@@ -24,7 +30,7 @@ No migration is needed: `exam-worker/migrations` has not changed since dbdd462a.
 | Cost | Workers on the existing account; static assets plus a few hundred test requests stay far inside the free daily request allowance. No paid service is activated, and no TTS or AI call is made. The existing per-minute deadline cron is unchanged. |
 | Indexing / exposure | `_headers`: `X-Robots-Tag: noindex, nofollow, noarchive`, `Cache-Control: no-store`, `X-Frame-Options: DENY`; `robots.txt` disallows all. A learner needs a non-prod account **and** a non-prod grant. |
 
-## Commands (run only after the owner's "go")
+## Commands (as used; for a later refresh)
 
 ```sh
 # page host (static files built by exam-content/tools/build-nonprod-site.mjs into qa-live/nonprod/hosted-site-2026-11-24)

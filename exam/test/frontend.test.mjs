@@ -1417,5 +1417,7 @@ test('O-5: the exam page shell carries a permanent non-affiliation footer (no ce
   assert.ok(foot, 'footer present');
   assert.match(foot[1], /nicht mit dem Goethe-Institut verbunden/);
   assert.match(foot[1], /kein Zertifikat des Goethe-Instituts/);
+  assert.match(foot[1], /nur zur Beschreibung des Prüfungsformats/, 'descriptive use only');
+  assert.equal(/zertifiziert/i.test(foot[1]), false);
   assert.equal(/<h1/.test(foot[1]), false, 'one h1 per screen stays');
 });

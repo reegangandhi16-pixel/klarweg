@@ -13,7 +13,7 @@ export const UMLAUTS = ['ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', 'ß', '„', '“', 
 const CHAR_NAMES = { '„': 'Anführungszeichen unten', '“': 'Anführungszeichen oben', '–': 'Gedankenstrich', '€': 'Eurozeichen' };
 /* OD-45 (LOCKED): student-facing title and mandatory disclaimer; never "Goethe score / Goethe-Ergebnis". */
 export const RESULT_TITLE = 'Klarweg B1 Simulation – Ergebnis';
-/* O-5 (owner 2026-11-24): explicit non-affiliation follows the locked OD-45 sentence. Keep in sync with core.js NON_AFFILIATION. */
+/* O-5 (owner 2026-11-24): explicit non-affiliation follows the locked OD-45 sentence. Keep in sync with the disclaimer in exam-worker/src/core.js buildResult(). */
 export const RESULT_DISCLAIMER = 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts. Dies ist eine Übungsprüfung von Klarweg, keine Prüfung und kein Zertifikat des Goethe-Instituts. Klarweg ist unabhängig und nicht mit dem Goethe-Institut verbunden.';
 /* EXAM_SINGLE_EXAMINER: one examiner gave both rating rounds; never presented as two independent raters */
 /* O-8 (owner 2026-11-24): no examiner-certification claim; replaces OWN-2026-11-06-2 wording. Keep in sync: core.js + render.js. */

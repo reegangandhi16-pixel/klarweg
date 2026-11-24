@@ -318,7 +318,9 @@ const CHAPTER = {
     },
     { de: 'billig', pos: 'adjective', en: 'cheap', hi: 'सस्ता',
       ex: 'Das Buch ist billig.', exEn: 'The book is cheap.',
-      compare: { comparative: 'billiger', superlative: 'am billigsten' } },
+      compare: { comparative: 'billiger', superlative: 'am billigsten' },
+      img: { src: '/api/media/vocab-img/e2be48f9bdbf7b6d1ae3', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'Two identical books with a large stack versus one single coin' }
+    },
     { de: 'böse', pos: 'adjective', en: 'angry, mean', hi: 'गुस्सा / दुष्ट',
       ex: 'Der Mann ist böse.', exEn: 'The man is angry.',
       img: { src: '/api/media/vocab-img/26add506f036ba7f5161', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'An angry person with folded arms and a scowling expression.' }

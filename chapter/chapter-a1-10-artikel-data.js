@@ -404,7 +404,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/6708bdf397e9ad4efc30', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A pencil drawing of a tree on paper' }
     },
     { de: 'eigene/eigener', pos: 'adjective', en: 'own', hi: 'अपना',
-      ex: 'Mach deine eigene Mindmap.', exEn: 'Make your own mind map.' },
+      ex: 'Mach deine eigene Mindmap.', exEn: 'Make your own mind map.',
+      img: { src: '/api/media/vocab-img/452b7a97b4edaf10b95a', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person drawing a custom mind map with coloured markers.' }
+    },
     { de: 'einfallen', pos: 'verb', en: 'to think of, occur to', hi: 'याद आना / सूझना',
       ex: 'Mir fällt das Wort ein.', exEn: 'The word comes to me.',
       conj: { praesens: 'fällt ein', praeteritum: 'fiel ein', perfekt: 'ist eingefallen' },

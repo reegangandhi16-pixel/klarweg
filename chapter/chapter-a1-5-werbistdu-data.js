@@ -332,7 +332,9 @@ const CHAPTER = {
       img: { src: '/api/media/vocab-img/00763f95ce7053c30b89', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'A person offering a wrapped gift forward with both hands.' }
     },
     { de: 'Name', art: 'der', gender: 'm', plural: 'Namen', pos: 'noun', en: 'name', hi: 'नाम',
-      ex: 'Mein Name ist Anna.', exEn: 'My name is Anna.' },
+      ex: 'Mein Name ist Anna.', exEn: 'My name is Anna.',
+      img: { src: '/api/media/vocab-img/e977bda0f5d3ed44418c', formats: ['avif', 'webp'], widths: [400, 800], w: 4, h: 3, alt: 'smiling young woman introducing herself at a seminar, wearing a blank sticky badge on her lapel while gesturing warmly', cap: 'Introducing oneself by name', hl: 'Name' }
+    },
     { de: 'Vorname', art: 'der', gender: 'm', plural: 'Vornamen', pos: 'noun', en: 'first name', hi: 'पहला नाम',
       ex: 'Mein Vorname ist Anna.', exEn: 'My first name is Anna.',
       vis: { kind: 'grammar', de: 'Mein Vorname ist Anna.', hl: 'Vorname', role: 'subject', cap: 'A person\'s given name, as opposed to family name' }

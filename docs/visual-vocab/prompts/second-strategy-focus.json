@@ -4246,5 +4246,411 @@
   "hl": "Einrichtung",
   "role": "focus",
   "cap": "die Einrichtung = institution, facility"
+ },
+ "allgemein--general": {
+  "type": "grammar",
+  "de": "Der Artikel gibt allgemeine Informationen.",
+  "hl": "allgemeine",
+  "role": "focus",
+  "cap": "allgemein = general"
+ },
+ "andeuten--hint-imply": {
+  "type": "grammar",
+  "de": "Sie deutete ein Problem an.",
+  "hl": "deutete ein Problem an",
+  "role": "focus",
+  "cap": "andeuten = to hint at (separable: deutete … an)"
+ },
+ "angewiesen-sein--be-dependent-on": {
+  "type": "grammar",
+  "de": "Wir sind stark auf gute Daten angewiesen.",
+  "hl": "angewiesen",
+  "role": "focus",
+  "cap": "angewiesen sein = to be dependent on"
+ },
+ "aussergewoehnlich--extraordinary": {
+  "type": "grammar",
+  "de": "Das Ergebnis war außergewöhnlich.",
+  "hl": "außergewöhnlich",
+  "role": "focus",
+  "cap": "außergewöhnlich = extraordinary"
+ },
+ "betreffen--concern": {
+  "type": "grammar",
+  "de": "Das betrifft uns alle.",
+  "hl": "betrifft",
+  "role": "focus",
+  "cap": "betreffen = to concern"
+ },
+ "das-arbeitsgebiet--field-of-work": {
+  "type": "grammar",
+  "de": "Unser Arbeitsgebiet lässt sich gut weiterentwickeln.",
+  "hl": "Arbeitsgebiet",
+  "role": "focus",
+  "cap": "das Arbeitsgebiet = field of work"
+ },
+ "das-aufgabengebiet--area-of-responsibility": {
+  "type": "grammar",
+  "de": "Die Bewerberin erweitert ihr Aufgabengebiet, indem sie sich aktiv einbringt.",
+  "hl": "Aufgabengebiet",
+  "role": "focus",
+  "cap": "das Aufgabengebiet = area of responsibility"
+ },
+ "das-bewerbungstraining--job-application-training": {
+  "type": "grammar",
+  "de": "Das Bewerbungstraining half ihr sehr.",
+  "hl": "Bewerbungstraining",
+  "role": "focus",
+  "cap": "das Bewerbungstraining = job application training"
+ },
+ "das-gegenargument--counterargument": {
+  "type": "grammar",
+  "de": "Er brachte ein starkes Gegenargument vor.",
+  "hl": "Gegenargument",
+  "role": "focus",
+  "cap": "das das Gegenargument = counterargument"
+ },
+ "das-management--management": {
+  "type": "grammar",
+  "de": "Das Management trifft die endgültige Entscheidung.",
+  "hl": "Management",
+  "role": "focus",
+  "cap": "das Management = management"
+ },
+ "das-versandrisiko--shipping-risk": {
+  "type": "grammar",
+  "de": "Der Kunde trägt das Versandrisiko.",
+  "hl": "Versandrisiko",
+  "role": "focus",
+  "cap": "das Versandrisiko = shipping risk"
+ },
+ "das-vorurteil--prejudice": {
+  "type": "grammar",
+  "de": "Sie kämpft gegen Vorurteile.",
+  "hl": "Vorurteile",
+  "role": "focus",
+  "cap": "das Vorurteil = prejudice"
+ },
+ "der-aufruf--call-appeal": {
+  "type": "grammar",
+  "de": "Ein Aufruf zur Unterscheidung zwischen beiden Bereichen reicht weder aus noch wird es jemals genug sein.",
+  "hl": "Aufruf",
+  "role": "focus",
+  "cap": "der Aufruf = call, appeal"
+ },
+ "der-blutzuckerspiegel--blood-sugar-level": {
+  "type": "grammar",
+  "de": "Der Arzt maß den Blutzuckerspiegel.",
+  "hl": "Blutzuckerspiegel",
+  "role": "focus",
+  "cap": "der Blutzuckerspiegel = blood sugar level"
+ },
+ "der-herzinfarkt--heart-attack": {
+  "type": "grammar",
+  "de": "Er erlitt einen Herzinfarkt.",
+  "hl": "Herzinfarkt",
+  "role": "focus",
+  "cap": "der Herzinfarkt = heart attack"
+ },
+ "der-stand--status": {
+  "type": "grammar",
+  "de": "Der aktuelle Stand der Bewerbung ist unklar.",
+  "hl": "Stand",
+  "role": "focus",
+  "cap": "der Stand = status"
+ },
+ "der-titel--title": {
+  "type": "grammar",
+  "de": "Ein guter Titel ist genauso wichtig wie ein gutes Ende.",
+  "hl": "Titel",
+  "role": "focus",
+  "cap": "der Titel = title"
+ },
+ "der-unterhalt--maintenance-upkeep": {
+  "type": "grammar",
+  "de": "Der Alleinernährer zahlte den Unterhalt nicht.",
+  "hl": "Unterhalt",
+  "role": "focus",
+  "cap": "der Unterhalt = maintenance, upkeep"
+ },
+ "der-die-kandidat-in--candidate": {
+  "type": "grammar",
+  "de": "Der Kandidat überzeugte alle.",
+  "hl": "Kandidat",
+  "role": "focus",
+  "cap": "der Kandidat / die Kandidatin = candidate"
+ },
+ "die-arbeitssituation--work-situation": {
+  "type": "grammar",
+  "de": "Die Arbeitssituation verbesserte sich.",
+  "hl": "Arbeitssituation",
+  "role": "focus",
+  "cap": "die Arbeitssituation = work situation"
+ },
+ "die-beachtung--attention-observance": {
+  "type": "grammar",
+  "de": "Das Thema verdient mehr Beachtung.",
+  "hl": "Beachtung",
+  "role": "focus",
+  "cap": "die Beachtung = attention, observance"
+ },
+ "die-behandlungsmoeglichkeit--treatment-option": {
+  "type": "grammar",
+  "de": "Sowohl die Infrastruktur als auch die Behandlungsmöglichkeiten müssen verbessert werden.",
+  "hl": "Behandlungsmöglichkeiten",
+  "role": "focus",
+  "cap": "die Behandlungsmöglichkeit = treatment option"
+ },
+ "die-betonung--emphasis-stress": {
+  "type": "grammar",
+  "de": "Die Betonung lag auf dem ersten Wort.",
+  "hl": "Betonung",
+  "role": "focus",
+  "cap": "die Betonung = emphasis, stress"
+ },
+ "die-durchwahl--direct-dial-extension": {
+  "type": "grammar",
+  "de": "Sie gab mir ihre Durchwahl.",
+  "hl": "Durchwahl",
+  "role": "focus",
+  "cap": "die Durchwahl = direct dial, extension"
+ },
+ "die-foerdermassnahme--support-measure-funding-measure": {
+  "type": "grammar",
+  "de": "Man sollte Fördermaßnahmen ausbauen, anstatt sie zu kürzen.",
+  "hl": "Fördermaßnahmen",
+  "role": "focus",
+  "cap": "die Fördermaßnahme = support measure, funding measure"
+ },
+ "die-formulierung--phrasing-wording": {
+  "type": "grammar",
+  "de": "Die Formulierung im Steckbrief ist wichtig.",
+  "hl": "Formulierung",
+  "role": "focus",
+  "cap": "die Formulierung = phrasing, wording"
+ },
+ "die-jahresmiete--yearly-rent": {
+  "type": "grammar",
+  "de": "Wegen des hohen Stiftungsvermögens war die Jahresmiete niedrig.",
+  "hl": "Jahresmiete",
+  "role": "focus",
+  "cap": "die Jahresmiete = yearly rent"
+ },
+ "die-karriereplanung--career-planning": {
+  "type": "grammar",
+  "de": "Ihre Karriereplanung ist sehr strukturiert.",
+  "hl": "Karriereplanung",
+  "role": "focus",
+  "cap": "die Karriereplanung = career planning"
+ },
+ "die-luegengeschichte--tall-tale-made-up-story": {
+  "type": "grammar",
+  "de": "Er erzählte eine Lügengeschichte.",
+  "hl": "Lügengeschichte",
+  "role": "focus",
+  "cap": "die Lügengeschichte = tall tale, made-up story"
+ },
+ "die-marktforschungsfirma--market-research-firm": {
+  "type": "grammar",
+  "de": "Die Marktforschungsfirma hat die Daten ausgewertet.",
+  "hl": "Marktforschungsfirma",
+  "role": "focus",
+  "cap": "die Marktforschungsfirma = market research firm"
+ },
+ "die-offenheit--openness": {
+  "type": "grammar",
+  "de": "Deine Offenheit hilft uns sehr.",
+  "hl": "Offenheit",
+  "role": "focus",
+  "cap": "die Offenheit = openness"
+ },
+ "die-politikwissenschaft--political-science": {
+  "type": "grammar",
+  "de": "Sie studierte Politikwissenschaft.",
+  "hl": "Politikwissenschaft",
+  "role": "focus",
+  "cap": "die Politikwissenschaft = political science"
+ },
+ "die-sache--matter-thing": {
+  "type": "grammar",
+  "de": "Das ist eine ernste Sache.",
+  "hl": "Sache",
+  "role": "focus",
+  "cap": "die Sache = matter, thing"
+ },
+ "die-sprachenpolitik--language-policy": {
+  "type": "grammar",
+  "de": "Die Sprachenpolitik der EU ist komplex.",
+  "hl": "Sprachenpolitik",
+  "role": "focus",
+  "cap": "die Sprachenpolitik = language policy"
+ },
+ "die-uebertreibung--exaggeration": {
+  "type": "grammar",
+  "de": "Das war keine Übertreibung.",
+  "hl": "Übertreibung",
+  "role": "focus",
+  "cap": "die Übertreibung = exaggeration"
+ },
+ "die-verfuegung--disposal-availability": {
+  "type": "grammar",
+  "de": "Weder ausreichend Geld noch moderne Technik steht zur Verfügung.",
+  "hl": "Verfügung",
+  "role": "focus",
+  "cap": "zur Verfügung stehen = to be available"
+ },
+ "die-versuchsgruppe--test-group": {
+  "type": "grammar",
+  "de": "Die sorgfältig ausgewählte Versuchsgruppe zeigte vorbildliche Ergebnisse.",
+  "hl": "Versuchsgruppe",
+  "role": "focus",
+  "cap": "die Versuchsgruppe = test group"
+ },
+ "doof--stupid-dumb": {
+  "type": "grammar",
+  "de": "Das war eine doofe Idee.",
+  "hl": "doofe",
+  "role": "focus",
+  "cap": "doof = stupid, dumb"
+ },
+ "durchfuehrbar--feasible-practicable": {
+  "type": "grammar",
+  "de": "Der Plan war durchführbar.",
+  "hl": "durchführbar",
+  "role": "focus",
+  "cap": "durchführbar = feasible, practicable"
+ },
+ "einfuehren--introduce-import": {
+  "type": "grammar",
+  "de": "Sie führten ein neues System ein.",
+  "hl": "führten ein neues System ein",
+  "role": "focus",
+  "cap": "einführen = to introduce (separable: führten … ein)"
+ },
+ "erwaehnen--mention": {
+  "type": "grammar",
+  "de": "Sie erwähnte das Problem kurz.",
+  "hl": "erwähnte",
+  "role": "focus",
+  "cap": "erwähnen = to mention"
+ },
+ "formulieren--phrase-to-formulate": {
+  "type": "grammar",
+  "de": "Er formuliert seine Kritik sehr höflich.",
+  "hl": "formuliert",
+  "role": "focus",
+  "cap": "formulieren = to phrase, to formulate"
+ },
+ "immer-wieder--again-and-again": {
+  "type": "grammar",
+  "de": "Die Bevölkerung wird immer wieder ermutigt.",
+  "hl": "immer wieder",
+  "role": "focus",
+  "cap": "immer wieder = again and again"
+ },
+ "klaeren--clarify-resolve": {
+  "type": "grammar",
+  "de": "Die Kaution für die Wohnung muss ich noch klären.",
+  "hl": "klären",
+  "role": "focus",
+  "cap": "klären = to clarify, resolve"
+ },
+ "klarmachen--make-clear-clarify": {
+  "type": "grammar",
+  "de": "Das machen wir im nächsten Kapitel klar.",
+  "hl": "machen wir im nächsten Kapitel klar",
+  "role": "focus",
+  "cap": "klarmachen = to make clear (separable: machen … klar)"
+ },
+ "kritikfaehig--able-to-take-criticism": {
+  "type": "grammar",
+  "de": "Ein guter Mitarbeiter ist kritikfähig.",
+  "hl": "kritikfähig",
+  "role": "focus",
+  "cap": "kritikfähig = able to take criticism"
+ },
+ "meinen--think-to-mean": {
+  "type": "grammar",
+  "de": "Ich meine, der Titel ist so wichtig wie die Handlung.",
+  "hl": "meine",
+  "role": "focus",
+  "cap": "meinen = to think, to mean"
+ },
+ "obgleich--although-even-though": {
+  "type": "grammar",
+  "de": "Obgleich die Bildungserwartung hoch ist, wählen viele einen praktischen Weg.",
+  "hl": "Obgleich",
+  "role": "focus",
+  "cap": "obgleich = although (the verb goes to the end)"
+ },
+ "schaetzen--guess-value": {
+  "type": "grammar",
+  "de": "Die Personalchefin schätzt ehrliche Bewerber sehr.",
+  "hl": "schätzt",
+  "role": "focus",
+  "cap": "schätzen = to value, appreciate (also: to estimate)"
+ },
+ "ueberaus--exceedingly-extremely": {
+  "type": "grammar",
+  "de": "Ihr Verhandlungsgeschick ist überaus stark.",
+  "hl": "überaus",
+  "role": "focus",
+  "cap": "überaus = exceedingly, extremely"
+ },
+ "uebersehen--overlook-miss": {
+  "type": "grammar",
+  "de": "Sie übersah den Fehler.",
+  "hl": "übersah",
+  "role": "focus",
+  "cap": "übersehen = to overlook, miss"
+ },
+ "unbezahlt--unpaid": {
+  "type": "grammar",
+  "de": "Sie leistete unbezahlte Überstunden.",
+  "hl": "unbezahlte",
+  "role": "focus",
+  "cap": "unbezahlt = unpaid"
+ },
+ "verarbeiten--process-digest-cope-with": {
+  "type": "grammar",
+  "de": "Sie verarbeitete die Informationen schnell.",
+  "hl": "verarbeitete",
+  "role": "focus",
+  "cap": "verarbeiten = to process, digest, cope with"
+ },
+ "verschaerfen--tighten-intensify": {
+  "type": "grammar",
+  "de": "Sie verschärften die Regeln.",
+  "hl": "verschärften",
+  "role": "focus",
+  "cap": "verschärfen = to tighten, intensify"
+ },
+ "von-nach--from-to": {
+  "type": "grammar",
+  "de": "Ich bin von Mitte nach Kreuzberg gefahren.",
+  "hl": "von Mitte nach Kreuzberg",
+  "role": "focus",
+  "cap": "von … nach = from … to (places)"
+ },
+ "voranstellen--place-in-front-preface": {
+  "type": "grammar",
+  "de": "Sie stellte eine Erklärung voran.",
+  "hl": "stellte eine Erklärung voran",
+  "role": "focus",
+  "cap": "voranstellen = to preface (separable: stellte … voran)"
+ },
+ "voraussichtlich--presumably-expected": {
+  "type": "grammar",
+  "de": "Das Projekt ist voraussichtlich im Juni fertig.",
+  "hl": "voraussichtlich",
+  "role": "focus",
+  "cap": "voraussichtlich = presumably, expected"
+ },
+ "wegen--because-of": {
+  "type": "grammar",
+  "de": "Wegen des guten Preises hoffe ich, die Wohnung zu bekommen.",
+  "hl": "Wegen",
+  "role": "focus",
+  "cap": "wegen + Genitiv = because of"
  }
 }

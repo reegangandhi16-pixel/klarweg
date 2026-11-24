@@ -47,11 +47,17 @@ test('guides link only to free chapters, never to locked ones', () => {
   }
 });
 
-test('guides load no analytics, tracking or placement scripts', () => {
-  for (const { rel, html } of pages) {
+test('guides load only shared scripts and the selected AdSense banner', () => {
+  const bannerGuides = new Set(['der-die-das', 'akkusativ', 'dativ']);
+  const adScript = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4203914253577733';
+  for (const { g, rel, html } of [...pages, { g: { slug: 'index' }, rel: 'grammar/index.html', html: read('grammar/index.html') }]) {
     assert.doesNotMatch(html, /gtag|googletagmanager|google-analytics|analytics\.js|clarity\.ms|facebook\.net|hotjar/i, rel);
     const scripts = [...html.matchAll(/<script[^>]*src="([^"]+)"/g)].map((m) => m[1]);
-    assert.deepEqual(scripts, ['../site.js', '../kw-config.js', '../kw-auth.js', '../kw-nav-auth.js?v=2'], `${rel} scripts`);
+    const expected = ['../site.js', '../kw-config.js', '../kw-auth.js', '../kw-nav-auth.js?v=2'];
+    if (bannerGuides.has(g.slug)) expected.unshift(adScript);
+    assert.deepEqual(scripts, expected, `${rel} scripts`);
+    const slots = [...html.matchAll(/data-ad-slot="([^"]+)"/g)].map((m) => m[1]);
+    assert.deepEqual(slots, bannerGuides.has(g.slug) ? ['6485807165'] : [], `${rel} ad slots`);
   }
 });
 

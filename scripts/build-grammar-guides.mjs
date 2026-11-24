@@ -132,9 +132,22 @@ const CSS = `<style>
 </style>
 `;
 
+const BANNER_GUIDES = new Set(['der-die-das', 'akkusativ', 'dativ']);
+const BANNER = `<div class="gg-ad" style="margin: 32px 0">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4203914253577733" crossorigin="anonymous"></script>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4203914253577733" data-ad-slot="6485807165" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
+  <script>(window.adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>`;
+
 function build(g) {
   const src = path.join(SRC, `${g.slug}.html`);
-  const body = fs.readFileSync(src, 'utf8').trim();
+  let body = fs.readFileSync(src, 'utf8').trim();
+  if (BANNER_GUIDES.has(g.slug)) {
+    const headings = [...body.matchAll(/^<h2 id="/gm)];
+    if (headings.length < 2) throw new Error(`Missing banner placement heading in ${g.slug}`);
+    const position = headings[1].index;
+    body = body.slice(0, position) + BANNER + '\n\n' + body.slice(position);
+  }
   const url = `${SITE_BASE}/grammar/${g.slug}.html`;
   let head = headTpl
     .replace(/<title>[^<]*<\/title>/, `<title>${esc(g.title)}</title>`)

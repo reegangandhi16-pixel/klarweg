@@ -1432,3 +1432,9 @@ test('rater: Sprechen unit without a usable recording shows a warning; Schreiben
   assert.match(missingRecordingNote({ module: 'sprechen', item_id: 'sprechen:pron' }, []), /dieses Modul/);
   assert.equal(missingRecordingNote({ module: 'schreiben', item_id: 'itm:x-s1' }, []), '');
 });
+
+test('O-5 footer is hidden while a module screen (exam bar) is active, so sticky Sprechen notes never slide under the bar', async () => {
+  const fsm = await import('node:fs');
+  const css = fsm.readFileSync(new URL('../exam.css', import.meta.url), 'utf8');
+  assert.match(css, /body:has\(\.kx-bar\) \.kx-legal \{ display: none; \}/);
+});

@@ -22,6 +22,9 @@ p { margin: 0 0 16px; }
 /* O-5 (owner 2026-11-24): permanent non-affiliation notice under every exam screen */
 .kx-legal { max-width: 1080px; margin: 0 auto; padding: 0 16px 48px; font: 400 12px/1.5 var(--font-ui); color: var(--ink-secondary); }
 .kx-legal p { margin: 0; max-width: 72ch; }
+/* Hidden while a module runs (exam bar on screen): the page must end with the module layout, or the sticky Sprechen
+   notes are pushed under the bar when scrolled to the bottom. Start, info and result screens keep the notice. */
+body:has(.kx-bar) .kx-legal { display: none; }
 .kx-card { max-width: 680px; margin: 48px auto; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px; }
 .kx-eyebrow, .kx-meta { font: 500 12px/1.4 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-secondary); }
 .kx-banner { font: 500 12px/1.5 var(--font-mono); background: var(--warm); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }

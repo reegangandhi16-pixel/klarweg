@@ -383,7 +383,13 @@ async function run(viewport) {
     const result = await text();
     assert.match(result, /Lesen/); assert.match(result, /in Bewertung/);
     assert.match(result, /Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts\./, 'OD-45 disclaimer');
-    assert.equal(/Goethe[- ]?(score|Ergebnis|Zertifikat)|official score|TEST RESULT|Awaiting/i.test(result.replace(/Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts\./, '')), false);
+    /* OD-45 guard on the RESULT content (#kx-app). The permanent O-5 footer names the format descriptively
+       ("orientiert am Format des Goethe-Zertifikats B1"); it is checked separately below and in frontend.test.mjs. */
+    const resultMain = await evaluate("document.querySelector('#kx-app').innerText");
+    assert.equal(/Goethe[- ]?(score|Ergebnis|Zertifikat)|official score|TEST RESULT|Awaiting/i.test(resultMain.replace(/Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts\./, '')), false);
+    const legal = await evaluate("document.querySelector('footer.kx-legal')?.innerText || ''");
+    assert.match(legal, /nicht mit dem Goethe-Institut verbunden/, 'O-5 footer visible on the result page');
+    assert.match(legal, /nur zur Beschreibung des Prüfungsformats/, 'O-5 footer: descriptive use only');
     assert.equal(/nicht bestanden · nicht bestanden/.test(result), false, 'no duplicated verdict');
     assert.match(result, /richtig \d+ · falsch \d+ · ohne Antwort \d+/, 'objective counts shown');
     const exceptions = b.events.filter((e) => e.method === 'Runtime.exceptionThrown');
@@ -625,7 +631,20 @@ function makeA11y({ send, evaluate }) {
       if (!String(n.name?.value || '').trim()) a11yFindings.push(`${label}: ${n.role.value} without an accessible name`);
     }
     const page = await evaluate(`(() => { const ids = [...document.querySelectorAll('[id]')].map((e) => e.id);
-      return { lang: document.documentElement.lang, dup: [...new Set(ids.filter((x, i) => ids.indexOf(x) !== i))], h1: document.querySelectorAll('h1').length }; })()`);
+      /* WCAG 2.1 AA 1.4.3 text contrast (4.5:1; large text 3:1) for visible elements with their own text; inactive controls exempt */
+      const lum = (c) => { const m = c.match(/[\\d.]+/g).map(Number); const ch = m.slice(0, 3).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return { L: 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2], a: m.length > 3 ? m[3] : 1 }; };
+      const bgOf = (e) => { for (let x = e; x; x = x.parentElement) { const b = getComputedStyle(x).backgroundColor; if (lum(b).a >= 0.99) return b; } return 'rgb(250, 250, 247)'; };
+      const low = [];
+      for (const e of document.querySelectorAll('body *')) {
+        if (!e.offsetParent && getComputedStyle(e).position !== 'fixed') continue;
+        if (![...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) continue;
+        const st = getComputedStyle(e); if (st.visibility === 'hidden' || +st.opacity === 0 || e.closest('[disabled],[aria-disabled="true"]')) continue;
+        const fg = lum(st.color), bg = lum(bgOf(e)); const r = (Math.max(fg.L, bg.L) + 0.05) / (Math.min(fg.L, bg.L) + 0.05);
+        const size = parseFloat(st.fontSize); const need = size >= 24 || (+st.fontWeight >= 700 && size >= 18.66) ? 3 : 4.5;
+        if (fg.a >= 0.99 && r < need) low.push(e.tagName.toLowerCase() + '.' + [...e.classList].join('.') + ' ' + r.toFixed(2) + ':1');
+      }
+      return { lang: document.documentElement.lang, dup: [...new Set(ids.filter((x, i) => ids.indexOf(x) !== i))], h1: document.querySelectorAll('h1').length, low: [...new Set(low)].slice(0, 8) }; })()`);
+    for (const c of page.low) a11yFindings.push(`${label}: low text contrast ${c}`);
     if (!page.lang) a11yFindings.push(`${label}: no lang on <html>`);
     for (const d of page.dup) a11yFindings.push(`${label}: duplicate id "${d}"`);
     if (page.h1 !== 1) a11yFindings.push(`${label}: ${page.h1} h1 elements`);

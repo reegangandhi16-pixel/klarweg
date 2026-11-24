@@ -110,3 +110,12 @@ test('RATER UI (OD-19): second-factor screens — labelled inputs, one-time-code
   assert.match(api, /mfaVerify: \(b\) => once\('POST', '\/auth\/mfa\/verify'/, 'a code is never sent twice by a retry');
   assert.match(api, /mfaConfirm: \(code\) => once\(/);
 });
+
+test('RATER API: productive data says whether the attempt is synthetic test content (rater eyebrow); real forms are not labelled synthetic', async () => {
+  const s = await finishedAttempt();
+  const r1 = newUser(); await role(s.env, r1, 'rater');
+  const d = (await productive(s, r1)).json;
+  assert.equal(d.ok, true);
+  assert.equal(d.test_content, true, 'the harness forms are synthetic');
+  assert.ok(d.recordings.every((t) => typeof t.chunks === 'number' && 'item_id' in t), 'recordings carry item_id + chunks for the missing-recording warning');
+});

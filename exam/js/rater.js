@@ -3,7 +3,7 @@
    validates every band. This page only renders what /admin/… returns and posts one rating per rubric unit. */
 import { createApi, ExamApiError, resolveApiBase } from './api.js';
 import { esc } from './render.js';
-import { ratingRound, unitRatedByMe, missingCriteria, CRITERION_LABELS, ERROR_TEXT, mfaVerifyView, mfaEnrolStartView, mfaEnrolView, mfaCodesView, disagreementSection } from './rating.js';
+import { ratingRound, unitRatedByMe, missingCriteria, missingRecordingNote, CRITERION_LABELS, ERROR_TEXT, mfaVerifyView, mfaEnrolStartView, mfaEnrolView, mfaCodesView, disagreementSection } from './rating.js';
 
 const $ = (s, r = document) => r.querySelector(s);
 const app = $('#kx-app');
@@ -72,7 +72,9 @@ function unitForm(u, round, data) {
     return `<div class="kx-item"><label for="${id}">${esc(CRITERION_LABELS[c] || c)}</label><select id="${id}" data-crit="${esc(c)}" required${mine ? ' disabled' : ''}>${opts}</select></div>`;
   }).join('');
   const title = u.item_id === 'sprechen:pron' ? 'Aussprache (ganzes Modul)' : `Teil ${esc(u.part)}${u.stem ? ` – ${esc(u.stem)}` : ''}`;
-  return `<form class="kx-task kx-rate" data-unit="${esc(u.item_id)}" novalidate><fieldset class="kx-item"><legend>${title}</legend>${crit}`
+  const noRec = missingRecordingNote(u, data.recordings);
+  return `<form class="kx-task kx-rate" data-unit="${esc(u.item_id)}" novalidate><fieldset class="kx-item"><legend>${title}</legend>`
+    + (noRec ? `<p class="kx-alert" role="note" data-no-recording>${esc(noRec)}</p>` : '') + crit
     + (u.zero_rule === 'erfuellung_E' ? '<p class="kx-meta">Erfüllung E → Aufgabe insgesamt 0 Punkte.</p>' : '')
     + `<p class="kx-rate-msg" role="status" aria-live="polite">${mine ? `Von Ihnen bewertet (Runde ${esc(round)}).` : ''}</p>`
     + `<div class="kx-actions"><button type="submit" class="kx-btn"${mine ? ' disabled' : ''}>Bewertung speichern</button></div></fieldset></form>`;
@@ -116,7 +118,7 @@ async function showAttempt(attemptId, note = '') {
     return `<section class="kx-part" data-module="${esc(m.module)}"><h2>${esc(MODULE_LABELS[m.module])}</h2><p class="kx-rate-status">Status: ${esc(status)}`
       + `${m.points != null ? ` · ${esc(m.points)} / ${esc(m.max_points)} Punkte` : ''}</p>${material}${forms}</section>`;
   }).join('');
-  screen(`<main class="kx-rater"><p class="kx-eyebrow">Versuch ${esc(d.attempt_id.slice(0, 12))}… · synthetisch</p><h1>Bewertung</h1>`
+  screen(`<main class="kx-rater"><p class="kx-eyebrow">Versuch ${esc(d.attempt_id.slice(0, 12))}…${d.test_content ? ' · synthetisch' : ''}</p><h1>Bewertung</h1>`
     + (note ? `<p class="kx-announce" role="status">${esc(note)}</p>` : '')
     + `${parts}<div class="kx-actions"><button type="button" class="kx-btn kx-btn-quiet" data-act="queue">Zur Liste</button></div></main>`);
   if (unsaved && unsaved.attempt_id === d.attempt_id) {

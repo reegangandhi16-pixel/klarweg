@@ -1076,7 +1076,7 @@ export async function productiveForRating(env, userId, attemptId) {
   }
   const modules = ['schreiben', 'sprechen'].filter((m) => mods[m]).map((m) => ({ module: m, status: mods[m] ? mods[m].status : null, score_status: scores[m] ? scores[m].status : null,
     points: scores[m] && scores[m].status === 'final' ? scores[m].points : null, max_points: scores[m] ? scores[m].max_points : null }));
-  return { ok: true, attempt_id: attempt.id, label: RESULT_LABEL, writing, recordings: turns, bands: BANDS, modules, units, topic,
+  return { ok: true, attempt_id: attempt.id, label: RESULT_LABEL, test_content: form.kind === 'synthetic', writing, recordings: turns, bands: BANDS, modules, units, topic,
     lead: await hasRole(env, userId, ['lead_rater']), single_examiner: singleExaminer(env) };
 }
 

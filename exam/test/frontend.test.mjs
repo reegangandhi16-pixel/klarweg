@@ -1421,3 +1421,14 @@ test('O-5: the exam page shell carries a permanent non-affiliation footer (no ce
   assert.equal(/zertifiziert/i.test(foot[1]), false);
   assert.equal(/<h1/.test(foot[1]), false, 'one h1 per screen stays');
 });
+
+test('rater: Sprechen unit without a usable recording shows a warning; Schreiben and recorded units do not', async () => {
+  const { missingRecordingNote } = await import('../js/rating.js');
+  const u = { module: 'sprechen', item_id: 'itm:x-sp1' };
+  assert.match(missingRecordingNote(u, []), /keine hörbare Aufnahme/);
+  assert.match(missingRecordingNote(u, [{ item_id: 'itm:x-sp1', chunks: 0 }, { item_id: 'itm:x-sp2', chunks: 9 }]), /keine hörbare Aufnahme/);
+  assert.equal(missingRecordingNote(u, [{ item_id: 'itm:x-sp1', chunks: 3 }]), '');
+  assert.equal(missingRecordingNote({ module: 'sprechen', item_id: 'sprechen:pron' }, [{ item_id: 'itm:x-sp2', chunks: 1 }]), '');
+  assert.match(missingRecordingNote({ module: 'sprechen', item_id: 'sprechen:pron' }, []), /dieses Modul/);
+  assert.equal(missingRecordingNote({ module: 'schreiben', item_id: 'itm:x-s1' }, []), '');
+});

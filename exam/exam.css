@@ -55,7 +55,7 @@ p { margin: 0 0 16px; }
 .kx-item { border: 0; margin: 0 0 16px; padding: 16px 0 0; border-top: 1px solid var(--line); }
 .kx-item legend, .kx-item > label { font-weight: 500; padding: 0; margin-bottom: 8px; }
 .kx-example { color: var(--ink-secondary); }
-.kx-ex { font: 500 12px/1 var(--font-mono); text-transform: uppercase; color: var(--ink-tertiary); }
+.kx-ex { font: 500 12px/1 var(--font-mono); text-transform: uppercase; color: var(--ink-secondary); }   /* WCAG AA: tertiary ink was 2.8:1 */
 .kx-opts { display: flex; flex-wrap: wrap; gap: 8px; }
 .kx-opt { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; background: var(--surface); }
 .kx-opt:has(input:checked) { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }

@@ -194,3 +194,20 @@ None of these is executed.
 - [ ] O-13 / OD-42 commercial access model
 - [ ] B6 release authorisation for r002, then the owner-run import (runbook)
 - [ ] Manual accessibility audit EX-04 (the automated scan does not replace it) · no calibration data (results never claim equivalence)
+
+## 9. After the owner's publication authorisation (2026-11-24, Issue #384 update)
+
+The owner authorised publication "subject to completing the remaining mandatory release checks". **Not published.**
+State (details in private `authoring/b1/release/RELEASE-GATES-2026-11-24.md`):
+
+| Gate | State |
+|---|---|
+| Academic review + originality (B1, B4) | **closed by owner attestation**: whole-form, owner as sole reviewer, bound to content fingerprints. The private generator refuses any form changed after the attestation (tamper test passed). No per-entry records were created |
+| M10 #11 (B5) | covered as the current talk; the replacement script is not applied |
+| Audio | 240/240 match an owner listening approval by hash. O-2: the owner chooses between listening to the 11 candidates and accepting the originals' small deviation |
+| OD-14 Google TTS terms | **OPEN, blocks release.** Google's Chirp 3 HD page now says "powered by our latest generation of generative models", so the under-18 clause §20(d) more likely applies (live M0 too). Needs Google's written answer, a counsel opinion, or a re-voice |
+| OD-08 trademark/format | **OPEN, blocks release**: needs counsel's documented clearance |
+| Real-device test, manual a11y (EX-04) | **OPEN (owner/human)** |
+| OD-42 access rules | **OPEN (owner decision)** |
+| PRs | #386 ⊂ #385 (merged into #385 with no content change; merge #386 first). Private #16 MERGEABLE/CLEAN; private #17 (GCP guard) merges cleanly with it |
+| r002 candidate | built locally (10 forms, 292 files, all `live`); rehearsal 10/10 on the normal build; browser spot check M1 ×2 PASS. **Not uploaded**; prod preflight is an owner step |

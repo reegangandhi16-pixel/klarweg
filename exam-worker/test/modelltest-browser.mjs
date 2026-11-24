@@ -70,7 +70,45 @@ async function journey(dir, vp) {
     assert.equal(PLACEHOLDER.test(t), false, `${label}: placeholder text on screen: ${(t.match(PLACEHOLDER) || [])[0]}`);
     assert.equal(/synthetische (Übungs)?inhalte|synthetische Testform|nur Systemtest|TEST CONTENT/i.test(t), false, `${label}: synthetic-content label on a real form`);   // the synthetic-VOICE disclosure is correct and allowed
     assert.equal(await evaluate('document.querySelectorAll("h1").length'), 1, `${label}: exactly one h1`);
+    await a11yScan(label);
   };
+  /* Automated accessibility scan of the REAL form as rendered (the synthetic suite also presses Tab for focus
+     visibility; EX-04 manual audit is separate): accessible names from Chrome's AX tree, duplicate ids, lang, img alt,
+     and WCAG 2.1 AA text contrast (4.5:1, large text 3:1) for every visible element with its own text. */
+  const AX_INTERACTIVE = new Set(['button', 'link', 'textbox', 'radio', 'checkbox', 'combobox', 'slider', 'spinbutton', 'listbox', 'switch', 'tab', 'menuitem']);
+  const a11yScan = async (label) => {
+    if (process.env.KX_NO_A11Y) return;
+    const f = [];
+    await send('Accessibility.enable');
+    const { nodes } = await send('Accessibility.getFullAXTree');
+    await send('Accessibility.disable');
+    for (const n of nodes) if (!n.ignored && AX_INTERACTIVE.has(n.role?.value) && !String(n.name?.value || '').trim()) f.push(`${n.role.value} without an accessible name`);
+    const page = await evaluate(`(() => {
+      const ids = [...document.querySelectorAll('[id]')].map((e) => e.id);
+      const lum = (c) => { const m = c.match(/[\\d.]+/g).map(Number); const ch = m.slice(0, 3).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return { L: 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2], a: m.length > 3 ? m[3] : 1 }; };
+      const bgOf = (e) => { for (let x = e; x; x = x.parentElement) { const b = getComputedStyle(x).backgroundColor; if (lum(b).a >= 0.99) return b; } return 'rgb(250, 250, 247)'; };
+      const low = [];
+      for (const e of document.querySelectorAll('body *')) {
+        if (!e.offsetParent && getComputedStyle(e).position !== 'fixed') continue;
+        if (![...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) continue;
+        const st = getComputedStyle(e); if (st.visibility === 'hidden' || +st.opacity === 0) continue;
+        if (e.closest('[disabled],[aria-disabled="true"]')) continue;   // WCAG 1.4.3 exempts inactive controls
+        const fg = lum(st.color), bg = lum(bgOf(e));
+        const r = (Math.max(fg.L, bg.L) + 0.05) / (Math.min(fg.L, bg.L) + 0.05);
+        const size = parseFloat(st.fontSize), bold = +st.fontWeight >= 700;
+        const need = size >= 24 || (bold && size >= 18.66) ? 3 : 4.5;
+        if (fg.a >= 0.99 && r < need) low.push(e.tagName.toLowerCase() + '.' + [...e.classList].join('.') + ' ' + r.toFixed(2) + ':1');
+      }
+      return { lang: document.documentElement.lang, dup: [...new Set(ids.filter((x, i) => ids.indexOf(x) !== i))],
+        noAlt: [...document.querySelectorAll('img:not([alt])')].length, low: [...new Set(low)].slice(0, 8) }; })()`);
+    if (!page.lang) f.push('no lang on <html>');
+    for (const d of page.dup) f.push(`duplicate id "${d}"`);
+    if (page.noAlt) f.push(`${page.noAlt} img without alt`);
+    for (const c of page.low) f.push(`low contrast ${c}`);
+    a11yScreens.add(label);
+    assert.deepEqual(f, [], `${label} (${vp.name}): accessibility findings`);
+  };
+  const a11yScreens = new Set();
   try {
     await send('Runtime.enable'); await send('Page.enable');
     await send('Emulation.setDeviceMetricsOverride', { width: vp.w, height: vp.h, deviceScaleFactor: 1, mobile: vp.mobile });
@@ -236,6 +274,7 @@ async function journey(dir, vp) {
       assert.ok(r.bytes > 0 && /audio/.test(r.type || ''), `rater playback is audio: ${JSON.stringify(r)}`);
     }
     facts.rater_recordings = turns.length;
+    facts.a11y_screens = a11yScreens.size;
     await evaluate(`document.cookie = 'kx-dev-as=outsider; path=/'`);
     const denied = await evaluate(`fetch('/exam/v1/admin/attempts/${attempt}/recordings/${turns[0].part}/${turns[0].turn}', { credentials: 'include' }).then((r) => r.status)`);
     assert.ok([403, 404].includes(denied), `an outsider must not hear a learner recording (${denied})`);

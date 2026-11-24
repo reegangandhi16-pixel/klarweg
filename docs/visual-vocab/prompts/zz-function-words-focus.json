@@ -1078,5 +1078,237 @@
  "die-einrichtung--facility-furnishing-institution": {
   "tier": "text-only",
   "reason": "manual review 2026-11-23: batch picture failed manual review (unclear meaning / English text) → sentence-focus visual (owner: chapter 1 complete, approved going live)"
+ },
+ "allgemein--general": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "andeuten--hint-imply": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "angewiesen-sein--be-dependent-on": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "aussergewoehnlich--extraordinary": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "betreffen--concern": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "das-arbeitsgebiet--field-of-work": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "das-aufgabengebiet--area-of-responsibility": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "das-bewerbungstraining--job-application-training": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "das-gegenargument--counterargument": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "das-management--management": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "das-versandrisiko--shipping-risk": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "das-vorurteil--prejudice": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "der-aufruf--call-appeal": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "der-blutzuckerspiegel--blood-sugar-level": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "der-herzinfarkt--heart-attack": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "der-stand--status": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "der-titel--title": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "der-unterhalt--maintenance-upkeep": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "der-die-kandidat-in--candidate": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-arbeitssituation--work-situation": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-beachtung--attention-observance": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-behandlungsmoeglichkeit--treatment-option": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-betonung--emphasis-stress": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-durchwahl--direct-dial-extension": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-foerdermassnahme--support-measure-funding-measure": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-formulierung--phrasing-wording": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-jahresmiete--yearly-rent": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-karriereplanung--career-planning": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-luegengeschichte--tall-tale-made-up-story": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-marktforschungsfirma--market-research-firm": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-offenheit--openness": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-politikwissenschaft--political-science": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-sache--matter-thing": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-sprachenpolitik--language-policy": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-uebertreibung--exaggeration": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-verfuegung--disposal-availability": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "die-versuchsgruppe--test-group": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "doof--stupid-dumb": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "durchfuehrbar--feasible-practicable": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "einfuehren--introduce-import": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "erwaehnen--mention": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "formulieren--phrase-to-formulate": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "immer-wieder--again-and-again": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "klaeren--clarify-resolve": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "klarmachen--make-clear-clarify": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "kritikfaehig--able-to-take-criticism": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "meinen--think-to-mean": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "obgleich--although-even-though": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "schaetzen--guess-value": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "ueberaus--exceedingly-extremely": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "uebersehen--overlook-miss": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "unbezahlt--unpaid": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "verarbeiten--process-digest-cope-with": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "verschaerfen--tighten-intensify": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "von-nach--from-to": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "voranstellen--place-in-front-preface": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "voraussichtlich--presumably-expected": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
+ },
+ "wegen--because-of": {
+  "tier": "text-only",
+  "reason": "manual review 2026-11-24 (round 4): picture did not teach the meaning in the card's example → sentence-focus visual (owner rule: failed picture → sentence focus)"
  }
 }

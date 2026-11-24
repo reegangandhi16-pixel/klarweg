@@ -400,7 +400,9 @@ const CHAPTER = {
     },
     { de: 'Jahresmiete', art: 'die', gender: 'f', plural: 'Jahresmieten', pos: 'noun', level: 'B1', en: 'yearly rent', hi: 'वार्षिक किराया',
       ex: 'Wegen des hohen Stiftungsvermögens war die Jahresmiete niedrig.', exEn: 'Because of the high endowment capital, the yearly rent was low.', exHi: 'Kam daan nidhi ki wajah se, vaarshik kiraya kam tha.',
-      advanced: { synonyms: [], opposites: [], collocations: [] } },
+      advanced: { synonyms: [], opposites: [], collocations: [] },
+      vis: { kind: 'grammar', de: 'Wegen des hohen Stiftungsvermögens war die Jahresmiete niedrig.', hl: 'Jahresmiete', role: 'focus', cap: 'die Jahresmiete = yearly rent' }
+    },
     { de: 'Karotte', art: 'die', gender: 'f', plural: 'Karotten', pos: 'noun', level: 'B1', en: 'carrot', hi: 'गाजर',
       ex: 'Trotz des Verzichts esse ich weiterhin viele Karotten.', exEn: 'Despite the deprivation, I still eat a lot of carrots.', exHi: 'Tyaag ke bawajood, main abhi bhi kaafi gaajar khaata hoon.',
       advanced: { synonyms: ['Möhre'], opposites: [], collocations: [] },

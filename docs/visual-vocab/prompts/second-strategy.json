@@ -58,13 +58,6 @@
   "role": "focus",
   "cap": "akademischer Deutschsprecher = academic German speaker"
  },
- "aktuell--current-topical": {
-  "key": "aktuell--current-topical",
-  "type": "scene",
-  "scene": "Show two people sitting at a cafe table attentively looking at a newspaper's front page fold, discussing the day's headline together.",
-  "hl": "aktuelles",
-  "cap": "Discussing a current, topical issue of the day"
- },
  "algerien--algeria": {
   "key": "algerien--algeria",
   "type": "map",
@@ -88,11 +81,11 @@
   "cap": "alles in allem = all in all"
  },
  "allgemein--general": {
-  "key": "allgemein--general",
-  "type": "scene",
-  "scene": "Show a public information counter in an open civic hall, where a staff member hands an overview brochure to a visitor.",
+  "type": "grammar",
+  "de": "Der Artikel gibt allgemeine Informationen.",
   "hl": "allgemeine",
-  "cap": "Receiving general information at an inquiry desk"
+  "role": "focus",
+  "cap": "allgemein = general"
  },
  "alltaeglich--ordinary": {
   "key": "alltaeglich--ordinary",
@@ -281,11 +274,11 @@
   "cap": "anlässlich = on the occasion of"
  },
  "annehmen--assume-suppose-to-accept-adopt": {
-  "key": "annehmen--assume-suppose-to-accept-adopt",
-  "type": "scene",
-  "scene": "Show a person looking up at clearing clouds after rain, with faint sunlight breaking through, smiling with quiet optimism.",
-  "cap": "Assuming things will soon improve",
-  "hl": "annehmen"
+  "type": "grammar",
+  "de": "Man kann annehmen, dass es besser wird.",
+  "hl": "annehmen",
+  "role": "focus",
+  "cap": "annehmen = to assume, suppose"
  },
  "annehmen--assume-to-accept": {
   "key": "annehmen--assume-to-accept",
@@ -653,13 +646,6 @@
   "cap": "Relocating industrial production to a low-wage country abroad.",
   "hl": "Billiglohnland"
  },
- "das-datum--date": {
-  "key": "das-datum--date",
-  "type": "scene",
-  "scene": "Show an ink date stamper resting on an official paper document next to a cleanly stamped date line.",
-  "cap": "Stamping the official calendar date onto a document.",
-  "hl": "Datum"
- },
  "das-deutsche--german": {
   "key": "das-deutsche--german",
   "type": "map",
@@ -683,13 +669,6 @@
   "scene": "Show a smiling pianist playing an upright piano in a bright, sunlit room, expressing an upbeat and cheerful musical mood.",
   "cap": "A bright and cheerful musical key",
   "hl": "Dur"
- },
- "das-endorphin--endorphin": {
-  "key": "das-endorphin--endorphin",
-  "type": "scene",
-  "scene": "Show a jogger in a park pausing after a run, breathing deeply with an energized, happy, and satisfied expression on their face.",
-  "cap": "Natural body chemicals released during exercise",
-  "hl": "Endorphine"
  },
  "das-erachten--opinion-view": {
   "type": "grammar",
@@ -715,11 +694,11 @@
   "cap": "Future tense expressing an upcoming event"
  },
  "das-gegenargument--counterargument": {
-  "key": "das-gegenargument--counterargument",
-  "type": "scene",
-  "scene": "Show a person standing up during a lively podium debate, raising an index finger calmly to present an opposing perspective.",
-  "cap": "Presenting an opposing point in a formal discussion",
-  "hl": "Gegenargument"
+  "type": "grammar",
+  "de": "Er brachte ein starkes Gegenargument vor.",
+  "hl": "Gegenargument",
+  "role": "focus",
+  "cap": "das das Gegenargument = counterargument"
  },
  "das-grundeinkommen--basic-income": {
   "key": "das-grundeinkommen--basic-income",
@@ -961,13 +940,6 @@
   "role": "verb",
   "cap": "The Perfekt tense formed with haben and a past participle"
  },
- "das-persoenlichkeitstraining--personality-training": {
-  "key": "das-persoenlichkeitstraining--personality-training",
-  "type": "scene",
-  "scene": "Show an adult standing confidently before a small seminar circle, speaking with an engaged posture while a coach listens attentively.",
-  "cap": "A participant speaking during personality coaching",
-  "hl": "Persönlichkeitstraining"
- },
  "das-personalpronomen--personal-pronoun": {
   "key": "das-personalpronomen--personal-pronoun",
   "type": "grammar",
@@ -1136,13 +1108,6 @@
   "hl": "Semester",
   "role": "focus",
   "cap": "das Semester = semester (university term)"
- },
- "das-sportpensum--exercise-quota-sports-workload": {
-  "key": "das-sportpensum--exercise-quota-sports-workload",
-  "type": "scene",
-  "scene": "Show an athlete stretching on a track next to a sports bag, water bottle, and running shoes after an intense session.",
-  "cap": "Completing a demanding athletic workload",
-  "hl": "Sportpensum"
  },
  "das-sprichwort--proverb": {
   "key": "das-sprichwort--proverb",
@@ -1498,20 +1463,6 @@
   "role": "focus",
   "cap": "der/die der/die Berechtigte = the entitled/authorized person"
  },
- "der-die-betroffene-r--affected-person": {
-  "key": "der-die-betroffene-r--affected-person",
-  "type": "scene",
-  "scene": "Show relief workers in bright vests handing warm blankets and hot thermoses to residents gathered outside after a severe storm.",
-  "cap": "Affected residents receiving support and relief supplies",
-  "hl": "Betroffenen"
- },
- "der-die-bundeskanzler-in--federal-chancellor": {
-  "key": "der-die-bundeskanzler-in--federal-chancellor",
-  "type": "scene",
-  "scene": "Show a head of government in a dark suit standing beside an international delegation at a formal summit table in a stately hall.",
-  "cap": "The federal chancellor meeting with other politicians",
-  "hl": "Bundeskanzler"
- },
  "der-die-bundesminister-in--federal-minister": {
   "key": "der-die-bundesminister-in--federal-minister",
   "type": "scene",
@@ -1548,13 +1499,6 @@
   "scene": "Show a government leader sitting at a polished executive desk in an official office, listening attentively as an aide presents a briefing folder.",
   "cap": "The chancellor receiving a briefing in the official office",
   "hl": "Kanzler"
- },
- "der-die-kanzlerkandidat-in--chancellor-candidate": {
-  "key": "der-die-kanzlerkandidat-in--chancellor-candidate",
-  "type": "scene",
-  "scene": "Show two political candidates standing at separate modern lecterns on a brightly lit broadcast debate stage, one gesturing emphatically.",
-  "cap": "The chancellor candidate debating on a televised stage",
-  "hl": "Kanzlerkandidat"
  },
  "der-die-langzeitarbeitslose-r--long-term-unemployed-person": {
   "key": "der-die-langzeitarbeitslose-r--long-term-unemployed-person",
@@ -1745,13 +1689,6 @@
   "role": "genitiv",
   "cap": "Genitive shows possession"
  },
- "der-gerechtigkeitssinn--sense-of-justice": {
-  "key": "der-gerechtigkeitssinn--sense-of-justice",
-  "type": "scene",
-  "scene": "Show an older sibling carefully dividing a freshly baked cake into two precisely equal halves so their younger sibling receives an identical piece.",
-  "cap": "A strong sense of fairness and justice",
-  "hl": "Gerechtigkeitssinn"
- },
  "der-gewaltuebergriff--violent-assault": {
   "type": "grammar",
   "de": "Der Mobilfunkanbieter verhinderte einen Gewaltübergriff.",
@@ -1780,13 +1717,6 @@
   "hl": "Kommen Sie",
   "role": "verb",
   "cap": "Imperative form used for polite requests and commands"
- },
- "der-inbegriff--epitome": {
-  "key": "der-inbegriff--epitome",
-  "type": "scene",
-  "scene": "Show a stylish woman in a timeless, perfectly tailored coat and dark sunglasses stepping gracefully out of an old European opera house.",
-  "cap": "The very epitome of classic elegance",
-  "hl": "Inbegriff"
  },
  "der-infinitiv--infinitive": {
   "key": "der-infinitiv--infinitive",
@@ -1894,13 +1824,6 @@
   "role": "verb",
   "cap": "Konjunktiv II expresses polite requests or unreal conditions"
  },
- "der-konnektor--connector": {
-  "key": "der-konnektor--connector",
-  "type": "scene",
-  "scene": "Show two hands fitting two wooden puzzle pieces together on a table to join them into a whole.",
-  "cap": "A connector links two separate parts together.",
-  "hl": "Konnektor"
- },
  "der-konsekutivsatz--consecutive-clause": {
   "key": "der-konsekutivsatz--consecutive-clause",
   "type": "grammar",
@@ -1931,33 +1854,12 @@
   "hl": "Kosename",
   "cap": "An affectionate pet name for a beloved companion"
  },
- "der-kreditkartenbetrug--credit-card-fraud": {
-  "key": "der-kreditkartenbetrug--credit-card-fraud",
-  "type": "scene",
-  "scene": "Show a person looking worriedly at a smartphone beside an alert warning icon, holding a plastic payment card.",
-  "hl": "Kreditkartenbetrug",
-  "cap": "Unauthorized credit card charges or fraud"
- },
  "der-lauf--course-run": {
   "key": "der-lauf--course-run",
   "type": "scene",
   "scene": "Show a seedling growing beside an old tree trunk, representing how living things change over time.",
   "hl": "Lauf",
   "cap": "The passage or course of time"
- },
- "der-lebensentwurf--life-plan": {
-  "key": "der-lebensentwurf--life-plan",
-  "type": "scene",
-  "scene": "Show a young professional sitting at a desk with an open sketchbook containing drawn pathways, milestones, and personal goals.",
-  "hl": "Lebensentwurf",
-  "cap": "A thoughtful plan and vision for one's life"
- },
- "der-lebensverlauf--course-of-life": {
-  "key": "der-lebensverlauf--course-of-life",
-  "type": "scene",
-  "scene": "Show a winding scenic path through rolling hills, passing through meadows and woods toward distant mountains.",
-  "hl": "Lebensverlauf",
-  "cap": "The twists and turns of a life's journey"
  },
  "der-lerneffekt--learning-effect": {
   "type": "grammar",
@@ -2015,13 +1917,6 @@
   "cap": "Filling in the family name on an official form",
   "hl": "Nachname"
  },
- "der-name--name": {
-  "key": "der-name--name",
-  "type": "scene",
-  "scene": "Show a smiling young woman introducing herself at a seminar, wearing a blank sticky badge on her lapel while gesturing warmly.",
-  "cap": "Introducing oneself by name",
-  "hl": "Name"
- },
  "der-nationalsozialismus--national-socialism-nazism": {
   "key": "der-nationalsozialismus--national-socialism-nazism",
   "type": "scene",
@@ -2066,13 +1961,6 @@
   "scene": "Show two business partners in an office shaking hands across a desk after smoothly reviewing a document together.",
   "cap": "A standard, smooth contract approval",
   "hl": "Normalfall"
- },
- "der-november--november": {
-  "key": "der-november--november",
-  "type": "scene",
-  "scene": "Show a person wearing a warm woolen coat and scarf walking through a foggy park among bare trees and fallen brown leaves.",
-  "cap": "Cold and misty late autumn weather",
-  "hl": "November"
  },
  "der-oktober--october": {
   "key": "der-oktober--october",
@@ -2180,13 +2068,6 @@
   "cap": "Calculating the overall grade average of the class",
   "hl": "Schnitt"
  },
- "der-schultyp--type-of-school": {
-  "key": "der-schultyp--type-of-school",
-  "type": "scene",
-  "scene": "Show two different school buildings side by side on a campus: a classical multi-story brick academy and a modern technical workshop building.",
-  "cap": "Different educational paths represent different types of school",
-  "hl": "Schultyp"
- },
  "der-september--september": {
   "type": "year",
   "month": 9,
@@ -2228,11 +2109,11 @@
   "hl": "Sprachschatz"
  },
  "der-stand--status": {
-  "key": "der-stand--status",
-  "type": "scene",
-  "scene": "Show a job applicant at a desk looking with anticipation at an open application folder beside a laptop and a phone.",
-  "cap": "The current status of the application is still unclear",
-  "hl": "Stand"
+  "type": "grammar",
+  "de": "Der aktuelle Stand der Bewerbung ist unklar.",
+  "hl": "Stand",
+  "role": "focus",
+  "cap": "der Stand = status"
  },
  "der-studienplatz--place-to-study": {
   "key": "der-studienplatz--place-to-study",
@@ -2284,11 +2165,11 @@
   "hl": "Textzusammenhang"
  },
  "der-titel--title": {
-  "key": "der-titel--title",
-  "type": "scene",
-  "scene": "Show an elegant hardcover book standing upright on a wooden shelf, prominently featuring an embossed decorative banner across the upper third of the cover.",
-  "cap": "The heading or name of a book or work",
-  "hl": "Titel"
+  "type": "grammar",
+  "de": "Ein guter Titel ist genauso wichtig wie ein gutes Ende.",
+  "hl": "Titel",
+  "role": "focus",
+  "cap": "der Titel = title"
  },
  "der-unterstrich--underscore": {
   "type": "grammar",
@@ -2333,13 +2214,6 @@
   "cap": "What can be detected or observed within sensory limits",
   "hl": "Wahrnehmungsbereichs"
  },
- "der-werktag--working-day": {
-  "key": "der-werktag--working-day",
-  "type": "scene",
-  "scene": "Show commuters with bags walking down a busy city sidewalk toward a train station under the early morning sun.",
-  "cap": "A regular working day of the week",
-  "hl": "Werktag"
- },
  "der-wert--value": {
   "key": "der-wert--value",
   "type": "scene",
@@ -2353,13 +2227,6 @@
   "hl": "Wertewandel",
   "role": "focus",
   "cap": "der der Wertewandel = change of values"
- },
- "der-wirtschaftssektor--economic-sector": {
-  "key": "der-wirtschaftssektor--economic-sector",
-  "type": "scene",
-  "scene": "Show wind turbines rotating gracefully over an expanse of agricultural fields with a modern solar energy facility nearby.",
-  "cap": "A distinct branch of the economy, like renewable energy",
-  "hl": "Wirtschaftssektor"
  },
  "der-wochentag--weekday": {
   "key": "der-wochentag--weekday",
@@ -2501,13 +2368,6 @@
   "cap": "Strict qualification or job requirement",
   "hl": "Anforderung"
  },
- "die-anfrage--enquiry": {
-  "key": "die-anfrage--enquiry",
-  "type": "scene",
-  "scene": "Show an office worker looking attentively at a newly arrived email notification on their computer screen with a questioning gesture.",
-  "cap": "An incoming customer inquiry or request",
-  "hl": "Anfrage"
- },
  "die-annahme--assumption": {
   "key": "die-annahme--assumption",
   "type": "scene",
@@ -2528,13 +2388,6 @@
   "hl": "Meiner Ansicht nach",
   "role": "focus",
   "cap": "meiner Ansicht nach = in my opinion"
- },
- "die-ansicht--view-opinion": {
-  "key": "die-ansicht--view-opinion",
-  "type": "scene",
-  "scene": "Show a speaker at a podium gesturing firmly with an open hand toward an audience, presenting a clear standpoint during a seminar.",
-  "cap": "Holding and presenting a firm view",
-  "hl": "Ansicht"
  },
  "die-antragsberechtigung--entitlement-to-apply": {
   "key": "die-antragsberechtigung--entitlement-to-apply",
@@ -2635,11 +2488,11 @@
   "cap": "After 1945 Germany was divided into four occupation zones"
  },
  "die-betonung--emphasis-stress": {
-  "key": "die-betonung--emphasis-stress",
-  "type": "scene",
-  "scene": "Show a speech coach tapping rhythmically with one hand on a table to guide a student who is practicing speaking aloud.",
-  "cap": "Placing stress and emphasis on a specific syllable",
-  "hl": "Betonung"
+  "type": "grammar",
+  "de": "Die Betonung lag auf dem ersten Wort.",
+  "hl": "Betonung",
+  "role": "focus",
+  "cap": "die Betonung = emphasis, stress"
  },
  "die-bezeichnung--term": {
   "key": "die-bezeichnung--term",
@@ -2647,13 +2500,6 @@
   "scene": "Show a linguist writing a new technical label on a blackboard and underlining it carefully for a seminar audience.",
   "cap": "A specific term or naming convention",
   "hl": "Bezeichnung"
- },
- "die-bildungschance--educational-opportunity": {
-  "key": "die-bildungschance--educational-opportunity",
-  "type": "scene",
-  "scene": "Show students from diverse backgrounds entering the bright, modern entrance of an open-access community university library.",
-  "cap": "Expanding educational opportunities for everyone",
-  "hl": "Bildungschancen"
  },
  "die-bildungserwartung--educational-expectation": {
   "type": "grammar",
@@ -2784,11 +2630,11 @@
   "hl": "Flüchtlingspolitik"
  },
  "die-foerdermassnahme--support-measure-funding-measure": {
-  "key": "die-foerdermassnahme--support-measure-funding-measure",
-  "type": "scene",
-  "scene": "Show a mentor offering one-on-one vocational training guidance to a young apprentice in a modern technical workshop.",
-  "cap": "A targeted funding and support initiative",
-  "hl": "Fördermaßnahmen"
+  "type": "grammar",
+  "de": "Man sollte Fördermaßnahmen ausbauen, anstatt sie zu kürzen.",
+  "hl": "Fördermaßnahmen",
+  "role": "focus",
+  "cap": "die Fördermaßnahme = support measure, funding measure"
  },
  "die-forderung--demand": {
   "key": "die-forderung--demand",
@@ -2806,11 +2652,11 @@
   "cap": "\"Aufgrund\" is a formal preposition used mainly in formal German"
  },
  "die-formulierung--phrasing-wording": {
-  "key": "die-formulierung--phrasing-wording",
-  "type": "scene",
-  "scene": "Show a writer sitting thoughtfully at a wooden desk with a fountain pen hovering above a sheet of paper, carefully crossing out one line and pondering a better way to express the thought.",
-  "cap": "Polishing the wording of a text carefully",
-  "hl": "Formulierung"
+  "type": "grammar",
+  "de": "Die Formulierung im Steckbrief ist wichtig.",
+  "hl": "Formulierung",
+  "role": "focus",
+  "cap": "die Formulierung = phrasing, wording"
  },
  "die-fragestellung--research-question-framing-of-a-question": {
   "key": "die-fragestellung--research-question-framing-of-a-question",
@@ -2933,11 +2779,11 @@
   "cap": "an internationally recognised, scientifically developed method"
  },
  "die-jahresmiete--yearly-rent": {
-  "key": "die-jahresmiete--yearly-rent",
-  "type": "scene",
-  "scene": "Show a smiling tenant receiving apartment keys from a landlord across a small kitchen table after agreeing to the lease.",
-  "cap": "Securing an apartment with an affordable yearly rent",
-  "hl": "Jahresmiete"
+  "type": "grammar",
+  "de": "Wegen des hohen Stiftungsvermögens war die Jahresmiete niedrig.",
+  "hl": "Jahresmiete",
+  "role": "focus",
+  "cap": "die Jahresmiete = yearly rent"
  },
  "die-kindergartenpflicht--compulsory-kindergarten": {
   "key": "die-kindergartenpflicht--compulsory-kindergarten",
@@ -3011,13 +2857,6 @@
   "hl": "Handy",
   "role": "focus",
   "cap": "German builds many new words from one word"
- },
- "die-liedzeile--lyric-line": {
-  "key": "die-liedzeile--lyric-line",
-  "type": "scene",
-  "scene": "Show a songwriter sitting with an acoustic guitar, singing into a vintage microphone in a cozy studio while jotting a line into a notebook.",
-  "cap": "Singing a memorable lyric line",
-  "hl": "Liedzeile"
  },
  "die-mehrsprachigkeit--multilingualism": {
   "key": "die-mehrsprachigkeit--multilingualism",
@@ -3164,13 +3003,6 @@
   "cap": "The human resources department handling hiring and staff",
   "hl": "Personalabteilung"
  },
- "die-personalchefin--hr-director": {
-  "key": "die-personalchefin--hr-director",
-  "type": "scene",
-  "scene": "Show a professional woman in business attire sitting at an office desk, reviewing applicant folders with a welcoming expression.",
-  "cap": "The female head of human resources",
-  "hl": "Personalchefin"
- },
  "die-pflichtveranstaltung--compulsory-event": {
   "key": "die-pflichtveranstaltung--compulsory-event",
   "type": "scene",
@@ -3193,11 +3025,11 @@
   "cap": "Auto → Autos: the plural form"
  },
  "die-politikwissenschaft--political-science": {
-  "key": "die-politikwissenschaft--political-science",
-  "type": "scene",
-  "scene": "Show university students in a seminar room discussing around a table with a model globe and stacked academic books.",
-  "cap": "The academic study of politics and governance",
-  "hl": "Politikwissenschaft"
+  "type": "grammar",
+  "de": "Sie studierte Politikwissenschaft.",
+  "hl": "Politikwissenschaft",
+  "role": "focus",
+  "cap": "die Politikwissenschaft = political science"
  },
  "die-praefigierung--prefixation": {
   "key": "die-praefigierung--prefixation",
@@ -3221,13 +3053,6 @@
   "cap": "The duration of an internship program",
   "hl": "Praktikumszeit"
  },
- "die-probepruefung--mock-exam": {
-  "key": "die-probepruefung--mock-exam",
-  "type": "scene",
-  "scene": "Show students sitting at individual desks in a quiet classroom writing timed test papers, with a stopwatch on the teacher's podium.",
-  "cap": "A practice exam under real testing conditions",
-  "hl": "Probeprüfung"
- },
  "die-professur--professorship": {
   "key": "die-professur--professorship",
   "type": "scene",
@@ -3241,13 +3066,6 @@
   "scene": "Show a kitchen counter with eco-friendly spray bottles and a reusable cloth neatly organized in a caddy after routine wiping.",
   "cap": "Regular habits and routines for domestic cleaning",
   "hl": "Putzgewohnheiten"
- },
- "die-querschnittslaehmung--paraplegia": {
-  "key": "die-querschnittslaehmung--paraplegia",
-  "type": "scene",
-  "scene": "Show a man using an active wheelchair navigating an accessible modern office ramp smoothly beside smiling colleagues.",
-  "cap": "Living with spinal cord paralysis",
-  "hl": "Querschnittslähmung"
  },
  "die-ratgebersendung--advice-programme": {
   "key": "die-ratgebersendung--advice-programme",
@@ -3294,11 +3112,11 @@
   "hl": "reproduzierbaren experimentellen Ergebnisse"
  },
  "die-sache--matter-thing": {
-  "key": "die-sache--matter-thing",
-  "type": "scene",
-  "scene": "Show three colleagues sitting around a conference table in deep discussion, leaning forward with solemn, focused expressions and folded hands.",
-  "cap": "Discussing a serious matter with grave concern",
-  "hl": "Sache"
+  "type": "grammar",
+  "de": "Das ist eine ernste Sache.",
+  "hl": "Sache",
+  "role": "focus",
+  "cap": "die Sache = matter, thing"
  },
  "die-saeuglingssterblichkeit--infant-mortality": {
   "type": "grammar",
@@ -3359,20 +3177,6 @@
   "cap": "Admiring the striking beauty of a historic city",
   "hl": "Schönheit"
  },
- "die-schulpflicht--compulsory-schooling": {
-  "key": "die-schulpflicht--compulsory-schooling",
-  "type": "scene",
-  "scene": "Show a diverse group of elementary school children wearing backpacks walking together through a school gate in the morning under a crossing guard's watch.",
-  "cap": "Compulsory schooling requiring every child to attend class",
-  "hl": "Schulpflicht"
- },
- "die-seele--soul": {
-  "key": "die-seele--soul",
-  "type": "scene",
-  "scene": "Show a person sitting quietly with closed eyes in a tranquil stone garden beside lush greenery, taking a deep and restful breath in serenity.",
-  "cap": "Finding deep peace and rest for the soul",
-  "hl": "Seele"
- },
  "die-selbstbestimmung--self-determination": {
   "type": "grammar",
   "de": "Das Recht auf Selbstbestimmung ist grundgesetzlich verankert.",
@@ -3424,11 +3228,11 @@
   "hl": "Sozialforschung"
  },
  "die-sprachenpolitik--language-policy": {
-  "key": "die-sprachenpolitik--language-policy",
-  "type": "scene",
-  "scene": "Show an international conference hall with interpretation booths along the back wall, several interpreters wearing headsets speaking into microphones, and delegates at desks wearing headphones listening attentively.",
-  "cap": "Managing multiple languages officially: language policy",
-  "hl": "Sprachenpolitik"
+  "type": "grammar",
+  "de": "Die Sprachenpolitik der EU ist komplex.",
+  "hl": "Sprachenpolitik",
+  "role": "focus",
+  "cap": "die Sprachenpolitik = language policy"
  },
  "die-sprachkenntnisse--language-skills": {
   "key": "die-sprachkenntnisse--language-skills",
@@ -3529,11 +3333,11 @@
   "hl": "Verantwortung für"
  },
  "die-verfuegung--disposal-availability": {
-  "key": "die-verfuegung--disposal-availability",
-  "type": "scene",
-  "scene": "Show an empty workstation equipped with an ultra-modern desktop monitor, ergonomic chair, and modern tools, ready for an employee to use freely.",
-  "cap": "Having modern technology at one's disposal and availability",
-  "hl": "Verfügung"
+  "type": "grammar",
+  "de": "Weder ausreichend Geld noch moderne Technik steht zur Verfügung.",
+  "hl": "Verfügung",
+  "role": "focus",
+  "cap": "zur Verfügung stehen = to be available"
  },
  "die-vergangenheitsform--past-tense": {
   "type": "grammar",
@@ -3903,13 +3707,6 @@
   "role": "focus",
   "cap": "entgegen = contrary to"
  },
- "entgegenbringen--show-extend": {
-  "key": "entgegenbringen--show-extend",
-  "type": "scene",
-  "scene": "Show an experienced colleague handing an important master key and folder to a smiling new team member.",
-  "cap": "Placing deep trust and confidence in someone.",
-  "hl": "brachte"
- },
  "entgegensehen--look-forward-to-await": {
   "key": "entgegensehen--look-forward-to-await",
   "type": "scene",
@@ -4046,11 +3843,11 @@
   "cap": "erträglich = bearable, tolerable"
  },
  "erwaehnen--mention": {
-  "key": "erwaehnen--mention",
-  "type": "scene",
-  "scene": "Show a woman speaking briefly during a conference meeting, gesturing politely with one hand to bring up a minor point.",
-  "cap": "Briefly mentioning an issue during a discussion",
-  "hl": "erwähnte"
+  "type": "grammar",
+  "de": "Sie erwähnte das Problem kurz.",
+  "hl": "erwähnte",
+  "role": "focus",
+  "cap": "erwähnen = to mention"
  },
  "erwecken--awaken-evoke": {
   "key": "erwecken--awaken-evoke",
@@ -4418,13 +4215,6 @@
   "role": "focus",
   "cap": "fließend = fluently"
  },
- "fluessig--fluent-liquid": {
-  "key": "fluessig--fluent-liquid",
-  "type": "scene",
-  "scene": "Show a presenter speaking with confidence and ease into a microphone before an audience, with relaxed posture and no notes.",
-  "cap": "Speaking smoothly and fluently",
-  "hl": "flüssig"
- },
  "franzoesisch--french": {
   "key": "franzoesisch--french",
   "type": "map",
@@ -4542,13 +4332,6 @@
   "role": "focus",
   "cap": "gell = right (tag question, regional)"
  },
- "gelten--apply-to-be-valid": {
-  "key": "gelten--apply-to-be-valid",
-  "type": "scene",
-  "scene": "Show a ticket inspector on a train inspecting a passenger's paper ticket and nodding with approval, confirming its validity.",
-  "cap": "Valid and applicable: the ticket is accepted.",
-  "hl": "gilt"
- },
  "gemaess--in-accordance-with-pursuant-to": {
   "type": "grammar",
   "de": "Gemäß Artikel 5 der Verfassung ist die Meinungsfreiheit geschützt.",
@@ -4576,13 +4359,6 @@
   "hl": "gerade",
   "role": "focus",
   "cap": "gerade = at the moment, just now"
- },
- "geraten--get-into-turn-out": {
-  "key": "geraten--get-into-turn-out",
-  "type": "scene",
-  "scene": "Show two hikers standing at a mountain trail fork under darkening skies, looking uneasy as one inspects a compass in deep concern.",
-  "cap": "Getting into a difficult, tricky situation.",
-  "hl": "gerieten"
  },
  "geregelt--fixed-regulated": {
   "key": "geregelt--fixed-regulated",
@@ -4632,13 +4408,6 @@
   "hl": "Gestern",
   "role": "focus",
   "cap": "gestern = yesterday"
- },
- "gesundheitlich--health-related": {
-  "key": "gesundheitlich--health-related",
-  "type": "scene",
-  "scene": "Show a family jogging together cheerfully in a sunlit park, looking vigorous, fit, and in robust physical condition.",
-  "cap": "Families that are physically sound and health-wise stable.",
-  "hl": "gesundheitlich"
  },
  "gewiss--certain": {
   "key": "gewiss--certain",
@@ -5158,11 +4927,11 @@
   "cap": "mehrmals = repeatedly, several times"
  },
  "meinen--think-to-mean": {
-  "key": "meinen--think-to-mean",
-  "type": "scene",
-  "scene": "Show a person in a cinema lobby thoughtfully discussing a movie poster with a friend, gesturing to explain their view.",
-  "cap": "Sharing one's thoughts and viewpoint",
-  "hl": "meine"
+  "type": "grammar",
+  "de": "Ich meine, der Titel ist so wichtig wie die Handlung.",
+  "hl": "meine",
+  "role": "focus",
+  "cap": "meinen = to think, to mean"
  },
  "meinetwegen--fine-with-me-for-my-sake": {
   "type": "grammar",
@@ -5677,13 +5446,6 @@
   "hl": "Samstags",
   "role": "focus",
   "cap": "samstags = on Saturdays"
- },
- "samt--including-together-with": {
-  "key": "samt--including-together-with",
-  "type": "scene",
-  "scene": "Show a smiling woman arriving at a front door, accompanied closely by her partner and children.",
-  "cap": "Arriving together with her whole family",
-  "hl": "samt"
  },
  "schlimmstenfalls--in-the-worst-case": {
   "type": "grammar",
@@ -6259,11 +6021,11 @@
   "hl": "unbestreitbar"
  },
  "unbezahlt--unpaid": {
-  "key": "unbezahlt--unpaid",
-  "type": "scene",
-  "scene": "Show a person working alone at an office desk under a glowing desk lamp while a wall clock in the background shows late evening.",
-  "cap": "Working extra hours without compensation",
-  "hl": "unbezahlte"
+  "type": "grammar",
+  "de": "Sie leistete unbezahlte Überstunden.",
+  "hl": "unbezahlte",
+  "role": "focus",
+  "cap": "unbezahlt = unpaid"
  },
  "und--and": {
   "type": "grammar",
@@ -6344,11 +6106,11 @@
   "hl": "verarbeitete"
  },
  "verarbeiten--process-digest-cope-with": {
-  "key": "verarbeiten--process-digest-cope-with",
-  "type": "scene",
-  "scene": "Show a focused professional woman sitting at a desk with dual monitors displaying bar charts and graphs, taking notes calmly and purposefully.",
-  "cap": "Quickly absorbing and processing data",
-  "hl": "verarbeitete"
+  "type": "grammar",
+  "de": "Sie verarbeitete die Informationen schnell.",
+  "hl": "verarbeitete",
+  "role": "focus",
+  "cap": "verarbeiten = to process, digest, cope with"
  },
  "verdraengen--displace-suppress-repress": {
   "key": "verdraengen--displace-suppress-repress",
@@ -6450,11 +6212,11 @@
   "hl": "voraussichtlich"
  },
  "voraussichtlich--presumably-expected": {
-  "key": "voraussichtlich--presumably-expected",
-  "type": "scene",
-  "scene": "Show a project team looking at a gantt chart timeline on a whiteboard where the final milestone bar aligns under the sixth column.",
-  "cap": "Expected completion in June",
-  "hl": "voraussichtlich"
+  "type": "grammar",
+  "de": "Das Projekt ist voraussichtlich im Juni fertig.",
+  "hl": "voraussichtlich",
+  "role": "focus",
+  "cap": "voraussichtlich = presumably, expected"
  },
  "vorgestern--day-before-yesterday": {
   "type": "grammar",
@@ -6894,10 +6656,11 @@
   "cap": "ursprünglich = originally"
  },
  "formulieren--phrase-to-formulate": {
-  "type": "scene",
-  "scene": "Show a manager speaking calmly to a colleague at a desk with an open, friendly hand gesture, the colleague nodding and listening.",
-  "cap": "Wording criticism politely and carefully",
-  "hl": "formuliert"
+  "type": "grammar",
+  "de": "Er formuliert seine Kritik sehr höflich.",
+  "hl": "formuliert",
+  "role": "focus",
+  "cap": "formulieren = to phrase, to formulate"
  },
  "die-beherrschung--mastery-command": {
   "type": "scene",
@@ -9114,6 +8877,538 @@
   "hl": "gibt",
   "role": "focus",
   "cap": "geben = to give, there is/are"
+ },
+ "betreffen--concern-affect": {
+  "type": "grammar",
+  "de": "Das betrifft uns alle.",
+  "hl": "betrifft",
+  "role": "focus",
+  "cap": "betreffen = to concern, affect"
+ },
+ "die-einrichtung--facility-furnishing-institution": {
+  "type": "grammar",
+  "de": "Die Einrichtung hilft bei der Integration.",
+  "hl": "Einrichtung",
+  "role": "focus",
+  "cap": "die Einrichtung = institution, facility"
+ },
+ "andeuten--hint-imply": {
+  "type": "grammar",
+  "de": "Sie deutete ein Problem an.",
+  "hl": "deutete ein Problem an",
+  "role": "focus",
+  "cap": "andeuten = to hint at (separable: deutete … an)"
+ },
+ "angewiesen-sein--be-dependent-on": {
+  "type": "grammar",
+  "de": "Wir sind stark auf gute Daten angewiesen.",
+  "hl": "angewiesen",
+  "role": "focus",
+  "cap": "angewiesen sein = to be dependent on"
+ },
+ "aussergewoehnlich--extraordinary": {
+  "type": "grammar",
+  "de": "Das Ergebnis war außergewöhnlich.",
+  "hl": "außergewöhnlich",
+  "role": "focus",
+  "cap": "außergewöhnlich = extraordinary"
+ },
+ "betreffen--concern": {
+  "type": "grammar",
+  "de": "Das betrifft uns alle.",
+  "hl": "betrifft",
+  "role": "focus",
+  "cap": "betreffen = to concern"
+ },
+ "das-arbeitsgebiet--field-of-work": {
+  "type": "grammar",
+  "de": "Unser Arbeitsgebiet lässt sich gut weiterentwickeln.",
+  "hl": "Arbeitsgebiet",
+  "role": "focus",
+  "cap": "das Arbeitsgebiet = field of work"
+ },
+ "das-aufgabengebiet--area-of-responsibility": {
+  "type": "grammar",
+  "de": "Die Bewerberin erweitert ihr Aufgabengebiet, indem sie sich aktiv einbringt.",
+  "hl": "Aufgabengebiet",
+  "role": "focus",
+  "cap": "das Aufgabengebiet = area of responsibility"
+ },
+ "das-bewerbungstraining--job-application-training": {
+  "type": "grammar",
+  "de": "Das Bewerbungstraining half ihr sehr.",
+  "hl": "Bewerbungstraining",
+  "role": "focus",
+  "cap": "das Bewerbungstraining = job application training"
+ },
+ "das-management--management": {
+  "type": "grammar",
+  "de": "Das Management trifft die endgültige Entscheidung.",
+  "hl": "Management",
+  "role": "focus",
+  "cap": "das Management = management"
+ },
+ "das-versandrisiko--shipping-risk": {
+  "type": "grammar",
+  "de": "Der Kunde trägt das Versandrisiko.",
+  "hl": "Versandrisiko",
+  "role": "focus",
+  "cap": "das Versandrisiko = shipping risk"
+ },
+ "das-vorurteil--prejudice": {
+  "type": "grammar",
+  "de": "Sie kämpft gegen Vorurteile.",
+  "hl": "Vorurteile",
+  "role": "focus",
+  "cap": "das Vorurteil = prejudice"
+ },
+ "der-aufruf--call-appeal": {
+  "type": "grammar",
+  "de": "Ein Aufruf zur Unterscheidung zwischen beiden Bereichen reicht weder aus noch wird es jemals genug sein.",
+  "hl": "Aufruf",
+  "role": "focus",
+  "cap": "der Aufruf = call, appeal"
+ },
+ "der-blutzuckerspiegel--blood-sugar-level": {
+  "type": "grammar",
+  "de": "Der Arzt maß den Blutzuckerspiegel.",
+  "hl": "Blutzuckerspiegel",
+  "role": "focus",
+  "cap": "der Blutzuckerspiegel = blood sugar level"
+ },
+ "der-herzinfarkt--heart-attack": {
+  "type": "grammar",
+  "de": "Er erlitt einen Herzinfarkt.",
+  "hl": "Herzinfarkt",
+  "role": "focus",
+  "cap": "der Herzinfarkt = heart attack"
+ },
+ "der-unterhalt--maintenance-upkeep": {
+  "type": "grammar",
+  "de": "Der Alleinernährer zahlte den Unterhalt nicht.",
+  "hl": "Unterhalt",
+  "role": "focus",
+  "cap": "der Unterhalt = maintenance, upkeep"
+ },
+ "der-die-kandidat-in--candidate": {
+  "type": "grammar",
+  "de": "Der Kandidat überzeugte alle.",
+  "hl": "Kandidat",
+  "role": "focus",
+  "cap": "der Kandidat / die Kandidatin = candidate"
+ },
+ "die-arbeitssituation--work-situation": {
+  "type": "grammar",
+  "de": "Die Arbeitssituation verbesserte sich.",
+  "hl": "Arbeitssituation",
+  "role": "focus",
+  "cap": "die Arbeitssituation = work situation"
+ },
+ "die-beachtung--attention-observance": {
+  "type": "grammar",
+  "de": "Das Thema verdient mehr Beachtung.",
+  "hl": "Beachtung",
+  "role": "focus",
+  "cap": "die Beachtung = attention, observance"
+ },
+ "die-behandlungsmoeglichkeit--treatment-option": {
+  "type": "grammar",
+  "de": "Sowohl die Infrastruktur als auch die Behandlungsmöglichkeiten müssen verbessert werden.",
+  "hl": "Behandlungsmöglichkeiten",
+  "role": "focus",
+  "cap": "die Behandlungsmöglichkeit = treatment option"
+ },
+ "die-durchwahl--direct-dial-extension": {
+  "type": "grammar",
+  "de": "Sie gab mir ihre Durchwahl.",
+  "hl": "Durchwahl",
+  "role": "focus",
+  "cap": "die Durchwahl = direct dial, extension"
+ },
+ "die-karriereplanung--career-planning": {
+  "type": "grammar",
+  "de": "Ihre Karriereplanung ist sehr strukturiert.",
+  "hl": "Karriereplanung",
+  "role": "focus",
+  "cap": "die Karriereplanung = career planning"
+ },
+ "die-luegengeschichte--tall-tale-made-up-story": {
+  "type": "grammar",
+  "de": "Er erzählte eine Lügengeschichte.",
+  "hl": "Lügengeschichte",
+  "role": "focus",
+  "cap": "die Lügengeschichte = tall tale, made-up story"
+ },
+ "die-marktforschungsfirma--market-research-firm": {
+  "type": "grammar",
+  "de": "Die Marktforschungsfirma hat die Daten ausgewertet.",
+  "hl": "Marktforschungsfirma",
+  "role": "focus",
+  "cap": "die Marktforschungsfirma = market research firm"
+ },
+ "die-offenheit--openness": {
+  "type": "grammar",
+  "de": "Deine Offenheit hilft uns sehr.",
+  "hl": "Offenheit",
+  "role": "focus",
+  "cap": "die Offenheit = openness"
+ },
+ "die-uebertreibung--exaggeration": {
+  "type": "grammar",
+  "de": "Das war keine Übertreibung.",
+  "hl": "Übertreibung",
+  "role": "focus",
+  "cap": "die Übertreibung = exaggeration"
+ },
+ "die-versuchsgruppe--test-group": {
+  "type": "grammar",
+  "de": "Die sorgfältig ausgewählte Versuchsgruppe zeigte vorbildliche Ergebnisse.",
+  "hl": "Versuchsgruppe",
+  "role": "focus",
+  "cap": "die Versuchsgruppe = test group"
+ },
+ "doof--stupid-dumb": {
+  "type": "grammar",
+  "de": "Das war eine doofe Idee.",
+  "hl": "doofe",
+  "role": "focus",
+  "cap": "doof = stupid, dumb"
+ },
+ "durchfuehrbar--feasible-practicable": {
+  "type": "grammar",
+  "de": "Der Plan war durchführbar.",
+  "hl": "durchführbar",
+  "role": "focus",
+  "cap": "durchführbar = feasible, practicable"
+ },
+ "einfuehren--introduce-import": {
+  "type": "grammar",
+  "de": "Sie führten ein neues System ein.",
+  "hl": "führten ein neues System ein",
+  "role": "focus",
+  "cap": "einführen = to introduce (separable: führten … ein)"
+ },
+ "immer-wieder--again-and-again": {
+  "type": "grammar",
+  "de": "Die Bevölkerung wird immer wieder ermutigt.",
+  "hl": "immer wieder",
+  "role": "focus",
+  "cap": "immer wieder = again and again"
+ },
+ "klaeren--clarify-resolve": {
+  "type": "grammar",
+  "de": "Die Kaution für die Wohnung muss ich noch klären.",
+  "hl": "klären",
+  "role": "focus",
+  "cap": "klären = to clarify, resolve"
+ },
+ "klarmachen--make-clear-clarify": {
+  "type": "grammar",
+  "de": "Das machen wir im nächsten Kapitel klar.",
+  "hl": "machen wir im nächsten Kapitel klar",
+  "role": "focus",
+  "cap": "klarmachen = to make clear (separable: machen … klar)"
+ },
+ "kritikfaehig--able-to-take-criticism": {
+  "type": "grammar",
+  "de": "Ein guter Mitarbeiter ist kritikfähig.",
+  "hl": "kritikfähig",
+  "role": "focus",
+  "cap": "kritikfähig = able to take criticism"
+ },
+ "obgleich--although-even-though": {
+  "type": "grammar",
+  "de": "Obgleich die Bildungserwartung hoch ist, wählen viele einen praktischen Weg.",
+  "hl": "Obgleich",
+  "role": "focus",
+  "cap": "obgleich = although (the verb goes to the end)"
+ },
+ "schaetzen--guess-value": {
+  "type": "grammar",
+  "de": "Die Personalchefin schätzt ehrliche Bewerber sehr.",
+  "hl": "schätzt",
+  "role": "focus",
+  "cap": "schätzen = to value, appreciate (also: to estimate)"
+ },
+ "ueberaus--exceedingly-extremely": {
+  "type": "grammar",
+  "de": "Ihr Verhandlungsgeschick ist überaus stark.",
+  "hl": "überaus",
+  "role": "focus",
+  "cap": "überaus = exceedingly, extremely"
+ },
+ "uebersehen--overlook-miss": {
+  "type": "grammar",
+  "de": "Sie übersah den Fehler.",
+  "hl": "übersah",
+  "role": "focus",
+  "cap": "übersehen = to overlook, miss"
+ },
+ "verschaerfen--tighten-intensify": {
+  "type": "grammar",
+  "de": "Sie verschärften die Regeln.",
+  "hl": "verschärften",
+  "role": "focus",
+  "cap": "verschärfen = to tighten, intensify"
+ },
+ "von-nach--from-to": {
+  "type": "grammar",
+  "de": "Ich bin von Mitte nach Kreuzberg gefahren.",
+  "hl": "von Mitte nach Kreuzberg",
+  "role": "focus",
+  "cap": "von … nach = from … to (places)"
+ },
+ "voranstellen--place-in-front-preface": {
+  "type": "grammar",
+  "de": "Sie stellte eine Erklärung voran.",
+  "hl": "stellte eine Erklärung voran",
+  "role": "focus",
+  "cap": "voranstellen = to preface (separable: stellte … voran)"
+ },
+ "wegen--because-of": {
+  "type": "grammar",
+  "de": "Wegen des guten Preises hoffe ich, die Wohnung zu bekommen.",
+  "hl": "Wegen",
+  "role": "focus",
+  "cap": "wegen + Genitiv = because of"
+ },
+ "aktuell--current-topical": {
+  "key": "aktuell--current-topical",
+  "type": "scene",
+  "scene": "Show two people sitting at a cafe table attentively looking at a newspaper's front page fold, discussing the day's headline together.",
+  "hl": "aktuelles",
+  "cap": "Discussing a current, topical issue of the day"
+ },
+ "das-datum--date": {
+  "key": "das-datum--date",
+  "type": "scene",
+  "scene": "Show an ink date stamper resting on an official paper document next to a cleanly stamped date line.",
+  "cap": "Stamping the official calendar date onto a document.",
+  "hl": "Datum"
+ },
+ "das-endorphin--endorphin": {
+  "key": "das-endorphin--endorphin",
+  "type": "scene",
+  "scene": "Show a jogger in a park pausing after a run, breathing deeply with an energized, happy, and satisfied expression on their face.",
+  "cap": "Natural body chemicals released during exercise",
+  "hl": "Endorphine"
+ },
+ "das-persoenlichkeitstraining--personality-training": {
+  "key": "das-persoenlichkeitstraining--personality-training",
+  "type": "scene",
+  "scene": "Show an adult standing confidently before a small seminar circle, speaking with an engaged posture while a coach listens attentively.",
+  "cap": "A participant speaking during personality coaching",
+  "hl": "Persönlichkeitstraining"
+ },
+ "das-sportpensum--exercise-quota-sports-workload": {
+  "key": "das-sportpensum--exercise-quota-sports-workload",
+  "type": "scene",
+  "scene": "Show an athlete stretching on a track next to a sports bag, water bottle, and running shoes after an intense session.",
+  "cap": "Completing a demanding athletic workload",
+  "hl": "Sportpensum"
+ },
+ "der-die-betroffene-r--affected-person": {
+  "key": "der-die-betroffene-r--affected-person",
+  "type": "scene",
+  "scene": "Show relief workers in bright vests handing warm blankets and hot thermoses to residents gathered outside after a severe storm.",
+  "cap": "Affected residents receiving support and relief supplies",
+  "hl": "Betroffenen"
+ },
+ "der-die-bundeskanzler-in--federal-chancellor": {
+  "key": "der-die-bundeskanzler-in--federal-chancellor",
+  "type": "scene",
+  "scene": "Show a head of government in a dark suit standing beside an international delegation at a formal summit table in a stately hall.",
+  "cap": "The federal chancellor meeting with other politicians",
+  "hl": "Bundeskanzler"
+ },
+ "der-die-kanzlerkandidat-in--chancellor-candidate": {
+  "key": "der-die-kanzlerkandidat-in--chancellor-candidate",
+  "type": "scene",
+  "scene": "Show two political candidates standing at separate modern lecterns on a brightly lit broadcast debate stage, one gesturing emphatically.",
+  "cap": "The chancellor candidate debating on a televised stage",
+  "hl": "Kanzlerkandidat"
+ },
+ "der-gerechtigkeitssinn--sense-of-justice": {
+  "key": "der-gerechtigkeitssinn--sense-of-justice",
+  "type": "scene",
+  "scene": "Show an older sibling carefully dividing a freshly baked cake into two precisely equal halves so their younger sibling receives an identical piece.",
+  "cap": "A strong sense of fairness and justice",
+  "hl": "Gerechtigkeitssinn"
+ },
+ "der-inbegriff--epitome": {
+  "key": "der-inbegriff--epitome",
+  "type": "scene",
+  "scene": "Show a stylish woman in a timeless, perfectly tailored coat and dark sunglasses stepping gracefully out of an old European opera house.",
+  "cap": "The very epitome of classic elegance",
+  "hl": "Inbegriff"
+ },
+ "der-konnektor--connector": {
+  "key": "der-konnektor--connector",
+  "type": "scene",
+  "scene": "Show two hands fitting two wooden puzzle pieces together on a table to join them into a whole.",
+  "cap": "A connector links two separate parts together.",
+  "hl": "Konnektor"
+ },
+ "der-kreditkartenbetrug--credit-card-fraud": {
+  "key": "der-kreditkartenbetrug--credit-card-fraud",
+  "type": "scene",
+  "scene": "Show a person looking worriedly at a smartphone beside an alert warning icon, holding a plastic payment card.",
+  "hl": "Kreditkartenbetrug",
+  "cap": "Unauthorized credit card charges or fraud"
+ },
+ "der-lebensentwurf--life-plan": {
+  "key": "der-lebensentwurf--life-plan",
+  "type": "scene",
+  "scene": "Show a young professional sitting at a desk with an open sketchbook containing drawn pathways, milestones, and personal goals.",
+  "hl": "Lebensentwurf",
+  "cap": "A thoughtful plan and vision for one's life"
+ },
+ "der-lebensverlauf--course-of-life": {
+  "key": "der-lebensverlauf--course-of-life",
+  "type": "scene",
+  "scene": "Show a winding scenic path through rolling hills, passing through meadows and woods toward distant mountains.",
+  "hl": "Lebensverlauf",
+  "cap": "The twists and turns of a life's journey"
+ },
+ "der-name--name": {
+  "key": "der-name--name",
+  "type": "scene",
+  "scene": "Show a smiling young woman introducing herself at a seminar, wearing a blank sticky badge on her lapel while gesturing warmly.",
+  "cap": "Introducing oneself by name",
+  "hl": "Name"
+ },
+ "der-november--november": {
+  "key": "der-november--november",
+  "type": "scene",
+  "scene": "Show a person wearing a warm woolen coat and scarf walking through a foggy park among bare trees and fallen brown leaves.",
+  "cap": "Cold and misty late autumn weather",
+  "hl": "November"
+ },
+ "der-schultyp--type-of-school": {
+  "key": "der-schultyp--type-of-school",
+  "type": "scene",
+  "scene": "Show two different school buildings side by side on a campus: a classical multi-story brick academy and a modern technical workshop building.",
+  "cap": "Different educational paths represent different types of school",
+  "hl": "Schultyp"
+ },
+ "der-werktag--working-day": {
+  "key": "der-werktag--working-day",
+  "type": "scene",
+  "scene": "Show commuters with bags walking down a busy city sidewalk toward a train station under the early morning sun.",
+  "cap": "A regular working day of the week",
+  "hl": "Werktag"
+ },
+ "der-wirtschaftssektor--economic-sector": {
+  "key": "der-wirtschaftssektor--economic-sector",
+  "type": "scene",
+  "scene": "Show wind turbines rotating gracefully over an expanse of agricultural fields with a modern solar energy facility nearby.",
+  "cap": "A distinct branch of the economy, like renewable energy",
+  "hl": "Wirtschaftssektor"
+ },
+ "die-anfrage--enquiry": {
+  "key": "die-anfrage--enquiry",
+  "type": "scene",
+  "scene": "Show an office worker looking attentively at a newly arrived email notification on their computer screen with a questioning gesture.",
+  "cap": "An incoming customer inquiry or request",
+  "hl": "Anfrage"
+ },
+ "die-ansicht--view-opinion": {
+  "key": "die-ansicht--view-opinion",
+  "type": "scene",
+  "scene": "Show a speaker at a podium gesturing firmly with an open hand toward an audience, presenting a clear standpoint during a seminar.",
+  "cap": "Holding and presenting a firm view",
+  "hl": "Ansicht"
+ },
+ "die-bildungschance--educational-opportunity": {
+  "key": "die-bildungschance--educational-opportunity",
+  "type": "scene",
+  "scene": "Show students from diverse backgrounds entering the bright, modern entrance of an open-access community university library.",
+  "cap": "Expanding educational opportunities for everyone",
+  "hl": "Bildungschancen"
+ },
+ "die-liedzeile--lyric-line": {
+  "key": "die-liedzeile--lyric-line",
+  "type": "scene",
+  "scene": "Show a songwriter sitting with an acoustic guitar, singing into a vintage microphone in a cozy studio while jotting a line into a notebook.",
+  "cap": "Singing a memorable lyric line",
+  "hl": "Liedzeile"
+ },
+ "die-personalchefin--hr-director": {
+  "key": "die-personalchefin--hr-director",
+  "type": "scene",
+  "scene": "Show a professional woman in business attire sitting at an office desk, reviewing applicant folders with a welcoming expression.",
+  "cap": "The female head of human resources",
+  "hl": "Personalchefin"
+ },
+ "die-probepruefung--mock-exam": {
+  "key": "die-probepruefung--mock-exam",
+  "type": "scene",
+  "scene": "Show students sitting at individual desks in a quiet classroom writing timed test papers, with a stopwatch on the teacher's podium.",
+  "cap": "A practice exam under real testing conditions",
+  "hl": "Probeprüfung"
+ },
+ "die-querschnittslaehmung--paraplegia": {
+  "key": "die-querschnittslaehmung--paraplegia",
+  "type": "scene",
+  "scene": "Show a man using an active wheelchair navigating an accessible modern office ramp smoothly beside smiling colleagues.",
+  "cap": "Living with spinal cord paralysis",
+  "hl": "Querschnittslähmung"
+ },
+ "die-schulpflicht--compulsory-schooling": {
+  "key": "die-schulpflicht--compulsory-schooling",
+  "type": "scene",
+  "scene": "Show a diverse group of elementary school children wearing backpacks walking together through a school gate in the morning under a crossing guard's watch.",
+  "cap": "Compulsory schooling requiring every child to attend class",
+  "hl": "Schulpflicht"
+ },
+ "die-seele--soul": {
+  "key": "die-seele--soul",
+  "type": "scene",
+  "scene": "Show a person sitting quietly with closed eyes in a tranquil stone garden beside lush greenery, taking a deep and restful breath in serenity.",
+  "cap": "Finding deep peace and rest for the soul",
+  "hl": "Seele"
+ },
+ "entgegenbringen--show-extend": {
+  "key": "entgegenbringen--show-extend",
+  "type": "scene",
+  "scene": "Show an experienced colleague handing an important master key and folder to a smiling new team member.",
+  "cap": "Placing deep trust and confidence in someone.",
+  "hl": "brachte"
+ },
+ "fluessig--fluent-liquid": {
+  "key": "fluessig--fluent-liquid",
+  "type": "scene",
+  "scene": "Show a presenter speaking with confidence and ease into a microphone before an audience, with relaxed posture and no notes.",
+  "cap": "Speaking smoothly and fluently",
+  "hl": "flüssig"
+ },
+ "gelten--apply-to-be-valid": {
+  "key": "gelten--apply-to-be-valid",
+  "type": "scene",
+  "scene": "Show a ticket inspector on a train inspecting a passenger's paper ticket and nodding with approval, confirming its validity.",
+  "cap": "Valid and applicable: the ticket is accepted.",
+  "hl": "gilt"
+ },
+ "geraten--get-into-turn-out": {
+  "key": "geraten--get-into-turn-out",
+  "type": "scene",
+  "scene": "Show two hikers standing at a mountain trail fork under darkening skies, looking uneasy as one inspects a compass in deep concern.",
+  "cap": "Getting into a difficult, tricky situation.",
+  "hl": "gerieten"
+ },
+ "gesundheitlich--health-related": {
+  "key": "gesundheitlich--health-related",
+  "type": "scene",
+  "scene": "Show a family jogging together cheerfully in a sunlit park, looking vigorous, fit, and in robust physical condition.",
+  "cap": "Families that are physically sound and health-wise stable.",
+  "hl": "gesundheitlich"
+ },
+ "samt--including-together-with": {
+  "key": "samt--including-together-with",
+  "type": "scene",
+  "scene": "Show a smiling woman arriving at a front door, accompanied closely by her partner and children.",
+  "cap": "Arriving together with her whole family",
+  "hl": "samt"
  },
  "das-menschenleben--human-life": {
   "key": "das-menschenleben--human-life",

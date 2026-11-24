@@ -9,6 +9,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { rows, committedUsd, listUsd, HARD_CAP_USD, STORE } from "./budget.mjs";
+import { gcpGuard } from "../lib/gcp-guard.mjs";
+// Fail-closed (2026-11-24): account/project/quota/billing verified from ~/.config/klarweg/gcp.env before the first Google call; old klarweg-512108/-498812 refused.
+let _gcp; const gcp = () => (_gcp ??= gcpGuard(process.env.VOCAB_IMG_GCP_PROJECT));
 
 const all = rows();
 const gen = all.filter((r) => r.batch === "gen");
@@ -66,10 +69,10 @@ const summary = {
   overlapIssues: issues.length, issues: issues.slice(0, 20),
 };
 if (process.argv.includes("--jobs")) {
-  const tok = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim();
+  const tok = execFileSync("gcloud", ["auth", "print-access-token", "--account", gcp().account], { encoding: "utf8" }).trim();
   summary.live = [];
   for (const j of open) {
-    const r = await fetch(`https://us-central1-aiplatform.googleapis.com/v1/${j.job}`, { headers: { Authorization: "Bearer " + tok, "x-goog-user-project": "klarweg-512108" } }).then((x) => x.json());
+    const r = await fetch(`https://us-central1-aiplatform.googleapis.com/v1/${j.job}`, { headers: { Authorization: "Bearer " + tok, "x-goog-user-project": gcp().project } }).then((x) => x.json());
     summary.live.push({ id: j.job.slice(-8), n: j.n, state: (r.state || "").replace("JOB_STATE_", ""), done: Number(r.completionStats?.successfulCount || 0), failed: Number(r.completionStats?.failedCount || 0), started: r.startTime });
   }
   summary.liveDone = summary.live.reduce((a, x) => a + x.done, 0);

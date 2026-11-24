@@ -257,7 +257,8 @@ export async function scoreModule(env, attempt, module) {
 /* ---------- result ---------- */
 /* OD-45 (LOCKED): student-facing title and mandatory disclaimer; never "Goethe score / Goethe-Ergebnis". */
 export const RESULT_LABEL = 'Klarweg B1 Simulation – Ergebnis';
-export const SAME_EXAMINER_NOTE = 'Zweimal unabhängig bewertet von derselben zertifizierten Prüfperson (nicht von zwei verschiedenen Prüfenden).';
+/* O-8 (owner 2026-11-24): no examiner-certification claim; replaces OWN-2026-11-06-2 wording. Keep in sync: core.js + render.js. */
+export const SAME_EXAMINER_NOTE = 'Bewertung durch eine Lehrkraft von Klarweg: zwei getrennte Bewertungsdurchgänge durch dieselbe Person (nicht durch zwei verschiedene Bewertende).';
 
 /* true when one examiner gave both counted rounds (1 and 2) of any rating unit of this module (EXAM_SINGLE_EXAMINER) */
 export async function sameExaminerRated(env, attemptId, module) {
@@ -277,7 +278,7 @@ export async function buildResult(env, attempt) {
     test_content: form.kind === 'synthetic',
     ...(attempt.part_scope !== null && attempt.part_scope !== undefined ? { practice_part: { module: attempt.module_scope, part: attempt.part_scope } } : {}),
     pass_points: (await levelConfig(env, form.level_config_id)).pass_threshold_points ?? null,   // per module (no total)
-    disclaimer: 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts. Die Module werden einzeln ausgewiesen; es gibt kein Gesamtergebnis.',
+    disclaimer: 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts. Dies ist eine Übungsprüfung von Klarweg, keine Prüfung und kein Zertifikat des Goethe-Instituts. Klarweg ist unabhängig und nicht mit dem Goethe-Institut verbunden. Die Module werden einzeln ausgewiesen; es gibt kein Gesamtergebnis.',
     modules: await Promise.all(mods.map(async (m) => {
       const s = rows.find((r) => r.module === m.module);
       const same = s && (m.module === 'schreiben' || m.module === 'sprechen') ? await sameExaminerRated(env, attempt.id, m.module) : false;

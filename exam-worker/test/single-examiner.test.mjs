@@ -47,12 +47,12 @@ test('SINGLE EXAMINER on: one examiner rates rounds 1 and 2; each round once; re
   const by = Object.fromEntries(res.modules.map((m) => [m.module, m]));
   for (const m of ['schreiben', 'sprechen']) { assert.equal(by[m].status, 'final'); assert.equal(by[m].same_examiner, true); assert.equal(by[m].note, SAME_EXAMINER_NOTE); }
   assert.equal(by.lesen.same_examiner, undefined);
-  assert.ok(resultPage(res).includes('derselben zertifizierten Prüfperson'));
+  assert.ok(resultPage(res).includes('dieselbe Person') && !/zertifiziert/i.test(resultPage(res)));
   const fb = await call(s.env, 'GET', `/exam/v1/attempts/${s.attempt}/modules/schreiben/feedback`, { user: s.user });
   assert.equal(fb.status, 200, JSON.stringify(fb.json));
   assert.equal(fb.json.same_examiner, true);
   const html = ratedFeedback('schreiben', fb.json);
-  assert.ok(html.includes('derselben zertifizierten Prüfperson') && !html.includes('Mittelwert aus zwei unabhängigen Bewertungen'));
+  assert.ok(html.includes('Lehrkraft von Klarweg') && !html.includes('Mittelwert aus zwei unabhängigen Bewertungen'));
 });
 
 test('SINGLE EXAMINER on, two different raters: nothing claims "same examiner"', async () => {

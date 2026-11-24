@@ -198,7 +198,9 @@ test('RESULTS (render): OD-45 title and disclaimer, per-module rows with counts,
       { module: 'schreiben', status: 'pending_rating', points: null, max_points: 100, note: 'Awaiting two independent human ratings.' },
       { module: 'sprechen', status: 'not_taken', points: null, max_points: 100 }] });
   assert.equal(RESULT_TITLE, 'Klarweg B1 Simulation – Ergebnis', 'OD-45 title');
-  assert.equal(RESULT_DISCLAIMER, 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts.', 'OD-45 disclaimer');
+  assert.ok(RESULT_DISCLAIMER.startsWith('Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts. '), 'OD-45 disclaimer');
+  assert.match(RESULT_DISCLAIMER, /nicht mit dem Goethe-Institut verbunden/, 'O-5 non-affiliation');
+  assert.match(RESULT_DISCLAIMER, /kein Zertifikat/, 'O-5 not a certificate');
   assert.ok(html.includes(esc(RESULT_TITLE)) && html.includes(esc(RESULT_DISCLAIMER)));
   assert.ok(html.includes('100 / 100') && html.includes('bestanden · sehr gut'));
   assert.ok(html.includes('33 / 100') && html.includes('richtig 10 · falsch 15 · ohne Antwort 5'));
@@ -1367,7 +1369,7 @@ test('START SCREEN: the Mock M0 comes before the synthetic practice and says how
   assert.deepEqual(c, { mode: 'mock_m0', module: null });
   const html = startScreen(c);
   assert.ok(html.includes('data-mode="mock_m0"') && html.includes('Klarweg B1 Modelltest'));
-  assert.ok(html.includes('zertifizierte Prüfperson') && html.includes('kein offizielles Ergebnis'));
+  assert.ok(html.includes('Lehrkraft von Klarweg') && !/zertifiziert/i.test(html) && html.includes('kein offizielles Ergebnis') && html.includes('nicht mit dem Goethe-Institut verbunden'));
   assert.ok(!html.includes('synthetische Inhalte') && html.includes('synthetischen Stimmen'), 'real content, honestly synthetic voices');
   assert.deepEqual(startChoice({ modes: [{ mode: 'synthetic_full', level: 'b1', available: true }, { mode: 'mock_m0', level: 'b1', available: false }] }), { mode: 'synthetic_full', module: null });
 });
@@ -1394,4 +1396,26 @@ test('START SCREEN (EXAM_MODULE_CHOICE): the Mock M0 offers all four modules OR 
   assert.ok(plain.includes('Modelltest starten') && !plain.includes('kx-module-choice'));
   // the stylesheet keeps the spacing scale for the new section
   assert.match(read('exam/exam.css'), /\.kx-mc-option \{ border: 1px solid var\(--line\); border-radius: var\(--radius\); padding: 24px; margin-top: 16px; \}/);
+});
+
+test('O-8/O-5 (owner 2026-11-24): no examiner-certification claim anywhere in the exam client or Worker; non-affiliation stated', async () => {
+  const fsm = await import('node:fs'); const pathm = await import('node:path');
+  const root = pathm.resolve(pathm.dirname(new URL(import.meta.url).pathname), '../..');
+  const files = [];
+  for (const d of ['exam', 'exam/js', 'exam-worker/src']) for (const f of fsm.readdirSync(pathm.join(root, d))) if (/\.(js|html|css)$/.test(f)) files.push(pathm.join(root, d, f));
+  for (const f of files) {
+    const s = fsm.readFileSync(f, 'utf8');
+    assert.equal(/zertifizierte?n? (Prüf|Bewert|Lehr)|certified (examiner|rater|teacher)/i.test(s), false, `certification claim in ${f}`);
+    assert.equal(/offizielle[rs]? (Goethe-)?Prüfer/i.test(s), false, `official-examiner claim in ${f}`);
+  }
+});
+
+test('O-5: the exam page shell carries a permanent non-affiliation footer (no certification claim)', async () => {
+  const fsm = await import('node:fs');
+  const html = fsm.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const foot = html.match(/<footer class="kx-legal">([\s\S]*?)<\/footer>/);
+  assert.ok(foot, 'footer present');
+  assert.match(foot[1], /nicht mit dem Goethe-Institut verbunden/);
+  assert.match(foot[1], /kein Zertifikat des Goethe-Instituts/);
+  assert.equal(/<h1/.test(foot[1]), false, 'one h1 per screen stays');
 });

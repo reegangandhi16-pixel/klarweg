@@ -1691,3 +1691,15 @@ public/vocab-img/833cb5ba0786dc863a7e-400.avif
 public/vocab-img/833cb5ba0786dc863a7e-400.webp
 public/vocab-img/833cb5ba0786dc863a7e-800.avif
 public/vocab-img/833cb5ba0786dc863a7e-800.webp
+
+# Keyword-led German learning guides, batch 6
+german-a1-word-order-in-hindi.html
+german-alphabet-spelling-names.html
+goethe-a1-speaking-requests.html
+german-a2-speaking-questions.html
+german-b1-listening-key-details.html
+goethe-b1-writing-revision.html
+telc-b2-speaking-discussion-practice.html
+german-b2-source-paraphrase-practice.html
+german-b1-workplace-speaking-practice.html
+german-a1-grammar-mistakes-hindi.html

@@ -39,6 +39,12 @@ for (const pages of batches) {
       .replace(/<table>[\s\S]*?<\/table>/g, table =>
         `<div class="guide-table" tabindex="0" role="region" aria-label="Comparison table">${table}</div>`);
     assert.ok(sections.length >= 2, file);
+    const practiceFirst = pages === batches[5];
+    const practiceSections = sections.filter(({ heading }) => heading !== 'Official references');
+    const practiceSection = content.includes('data-speak=') ? practiceSections[0] : practiceSections.at(-1);
+    const primaryAction = practiceFirst
+      ? link('#' + practiceSection.id, language === 'hi' ? 'अभ्यास शुरू करें' : 'Start the practice', 'btn')
+      : link(target, action, 'btn');
     const contents = sections.filter(({ heading }) => heading !== 'Official references')
       .map(({ id, heading, languageAttribute }) => `<li><a href="#${id}"${languageAttribute || ''}>${heading}</a></li>`).join('');
     const related = pages.filter(page => page[0] !== slug).slice(0, 4);
@@ -113,7 +119,7 @@ for (const pages of batches) {
 <nav class="crumb" aria-label="Breadcrumb">${link('resources.html#german-learning-guides','German learning guides')}</nav>
 <section class="hero guide-hero"><h1>${esc(title)}</h1>
 <div class="guide-answer"><strong>Quick answer</strong><p class="lede"${language === 'hi' ? ' lang="hi"' : ''}>${esc(answers[slug])}</p></div>
-<div class="actions">${link(target,action,'btn')}</div></section>
+<div class="actions">${primaryAction}</div></section>
 <nav class="panel guide-contents" id="on-this-page" aria-labelledby="contents-title"><h2 id="contents-title">On this page</h2><ul>${contents}</ul></nav>
 <div class="content guide-content"><div class="stack">
 ${content}

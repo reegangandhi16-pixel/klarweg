@@ -19,9 +19,11 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { ROOT, loadChapters, conceptKey, headKey, headTerm } from "./lib.mjs";
 import { STORE, log, assertCanSpend, textUsd } from "./budget.mjs";
+import { gcpGuard } from "../lib/gcp-guard.mjs";
+// Fail-closed (2026-11-24): account/project/quota/billing verified from ~/.config/klarweg/gcp.env before the first Google call; old klarweg-512108/-498812 refused.
+let _gcp; const gcp = () => (_gcp ??= gcpGuard(process.env.VOCAB_IMG_GCP_PROJECT));
 
 const MODEL = process.env.REVIEW_MODEL || "gemini-3.8-flash";
-const PROJECT = process.env.VOCAB_IMG_GCP_PROJECT || "klarweg-512108";
 const DIR = path.join(STORE, "review-v2");
 const OUT = path.join(ROOT, "docs/visual-vocab/prompts/coverage-2.json");
 const QUEUE = path.join(STORE, "project/queue.json");
@@ -128,14 +130,14 @@ export function parseCritic(text) {
 }
 
 async function call(token, items, system = RULES, render = null) {
-  const url = `https://aiplatform.googleapis.com/v1/projects/${PROJECT}/locations/global/publishers/google/models/${MODEL}:generateContent`;
+  const url = `https://aiplatform.googleapis.com/v1/projects/${gcp().project}/locations/global/publishers/google/models/${MODEL}:generateContent`;
   const text = render ? render(items) : "Concepts:\n" + items.map((c) => JSON.stringify({ key: c.key, german: c.de, pos: c.pos, meaning: c.meaning, example: c.example, chapter: c.chapter, failedBecause: c.failedBecause, existing: c.existing })).join("\n");
   const body = { systemInstruction: { parts: [{ text: system }] },
     contents: [{ role: "user", parts: [{ text }] }],
     generationConfig: { temperature: 0.4, maxOutputTokens: 32000 } };
   let last = 0;
   for (let a = 0; a < 6; a++) {
-    let r; try { r = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(a > 0 && last === 401), "Content-Type": "application/json", "x-goog-user-project": PROJECT }, body: JSON.stringify(body) }); }
+    let r; try { r = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(a > 0 && last === 401), "Content-Type": "application/json", "x-goog-user-project": gcp().project }, body: JSON.stringify(body) }); }
     catch { await new Promise((z) => setTimeout(z, 10000 * (a + 1))); continue; }
     last = r.status;
     if (r.status === 401) continue;
@@ -154,8 +156,8 @@ async function run() {
   const name = (i) => path.join(DIR, `${tag}chunk-${String(i).padStart(4, "0")}.json`);
   const pending = all.map((c, i) => ({ c, i })).filter(({ i }) => !fs.existsSync(name(i))).slice(0, Number(opt("limit", Infinity)));
   console.log(JSON.stringify({ concepts: list.length, chunks: all.length, pending: pending.length }));
-  let tok = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim(), at = Date.now();
-  const token = (force) => { if (force || Date.now() - at > 20 * 60e3) { tok = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim(); at = Date.now(); } return tok; };
+  let tok = execFileSync("gcloud", ["auth", "print-access-token", "--account", gcp().account], { encoding: "utf8" }).trim(), at = Date.now();
+  const token = (force) => { if (force || Date.now() - at > 20 * 60e3) { tok = execFileSync("gcloud", ["auth", "print-access-token", "--account", gcp().account], { encoding: "utf8" }).trim(); at = Date.now(); } return tok; };
   let idx = 0, done = 0, usd = 0;
   async function worker() {
     while (idx < pending.length) {
@@ -187,8 +189,8 @@ async function critic(rescue = false) {
   const all = chunked(list); const name = (i) => path.join(DIRX, `r${run}-chunk-${String(i).padStart(4, "0")}.json`);
   const pending = all.map((c, i) => ({ c, i })).filter(({ i }) => !fs.existsSync(name(i))).slice(0, Number(opt("limit", Infinity)));
   console.log(JSON.stringify({ proposals: list.length, chunks: all.length, pending: pending.length }));
-  let tok = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim(), at = Date.now();
-  const token = (force) => { if (force || Date.now() - at > 20 * 60e3) { tok = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim(); at = Date.now(); } return tok; };
+  let tok = execFileSync("gcloud", ["auth", "print-access-token", "--account", gcp().account], { encoding: "utf8" }).trim(), at = Date.now();
+  const token = (force) => { if (force || Date.now() - at > 20 * 60e3) { tok = execFileSync("gcloud", ["auth", "print-access-token", "--account", gcp().account], { encoding: "utf8" }).trim(); at = Date.now(); } return tok; };
   const render = (items) => "Proposals:\n" + items.map((x) => { const c = byKey.get(x.key); return JSON.stringify({ key: x.key, german: c.de, pos: c.pos, meaning: c.meaning, example: c.example, chapter: c.chapter, strategy: x.strategy, scene: x.subject, ...(rescue ? { rejectedBecause: crit.get(x.key).reason } : {}) }); }).join("\n");
   let idx = 0, done = 0, usd = 0;
   async function worker() {

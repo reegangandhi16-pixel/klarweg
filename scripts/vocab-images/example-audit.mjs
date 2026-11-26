@@ -12,9 +12,11 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { loadChapters } from "./lib.mjs";
 import { STORE, log, assertCanSpend, textUsd } from "./budget.mjs";
+import { gcpGuard } from "../lib/gcp-guard.mjs";
+// Fail-closed (2026-11-24): account/project/quota/billing verified from ~/.config/klarweg/gcp.env before the first Google call; old klarweg-512108/-498812 refused.
+let _gcp; const gcp = () => (_gcp ??= gcpGuard(process.env.VOCAB_IMG_GCP_PROJECT));
 
 const MODEL = process.env.REVIEW_MODEL || "gemini-3.8-flash";
-const PROJECT = process.env.VOCAB_IMG_GCP_PROJECT || "klarweg-512108";
 const DIR = path.join(STORE, "example-audit");
 const CHUNK = 40;
 const args = process.argv.slice(2);
@@ -36,12 +38,12 @@ function cards() {
   return out;
 }
 async function call(token, items) {
-  const url = `https://aiplatform.googleapis.com/v1/projects/${PROJECT}/locations/global/publishers/google/models/${MODEL}:generateContent`;
+  const url = `https://aiplatform.googleapis.com/v1/projects/${gcp().project}/locations/global/publishers/google/models/${MODEL}:generateContent`;
   const body = { systemInstruction: { parts: [{ text: RULES }] }, contents: [{ role: "user", parts: [{ text: "Cards:\n" + items.map((c) => JSON.stringify(c)).join("\n") }] }],
     generationConfig: { temperature: 0, maxOutputTokens: 24000, responseMimeType: "application/json" } };
   let last = 0;
   for (let a = 0; a < 6; a++) {
-    let r; try { r = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(a > 0 && last === 401), "Content-Type": "application/json", "x-goog-user-project": PROJECT }, body: JSON.stringify(body) }); }
+    let r; try { r = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(a > 0 && last === 401), "Content-Type": "application/json", "x-goog-user-project": gcp().project }, body: JSON.stringify(body) }); }
     catch { await new Promise((z) => setTimeout(z, 10000 * (a + 1))); continue; }
     last = r.status; if (r.status === 401) continue;
     if (r.status === 429 || r.status >= 500) { await new Promise((z) => setTimeout(z, 15000 * (a + 1))); continue; }
@@ -55,8 +57,8 @@ async function run() {
   const name = (i) => path.join(DIR, `chunk-${String(i).padStart(4, "0")}.json`);
   const pending = chunks.map((c, i) => ({ c, i })).filter(({ i }) => !fs.existsSync(name(i)));
   console.log(JSON.stringify({ cards: all.length, chunks: chunks.length, pending: pending.length }));
-  let tok = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim(), at = Date.now();
-  const token = (f) => { if (f || Date.now() - at > 20 * 60e3) { tok = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim(); at = Date.now(); } return tok; };
+  let tok = execFileSync("gcloud", ["auth", "print-access-token", "--account", gcp().account], { encoding: "utf8" }).trim(), at = Date.now();
+  const token = (f) => { if (f || Date.now() - at > 20 * 60e3) { tok = execFileSync("gcloud", ["auth", "print-access-token", "--account", gcp().account], { encoding: "utf8" }).trim(); at = Date.now(); } return tok; };
   let idx = 0, done = 0, usd = 0;
   async function worker() {
     while (idx < pending.length) {

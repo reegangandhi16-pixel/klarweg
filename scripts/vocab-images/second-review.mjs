@@ -20,9 +20,11 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { ROOT, loadChapters, conceptKey, headTerm } from "./lib.mjs";
 import { STORE, log, assertCanSpend, textUsd } from "./budget.mjs";
+import { gcpGuard } from "../lib/gcp-guard.mjs";
+// Fail-closed (2026-11-24): account/project/quota/billing verified from ~/.config/klarweg/gcp.env before the first Google call; old klarweg-512108/-498812 refused.
+let _gcp; const gcp = () => (_gcp ??= gcpGuard(process.env.VOCAB_IMG_GCP_PROJECT));
 
 const MODEL = process.env.REVIEW_MODEL || "gemini-3.8-flash";
-const PROJECT = process.env.VOCAB_IMG_GCP_PROJECT || "klarweg-512108";
 const DIR = path.join(STORE, "review-second"), VDIR = path.join(STORE, "review-second-verify");
 const OUT = path.join(ROOT, "docs/visual-vocab/prompts/second-strategy.json");
 const QUEUE = path.join(STORE, "project/queue.json");
@@ -57,12 +59,12 @@ function concepts() {
   return [...m.values()].sort((a, b) => a.key.localeCompare(b.key));
 }
 async function call(token, system, text) {
-  const url = `https://aiplatform.googleapis.com/v1/projects/${PROJECT}/locations/global/publishers/google/models/${MODEL}:generateContent`;
+  const url = `https://aiplatform.googleapis.com/v1/projects/${gcp().project}/locations/global/publishers/google/models/${MODEL}:generateContent`;
   const body = { systemInstruction: { parts: [{ text: system }] }, contents: [{ role: "user", parts: [{ text }] }],
     generationConfig: { temperature: 0.3, maxOutputTokens: 32000, responseMimeType: "application/json" } };
   let last = 0;
   for (let a = 0; a < 6; a++) {
-    let r; try { r = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(a > 0 && last === 401), "Content-Type": "application/json", "x-goog-user-project": PROJECT }, body: JSON.stringify(body) }); }
+    let r; try { r = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(a > 0 && last === 401), "Content-Type": "application/json", "x-goog-user-project": gcp().project }, body: JSON.stringify(body) }); }
     catch { await new Promise((z) => setTimeout(z, 10000 * (a + 1))); continue; }
     last = r.status; if (r.status === 401) continue;
     if (r.status === 429 || r.status >= 500) { await new Promise((z) => setTimeout(z, 15000 * (a + 1))); continue; }
@@ -71,8 +73,8 @@ async function call(token, system, text) {
   return { ok: false, status: last || 599, j: {} };
 }
 function tokenFn() {
-  let tok = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim(), at = Date.now();
-  return (force) => { if (force || Date.now() - at > 20 * 60e3) { tok = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim(); at = Date.now(); } return tok; };
+  let tok = execFileSync("gcloud", ["auth", "print-access-token", "--account", gcp().account], { encoding: "utf8" }).trim(), at = Date.now();
+  return (force) => { if (force || Date.now() - at > 20 * 60e3) { tok = execFileSync("gcloud", ["auth", "print-access-token", "--account", gcp().account], { encoding: "utf8" }).trim(); at = Date.now(); } return tok; };
 }
 const hashOf = (x) => { const { key, ...rest } = x; return JSON.stringify(rest); };
 const readDir = (d) => { const r = new Map(); if (fs.existsSync(d)) for (const f of fs.readdirSync(d).filter((f) => f.endsWith(".json")).sort()) for (const x of JSON.parse(fs.readFileSync(path.join(d, f), "utf8"))) if (x && x.key) r.set(x.key, x); return r; };

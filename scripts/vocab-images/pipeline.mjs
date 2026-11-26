@@ -43,6 +43,9 @@ import { createRequire } from "node:module";
 import { ROOT, LEVELS, loadChapters, classify, conceptKey, promptFor } from "./lib.mjs";
 import { applyImages } from "./apply-lib.mjs";
 import { STORE, rows, log, committedUsd, listUsd, assertCanSpend, textUsd, IMAGE_USD_WORST, IMAGE_USD_BATCH } from "./budget.mjs";
+import { gcpGuard } from "../lib/gcp-guard.mjs";
+// Fail-closed (2026-11-24): account/project/quota/billing verified from ~/.config/klarweg/gcp.env before the first Google call; old klarweg-512108/-498812 refused.
+let _gcp; const gcp = () => (_gcp ??= gcpGuard(process.env.VOCAB_IMG_GCP_PROJECT));
 
 const PROMPTS_DIR = path.join(ROOT, "docs/visual-vocab/prompts");
 const GATED_LIST = path.join(ROOT, "docs/visual-vocab/gated-images.json");
@@ -58,9 +61,7 @@ const WIDTHS = [400, 800];
 const FORMATS = ["avif", "webp"];
 const IMAGE_MODEL = process.env.IMAGE_MODEL || "gemini-2.5-flash-image";
 const QA_MODEL = process.env.QA_MODEL || "gemini-3.8-flash";
-const PROJECT = process.env.VOCAB_IMG_GCP_PROJECT || "klarweg-512108";
-const PROJECT_NUM = process.env.VOCAB_IMG_GCP_PROJECT_NUM || "951775270820";
-const GCS = process.env.VOCAB_IMG_GCS || "gs://klarweg/vocab-img-batch";
+const GCS = process.env.VOCAB_IMG_GCS || ""; // old gs://klarweg bucket belongs to the old project; batch mode needs a bucket in the new project
 const REGION = "us-central1";
 
 const args = process.argv.slice(2);
@@ -70,10 +71,10 @@ const readJson = (p, d) => (fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, "ut
 const writeJson = (p, v) => { fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, JSON.stringify(v, null, 1) + "\n"); };
 const readJsonl = (p) => (fs.existsSync(p) ? fs.readFileSync(p, "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l)) : []);
 export const imageId = (key) => crypto.createHash("sha256").update(key).digest("hex").slice(0, 20);
-const token = (() => { let t = null, at = 0; return (force) => { if (force || !t || Date.now() - at > 20 * 60e3) { t = execFileSync("gcloud", ["auth", "print-access-token"], { encoding: "utf8" }).trim(); at = Date.now(); } return t; }; })();
+const token = (() => { let t = null, at = 0; return (force) => { if (force || !t || Date.now() - at > 20 * 60e3) { t = execFileSync("gcloud", ["auth", "print-access-token", "--account", gcp().account], { encoding: "utf8" }).trim(); at = Date.now(); } return t; }; })();
 const gapi = async (url, init = {}) => {
-  let r = await fetch(url, { ...init, headers: { Authorization: "Bearer " + token(), "Content-Type": "application/json", "x-goog-user-project": PROJECT, ...(init.headers || {}) } });
-  if (r.status === 401) r = await fetch(url, { ...init, headers: { Authorization: "Bearer " + token(true), "Content-Type": "application/json", "x-goog-user-project": PROJECT, ...(init.headers || {}) } });
+  let r = await fetch(url, { ...init, headers: { Authorization: "Bearer " + token(), "Content-Type": "application/json", "x-goog-user-project": gcp().project, ...(init.headers || {}) } });
+  if (r.status === 401) r = await fetch(url, { ...init, headers: { Authorization: "Bearer " + token(true), "Content-Type": "application/json", "x-goog-user-project": gcp().project, ...(init.headers || {}) } });
   const j = await r.json().catch(() => ({}));
   if (!r.ok) throw new Error(`${r.status} ${JSON.stringify(j).slice(0, 300)}`);
   return j;
@@ -262,7 +263,7 @@ async function generate() {
   const limit = Number(opt("limit", Infinity)), par = Number(opt("parallel", 4)), level = opt("level");
   markAbortedInteractive();
   const work = pickWork(level, limit);
-  const url = `https://aiplatform.googleapis.com/v1/projects/${PROJECT}/locations/global/publishers/google/models/${IMAGE_MODEL}:generateContent`;
+  const url = `https://aiplatform.googleapis.com/v1/projects/${gcp().project}/locations/global/publishers/google/models/${IMAGE_MODEL}:generateContent`;
   console.log(JSON.stringify({ toGenerate: work.length, parallel: par }));
   let idx = 0, ok = 0, bad = 0, r429 = 0, stop = false; const t0 = Date.now();
   const gate = makeGate(par);
@@ -277,7 +278,7 @@ async function generate() {
       let res = null;
       for (let a = 0; a < 10; a++) {
         await gate.acquire();
-        try { res = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(a > 0 && res?.status === 401), "Content-Type": "application/json", "x-goog-user-project": PROJECT }, body: JSON.stringify(body) }); }
+        try { res = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(a > 0 && res?.status === 401), "Content-Type": "application/json", "x-goog-user-project": gcp().project }, body: JSON.stringify(body) }); }
         finally { gate.release(); }
         if (res.status === 401) continue;
         if (res.status === 429 || res.status >= 500) { r429++; gate.backoff(); await new Promise((z) => setTimeout(z, backoffMs(a))); continue; }
@@ -336,9 +337,10 @@ async function submit() {
     const local = path.join(PROJ, "jobs", tag + ".jsonl");
     fs.mkdirSync(path.dirname(local), { recursive: true });
     fs.writeFileSync(local, part.map((w) => JSON.stringify({ key: `${w.it.key}#${w.attempt}`, request: { contents: [{ role: "user", parts: [{ text: w.prompt }] }], generationConfig: { responseModalities: ["IMAGE"], imageConfig: { aspectRatio: "4:3" } } } })).join("\n") + "\n");
+    if (!GCS) throw new Error("VOCAB_IMG_GCS is not set: batch mode needs a gs:// bucket in the NEW project (the old gs://klarweg bucket is in the old project) — refusing");
     const gin = `${GCS}/${tag}/in.jsonl`, gout = `${GCS}/${tag}/out`;
-    execFileSync("gcloud", ["storage", "cp", "--quiet", local, gin], { stdio: "pipe" });
-    const job = await gapi(`https://${REGION}-aiplatform.googleapis.com/v1/projects/${PROJECT}/locations/${REGION}/batchPredictionJobs`, { method: "POST", body: JSON.stringify({
+    execFileSync("gcloud", ["storage", "cp", "--quiet", "--account", gcp().account, "--billing-project", gcp().project, local, gin], { stdio: "pipe" });
+    const job = await gapi(`https://${REGION}-aiplatform.googleapis.com/v1/projects/${gcp().project}/locations/${REGION}/batchPredictionJobs`, { method: "POST", body: JSON.stringify({
       displayName: "vocab-img-" + tag, model: `publishers/google/models/${IMAGE_MODEL}`,
       inputConfig: { instancesFormat: "jsonl", gcsSource: { uris: [gin] } },
       outputConfig: { predictionsFormat: "jsonl", gcsDestination: { outputUriPrefix: gout } } }) });
@@ -415,7 +417,7 @@ async function qa() {
   const work = [];
   for (const [key, x] of st.all) { const it = items.get(key); if (it) for (const r of x.needsQa) work.push({ it, r }); }
   console.log(JSON.stringify({ toCheck: work.length }));
-  const url = `https://aiplatform.googleapis.com/v1/projects/${PROJECT}/locations/global/publishers/google/models/${QA_MODEL}:generateContent`;
+  const url = `https://aiplatform.googleapis.com/v1/projects/${gcp().project}/locations/global/publishers/google/models/${QA_MODEL}:generateContent`;
   let idx = 0, done = 0, fails = 0, usd = 0;
   async function worker() {
     while (idx < work.length) {
@@ -428,7 +430,7 @@ async function qa() {
       let j = null;
       for (let a = 0; a < 6 && !j; a++) {
         let res;
-        try { res = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(), "Content-Type": "application/json", "x-goog-user-project": PROJECT }, body: JSON.stringify(body) }); }
+        try { res = await fetch(url, { method: "POST", headers: { Authorization: "Bearer " + token(), "Content-Type": "application/json", "x-goog-user-project": gcp().project }, body: JSON.stringify(body) }); }
         catch (e) { console.error("qa network error, retrying:", String(e.cause?.code || e.message).slice(0, 60)); await new Promise((z) => setTimeout(z, 10000 * (a + 1))); continue; }   // ETIMEDOUT etc. must not kill the whole QA run
         if (res.status === 401) { token(true); continue; }
         if (res.status === 429 || res.status >= 500) { await new Promise((z) => setTimeout(z, 10000 * (a + 1))); continue; }

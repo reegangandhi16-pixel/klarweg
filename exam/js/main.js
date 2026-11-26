@@ -99,6 +99,11 @@ function reacquireLease(staleLease = null) {
   })();
   return reacquiring;
 }
+/* A request that carried the lease this tab has since replaced itself (reacquired after expiry) can reach the server
+   after the new lease exists; the server then answers lease_superseded. That is not another tab: wait for an
+   in-flight reacquire, and if our lease changed, the old one was simply ours. Another tab taking over after our
+   reacquire still fails on the retry with the current lease. */
+async function replacedByUs(lease) { if (reacquiring) await reacquiring; return !!lease && lease !== S.lease; }
 /* Another tab holding the attempt now is the same situation as a superseded lease: offer "Hier fortsetzen". */
 const leaseLost = (e) => (e && e.code === 'lease_held' ? new ExamApiError(409, 'lease_superseded') : e);
 function onLeaseExpired(staleLease = null) { reacquireLease(staleLease).then((e) => { if (e) { clearInterval(S.hb); fail(leaseLost(e)); } }); }
@@ -111,6 +116,7 @@ for (const name of LEASED_CALLS) {
   const call = api[name];
   api[name] = async (id, lease, ...rest) => {
     try { return await call(id, lease, ...rest); } catch (e) {
+      if (e && e.code === 'lease_superseded' && await replacedByUs(lease)) return call(id, S.lease, ...rest);
       if (!e || e.code !== 'lease_expired') throw e;
       const err = await reacquireLease(lease);
       if (err) throw leaseLost(err);
@@ -124,7 +130,7 @@ function startHeartbeat() {
   S.hb = setInterval(async () => {
     const sent = S.lease;
     try { const r = await api.heartbeat(S.attempt.attempt_id, sent); const before = S.module; S.attempt = r; const m = r.modules.find((x) => x.module === before); if (before && m && m.status === 'submitted') route(); }
-    catch (e) { if (e.code === 'lease_superseded' || e.code === 'auth_required' || e.code === 'exam_access_required') { clearInterval(S.hb); clearInterval(S.timer); fail(e); } else if (e.code === 'lease_expired') onLeaseExpired(sent); }
+    catch (e) { if (e.code === 'lease_superseded' && await replacedByUs(sent)) return; if (e.code === 'lease_superseded' || e.code === 'auth_required' || e.code === 'exam_access_required') { clearInterval(S.hb); clearInterval(S.timer); fail(e); } else if (e.code === 'lease_expired') onLeaseExpired(sent); }
   }, 15_000);
 }
 

@@ -13,9 +13,11 @@ export const UMLAUTS = ['ä', 'ö', 'ü', 'Ä', 'Ö', 'Ü', 'ß', '„', '“', 
 const CHAR_NAMES = { '„': 'Anführungszeichen unten', '“': 'Anführungszeichen oben', '–': 'Gedankenstrich', '€': 'Eurozeichen' };
 /* OD-45 (LOCKED): student-facing title and mandatory disclaimer; never "Goethe score / Goethe-Ergebnis". */
 export const RESULT_TITLE = 'Klarweg B1 Simulation – Ergebnis';
-export const RESULT_DISCLAIMER = 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts.';
+/* O-5 (owner 2026-11-24): explicit non-affiliation follows the locked OD-45 sentence. Keep in sync with the disclaimer in exam-worker/src/core.js buildResult(). */
+export const RESULT_DISCLAIMER = 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts. Dies ist eine Übungsprüfung von Klarweg, keine Prüfung und kein Zertifikat des Goethe-Instituts. Klarweg ist unabhängig und nicht mit dem Goethe-Institut verbunden.';
 /* EXAM_SINGLE_EXAMINER: one examiner gave both rating rounds; never presented as two independent raters */
-export const SAME_EXAMINER_NOTE = 'Zweimal unabhängig bewertet von derselben zertifizierten Prüfperson (nicht von zwei verschiedenen Prüfenden).';
+/* O-8 (owner 2026-11-24): no examiner-certification claim; replaces OWN-2026-11-06-2 wording. Keep in sync: core.js + render.js. */
+export const SAME_EXAMINER_NOTE = 'Bewertung durch eine Lehrkraft von Klarweg: zwei getrennte Bewertungsdurchgänge durch dieselbe Person (nicht durch zwei verschiedene Bewertende).';
 
 export function paragraphs(md) {
   return String(md || '').split(/\n{2,}/).map((p) => `<p>${esc(p).replace(/\n/g, '<br>')}</p>`).join('');
@@ -467,7 +469,7 @@ export function startScreen(choice, { lastCompleted = null, history = '', parts 
     return `<main class="kx-card"><p class="kx-eyebrow">${choice.modules ? 'Modelltest' : 'Modelltest · alle vier Module'}</p><h1>Klarweg B1 Modelltest</h1>`
       + '<p>Ein vollständiger Modelltest mit Lesen, Hören, Schreiben und Sprechen, mit den Prüfungszeiten. Die Zeit läuft auf dem Server. '
       + 'Die Hörtexte werden einmal oder zweimal abgespielt, wie in der Prüfung; Sie können sie nicht anhalten. Für Sprechen brauchen Sie ein Mikrofon.</p>'
-      + '<p>Lesen und Hören werden automatisch ausgewertet, mit Lösung und Erklärung zu jeder Aufgabe. Schreiben und Sprechen bewertet eine zertifizierte Prüfperson; '
+      + '<p>Lesen und Hören werden automatisch ausgewertet, mit Lösung und Erklärung zu jeder Aufgabe. Schreiben und Sprechen bewertet eine Lehrkraft von Klarweg; '
       + 'das Ergebnis dieser Module erscheint nach der Bewertung.</p>'
       + `<p class="kx-meta">${esc(RESULT_DISCLAIMER)} Die Hörtexte sind mit synthetischen Stimmen erstellt.</p>`
       + (choice.modules ? moduleChoiceSection(choice) + (last ? `<div class="kx-actions">${last}</div>` : '')
@@ -502,7 +504,12 @@ export function attemptHistory(list, formatDate = (ms) => new Date(ms).toLocaleD
       + `<td><button type="button" class="kx-btn kx-btn-quiet" data-act="last-result" data-attempt="${esc(a.attempt_id)}">Ergebnis ansehen</button></td></tr>`;
   }).join('');
   if (!rows) return '';
-  return '<section class="kx-history" aria-labelledby="kx-history-title"><h2 id="kx-history-title">Ihre bisherigen Übungen</h2>'
+  /* Modelltest progress: "3 von 11 Modelltests vollständig bearbeitet" (the next start assigns one not yet taken) */
+  const mp = list.mock_progress;
+  const progress = mp && mp.total > 0
+    ? `<p class="kx-progress-set">${esc(mp.completed)} von ${esc(mp.total)} Modelltests vollständig bearbeitet.${mp.completed < mp.total ? ' Neue Starts wählen bevorzugt einen Modelltest, den Sie noch nicht bearbeitet haben.' : ' Sie haben alle Modelltests bearbeitet; ein neuer Start wiederholt einen davon.'}</p>`
+    : '';
+  return '<section class="kx-history" aria-labelledby="kx-history-title"><h2 id="kx-history-title">Ihre bisherigen Übungen</h2>' + progress
     + `<div class="kx-table-wrap"><table class="kx-table"><caption>Abgeschlossene Übungen (neueste zuerst)</caption><thead><tr><th scope="col">Datum</th><th scope="col">Übung</th>`
     + cols.map((mod) => `<th scope="col">${esc(MODULE_LABELS[mod])}</th>`).join('') + '<th scope="col"><span class="kx-sr">Aktion</span></th></tr></thead>'
     + `<tbody>${rows}</tbody></table></div></section>`;

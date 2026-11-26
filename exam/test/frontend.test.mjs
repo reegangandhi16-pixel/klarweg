@@ -124,7 +124,7 @@ test('SPEAKING (client): chunk queue hashes, buffers, resends only gaps, stops o
   const stored = await store.get(q.key(t, 0));
   assert.equal(stored.sha256, await sha256Hex(new TextEncoder().encode('c0')));
   await q.drain(t, new Set([1]));                  // server already has seq 1
-  assert.deepEqual(uploads.map((u) => u.seq), ['0', '2']);
+  assert.deepEqual(uploads.map((u) => u.seq).sort(), ['0', '2']);   // parallel uploads: order-free (the server keys chunks by seq)
   assert.deepEqual(await q.pending(t), []);
   const r = await q.finish(t, 3, 4000);
   assert.deepEqual(r, { ok: true, item_id: t.item_id, turn: 't1', chunks: 3, duration_ms: 4000 });
@@ -132,6 +132,28 @@ test('SPEAKING (client): chunk queue hashes, buffers, resends only gaps, stops o
   await q2.add(t, 9, new Uint8Array([1]).buffer, 'audio/webm');
   await assert.rejects(q2.drain(t), (e) => e.code === 'consent_required');
   assert.equal((await q2.pending(t)).length, 1);   // still buffered locally
+});
+
+test('SPEAKING (client): chunks upload in parallel (bounded), every chunk once; a definitive refusal stops the drain and keeps the rest buffered', async () => {
+  const store = memoryStore(); const t = { item_id: 'itm:b1:syn-sp2', turn: 't1' };
+  let inFlight = 0, peak = 0; const sent = [];
+  const q = new ChunkQueue({ attemptId: 'att_fe_par', store, sleep: async () => {},
+    upload: async (meta) => { inFlight++; peak = Math.max(peak, inFlight); await new Promise((r) => setTimeout(r, 5)); inFlight--; sent.push(meta.seq); },
+    completeTurn: async (b) => ({ ok: true, ...b }) });
+  assert.equal(q.concurrency, 4, 'default: 4 in flight');
+  for (let i = 0; i < 20; i++) await q.add(t, i, new Uint8Array([i + 1]).buffer, 'audio/webm');
+  await q.drain(t);
+  assert.equal(peak, 4, 'never more than 4 uploads at once');
+  assert.deepEqual(sent.map(Number).sort((a, b) => a - b), [...Array(20).keys()], 'each chunk exactly once');
+  assert.deepEqual(await q.pending(t), []);
+  const t2 = { item_id: 'itm:b1:syn-sp2', turn: 't2' }; let calls = 0;
+  const q2 = new ChunkQueue({ attemptId: 'att_fe_par', store, sleep: async () => {},
+    upload: async () => { calls++; await new Promise((r) => setTimeout(r, 2)); throw new ExamApiError(409, 'upload_window_closed'); }, completeTurn: async () => {} });
+  for (let i = 0; i < 10; i++) await q2.add(t2, i, new Uint8Array([i + 1]).buffer, 'audio/webm');
+  await assert.rejects(q2.drain(t2), (e) => e.code === 'upload_window_closed');
+  assert.ok(calls <= 4, `stops after the first refusal (calls=${calls})`);
+  assert.equal((await q2.pending(t2)).length, 10, 'nothing deleted: all chunks stay buffered for a later resend');
+  assert.equal(new ChunkQueue({ attemptId: 'att_x', store, upload: async () => {}, completeTurn: async () => {}, concurrency: 1 }).concurrency, 1);
 });
 
 test('ENGINE: generic sequencing from server state; every synthetic package is supported by the renderer registry', () => {
@@ -176,7 +198,9 @@ test('RESULTS (render): OD-45 title and disclaimer, per-module rows with counts,
       { module: 'schreiben', status: 'pending_rating', points: null, max_points: 100, note: 'Awaiting two independent human ratings.' },
       { module: 'sprechen', status: 'not_taken', points: null, max_points: 100 }] });
   assert.equal(RESULT_TITLE, 'Klarweg B1 Simulation – Ergebnis', 'OD-45 title');
-  assert.equal(RESULT_DISCLAIMER, 'Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts.', 'OD-45 disclaimer');
+  assert.ok(RESULT_DISCLAIMER.startsWith('Klarweg-Simulation – kein offizielles Ergebnis des Goethe-Instituts. '), 'OD-45 disclaimer');
+  assert.match(RESULT_DISCLAIMER, /nicht mit dem Goethe-Institut verbunden/, 'O-5 non-affiliation');
+  assert.match(RESULT_DISCLAIMER, /kein Zertifikat/, 'O-5 not a certificate');
   assert.ok(html.includes(esc(RESULT_TITLE)) && html.includes(esc(RESULT_DISCLAIMER)));
   assert.ok(html.includes('100 / 100') && html.includes('bestanden · sehr gut'));
   assert.ok(html.includes('33 / 100') && html.includes('richtig 10 · falsch 15 · ohne Antwort 5'));
@@ -616,6 +640,12 @@ test('LEASE EXPIRY (static): an expired lease is reacquired like a reload (no ta
   const leased = [...apiSrc.matchAll(/^\s+([a-zA-Z]+): \(id, leaseId\b/gm)].map((m) => m[1]).filter((n) => n !== 'heartbeat');
   assert.deepEqual([...list].sort(), [...leased].sort(), 'LEASED_CALLS covers every lease-carrying API method except heartbeat');
   assert.match(main, /return call\(id, S\.lease, \.\.\.rest\);/, 'retried once with the reacquired lease');
+
+  // a late request with the lease this tab replaced itself is answered lease_superseded: not a takeover (found in the
+  // non-prod preview journey 2026-11-11: false "In einem anderen Fenster geöffnet" after a 75 s freeze)
+  assert.match(main, /async function replacedByUs\(lease\) \{ if \(reacquiring\) await reacquiring; return !!lease && lease !== S\.lease; \}/);
+  assert.match(main, /if \(e && e\.code === 'lease_superseded' && await replacedByUs\(lease\)\) return call\(id, S\.lease, \.\.\.rest\);/, 'leased calls and autosave');
+  assert.match(main, /if \(e\.code === 'lease_superseded' && await replacedByUs\(sent\)\) return;/, 'heartbeat');
 });
 
 test('COOKIE PRE-FLIGHT (OD-20 interim): cookieCheck() true/false/null, never throws; "signed out" becomes "cookies blocked" only on a definite answer', async () => {
@@ -1339,7 +1369,7 @@ test('START SCREEN: the Mock M0 comes before the synthetic practice and says how
   assert.deepEqual(c, { mode: 'mock_m0', module: null });
   const html = startScreen(c);
   assert.ok(html.includes('data-mode="mock_m0"') && html.includes('Klarweg B1 Modelltest'));
-  assert.ok(html.includes('zertifizierte Prüfperson') && html.includes('kein offizielles Ergebnis'));
+  assert.ok(html.includes('Lehrkraft von Klarweg') && !/zertifiziert/i.test(html) && html.includes('kein offizielles Ergebnis') && html.includes('nicht mit dem Goethe-Institut verbunden'));
   assert.ok(!html.includes('synthetische Inhalte') && html.includes('synthetischen Stimmen'), 'real content, honestly synthetic voices');
   assert.deepEqual(startChoice({ modes: [{ mode: 'synthetic_full', level: 'b1', available: true }, { mode: 'mock_m0', level: 'b1', available: false }] }), { mode: 'synthetic_full', module: null });
 });
@@ -1366,4 +1396,45 @@ test('START SCREEN (EXAM_MODULE_CHOICE): the Mock M0 offers all four modules OR 
   assert.ok(plain.includes('Modelltest starten') && !plain.includes('kx-module-choice'));
   // the stylesheet keeps the spacing scale for the new section
   assert.match(read('exam/exam.css'), /\.kx-mc-option \{ border: 1px solid var\(--line\); border-radius: var\(--radius\); padding: 24px; margin-top: 16px; \}/);
+});
+
+test('O-8/O-5 (owner 2026-11-24): no examiner-certification claim anywhere in the exam client or Worker; non-affiliation stated', async () => {
+  const fsm = await import('node:fs'); const pathm = await import('node:path');
+  const root = pathm.resolve(pathm.dirname(new URL(import.meta.url).pathname), '../..');
+  const files = [];
+  for (const d of ['exam', 'exam/js', 'exam-worker/src']) for (const f of fsm.readdirSync(pathm.join(root, d))) if (/\.(js|html|css)$/.test(f)) files.push(pathm.join(root, d, f));
+  for (const f of files) {
+    const s = fsm.readFileSync(f, 'utf8');
+    assert.equal(/zertifizierte?n? (Prüf|Bewert|Lehr)|certified (examiner|rater|teacher)/i.test(s), false, `certification claim in ${f}`);
+    assert.equal(/offizielle[rs]? (Goethe-)?Prüfer/i.test(s), false, `official-examiner claim in ${f}`);
+  }
+});
+
+test('O-5: the exam page shell carries a permanent non-affiliation footer (no certification claim)', async () => {
+  const fsm = await import('node:fs');
+  const html = fsm.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+  const foot = html.match(/<footer class="kx-legal">([\s\S]*?)<\/footer>/);
+  assert.ok(foot, 'footer present');
+  assert.match(foot[1], /nicht mit dem Goethe-Institut verbunden/);
+  assert.match(foot[1], /kein Zertifikat des Goethe-Instituts/);
+  assert.match(foot[1], /nur zur Beschreibung des Prüfungsformats/, 'descriptive use only');
+  assert.equal(/zertifiziert/i.test(foot[1]), false);
+  assert.equal(/<h1/.test(foot[1]), false, 'one h1 per screen stays');
+});
+
+test('rater: Sprechen unit without a usable recording shows a warning; Schreiben and recorded units do not', async () => {
+  const { missingRecordingNote } = await import('../js/rating.js');
+  const u = { module: 'sprechen', item_id: 'itm:x-sp1' };
+  assert.match(missingRecordingNote(u, []), /keine hörbare Aufnahme/);
+  assert.match(missingRecordingNote(u, [{ item_id: 'itm:x-sp1', chunks: 0 }, { item_id: 'itm:x-sp2', chunks: 9 }]), /keine hörbare Aufnahme/);
+  assert.equal(missingRecordingNote(u, [{ item_id: 'itm:x-sp1', chunks: 3 }]), '');
+  assert.equal(missingRecordingNote({ module: 'sprechen', item_id: 'sprechen:pron' }, [{ item_id: 'itm:x-sp2', chunks: 1 }]), '');
+  assert.match(missingRecordingNote({ module: 'sprechen', item_id: 'sprechen:pron' }, []), /dieses Modul/);
+  assert.equal(missingRecordingNote({ module: 'schreiben', item_id: 'itm:x-s1' }, []), '');
+});
+
+test('O-5 footer is hidden while a module screen (exam bar) is active, so sticky Sprechen notes never slide under the bar', async () => {
+  const fsm = await import('node:fs');
+  const css = fsm.readFileSync(new URL('../exam.css', import.meta.url), 'utf8');
+  assert.match(css, /body:has\(\.kx-bar\) \.kx-legal \{ display: none; \}/);
 });

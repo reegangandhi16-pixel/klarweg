@@ -44,6 +44,16 @@ export function ratingRound(data, module) {
 }
 export const unitRatedByMe = (u, round) => u.rounds_taken.some((r) => r.mine && r.round === round);
 export const missingCriteria = (u, bands) => Object.keys(u.criteria).filter((c) => !bands[c]);
+/* Sprechen: warn the rater when the unit has no usable recording (no turn with an uploaded chunk). The rater still
+   decides (a learner may have stayed silent), but never rates "blind" without noticing. pron = whole module. */
+export function missingRecordingNote(u, recordings = []) {
+  if (u.module !== 'sprechen') return '';
+  const usable = recordings.filter((r) => r.chunks > 0 && (u.item_id === 'sprechen:pron' || r.item_id === u.item_id));
+  if (usable.length) return '';
+  return u.item_id === 'sprechen:pron'
+    ? 'Achtung: Für dieses Modul liegt keine hörbare Aufnahme vor. Prüfen Sie die Liste der Aufnahmen, bevor Sie bewerten.'
+    : 'Achtung: Für diesen Teil liegt keine hörbare Aufnahme vor (technische Lücke oder kein Beitrag). Prüfen Sie die Liste der Aufnahmen, bevor Sie bewerten.';
+}
 
 /* ---------- second factor (OD-19) — pure renderers; esc is passed in to keep this module DOM-free ---------- */
 const MFA_INPUT = (id, label, extra) => `<div class="kx-item"><label for="${id}">${label}</label><input id="${id}" name="${id}" ${extra} required></div>`;

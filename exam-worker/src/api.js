@@ -3,7 +3,7 @@
    → server deadline. Invalid state transitions are rejected with 409. */
 import { fail, now, readJsonBody, sha256Hex, DEVICE_ID_RE } from './http.js';
 import { log } from './log.js';
-import { MODES, EXAM_MODULES, apiMode, modeBlock, moduleOnly, moduleChoice, practiceParts, singleExaminer } from './flags.js';
+import { MODES, EXAM_MODULES, assignableStatuses, apiMode, modeBlock, moduleOnly, moduleChoice, practiceParts, singleExaminer } from './flags.js';
 import { hasExamAccess, hasRole } from './auth.js';
 import { releaseSet, practicePool, RELEASE_MESSAGES } from './release.js';
 import { formRow, levelConfig, moduleConfig, loadPackage } from './content.js';
@@ -11,7 +11,11 @@ import { countWords } from './wordcount.js';
 import { BANDS, rubricTotal, rubricUnits } from './scoring.js';
 import { signMediaToken, MEDIA_TTL_MS } from './media.js';
 import { sameExaminerRated } from './core.js';
+
+/* SQL literal list of the assignable form statuses — built only from the fixed values in flags.js, never from env text */
+const statusSql = (env) => assignableStatuses(env).map((x) => `'${x}'`).join(',');
 import {
+
   loadAttempt, attemptModules, audit, requireRequestId, idempotent, acquireLease, requireLease,
   computeDeadline, speakingPrepEnd, settle, submitModule, finalizeModule, scoreModule, buildResult, incident, SAVE_GRACE_MS, RESULT_LABEL
 } from './core.js';
@@ -127,7 +131,16 @@ function practisableParts(cfg, module) {
 export async function myAttempts(env, userId) {
   const rows = (await env.DB.prepare(`SELECT a.id, a.completed_at, a.module_scope, a.part_scope, f.label, f.kind, r.json FROM attempts a JOIN forms f ON f.id = a.form_id
       LEFT JOIN results r ON r.attempt_id = a.id WHERE a.user_id = ?1 AND a.status = 'completed' ORDER BY a.completed_at DESC LIMIT 20`).bind(userId).all()).results;
-  return { ok: true, attempts: rows.map((r) => {
+  /* Modelltest progress (Issue #384 dashboard): how many of the Modelltests this learner may be assigned they have
+     completed in full. Counts only assignable mock forms (status + learner release set, exactly as assignment does);
+     a form id is never sent to the client. null when no Modelltest is assignable. */
+  const rs = await releaseSet(env);
+  const mockIds = rs.block ? [] : (await env.DB.prepare(`SELECT id FROM forms WHERE kind = 'mock' AND status IN (${statusSql(env)})`).all()).results
+    .map((f) => f.id).filter((id) => !rs.ids || rs.ids.includes(id));
+  const doneIds = mockIds.length ? (await env.DB.prepare(`SELECT DISTINCT form_id FROM attempts WHERE user_id = ?1 AND status = 'completed' AND module_scope IS NULL`).bind(userId).all()).results
+    .map((r) => r.form_id).filter((id) => mockIds.includes(id)) : [];
+  const mockProgress = mockIds.length ? { completed: doneIds.length, total: mockIds.length } : null;
+  return { ok: true, mock_progress: mockProgress, attempts: rows.map((r) => {
     const res = r.json ? JSON.parse(r.json) : null;
     return { attempt_id: r.id, completed_at: r.completed_at, form_label: r.label, test_content: r.kind === 'synthetic',
       ...(partScope(r) !== null ? { practice_part: { module: r.module_scope, part: r.part_scope } } : {}),
@@ -152,7 +165,7 @@ export async function availability(env, userId) {
       if (!reason && !(await hasExamAccess(env, userId, lvl, def.access_scope)) && !(await hasRole(env, userId, ['exam_admin']))) reason = 'no_access';
       if (!reason) {
         const forms = (await env.DB.prepare(`SELECT f.id FROM forms f JOIN level_configs l ON l.id = f.level_config_id
-            WHERE f.status = 'live' AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')})`).bind(lvl, ...def.kinds).all()).results
+            WHERE f.status IN (${statusSql(env)}) AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')})`).bind(lvl, ...def.kinds).all()).results
           .filter((f) => !rs.ids || rs.ids.includes(f.id));
         if (!forms.length) reason = 'no_forms';
       }
@@ -179,7 +192,7 @@ async function partAvailability(env, userId, mode, def, pp) {
       let parts = [];
       if (!reason) {
         const forms = (await env.DB.prepare(`SELECT f.id, f.level_config_id FROM forms f JOIN level_configs l ON l.id = f.level_config_id
-            WHERE f.status = 'live' AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')})`).bind(lvl, ...def.kinds).all()).results
+            WHERE f.status IN (${statusSql(env)}) AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')})`).bind(lvl, ...def.kinds).all()).results
           .filter((f) => pool.ids.includes(f.id));
         if (!forms.length) reason = 'no_forms';
         else parts = practisableParts(await levelConfig(env, forms[0].level_config_id), module);
@@ -249,7 +262,7 @@ export async function createAttempt(env, userId, request) {
   }
 
   const forms = (await env.DB.prepare(`SELECT f.id, f.release, f.level_config_id FROM forms f JOIN level_configs l ON l.id = f.level_config_id
-      WHERE f.status = 'live' AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')}) ORDER BY f.id`).bind(lvl, ...def.kinds).all()).results
+      WHERE f.status IN (${statusSql(env)}) AND l.level = ?1 AND f.kind IN (${def.kinds.map((_, i) => `?${i + 2}`).join(',')}) ORDER BY f.id`).bind(lvl, ...def.kinds).all()).results
     .filter((f) => !rs.ids || rs.ids.includes(f.id));   // a release set narrows the pool; it never adds a form
   if (!forms.length) fail(409, 'no_forms_available');
   /* ENGINE §7.3 repeat-avoidance: among the forms THIS user has attempted least often (never attempted = 0, so unseen
@@ -1063,7 +1076,7 @@ export async function productiveForRating(env, userId, attemptId) {
   }
   const modules = ['schreiben', 'sprechen'].filter((m) => mods[m]).map((m) => ({ module: m, status: mods[m] ? mods[m].status : null, score_status: scores[m] ? scores[m].status : null,
     points: scores[m] && scores[m].status === 'final' ? scores[m].points : null, max_points: scores[m] ? scores[m].max_points : null }));
-  return { ok: true, attempt_id: attempt.id, label: RESULT_LABEL, writing, recordings: turns, bands: BANDS, modules, units, topic,
+  return { ok: true, attempt_id: attempt.id, label: RESULT_LABEL, test_content: form.kind === 'synthetic', writing, recordings: turns, bands: BANDS, modules, units, topic,
     lead: await hasRole(env, userId, ['lead_rater']), single_examiner: singleExaminer(env) };
 }
 

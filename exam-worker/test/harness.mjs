@@ -61,14 +61,14 @@ export function makeBucket() {
 
 const builds = new Map();
 /* The synthetic release used by tests and the dev server: S0 (system test) unless other form directories are given. */
-export function syntheticBuild(formDirs = [FORM_DIR]) {
-  const key = formDirs.join('|');
-  if (!builds.has(key)) builds.set(key, buildRelease({ release: 'r000', formDirs, builtAt: '2026-10-04T00:00:00.000Z' }));
+export function syntheticBuild(formDirs = [FORM_DIR], { reviewStaging = false } = {}) {
+  const key = (reviewStaging ? 'review|' : '') + formDirs.join('|');
+  if (!builds.has(key)) builds.set(key, buildRelease({ release: 'r000', formDirs, reviewStaging, builtAt: '2026-10-04T00:00:00.000Z' }));
   return builds.get(key);
 }
 
-export function makeEnv({ flags = {}, start = Date.UTC(2026, 9, 4, 9, 0, 0), formDirs } = {}) {
-  const build = syntheticBuild(formDirs);
+export function makeEnv({ flags = {}, start = Date.UTC(2026, 9, 4, 9, 0, 0), formDirs, reviewStaging = false } = {}) {
+  const build = syntheticBuild(formDirs, { reviewStaging });
   const DB = createExamD1();
   DB.raw.exec(build.sql);
   const CONTENT = makeBucket();

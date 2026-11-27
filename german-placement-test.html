@@ -201,6 +201,62 @@
 <script src="kw-config.js"></script>
 <script src="kw-auth.js"></script>
 <script src="kw-nav-auth.js?v=2"></script>
+<script>
+/* Mobile hamburger menu. Accessible drawer: focus moves in on open and
+   returns to the trigger on close, Escape closes, backdrop click
+   closes, Tab is trapped inside the drawer while open, background
+   scroll is blocked. Desktop nav is untouched -- this only ever shows
+   at the .nav-hamburger media breakpoint above. */
+(function () {
+  var btn = document.getElementById('nav-hamburger');
+  var panel = document.getElementById('mobile-nav');
+  var overlay = document.getElementById('mobile-nav-overlay');
+  var closeBtn = document.getElementById('mobile-nav-close');
+  if (!btn || !panel || !overlay) return;
+  var lastFocused = null;
+
+  function focusable() {
+    return Array.prototype.slice.call(
+      panel.querySelectorAll('a[href], button:not([disabled])')
+    );
+  }
+  function openMenu() {
+    lastFocused = document.activeElement;
+    panel.hidden = false;
+    overlay.hidden = false;
+    document.body.classList.add('mobile-nav-open');
+    btn.setAttribute('aria-expanded', 'true');
+    var items = focusable();
+    if (items.length) items[0].focus();
+  }
+  function closeMenu() {
+    panel.hidden = true;
+    overlay.hidden = true;
+    document.body.classList.remove('mobile-nav-open');
+    btn.setAttribute('aria-expanded', 'false');
+    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+  }
+  btn.addEventListener('click', function () {
+    if (panel.hidden) openMenu(); else closeMenu();
+  });
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+  document.addEventListener('keydown', function (e) {
+    if (panel.hidden) return;
+    if (e.key === 'Escape') { closeMenu(); return; }
+    if (e.key === 'Tab') {
+      var items = focusable();
+      if (!items.length) return;
+      var first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  window.addEventListener('resize', function () {
+    if (!panel.hidden && window.innerWidth > 860) closeMenu();
+  });
+})();
+</script>
 <script src="german-placement-test.js"></script>
 </body>
 </html>

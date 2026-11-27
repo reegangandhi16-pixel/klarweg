@@ -1657,6 +1657,8 @@ a2-german-sentence-builder.html
 weil-vs-deshalb-exercises.html
 german-subordinate-clause-exercises.html
 german-word-order-error-correction.html
+german-articles-trainer.html
+german-articles-trainer.js
 german-sentence-builder.html
 german-sentence-builder.js
 german-placement-test.html

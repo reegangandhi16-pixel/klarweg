@@ -1651,6 +1651,8 @@ online-german-a1-classes.html
 online-german-b1-classes.html
 german-course-fees-in-hindi.html
 german-a1-30-day-study-plan.html
+german-placement-test.html
+german-placement-test.js
 german-a1-syllabus-checklist.html
 german-a1-worksheet-hindi.html
 german-a1-listening-practice.html

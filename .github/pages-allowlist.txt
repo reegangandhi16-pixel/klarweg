@@ -1651,6 +1651,14 @@ online-german-a1-classes.html
 online-german-b1-classes.html
 german-course-fees-in-hindi.html
 german-a1-30-day-study-plan.html
+a1-german-sentence-builder.html
+german-question-word-order-exercises.html
+a2-german-sentence-builder.html
+weil-vs-deshalb-exercises.html
+german-subordinate-clause-exercises.html
+german-word-order-error-correction.html
+german-sentence-builder.html
+german-sentence-builder.js
 german-placement-test.html
 german-placement-test.js
 german-a1-syllabus-checklist.html

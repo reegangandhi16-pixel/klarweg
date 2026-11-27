@@ -698,6 +698,7 @@ goethe/c2-exam-preparation.html
 goethe/b1-schreiben.html
 goethe/b2-schreiben.html
 goethe/b1-sprechen.html
+goethe/b1-sprechen-teil-2-uebung.html
 goethe/b2-sprechen.html
 goethe/exam-modules-retake.html
 goethe/paper-vs-digital-exam.html
